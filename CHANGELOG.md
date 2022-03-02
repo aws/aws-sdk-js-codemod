@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.0.4
+
+### Patch Changes
+
+- 978e21a: Make aws-sdk-js-codemod in bin folder executable
+
 ## 0.0.3
 
 ### Patch Changes
