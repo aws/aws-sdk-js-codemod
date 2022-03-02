@@ -16,6 +16,7 @@
   "license": "MIT",
   "author": "Kamat, Trivikram <trivikr.dev@gmail.com>",
   "files": [
+    "bin",
     "dist"
   ],
   "main": "dist/cli.js",
