@@ -30,7 +30,7 @@
     "lint": "eslint 'src/*.ts'",
     "release": "yarn build && changeset publish",
     "test": "jest",
-    "postinstall": "simple-git-hooks"
+    "postinstall": "npx simple-git-hooks"
   },
   "dependencies": {
     "jscodeshift": "0.13.1",
