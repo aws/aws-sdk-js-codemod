@@ -29,8 +29,7 @@
     "build": "tsc",
     "lint": "eslint 'src/*.ts'",
     "release": "yarn build && changeset publish",
-    "test": "jest",
-    "postinstall": "simple-git-hooks"
+    "test": "jest"
   },
   "dependencies": {
     "jscodeshift": "0.13.1",
