@@ -11,5 +11,5 @@ const [, , ...args] = process.argv;
 if (args[0] === "--version") {
   console.log(`v${version}`);
 } else {
-  spawn("jscodeshift", args, { stdio: "inherit" });
+  spawn("./node_modules/.bin/jscodeshift", args, { stdio: "inherit" });
 }
