@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.0.5
+
+### Patch Changes
+
+- 0baf388: Use npm exec instead of ./node_modules/.bin
+
 ## 0.0.4
 
 ### Patch Changes
