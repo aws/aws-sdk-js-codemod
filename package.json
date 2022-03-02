@@ -16,11 +16,12 @@
   "license": "MIT",
   "author": "Kamat, Trivikram <trivikr.dev@gmail.com>",
   "files": [
+    "bin",
     "dist"
   ],
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
-  "bin": "dist/cli.js",
+  "bin": "bin/aws-sdk-js-codemod",
   "repository": {
     "type": "git",
     "url": "https://github.com/trivikr/aws-sdk-js-codemod.git"
