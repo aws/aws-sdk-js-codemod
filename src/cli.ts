@@ -7,9 +7,11 @@ import { spawn } from "child_process";
 import { version } from "../package.json"; // eslint-disable-line
 
 const [, , ...args] = process.argv;
+const jscodeshiftPath = "./node_modules/.bin/jscodeshift";
 
 if (args[0] === "--version") {
-  console.log(`v${version}`);
+  process.stdout.write(`aws-sdk-js-codemod: ${version}\n\n`);
+  spawn(jscodeshiftPath, ["--version"], { stdio: "inherit" });
 } else {
-  spawn("./node_modules/.bin/jscodeshift", args, { stdio: "inherit" });
+  spawn(jscodeshiftPath, args, { stdio: "inherit" });
 }
