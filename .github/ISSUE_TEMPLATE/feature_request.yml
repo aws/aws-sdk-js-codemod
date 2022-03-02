@@ -1,0 +1,50 @@
+name: Feature Request
+description: These issues are for **concrete and actionable proposals**. If you just have
+  a general problem that you would like to brainstorm, open a Discussion instead.
+title: "[Feature]: "
+labels: ["enhancement"]
+
+body:
+  - type: checkboxes
+    id: selfservice
+    attributes:
+      label: Self-service
+      description: "Adding features is a great way to give back to open-source projects, and we're more than happy to answer questions and provide context."
+      options:
+        - label: "I'd be willing to implement this feature"
+
+  - type: textarea
+    attributes:
+      label: Provide a minimal code for which transform does not work
+      description: |
+        A clear and concise description along with the code snippet for which the transform does not work.
+      placeholder: |
+        ```ts
+        import AWS from "aws-sdk";
+
+        const region = "us-west-2";
+        const client = new AWS.DynamoDB({ region });
+        const response = await client.listTables({}).promise();
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Output
+      description: |
+        The expected output of the provided code snippet.
+      placeholder: |
+        ```ts
+        import { DynamoDB } from "@aws-sdk/client-dynamodb";
+
+        const region = "us-west-2";
+        const client = new DynamoDB({ region });
+        const response = await client.listTables({});
+        ```
+
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        Add any other context about the problem here. Or a screenshot if applicable.

@@ -1,0 +1,76 @@
+name: Bug Report
+description: Create a report to help us improve
+title: "[Bug?]: "
+labels: ["bug", "triage"]
+
+body:
+  - type: checkboxes
+    id: selfservice
+    attributes:
+      label: Self-service
+      description: "Fixing bugs is always a great way to give back to open-source projects, and we're more than happy to answer questions and provide context."
+      options:
+        - label: "I'd be willing to implement a fix"
+
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: |
+        A clear and concise description of what the bug is. A bug is **unintended**. A feature not being implemented is **not a bug**.
+      placeholder: |
+        eg: Running aws-sdk-js-v2-to-v3 transform on provided input causes it to crash.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        The _minimal_ information needed to reproduce your issue (ideally provided input, and expected output).
+      placeholder: |
+        ### Input
+        ```ts
+        import AWS from "aws-sdk";
+
+        const region = "us-west-2";
+        const client = new AWS.DynamoDB({ region });
+        const response = await client.listTables({}).promise();
+        ```
+
+        ### Observed Output
+        ```ts
+        ```
+
+        ### Expected Output
+        ```ts
+        import { DynamoDB } from "@aws-sdk/client-dynamodb";
+
+        const region = "us-west-2";
+        const client = new DynamoDB({ region });
+        const response = await client.listTables({});
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Environment
+      render: shell
+      description: |
+        Run `node -v` and `jscodeshift -v` and paste the result into the form
+      placeholder: |
+        node version: v16.14.0
+
+        jscodeshift: 0.13.1
+          - babel: 7.17.5
+          - babylon: 7.17.3
+          - flow: 0.172.0
+          - recast: 0.20.5
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: |
+        Add any other context about the problem here. Or a screenshot if applicable.
