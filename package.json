@@ -18,7 +18,9 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
+  "main": "dist/cli.js",
+  "types": "dist/cli.d.ts",
+  "bin": "dist/cli.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/trivikr/aws-sdk-js-codemod.git"

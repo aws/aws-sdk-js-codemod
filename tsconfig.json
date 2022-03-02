@@ -4,6 +4,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "outDir": "dist",
+    "resolveJsonModule": true,
     "rootDir": "src"
   },
   "exclude": ["**/dist/**", "**/__tests__/**", "**/__testfixtures__/**"]
