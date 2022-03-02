@@ -8,7 +8,12 @@ import { run } from "../cli";
 jest.mock("child_process");
 
 describe("cli", () => {
-  const jscodeshiftPath = "./node_modules/.bin/jscodeshift";
+  const verifySpawnCall = (args: string[]) => {
+    expect(spawn).toHaveBeenCalledWith("npm", ["exec", "jscodeshift", "--", ...args], {
+      stdio: "inherit",
+      shell: process.platform == "win32",
+    });
+  };
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -23,12 +28,12 @@ describe("cli", () => {
     expect(process.stdout.write).toHaveBeenCalledWith(
       expect.stringMatching(`aws-sdk-js-codemod: ${version}`)
     );
-    expect(spawn).toHaveBeenCalledWith(jscodeshiftPath, mockArgs, { stdio: "inherit" });
+    verifySpawnCall(mockArgs);
   });
 
   it("should pass args to jscodeshift", async () => {
     const mockArgs = ["random", "args", "one", "two", "three"];
     await run(mockArgs);
-    expect(spawn).toHaveBeenCalledWith(jscodeshiftPath, mockArgs, { stdio: "inherit" });
+    verifySpawnCall(mockArgs);
   });
 });
