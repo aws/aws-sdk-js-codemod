@@ -18,14 +18,21 @@ const transforms = readdirSync(join(__dirname, "transforms"), { withFileTypes: t
   });
 
 const helpParagraph = `aws-sdk-js-codemod is a light wrapper over jscodeshift.
-It processes --help, --version and --transform options before passing them downstream.`;
+It processes --help, --version and --transform options before passing them downstream.
+
+You can drop-in replace aws-sdk-js-codemod for jscodeshift in the usage section below.
+You can provide names of the custom transforms instead of a local path or url.
+
+Transforms:
+${transforms.map(({ name, description }) => `- ${name}: ${description}`)}
+
+`;
 
 export const run = async (args): Promise<void> => {
   if (args[0] === "--version") {
     process.stdout.write(`aws-sdk-js-codemod: ${version}\n\n`);
   } else if (args[0] === "--help" || args[0] === "-h") {
     process.stdout.write(helpParagraph);
-    process.stdout.write(`You can pass names of aws-sdk-js-codemod custom transforms:\n`);
   }
   spawn("npm", ["exec", "jscodeshift", "--", ...args], {
     stdio: "inherit",
