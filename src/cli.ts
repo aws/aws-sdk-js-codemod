@@ -16,11 +16,15 @@ const transforms = readdirSync("transforms", { withFileTypes: true })
     return { name, description, options } as AwsSdkJsCodemodTransform;
   });
 
+const helpParagraph = `aws-sdk-js-codemod is a light wrapper over jscodeshift.
+It processes --help, --version and --transform options before passing them downstream.`;
+
 export const run = async (args): Promise<void> => {
   if (args[0] === "--version") {
     process.stdout.write(`aws-sdk-js-codemod: ${version}\n\n`);
   } else if (args[0] === "--help" || args[0] === "-h") {
-    process.stdout.write(`aws-sdk-js-codemod is a light wrapper over jscodeshift.\n`);
+    process.stdout.write(helpParagraph);
+    process.stdout.write(`You can pass names of aws-sdk-js-codemod custom transforms:\n`);
   }
   spawn("npm", ["exec", "jscodeshift", "--", ...args], {
     stdio: "inherit",
