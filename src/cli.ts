@@ -2,13 +2,14 @@
 
 import { spawn } from "child_process";
 import { readdirSync } from "fs";
+import { join } from "path";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../package.json"; // eslint-disable-line
 import { AwsSdkJsCodemodTransform } from "./transforms/types";
 
-const transforms = readdirSync("transforms", { withFileTypes: true })
+const transforms = readdirSync(join(__dirname, "transforms"), { withFileTypes: true })
   .filter((dirent) => dirent.isDirectory())
   .map((dirent) => dirent.name)
   .map((dirName) => {
