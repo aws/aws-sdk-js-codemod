@@ -4,6 +4,15 @@ This repository contains a collection of codemod scripts for use with
 [JSCodeshift][jscodeshift] that help update [AWS SDK for JavaScript][aws-sdk-js]
 APIs.
 
+The `aws-sdk-js-codemod` CLI is a lightweight wrapper over jscodeshift.
+It processes `--help`, `--version` and `--transform` options before passing them
+downstream.
+
+You can provide names of the custom transforms instead of a local path or url:
+
+     v2-to-v3  Converts AWS SDK for JavaScript APIs in a Javascript/TypeScript
+               codebase from version 2 (v2) to version 3 (v3).
+
 ## Prerequisites
 
 To use aws-sdk-js-codemod, please install [Node.js][install-nodejs].
