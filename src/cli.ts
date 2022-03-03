@@ -6,30 +6,12 @@ import { spawn } from "child_process";
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../package.json"; // eslint-disable-line
 import {
+  getArgsWithUpdatedTransformFile,
   getHelpParagraph,
   getTransformFileFromArgs,
   getTransforms,
   getUpdatedTransformFile,
 } from "./utils";
-
-const getArgsWithUpdatedTransformFile = (
-  args: string[],
-  updatedTransformFile: string
-): string[] => {
-  if (args.includes("-t")) {
-    const transformIndex = args.indexOf("-t");
-    args[transformIndex + 1] = updatedTransformFile;
-    return args;
-  }
-
-  const transformArg = args.find((arg) => arg.startsWith("--transform="));
-  if (!transformArg) {
-    throw new Error("No transform file specified in -t or --transform.");
-  }
-  const transformIndex = args.indexOf(transformArg);
-  args[transformIndex] = `--transform=${updatedTransformFile}`;
-  return args;
-};
 
 export const run = async (args: string[]): Promise<void> => {
   const transforms = getTransforms();

@@ -1,3 +1,4 @@
+export * from "./getArgsWithUpdatedTransformFile";
 export * from "./getHelpParagraph";
 export * from "./getTransformFileFromArgs";
 export * from "./getTransforms";
