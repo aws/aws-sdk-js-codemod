@@ -1,22 +1,14 @@
 #!/usr/bin/env node
 
 import { spawn } from "child_process";
-import { readdirSync } from "fs";
-import { join } from "path";
 import { getBorderCharacters, table } from "table";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../package.json"; // eslint-disable-line
-import { AwsSdkJsCodemodTransform } from "./transforms/types";
+import { getTransforms } from "./utils";
 
-const transforms = readdirSync(join(__dirname, "transforms"), { withFileTypes: true })
-  .filter((dirent) => dirent.isDirectory())
-  .map((dirent) => dirent.name)
-  .map((dirName) => {
-    const { name, description, options } = require(`./transforms/${dirName}/transform`); // eslint-disable-line
-    return { name, description, options } as AwsSdkJsCodemodTransform;
-  });
+const transforms = getTransforms();
 
 const helpParagraph = `----------------------------------------------------------------------------------------------------
 aws-sdk-js-codemod is a lightweight wrapper over jscodeshift.
