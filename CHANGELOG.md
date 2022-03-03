@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.1.1
+
+### Patch Changes
+
+- 369d337: Update README with instructions to use aws-sdk-js-codemod
+
 ## 0.1.0
 
 ### Minor Changes
