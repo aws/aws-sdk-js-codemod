@@ -15,9 +15,9 @@ body:
 
   - type: textarea
     attributes:
-      label: Provide a minimal code for which transform does not work
+      label: Input code
       description: |
-        A clear and concise description along with the code snippet for which the transform does not work.
+        Provide a minimal code for which you need transformation to be supported.
       placeholder: |
         ```ts
         import AWS from "aws-sdk";
@@ -32,8 +32,7 @@ body:
   - type: textarea
     attributes:
       label: Expected Output
-      description: |
-        The expected output of the provided code snippet.
+      description: The expected transformed output for the provided code snippet.
       placeholder: |
         ```ts
         import { DynamoDB } from "@aws-sdk/client-dynamodb";
