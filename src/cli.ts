@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
 import { spawn } from "child_process";
-import { resolve } from "path";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../package.json"; // eslint-disable-line
-import { getHelpParagraph, getTransformFileFromArgs, getTransforms } from "./utils";
-
-const getUpdatedTransformFile = (transformFolder: string) =>
-  resolve(__dirname, "transforms", transformFolder, "transformer.js");
+import {
+  getHelpParagraph,
+  getTransformFileFromArgs,
+  getTransforms,
+  getUpdatedTransformFile,
+} from "./utils";
 
 const getArgsWithUpdatedTransformFile = (
   args: string[],
