@@ -1,5 +1,16 @@
 # aws-sdk-js-codemod
 
+## 0.1.0
+
+### Minor Changes
+
+- a8be757: Send updated transform file if a custom transform is selected
+
+### Patch Changes
+
+- e13f64c: Copy code which performs basic transformation of AWS SDK for JavaScript client from v2 to v3
+- dbd8346: Adds a placeholder for transforms with information under help option
+
 ## 0.0.5
 
 ### Patch Changes
