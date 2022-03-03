@@ -22,13 +22,22 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: template-name
+    attributes:
+      label: Template name
+      description: Which template are you seeing this error for?
+      options:
+        - v2-to-v3
+        - Other (describe under Additional Context)
+    validations:
+      required: true
+
   - type: textarea
     attributes:
-      label: Steps to reproduce
-      description: |
-        The _minimal_ information needed to reproduce your issue (ideally provided input, and expected output).
+      label: Input file
+      description: The _minimal_ input file to reproduce your issue.
       placeholder: |
-        ### Input
         ```ts
         import AWS from "aws-sdk";
 
@@ -36,11 +45,23 @@ body:
         const client = new AWS.DynamoDB({ region });
         const response = await client.listTables({}).promise();
         ```
+    validations:
+      required: true
 
-        ### Observed Output
-        ```ts
-        ```
+  - type: textarea
+    attributes:
+      label: Observed failure
+      description: A concise description of what error you're experiencing.
+      placeholder: |
+        eg: The aws-sdk-js-codemod script returned the following error:
+    validations:
+      required: true
 
+  - type: textarea
+    attributes:
+      label: Expected output
+      description: Thw output file you expected to see.
+      placeholder: |
         ### Expected Output
         ```ts
         import { DynamoDB } from "@aws-sdk/client-dynamodb";
