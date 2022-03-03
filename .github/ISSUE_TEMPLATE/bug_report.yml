@@ -35,7 +35,7 @@ body:
 
   - type: textarea
     attributes:
-      label: Input file
+      label: Input code
       description: The _minimal_ input file to reproduce your issue.
       placeholder: |
         ```ts
