@@ -1,6 +1,6 @@
 export type PositionalOptionsType = "boolean" | "number" | "string";
 
-export interface TransformOption {
+export interface AwsSdkJsCodemodTransformOption {
   /** array of values, limit valid option arguments to a predefined set */
   choices?: ReadonlyArray<boolean> | ReadonlyArray<number> | ReadonlyArray<string>;
 
@@ -14,7 +14,7 @@ export interface TransformOption {
   type: PositionalOptionsType;
 }
 
-export interface Transform {
+export interface AwsSdkJsCodemodTransform {
   /** string, the name of the transform */
   name: string;
 
@@ -22,5 +22,5 @@ export interface Transform {
   description: string;
 
   /** array of TransformOption, the which can be passed to the transform */
-  options: TransformOption[];
+  options: AwsSdkJsCodemodTransformOption[];
 }
