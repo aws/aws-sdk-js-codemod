@@ -6,20 +6,7 @@ import { resolve } from "path";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../package.json"; // eslint-disable-line
-import { getHelpParagraph, getTransforms } from "./utils";
-
-const getTransformFile = (args: string[]): string => {
-  if (args.includes("-t")) {
-    const transformIndex = args.indexOf("-t");
-    return args[transformIndex + 1];
-  }
-
-  const transformArg = args.find((arg) => arg.startsWith("--transform="));
-  if (!transformArg) {
-    throw new Error("No transform file specified in -t or --transform.");
-  }
-  return transformArg.split("=")[1];
-};
+import { getHelpParagraph, getTransformFileFromArgs, getTransforms } from "./utils";
 
 const getUpdatedTransformFile = (transformFolder: string) =>
   resolve(__dirname, "transforms", transformFolder, "transformer.js");
@@ -51,7 +38,7 @@ export const run = async (args: string[]): Promise<void> => {
   } else if (args[0] === "--help" || args[0] === "-h") {
     process.stdout.write(getHelpParagraph(transforms));
   } else if (args.includes("-t") || args.some((arg) => arg.startsWith("--transform="))) {
-    const transformFile = getTransformFile(args);
+    const transformFile = getTransformFileFromArgs(args);
     if (transforms.map(({ name }) => name).includes(transformFile)) {
       const updatedTransformFile = getUpdatedTransformFile(transformFile);
       args = getArgsWithUpdatedTransformFile(args, updatedTransformFile);
