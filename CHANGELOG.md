@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.1.2
+
+### Patch Changes
+
+- fcd1e82: Removes unused v2 default import
+
 ## 0.1.1
 
 ### Patch Changes
