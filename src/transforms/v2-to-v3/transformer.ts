@@ -1,8 +1,13 @@
 import { API, FileInfo } from "jscodeshift";
 import findImports from "jscodeshift-find-imports";
 
-import { addV3ClientImport, getV2ClientNames, replaceClientCreation } from "./helpers";
-import { getV3ClientName, getV3ClientPackageName } from "./utils";
+import {
+  addV3ClientImport,
+  getV2ClientNames,
+  getV3ClientName,
+  getV3ClientPackageName,
+  replaceClientCreation,
+} from "./utils";
 
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
