@@ -1,5 +1,4 @@
 import { API, FileInfo } from "jscodeshift";
-import findImports from "jscodeshift-find-imports";
 
 import {
   addV3ClientImport,
@@ -30,6 +29,28 @@ export default function transformer(file: FileInfo, api: API) {
       v2ClientName,
       v3ClientName,
     });
+  }
+
+  const identifierUsages = source
+    .find(j.Identifier, { name: v2DefaultImportName })
+    // Ignore identifier from import.
+    .filter((identifierPath) => identifierPath.parentPath.value.type !== "ImportDefaultSpecifier");
+  if (identifierUsages.size() === 0) {
+    // Remove identifier from import.
+    source
+      .find(j.ImportDeclaration, {
+        specifiers: [{ type: "ImportDefaultSpecifier", local: { name: v2DefaultImportName } }],
+      })
+      .forEach((declerationPath) => {
+        declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
+          (specifier) =>
+            specifier.type !== "ImportDefaultSpecifier" &&
+            specifier.local.name !== v2DefaultImportName
+        );
+        if (declerationPath.value.specifiers.length === 0) {
+          j(declerationPath).remove();
+        }
+      });
   }
 
   return source.toSource();
