@@ -6,6 +6,7 @@ import {
   getV2DefaultImportName,
   getV3ClientName,
   getV3ClientPackageName,
+  removeUnusedDefaultImport,
   replaceClientCreation,
 } from "./utils";
 
@@ -36,21 +37,7 @@ export default function transformer(file: FileInfo, api: API) {
     // Ignore identifier from import.
     .filter((identifierPath) => identifierPath.parentPath.value.type !== "ImportDefaultSpecifier");
   if (identifierUsages.size() === 0) {
-    // Remove identifier from import.
-    source
-      .find(j.ImportDeclaration, {
-        specifiers: [{ type: "ImportDefaultSpecifier", local: { name: v2DefaultImportName } }],
-      })
-      .forEach((declerationPath) => {
-        declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
-          (specifier) =>
-            specifier.type !== "ImportDefaultSpecifier" &&
-            specifier.local.name !== v2DefaultImportName
-        );
-        if (declerationPath.value.specifiers.length === 0) {
-          j(declerationPath).remove();
-        }
-      });
+    removeUnusedDefaultImport(j, source, v2DefaultImportName);
   }
 
   return source.toSource();
