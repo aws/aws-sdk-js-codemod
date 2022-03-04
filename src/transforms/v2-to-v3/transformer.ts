@@ -6,7 +6,7 @@ import {
   getV2DefaultImportName,
   getV3ClientName,
   getV3ClientPackageName,
-  removeUnusedDefaultImport,
+  removeDefaultImportIfNotUsed,
   replaceClientCreation,
 } from "./utils";
 
@@ -32,13 +32,7 @@ export default function transformer(file: FileInfo, api: API) {
     });
   }
 
-  const identifierUsages = source
-    .find(j.Identifier, { name: v2DefaultImportName })
-    // Ignore identifier from import.
-    .filter((identifierPath) => identifierPath.parentPath.value.type !== "ImportDefaultSpecifier");
-  if (identifierUsages.size() === 0) {
-    removeUnusedDefaultImport(j, source, v2DefaultImportName);
-  }
+  removeDefaultImportIfNotUsed(j, source, v2DefaultImportName);
 
   return source.toSource();
 }
