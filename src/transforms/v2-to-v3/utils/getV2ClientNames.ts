@@ -3,13 +3,13 @@ import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshi
 export const getV2ClientNames = (
   j: JSCodeshift,
   source: Collection<any>,
-  importObj: Identifier
+  v2DefaultImportName: string
 ): Array<string> =>
   source
     .find(j.NewExpression, {
       callee: {
         type: "MemberExpression",
-        object: { type: "Identifier", name: importObj.name },
+        object: { type: "Identifier", name: v2DefaultImportName },
         property: { type: "Identifier" },
       },
     })
