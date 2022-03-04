@@ -4,7 +4,7 @@ import findImports from "jscodeshift-find-imports";
 import {
   addV3ClientImport,
   getV2ClientNames,
-  getV2DefaultImport,
+  getV2DefaultImportName,
   getV3ClientName,
   getV3ClientPackageName,
   replaceClientCreation,
@@ -14,7 +14,11 @@ export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   const source = j(file.source);
 
-  const { name: v2DefaultImportName } = getV2DefaultImport(j, source);
+  const v2DefaultImportName = getV2DefaultImportName(j, source);
+  if (!v2DefaultImportName) {
+    return source.toSource();
+  }
+
   const v2ClientNames = getV2ClientNames(j, source, v2DefaultImportName);
 
   for (const v2ClientName of v2ClientNames) {
