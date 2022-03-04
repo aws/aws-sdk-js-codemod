@@ -44,8 +44,6 @@ client.listTables({}, (err, data) => {
 $ npx aws-sdk-js-codemod -t v2-to-v3 example.ts
 
 $ cat example.ts
-import AWS from "aws-sdk";
-
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
 const region = "us-west-2";

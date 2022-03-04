@@ -1,5 +1,4 @@
 import { API, FileInfo } from "jscodeshift";
-import findImports from "jscodeshift-find-imports";
 
 import {
   addV3ClientImport,
@@ -7,6 +6,7 @@ import {
   getV2DefaultImportName,
   getV3ClientName,
   getV3ClientPackageName,
+  removeDefaultImportIfNotUsed,
   replaceClientCreation,
 } from "./utils";
 
@@ -31,6 +31,8 @@ export default function transformer(file: FileInfo, api: API) {
       v3ClientName,
     });
   }
+
+  removeDefaultImportIfNotUsed(j, source, v2DefaultImportName);
 
   return source.toSource();
 }
