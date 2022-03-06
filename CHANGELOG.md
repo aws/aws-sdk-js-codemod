@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.1.3
+
+### Patch Changes
+
+- ca6077d: Move test files next to source files
+- 1112f3f: Update unit tests to follow team jest standards
+
 ## 0.1.2
 
 ### Patch Changes
