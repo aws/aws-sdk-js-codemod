@@ -1,6 +1,13 @@
-// @ts-expects-error Could not find a declaration file for module
-import { defineTest } from "jscodeshift/dist/testUtils";
+import { readdirSync } from "fs";
+import { runTest } from "jscodeshift/dist/testUtils";
+import { join } from "path";
 
 describe("v2-to-v3", () => {
-  defineTest(__dirname, "./transformer", null, "basic", { parser: "ts" });
+  const testFilePrefixes = readdirSync(join(__dirname, "..", "__testfixtures__"))
+    .filter((fileName) => fileName.endsWith(".input.ts"))
+    .map((fileName) => fileName.replace(".input.ts", ""));
+
+  it.each(testFilePrefixes)("%s", (testFilePrefix) => {
+    runTest(__dirname, "./transformer", null, testFilePrefix, { parser: "ts" });
+  });
 });
