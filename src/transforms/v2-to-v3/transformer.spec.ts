@@ -5,7 +5,7 @@ import { join } from "path";
 import transformer from "./transformer";
 
 describe("v2-to-v3", () => {
-  const fixtureDir = join(__dirname, "__testfixtures__");
+  const fixtureDir = join(__dirname, "__fixtures__");
   const testFilePrefixes = readdirSync(fixtureDir)
     .filter((fileName) => fileName.endsWith(".input.ts"))
     .map((fileName) => fileName.replace(".input.ts", ""));
