@@ -2,8 +2,8 @@ import { spawn } from "child_process";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
-import { version } from "../../package.json"; // eslint-disable-line
-import { run } from "../cli";
+import { version } from "../package.json"; // eslint-disable-line
+import { run } from "./cli";
 
 jest.mock("child_process");
 

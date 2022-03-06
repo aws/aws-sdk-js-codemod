@@ -1,5 +1,5 @@
-import { CLIENT_NAMES_MAP } from "../config";
-import { getV3ClientName } from "../getV3ClientName";
+import { CLIENT_NAMES_MAP } from "./config";
+import { getV3ClientName } from "./getV3ClientName";
 
 describe(getV3ClientName.name, () => {
   it.each(Object.entries(CLIENT_NAMES_MAP))("getV3ClientName('%s') === '%s'", (input, output) => {

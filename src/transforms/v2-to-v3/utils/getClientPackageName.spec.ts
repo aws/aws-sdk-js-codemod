@@ -1,5 +1,5 @@
-import { CLIENT_PACKAGE_NAMES_MAP } from "../config";
-import { getV3ClientPackageName } from "../getV3ClientPackageName";
+import { CLIENT_PACKAGE_NAMES_MAP } from "./config";
+import { getV3ClientPackageName } from "./getV3ClientPackageName";
 
 describe(getV3ClientPackageName.name, () => {
   it.each(Object.entries(CLIENT_PACKAGE_NAMES_MAP))(
