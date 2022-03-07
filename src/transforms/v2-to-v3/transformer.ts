@@ -21,9 +21,8 @@ export default function transformer(file: FileInfo, api: API) {
   const v2ClientNames = getV2ClientNames(j, source, v2DefaultImportName);
   const clientMetadata = getClientMetadata(v2ClientNames);
 
-  for (const [v2ClientName, { v3ClientName, v3ClientPackageName }] of Object.entries(
-    clientMetadata
-  ).reverse()) {
+  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
+    const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
     addV3ClientImport(j, source, { v3ClientName, v3ClientPackageName });
     replaceClientCreation(j, source, {
       v2DefaultImportName,
