@@ -20,10 +20,27 @@ export default function transformer(file: FileInfo, api: API) {
   }
 
   const v2ClientNames = getV2ClientNames(j, source, v2DefaultImportName);
+  const clientMetadata: { [key: string]: { v3ClientName: string; v3ClientPackageName: string } } =
+    v2ClientNames.reduce(
+      (metadata, v2ClientName) => ({
+        ...metadata,
+        [v2ClientName]: {
+          v3ClientName: getV3ClientName(v2ClientName),
+          v3ClientPackageName: getV3ClientPackageName(v2ClientName),
+        },
+      }),
+      {}
+    );
 
-  for (const v2ClientName of v2ClientNames.sort().reverse()) {
-    const v3ClientName = getV3ClientName(v2ClientName);
-    const v3ClientPackageName = getV3ClientPackageName(v2ClientName);
+  const sortedClientMetadata: {
+    [key: string]: { v3ClientName: string; v3ClientPackageName: string };
+  } = Object.entries(clientMetadata)
+    .sort(([, { v3ClientPackageName: a }], [, { v3ClientPackageName: b }]) => b.localeCompare(a))
+    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+
+  for (const [v2ClientName, { v3ClientName, v3ClientPackageName }] of Object.entries(
+    sortedClientMetadata
+  )) {
     addV3ClientImport(j, source, { v3ClientName, v3ClientPackageName });
     replaceClientCreation(j, source, {
       v2DefaultImportName,
