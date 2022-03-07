@@ -10,14 +10,11 @@ describe("v2-to-v3", () => {
     .filter((fileName) => fileName.endsWith(".input.ts"))
     .map((fileName) => fileName.replace(".input.ts", ""));
 
-  it.each(["clients-individual-star-import"])(
-    `transforms correctly using "%s" data`,
-    (testFilePrefix) => {
-      const path = join(fixtureDir, testFilePrefix + `.input.ts`);
-      const source = readFileSync(path, "utf8");
-      const input = { path, source };
-      const expectedOutput = readFileSync(join(fixtureDir, testFilePrefix + `.output.ts`), "utf8");
-      runInlineTest(transformer, null, input, expectedOutput);
-    }
-  );
+  it.each(testFilePrefixes)(`transforms correctly using "%s" data`, (testFilePrefix) => {
+    const path = join(fixtureDir, testFilePrefix + `.input.ts`);
+    const source = readFileSync(path, "utf8");
+    const input = { path, source };
+    const expectedOutput = readFileSync(join(fixtureDir, testFilePrefix + `.output.ts`), "utf8");
+    runInlineTest(transformer, null, input, expectedOutput);
+  });
 });
