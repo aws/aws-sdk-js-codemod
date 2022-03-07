@@ -10,6 +10,14 @@ export const addV3ClientImport = (
   source: Collection<any>,
   { v3ClientName, v3ClientPackageName }: AddV3ClientImportOptions
 ): void => {
+  const existingImport = source.find(j.ImportDeclaration, {
+    source: { value: v3ClientPackageName },
+  });
+  if (existingImport.size()) {
+    // Skip if import already exists.
+    return;
+  }
+
   source
     .find(j.ImportDeclaration)
     .filter((path) => path.value.source.value === "aws-sdk")
