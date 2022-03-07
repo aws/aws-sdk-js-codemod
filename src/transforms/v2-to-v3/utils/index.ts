@@ -1,4 +1,5 @@
 export * from "./addV3ClientImport";
+export * from "./containsRequire";
 export * from "./getClientMetadata";
 export * from "./getV2ClientImportNames";
 export * from "./getV2ClientNames";

@@ -2,6 +2,7 @@ import { API, FileInfo } from "jscodeshift";
 
 import {
   addV3ClientImport,
+  containsRequire,
   getClientMetadata,
   getV2ClientImportNames,
   getV2ClientNames,
@@ -15,6 +16,8 @@ import {
 export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   const source = j(file.source);
+
+  const useRequire = containsRequire(j, source);
 
   const v2DefaultImportName = getV2DefaultImportName(j, source);
   const v2ClientImportNames = getV2ClientImportNames(j, source);
