@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.3.0
+
+### Minor Changes
+
+- d5d5e9d: Support transformation of v2 client imports
+
 ## 0.2.3
 
 ### Patch Changes
