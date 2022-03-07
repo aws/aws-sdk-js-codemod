@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.2.2
+
+### Patch Changes
+
+- 84c337a: Remove .promise() from API calls in variable declarator
+
 ## 0.2.1
 
 ### Patch Changes
