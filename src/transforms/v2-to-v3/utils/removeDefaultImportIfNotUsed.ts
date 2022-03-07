@@ -8,7 +8,7 @@ export const removeDefaultImportIfNotUsed = (
   const identifierUsages = source
     .find(j.Identifier, { name: defaultImportName })
     // Ignore identifier from import.
-    .filter((identifierPath) => identifierPath.parentPath.value.type !== "ImportDefaultSpecifier");
+    .filter((identifierPath) => !identifierPath.parentPath.value.type.startsWith("Import"));
 
   if (identifierUsages.size() === 0) {
     source
