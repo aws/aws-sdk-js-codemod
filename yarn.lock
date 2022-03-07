@@ -1841,7 +1841,6 @@ __metadata:
     eslint-plugin-simple-import-sort: 7.0.0
     jest: 27.5.1
     jscodeshift: 0.13.1
-    jscodeshift-find-imports: 2.0.4
     lint-staged: 12.3.4
     prettier: 2.5.1
     simple-git-hooks: 2.7.0
@@ -4592,15 +4591,6 @@ __metadata:
   bin:
     js-yaml: bin/js-yaml.js
   checksum: c7830dfd456c3ef2c6e355cc5a92e6700ceafa1d14bba54497b34a99f0376cecbb3e9ac14d3e5849b426d5a5140709a66237a8c991c675431271c4ce5504151a
-  languageName: node
-  linkType: hard
-
-"jscodeshift-find-imports@npm:2.0.4":
-  version: 2.0.4
-  resolution: "jscodeshift-find-imports@npm:2.0.4"
-  peerDependencies:
-    jscodeshift: ^0.7.0 || ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0
-  checksum: b57e6f6ca7c94a528d8dd6ea888765ccae03d4005026ea4423f2c8572c7abb1bff5fab96ad0f04c6cb80628ecd6944386b450dc8d231905d2cb17a34129d9b86
   languageName: node
   linkType: hard
 
