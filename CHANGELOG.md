@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.1.5
+
+### Patch Changes
+
+- c38b72a: Update existing v3 import if already present
+
 ## 0.1.4
 
 ### Patch Changes
