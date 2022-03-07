@@ -2,10 +2,9 @@ import { API, FileInfo } from "jscodeshift";
 
 import {
   addV3ClientImport,
+  getClientMetadata,
   getV2ClientNames,
   getV2DefaultImportName,
-  getV3ClientName,
-  getV3ClientPackageName,
   removeDefaultImportIfNotUsed,
   replaceClientCreation,
 } from "./utils";
@@ -20,10 +19,10 @@ export default function transformer(file: FileInfo, api: API) {
   }
 
   const v2ClientNames = getV2ClientNames(j, source, v2DefaultImportName);
+  const clientMetadata = getClientMetadata(v2ClientNames);
 
-  for (const v2ClientName of v2ClientNames) {
-    const v3ClientName = getV3ClientName(v2ClientName);
-    const v3ClientPackageName = getV3ClientPackageName(v2ClientName);
+  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
+    const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
     addV3ClientImport(j, source, { v3ClientName, v3ClientPackageName });
     replaceClientCreation(j, source, {
       v2DefaultImportName,
