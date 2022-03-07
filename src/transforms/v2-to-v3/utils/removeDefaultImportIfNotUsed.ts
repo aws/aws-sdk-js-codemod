@@ -13,15 +13,13 @@ export const removeDefaultImportIfNotUsed = (
   if (identifierUsages.size() === 0) {
     source
       .find(j.ImportDeclaration, {
-        specifiers: [{ type: "ImportDefaultSpecifier", local: { name: defaultImportName } }],
+        specifiers: [{ local: { name: defaultImportName } }],
         source: { value: "aws-sdk" },
       })
       .forEach((declerationPath) => {
         // Remove default import from ImportDeclaration.
         declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
-          (specifier) =>
-            specifier.type !== "ImportDefaultSpecifier" &&
-            specifier.local.name !== defaultImportName
+          (specifier) => specifier.local.name !== defaultImportName
         );
         // Remove ImportDeclaration if there are no other imports.
         if (declerationPath.value.specifiers.length === 0) {
