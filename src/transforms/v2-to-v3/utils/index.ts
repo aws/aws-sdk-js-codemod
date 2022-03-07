@@ -1,5 +1,6 @@
 export * from "./addV3ClientImport";
 export * from "./getClientMetadata";
+export * from "./getV2ClientImportNames";
 export * from "./getV2ClientNames";
 export * from "./getV2DefaultImportName";
 export * from "./removeDefaultImportIfNotUsed";
