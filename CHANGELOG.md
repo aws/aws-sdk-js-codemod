@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.2.3
+
+### Patch Changes
+
+- 24f87df: Check for source 'aws-sdk' while removing default imports
+
 ## 0.2.2
 
 ### Patch Changes
