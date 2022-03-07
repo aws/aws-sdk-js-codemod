@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.1.4
+
+### Patch Changes
+
+- 62ba488: Sort v3 client imports
+- 18ee5bb: Add test for multiple API callbacks
+
 ## 0.1.3
 
 ### Patch Changes
