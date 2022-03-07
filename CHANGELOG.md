@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.3.1
+
+### Patch Changes
+
+- 339e74a: Handle v2 client imports in case of ImportNamespaceSpecifier
+- f4d79c8: Replace jscodeshift-find-imports with source.find() call
+
 ## 0.3.0
 
 ### Minor Changes
