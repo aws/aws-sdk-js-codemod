@@ -8,8 +8,8 @@ export const getV2ClientImportNames = (j: JSCodeshift, source: Collection<any>):
   const { statement } = j.template;
 
   for (const clientName of CLIENT_NAMES) {
-    const individualImport = `aws-sdk/clients/${clientName.toLowerCase()}`;
-    const imports = findImports(source, statement`import AWS from '${individualImport}'`);
+    const importStatement = `import ${clientName} from 'aws-sdk/clients/${clientName.toLowerCase()}'`;
+    const imports = findImports(source, statement([importStatement]));
 
     for (const importObj of Object.values(imports)) {
       if (importObj.type === "Identifier") v2ClientImportNames.push(importObj.name);
