@@ -42,9 +42,17 @@ export const removePromiseCalls = (
           },
         })
         .forEach((callExpressionPath) => {
-          callExpressionPath.parentPath.value.object = (
-            callExpressionPath.value.callee as MemberExpression
-          ).object;
+          switch (callExpressionPath.parentPath.value.type) {
+            case "MemberExpression":
+              callExpressionPath.parentPath.value.object = (
+                callExpressionPath.value.callee as MemberExpression
+              ).object;
+              return;
+            default:
+              throw new Error(
+                `Removal of .promise() not implemented for ${callExpressionPath.parentPath.value.type}`
+              );
+          }
         });
     });
 };
