@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.2.0
+
+### Minor Changes
+
+- a4dc900: Remove .promise() from client API calls
+
 ## 0.1.5
 
 ### Patch Changes
