@@ -23,7 +23,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   for (const [v2ClientName, { v3ClientName, v3ClientPackageName }] of Object.entries(
     clientMetadata
-  )) {
+  ).reverse()) {
     addV3ClientImport(j, source, { v3ClientName, v3ClientPackageName });
     replaceClientCreation(j, source, {
       v2DefaultImportName,
