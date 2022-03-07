@@ -17,7 +17,7 @@ export const removeDefaultImportIfNotUsed = (
         source: { value: "aws-sdk" },
       })
       .forEach((declerationPath) => {
-        // Remove default import from ImportDecleration.
+        // Remove default import from ImportDeclaration.
         declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
           (specifier) =>
             specifier.type !== "ImportDefaultSpecifier" &&

@@ -12,12 +12,24 @@ export const replaceClientCreation = (
   source: Collection<any>,
   { v2DefaultImportName, v2ClientName, v3ClientName }: ReplaceClientCreationOptions
 ): void => {
+  // Replace clients created with default import.
   source
     .find(j.NewExpression, {
       callee: {
         object: { type: "Identifier", name: v2DefaultImportName },
         property: { type: "Identifier", name: v2ClientName },
       },
+    })
+    .replaceWith((nodePath) => {
+      const { node } = nodePath;
+      node.callee = j.identifier(v3ClientName);
+      return node;
+    });
+
+  // Replace clients created with client import.
+  source
+    .find(j.NewExpression, {
+      callee: { type: "Identifier", name: v2ClientName },
     })
     .replaceWith((nodePath) => {
       const { node } = nodePath;
