@@ -1,3 +1,3 @@
-import AugmentedAIRuntime from "aws-sdk/clients/augmentedairuntime";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 
-const client = new AugmentedAIRuntime();
+const client = new DynamoDB();

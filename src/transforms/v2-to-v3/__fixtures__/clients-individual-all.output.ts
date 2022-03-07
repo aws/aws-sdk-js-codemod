@@ -1,3 +1,3 @@
-import { SageMakerA2IRuntime } from "@aws-sdk/client-sage-maker-a2iruntime";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
-const client = new SageMakerA2IRuntime();
+const client = new DynamoDB();
