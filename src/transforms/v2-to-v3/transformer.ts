@@ -21,14 +21,8 @@ export default function transformer(file: FileInfo, api: API) {
   const v2ClientNames = getV2ClientNames(j, source, v2DefaultImportName);
   const clientMetadata = getClientMetadata(v2ClientNames);
 
-  const sortedClientMetadata: {
-    [key: string]: { v3ClientName: string; v3ClientPackageName: string };
-  } = Object.entries(clientMetadata)
-    .sort(([, { v3ClientPackageName: a }], [, { v3ClientPackageName: b }]) => b.localeCompare(a))
-    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-
   for (const [v2ClientName, { v3ClientName, v3ClientPackageName }] of Object.entries(
-    sortedClientMetadata
+    clientMetadata
   )) {
     addV3ClientImport(j, source, { v3ClientName, v3ClientPackageName });
     replaceClientCreation(j, source, {
