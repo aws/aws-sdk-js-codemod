@@ -47,7 +47,12 @@ export const removePromiseCalls = (
               callExpressionPath.parentPath.value.object = (
                 callExpressionPath.value.callee as MemberExpression
               ).object;
-              return;
+              break;
+            case "AwaitExpression":
+              callExpressionPath.parentPath.value.argument = (
+                callExpressionPath.value.callee as MemberExpression
+              ).object;
+              break;
             default:
               throw new Error(
                 `Removal of .promise() not implemented for ${callExpressionPath.parentPath.value.type}`
