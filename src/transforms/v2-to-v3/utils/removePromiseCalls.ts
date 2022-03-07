@@ -5,7 +5,7 @@ export interface RemovePromiseCallsOptions {
   v2DefaultImportName: string;
 }
 
-// Replace v2 client creation with v3 client creation.
+// Removes .promise() from client API calls.
 export const removePromiseCalls = (
   j: JSCodeshift,
   source: Collection<any>,
