@@ -21,7 +21,7 @@ export default function transformer(file: FileInfo, api: API) {
     return source.toSource();
   }
 
-  const v2ClientNames = getV2ClientNames(j, source, v2DefaultImportName);
+  const v2ClientNames = getV2ClientNames(j, source, { v2DefaultImportName, v2ClientImportNames });
   const clientMetadata = getClientMetadata(v2ClientNames);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
