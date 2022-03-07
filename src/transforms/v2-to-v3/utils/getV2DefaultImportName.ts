@@ -1,16 +1,26 @@
 import { Collection, JSCodeshift } from "jscodeshift";
-import findImports from "jscodeshift-find-imports";
 
 export const getV2DefaultImportName = (
   j: JSCodeshift,
   source: Collection<any>
 ): string | undefined => {
-  const { statement } = j.template;
-  const imports = findImports(source, statement`import AWS from 'aws-sdk'`);
+  let v2DefaultImportName = undefined;
 
-  for (const importObj of Object.values(imports)) {
-    if (importObj.type === "Identifier") return importObj.name;
-  }
+  // Set specifier name in v2DefaultImportName if it is imported in the source.
+  source
+    .find(j.ImportDeclaration, {
+      source: { value: "aws-sdk" },
+    })
+    .forEach((declerationPath) => {
+      declerationPath.value.specifiers.forEach((specifier) => {
+        if (
+          specifier.type === "ImportDefaultSpecifier" ||
+          specifier.type === "ImportNamespaceSpecifier"
+        ) {
+          v2DefaultImportName = specifier.local.name;
+        }
+      });
+    });
 
-  return undefined;
+  return v2DefaultImportName;
 };
