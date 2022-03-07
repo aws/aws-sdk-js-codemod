@@ -14,6 +14,7 @@ export const removeDefaultImportIfNotUsed = (
     source
       .find(j.ImportDeclaration, {
         specifiers: [{ type: "ImportDefaultSpecifier", local: { name: defaultImportName } }],
+        source: { value: "aws-sdk" },
       })
       .forEach((declerationPath) => {
         // Remove default import from ImportDecleration.
