@@ -16,7 +16,7 @@ export const removeDefaultImportIfNotUsed = (
         specifiers: [{ type: "ImportDefaultSpecifier", local: { name: defaultImportName } }],
       })
       .forEach((declerationPath) => {
-        // Remove default import from ImportDecleration.
+        // Remove default import from ImportDeclaration.
         declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
           (specifier) =>
             specifier.type !== "ImportDefaultSpecifier" &&
