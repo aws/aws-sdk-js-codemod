@@ -17,7 +17,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   const v2DefaultImportName = getV2DefaultImportName(j, source);
   const v2ClientImportNames = getV2ClientImportNames(j, source);
-  if (!v2DefaultImportName || v2ClientImportNames.length === 0) {
+  if (!v2DefaultImportName && v2ClientImportNames.length === 0) {
     return source.toSource();
   }
 
