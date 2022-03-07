@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.2.1
+
+### Patch Changes
+
+- ed78aae: Remove .promise() from API calls which use await
+
 ## 0.2.0
 
 ### Minor Changes
