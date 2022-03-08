@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.4.1
+
+### Patch Changes
+
+- 1008a5b: Support transformation for client require
+
 ## 0.4.0
 
 ### Minor Changes
