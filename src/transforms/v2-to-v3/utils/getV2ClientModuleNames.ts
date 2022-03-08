@@ -1,10 +1,15 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { CLIENT_NAMES } from "./config";
 import { containsRequire } from "./containsRequire";
-import { getV2ClientImportNames } from "./getV2ClientImportNames";
-import { getV2ClientRequireNames } from "./getV2ClientRequireNames";
+import { getImportIdentifierName } from "./getImportIdentifierName";
+import { getRequireIdentifierName } from "./getRequireIdentifierName";
 
 export const getV2ClientModuleNames = (j: JSCodeshift, source: Collection<any>): string[] =>
-  containsRequire(j, source)
-    ? getV2ClientRequireNames(j, source)
-    : getV2ClientImportNames(j, source);
+  CLIENT_NAMES.map((clientName) => `aws-sdk/clients/${clientName.toLowerCase()}`)
+    .map((v2ClientLiteralValue) =>
+      containsRequire(j, source)
+        ? getRequireIdentifierName(j, source, v2ClientLiteralValue)
+        : getImportIdentifierName(j, source, v2ClientLiteralValue)
+    )
+    .filter((v2ClientModuleName) => v2ClientModuleName !== undefined);

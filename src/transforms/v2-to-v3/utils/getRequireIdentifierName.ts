@@ -1,8 +1,9 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-export const getV2DefaultRequireName = (
+export const getRequireIdentifierName = (
   j: JSCodeshift,
-  source: Collection<any>
+  source: Collection<any>,
+  literalValue: string
 ): string | undefined =>
   (
     source
@@ -11,7 +12,7 @@ export const getV2DefaultRequireName = (
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
-          arguments: [{ type: "Literal", value: "aws-sdk" }],
+          arguments: [{ type: "Literal", value: literalValue }],
         },
       })
       .nodes()[0]?.id as Identifier
