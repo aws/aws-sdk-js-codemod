@@ -3,7 +3,7 @@ import { API, FileInfo } from "jscodeshift";
 import {
   addV3ClientModule,
   getClientMetadata,
-  getV2ClientImportNames,
+  getV2ClientModuleNames,
   getV2ClientNames,
   getV2DefaultModuleName,
   removeDefaultModuleIfNotUsed,
@@ -17,7 +17,7 @@ export default function transformer(file: FileInfo, api: API) {
   const source = j(file.source);
 
   const v2DefaultImportName = getV2DefaultModuleName(j, source);
-  const v2ClientImportNames = getV2ClientImportNames(j, source);
+  const v2ClientImportNames = getV2ClientModuleNames(j, source);
   if (!v2DefaultImportName && v2ClientImportNames.length === 0) {
     return source.toSource();
   }
