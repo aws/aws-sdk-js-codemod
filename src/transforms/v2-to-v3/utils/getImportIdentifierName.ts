@@ -1,11 +1,12 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export const getV2DefaultImportName = (
+export const getImportIdentifierName = (
   j: JSCodeshift,
-  source: Collection<any>
+  source: Collection<any>,
+  literalValue: string
 ): string | undefined =>
   source
     .find(j.ImportDeclaration, {
-      source: { value: "aws-sdk" },
+      source: { type: "Literal", value: literalValue },
     })
     .nodes()[0]?.specifiers[0]?.local.name;
