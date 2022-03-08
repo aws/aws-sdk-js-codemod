@@ -6,6 +6,6 @@ export * from "./getV2ClientNames";
 export * from "./getV2DefaultImportName";
 export * from "./removeDefaultModuleIfNotUsed";
 export * from "./removePromiseCalls";
-export * from "./removeV2ClientImport";
+export * from "./removeV2ClientModule";
 export * from "./replaceClientCreation";
 export * from "./types";
