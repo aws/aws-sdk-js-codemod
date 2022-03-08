@@ -12,7 +12,7 @@ export const replaceClientCreation = (
   source: Collection<any>,
   { v2DefaultModuleName, v2ClientName, v3ClientName }: ReplaceClientCreationOptions
 ): void => {
-  // Replace clients created with default import.
+  // Replace clients created with default module.
   source
     .find(j.NewExpression, {
       callee: {
@@ -26,7 +26,7 @@ export const replaceClientCreation = (
       return node;
     });
 
-  // Replace clients created with client import.
+  // Replace clients created with client module.
   source
     .find(j.NewExpression, {
       callee: { type: "Identifier", name: v2ClientName },

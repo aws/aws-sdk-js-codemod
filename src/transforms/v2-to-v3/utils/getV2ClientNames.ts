@@ -10,7 +10,7 @@ export const getV2ClientNames = (
   source: Collection<any>,
   { v2DefaultModuleName, v2ClientModuleNames }: GetV2ClientNamesOptions
 ): Array<string> => {
-  const v2ClientNamesFromDefaultImport = source
+  const v2ClientNamesFromDefaultModule = source
     .find(j.NewExpression, {
       callee: {
         type: "MemberExpression",
@@ -23,10 +23,10 @@ export const getV2ClientNames = (
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name
     );
 
-  // Merge v2ClientNamesFromDefaultImport with v2ClientImportNames with duplicates removed.
-  return v2ClientNamesFromDefaultImport.concat(
+  // Merge v2ClientNamesFromDefaultModule with v2ClientModuleNames with duplicates removed.
+  return v2ClientNamesFromDefaultModule.concat(
     v2ClientModuleNames.filter(
-      (v2ClientImportName) => v2ClientNamesFromDefaultImport.indexOf(v2ClientImportName) < 0
+      (v2ClientModuleName) => v2ClientNamesFromDefaultModule.indexOf(v2ClientModuleName) < 0
     )
   );
 };
