@@ -2,17 +2,21 @@ import { Collection, Identifier, JSCodeshift, VariableDeclarator } from "jscodes
 
 import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
 
-export const removeV2ClientRequire = (
+export interface RemoveRequireIdentifierNameOptions {
+  identifierName: string;
+  literalValue: string;
+}
+
+export const removeRequireIdentifierName = (
   j: JSCodeshift,
   source: Collection<any>,
-  v2ClientName: string
+  { identifierName, literalValue }: RemoveRequireIdentifierNameOptions
 ) => {
-  const requireLiteralName = `aws-sdk/clients/${v2ClientName.toLowerCase()}`;
-  getRequireVariableDeclaration(j, source, requireLiteralName)
+  getRequireVariableDeclaration(j, source, literalValue)
     .filter(
       (nodePath) =>
         ((nodePath.value.declarations[0] as VariableDeclarator).id as Identifier).name ===
-        v2ClientName
+        identifierName
     )
     .remove();
 };

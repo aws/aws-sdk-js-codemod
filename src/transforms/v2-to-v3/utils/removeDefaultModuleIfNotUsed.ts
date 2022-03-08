@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { containsRequire } from "./containsRequire";
-import { removeDefaultImport } from "./removeDefaultImport";
-import { removeDefaultRequire } from "./removeDefaultRequire";
+import { removeImportIdentifierName } from "./removeImportIdentifierName";
+import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
 export const removeDefaultModuleIfNotUsed = (
   j: JSCodeshift,
@@ -13,10 +13,14 @@ export const removeDefaultModuleIfNotUsed = (
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
+    const removeIdentifierNameOptions = {
+      identifierName: defaultModuleName,
+      literalValue: "aws-sdk",
+    };
     if (containsRequire(j, source)) {
-      removeDefaultRequire(j, source, defaultModuleName);
+      removeRequireIdentifierName(j, source, removeIdentifierNameOptions);
     } else {
-      removeDefaultImport(j, source, defaultModuleName);
+      removeImportIdentifierName(j, source, removeIdentifierNameOptions);
     }
   }
 };
