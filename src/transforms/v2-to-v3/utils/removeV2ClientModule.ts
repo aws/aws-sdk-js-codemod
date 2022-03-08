@@ -8,13 +8,12 @@ export const removeV2ClientModule = (
   j: JSCodeshift,
   source: Collection<any>,
   v2ClientName: string
-) =>
-  containsRequire(j, source)
-    ? removeRequireIdentifierName(j, source, {
-        identifierName: v2ClientName,
-        literalValue: `aws-sdk/clients/${v2ClientName.toLowerCase()}`,
-      })
-    : removeImportIdentifierName(j, source, {
-        identifierName: v2ClientName,
-        literalValue: `aws-sdk/clients/${v2ClientName.toLowerCase()}`,
-      });
+) => {
+  const removeIdentifierNameOptions = {
+    identifierName: v2ClientName,
+    literalValue: `aws-sdk/clients/${v2ClientName.toLowerCase()}`,
+  };
+  return containsRequire(j, source)
+    ? removeRequireIdentifierName(j, source, removeIdentifierNameOptions)
+    : removeImportIdentifierName(j, source, removeIdentifierNameOptions);
+};

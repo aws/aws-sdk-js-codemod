@@ -13,16 +13,14 @@ export const removeDefaultModuleIfNotUsed = (
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
+    const removeIdentifierNameOptions = {
+      identifierName: defaultModuleName,
+      literalValue: "aws-sdk",
+    };
     if (containsRequire(j, source)) {
-      removeRequireIdentifierName(j, source, {
-        identifierName: defaultModuleName,
-        literalValue: "aws-sdk",
-      });
+      removeRequireIdentifierName(j, source, removeIdentifierNameOptions);
     } else {
-      removeImportIdentifierName(j, source, {
-        identifierName: defaultModuleName,
-        literalValue: "aws-sdk",
-      });
+      removeImportIdentifierName(j, source, removeIdentifierNameOptions);
     }
   }
 };
