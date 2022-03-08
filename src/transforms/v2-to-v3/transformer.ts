@@ -6,7 +6,7 @@ import {
   getV2ClientImportNames,
   getV2ClientNames,
   getV2DefaultImportName,
-  removeDefaultImportIfNotUsed,
+  removeDefaultModuleIfNotUsed,
   removePromiseCalls,
   removeV2ClientImport,
   replaceClientCreation,
@@ -33,7 +33,7 @@ export default function transformer(file: FileInfo, api: API) {
     replaceClientCreation(j, source, { v2DefaultImportName, v2ClientName, v3ClientName });
   }
 
-  removeDefaultImportIfNotUsed(j, source, v2DefaultImportName);
+  removeDefaultModuleIfNotUsed(j, source, v2DefaultImportName);
 
   return source.toSource();
 }
