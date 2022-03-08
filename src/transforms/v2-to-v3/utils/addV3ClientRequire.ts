@@ -1,6 +1,7 @@
 import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "jscodeshift";
 
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
+import { PACKAGE_NAME } from "./config";
 import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
 
 export const addV3ClientRequire = (
@@ -42,7 +43,7 @@ export const addV3ClientRequire = (
 
   // Insert after default require if present. If not, insert after client require.
   const clientRequireValue = `aws-sdk/clients/${v2ClientName.toLowerCase()}`;
-  const defaultRequireVarDeclaration = getRequireVariableDeclaration(j, source, "aws-sdk");
+  const defaultRequireVarDeclaration = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
   const clientRequireVarDeclaration = getRequireVariableDeclaration(j, source, clientRequireValue);
 
   const requireVarDeclaration =

@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
+import { PACKAGE_NAME } from "./config";
 
 export const addV3ClientImport = (
   j: JSCodeshift,
@@ -27,7 +28,7 @@ export const addV3ClientImport = (
     .find(j.ImportDeclaration)
     .filter(
       (path) =>
-        path.value.source.value === "aws-sdk" ||
+        path.value.source.value === PACKAGE_NAME ||
         path.value.source.value === `aws-sdk/clients/${v2ClientName.toLowerCase()}`
     )
     .insertAfter(
