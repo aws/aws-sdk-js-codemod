@@ -2,8 +2,8 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES } from "./config";
 
-export const getV2ClientImportNames = (j: JSCodeshift, source: Collection<any>): string[] => {
-  const v2ClientImportNames = [];
+export const getV2ClientModuleNames = (j: JSCodeshift, source: Collection<any>): string[] => {
+  const v2ClientModuleNames = [];
 
   for (const clientName of CLIENT_NAMES) {
     // Add specifier name to v2ClientImportNames if it is imported in the source.
@@ -17,7 +17,7 @@ export const getV2ClientImportNames = (j: JSCodeshift, source: Collection<any>):
             specifier.type === "ImportDefaultSpecifier" ||
             specifier.type === "ImportNamespaceSpecifier"
           ) {
-            v2ClientImportNames.push(specifier.local.name);
+            v2ClientModuleNames.push(specifier.local.name);
           }
         });
       });
@@ -33,9 +33,9 @@ export const getV2ClientImportNames = (j: JSCodeshift, source: Collection<any>):
         },
       })
       .forEach((declerationPath) => {
-        v2ClientImportNames.push((declerationPath.value.id as Identifier).name);
+        v2ClientModuleNames.push((declerationPath.value.id as Identifier).name);
       });
   }
 
-  return v2ClientImportNames;
+  return v2ClientModuleNames;
 };
