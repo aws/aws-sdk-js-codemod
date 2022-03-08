@@ -17,12 +17,12 @@ export default function transformer(file: FileInfo, api: API) {
   const source = j(file.source);
 
   const v2DefaultModuleName = getV2DefaultModuleName(j, source);
-  const v2ClientImportNames = getV2ClientModuleNames(j, source);
-  if (!v2DefaultModuleName && v2ClientImportNames.length === 0) {
+  const v2ClientModuleNames = getV2ClientModuleNames(j, source);
+  if (!v2DefaultModuleName && v2ClientModuleNames.length === 0) {
     return source.toSource();
   }
 
-  const v2ClientNames = getV2ClientNames(j, source, { v2DefaultModuleName, v2ClientImportNames });
+  const v2ClientNames = getV2ClientNames(j, source, { v2DefaultModuleName, v2ClientModuleNames });
   const clientMetadata = getClientMetadata(v2ClientNames);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
