@@ -10,7 +10,7 @@ describe("v2-to-v3", () => {
     .filter((fileName) => fileName.endsWith(".input.ts"))
     .map((fileName) => fileName.replace(".input.ts", ""));
 
-  it.each(["global-require"])(`transforms correctly using "%s" data`, (testFilePrefix) => {
+  it.each(testFilePrefixes)(`transforms correctly using "%s" data`, (testFilePrefix) => {
     const path = join(fixtureDir, testFilePrefix + `.input.ts`);
     const source = readFileSync(path, "utf8");
     const input = { path, source };
