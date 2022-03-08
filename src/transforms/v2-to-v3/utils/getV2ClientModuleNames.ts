@@ -4,12 +4,11 @@ import { CLIENT_NAMES } from "./config";
 import { containsRequire } from "./containsRequire";
 import { getImportIdentifierName } from "./getImportIdentifierName";
 import { getRequireIdentifierName } from "./getRequireIdentifierName";
+import { getV2ClientModulePath } from "./getV2ClientModulePath";
 
 export const getV2ClientModuleNames = (j: JSCodeshift, source: Collection<any>): string[] =>
-  CLIENT_NAMES.map((clientName) => `aws-sdk/clients/${clientName.toLowerCase()}`)
-    .map((v2ClientLiteralValue) =>
-      containsRequire(j, source)
-        ? getRequireIdentifierName(j, source, v2ClientLiteralValue)
-        : getImportIdentifierName(j, source, v2ClientLiteralValue)
-    )
-    .filter((v2ClientModuleName) => v2ClientModuleName !== undefined);
+  CLIENT_NAMES.map((clientName) =>
+    containsRequire(j, source)
+      ? getRequireIdentifierName(j, source, getV2ClientModulePath(clientName))
+      : getImportIdentifierName(j, source, getV2ClientModulePath(clientName))
+  ).filter((v2ClientModuleName) => v2ClientModuleName !== undefined);
