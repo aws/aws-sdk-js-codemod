@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { containsRequire } from "./containsRequire";
+import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
-import { removeV2ClientImport } from "./removeV2ClientImport";
 
 export const removeV2ClientModule = (
   j: JSCodeshift,
@@ -14,4 +14,7 @@ export const removeV2ClientModule = (
         identifierName: v2ClientName,
         literalValue: `aws-sdk/clients/${v2ClientName.toLowerCase()}`,
       })
-    : removeV2ClientImport(j, source, v2ClientName);
+    : removeImportIdentifierName(j, source, {
+        identifierName: v2ClientName,
+        literalValue: `aws-sdk/clients/${v2ClientName.toLowerCase()}`,
+      });

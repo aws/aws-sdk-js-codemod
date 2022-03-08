@@ -1,24 +1,24 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export const removeV2ClientImport = (
+export interface RemoveImportIdentifierNameOptions {
+  identifierName: string;
+  literalValue: string;
+}
+
+export const removeImportIdentifierName = (
   j: JSCodeshift,
   source: Collection<any>,
-  v2ClientName: string
+  { identifierName, literalValue }: RemoveImportIdentifierNameOptions
 ) => {
-  const importSourceName = `aws-sdk/clients/${v2ClientName.toLowerCase()}`;
   source
     .find(j.ImportDeclaration, {
-      specifiers: [
-        {
-          local: { name: v2ClientName },
-        },
-      ],
-      source: { value: importSourceName },
+      specifiers: [{ local: { name: identifierName } }],
+      source: { value: literalValue },
     })
     .forEach((declerationPath) => {
-      // Remove import from ImportDeclaration.
+      // Remove default import from ImportDeclaration.
       declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
-        (specifier) => specifier.local.name !== v2ClientName
+        (specifier) => specifier.local.name !== identifierName
       );
       // Remove ImportDeclaration if there are no other imports.
       if (declerationPath.value.specifiers.length === 0) {
