@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 export const getV2DefaultImportName = (
   j: JSCodeshift,
@@ -20,6 +20,20 @@ export const getV2DefaultImportName = (
           v2DefaultImportName = specifier.local.name;
         }
       });
+    });
+
+  // Set specifier name in v2DefaultImportName if it is required in the source.
+  source
+    .find(j.VariableDeclarator, {
+      id: { type: "Identifier" },
+      init: {
+        type: "CallExpression",
+        callee: { type: "Identifier", name: "require" },
+        arguments: [{ type: "Literal", value: "aws-sdk" }],
+      },
+    })
+    .forEach((declerationPath) => {
+      v2DefaultImportName = (declerationPath.value.id as Identifier).name;
     });
 
   return v2DefaultImportName;
