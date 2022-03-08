@@ -12,4 +12,4 @@ export const getV2ClientModuleNames = (j: JSCodeshift, source: Collection<any>):
         ? getRequireIdentifierName(j, source, v2ClientLiteralValue)
         : getImportIdentifierName(j, source, v2ClientLiteralValue)
     )
-    .filter((v2ClientImportLocalName) => v2ClientImportLocalName !== undefined);
+    .filter((v2ClientModuleName) => v2ClientModuleName !== undefined);
