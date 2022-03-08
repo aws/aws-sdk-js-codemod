@@ -2,14 +2,14 @@ import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshi
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
-  v2DefaultImportName: string;
+  v2DefaultModuleName: string;
 }
 
 // Removes .promise() from client API calls.
 export const removePromiseCalls = (
   j: JSCodeshift,
   source: Collection<any>,
-  { v2DefaultImportName, v2ClientName }: RemovePromiseCallsOptions
+  { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
   source
     .find(j.VariableDeclarator, {
@@ -17,7 +17,7 @@ export const removePromiseCalls = (
       init: {
         type: "NewExpression",
         callee: {
-          object: { type: "Identifier", name: v2DefaultImportName },
+          object: { type: "Identifier", name: v2DefaultModuleName },
           property: { type: "Identifier", name: v2ClientName },
         },
       },

@@ -1,20 +1,20 @@
 import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
 
 export interface GetV2ClientNamesOptions {
-  v2DefaultImportName: string;
+  v2DefaultModuleName: string;
   v2ClientImportNames: string[];
 }
 
 export const getV2ClientNames = (
   j: JSCodeshift,
   source: Collection<any>,
-  { v2DefaultImportName, v2ClientImportNames }: GetV2ClientNamesOptions
+  { v2DefaultModuleName, v2ClientImportNames }: GetV2ClientNamesOptions
 ): Array<string> => {
   const v2ClientNamesFromDefaultImport = source
     .find(j.NewExpression, {
       callee: {
         type: "MemberExpression",
-        object: { type: "Identifier", name: v2DefaultImportName },
+        object: { type: "Identifier", name: v2DefaultModuleName },
         property: { type: "Identifier" },
       },
     })

@@ -7,16 +7,16 @@ import { removeDefaultRequire } from "./removeDefaultRequire";
 export const removeDefaultModuleIfNotUsed = (
   j: JSCodeshift,
   source: Collection<any>,
-  defaultImportName: string
+  defaultModuleName: string
 ) => {
-  const identifierUsages = source.find(j.Identifier, { name: defaultImportName });
+  const identifierUsages = source.find(j.Identifier, { name: defaultModuleName });
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
     if (containsRequire(j, source)) {
-      removeDefaultRequire(j, source, defaultImportName);
+      removeDefaultRequire(j, source, defaultModuleName);
     } else {
-      removeDefaultImport(j, source, defaultImportName);
+      removeDefaultImport(j, source, defaultModuleName);
     }
   }
 };
