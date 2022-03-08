@@ -3,6 +3,7 @@ import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "js
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
 import { PACKAGE_NAME } from "./config";
 import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
+import { getV2ClientModulePath } from "./getV2ClientModulePath";
 
 export const addV3ClientRequire = (
   j: JSCodeshift,
@@ -42,9 +43,9 @@ export const addV3ClientRequire = (
   }
 
   // Insert after default require if present. If not, insert after client require.
-  const clientRequireValue = `aws-sdk/clients/${v2ClientName.toLowerCase()}`;
+  const v2ClientModulePath = getV2ClientModulePath(v2ClientName);
   const defaultRequireVarDeclaration = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
-  const clientRequireVarDeclaration = getRequireVariableDeclaration(j, source, clientRequireValue);
+  const clientRequireVarDeclaration = getRequireVariableDeclaration(j, source, v2ClientModulePath);
 
   const requireVarDeclaration =
     defaultRequireVarDeclaration.size() > 0
