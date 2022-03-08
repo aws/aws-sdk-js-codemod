@@ -1,5 +1,17 @@
 # aws-sdk-js-codemod
 
+## 0.4.2
+
+### Patch Changes
+
+- a72bd0c: Rename Import to Module wherever required
+- 34c3fb7: Add utils remove(Require|Import)IdentifierName
+- 4df95bd: Add utility getV2ClientModulePath
+- d0d459a: Split getV2ClientModuleNames into import/require components
+- 38a16cc: Add utils get(Require|Import)IdentifierName
+- dd83c82: Split getV2DefaultModuleName into import/require components
+- 5690340: Store 'aws-sdk' in constant PACKAGE_NAME
+
 ## 0.4.1
 
 ### Patch Changes
