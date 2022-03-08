@@ -1,10 +1,10 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-export const getV2DefaultImportName = (
+export const getV2DefaultModuleName = (
   j: JSCodeshift,
   source: Collection<any>
 ): string | undefined => {
-  let v2DefaultImportName = undefined;
+  let v2DefaultModuleName = undefined;
 
   // Set specifier name in v2DefaultImportName if it is imported in the source.
   source
@@ -17,7 +17,7 @@ export const getV2DefaultImportName = (
           specifier.type === "ImportDefaultSpecifier" ||
           specifier.type === "ImportNamespaceSpecifier"
         ) {
-          v2DefaultImportName = specifier.local.name;
+          v2DefaultModuleName = specifier.local.name;
         }
       });
     });
@@ -33,8 +33,8 @@ export const getV2DefaultImportName = (
       },
     })
     .forEach((declerationPath) => {
-      v2DefaultImportName = (declerationPath.value.id as Identifier).name;
+      v2DefaultModuleName = (declerationPath.value.id as Identifier).name;
     });
 
-  return v2DefaultImportName;
+  return v2DefaultModuleName;
 };
