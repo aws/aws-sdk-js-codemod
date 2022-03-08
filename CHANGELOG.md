@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.4.0
+
+### Minor Changes
+
+- 65c166a: Support transformation for global require
+
 ## 0.3.1
 
 ### Patch Changes
