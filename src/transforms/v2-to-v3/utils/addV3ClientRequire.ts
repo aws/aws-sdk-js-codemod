@@ -27,7 +27,7 @@ export const addV3ClientRequire = (
     },
   });
 
-  // Require decleration already exists.
+  // Require declaration already exists.
   if (existingRequires.size()) {
     existingRequires.forEach((nodePath) => {
       // Append to existing require if property not present.

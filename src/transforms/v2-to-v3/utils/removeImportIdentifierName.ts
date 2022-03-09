@@ -15,14 +15,14 @@ export const removeImportIdentifierName = (
       specifiers: [{ local: { name: identifierName } }],
       source: { value: literalValue },
     })
-    .forEach((declerationPath) => {
+    .forEach((declarationPath) => {
       // Remove default import from ImportDeclaration.
-      declerationPath.value.specifiers = declerationPath.value.specifiers.filter(
+      declarationPath.value.specifiers = declarationPath.value.specifiers.filter(
         (specifier) => specifier.local.name !== identifierName
       );
       // Remove ImportDeclaration if there are no other imports.
-      if (declerationPath.value.specifiers.length === 0) {
-        j(declerationPath).remove();
+      if (declarationPath.value.specifiers.length === 0) {
+        j(declarationPath).remove();
       }
     });
 };

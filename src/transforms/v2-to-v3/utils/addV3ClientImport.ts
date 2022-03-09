@@ -13,7 +13,7 @@ export const addV3ClientImport = (
     source: { value: v3ClientPackageName },
   });
 
-  // Import decleration already exists.
+  // Import declaration already exists.
   if (existingImports.size()) {
     existingImports.forEach((nodePath) => {
       // Append to existing import if specifier not present.
