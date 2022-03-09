@@ -4,7 +4,7 @@ import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicat
 
 export interface GetV2ClientNamesOptions {
   v2DefaultModuleName: string;
-  v2ClientModuleNames: string[];
+  v2ClientModuleNames: Array<string>;
 }
 
 export const getV2ClientNames = (

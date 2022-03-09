@@ -22,5 +22,5 @@ export interface AwsSdkJsCodemodTransform {
   description: string;
 
   /** array of TransformOption, the which can be passed to the transform */
-  options: AwsSdkJsCodemodTransformOption[];
+  options: Array<AwsSdkJsCodemodTransformOption>;
 }

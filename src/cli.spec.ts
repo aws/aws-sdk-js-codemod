@@ -8,7 +8,7 @@ import { run } from "./cli";
 jest.mock("child_process");
 
 describe("cli", () => {
-  const verifySpawnCall = (args: string[]) => {
+  const verifySpawnCall = (args: Array<string>) => {
     expect(spawn).toHaveBeenCalledWith("npm", ["exec", "jscodeshift", "--", ...args], {
       stdio: "inherit",
       shell: process.platform == "win32",

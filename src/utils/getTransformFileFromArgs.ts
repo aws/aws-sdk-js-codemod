@@ -1,4 +1,4 @@
-export const getTransformFileFromArgs = (args: string[]): string => {
+export const getTransformFileFromArgs = (args: Array<string>): string => {
   if (args.includes("-t")) {
     const transformIndex = args.indexOf("-t");
     return args[transformIndex + 1];

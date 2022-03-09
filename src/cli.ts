@@ -13,7 +13,7 @@ import {
   getUpdatedTransformFile,
 } from "./utils";
 
-export const run = async (args: string[]): Promise<void> => {
+export const run = async (args: Array<string>): Promise<void> => {
   const transforms = getTransforms();
 
   if (args[0] === "--version") {

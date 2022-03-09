@@ -1,7 +1,7 @@
 export const getArgsWithUpdatedTransformFile = (
-  args: string[],
+  args: Array<string>,
   updatedTransformFile: string
-): string[] => {
+): Array<string> => {
   if (args.includes("-t")) {
     const transformIndex = args.indexOf("-t");
     args[transformIndex + 1] = updatedTransformFile;
