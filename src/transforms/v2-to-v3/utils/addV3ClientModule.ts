@@ -12,7 +12,7 @@ export interface AddV3ClientModuleOptions {
 
 export const addV3ClientModule = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { v2ClientName, v3ClientName, v3ClientPackageName }: AddV3ClientModuleOptions
 ): void =>
   containsRequire(j, source)

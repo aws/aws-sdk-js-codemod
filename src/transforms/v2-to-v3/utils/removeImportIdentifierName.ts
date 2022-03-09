@@ -7,7 +7,7 @@ export interface RemoveImportIdentifierNameOptions {
 
 export const removeImportIdentifierName = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { identifierName, literalValue }: RemoveImportIdentifierNameOptions
 ) => {
   source

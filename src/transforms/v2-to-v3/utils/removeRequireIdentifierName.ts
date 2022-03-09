@@ -9,7 +9,7 @@ export interface RemoveRequireIdentifierNameOptions {
 
 export const removeRequireIdentifierName = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { identifierName, literalValue }: RemoveRequireIdentifierNameOptions
 ) => {
   getRequireVariableDeclaration(j, source, literalValue)

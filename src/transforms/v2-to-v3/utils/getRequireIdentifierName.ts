@@ -2,7 +2,7 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 export const getRequireIdentifierName = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   literalValue: string
 ): string | undefined =>
   (

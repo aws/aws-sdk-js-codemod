@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 export const getImportIdentifierName = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   literalValue: string
 ): string | undefined =>
   source

@@ -9,7 +9,7 @@ export interface GetV2ClientNamesOptions {
 
 export const getV2ClientNames = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientModuleNames }: GetV2ClientNamesOptions
 ): string[] => {
   const v2ClientNamesFromDefaultModule = source
