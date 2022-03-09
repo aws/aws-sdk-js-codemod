@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.4.3
+
+### Patch Changes
+
+- ea49796: Bump typescript to 4.6
+- 8b09b2d: Support parser=ts
+
 ## 0.4.2
 
 ### Patch Changes
