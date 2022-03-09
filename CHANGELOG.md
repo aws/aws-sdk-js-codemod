@@ -1,5 +1,14 @@
 # aws-sdk-js-codemod
 
+## 0.4.5
+
+### Patch Changes
+
+- 249dee2: Replace <any> with <unknown>
+- 812ab49: Add test with no AWS SDK for JavaScript (v2)
+- 8ef2e6d: Rename named import to identifier import
+- 3d1b37c: Add test for existing identifier/package require
+
 ## 0.4.4
 
 ### Patch Changes
