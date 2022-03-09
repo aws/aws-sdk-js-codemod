@@ -11,7 +11,7 @@ export const getV2ClientNames = (
   j: JSCodeshift,
   source: Collection<any>,
   { v2DefaultModuleName, v2ClientModuleNames }: GetV2ClientNamesOptions
-): Array<string> => {
+): string[] => {
   const v2ClientNamesFromDefaultModule = source
     .find(j.NewExpression, {
       callee: {

@@ -2,7 +2,7 @@ export type PositionalOptionsType = "boolean" | "number" | "string";
 
 export interface AwsSdkJsCodemodTransformOption {
   /** array of values, limit valid option arguments to a predefined set */
-  choices?: ReadonlyArray<boolean> | ReadonlyArray<number> | ReadonlyArray<string>;
+  choices?: readonly boolean[] | readonly number[] | readonly string[];
 
   /** value, set a default value for the option */
   default?: boolean | number | string;
