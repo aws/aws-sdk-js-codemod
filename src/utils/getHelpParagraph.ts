@@ -2,7 +2,7 @@ import { getBorderCharacters, table } from "table";
 
 import { AwsSdkJsCodemodTransform } from "../transforms";
 
-export const getHelpParagraph = (transforms: Array<AwsSdkJsCodemodTransform>) =>
+export const getHelpParagraph = (transforms: AwsSdkJsCodemodTransform[]) =>
   `----------------------------------------------------------------------------------------------------
 aws-sdk-js-codemod is a lightweight wrapper over jscodeshift.
 It processes --help, --version and --transform options before passing them downstream.
