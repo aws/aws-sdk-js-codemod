@@ -7,7 +7,7 @@ import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
 export const removeDefaultModuleIfNotUsed = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   defaultModuleName: string
 ) => {
   const identifierUsages = source.find(j.Identifier, { name: defaultModuleName });

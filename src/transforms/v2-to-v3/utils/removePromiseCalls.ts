@@ -8,7 +8,7 @@ export interface RemovePromiseCallsOptions {
 // Removes .promise() from client API calls.
 export const removePromiseCalls = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
   source

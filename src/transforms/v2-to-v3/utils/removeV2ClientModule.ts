@@ -7,7 +7,7 @@ import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
 export const removeV2ClientModule = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   v2ClientName: string
 ) => {
   const removeIdentifierNameOptions = {

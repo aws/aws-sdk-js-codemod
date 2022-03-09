@@ -9,7 +9,7 @@ export interface ReplaceClientCreationOptions {
 // Replace v2 client creation with v3 client creation.
 export const replaceClientCreation = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName, v3ClientName }: ReplaceClientCreationOptions
 ): void => {
   // Replace clients created with default module.

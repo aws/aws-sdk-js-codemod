@@ -6,7 +6,7 @@ import { getV2ClientModulePath } from "./getV2ClientModulePath";
 
 export const addV3ClientImport = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { v2ClientName, v3ClientName, v3ClientPackageName }: AddV3ClientModuleOptions
 ): void => {
   const existingImports = source.find(j.ImportDeclaration, {

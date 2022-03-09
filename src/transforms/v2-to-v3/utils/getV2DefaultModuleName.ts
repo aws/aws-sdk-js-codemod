@@ -7,7 +7,7 @@ import { getRequireIdentifierName } from "./getRequireIdentifierName";
 
 export const getV2DefaultModuleName = (
   j: JSCodeshift,
-  source: Collection<any>
+  source: Collection<unknown>
 ): string | undefined =>
   containsRequire(j, source)
     ? getRequireIdentifierName(j, source, PACKAGE_NAME)

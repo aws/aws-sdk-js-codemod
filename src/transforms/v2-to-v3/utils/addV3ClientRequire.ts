@@ -7,7 +7,7 @@ import { getV2ClientModulePath } from "./getV2ClientModulePath";
 
 export const addV3ClientRequire = (
   j: JSCodeshift,
-  source: Collection<any>,
+  source: Collection<unknown>,
   { v2ClientName, v3ClientName, v3ClientPackageName }: AddV3ClientModuleOptions
 ): void => {
   const v3ClientNameIdentifier = j.identifier(v3ClientName);
