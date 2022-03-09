@@ -1,5 +1,7 @@
 import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
 
+import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
+
 export interface GetV2ClientNamesOptions {
   v2DefaultModuleName: string;
   v2ClientModuleNames: string[];
@@ -23,10 +25,5 @@ export const getV2ClientNames = (
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name
     );
 
-  // Merge v2ClientNamesFromDefaultModule with v2ClientModuleNames with duplicates removed.
-  return v2ClientNamesFromDefaultModule.concat(
-    v2ClientModuleNames.filter(
-      (v2ClientModuleName) => v2ClientNamesFromDefaultModule.indexOf(v2ClientModuleName) < 0
-    )
-  );
+  return getMergedArrayWithoutDuplicates(v2ClientNamesFromDefaultModule, v2ClientModuleNames);
 };
