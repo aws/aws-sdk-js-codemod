@@ -12,7 +12,7 @@ export const getRequireIdentifierName = (
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
-          arguments: [{ type: "Literal", value: literalValue }],
+          arguments: [{ value: literalValue }],
         },
       })
       .nodes()[0]?.id as Identifier

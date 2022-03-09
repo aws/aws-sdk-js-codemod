@@ -23,7 +23,7 @@ export const addV3ClientRequire = (
     init: {
       type: "CallExpression",
       callee: { type: "Identifier", name: "require" },
-      arguments: [{ type: "Literal", value: v3ClientPackageName }],
+      arguments: [{ value: v3ClientPackageName }],
     },
   });
 

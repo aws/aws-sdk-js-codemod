@@ -11,7 +11,7 @@ export const getRequireVariableDeclaration = (
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
-          arguments: [{ type: "Literal", value: literalValue }],
+          arguments: [{ value: literalValue }],
         },
       },
     ],
