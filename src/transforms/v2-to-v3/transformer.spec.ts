@@ -15,6 +15,6 @@ describe("v2-to-v3", () => {
     const source = readFileSync(path, "utf8");
     const input = { path, source };
     const expectedOutput = readFileSync(join(fixtureDir, testFilePrefix + `.output.ts`), "utf8");
-    runInlineTest(transformer, null, input, expectedOutput);
+    runInlineTest(transformer, null, input, expectedOutput, { parser: "ts" });
   });
 });
