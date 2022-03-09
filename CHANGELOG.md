@@ -1,5 +1,14 @@
 # aws-sdk-js-codemod
 
+## 0.4.4
+
+### Patch Changes
+
+- 4053841: Run yarn lint on all source files
+- 52fc856: Enable eslint rule array-type with default 'array'
+- ea133bb: Enable eslint naming-convention rule with camelCase, UPPER_CASE and PascalCase
+- 52947af: Create utility getMergedArrayWithoutDuplicates
+
 ## 0.4.3
 
 ### Patch Changes
