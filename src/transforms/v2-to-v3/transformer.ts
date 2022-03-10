@@ -10,6 +10,7 @@ import {
   removePromiseCalls,
   removeV2ClientModule,
   replaceClientCreation,
+  replaceTSTypeReference,
 } from "./utils";
 
 export default function transformer(file: FileInfo, api: API) {
@@ -31,6 +32,7 @@ export default function transformer(file: FileInfo, api: API) {
     removeV2ClientModule(j, source, v2ClientName);
     removePromiseCalls(j, source, { v2DefaultModuleName, v2ClientName });
     replaceClientCreation(j, source, { v2DefaultModuleName, v2ClientName, v3ClientName });
+    replaceTSTypeReference(j, source, { v2DefaultModuleName, v2ClientName, v3ClientName });
   }
 
   removeDefaultModuleIfNotUsed(j, source, v2DefaultModuleName);
