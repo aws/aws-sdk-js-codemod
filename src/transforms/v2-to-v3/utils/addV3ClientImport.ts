@@ -24,7 +24,7 @@ export const addV3ClientImport = (
     return;
   }
 
-  // Insert after default import if present. If not, insert after client import.
+  // Insert after default import if present. If not, insert after service import.
   source
     .find(j.ImportDeclaration)
     .filter(
