@@ -2,15 +2,15 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
 
-export interface GetClientIdentifierNamesOptions {
+export interface GetV2ClientIdNamesOptions {
   v2ClientName: string;
   v2DefaultModuleName: string;
 }
 
-export const getClientIdentifierNames = (
+export const getV2ClientIdNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName }: GetClientIdentifierNamesOptions
+  { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesOptions
 ): string[] => {
   const clientIdentifierNamesFromDefaultImport = source
     .find(j.VariableDeclarator, {
