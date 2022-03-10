@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.5.0
+
+### Minor Changes
+
+- 334a834: Process clients from TS Type Reference
+
 ## 0.4.6
 
 ### Patch Changes
