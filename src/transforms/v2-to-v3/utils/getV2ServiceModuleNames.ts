@@ -11,4 +11,4 @@ export const getV2ServiceModuleNames = (j: JSCodeshift, source: Collection<unkno
     containsRequire(j, source)
       ? getRequireIdentifierName(j, source, getV2ServiceModulePath(clientName))
       : getImportIdentifierName(j, source, getV2ServiceModulePath(clientName))
-  ).filter((v2ClientModuleName) => v2ClientModuleName !== undefined);
+  ).filter((v2ServiceModuleName) => v2ServiceModuleName !== undefined);
