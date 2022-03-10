@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { containsRequire } from "./containsRequire";
-import { getV2ClientModulePath } from "./getV2ClientModulePath";
+import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
@@ -12,7 +12,7 @@ export const removeV2ClientModule = (
 ) => {
   const removeIdentifierNameOptions = {
     identifierName: v2ClientName,
-    literalValue: getV2ClientModulePath(v2ClientName),
+    literalValue: getV2ServiceModulePath(v2ClientName),
   };
   return containsRequire(j, source)
     ? removeRequireIdentifierName(j, source, removeIdentifierNameOptions)
