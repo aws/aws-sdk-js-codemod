@@ -2,17 +2,17 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
 
-export interface GetClientIdentifierNamesOptions {
+export interface GetV2ClientIdNamesFromNewExprOptions {
   v2ClientName: string;
   v2DefaultModuleName: string;
 }
 
-export const getClientIdentifierNames = (
+export const getV2ClientIdNamesFromNewExpr = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName }: GetClientIdentifierNamesOptions
+  { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesFromNewExprOptions
 ): string[] => {
-  const clientIdentifierNamesFromDefaultImport = source
+  const clientIdNamesFromDefaultModule = source
     .find(j.VariableDeclarator, {
       id: { type: "Identifier" },
       init: {
@@ -26,7 +26,7 @@ export const getClientIdentifierNames = (
     .nodes()
     .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
 
-  const clientIdentifierNamesFromClientImport = source
+  const clientIdNamesFromServiceModule = source
     .find(j.VariableDeclarator, {
       id: { type: "Identifier" },
       init: {
@@ -38,7 +38,7 @@ export const getClientIdentifierNames = (
     .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
 
   return getMergedArrayWithoutDuplicates(
-    clientIdentifierNamesFromDefaultImport,
-    clientIdentifierNamesFromClientImport
+    clientIdNamesFromDefaultModule,
+    clientIdNamesFromServiceModule
   );
 };

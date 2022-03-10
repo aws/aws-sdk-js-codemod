@@ -17,8 +17,13 @@ describe("v2-to-v3", () => {
     const outputCode = readFileSync(outputPath, "utf8");
     const input = { path: inputPath, source: inputCode };
 
-    it.each([{}, { parser: "ts" }])("with testOptions: %o", (testOptions) => {
-      runInlineTest(transformer, null, input, outputCode, testOptions);
-    });
+    // Some tests are tsonly as they fail with babel parser
+    // Refs: https://github.com/facebook/jscodeshift/issues/488
+    it.each([{ parser: "ts" }, ...(testFilePrefix.startsWith("tsonly-") ? [] : [{}])])(
+      "with testOptions: %o",
+      (testOptions) => {
+        runInlineTest(transformer, null, input, outputCode, testOptions);
+      }
+    );
   });
 });

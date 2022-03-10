@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift, MemberExpression } from "jscodeshift";
+import { CallExpression, Collection, JSCodeshift, MemberExpression } from "jscodeshift";
 
-import { getClientIdentifierNames } from "./getClientIdentifierNames";
+import { getV2ClientIdNames } from "./getV2ClientIdNames";
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
@@ -13,12 +13,12 @@ export const removePromiseCalls = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
-  const clientIdentifierNames = getClientIdentifierNames(j, source, {
+  const v2ClientIdNames = getV2ClientIdNames(j, source, {
     v2DefaultModuleName,
     v2ClientName,
   });
 
-  for (const clientIdentifierName of clientIdentifierNames) {
+  for (const v2ClientIdName of v2ClientIdNames) {
     source
       .find(j.CallExpression, {
         callee: {
@@ -29,7 +29,7 @@ export const removePromiseCalls = (
               type: "MemberExpression",
               object: {
                 type: "Identifier",
-                name: clientIdentifierName,
+                name: v2ClientIdName,
               },
             },
           },
@@ -52,6 +52,12 @@ export const removePromiseCalls = (
             callExpressionPath.parentPath.value.init = (
               callExpressionPath.value.callee as MemberExpression
             ).object;
+            break;
+          case "ArrowFunctionExpression":
+          case "ReturnStatement":
+            callExpressionPath.value.callee = (
+              (callExpressionPath.value.callee as MemberExpression).object as CallExpression
+            ).callee;
             break;
           default:
             throw new Error(
