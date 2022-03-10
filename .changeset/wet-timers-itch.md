@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": patch
 ---
 
-Support removing promise() calls from clients created from service imports
+Remove promise() calls from clients created from service imports
