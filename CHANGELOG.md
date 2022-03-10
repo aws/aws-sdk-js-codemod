@@ -1,5 +1,13 @@
 # aws-sdk-js-codemod
 
+## 0.4.6
+
+### Patch Changes
+
+- af1ba19: Add tests for existing package import/require with services
+- f67d3ea: Rename v2 Modules from Client to Service
+- 5b77175: Remove promise() calls from clients created from service imports
+
 ## 0.4.5
 
 ### Patch Changes
