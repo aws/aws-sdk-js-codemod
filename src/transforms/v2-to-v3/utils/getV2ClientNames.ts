@@ -4,13 +4,13 @@ import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicat
 
 export interface GetV2ClientNamesOptions {
   v2DefaultModuleName: string;
-  v2ClientModuleNames: string[];
+  v2ServiceModuleNames: string[];
 }
 
 export const getV2ClientNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientModuleNames }: GetV2ClientNamesOptions
+  { v2DefaultModuleName, v2ServiceModuleNames }: GetV2ClientNamesOptions
 ): string[] => {
   const v2ClientNamesFromDefaultModule = source
     .find(j.NewExpression, {
@@ -25,5 +25,5 @@ export const getV2ClientNames = (
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name
     );
 
-  return getMergedArrayWithoutDuplicates(v2ClientNamesFromDefaultModule, v2ClientModuleNames);
+  return getMergedArrayWithoutDuplicates(v2ClientNamesFromDefaultModule, v2ServiceModuleNames);
 };

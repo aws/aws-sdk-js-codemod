@@ -3,9 +3,9 @@ import { API, FileInfo } from "jscodeshift";
 import {
   addV3ClientModule,
   getClientMetadata,
-  getV2ClientModuleNames,
   getV2ClientNames,
   getV2DefaultModuleName,
+  getV2ServiceModuleNames,
   removeDefaultModuleIfNotUsed,
   removePromiseCalls,
   removeV2ClientModule,
@@ -17,12 +17,12 @@ export default function transformer(file: FileInfo, api: API) {
   const source = j(file.source);
 
   const v2DefaultModuleName = getV2DefaultModuleName(j, source);
-  const v2ClientModuleNames = getV2ClientModuleNames(j, source);
-  if (!v2DefaultModuleName && v2ClientModuleNames.length === 0) {
+  const v2ServiceModuleNames = getV2ServiceModuleNames(j, source);
+  if (!v2DefaultModuleName && v2ServiceModuleNames.length === 0) {
     return source.toSource();
   }
 
-  const v2ClientNames = getV2ClientNames(j, source, { v2DefaultModuleName, v2ClientModuleNames });
+  const v2ClientNames = getV2ClientNames(j, source, { v2DefaultModuleName, v2ServiceModuleNames });
   const clientMetadata = getClientMetadata(v2ClientNames);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {

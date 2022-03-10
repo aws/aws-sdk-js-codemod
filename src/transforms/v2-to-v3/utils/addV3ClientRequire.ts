@@ -3,7 +3,7 @@ import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "js
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
 import { PACKAGE_NAME } from "./config";
 import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
-import { getV2ClientModulePath } from "./getV2ClientModulePath";
+import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export const addV3ClientRequire = (
   j: JSCodeshift,
@@ -42,16 +42,14 @@ export const addV3ClientRequire = (
     return;
   }
 
-  // Insert after default require if present. If not, insert after client require.
-  const v2ClientModulePath = getV2ClientModulePath(v2ClientName);
-  const defaultRequireVarDeclaration = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
-  const clientRequireVarDeclaration = getRequireVariableDeclaration(j, source, v2ClientModulePath);
+  // Insert after default require if present. If not, insert after service require.
+  const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
+  const defaultRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
+  const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);
 
-  const requireVarDeclaration =
-    defaultRequireVarDeclaration.size() > 0
-      ? defaultRequireVarDeclaration
-      : clientRequireVarDeclaration;
-  requireVarDeclaration.insertAfter(
+  const requireVarDecl =
+    defaultRequireVarDecl.size() > 0 ? defaultRequireVarDecl : serviceRequireVarDecl;
+  requireVarDecl.insertAfter(
     j.variableDeclaration("const", [
       j.variableDeclarator(
         j.objectPattern([v3ClientNameProperty]),

@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
 import { PACKAGE_NAME } from "./config";
-import { getV2ClientModulePath } from "./getV2ClientModulePath";
+import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export const addV3ClientImport = (
   j: JSCodeshift,
@@ -24,13 +24,13 @@ export const addV3ClientImport = (
     return;
   }
 
-  // Insert after default import if present. If not, insert after client import.
+  // Insert after default import if present. If not, insert after service import.
   source
     .find(j.ImportDeclaration)
     .filter(
       (path) =>
         path.value.source.value === PACKAGE_NAME ||
-        path.value.source.value === getV2ClientModulePath(v2ClientName)
+        path.value.source.value === getV2ServiceModulePath(v2ClientName)
     )
     .insertAfter(
       j.importDeclaration(
