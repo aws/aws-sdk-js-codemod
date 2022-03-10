@@ -11,7 +11,7 @@ export const removePromiseCalls = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
-  source
+  const clientVariableDeclaratorNames = source
     .find(j.VariableDeclarator, {
       id: { type: "Identifier" },
       init: {
@@ -22,47 +22,49 @@ export const removePromiseCalls = (
         },
       },
     })
-    .forEach((nodePath) => {
-      const name = (nodePath.value.id as Identifier).name;
-      source
-        .find(j.CallExpression, {
-          callee: {
-            type: "MemberExpression",
-            object: {
-              type: "CallExpression",
-              callee: {
-                type: "MemberExpression",
-                object: {
-                  type: "Identifier",
-                  name,
-                },
+    .nodes()
+    .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
+
+  for (const clientVariableDeclaratorName of clientVariableDeclaratorNames) {
+    source
+      .find(j.CallExpression, {
+        callee: {
+          type: "MemberExpression",
+          object: {
+            type: "CallExpression",
+            callee: {
+              type: "MemberExpression",
+              object: {
+                type: "Identifier",
+                name: clientVariableDeclaratorName,
               },
             },
-            property: { type: "Identifier", name: "promise" },
           },
-        })
-        .forEach((callExpressionPath) => {
-          switch (callExpressionPath.parentPath.value.type) {
-            case "AwaitExpression":
-              callExpressionPath.parentPath.value.argument = (
-                callExpressionPath.value.callee as MemberExpression
-              ).object;
-              break;
-            case "MemberExpression":
-              callExpressionPath.parentPath.value.object = (
-                callExpressionPath.value.callee as MemberExpression
-              ).object;
-              break;
-            case "VariableDeclarator":
-              callExpressionPath.parentPath.value.init = (
-                callExpressionPath.value.callee as MemberExpression
-              ).object;
-              break;
-            default:
-              throw new Error(
-                `Removal of .promise() not implemented for ${callExpressionPath.parentPath.value.type}`
-              );
-          }
-        });
-    });
+          property: { type: "Identifier", name: "promise" },
+        },
+      })
+      .forEach((callExpressionPath) => {
+        switch (callExpressionPath.parentPath.value.type) {
+          case "AwaitExpression":
+            callExpressionPath.parentPath.value.argument = (
+              callExpressionPath.value.callee as MemberExpression
+            ).object;
+            break;
+          case "MemberExpression":
+            callExpressionPath.parentPath.value.object = (
+              callExpressionPath.value.callee as MemberExpression
+            ).object;
+            break;
+          case "VariableDeclarator":
+            callExpressionPath.parentPath.value.init = (
+              callExpressionPath.value.callee as MemberExpression
+            ).object;
+            break;
+          default:
+            throw new Error(
+              `Removal of .promise() not implemented for ${callExpressionPath.parentPath.value.type}`
+            );
+        }
+      });
+  }
 };
