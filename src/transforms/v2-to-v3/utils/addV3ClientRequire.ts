@@ -43,15 +43,13 @@ export const addV3ClientRequire = (
   }
 
   // Insert after default require if present. If not, insert after service require.
-  const v2ClientModulePath = getV2ServiceModulePath(v2ClientName);
-  const defaultRequireVarDeclaration = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
-  const serviceRequireVarDeclaration = getRequireVariableDeclaration(j, source, v2ClientModulePath);
+  const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
+  const defaultRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
+  const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);
 
-  const requireVarDeclaration =
-    defaultRequireVarDeclaration.size() > 0
-      ? defaultRequireVarDeclaration
-      : serviceRequireVarDeclaration;
-  requireVarDeclaration.insertAfter(
+  const requireVarDecl =
+    defaultRequireVarDecl.size() > 0 ? defaultRequireVarDecl : serviceRequireVarDecl;
+  requireVarDecl.insertAfter(
     j.variableDeclaration("const", [
       j.variableDeclarator(
         j.objectPattern([v3ClientNameProperty]),
