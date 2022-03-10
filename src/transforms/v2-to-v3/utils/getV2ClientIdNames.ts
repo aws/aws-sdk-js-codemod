@@ -1,6 +1,8 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
+import { getV2ClientIdNamesFromNewExpr } from "./getV2ClientIdNamesFromNewExpr";
+import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeRef";
 
 export interface GetV2ClientIdNamesOptions {
   v2ClientName: string;
@@ -12,33 +14,15 @@ export const getV2ClientIdNames = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesOptions
 ): string[] => {
-  const clientIdentifierNamesFromDefaultImport = source
-    .find(j.VariableDeclarator, {
-      id: { type: "Identifier" },
-      init: {
-        type: "NewExpression",
-        callee: {
-          object: { type: "Identifier", name: v2DefaultModuleName },
-          property: { type: "Identifier", name: v2ClientName },
-        },
-      },
-    })
-    .nodes()
-    .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
+  const v2ClientIdNamesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, {
+    v2DefaultModuleName,
+    v2ClientName,
+  });
 
-  const clientIdentifierNamesFromClientImport = source
-    .find(j.VariableDeclarator, {
-      id: { type: "Identifier" },
-      init: {
-        type: "NewExpression",
-        callee: { type: "Identifier", name: v2ClientName },
-      },
-    })
-    .nodes()
-    .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
+  const v2ClientIdNamesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, {
+    v2DefaultModuleName,
+    v2ClientName,
+  });
 
-  return getMergedArrayWithoutDuplicates(
-    clientIdentifierNamesFromDefaultImport,
-    clientIdentifierNamesFromClientImport
-  );
+  return getMergedArrayWithoutDuplicates(v2ClientIdNamesFromNewExpr, v2ClientIdNamesFromTSTypeRef);
 };
