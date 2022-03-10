@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
-export const getV2ClientNamesFromTypeId = (
+export const getV2ClientNamesFromTSTypeRef = (
   j: JSCodeshift,
   source: Collection<unknown>,
   v2DefaultModuleName: string
