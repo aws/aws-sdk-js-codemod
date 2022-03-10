@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift, MemberExpression } from "jscodeshift";
+import { CallExpression, Collection, JSCodeshift, MemberExpression } from "jscodeshift";
 
 import { getV2ClientIdNames } from "./getV2ClientIdNames";
 
@@ -52,6 +52,12 @@ export const removePromiseCalls = (
             callExpressionPath.parentPath.value.init = (
               callExpressionPath.value.callee as MemberExpression
             ).object;
+            break;
+          case "ArrowFunctionExpression":
+          case "ReturnStatement":
+            callExpressionPath.value.callee = (
+              (callExpressionPath.value.callee as MemberExpression).object as CallExpression
+            ).callee;
             break;
           default:
             throw new Error(
