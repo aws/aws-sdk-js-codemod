@@ -13,7 +13,7 @@
     "migration"
   ],
   "homepage": "https://github.com/trivikr/aws-sdk-js-codemod",
-  "license": "MIT",
+  "license": "MIT-0",
   "author": "Kamat, Trivikram <trivikr.dev@gmail.com>",
   "files": [
     "bin",
