@@ -55,6 +55,10 @@ client.listTables({}, (err, data) => {
 
 ```
 
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
+
 [aws-sdk-js]: https://aws.amazon.com/sdk-for-javascript/
 [install-nodejs]: https://nodejs.dev/learn/how-to-install-nodejs
 [jscodeshift]: https://github.com/facebook/jscodeshift
