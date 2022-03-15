@@ -12,7 +12,7 @@
     "v3",
     "migration"
   ],
-  "homepage": "https://github.com/trivikr/aws-sdk-js-codemod",
+  "homepage": "https://github.com/awslabs/aws-sdk-js-codemod",
   "license": "MIT-0",
   "author": "Kamat, Trivikram <trivikr.dev@gmail.com>",
   "files": [
@@ -24,7 +24,7 @@
   "bin": "bin/aws-sdk-js-codemod",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trivikr/aws-sdk-js-codemod.git"
+    "url": "https://github.com/awslabs/aws-sdk-js-codemod.git"
   },
   "scripts": {
     "build": "tsc",
