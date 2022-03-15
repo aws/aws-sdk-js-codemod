@@ -14,7 +14,13 @@
   ],
   "homepage": "https://github.com/awslabs/aws-sdk-js-codemod",
   "license": "MIT-0",
-  "author": "Kamat, Trivikram <trivikr.dev@gmail.com>",
+  "author": {
+    "name": "Amazon Web Services",
+    "url": "http://aws.amazon.com"
+  },
+  "contributors": [
+    "Kamat, Trivikram <trivikr.dev@gmail.com>"
+  ],
   "files": [
     "bin",
     "dist"
