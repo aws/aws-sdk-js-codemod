@@ -1,5 +1,17 @@
 # aws-sdk-js-codemod
 
+## 0.5.1
+
+### Patch Changes
+
+- 9b5791a: Update GitHub user to awslabs
+- fb0c577: Add Pull Request Template
+- cfa2e97: Add CONTRIBUTING.md
+- 9a58d12: Add Code of Conduct
+- c0f7605: Set Amazon Web Services as author
+- f9d1827: Add link to LICENSE from README
+- 7c7d1c8: Add MIT-0 License
+
 ## 0.5.0
 
 ### Minor Changes
