@@ -1,7 +1,3 @@
-const { config } = require("dotenv");
-
-config();
-
 const REPO = "awslabs/aws-sdk-js-codemod";
 
 const getGithubCommitWithLink = (commit) =>
