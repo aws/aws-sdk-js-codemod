@@ -4,178 +4,178 @@
 
 ### Patch Changes
 
-- 9b5791a: Update GitHub user to awslabs
-- fb0c577: Add Pull Request Template
-- cfa2e97: Add CONTRIBUTING.md
-- 9a58d12: Add Code of Conduct
-- c0f7605: Set Amazon Web Services as author
-- f9d1827: Add link to LICENSE from README
-- 7c7d1c8: Add MIT-0 License
+- Update GitHub user to awslabs ([9b5791a](https://github.com/awslabs/aws-sdk-js-codemod/commit/9b5791a))
+- Add Pull Request Template ([fb0c577](https://github.com/awslabs/aws-sdk-js-codemod/commit/fb0c577))
+- Add CONTRIBUTING.md ([cfa2e97](https://github.com/awslabs/aws-sdk-js-codemod/commit/cfa2e97))
+- Add Code of Conduct ([9a58d12](https://github.com/awslabs/aws-sdk-js-codemod/commit/9a58d12))
+- Set Amazon Web Services as author ([c0f7605](https://github.com/awslabs/aws-sdk-js-codemod/commit/c0f7605))
+- Add link to LICENSE from README ([f9d1827](https://github.com/awslabs/aws-sdk-js-codemod/commit/f9d1827))
+- Add MIT-0 License ([7c7d1c8](https://github.com/awslabs/aws-sdk-js-codemod/commit/7c7d1c8))
 
 ## 0.5.0
 
 ### Minor Changes
 
-- 334a834: Process clients from TS Type Reference
+- Process clients from TS Type Reference ([334a834](https://github.com/awslabs/aws-sdk-js-codemod/commit/334a834))
 
 ## 0.4.6
 
 ### Patch Changes
 
-- af1ba19: Add tests for existing package import/require with services
-- f67d3ea: Rename v2 Modules from Client to Service
-- 5b77175: Remove promise() calls from clients created from service imports
+- Add tests for existing package import/require with services ([af1ba19](https://github.com/awslabs/aws-sdk-js-codemod/commit/af1ba19))
+- Rename v2 Modules from Client to Service ([f67d3ea](https://github.com/awslabs/aws-sdk-js-codemod/commit/f67d3ea))
+- Remove promise() calls from clients created from service imports ([5b77175](https://github.com/awslabs/aws-sdk-js-codemod/commit/5b77175))
 
 ## 0.4.5
 
 ### Patch Changes
 
-- 249dee2: Replace <any> with <unknown>
-- 812ab49: Add test with no AWS SDK for JavaScript (v2)
-- 8ef2e6d: Rename named import to identifier import
-- 3d1b37c: Add test for existing identifier/package require
+- Replace <any> with <unknown> ([249dee2](https://github.com/awslabs/aws-sdk-js-codemod/commit/249dee2))
+- Add test with no AWS SDK for JavaScript (v2) ([812ab49](https://github.com/awslabs/aws-sdk-js-codemod/commit/812ab49))
+- Rename named import to identifier import ([8ef2e6d](https://github.com/awslabs/aws-sdk-js-codemod/commit/8ef2e6d))
+- Add test for existing identifier/package require ([3d1b37c](https://github.com/awslabs/aws-sdk-js-codemod/commit/3d1b37c))
 
 ## 0.4.4
 
 ### Patch Changes
 
-- 4053841: Run yarn lint on all source files
-- 52fc856: Enable eslint rule array-type with default 'array'
-- ea133bb: Enable eslint naming-convention rule with camelCase, UPPER_CASE and PascalCase
-- 52947af: Create utility getMergedArrayWithoutDuplicates
+- Run yarn lint on all source files ([4053841](https://github.com/awslabs/aws-sdk-js-codemod/commit/4053841))
+- Enable eslint rule array-type with default 'array' ([52fc856](https://github.com/awslabs/aws-sdk-js-codemod/commit/52fc856))
+- Enable eslint naming-convention rule with camelCase, UPPER_CASE and PascalCase ([ea133bb](https://github.com/awslabs/aws-sdk-js-codemod/commit/ea133bb))
+- Create utility getMergedArrayWithoutDuplicates ([52947af](https://github.com/awslabs/aws-sdk-js-codemod/commit/52947af))
 
 ## 0.4.3
 
 ### Patch Changes
 
-- ea49796: Bump typescript to 4.6
-- 8b09b2d: Support parser=ts
+- Bump typescript to 4.6 ([ea49796](https://github.com/awslabs/aws-sdk-js-codemod/commit/ea49796))
+- Support parser=ts ([8b09b2d](https://github.com/awslabs/aws-sdk-js-codemod/commit/8b09b2d))
 
 ## 0.4.2
 
 ### Patch Changes
 
-- a72bd0c: Rename Import to Module wherever required
-- 34c3fb7: Add utils remove(Require|Import)IdentifierName
-- 4df95bd: Add utility getV2ClientModulePath
-- d0d459a: Split getV2ClientModuleNames into import/require components
-- 38a16cc: Add utils get(Require|Import)IdentifierName
-- dd83c82: Split getV2DefaultModuleName into import/require components
-- 5690340: Store 'aws-sdk' in constant PACKAGE_NAME
+- Rename Import to Module wherever required ([a72bd0c](https://github.com/awslabs/aws-sdk-js-codemod/commit/a72bd0c))
+- Add utils remove(Require|Import)IdentifierName ([34c3fb7](https://github.com/awslabs/aws-sdk-js-codemod/commit/34c3fb7))
+- Add utility getV2ClientModulePath ([4df95bd](https://github.com/awslabs/aws-sdk-js-codemod/commit/4df95bd))
+- Split getV2ClientModuleNames into import/require components ([d0d459a](https://github.com/awslabs/aws-sdk-js-codemod/commit/d0d459a))
+- Add utils get(Require|Import)IdentifierName ([38a16cc](https://github.com/awslabs/aws-sdk-js-codemod/commit/38a16cc))
+- Split getV2DefaultModuleName into import/require components ([dd83c82](https://github.com/awslabs/aws-sdk-js-codemod/commit/dd83c82))
+- Store 'aws-sdk' in constant PACKAGE_NAME ([5690340](https://github.com/awslabs/aws-sdk-js-codemod/commit/5690340))
 
 ## 0.4.1
 
 ### Patch Changes
 
-- 1008a5b: Support transformation for client require
+- Support transformation for client require ([1008a5b](https://github.com/awslabs/aws-sdk-js-codemod/commit/1008a5b))
 
 ## 0.4.0
 
 ### Minor Changes
 
-- 65c166a: Support transformation for global require
+- Support transformation for global require ([65c166a](https://github.com/awslabs/aws-sdk-js-codemod/commit/65c166a))
 
 ## 0.3.1
 
 ### Patch Changes
 
-- 339e74a: Handle v2 client imports in case of ImportNamespaceSpecifier
-- f4d79c8: Replace jscodeshift-find-imports with source.find() call
+- Handle v2 client imports in case of ImportNamespaceSpecifier ([339e74a](https://github.com/awslabs/aws-sdk-js-codemod/commit/339e74a))
+- Replace jscodeshift-find-imports with source.find() call ([f4d79c8](https://github.com/awslabs/aws-sdk-js-codemod/commit/f4d79c8))
 
 ## 0.3.0
 
 ### Minor Changes
 
-- d5d5e9d: Support transformation of v2 client imports
+- Support transformation of v2 client imports ([d5d5e9d](https://github.com/awslabs/aws-sdk-js-codemod/commit/d5d5e9d))
 
 ## 0.2.3
 
 ### Patch Changes
 
-- 24f87df: Check for source 'aws-sdk' while removing default imports
+- Check for source 'aws-sdk' while removing default imports ([24f87df](https://github.com/awslabs/aws-sdk-js-codemod/commit/24f87df))
 
 ## 0.2.2
 
 ### Patch Changes
 
-- 84c337a: Remove .promise() from API calls in variable declarator
+- Remove .promise() from API calls in variable declarator ([84c337a](https://github.com/awslabs/aws-sdk-js-codemod/commit/84c337a))
 
 ## 0.2.1
 
 ### Patch Changes
 
-- ed78aae: Remove .promise() from API calls which use await
+- Remove .promise() from API calls which use await ([ed78aae](https://github.com/awslabs/aws-sdk-js-codemod/commit/ed78aae))
 
 ## 0.2.0
 
 ### Minor Changes
 
-- a4dc900: Remove .promise() from client API calls
+- Remove .promise() from client API calls ([a4dc900](https://github.com/awslabs/aws-sdk-js-codemod/commit/a4dc900))
 
 ## 0.1.5
 
 ### Patch Changes
 
-- c38b72a: Update existing v3 import if already present
+- Update existing v3 import if already present ([c38b72a](https://github.com/awslabs/aws-sdk-js-codemod/commit/c38b72a))
 
 ## 0.1.4
 
 ### Patch Changes
 
-- 62ba488: Sort v3 client imports
-- 18ee5bb: Add test for multiple API callbacks
+- Sort v3 client imports ([62ba488](https://github.com/awslabs/aws-sdk-js-codemod/commit/62ba488))
+- Add test for multiple API callbacks ([18ee5bb](https://github.com/awslabs/aws-sdk-js-codemod/commit/18ee5bb))
 
 ## 0.1.3
 
 ### Patch Changes
 
-- ca6077d: Move test files next to source files
-- 1112f3f: Update unit tests to follow team jest standards
+- Move test files next to source files ([ca6077d](https://github.com/awslabs/aws-sdk-js-codemod/commit/ca6077d))
+- Update unit tests to follow team jest standards ([1112f3f](https://github.com/awslabs/aws-sdk-js-codemod/commit/1112f3f))
 
 ## 0.1.2
 
 ### Patch Changes
 
-- fcd1e82: Removes unused v2 default import
+- Removes unused v2 default import ([fcd1e82](https://github.com/awslabs/aws-sdk-js-codemod/commit/fcd1e82))
 
 ## 0.1.1
 
 ### Patch Changes
 
-- 369d337: Update README with instructions to use aws-sdk-js-codemod
+- Update README with instructions to use aws-sdk-js-codemod ([369d337](https://github.com/awslabs/aws-sdk-js-codemod/commit/369d337))
 
 ## 0.1.0
 
 ### Minor Changes
 
-- a8be757: Send updated transform file if a custom transform is selected
+- Send updated transform file if a custom transform is selected ([a8be757](https://github.com/awslabs/aws-sdk-js-codemod/commit/a8be757))
 
 ### Patch Changes
 
-- e13f64c: Copy code which performs basic transformation of AWS SDK for JavaScript client from v2 to v3
-- dbd8346: Adds a placeholder for transforms with information under help option
+- Copy code which performs basic transformation of AWS SDK for JavaScript client from v2 to v3 ([e13f64c](https://github.com/awslabs/aws-sdk-js-codemod/commit/e13f64c))
+- Adds a placeholder for transforms with information under help option ([dbd8346](https://github.com/awslabs/aws-sdk-js-codemod/commit/dbd8346))
 
 ## 0.0.5
 
 ### Patch Changes
 
-- 0baf388: Use npm exec instead of ./node_modules/.bin
+- Use npm exec instead of ./node_modules/.bin ([0baf388](https://github.com/awslabs/aws-sdk-js-codemod/commit/0baf388))
 
 ## 0.0.4
 
 ### Patch Changes
 
-- 978e21a: Make aws-sdk-js-codemod in bin folder executable
+- Make aws-sdk-js-codemod in bin folder executable ([978e21a](https://github.com/awslabs/aws-sdk-js-codemod/commit/978e21a))
 
 ## 0.0.3
 
 ### Patch Changes
 
-- 3c20ee0: Remove simple-git-hooks on postinstall
+- Remove simple-git-hooks on postinstall ([3c20ee0](https://github.com/awslabs/aws-sdk-js-codemod/commit/3c20ee0))
 
 ## 0.0.2
 
 ### Patch Changes
 
-- 91ec885: Copy configuration from trivikr/aws-sdk-js-v2-to-v3
-- baafe94: Add a basic wrapper over jscodeshift
+- Copy configuration from trivikr/aws-sdk-js-v2-to-v3 ([91ec885](https://github.com/awslabs/aws-sdk-js-codemod/commit/91ec885))
+- Add a basic wrapper over jscodeshift ([baafe94](https://github.com/awslabs/aws-sdk-js-codemod/commit/baafe94))
