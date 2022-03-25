@@ -736,7 +736,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/get-github-info@npm:^0.5.0":
+"@changesets/get-github-info@npm:0.5.0, @changesets/get-github-info@npm:^0.5.0":
   version: 0.5.0
   resolution: "@changesets/get-github-info@npm:0.5.0"
   dependencies:
@@ -1853,6 +1853,7 @@ __metadata:
   dependencies:
     "@changesets/changelog-github": 0.4.3
     "@changesets/cli": 2.21.0
+    "@changesets/get-github-info": 0.5.0
     "@tsconfig/node12": 1.0.2
     "@types/jest": 27.4.1
     "@types/jscodeshift": 0.11.3
