@@ -22,7 +22,7 @@ const getReleaseLine = (changeset, _type) => {
   const { commit, summary } = changeset;
   const [firstLine, ...futureLines] = summary.split("\n").map((l) => l.trimRight());
 
-  return `${firstLine} (${getGithubCommitWithLink(commit)})${
+  return `- ${firstLine} (${getGithubCommitWithLink(commit)})${
     futureLines.length > 0 ? futureLines.map((l) => `  ${l}`).join("\n") : ""
   }`;
 };
