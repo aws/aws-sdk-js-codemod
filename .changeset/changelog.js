@@ -1,4 +1,4 @@
-import { config } from "dotenv";
+const { config } = require("dotenv");
 
 config();
 
@@ -31,4 +31,4 @@ const getReleaseLine = (changeset, _type) => {
   }`;
 };
 
-export { getReleaseLine, getDependencyReleaseLine };
+module.exports = { getReleaseLine, getDependencyReleaseLine };
