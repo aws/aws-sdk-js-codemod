@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.21.0",
-    "@tsconfig/node12": "1.0.2",
+    "@tsconfig/node12": "1.0.11",
     "@types/jest": "27.4.1",
     "@types/jscodeshift": "0.11.3",
     "@types/node": "16.11.26",
