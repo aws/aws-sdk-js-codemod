@@ -7,5 +7,5 @@
     "resolveJsonModule": true,
     "rootDir": "src"
   },
-  "exclude": ["**/__fixtures__/**", "**/*.spec.ts"]
+  "exclude": ["dist", "**/__fixtures__/**", "**/*.spec.ts"]
 }
