@@ -1809,7 +1809,7 @@ __metadata:
     lint-staged: 12.3.4
     prettier: 2.5.1
     simple-git-hooks: 2.7.0
-    table: 6.8.0
+    table: 6.8.1
     ts-jest: 27.1.3
     typescript: 4.6.2
   bin:
@@ -6064,16 +6064,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"table@npm:6.8.0":
-  version: 6.8.0
-  resolution: "table@npm:6.8.0"
+"table@npm:6.8.1":
+  version: 6.8.1
+  resolution: "table@npm:6.8.1"
   dependencies:
     ajv: ^8.0.1
     lodash.truncate: ^4.4.2
     slice-ansi: ^4.0.0
     string-width: ^4.2.3
     strip-ansi: ^6.0.1
-  checksum: 5b07fe462ee03d2e1fac02cbb578efd2e0b55ac07e3d3db2e950aa9570ade5a4a2b8d3c15e9f25c89e4e50b646bc4269934601ee1eef4ca7968ad31960977690
+  checksum: 08249c7046125d9d0a944a6e96cfe9ec66908d6b8a9db125531be6eb05fa0de047fd5542e9d43b4f987057f00a093b276b8d3e19af162a9c40db2681058fd306
   languageName: node
   linkType: hard
 
