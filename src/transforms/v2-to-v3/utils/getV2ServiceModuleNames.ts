@@ -9,6 +9,6 @@ import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 export const getV2ServiceModuleNames = (j: JSCodeshift, source: Collection<unknown>): string[] =>
   CLIENT_NAMES.map((clientName) =>
     containsRequire(j, source)
-      ? getRequireIdentifierName(j, source, getV2ServiceModulePath(clientName))
-      : getImportIdentifierName(j, source, getV2ServiceModulePath(clientName))
+      ? (getRequireIdentifierName(j, source, getV2ServiceModulePath(clientName)) as string)
+      : (getImportIdentifierName(j, source, getV2ServiceModulePath(clientName)) as string)
   ).filter((v2ServiceModuleName) => v2ServiceModuleName !== undefined);

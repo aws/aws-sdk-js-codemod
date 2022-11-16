@@ -17,8 +17,8 @@ export const addV3ClientImport = (
   if (existingImports.size()) {
     existingImports.forEach((nodePath) => {
       // Append to existing import if specifier not present.
-      if (!nodePath.value.specifiers.find((specifier) => specifier.local.name === v3ClientName)) {
-        nodePath.value.specifiers.push(j.importSpecifier(j.identifier(v3ClientName)));
+      if (!nodePath.value.specifiers?.find((specifier) => specifier.local?.name === v3ClientName)) {
+        nodePath.value.specifiers?.push(j.importSpecifier(j.identifier(v3ClientName)));
       }
     });
     return;

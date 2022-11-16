@@ -1228,10 +1228,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node12@npm:1.0.2":
-  version: 1.0.2
-  resolution: "@tsconfig/node12@npm:1.0.2"
-  checksum: 02fdd65c4b19bedcf953d9bcf94548e36d18cb3390cb0738a34b8916f7cd25f48e1498df2ee4610ae57cd6142f688985dd3ccf5897d6e4a67a294726101b0f39
+"@tsconfig/node14@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@tsconfig/node14@npm:1.0.3"
+  checksum: 19275fe80c4c8d0ad0abed6a96dbf00642e88b220b090418609c4376e1cef81bf16237bf170ad1b341452feddb8115d8dd2e5acdfdea1b27422071163dc9ba9d
   languageName: node
   linkType: hard
 
@@ -1360,10 +1360,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.26":
-  version: 16.11.26
-  resolution: "@types/node@npm:16.11.26"
-  checksum: 57757caaba3f0d95de82198cb276a1002c49b710108c932a1d02d7c91ff2fa57cfe2dd19fde60853b6dd90b0964b3cf35557981d2628e20aed6a909057aedfe6
+"@types/node@npm:14.18.33":
+  version: 14.18.33
+  resolution: "@types/node@npm:14.18.33"
+  checksum: 4e23f95186d8ae1d38c999bc6b46fe94e790da88744b0a3bfeedcbd0d9ffe2cb0ff39e85f43014f6739e5270292c1a1f6f97a1fc606fd573a0c17fda9a1d42de
   languageName: node
   linkType: hard
 
@@ -1822,10 +1822,10 @@ __metadata:
   resolution: "aws-sdk-js-codemod@workspace:."
   dependencies:
     "@changesets/cli": 2.21.0
-    "@tsconfig/node12": 1.0.2
+    "@tsconfig/node14": 1.0.3
     "@types/jest": 27.4.1
     "@types/jscodeshift": 0.11.5
-    "@types/node": 16.11.26
+    "@types/node": 14.18.33
     "@typescript-eslint/eslint-plugin": 5.43.0
     "@typescript-eslint/parser": 5.43.0
     eslint: 8.27.0

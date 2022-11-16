@@ -1,4 +1,6 @@
 import { readdirSync, readFileSync } from "fs";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Could not find a declaration file for module 'jscodeshift/dist/testUtils'
 import { runInlineTest } from "jscodeshift/dist/testUtils";
 import { join } from "path";
 
