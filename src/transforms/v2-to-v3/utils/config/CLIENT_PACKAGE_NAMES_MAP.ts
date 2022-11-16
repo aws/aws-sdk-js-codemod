@@ -1,6 +1,6 @@
 import { CLIENT_NAMES } from "./CLIENT_NAMES";
 
-export const CLIENT_PACKAGE_NAMES_MAP = {
+export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ...CLIENT_NAMES.reduce(
     (acc, name) => ({
       ...acc,

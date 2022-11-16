@@ -9,4 +9,4 @@ export const getImportIdentifierName = (
     .find(j.ImportDeclaration, {
       source: { value: literalValue },
     })
-    .nodes()[0]?.specifiers[0]?.local.name;
+    .nodes()[0]?.specifiers?.[0]?.local?.name;

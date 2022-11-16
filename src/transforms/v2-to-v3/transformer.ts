@@ -17,7 +17,7 @@ export default function transformer(file: FileInfo, api: API) {
   const j = api.jscodeshift;
   const source = j(file.source);
 
-  const v2DefaultModuleName = getV2DefaultModuleName(j, source);
+  const v2DefaultModuleName = getV2DefaultModuleName(j, source) as string;
   const v2ServiceModuleNames = getV2ServiceModuleNames(j, source);
   if (!v2DefaultModuleName && v2ServiceModuleNames.length === 0) {
     return source.toSource();
