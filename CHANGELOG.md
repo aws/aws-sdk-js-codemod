@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.1
+
+### Patch Changes
+
+- Skip generation of type definitions ([c27a225](https://github.com/awslabs/aws-sdk-js-codemod/commit/c27a225))
+
 ## 0.6.0
 
 ### Minor Changes
