@@ -2126,7 +2126,7 @@ __metadata:
     jest: ^29.3.1
     jscodeshift: 0.14.0
     lint-staged: ^13.0.3
-    prettier: 2.5.1
+    prettier: 2.7.1
     simple-git-hooks: ^2.8.1
     table: 6.8.0
     ts-jest: ^29.0.3
@@ -5676,16 +5676,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.5.1":
-  version: 2.5.1
-  resolution: "prettier@npm:2.5.1"
-  bin:
-    prettier: bin-prettier.js
-  checksum: 21b9408476ea1c544b0e45d51ceb94a84789ff92095abb710942d780c862d0daebdb29972d47f6b4d0f7ebbfb0ffbf56cc2cfa3e3e9d1cca54864af185b15b66
-  languageName: node
-  linkType: hard
-
-"prettier@npm:^2.7.1":
+"prettier@npm:2.7.1, prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
