@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.2
+
+### Patch Changes
+
+- Remove dependency 'table' ([4ab8452](https://github.com/awslabs/aws-sdk-js-codemod/commit/4ab8452))
+
 ## 0.6.1
 
 ### Patch Changes
