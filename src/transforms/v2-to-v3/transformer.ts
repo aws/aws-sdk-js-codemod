@@ -6,6 +6,7 @@ import {
   getV2ClientNames,
   getV2DefaultModuleName,
   getV2ServiceModuleNames,
+  isTypeScriptFile,
   removeDefaultModuleIfNotUsed,
   removePromiseCalls,
   removeV2ClientModule,
@@ -14,7 +15,7 @@ import {
 } from "./utils";
 
 export default function transformer(file: FileInfo, api: API) {
-  const j = api.jscodeshift;
+  const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
   const v2DefaultModuleName = getV2DefaultModuleName(j, source) as string;

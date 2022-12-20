@@ -4,6 +4,7 @@ export * from "./getClientMetadata";
 export * from "./getV2ClientNames";
 export * from "./getV2DefaultModuleName";
 export * from "./getV2ServiceModuleNames";
+export * from "./isTypeScriptFile";
 export * from "./removeDefaultModuleIfNotUsed";
 export * from "./removePromiseCalls";
 export * from "./removeV2ClientModule";

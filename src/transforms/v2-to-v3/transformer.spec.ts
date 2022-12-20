@@ -6,26 +6,24 @@ import { join } from "path";
 
 import transformer from "./transformer";
 
+const inputFileRegex = /(.*).input.[jt]sx?$/;
+
 describe("v2-to-v3", () => {
   const fixtureDir = join(__dirname, "__fixtures__");
-  const testFilePrefixes = readdirSync(fixtureDir)
-    .filter((fileName) => fileName.endsWith(".input.ts"))
-    .map((fileName) => fileName.replace(".input.ts", ""));
+  const testFiles: [string, string][] = readdirSync(fixtureDir)
+    .filter((fileName) => inputFileRegex.test(fileName))
+    .map((fileName) => [
+      (fileName.match(inputFileRegex) as RegExpMatchArray)[1],
+      fileName.split(".").pop() as string,
+    ]);
 
-  describe.each(testFilePrefixes)(`transforms correctly using "%s" data`, (testFilePrefix) => {
-    const inputPath = join(fixtureDir, testFilePrefix + `.input.ts`);
-    const outputPath = join(fixtureDir, testFilePrefix + `.output.ts`);
+  it.each(testFiles)(`transforms correctly using "%s" data`, (filePrefix, fileExtension) => {
+    const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
+    const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
     const inputCode = readFileSync(inputPath, "utf8");
     const outputCode = readFileSync(outputPath, "utf8");
-    const input = { path: inputPath, source: inputCode };
 
-    // Some tests are tsonly as they fail with babel parser
-    // Refs: https://github.com/facebook/jscodeshift/issues/488
-    it.each([{ parser: "ts" }, ...(testFilePrefix.startsWith("tsonly-") ? [] : [{}])])(
-      "with testOptions: %o",
-      (testOptions) => {
-        runInlineTest(transformer, null, input, outputCode, testOptions);
-      }
-    );
+    const input = { path: inputPath, source: inputCode };
+    runInlineTest(transformer, null, input, outputCode);
   });
 });
