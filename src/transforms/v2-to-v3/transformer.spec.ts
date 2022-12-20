@@ -6,15 +6,21 @@ import { join } from "path";
 
 import transformer from "./transformer";
 
+const jsExtension = ".input.js";
+const tsExtension = ".input.ts";
+
 describe("v2-to-v3", () => {
   const fixtureDir = join(__dirname, "__fixtures__");
-  const testFilePrefixes = readdirSync(fixtureDir)
-    .filter((fileName) => fileName.endsWith(".input.ts"))
-    .map((fileName) => fileName.replace(".input.ts", ""));
+  const testFiles: [string, string][] = readdirSync(fixtureDir)
+    .filter((fileName) => fileName.endsWith(jsExtension) || fileName.endsWith(tsExtension))
+    .map((fileName) => [
+      fileName.replace(jsExtension, "").replace(tsExtension, ""),
+      fileName.split(".").pop() as string,
+    ]);
 
-  it.each(testFilePrefixes)(`transforms correctly using "%s" data`, (testFilePrefix) => {
-    const inputPath = join(fixtureDir, testFilePrefix + `.input.ts`);
-    const outputPath = join(fixtureDir, testFilePrefix + `.output.ts`);
+  it.each(testFiles)(`transforms correctly using "%s" data`, (filePrefix, fileExtension) => {
+    const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
+    const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
     const inputCode = readFileSync(inputPath, "utf8");
     const outputCode = readFileSync(outputPath, "utf8");
     const input = { path: inputPath, source: inputCode };
