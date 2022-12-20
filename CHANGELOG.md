@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.3
+
+### Patch Changes
+
+- Automatically set parser to ts for TypeScript files ([8ab815a](https://github.com/awslabs/aws-sdk-js-codemod/commit/8ab815a))
+
 ## 0.6.2
 
 ### Patch Changes
