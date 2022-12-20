@@ -6,15 +6,14 @@ import { join } from "path";
 
 import transformer from "./transformer";
 
-const jsExtension = ".input.js";
-const tsExtension = ".input.ts";
+const inputFileRegex = /(.*).input.[jt]sx?$/;
 
 describe("v2-to-v3", () => {
   const fixtureDir = join(__dirname, "__fixtures__");
   const testFiles: [string, string][] = readdirSync(fixtureDir)
-    .filter((fileName) => fileName.endsWith(jsExtension) || fileName.endsWith(tsExtension))
+    .filter((fileName) => inputFileRegex.test(fileName))
     .map((fileName) => [
-      fileName.replace(jsExtension, "").replace(tsExtension, ""),
+      (fileName.match(inputFileRegex) as RegExpMatchArray)[1],
       fileName.split(".").pop() as string,
     ]);
 
@@ -23,8 +22,8 @@ describe("v2-to-v3", () => {
     const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
     const inputCode = readFileSync(inputPath, "utf8");
     const outputCode = readFileSync(outputPath, "utf8");
-    const input = { path: inputPath, source: inputCode };
 
+    const input = { path: inputPath, source: inputCode };
     runInlineTest(transformer, null, input, outputCode);
   });
 });
