@@ -28,6 +28,9 @@ const client = new DynamoDB();
       return await this.client.listTables();
     }
   }
+
+  // Variable declarator
+  const listTablesPromise = client.listTables();
 }
 
 // Promise with params
