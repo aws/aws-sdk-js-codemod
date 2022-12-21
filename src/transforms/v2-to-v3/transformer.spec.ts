@@ -17,13 +17,16 @@ describe("v2-to-v3", () => {
       fileName.split(".").pop() as string,
     ]);
 
-  it.each(testFiles)(`transforms correctly using "%s" data`, (filePrefix, fileExtension) => {
-    const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
-    const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
-    const inputCode = readFileSync(inputPath, "utf8");
-    const outputCode = readFileSync(outputPath, "utf8");
+  it.each([["api-promise-class-member", "js"]])(
+    `transforms correctly using "%s" data`,
+    (filePrefix, fileExtension) => {
+      const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
+      const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
+      const inputCode = readFileSync(inputPath, "utf8");
+      const outputCode = readFileSync(outputPath, "utf8");
 
-    const input = { path: inputPath, source: inputCode };
-    runInlineTest(transformer, null, input, outputCode);
-  });
+      const input = { path: inputPath, source: inputCode };
+      runInlineTest(transformer, null, input, outputCode);
+    }
+  );
 });
