@@ -1,6 +1,7 @@
 import { CallExpression, Collection, JSCodeshift, MemberExpression } from "jscodeshift";
 
-import { getV2ClientIdNames } from "./getV2ClientIdNames";
+import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getV2ClientIdThisExpressions } from "./getV2ClientIdThisExpressions";
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
@@ -13,12 +14,13 @@ export const removePromiseCalls = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
-  const v2ClientIdNames = getV2ClientIdNames(j, source, {
+  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, {
     v2DefaultModuleName,
     v2ClientName,
   });
+  const v2ClientIdThisExpressions = getV2ClientIdThisExpressions(j, source, v2ClientIdentifiers);
 
-  for (const v2ClientIdName of v2ClientIdNames) {
+  for (const v2ClientId of [...v2ClientIdentifiers, ...v2ClientIdThisExpressions]) {
     source
       .find(j.CallExpression, {
         callee: {
@@ -27,10 +29,7 @@ export const removePromiseCalls = (
             type: "CallExpression",
             callee: {
               type: "MemberExpression",
-              object: {
-                type: "Identifier",
-                name: v2ClientIdName,
-              },
+              object: v2ClientId,
             },
           },
           property: { type: "Identifier", name: "promise" },

@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
 import { getV2ClientIdNamesFromNewExpr } from "./getV2ClientIdNamesFromNewExpr";
@@ -9,11 +9,11 @@ export interface GetV2ClientIdNamesOptions {
   v2DefaultModuleName: string;
 }
 
-export const getV2ClientIdNames = (
+export const getV2ClientIdentifiers = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesOptions
-): string[] => {
+): Identifier[] => {
   const v2ClientIdNamesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, {
     v2DefaultModuleName,
     v2ClientName,
@@ -24,5 +24,10 @@ export const getV2ClientIdNames = (
     v2ClientName,
   });
 
-  return getMergedArrayWithoutDuplicates(v2ClientIdNamesFromNewExpr, v2ClientIdNamesFromTSTypeRef);
+  const clientIdNames = getMergedArrayWithoutDuplicates(
+    v2ClientIdNamesFromNewExpr,
+    v2ClientIdNamesFromTSTypeRef
+  );
+
+  return clientIdNames.map((clientidName) => ({ type: "Identifier", name: clientidName }));
 };
