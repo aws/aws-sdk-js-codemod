@@ -4,13 +4,6 @@ const client = new AWS.DynamoDB();
 
 // Promise without params
 {
-  // .then() and .catch()
-  client
-    .listTables()
-    .promise()
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err, err.stack));
-
   // async/await
   try {
     await client.listTables().promise();
@@ -18,17 +11,28 @@ const client = new AWS.DynamoDB();
   } catch (err) {
     console.log(err, err.stack);
   }
-}
 
-// Promise with params
-{
   // .then() and .catch()
   client
-    .listTagsOfResource({ ResourceArn: "STRING_VALUE" })
+    .listTables()
     .promise()
     .then((data) => console.log(data))
     .catch((err) => console.log(err, err.stack));
 
+  // Client as class member
+  class ClientClassMember {
+    constructor(client = new AWS.DynamoDB()) {
+      this.client = client;
+    }
+  
+    async listTables() {
+      return await this.client.listTables().promise();
+    }
+  }
+}
+
+// Promise with params
+{
   // async/await
   try {
     await client.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
@@ -36,4 +40,11 @@ const client = new AWS.DynamoDB();
   } catch (err) {
     console.log(err, err.stack);
   }
+
+  // .then() and .catch()
+  client
+    .listTagsOfResource({ ResourceArn: "STRING_VALUE" })
+    .promise()
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err, err.stack));
 }
