@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.4
+
+### Patch Changes
+
+- Remove .promise() calls from class member clients ([43abf32](https://github.com/awslabs/aws-sdk-js-codemod/commit/43abf32))
+
 ## 0.6.3
 
 ### Patch Changes
