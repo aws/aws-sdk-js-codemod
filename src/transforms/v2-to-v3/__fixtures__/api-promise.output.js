@@ -9,6 +9,14 @@ const client = new DynamoDB();
     .listTables()
     .then((data) => console.log(data))
     .catch((err) => console.log(err, err.stack));
+
+  // async/await
+  try {
+    await client.listTables();
+    console.log(data);
+  } catch (err) {
+    console.log(err, err.stack);
+  }
 }
 
 // Promise with params
@@ -18,4 +26,12 @@ const client = new DynamoDB();
     .listTagsOfResource({ ResourceArn: "STRING_VALUE" })
     .then((data) => console.log(data))
     .catch((err) => console.log(err, err.stack));
+
+  // async/await
+  try {
+    await client.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
+    console.log(data);
+  } catch (err) {
+    console.log(err, err.stack);
+  }
 }
