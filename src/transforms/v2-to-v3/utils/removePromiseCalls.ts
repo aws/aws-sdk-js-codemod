@@ -13,11 +13,10 @@ export const removePromiseCalls = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
-  const v2ClientIdNames = ["client"];
-  // const v2ClientIdNames = getV2ClientIdNames(j, source, {
-  //   v2DefaultModuleName,
-  //   v2ClientName,
-  // });
+  const v2ClientIdNames = getV2ClientIdNames(j, source, {
+    v2DefaultModuleName,
+    v2ClientName,
+  });
 
   for (const v2ClientIdName of v2ClientIdNames) {
     source
@@ -29,14 +28,8 @@ export const removePromiseCalls = (
             callee: {
               type: "MemberExpression",
               object: {
-                type: "MemberExpression",
-                object: {
-                  type: "ThisExpression",
-                },
-                property: {
-                  type: "Identifier",
-                  name: v2ClientIdName,
-                },
+                type: "Identifier",
+                name: v2ClientIdName,
               },
             },
           },
