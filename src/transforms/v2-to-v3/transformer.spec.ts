@@ -1,4 +1,5 @@
-import { readdirSync, readFileSync } from "fs";
+import { readdirSync } from "fs";
+import { readFile } from "fs/promises";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: Could not find a declaration file for module 'jscodeshift/dist/testUtils'
 import { runInlineTest } from "jscodeshift/dist/testUtils";
@@ -17,11 +18,11 @@ describe("v2-to-v3", () => {
       fileName.split(".").pop() as string,
     ]);
 
-  it.each(testFiles)(`transforms correctly using "%s" data`, (filePrefix, fileExtension) => {
+  it.concurrent.each(testFiles)(`transforms: %s.%s`, async (filePrefix, fileExtension) => {
     const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
     const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
-    const inputCode = readFileSync(inputPath, "utf8");
-    const outputCode = readFileSync(outputPath, "utf8");
+    const inputCode = await readFile(inputPath, "utf8");
+    const outputCode = await readFile(outputPath, "utf8");
 
     const input = { path: inputPath, source: inputCode };
     runInlineTest(transformer, null, input, outputCode);
