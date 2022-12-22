@@ -1,6 +1,6 @@
 import { CallExpression, Collection, JSCodeshift, MemberExpression } from "jscodeshift";
 
-import { getV2ClientIdentifiers, getV2ClientIdThisExpressions } from "./get";
+import { getV2ClientIdentifiers, getV2ClientIdThisExpressions } from "../get";
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;

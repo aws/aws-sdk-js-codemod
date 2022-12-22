@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "./config";
-import { containsRequire } from "./containsRequire";
+import { PACKAGE_NAME } from "../config";
+import { containsRequire } from "../containsRequire";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
