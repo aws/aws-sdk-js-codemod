@@ -12,20 +12,28 @@ describe("v2-to-v3", () => {
 
   const inputFileRegex = /(.*).input.[jt]sx?$/;
   const fixtureDir = join(__dirname, "__fixtures__");
-  const testFiles: [string, string][] = readdirSync(fixtureDir)
-    .filter((fileName) => inputFileRegex.test(fileName))
-    .map((fileName) => [
-      (fileName.match(inputFileRegex) as RegExpMatchArray)[1],
-      fileName.split(".").pop() as string,
-    ]);
 
-  it.concurrent.each(testFiles)(`transforms: %s.%s`, async (filePrefix, fileExtension) => {
-    const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
-    const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
-    const inputCode = await readFile(inputPath, "utf8");
-    const outputCode = await readFile(outputPath, "utf8");
+  const getTestFileMetadata = (dirPath: string) =>
+    readdirSync(dirPath)
+      .filter((fileName) => inputFileRegex.test(fileName))
+      .map(
+        (fileName) =>
+          [
+            (fileName.match(inputFileRegex) as RegExpMatchArray)[1],
+            fileName.split(".").pop() as string,
+          ] as const
+      );
 
-    const input = { path: inputPath, source: inputCode };
-    runInlineTest(transformer, null, input, outputCode);
-  });
+  it.concurrent.each(getTestFileMetadata(fixtureDir))(
+    `transforms: %s.%s`,
+    async (filePrefix, fileExtension) => {
+      const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
+      const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
+      const inputCode = await readFile(inputPath, "utf8");
+      const outputCode = await readFile(outputPath, "utf8");
+
+      const input = { path: inputPath, source: inputCode };
+      runInlineTest(transformer, null, input, outputCode);
+    }
+  );
 });
