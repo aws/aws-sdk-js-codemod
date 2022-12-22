@@ -22,7 +22,12 @@ export const removeImportIdentifierName = (
       );
       // Remove ImportDeclaration if there are no other imports.
       if (declarationPath.value.specifiers?.length === 0) {
-        j(declarationPath).remove();
+        if (declarationPath.value.comments?.length) {
+          declarationPath.insertBefore(
+            j.commentLine(declarationPath.value.comments[0].value, true, false)
+          );
+        }
+        // j(declarationPath).remove();
       }
     });
 };
