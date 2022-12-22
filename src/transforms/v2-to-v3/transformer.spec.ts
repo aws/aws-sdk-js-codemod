@@ -18,13 +18,16 @@ describe("v2-to-v3", () => {
       fileName.split(".").pop() as string,
     ]);
 
-  it.concurrent.each(testFiles)(`transforms: %s.%s`, async (filePrefix, fileExtension) => {
-    const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
-    const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
-    const inputCode = await readFile(inputPath, "utf8");
-    const outputCode = await readFile(outputPath, "utf8");
+  it.concurrent.each([["global-import-new-clients", "js"]])(
+    `transforms: %s.%s`,
+    async (filePrefix, fileExtension) => {
+      const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
+      const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
+      const inputCode = await readFile(inputPath, "utf8");
+      const outputCode = await readFile(outputPath, "utf8");
 
-    const input = { path: inputPath, source: inputCode };
-    runInlineTest(transformer, null, input, outputCode);
-  });
+      const input = { path: inputPath, source: inputCode };
+      runInlineTest(transformer, null, input, outputCode);
+    }
+  );
 });
