@@ -28,12 +28,14 @@ export default function transformer(file: FileInfo, api: API) {
   const clientMetadata = getClientMetadata(v2ClientNames);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
+    console.log("start: ", v2ClientName, Date.now());
     const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
     addV3ClientModule(j, source, { v2ClientName, v3ClientName, v3ClientPackageName });
     removeV2ClientModule(j, source, v2ClientName);
     removePromiseCalls(j, source, { v2DefaultModuleName, v2ClientName });
     replaceClientCreation(j, source, { v2DefaultModuleName, v2ClientName, v3ClientName });
     replaceTSTypeReference(j, source, { v2DefaultModuleName, v2ClientName, v3ClientName });
+    console.log("end: ", v2ClientName, Date.now());
   }
 
   removeDefaultModuleIfNotUsed(j, source, v2DefaultModuleName);
