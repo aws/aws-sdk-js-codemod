@@ -7,9 +7,10 @@ import { join } from "path";
 
 import transformer from "./transformer";
 
-const inputFileRegex = /(.*).input.[jt]sx?$/;
-
 describe("v2-to-v3", () => {
+  jest.setTimeout(20000);
+
+  const inputFileRegex = /(.*).input.[jt]sx?$/;
   const fixtureDir = join(__dirname, "__fixtures__");
   const testFiles: [string, string][] = readdirSync(fixtureDir)
     .filter((fileName) => inputFileRegex.test(fileName))
