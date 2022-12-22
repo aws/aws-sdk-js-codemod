@@ -24,10 +24,12 @@ export const removeImportIdentifierName = (
       if (declarationPath.value.specifiers?.length === 0) {
         if (declarationPath.value.comments?.length) {
           declarationPath.insertBefore(
-            j.commentLine(declarationPath.value.comments[0].value, true, false)
+            j.emptyStatement.from({
+              comments: declarationPath.value.comments,
+            })
           );
         }
-        // j(declarationPath).remove();
+        j(declarationPath).remove();
       }
     });
 };
