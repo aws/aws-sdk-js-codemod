@@ -1,3 +1,5 @@
-export * from "./containsRequire";
+export * from "./add";
+export * from "./get";
 export * from "./isTypeScriptFile";
-export * from "./types";
+export * from "./remove";
+export * from "./replace";
