@@ -12,6 +12,9 @@ describe("v2-to-v3", () => {
 
   const inputFileRegex = /(.*).input.[jt]sx?$/;
   const fixtureDir = join(__dirname, "__fixtures__");
+  const fixtureSubDirs = readdirSync(fixtureDir, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
 
   const getTestFileMetadata = (dirPath: string) =>
     readdirSync(dirPath)
@@ -41,4 +44,15 @@ describe("v2-to-v3", () => {
       runInlineTest(transformer, null, input, outputCode);
     }
   );
+
+  describe.each(fixtureSubDirs)("%s", (subDir) => {
+    const subDirPath = join(fixtureDir, subDir);
+    it.concurrent.each(getTestFileMetadata(subDirPath))(
+      `transforms: %s.%s`,
+      async (filePrefix, fileExtension) => {
+        const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
+        runInlineTest(transformer, null, input, outputCode);
+      }
+    );
+  });
 });
