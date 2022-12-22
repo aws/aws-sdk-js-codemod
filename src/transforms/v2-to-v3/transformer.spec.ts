@@ -24,15 +24,20 @@ describe("v2-to-v3", () => {
           ] as const
       );
 
+  const getTestMetadata = async (dirPath: string, filePrefix: string, fileExtension: string) => {
+    const inputPath = join(dirPath, [filePrefix, "input", fileExtension].join("."));
+    const outputPath = join(dirPath, [filePrefix, "output", fileExtension].join("."));
+    const inputCode = await readFile(inputPath, "utf8");
+    const outputCode = await readFile(outputPath, "utf8");
+
+    const input = { path: inputPath, source: inputCode };
+    return { input, outputCode };
+  };
+
   it.concurrent.each(getTestFileMetadata(fixtureDir))(
     `transforms: %s.%s`,
     async (filePrefix, fileExtension) => {
-      const inputPath = join(fixtureDir, [filePrefix, "input", fileExtension].join("."));
-      const outputPath = join(fixtureDir, [filePrefix, "output", fileExtension].join("."));
-      const inputCode = await readFile(inputPath, "utf8");
-      const outputCode = await readFile(outputPath, "utf8");
-
-      const input = { path: inputPath, source: inputCode };
+      const { input, outputCode } = await getTestMetadata(fixtureDir, filePrefix, fileExtension);
       runInlineTest(transformer, null, input, outputCode);
     }
   );
