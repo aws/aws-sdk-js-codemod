@@ -1,6 +1,6 @@
+import { ClientMetadataMap } from "../types";
 import { getV3ClientName } from "./getV3ClientName";
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
-import { ClientMetadataMap } from "./types";
 
 export const getClientMetadata = (v2ClientNames: string[]): ClientMetadataMap =>
   Object.entries(

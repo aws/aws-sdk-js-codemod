@@ -2,10 +2,6 @@ import { API, FileInfo } from "jscodeshift";
 
 import {
   addV3ClientModule,
-  getClientMetadata,
-  getV2ClientNames,
-  getV2DefaultModuleName,
-  getV2ServiceModuleNames,
   isTypeScriptFile,
   removeDefaultModuleIfNotUsed,
   removePromiseCalls,
@@ -13,6 +9,12 @@ import {
   replaceClientCreation,
   replaceTSTypeReference,
 } from "./utils";
+import {
+  getClientMetadata,
+  getV2ClientNames,
+  getV2DefaultModuleName,
+  getV2ServiceModuleNames,
+} from "./utils/get";
 
 export default function transformer(file: FileInfo, api: API) {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;

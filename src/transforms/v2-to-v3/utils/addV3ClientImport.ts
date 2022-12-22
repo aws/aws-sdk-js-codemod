@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
 import { PACKAGE_NAME } from "./config";
-import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
+import { getV2ServiceModulePath } from "./get";
 
 export const addV3ClientImport = (
   j: JSCodeshift,

@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { containsRequire } from "./containsRequire";
-import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
+import { getV2ServiceModulePath } from "./get";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 

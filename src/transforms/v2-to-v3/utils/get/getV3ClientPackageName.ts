@@ -1,4 +1,4 @@
-import { CLIENT_PACKAGE_NAMES_MAP } from "./config";
+import { CLIENT_PACKAGE_NAMES_MAP } from "../config";
 
 // Returns v3 client package name for the provided v2 client name.
 export const getV3ClientPackageName = (clientName: string) => {
