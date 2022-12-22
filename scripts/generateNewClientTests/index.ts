@@ -3,6 +3,8 @@ import { join } from "path";
 
 import { getGlobalImportInputContent } from "./getGlobalImportInputContent";
 import { getGlobalImportOutputContent } from "./getGlobalImportOutputContent";
+import { getGlobalRequireInputContent } from "./getGlobalRequireInputContent";
+import { getGlobalRequireOutputContent } from "./getGlobalRequireOutputContent";
 
 // The "use strict" directive is added to so that comments can be attached to it.
 // Recast removes the comments while removing import/require.
@@ -15,11 +17,13 @@ const newClientsTestsFolder = join("src", "transforms", "v2-to-v3", "__fixtures_
 const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
 
 (async () => {
-  // overwrite `global-import.input.js`
-  const globalImportInputPath = join(newClientTestsPath, `global-import.input.js`);
-  await writeFile(globalImportInputPath, getGlobalImportInputContent(codegenComment));
-
-  // overwrite `global-import.output.js`
-  const globalImportOutputPath = join(newClientTestsPath, `global-import.output.js`);
-  await writeFile(globalImportOutputPath, getGlobalImportOutputContent(codegenComment));
+  for (const [fileName, getFileContent] of [
+    ["global-import.input.js", getGlobalImportInputContent],
+    ["global-import.output.js", getGlobalImportOutputContent],
+    ["global-require.input.js", getGlobalRequireInputContent],
+    ["global-require.output.js", getGlobalRequireOutputContent],
+  ] as [string, (comment: string) => string][]) {
+    const filePath = join(newClientTestsPath, fileName);
+    await writeFile(filePath, getFileContent(codegenComment));
+  }
 })();
