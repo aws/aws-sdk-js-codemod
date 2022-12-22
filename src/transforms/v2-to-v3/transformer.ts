@@ -1,7 +1,6 @@
 import { API, FileInfo } from "jscodeshift";
 
 import {
-  addV3ClientModule,
   isTypeScriptFile,
   removeDefaultModuleIfNotUsed,
   removePromiseCalls,
@@ -9,6 +8,7 @@ import {
   replaceClientCreation,
   replaceTSTypeReference,
 } from "./utils";
+import { addV3ClientModule } from "./utils/add";
 import {
   getClientMetadata,
   getV2ClientNames,

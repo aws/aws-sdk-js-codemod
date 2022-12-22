@@ -1,4 +1,3 @@
-export * from "./addV3ClientModule";
 export * from "./containsRequire";
 export * from "./isTypeScriptFile";
 export * from "./removeDefaultModuleIfNotUsed";
