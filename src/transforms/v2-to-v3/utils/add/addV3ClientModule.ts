@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { containsRequire } from "../containsRequire";
 import { addV3ClientImport } from "./addV3ClientImport";
 import { addV3ClientRequire } from "./addV3ClientRequire";
-import { containsRequire } from "./containsRequire";
 
 export interface AddV3ClientModuleOptions {
   v2ClientName: string;

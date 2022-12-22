@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, VariableDeclarator } from "jscodeshift";
 
-import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
+import { getRequireVariableDeclaration } from "../get";
 
 export interface RemoveRequireIdentifierNameOptions {
   identifierName: string;

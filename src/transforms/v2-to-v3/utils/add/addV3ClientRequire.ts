@@ -1,9 +1,8 @@
 import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "jscodeshift";
 
+import { PACKAGE_NAME } from "../config";
+import { getRequireVariableDeclaration, getV2ServiceModulePath } from "../get";
 import { AddV3ClientModuleOptions } from "./addV3ClientModule";
-import { PACKAGE_NAME } from "./config";
-import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
-import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export const addV3ClientRequire = (
   j: JSCodeshift,

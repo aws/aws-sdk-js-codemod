@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES } from "./config";
-import { containsRequire } from "./containsRequire";
+import { CLIENT_NAMES } from "../config";
+import { containsRequire } from "../containsRequire";
 import { getImportIdentifierName } from "./getImportIdentifierName";
 import { getRequireIdentifierName } from "./getRequireIdentifierName";
 import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
