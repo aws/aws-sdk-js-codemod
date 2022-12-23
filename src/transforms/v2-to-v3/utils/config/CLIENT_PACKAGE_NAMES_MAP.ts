@@ -92,6 +92,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   MigrationHubRefactorSpaces: "client-migration-hub-refactor-spaces",
   NetworkManager: "client-networkmanager",
   OpenSearch: "client-opensearch",
+  OpenSearchServerless: "client-opensearchserverless",
   OpsWorks: "client-opsworks",
   OpsWorksCM: "client-opsworkscm",
   PinpointSMSVoice: "client-pinpoint-sms-voice",

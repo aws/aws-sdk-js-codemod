@@ -907,12 +907,12 @@ const {
 } = require("@aws-sdk/client-omics");
 
 const {
-  OpenSearchServerless
-} = require("@aws-sdk/client-open-search-serverless");
-
-const {
   OpenSearch
 } = require("@aws-sdk/client-opensearch");
+
+const {
+  OpenSearchServerless
+} = require("@aws-sdk/client-opensearchserverless");
 
 const {
   OpsWorks

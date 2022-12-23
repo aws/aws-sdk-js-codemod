@@ -229,7 +229,7 @@ import { Nimble } from "@aws-sdk/client-nimble";
 import { OAM } from "@aws-sdk/client-oam";
 import { Omics } from "@aws-sdk/client-omics";
 import { OpenSearch } from "@aws-sdk/client-opensearch";
-import { OpenSearchServerless } from "@aws-sdk/client-open-search-serverless";
+import { OpenSearchServerless } from "@aws-sdk/client-opensearchserverless";
 import { OpsWorks } from "@aws-sdk/client-opsworks";
 import { OpsWorksCM } from "@aws-sdk/client-opsworkscm";
 import { Organizations } from "@aws-sdk/client-organizations";

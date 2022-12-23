@@ -687,7 +687,7 @@ const {
 } = require("@aws-sdk/client-opensearch");
 const {
   OpenSearchServerless
-} = require("@aws-sdk/client-open-search-serverless");
+} = require("@aws-sdk/client-opensearchserverless");
 const {
   OpsWorks
 } = require("@aws-sdk/client-opsworks");
