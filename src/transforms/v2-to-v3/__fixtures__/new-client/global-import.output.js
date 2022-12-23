@@ -259,7 +259,7 @@ import { RedshiftData } from "@aws-sdk/client-redshift-data";
 import { RedshiftServerless } from "@aws-sdk/client-redshift-serverless";
 import { Rekognition } from "@aws-sdk/client-rekognition";
 import { Resiliencehub } from "@aws-sdk/client-resiliencehub";
-import { ResourceExplorer2 } from "@aws-sdk/client-resource-explorer2";
+import { ResourceExplorer2 } from "@aws-sdk/client-resource-explorer-2";
 import { ResourceGroups } from "@aws-sdk/client-resource-groups";
 import { ResourceGroupsTaggingAPI } from "@aws-sdk/client-resource-groups-tagging-api";
 import { RoboMaker } from "@aws-sdk/client-robomaker";

@@ -783,7 +783,7 @@ const {
 } = require("@aws-sdk/client-resiliencehub");
 const {
   ResourceExplorer2
-} = require("@aws-sdk/client-resource-explorer2");
+} = require("@aws-sdk/client-resource-explorer-2");
 const {
   ResourceGroups
 } = require("@aws-sdk/client-resource-groups");

@@ -99,6 +99,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   PrivateNetworks: "client-privatenetworks",
   QLDBSession: "client-qldb-session",
   QuickSight: "client-quicksight",
+  ResourceExplorer2: "client-resource-explorer-2",
   RDSDataService: "client-rds-data",
   RoboMaker: "client-robomaker",
   Route53: "client-route-53",
