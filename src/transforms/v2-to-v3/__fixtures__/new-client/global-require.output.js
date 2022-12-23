@@ -1139,12 +1139,12 @@ const {
 } = require("@aws-sdk/client-secrets-manager");
 
 const {
-  SecurityLake
-} = require("@aws-sdk/client-security-lake");
-
-const {
   SecurityHub
 } = require("@aws-sdk/client-securityhub");
+
+const {
+  SecurityLake
+} = require("@aws-sdk/client-securitylake");
 
 const {
   ServerlessApplicationRepository

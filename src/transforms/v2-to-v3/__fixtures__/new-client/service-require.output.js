@@ -897,7 +897,7 @@ const {
 } = require("@aws-sdk/client-securityhub");
 const {
   SecurityLake
-} = require("@aws-sdk/client-security-lake");
+} = require("@aws-sdk/client-securitylake");
 const {
   ServerlessApplicationRepository
 } = require("@aws-sdk/client-serverlessapplicationrepository");

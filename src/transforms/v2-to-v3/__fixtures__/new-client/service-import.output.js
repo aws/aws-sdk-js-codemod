@@ -299,7 +299,7 @@ import { Scheduler } from "@aws-sdk/client-scheduler";
 import { Schemas } from "@aws-sdk/client-schemas";
 import { SecretsManager } from "@aws-sdk/client-secrets-manager";
 import { SecurityHub } from "@aws-sdk/client-securityhub";
-import { SecurityLake } from "@aws-sdk/client-security-lake";
+import { SecurityLake } from "@aws-sdk/client-securitylake";
 import { ServerlessApplicationRepository } from "@aws-sdk/client-serverlessapplicationrepository";
 import { ServiceCatalog } from "@aws-sdk/client-service-catalog";
 import { ServiceCatalogAppRegistry } from "@aws-sdk/client-service-catalog-appregistry";

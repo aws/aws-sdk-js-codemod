@@ -19,6 +19,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("client-pinpoint-sms", "client-pinpoint-sms-")
         .replace("client-route53", "client-route53-")
         .replace("client-sage-maker", "client-sagemaker")
+        .replace("client-security-", "client-security")
         .replace("client-work-", "client-work"),
     }),
     {}
