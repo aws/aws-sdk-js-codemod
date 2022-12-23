@@ -393,7 +393,7 @@ const {
 } = require("@aws-sdk/client-gamelift");
 const {
   GameSparks
-} = require("@aws-sdk/client-game-sparks");
+} = require("@aws-sdk/client-gamesparks");
 const {
   Glacier
 } = require("@aws-sdk/client-glacier");

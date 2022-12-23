@@ -131,7 +131,7 @@ import { Forecastquery } from "@aws-sdk/client-forecastquery";
 import { Forecast } from "@aws-sdk/client-forecast";
 import { FraudDetector } from "@aws-sdk/client-frauddetector";
 import { GameLift } from "@aws-sdk/client-gamelift";
-import { GameSparks } from "@aws-sdk/client-game-sparks";
+import { GameSparks } from "@aws-sdk/client-gamesparks";
 import { Glacier } from "@aws-sdk/client-glacier";
 import { GlobalAccelerator } from "@aws-sdk/client-global-accelerator";
 import { Glue } from "@aws-sdk/client-glue";

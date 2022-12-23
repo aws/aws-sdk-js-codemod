@@ -515,12 +515,12 @@ const {
 } = require("@aws-sdk/client-fsx");
 
 const {
-  GameSparks
-} = require("@aws-sdk/client-game-sparks");
-
-const {
   GameLift
 } = require("@aws-sdk/client-gamelift");
+
+const {
+  GameSparks
+} = require("@aws-sdk/client-gamesparks");
 
 const {
   Glacier
