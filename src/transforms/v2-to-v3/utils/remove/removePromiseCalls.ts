@@ -1,6 +1,7 @@
-import { CallExpression, Collection, JSCodeshift, MemberExpression } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getV2ClientIdentifiers, getV2ClientIdThisExpressions } from "../get";
+import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
@@ -20,6 +21,7 @@ export const removePromiseCalls = (
   const v2ClientIdThisExpressions = getV2ClientIdThisExpressions(j, source, v2ClientIdentifiers);
 
   for (const v2ClientId of [...v2ClientIdentifiers, ...v2ClientIdThisExpressions]) {
+    // Remove .promise() from client API calls.
     source
       .find(j.CallExpression, {
         callee: {
@@ -34,34 +36,37 @@ export const removePromiseCalls = (
           property: { type: "Identifier", name: "promise" },
         },
       })
-      .forEach((callExpressionPath) => {
-        switch (callExpressionPath.parentPath.value.type) {
-          case "AwaitExpression":
-            callExpressionPath.parentPath.value.argument = (
-              callExpressionPath.value.callee as MemberExpression
-            ).object;
-            break;
-          case "MemberExpression":
-            callExpressionPath.parentPath.value.object = (
-              callExpressionPath.value.callee as MemberExpression
-            ).object;
-            break;
-          case "VariableDeclarator":
-            callExpressionPath.parentPath.value.init = (
-              callExpressionPath.value.callee as MemberExpression
-            ).object;
-            break;
-          case "ArrowFunctionExpression":
-          case "ReturnStatement":
-            callExpressionPath.value.callee = (
-              (callExpressionPath.value.callee as MemberExpression).object as CallExpression
-            ).callee;
-            break;
-          default:
-            throw new Error(
-              `Removal of .promise() not implemented for ${callExpressionPath.parentPath.value.type}`
-            );
-        }
+      .forEach((callExpression) => {
+        removePromiseForCallExpression(callExpression);
+      });
+
+    // Remove .promise() from client API request stored in a variable.
+    source
+      .find(j.VariableDeclarator, {
+        id: { type: "Identifier" },
+        init: {
+          type: "CallExpression",
+          callee: {
+            type: "MemberExpression",
+            object: v2ClientId,
+          },
+        },
+      })
+      .forEach((variableDeclarator) => {
+        source
+          .find(j.CallExpression, {
+            callee: {
+              type: "MemberExpression",
+              object: {
+                type: "Identifier",
+                name: (variableDeclarator.value.id as Identifier).name,
+              },
+              property: { type: "Identifier", name: "promise" },
+            },
+          })
+          .forEach((callExpression) => {
+            removePromiseForCallExpression(callExpression);
+          });
       });
   }
 };
