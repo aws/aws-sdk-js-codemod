@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getV2ClientIdentifiers, getV2ClientIdThisExpressions } from "../get";
 import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
@@ -21,6 +21,7 @@ export const removePromiseCalls = (
   const v2ClientIdThisExpressions = getV2ClientIdThisExpressions(j, source, v2ClientIdentifiers);
 
   for (const v2ClientId of [...v2ClientIdentifiers, ...v2ClientIdThisExpressions]) {
+    // Remove .promise() from client API calls.
     source
       .find(j.CallExpression, {
         callee: {
@@ -37,6 +38,35 @@ export const removePromiseCalls = (
       })
       .forEach((callExpression) => {
         removePromiseForCallExpression(callExpression);
+      });
+
+    // Remove .promise() from client API request stored in a variable.
+    source
+      .find(j.VariableDeclarator, {
+        id: { type: "Identifier" },
+        init: {
+          type: "CallExpression",
+          callee: {
+            type: "MemberExpression",
+            object: v2ClientId,
+          },
+        },
+      })
+      .forEach((variableDeclarator) => {
+        source
+          .find(j.CallExpression, {
+            callee: {
+              type: "MemberExpression",
+              object: {
+                type: "Identifier",
+                name: (variableDeclarator.value.id as Identifier).name,
+              },
+              property: { type: "Identifier", name: "promise" },
+            },
+          })
+          .forEach((callExpression) => {
+            removePromiseForCallExpression(callExpression);
+          });
       });
   }
 };
