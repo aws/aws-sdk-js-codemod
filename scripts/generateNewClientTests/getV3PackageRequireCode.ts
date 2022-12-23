@@ -8,12 +8,12 @@ export const getV3PackageRequireCode = (
   sortedV2ClientNames: typeof CLIENT_NAMES,
   { extraNewLine = false }: { extraNewLine?: boolean } = {}
 ) => {
-  let v3PackageImportsCode = ``;
+  let v3PackageRequireCode = ``;
   for (const v2ClientName of sortedV2ClientNames) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
-    v3PackageImportsCode += `const {\n  ${v3ClientName}\n} = require("${v3ClientPackageName}");\n`;
-    if (extraNewLine) v3PackageImportsCode += `\n`;
+    v3PackageRequireCode += `const {\n  ${v3ClientName}\n} = require("${v3ClientPackageName}");\n`;
+    if (extraNewLine) v3PackageRequireCode += `\n`;
   }
-  return v3PackageImportsCode;
+  return v3PackageRequireCode;
 };

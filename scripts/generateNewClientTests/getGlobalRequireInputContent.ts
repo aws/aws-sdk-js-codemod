@@ -1,10 +1,10 @@
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getGlobalRequireInputContent = (codegenComment: string) => {
-  let globalImportInputContent = `${codegenComment}\n`;
+  let globalRequireInputContent = `${codegenComment}\n`;
 
-  globalImportInputContent += `const AWS = require("aws-sdk");\n\n`;
-  globalImportInputContent += getV2ClientsNewExpressionCode(`AWS.`);
+  globalRequireInputContent += `const AWS = require("aws-sdk");\n\n`;
+  globalRequireInputContent += getV2ClientsNewExpressionCode(`AWS.`);
 
-  return globalImportInputContent;
+  return globalRequireInputContent;
 };

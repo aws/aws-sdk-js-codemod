@@ -3,12 +3,12 @@ import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageRequireCode } from "./getV3PackageRequireCode";
 
 export const getGlobalRequireOutputContent = (codegenComment: string) => {
-  let globalImportOutputContent = `${codegenComment}\n\n`;
+  let globalRequireOutputContent = `${codegenComment}\n\n`;
 
-  globalImportOutputContent += getV3PackageRequireCode(getClientNamesSortedByPackageName(), {
+  globalRequireOutputContent += getV3PackageRequireCode(getClientNamesSortedByPackageName(), {
     extraNewLine: true,
   });
-  globalImportOutputContent += getV3ClientsNewExpressionCode();
+  globalRequireOutputContent += getV3ClientsNewExpressionCode();
 
-  return globalImportOutputContent;
+  return globalRequireOutputContent;
 };

@@ -3,11 +3,11 @@ import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageRequireCode } from "./getV3PackageRequireCode";
 
 export const getServiceRequireOutputContent = (codegenComment: string) => {
-  let serviceImportOutputContent = `${codegenComment}\n`;
+  let serviceRequireOutputContent = `${codegenComment}\n`;
 
-  serviceImportOutputContent += getV3PackageRequireCode(CLIENT_NAMES);
-  serviceImportOutputContent += `\n`;
-  serviceImportOutputContent += getV3ClientsNewExpressionCode();
+  serviceRequireOutputContent += getV3PackageRequireCode(CLIENT_NAMES);
+  serviceRequireOutputContent += `\n`;
+  serviceRequireOutputContent += getV3ClientsNewExpressionCode();
 
-  return serviceImportOutputContent;
+  return serviceRequireOutputContent;
 };
