@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.6
+
+### Patch Changes
+
+- Remove .promise() from client API request stored in a variable. ([c80233f](https://github.com/awslabs/aws-sdk-js-codemod/commit/c80233f))
+
 ## 0.6.5
 
 ### Patch Changes
