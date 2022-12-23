@@ -83,6 +83,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   IoTRoboRunner: "client-iot-roborunner",
   KafkaConnect: "client-kafkaconnect",
   KinesisVideoSignalingChannels: "client-kinesis-video-signaling",
+  KinesisVideoWebRTCStorage: "client-kinesis-video-webrtc-storage",
   LakeFormation: "client-lakeformation",
   LexRuntime: "client-lex-runtime-service",
   ManagedBlockchain: "client-managedblockchain",

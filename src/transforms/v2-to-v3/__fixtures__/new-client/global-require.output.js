@@ -708,7 +708,7 @@ const {
 
 const {
   KinesisVideoWebRTCStorage
-} = require("@aws-sdk/client-kinesis-video-web-rtcstorage");
+} = require("@aws-sdk/client-kinesis-video-webrtc-storage");
 
 const {
   KMS

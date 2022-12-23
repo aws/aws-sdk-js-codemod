@@ -537,7 +537,7 @@ const {
 } = require("@aws-sdk/client-kinesis-video-signaling");
 const {
   KinesisVideoWebRTCStorage
-} = require("@aws-sdk/client-kinesis-video-web-rtcstorage");
+} = require("@aws-sdk/client-kinesis-video-webrtc-storage");
 const {
   LakeFormation
 } = require("@aws-sdk/client-lakeformation");

@@ -179,7 +179,7 @@ import { KinesisVideo } from "@aws-sdk/client-kinesis-video";
 import { KinesisVideoArchivedMedia } from "@aws-sdk/client-kinesis-video-archived-media";
 import { KinesisVideoMedia } from "@aws-sdk/client-kinesis-video-media";
 import { KinesisVideoSignaling } from "@aws-sdk/client-kinesis-video-signaling";
-import { KinesisVideoWebRTCStorage } from "@aws-sdk/client-kinesis-video-web-rtcstorage";
+import { KinesisVideoWebRTCStorage } from "@aws-sdk/client-kinesis-video-webrtc-storage";
 import { LakeFormation } from "@aws-sdk/client-lakeformation";
 import { Lambda } from "@aws-sdk/client-lambda";
 import { LexModelBuildingService } from "@aws-sdk/client-lex-model-building-service";
