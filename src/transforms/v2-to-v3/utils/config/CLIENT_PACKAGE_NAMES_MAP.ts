@@ -43,6 +43,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   CognitoIdentityServiceProvider: "client-cognito-identity-provider",
   ComprehendMedical: "client-comprehendmedical",
   ConnectContactLens: "client-connect-contact-lens",
+  ControlTower: "client-controltower",
   DMS: "client-database-migration-service",
   DataPipeline: "client-data-pipeline",
   Discovery: "client-application-discovery-service",

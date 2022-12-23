@@ -79,7 +79,7 @@ import { ConnectContactLens } from "@aws-sdk/client-connect-contact-lens";
 import { ConnectCampaigns } from "@aws-sdk/client-connectcampaigns";
 import { ConnectCases } from "@aws-sdk/client-connectcases";
 import { ConnectParticipant } from "@aws-sdk/client-connectparticipant";
-import { ControlTower } from "@aws-sdk/client-control-tower";
+import { ControlTower } from "@aws-sdk/client-controltower";
 import { CostAndUsageReportService } from "@aws-sdk/client-cost-and-usage-report-service";
 import { CostExplorer } from "@aws-sdk/client-cost-explorer";
 import { CustomerProfiles } from "@aws-sdk/client-customer-profiles";

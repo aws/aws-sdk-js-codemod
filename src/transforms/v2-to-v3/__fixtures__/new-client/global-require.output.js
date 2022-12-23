@@ -316,7 +316,7 @@ const {
 
 const {
   ControlTower
-} = require("@aws-sdk/client-control-tower");
+} = require("@aws-sdk/client-controltower");
 
 const {
   CostAndUsageReportService

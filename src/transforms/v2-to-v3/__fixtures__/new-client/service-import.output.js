@@ -80,7 +80,7 @@ import { ConnectCampaigns } from "@aws-sdk/client-connectcampaigns";
 import { ConnectCases } from "@aws-sdk/client-connectcases";
 import { ConnectContactLens } from "@aws-sdk/client-connect-contact-lens";
 import { ConnectParticipant } from "@aws-sdk/client-connectparticipant";
-import { ControlTower } from "@aws-sdk/client-control-tower";
+import { ControlTower } from "@aws-sdk/client-controltower";
 import { CostExplorer } from "@aws-sdk/client-cost-explorer";
 import { CustomerProfiles } from "@aws-sdk/client-customer-profiles";
 import { DAX } from "@aws-sdk/client-dax";

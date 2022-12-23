@@ -240,7 +240,7 @@ const {
 } = require("@aws-sdk/client-connectparticipant");
 const {
   ControlTower
-} = require("@aws-sdk/client-control-tower");
+} = require("@aws-sdk/client-controltower");
 const {
   CostExplorer
 } = require("@aws-sdk/client-cost-explorer");
