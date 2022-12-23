@@ -241,7 +241,7 @@ import { PI } from "@aws-sdk/client-pi";
 import { Pinpoint } from "@aws-sdk/client-pinpoint";
 import { PinpointEmail } from "@aws-sdk/client-pinpoint-email";
 import { PinpointSMSVoice } from "@aws-sdk/client-pinpoint-sms-voice";
-import { PinpointSMSVoiceV2 } from "@aws-sdk/client-pinpoint-smsvoice-v2";
+import { PinpointSMSVoiceV2 } from "@aws-sdk/client-pinpoint-sms-voice-v2";
 import { Pipes } from "@aws-sdk/client-pipes";
 import { Polly } from "@aws-sdk/client-polly";
 import { Pricing } from "@aws-sdk/client-pricing";

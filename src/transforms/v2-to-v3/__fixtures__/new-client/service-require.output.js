@@ -726,7 +726,7 @@ const {
 } = require("@aws-sdk/client-pinpoint-sms-voice");
 const {
   PinpointSMSVoiceV2
-} = require("@aws-sdk/client-pinpoint-smsvoice-v2");
+} = require("@aws-sdk/client-pinpoint-sms-voice-v2");
 const {
   Pipes
 } = require("@aws-sdk/client-pipes");

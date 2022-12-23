@@ -16,6 +16,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("client-lookout-", "client-lookout")
         .replace("client-media-", "client-media")
         .replace("client-migration-hub-", "client-migrationhub")
+        .replace("client-pinpoint-sms", "client-pinpoint-sms-")
         .replace("client-route53", "client-route53-")
         .replace("client-sage-maker", "client-sagemaker")
         .replace("client-work-", "client-work"),
@@ -95,7 +96,6 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   OpenSearchServerless: "client-opensearchserverless",
   OpsWorks: "client-opsworks",
   OpsWorksCM: "client-opsworkscm",
-  PinpointSMSVoice: "client-pinpoint-sms-voice",
   QLDBSession: "client-qldb-session",
   QuickSight: "client-quicksight",
   RDSDataService: "client-rds-data",
