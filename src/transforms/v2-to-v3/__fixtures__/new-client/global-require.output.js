@@ -99,6 +99,10 @@ const {
 } = require("@aws-sdk/client-appsync");
 
 const {
+  ARCZonalShift
+} = require("@aws-sdk/client-arc-zonal-shift");
+
+const {
   Athena
 } = require("@aws-sdk/client-athena");
 
@@ -123,8 +127,16 @@ const {
 } = require("@aws-sdk/client-backup-gateway");
 
 const {
+  BackupStorage
+} = require("@aws-sdk/client-backupstorage");
+
+const {
   Batch
 } = require("@aws-sdk/client-batch");
+
+const {
+  Billingconductor
+} = require("@aws-sdk/client-billingconductor");
 
 const {
   Braket
@@ -143,12 +155,20 @@ const {
 } = require("@aws-sdk/client-chime-sdk-identity");
 
 const {
+  ChimeSDKMediaPipelines
+} = require("@aws-sdk/client-chime-sdk-media-pipelines");
+
+const {
   ChimeSDKMeetings
 } = require("@aws-sdk/client-chime-sdk-meetings");
 
 const {
   ChimeSDKMessaging
 } = require("@aws-sdk/client-chime-sdk-messaging");
+
+const {
+  ChimeSDKVoice
+} = require("@aws-sdk/client-chime-sdk-voice");
 
 const {
   Cloud9
@@ -209,6 +229,10 @@ const {
 const {
   CodeBuild
 } = require("@aws-sdk/client-codebuild");
+
+const {
+  CodeCatalyst
+} = require("@aws-sdk/client-codecatalyst");
 
 const {
   CodeCommit
@@ -279,8 +303,20 @@ const {
 } = require("@aws-sdk/client-connect-contact-lens");
 
 const {
+  ConnectCampaigns
+} = require("@aws-sdk/client-connectcampaigns");
+
+const {
+  ConnectCases
+} = require("@aws-sdk/client-connectcases");
+
+const {
   ConnectParticipant
 } = require("@aws-sdk/client-connectparticipant");
+
+const {
+  ControlTower
+} = require("@aws-sdk/client-controltower");
 
 const {
   CostAndUsageReportService
@@ -345,6 +381,10 @@ const {
 const {
   DocDB
 } = require("@aws-sdk/client-docdb");
+
+const {
+  DocDBElastic
+} = require("@aws-sdk/client-docdb-elastic");
 
 const {
   Drs
@@ -427,6 +467,10 @@ const {
 } = require("@aws-sdk/client-emr-containers");
 
 const {
+  EMRServerless
+} = require("@aws-sdk/client-emr-serverless");
+
+const {
   EventBridge
 } = require("@aws-sdk/client-eventbridge");
 
@@ -473,6 +517,10 @@ const {
 const {
   GameLift
 } = require("@aws-sdk/client-gamelift");
+
+const {
+  GameSparks
+} = require("@aws-sdk/client-gamesparks");
 
 const {
   Glacier
@@ -567,6 +615,10 @@ const {
 } = require("@aws-sdk/client-iot-jobs-data-plane");
 
 const {
+  IoTRoboRunner
+} = require("@aws-sdk/client-iot-roborunner");
+
+const {
   IoTWireless
 } = require("@aws-sdk/client-iot-wireless");
 
@@ -581,6 +633,10 @@ const {
 const {
   IoTFleetHub
 } = require("@aws-sdk/client-iotfleethub");
+
+const {
+  IoTFleetWise
+} = require("@aws-sdk/client-iotfleetwise");
 
 const {
   IoTSecureTunneling
@@ -603,6 +659,10 @@ const {
 } = require("@aws-sdk/client-ivs");
 
 const {
+  Ivschat
+} = require("@aws-sdk/client-ivschat");
+
+const {
   Kafka
 } = require("@aws-sdk/client-kafka");
 
@@ -613,6 +673,10 @@ const {
 const {
   Kendra
 } = require("@aws-sdk/client-kendra");
+
+const {
+  Keyspaces
+} = require("@aws-sdk/client-keyspaces");
 
 const {
   Kinesis
@@ -641,6 +705,10 @@ const {
 const {
   KinesisVideoSignaling
 } = require("@aws-sdk/client-kinesis-video-signaling");
+
+const {
+  KinesisVideoWebRTCStorage
+} = require("@aws-sdk/client-kinesis-video-webrtc-storage");
 
 const {
   KMS
@@ -675,6 +743,14 @@ const {
 } = require("@aws-sdk/client-license-manager");
 
 const {
+  LicenseManagerLinuxSubscriptions
+} = require("@aws-sdk/client-license-manager-linux-subscriptions");
+
+const {
+  LicenseManagerUserSubscriptions
+} = require("@aws-sdk/client-license-manager-user-subscriptions");
+
+const {
   Lightsail
 } = require("@aws-sdk/client-lightsail");
 
@@ -693,6 +769,10 @@ const {
 const {
   LookoutVision
 } = require("@aws-sdk/client-lookoutvision");
+
+const {
+  M2
+} = require("@aws-sdk/client-m2");
 
 const {
   MachineLearning
@@ -779,6 +859,10 @@ const {
 } = require("@aws-sdk/client-migrationhub-config");
 
 const {
+  MigrationHubOrchestrator
+} = require("@aws-sdk/client-migrationhuborchestrator");
+
+const {
   MigrationHubStrategy
 } = require("@aws-sdk/client-migrationhubstrategy");
 
@@ -815,8 +899,20 @@ const {
 } = require("@aws-sdk/client-nimble");
 
 const {
+  OAM
+} = require("@aws-sdk/client-oam");
+
+const {
+  Omics
+} = require("@aws-sdk/client-omics");
+
+const {
   OpenSearch
 } = require("@aws-sdk/client-opensearch");
+
+const {
+  OpenSearchServerless
+} = require("@aws-sdk/client-opensearchserverless");
 
 const {
   OpsWorks
@@ -867,12 +963,24 @@ const {
 } = require("@aws-sdk/client-pinpoint-sms-voice");
 
 const {
+  PinpointSMSVoiceV2
+} = require("@aws-sdk/client-pinpoint-sms-voice-v2");
+
+const {
+  Pipes
+} = require("@aws-sdk/client-pipes");
+
+const {
   Polly
 } = require("@aws-sdk/client-polly");
 
 const {
   Pricing
 } = require("@aws-sdk/client-pricing");
+
+const {
+  PrivateNetworks
+} = require("@aws-sdk/client-privatenetworks");
 
 const {
   Proton
@@ -915,12 +1023,20 @@ const {
 } = require("@aws-sdk/client-redshift-data");
 
 const {
+  RedshiftServerless
+} = require("@aws-sdk/client-redshift-serverless");
+
+const {
   Rekognition
 } = require("@aws-sdk/client-rekognition");
 
 const {
   Resiliencehub
 } = require("@aws-sdk/client-resiliencehub");
+
+const {
+  ResourceExplorer2
+} = require("@aws-sdk/client-resource-explorer-2");
 
 const {
   ResourceGroups
@@ -933,6 +1049,10 @@ const {
 const {
   RoboMaker
 } = require("@aws-sdk/client-robomaker");
+
+const {
+  RolesAnywhere
+} = require("@aws-sdk/client-rolesanywhere");
 
 const {
   Route53
@@ -991,12 +1111,24 @@ const {
 } = require("@aws-sdk/client-sagemaker-featurestore-runtime");
 
 const {
+  SageMakerGeospatial
+} = require("@aws-sdk/client-sagemaker-geospatial");
+
+const {
+  SageMakerMetrics
+} = require("@aws-sdk/client-sagemaker-metrics");
+
+const {
   SageMakerRuntime
 } = require("@aws-sdk/client-sagemaker-runtime");
 
 const {
   Savingsplans
 } = require("@aws-sdk/client-savingsplans");
+
+const {
+  Scheduler
+} = require("@aws-sdk/client-scheduler");
 
 const {
   Schemas
@@ -1009,6 +1141,10 @@ const {
 const {
   SecurityHub
 } = require("@aws-sdk/client-securityhub");
+
+const {
+  SecurityLake
+} = require("@aws-sdk/client-securitylake");
 
 const {
   ServerlessApplicationRepository
@@ -1051,6 +1187,10 @@ const {
 } = require("@aws-sdk/client-signer");
 
 const {
+  SimSpaceWeaver
+} = require("@aws-sdk/client-simspaceweaver");
+
+const {
   SMS
 } = require("@aws-sdk/client-sms");
 
@@ -1083,6 +1223,10 @@ const {
 } = require("@aws-sdk/client-ssm-incidents");
 
 const {
+  SsmSap
+} = require("@aws-sdk/client-ssm-sap");
+
+const {
   SSO
 } = require("@aws-sdk/client-sso");
 
@@ -1105,6 +1249,10 @@ const {
 const {
   Support
 } = require("@aws-sdk/client-support");
+
+const {
+  SupportApp
+} = require("@aws-sdk/client-support-app");
 
 const {
   SWF
@@ -1193,6 +1341,7 @@ const {
 new ACM();
 new ACMPCA();
 new APIGateway();
+new ARCZonalShift();
 new AccessAnalyzer();
 new Account();
 new AlexaForBusiness();
@@ -1220,14 +1369,18 @@ new AutoScaling();
 new AutoScalingPlans();
 new Backup();
 new BackupGateway();
+new BackupStorage();
 new Batch();
+new Billingconductor();
 new Braket();
 new Budgets();
 new CostAndUsageReportService();
 new Chime();
 new ChimeSDKIdentity();
+new ChimeSDKMediaPipelines();
 new ChimeSDKMeetings();
 new ChimeSDKMessaging();
+new ChimeSDKVoice();
 new Cloud9();
 new CloudControl();
 new CloudDirectory();
@@ -1243,6 +1396,7 @@ new CloudWatchEvents();
 new CloudWatchLogs();
 new Codeartifact();
 new CodeBuild();
+new CodeCatalyst();
 new CodeCommit();
 new CodeDeploy();
 new CodeGuruProfiler();
@@ -1259,8 +1413,11 @@ new ComprehendMedical();
 new ComputeOptimizer();
 new ConfigService();
 new Connect();
+new ConnectCampaigns();
+new ConnectCases();
 new ConnectContactLens();
 new ConnectParticipant();
+new ControlTower();
 new CostExplorer();
 new CustomerProfiles();
 new DAX();
@@ -1277,6 +1434,7 @@ new DirectConnect();
 new DirectoryService();
 new ApplicationDiscoveryService();
 new DocDB();
+new DocDBElastic();
 new Drs();
 new DynamoDB();
 new DynamoDBStreams();
@@ -1291,6 +1449,7 @@ new EKS();
 new ElasticLoadBalancing();
 new ElasticLoadBalancingV2();
 new EMR();
+new EMRServerless();
 new EMRContainers();
 new ElasticsearchService();
 new ElastiCache();
@@ -1309,6 +1468,7 @@ new Forecastquery();
 new Forecast();
 new FraudDetector();
 new GameLift();
+new GameSparks();
 new Glacier();
 new GlobalAccelerator();
 new Glue();
@@ -1332,7 +1492,9 @@ new IoTAnalytics();
 new IoTEvents();
 new IoTEventsData();
 new IoTFleetHub();
+new IoTFleetWise();
 new IoTJobsDataPlane();
+new IoTRoboRunner();
 new IoTSecureTunneling();
 new IoTSiteWise();
 new IoTThingsGraph();
@@ -1341,10 +1503,12 @@ new IoTWireless();
 new IoT();
 new IoTDataPlane();
 new IotDeviceAdvisor();
+new Ivschat();
 new KMS();
 new Kafka();
 new KafkaConnect();
 new Kendra();
+new Keyspaces();
 new Kinesis();
 new KinesisAnalytics();
 new KinesisAnalyticsV2();
@@ -1352,6 +1516,7 @@ new KinesisVideo();
 new KinesisVideoArchivedMedia();
 new KinesisVideoMedia();
 new KinesisVideoSignaling();
+new KinesisVideoWebRTCStorage();
 new LakeFormation();
 new Lambda();
 new LexModelBuildingService();
@@ -1359,11 +1524,14 @@ new LexModelsV2();
 new LexRuntimeService();
 new LexRuntimeV2();
 new LicenseManager();
+new LicenseManagerLinuxSubscriptions();
+new LicenseManagerUserSubscriptions();
 new Lightsail();
 new Location();
 new LookoutEquipment();
 new LookoutMetrics();
 new LookoutVision();
+new M2();
 new Mq();
 new MTurk();
 new MWAA();
@@ -1387,6 +1555,7 @@ new MemoryDB();
 new Mgn();
 new MigrationHub();
 new MigrationHubConfig();
+new MigrationHubOrchestrator();
 new MigrationHubRefactorSpaces();
 new MigrationHubStrategy();
 new Mobile();
@@ -1394,7 +1563,10 @@ new Neptune();
 new NetworkFirewall();
 new NetworkManager();
 new Nimble();
+new OAM();
+new Omics();
 new OpenSearch();
+new OpenSearchServerless();
 new OpsWorks();
 new OpsWorksCM();
 new Organizations();
@@ -1407,8 +1579,11 @@ new PersonalizeRuntime();
 new Pinpoint();
 new PinpointEmail();
 new PinpointSMSVoice();
+new PinpointSMSVoiceV2();
+new Pipes();
 new Polly();
 new Pricing();
+new PrivateNetworks();
 new Proton();
 new QLDB();
 new QLDBSession();
@@ -1420,11 +1595,14 @@ new RUM();
 new Rbin();
 new Redshift();
 new RedshiftData();
+new RedshiftServerless();
 new Rekognition();
 new Resiliencehub();
+new ResourceExplorer2();
 new ResourceGroups();
 new ResourceGroupsTaggingAPI();
 new RoboMaker();
+new RolesAnywhere();
 new Route53();
 new Route53Domains();
 new Route53RecoveryCluster();
@@ -1449,12 +1627,16 @@ new STS();
 new SWF();
 new SageMaker();
 new SageMakerFeatureStoreRuntime();
+new SageMakerGeospatial();
+new SageMakerMetrics();
 new SageMakerRuntime();
 new SagemakerEdge();
 new Savingsplans();
+new Scheduler();
 new Schemas();
 new SecretsManager();
 new SecurityHub();
+new SecurityLake();
 new ServerlessApplicationRepository();
 new ServiceCatalog();
 new ServiceCatalogAppRegistry();
@@ -1462,11 +1644,14 @@ new ServiceDiscovery();
 new ServiceQuotas();
 new Shield();
 new Signer();
+new SimSpaceWeaver();
 new SnowDeviceManagement();
 new Snowball();
+new SsmSap();
 new SFN();
 new StorageGateway();
 new Support();
+new SupportApp();
 new Synthetics();
 new Textract();
 new TimestreamQuery();
