@@ -185,6 +185,7 @@ export const CLIENT_NAMES = [
   "LexRuntime",
   "LexRuntimeV2",
   "LicenseManager",
+  "LicenseManagerLinuxSubscriptions",
   "LicenseManagerUserSubscriptions",
   "Lightsail",
   "Location",
