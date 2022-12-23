@@ -4,7 +4,7 @@
 import { ACM } from "@aws-sdk/client-acm";
 import { ACMPCA } from "@aws-sdk/client-acm-pca";
 import { APIGateway } from "@aws-sdk/client-api-gateway";
-import { ARCZonalShift } from "@aws-sdk/client-arczonal-shift";
+import { ARCZonalShift } from "@aws-sdk/client-arc-zonal-shift";
 import { AccessAnalyzer } from "@aws-sdk/client-accessanalyzer";
 import { Account } from "@aws-sdk/client-account";
 import { AlexaForBusiness } from "@aws-sdk/client-alexa-for-business";

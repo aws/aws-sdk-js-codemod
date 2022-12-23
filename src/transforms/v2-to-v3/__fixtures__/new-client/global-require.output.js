@@ -100,7 +100,7 @@ const {
 
 const {
   ARCZonalShift
-} = require("@aws-sdk/client-arczonal-shift");
+} = require("@aws-sdk/client-arc-zonal-shift");
 
 const {
   Athena

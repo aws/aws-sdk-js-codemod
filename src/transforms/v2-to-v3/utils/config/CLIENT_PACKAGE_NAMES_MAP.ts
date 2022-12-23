@@ -31,6 +31,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   AppStream: "client-appstream",
   AppSync: "client-appsync",
   ApplicationCostProfiler: "client-applicationcostprofiler",
+  ARCZonalShift: "client-arc-zonal-shift",
   AugmentedAIRuntime: "client-sage-maker-a2iruntime",
   AuditManager: "client-auditmanager",
   CUR: "client-cost-and-usage-report-service",

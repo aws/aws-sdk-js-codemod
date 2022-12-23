@@ -12,7 +12,7 @@ const {
 } = require("@aws-sdk/client-api-gateway");
 const {
   ARCZonalShift
-} = require("@aws-sdk/client-arczonal-shift");
+} = require("@aws-sdk/client-arc-zonal-shift");
 const {
   AccessAnalyzer
 } = require("@aws-sdk/client-accessanalyzer");

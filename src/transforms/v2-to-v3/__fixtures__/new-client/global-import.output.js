@@ -25,7 +25,7 @@ import { ApplicationCostProfiler } from "@aws-sdk/client-applicationcostprofiler
 import { AppRunner } from "@aws-sdk/client-apprunner";
 import { AppStream } from "@aws-sdk/client-appstream";
 import { AppSync } from "@aws-sdk/client-appsync";
-import { ARCZonalShift } from "@aws-sdk/client-arczonal-shift";
+import { ARCZonalShift } from "@aws-sdk/client-arc-zonal-shift";
 import { Athena } from "@aws-sdk/client-athena";
 import { AuditManager } from "@aws-sdk/client-auditmanager";
 import { AutoScaling } from "@aws-sdk/client-auto-scaling";
