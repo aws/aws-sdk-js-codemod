@@ -379,12 +379,12 @@ const {
 } = require("@aws-sdk/client-dlm");
 
 const {
-  DocDBElastic
-} = require("@aws-sdk/client-doc-dbelastic");
-
-const {
   DocDB
 } = require("@aws-sdk/client-docdb");
+
+const {
+  DocDBElastic
+} = require("@aws-sdk/client-docdb-elastic");
 
 const {
   Drs

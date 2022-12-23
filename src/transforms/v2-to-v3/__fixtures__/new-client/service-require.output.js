@@ -291,7 +291,7 @@ const {
 } = require("@aws-sdk/client-docdb");
 const {
   DocDBElastic
-} = require("@aws-sdk/client-doc-dbelastic");
+} = require("@aws-sdk/client-docdb-elastic");
 const {
   Drs
 } = require("@aws-sdk/client-drs");

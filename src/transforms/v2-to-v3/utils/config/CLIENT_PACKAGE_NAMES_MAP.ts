@@ -51,6 +51,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   DynamoDB: "client-dynamodb",
   DynamoDBStreams: "client-dynamodb-streams",
   DocDB: "client-docdb",
+  DocDBElastic: "client-docdb-elastic",
   EC2InstanceConnect: "client-ec2-instance-connect",
   ECRPUBLIC: "client-ecr-public",
   ELB: "client-elastic-load-balancing",

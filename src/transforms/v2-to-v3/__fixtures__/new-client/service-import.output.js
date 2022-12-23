@@ -97,7 +97,7 @@ import { DirectConnect } from "@aws-sdk/client-direct-connect";
 import { DirectoryService } from "@aws-sdk/client-directory-service";
 import { ApplicationDiscoveryService } from "@aws-sdk/client-application-discovery-service";
 import { DocDB } from "@aws-sdk/client-docdb";
-import { DocDBElastic } from "@aws-sdk/client-doc-dbelastic";
+import { DocDBElastic } from "@aws-sdk/client-docdb-elastic";
 import { Drs } from "@aws-sdk/client-drs";
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { DynamoDBStreams } from "@aws-sdk/client-dynamodb-streams";
