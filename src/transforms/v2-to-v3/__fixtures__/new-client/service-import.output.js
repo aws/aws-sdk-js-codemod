@@ -76,7 +76,7 @@ import { ComprehendMedical } from "@aws-sdk/client-comprehendmedical";
 import { ComputeOptimizer } from "@aws-sdk/client-compute-optimizer";
 import { ConfigService } from "@aws-sdk/client-config-service";
 import { Connect } from "@aws-sdk/client-connect";
-import { ConnectCampaigns } from "@aws-sdk/client-connect-campaigns";
+import { ConnectCampaigns } from "@aws-sdk/client-connectcampaigns";
 import { ConnectCases } from "@aws-sdk/client-connect-cases";
 import { ConnectContactLens } from "@aws-sdk/client-connect-contact-lens";
 import { ConnectParticipant } from "@aws-sdk/client-connectparticipant";

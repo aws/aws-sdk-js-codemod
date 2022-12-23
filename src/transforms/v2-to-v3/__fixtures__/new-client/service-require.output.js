@@ -228,7 +228,7 @@ const {
 } = require("@aws-sdk/client-connect");
 const {
   ConnectCampaigns
-} = require("@aws-sdk/client-connect-campaigns");
+} = require("@aws-sdk/client-connectcampaigns");
 const {
   ConnectCases
 } = require("@aws-sdk/client-connect-cases");

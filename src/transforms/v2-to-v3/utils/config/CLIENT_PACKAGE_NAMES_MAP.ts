@@ -41,6 +41,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   CodeStarconnections: "client-codestar-connections",
   CognitoIdentityServiceProvider: "client-cognito-identity-provider",
   ComprehendMedical: "client-comprehendmedical",
+  ConnectCampaigns: "client-connectcampaigns",
   ConnectParticipant: "client-connectparticipant",
   DMS: "client-database-migration-service",
   DataPipeline: "client-data-pipeline",
