@@ -157,7 +157,7 @@ import { IoTEventsData } from "@aws-sdk/client-iot-events-data";
 import { IoTFleetHub } from "@aws-sdk/client-iotfleethub";
 import { IoTFleetWise } from "@aws-sdk/client-iotfleetwise";
 import { IoTJobsDataPlane } from "@aws-sdk/client-iot-jobs-data-plane";
-import { IoTRoboRunner } from "@aws-sdk/client-iot-robo-runner";
+import { IoTRoboRunner } from "@aws-sdk/client-iot-roborunner";
 import { IoTSecureTunneling } from "@aws-sdk/client-iotsecuretunneling";
 import { IoTSiteWise } from "@aws-sdk/client-iotsitewise";
 import { IoTThingsGraph } from "@aws-sdk/client-iotthingsgraph";

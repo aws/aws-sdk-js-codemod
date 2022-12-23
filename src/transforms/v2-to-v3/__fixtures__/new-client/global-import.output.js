@@ -154,7 +154,7 @@ import { IoTDataPlane } from "@aws-sdk/client-iot-data-plane";
 import { IoTEvents } from "@aws-sdk/client-iot-events";
 import { IoTEventsData } from "@aws-sdk/client-iot-events-data";
 import { IoTJobsDataPlane } from "@aws-sdk/client-iot-jobs-data-plane";
-import { IoTRoboRunner } from "@aws-sdk/client-iot-robo-runner";
+import { IoTRoboRunner } from "@aws-sdk/client-iot-roborunner";
 import { IoTWireless } from "@aws-sdk/client-iot-wireless";
 import { IoTAnalytics } from "@aws-sdk/client-iotanalytics";
 import { IotDeviceAdvisor } from "@aws-sdk/client-iotdeviceadvisor";

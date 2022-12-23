@@ -80,6 +80,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   IoTSiteWise: "client-iotsitewise",
   IoTThingsGraph: "client-iotthingsgraph",
   IoTTwinMaker: "client-iottwinmaker",
+  IoTRoboRunner: "client-iot-roborunner",
   KafkaConnect: "client-kafkaconnect",
   KinesisVideoSignalingChannels: "client-kinesis-video-signaling",
   LakeFormation: "client-lakeformation",

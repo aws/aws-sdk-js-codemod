@@ -471,7 +471,7 @@ const {
 } = require("@aws-sdk/client-iot-jobs-data-plane");
 const {
   IoTRoboRunner
-} = require("@aws-sdk/client-iot-robo-runner");
+} = require("@aws-sdk/client-iot-roborunner");
 const {
   IoTSecureTunneling
 } = require("@aws-sdk/client-iotsecuretunneling");

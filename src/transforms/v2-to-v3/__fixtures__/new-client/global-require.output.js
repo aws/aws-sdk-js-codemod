@@ -616,7 +616,7 @@ const {
 
 const {
   IoTRoboRunner
-} = require("@aws-sdk/client-iot-robo-runner");
+} = require("@aws-sdk/client-iot-roborunner");
 
 const {
   IoTWireless
