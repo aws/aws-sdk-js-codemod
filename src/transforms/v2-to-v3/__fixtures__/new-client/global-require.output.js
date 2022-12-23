@@ -611,10 +611,6 @@ const {
 } = require("@aws-sdk/client-iot-events-data");
 
 const {
-  IoTFleetWise
-} = require("@aws-sdk/client-iot-fleet-wise");
-
-const {
   IoTJobsDataPlane
 } = require("@aws-sdk/client-iot-jobs-data-plane");
 
@@ -637,6 +633,10 @@ const {
 const {
   IoTFleetHub
 } = require("@aws-sdk/client-iotfleethub");
+
+const {
+  IoTFleetWise
+} = require("@aws-sdk/client-iotfleetwise");
 
 const {
   IoTSecureTunneling

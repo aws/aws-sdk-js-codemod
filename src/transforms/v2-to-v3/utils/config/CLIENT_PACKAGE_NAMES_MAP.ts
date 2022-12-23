@@ -12,6 +12,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("client-connect-", "client-connect")
         .replace("client-data-", "client-data")
         .replace("client-io-t", "client-iot-")
+        .replace("client-iot-fleet-", "client-iotfleet")
         .replace("client-lookout-", "client-lookout")
         .replace("client-media-", "client-media")
         .replace("client-route53", "client-route53-")
@@ -73,7 +74,6 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   HealthLake: "client-healthlake",
   IdentityStore: "client-identitystore",
   IoTAnalytics: "client-iotanalytics",
-  IoTFleetHub: "client-iotfleethub",
   IotData: "client-iot-data-plane",
   IotDeviceAdvisor: "client-iotdeviceadvisor",
   IoTSecureTunneling: "client-iotsecuretunneling",

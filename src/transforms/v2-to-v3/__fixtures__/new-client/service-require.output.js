@@ -465,7 +465,7 @@ const {
 } = require("@aws-sdk/client-iotfleethub");
 const {
   IoTFleetWise
-} = require("@aws-sdk/client-iot-fleet-wise");
+} = require("@aws-sdk/client-iotfleetwise");
 const {
   IoTJobsDataPlane
 } = require("@aws-sdk/client-iot-jobs-data-plane");
