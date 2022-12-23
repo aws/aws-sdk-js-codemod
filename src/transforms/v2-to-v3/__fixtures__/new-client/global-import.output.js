@@ -245,7 +245,7 @@ import { PinpointSMSVoiceV2 } from "@aws-sdk/client-pinpoint-sms-voice-v2";
 import { Pipes } from "@aws-sdk/client-pipes";
 import { Polly } from "@aws-sdk/client-polly";
 import { Pricing } from "@aws-sdk/client-pricing";
-import { PrivateNetworks } from "@aws-sdk/client-private-networks";
+import { PrivateNetworks } from "@aws-sdk/client-privatenetworks";
 import { Proton } from "@aws-sdk/client-proton";
 import { QLDB } from "@aws-sdk/client-qldb";
 import { QLDBSession } from "@aws-sdk/client-qldb-session";

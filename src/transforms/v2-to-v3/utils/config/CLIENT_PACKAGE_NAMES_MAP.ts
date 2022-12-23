@@ -96,6 +96,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   OpenSearchServerless: "client-opensearchserverless",
   OpsWorks: "client-opsworks",
   OpsWorksCM: "client-opsworkscm",
+  PrivateNetworks: "client-privatenetworks",
   QLDBSession: "client-qldb-session",
   QuickSight: "client-quicksight",
   RDSDataService: "client-rds-data",

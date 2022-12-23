@@ -738,7 +738,7 @@ const {
 } = require("@aws-sdk/client-pricing");
 const {
   PrivateNetworks
-} = require("@aws-sdk/client-private-networks");
+} = require("@aws-sdk/client-privatenetworks");
 const {
   Proton
 } = require("@aws-sdk/client-proton");
