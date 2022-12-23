@@ -31,6 +31,12 @@ const client = new DynamoDB();
 
   // Variable declarator
   const listTablesPromise = client.listTables();
+
+  // Promise call on request in variable declarator
+  const listTablesRequest = client.listTables();
+  listTablesRequest
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err, err.stack));
 }
 
 // Promise with params
