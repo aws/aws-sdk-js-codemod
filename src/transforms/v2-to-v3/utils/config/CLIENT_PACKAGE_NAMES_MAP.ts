@@ -34,6 +34,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ARCZonalShift: "client-arc-zonal-shift",
   AugmentedAIRuntime: "client-sage-maker-a2iruntime",
   AuditManager: "client-auditmanager",
+  BackupStorage: "client-backupstorage",
   CUR: "client-cost-and-usage-report-service",
   CloudHSMV2: "client-cloudhsm-v2",
   CodeGuruProfiler: "client-codeguruprofiler",

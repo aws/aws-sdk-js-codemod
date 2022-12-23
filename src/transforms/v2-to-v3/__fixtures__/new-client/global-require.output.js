@@ -128,7 +128,7 @@ const {
 
 const {
   BackupStorage
-} = require("@aws-sdk/client-backup-storage");
+} = require("@aws-sdk/client-backupstorage");
 
 const {
   Batch

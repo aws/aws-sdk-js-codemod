@@ -32,7 +32,7 @@ import { AutoScaling } from "@aws-sdk/client-auto-scaling";
 import { AutoScalingPlans } from "@aws-sdk/client-auto-scaling-plans";
 import { Backup } from "@aws-sdk/client-backup";
 import { BackupGateway } from "@aws-sdk/client-backup-gateway";
-import { BackupStorage } from "@aws-sdk/client-backup-storage";
+import { BackupStorage } from "@aws-sdk/client-backupstorage";
 import { Batch } from "@aws-sdk/client-batch";
 import { Billingconductor } from "@aws-sdk/client-billingconductor";
 import { Braket } from "@aws-sdk/client-braket";
