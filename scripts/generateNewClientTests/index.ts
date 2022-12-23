@@ -5,6 +5,8 @@ import { getGlobalImportInputContent } from "./getGlobalImportInputContent";
 import { getGlobalImportOutputContent } from "./getGlobalImportOutputContent";
 import { getGlobalRequireInputContent } from "./getGlobalRequireInputContent";
 import { getGlobalRequireOutputContent } from "./getGlobalRequireOutputContent";
+import { getServiceImportInputContent } from "./getServiceImportInputContent";
+import { getServiceImportOutputContent } from "./getServiceImportOutputContent";
 
 // The "use strict" directive is added to so that comments can be attached to it.
 // Recast removes the comments while removing import/require.
@@ -22,6 +24,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["global-import.output.js", getGlobalImportOutputContent],
     ["global-require.input.js", getGlobalRequireInputContent],
     ["global-require.output.js", getGlobalRequireOutputContent],
+    ["service-import.input.js", getServiceImportInputContent],
+    ["service-import.output.js", getServiceImportOutputContent],
   ] as [string, (comment: string) => string][]) {
     const filePath = join(newClientTestsPath, fileName);
     await writeFile(filePath, getFileContent(codegenComment));
