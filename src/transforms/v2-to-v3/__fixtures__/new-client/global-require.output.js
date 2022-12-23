@@ -851,16 +851,16 @@ const {
 } = require("@aws-sdk/client-migration-hub");
 
 const {
-  MigrationHubOrchestrator
-} = require("@aws-sdk/client-migration-hub-orchestrator");
-
-const {
   MigrationHubRefactorSpaces
 } = require("@aws-sdk/client-migration-hub-refactor-spaces");
 
 const {
   MigrationHubConfig
 } = require("@aws-sdk/client-migrationhub-config");
+
+const {
+  MigrationHubOrchestrator
+} = require("@aws-sdk/client-migrationhuborchestrator");
 
 const {
   MigrationHubStrategy

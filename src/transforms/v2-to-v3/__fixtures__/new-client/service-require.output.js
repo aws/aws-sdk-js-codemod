@@ -654,7 +654,7 @@ const {
 } = require("@aws-sdk/client-migrationhub-config");
 const {
   MigrationHubOrchestrator
-} = require("@aws-sdk/client-migration-hub-orchestrator");
+} = require("@aws-sdk/client-migrationhuborchestrator");
 const {
   MigrationHubRefactorSpaces
 } = require("@aws-sdk/client-migration-hub-refactor-spaces");

@@ -15,6 +15,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("client-iot-fleet-", "client-iotfleet")
         .replace("client-lookout-", "client-lookout")
         .replace("client-media-", "client-media")
+        .replace("client-migration-hub-", "client-migrationhub")
         .replace("client-route53", "client-route53-")
         .replace("client-sage-maker", "client-sagemaker")
         .replace("client-work-", "client-work"),
@@ -88,7 +89,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   LexRuntime: "client-lex-runtime-service",
   ManagedBlockchain: "client-managedblockchain",
   MigrationHubConfig: "client-migrationhub-config",
-  MigrationHubStrategy: "client-migrationhubstrategy",
+  MigrationHubRefactorSpaces: "client-migration-hub-refactor-spaces",
   NetworkManager: "client-networkmanager",
   OpenSearch: "client-opensearch",
   OpsWorks: "client-opsworks",

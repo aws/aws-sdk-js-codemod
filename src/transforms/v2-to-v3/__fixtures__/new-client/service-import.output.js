@@ -218,7 +218,7 @@ import { MemoryDB } from "@aws-sdk/client-memory-db";
 import { Mgn } from "@aws-sdk/client-mgn";
 import { MigrationHub } from "@aws-sdk/client-migration-hub";
 import { MigrationHubConfig } from "@aws-sdk/client-migrationhub-config";
-import { MigrationHubOrchestrator } from "@aws-sdk/client-migration-hub-orchestrator";
+import { MigrationHubOrchestrator } from "@aws-sdk/client-migrationhuborchestrator";
 import { MigrationHubRefactorSpaces } from "@aws-sdk/client-migration-hub-refactor-spaces";
 import { MigrationHubStrategy } from "@aws-sdk/client-migrationhubstrategy";
 import { Mobile } from "@aws-sdk/client-mobile";
