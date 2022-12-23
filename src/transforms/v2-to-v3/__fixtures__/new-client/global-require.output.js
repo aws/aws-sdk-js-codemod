@@ -468,7 +468,7 @@ const {
 
 const {
   EMRServerless
-} = require("@aws-sdk/client-emrserverless");
+} = require("@aws-sdk/client-emr-serverless");
 
 const {
   EventBridge

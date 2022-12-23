@@ -336,7 +336,7 @@ const {
 } = require("@aws-sdk/client-emr");
 const {
   EMRServerless
-} = require("@aws-sdk/client-emrserverless");
+} = require("@aws-sdk/client-emr-serverless");
 const {
   EMRContainers
 } = require("@aws-sdk/client-emr-containers");

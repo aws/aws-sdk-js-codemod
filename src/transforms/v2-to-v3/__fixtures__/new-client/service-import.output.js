@@ -112,7 +112,7 @@ import { EKS } from "@aws-sdk/client-eks";
 import { ElasticLoadBalancing } from "@aws-sdk/client-elastic-load-balancing";
 import { ElasticLoadBalancingV2 } from "@aws-sdk/client-elastic-load-balancing-v2";
 import { EMR } from "@aws-sdk/client-emr";
-import { EMRServerless } from "@aws-sdk/client-emrserverless";
+import { EMRServerless } from "@aws-sdk/client-emr-serverless";
 import { EMRContainers } from "@aws-sdk/client-emr-containers";
 import { ElasticsearchService } from "@aws-sdk/client-elasticsearch-service";
 import { ElastiCache } from "@aws-sdk/client-elasticache";

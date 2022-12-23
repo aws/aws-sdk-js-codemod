@@ -58,6 +58,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ELBv2: "client-elastic-load-balancing-v2",
   ElastiCache: "client-elasticache",
   EMRcontainers: "client-emr-containers",
+  EMRServerless: "client-emr-serverless",
   ES: "client-elasticsearch-service",
   EventBridge: "client-eventbridge",
   Finspacedata: "client-finspace-data",

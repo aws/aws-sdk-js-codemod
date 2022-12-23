@@ -117,7 +117,7 @@ import { ElastiCache } from "@aws-sdk/client-elasticache";
 import { ElasticsearchService } from "@aws-sdk/client-elasticsearch-service";
 import { EMR } from "@aws-sdk/client-emr";
 import { EMRContainers } from "@aws-sdk/client-emr-containers";
-import { EMRServerless } from "@aws-sdk/client-emrserverless";
+import { EMRServerless } from "@aws-sdk/client-emr-serverless";
 import { EventBridge } from "@aws-sdk/client-eventbridge";
 import { Evidently } from "@aws-sdk/client-evidently";
 import { Finspace } from "@aws-sdk/client-finspace";
