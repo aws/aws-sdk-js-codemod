@@ -77,7 +77,7 @@ import { ComputeOptimizer } from "@aws-sdk/client-compute-optimizer";
 import { ConfigService } from "@aws-sdk/client-config-service";
 import { Connect } from "@aws-sdk/client-connect";
 import { ConnectCampaigns } from "@aws-sdk/client-connectcampaigns";
-import { ConnectCases } from "@aws-sdk/client-connect-cases";
+import { ConnectCases } from "@aws-sdk/client-connectcases";
 import { ConnectContactLens } from "@aws-sdk/client-connect-contact-lens";
 import { ConnectParticipant } from "@aws-sdk/client-connectparticipant";
 import { ControlTower } from "@aws-sdk/client-control-tower";

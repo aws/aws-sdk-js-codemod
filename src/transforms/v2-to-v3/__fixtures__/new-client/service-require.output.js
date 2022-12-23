@@ -231,7 +231,7 @@ const {
 } = require("@aws-sdk/client-connectcampaigns");
 const {
   ConnectCases
-} = require("@aws-sdk/client-connect-cases");
+} = require("@aws-sdk/client-connectcases");
 const {
   ConnectContactLens
 } = require("@aws-sdk/client-connect-contact-lens");

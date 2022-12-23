@@ -9,6 +9,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("client-amplify-", "client-amplify")
         .replace("client-cloud-", "client-cloud")
         .replace("client-code-", "client-code")
+        .replace("client-connect-", "client-connect")
         .replace("client-data-", "client-data")
         .replace("client-io-t", "client-iot-")
         .replace("client-lookout-", "client-lookout")
@@ -41,8 +42,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   CodeStarconnections: "client-codestar-connections",
   CognitoIdentityServiceProvider: "client-cognito-identity-provider",
   ComprehendMedical: "client-comprehendmedical",
-  ConnectCampaigns: "client-connectcampaigns",
-  ConnectParticipant: "client-connectparticipant",
+  ConnectContactLens: "client-connect-contact-lens",
   DMS: "client-database-migration-service",
   DataPipeline: "client-data-pipeline",
   Discovery: "client-application-discovery-service",

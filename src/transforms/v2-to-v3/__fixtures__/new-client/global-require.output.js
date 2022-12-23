@@ -299,16 +299,16 @@ const {
 } = require("@aws-sdk/client-connect");
 
 const {
-  ConnectCases
-} = require("@aws-sdk/client-connect-cases");
-
-const {
   ConnectContactLens
 } = require("@aws-sdk/client-connect-contact-lens");
 
 const {
   ConnectCampaigns
 } = require("@aws-sdk/client-connectcampaigns");
+
+const {
+  ConnectCases
+} = require("@aws-sdk/client-connectcases");
 
 const {
   ConnectParticipant
