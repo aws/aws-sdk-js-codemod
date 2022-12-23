@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.6.5
+
+### Patch Changes
+
+- Refactor to move v2-to-v3 utils into folders ([0c9cfd1](https://github.com/awslabs/aws-sdk-js-codemod/commit/0c9cfd1))
+- Support transformation for clients published between 2022-03-02 and 2022-12-21 ([653b11b](https://github.com/awslabs/aws-sdk-js-codemod/commit/653b11b))
+
 ## 0.6.4
 
 ### Patch Changes
