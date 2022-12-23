@@ -102,6 +102,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ResourceExplorer2: "client-resource-explorer-2",
   RDSDataService: "client-rds-data",
   RoboMaker: "client-robomaker",
+  RolesAnywhere: "client-rolesanywhere",
   Route53: "client-route-53",
   Route53Domains: "client-route-53-domains",
   Route53Resolver: "client-route53resolver",

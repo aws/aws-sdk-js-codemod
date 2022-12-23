@@ -795,7 +795,7 @@ const {
 } = require("@aws-sdk/client-robomaker");
 const {
   RolesAnywhere
-} = require("@aws-sdk/client-roles-anywhere");
+} = require("@aws-sdk/client-rolesanywhere");
 const {
   Route53
 } = require("@aws-sdk/client-route-53");

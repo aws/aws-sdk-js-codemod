@@ -263,7 +263,7 @@ import { ResourceExplorer2 } from "@aws-sdk/client-resource-explorer-2";
 import { ResourceGroups } from "@aws-sdk/client-resource-groups";
 import { ResourceGroupsTaggingAPI } from "@aws-sdk/client-resource-groups-tagging-api";
 import { RoboMaker } from "@aws-sdk/client-robomaker";
-import { RolesAnywhere } from "@aws-sdk/client-roles-anywhere";
+import { RolesAnywhere } from "@aws-sdk/client-rolesanywhere";
 import { Route53 } from "@aws-sdk/client-route-53";
 import { Route53Domains } from "@aws-sdk/client-route-53-domains";
 import { Route53RecoveryCluster } from "@aws-sdk/client-route53-recovery-cluster";

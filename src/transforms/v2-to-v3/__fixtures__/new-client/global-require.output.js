@@ -1052,7 +1052,7 @@ const {
 
 const {
   RolesAnywhere
-} = require("@aws-sdk/client-roles-anywhere");
+} = require("@aws-sdk/client-rolesanywhere");
 
 const {
   Route53
