@@ -1188,7 +1188,7 @@ const {
 
 const {
   SimSpaceWeaver
-} = require("@aws-sdk/client-sim-space-weaver");
+} = require("@aws-sdk/client-simspaceweaver");
 
 const {
   SMS

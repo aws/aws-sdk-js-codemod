@@ -307,7 +307,7 @@ import { ServiceDiscovery } from "@aws-sdk/client-servicediscovery";
 import { ServiceQuotas } from "@aws-sdk/client-service-quotas";
 import { Shield } from "@aws-sdk/client-shield";
 import { Signer } from "@aws-sdk/client-signer";
-import { SimSpaceWeaver } from "@aws-sdk/client-sim-space-weaver";
+import { SimSpaceWeaver } from "@aws-sdk/client-simspaceweaver";
 import { SnowDeviceManagement } from "@aws-sdk/client-snow-device-management";
 import { Snowball } from "@aws-sdk/client-snowball";
 import { SsmSap } from "@aws-sdk/client-ssm-sap";

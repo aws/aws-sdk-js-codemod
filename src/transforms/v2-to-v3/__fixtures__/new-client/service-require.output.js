@@ -921,7 +921,7 @@ const {
 } = require("@aws-sdk/client-signer");
 const {
   SimSpaceWeaver
-} = require("@aws-sdk/client-sim-space-weaver");
+} = require("@aws-sdk/client-simspaceweaver");
 const {
   SnowDeviceManagement
 } = require("@aws-sdk/client-snow-device-management");

@@ -297,7 +297,7 @@ import { SESv2 } from "@aws-sdk/client-sesv2";
 import { SFN } from "@aws-sdk/client-sfn";
 import { Shield } from "@aws-sdk/client-shield";
 import { Signer } from "@aws-sdk/client-signer";
-import { SimSpaceWeaver } from "@aws-sdk/client-sim-space-weaver";
+import { SimSpaceWeaver } from "@aws-sdk/client-simspaceweaver";
 import { SMS } from "@aws-sdk/client-sms";
 import { SnowDeviceManagement } from "@aws-sdk/client-snow-device-management";
 import { Snowball } from "@aws-sdk/client-snowball";

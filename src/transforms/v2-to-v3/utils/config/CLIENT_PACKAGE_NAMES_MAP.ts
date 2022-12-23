@@ -114,6 +114,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ServerlessApplicationRepository: "client-serverlessapplicationrepository",
   ServiceCatalogAppRegistry: "client-service-catalog-appregistry",
   ServiceDiscovery: "client-servicediscovery",
+  SimSpaceWeaver: "client-simspaceweaver",
   SSMContacts: "client-ssm-contacts",
   SSMIncidents: "client-ssm-incidents",
   SSOAdmin: "client-sso-admin",
