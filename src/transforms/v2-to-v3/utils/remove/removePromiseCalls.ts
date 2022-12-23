@@ -1,6 +1,7 @@
-import { CallExpression, Collection, JSCodeshift, MemberExpression } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV2ClientIdentifiers, getV2ClientIdThisExpressions } from "../get";
+import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
@@ -34,34 +35,8 @@ export const removePromiseCalls = (
           property: { type: "Identifier", name: "promise" },
         },
       })
-      .forEach((callExpressionPath) => {
-        switch (callExpressionPath.parentPath.value.type) {
-          case "AwaitExpression":
-            callExpressionPath.parentPath.value.argument = (
-              callExpressionPath.value.callee as MemberExpression
-            ).object;
-            break;
-          case "MemberExpression":
-            callExpressionPath.parentPath.value.object = (
-              callExpressionPath.value.callee as MemberExpression
-            ).object;
-            break;
-          case "VariableDeclarator":
-            callExpressionPath.parentPath.value.init = (
-              callExpressionPath.value.callee as MemberExpression
-            ).object;
-            break;
-          case "ArrowFunctionExpression":
-          case "ReturnStatement":
-            callExpressionPath.value.callee = (
-              (callExpressionPath.value.callee as MemberExpression).object as CallExpression
-            ).callee;
-            break;
-          default:
-            throw new Error(
-              `Removal of .promise() not implemented for ${callExpressionPath.parentPath.value.type}`
-            );
-        }
+      .forEach((callExpression) => {
+        removePromiseForCallExpression(callExpression);
       });
   }
 };
