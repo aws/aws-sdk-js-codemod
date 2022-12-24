@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.7
+
+### Patch Changes
+
+- Check only for client constructors in named imports ([9621c39](https://github.com/awslabs/aws-sdk-js-codemod/commit/9621c39))
+
 ## 0.6.6
 
 ### Patch Changes
