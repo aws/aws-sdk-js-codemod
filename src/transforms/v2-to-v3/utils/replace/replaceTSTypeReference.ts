@@ -12,13 +12,16 @@ export const replaceTSTypeReference = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName, v3ClientName }: ReplaceTypeReferenceOptions
 ): void => {
-  // Replace type reference created with default module.
+  // Replace type reference to client created with default module.
   source
     .find(j.TSTypeReference, {
-      typeName: { left: { name: v2DefaultModuleName } },
+      typeName: {
+        left: { type: "Identifier", name: v2DefaultModuleName },
+        right: { type: "Identifier", name: v2ClientName },
+      },
     })
-    .replaceWith((nodePath) => {
-      const { node } = nodePath;
+    .replaceWith((tsTypeRef) => {
+      const { node } = tsTypeRef;
       node.typeName = j.identifier(v3ClientName);
       return node;
     });
