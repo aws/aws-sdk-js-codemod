@@ -1,17 +1,12 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3ClientInputOutputType } from "../get";
+import { getV3ClientType } from "../get";
 
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
   v3ClientName: string;
   v2DefaultModuleName: string;
 }
-
-const getTsTypeWithClientName = (j: JSCodeshift, node: TSTypeReference, v3ClientName: string) => {
-  node.typeName = j.identifier(v3ClientName);
-  return node;
-};
 
 // Replace v2 client type reference with v3 client type reference.
 export const replaceTSTypeReference = (
@@ -27,7 +22,11 @@ export const replaceTSTypeReference = (
         right: { type: "Identifier", name: v2ClientName },
       },
     })
-    .replaceWith((tsTypeRef) => getTsTypeWithClientName(j, tsTypeRef.node, v3ClientName));
+    .replaceWith((tsTypeRef) => {
+      const { node } = tsTypeRef;
+      node.typeName = j.identifier(v3ClientName);
+      return node;
+    });
 
   // Replace type reference to client input/output created with default module.
   source
@@ -41,18 +40,14 @@ export const replaceTSTypeReference = (
         right: { type: "Identifier" },
       },
     })
-    .replaceWith((tsTypeRef) =>
-      getV3ClientInputOutputType(
-        j,
-        tsTypeRef.node,
-        ((tsTypeRef.node.typeName as TSQualifiedName).right as Identifier).name
-      )
-    );
+    .replaceWith((v2ClientType) => getV3ClientType(j, v2ClientType));
 
   // Replace type reference to client created with client module.
   source
     .find(j.TSTypeReference, {
-      typeName: { type: "Identifier", name: v2ClientName },
+      typeName: {
+        left: { type: "Identifier", name: v2ClientName },
+      },
     })
-    .replaceWith((tsTypeRef) => getTsTypeWithClientName(j, tsTypeRef.node, v3ClientName));
+    .replaceWith((v2ClientType) => getV3ClientType(j, v2ClientType));
 };
