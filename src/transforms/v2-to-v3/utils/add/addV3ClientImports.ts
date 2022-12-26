@@ -2,6 +2,7 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath, getV3ClientTypes } from "../get";
+import { addV3ClientModuleImport } from "./addV3ClientModuleImport";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
 export const addV3ClientImports = (
@@ -20,21 +21,15 @@ export const addV3ClientImports = (
 
   // Import declaration already exists.
   if (existingImports.size()) {
-    const existingImportSpecifiers = existingImports
-      .nodes()
-      .map((importDeclaration) => importDeclaration.specifiers)
-      .flat();
-    if (!existingImportSpecifiers.find((specifier) => specifier?.local?.name === v3ClientName)) {
-      existingImports.nodes()[0].specifiers?.push(j.importSpecifier(j.identifier(v3ClientName)));
-    }
+    addV3ClientModuleImport(j, existingImports, v3ClientName);
   } else {
-    // Insert after default import if present. If not, insert after service import.
+    // Insert after default import or service import, whichever comes first.
     source
       .find(j.ImportDeclaration)
-      .filter(
-        (path) =>
-          path.value.source.value === PACKAGE_NAME ||
-          path.value.source.value === getV2ServiceModulePath(v2ClientName)
+      .filter((path) =>
+        [PACKAGE_NAME, getV2ServiceModulePath(v2ClientName)].includes(
+          path.value.source.value as string
+        )
       )
       .at(0)
       .insertAfter(
@@ -52,19 +47,10 @@ export const addV3ClientImports = (
     const clientImports = source.find(j.ImportDeclaration, {
       source: { value: v3ClientPackageName },
     });
-    for (const clientTsType of v3ClientTypes.sort()) {
-      const clientsTypename = (clientTsType.typeName as Identifier).name;
-      if (clientsTypename.endsWith("CommandInput") || clientsTypename.endsWith("CommandOutput")) {
-        clientImports.forEach((nodePath) => {
-          // Append to existing import if specifier not present.
-          if (
-            !nodePath.value.specifiers?.find(
-              (specifier) => specifier.local?.name === clientsTypename
-            )
-          ) {
-            nodePath.value.specifiers?.push(j.importSpecifier(j.identifier(clientsTypename)));
-          }
-        });
+    for (const v3ClientType of v3ClientTypes.sort()) {
+      const v3ClientTypeName = (v3ClientType.typeName as Identifier).name;
+      if (v3ClientTypeName.endsWith("CommandInput") || v3ClientTypeName.endsWith("CommandOutput")) {
+        addV3ClientModuleImport(j, clientImports, v3ClientTypeName);
       }
     }
   }
