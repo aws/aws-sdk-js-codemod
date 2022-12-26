@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import {
@@ -8,6 +8,14 @@ import {
 } from "../get";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
+
+const getClientProperty = (j: JSCodeshift, name: Identifier) =>
+  j.property.from({
+    kind: "init",
+    key: name,
+    shorthand: true,
+    value: name,
+  });
 
 export const addV3ClientRequires = (
   j: JSCodeshift,
@@ -19,14 +27,7 @@ export const addV3ClientRequires = (
     v2DefaultModuleName,
   }: AddV3ClientModulesOptions
 ): void => {
-  const v3ClientNameIdentifier = j.identifier(v3ClientName);
-  const v3ClientNameProperty = j.property.from({
-    kind: "init",
-    key: v3ClientNameIdentifier,
-    shorthand: true,
-    value: v3ClientNameIdentifier,
-  });
-
+  const v3ClientNameProperty = getClientProperty(j, j.identifier(v3ClientName));
   const existingRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
 
   // Require declaration already exists.
@@ -58,13 +59,7 @@ export const addV3ClientRequires = (
   if (v3ClientTypeNames.length > 0) {
     const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
     for (const v3ClientTypeName of v3ClientTypeNames.sort()) {
-      const v3ClientTypeNameIdentifier = j.identifier(v3ClientTypeName);
-      const v3ClientTypeNameProperty = j.property.from({
-        kind: "init",
-        key: v3ClientTypeNameIdentifier,
-        shorthand: true,
-        value: v3ClientTypeNameIdentifier,
-      });
+      const v3ClientTypeNameProperty = getClientProperty(j, j.identifier(v3ClientTypeName));
       addV3ClientModuleRequire(j, clientRequires, v3ClientTypeNameProperty);
     }
   }
