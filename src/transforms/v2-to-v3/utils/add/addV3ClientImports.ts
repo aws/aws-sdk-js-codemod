@@ -41,14 +41,14 @@ export const addV3ClientImports = (
   }
 
   // Add require for input/output types, if needed.
-  const v3ClientTypes = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
+  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
 
-  if (v3ClientTypes.length > 0) {
+  if (v3ClientTypeNames.length > 0) {
     const clientImports = source.find(j.ImportDeclaration, {
       source: { value: v3ClientPackageName },
     });
-    for (const v3ClientType of v3ClientTypes.sort()) {
-      addV3ClientModuleImport(j, clientImports, v3ClientType);
+    for (const v3ClientTypeName of v3ClientTypeNames.sort()) {
+      addV3ClientModuleImport(j, clientImports, v3ClientTypeName);
     }
   }
 };
