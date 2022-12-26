@@ -58,16 +58,14 @@ export const addV3ClientRequires = (
   if (v3ClientTypes.length > 0) {
     const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
     for (const v3ClientType of v3ClientTypes.sort()) {
-      if (v3ClientType.endsWith("CommandInput") || v3ClientType.endsWith("CommandOutput")) {
-        const v3ClientTypeNameIdentifier = j.identifier(v3ClientType);
-        const v3ClientTypeNameProperty = j.property.from({
-          kind: "init",
-          key: v3ClientTypeNameIdentifier,
-          shorthand: true,
-          value: v3ClientTypeNameIdentifier,
-        });
-        addV3ClientModuleRequire(j, clientRequires, v3ClientTypeNameProperty);
-      }
+      const v3ClientTypeNameIdentifier = j.identifier(v3ClientType);
+      const v3ClientTypeNameProperty = j.property.from({
+        kind: "init",
+        key: v3ClientTypeNameIdentifier,
+        shorthand: true,
+        value: v3ClientTypeNameIdentifier,
+      });
+      addV3ClientModuleRequire(j, clientRequires, v3ClientTypeNameProperty);
     }
   }
 };
