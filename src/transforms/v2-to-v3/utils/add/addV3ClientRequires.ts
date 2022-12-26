@@ -53,12 +53,12 @@ export const addV3ClientRequires = (
   }
 
   // Add require for input/output types, if needed.
-  const v3ClientTypes = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
+  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
 
-  if (v3ClientTypes.length > 0) {
+  if (v3ClientTypeNames.length > 0) {
     const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
-    for (const v3ClientType of v3ClientTypes.sort()) {
-      const v3ClientTypeNameIdentifier = j.identifier(v3ClientType);
+    for (const v3ClientTypeName of v3ClientTypeNames.sort()) {
+      const v3ClientTypeNameIdentifier = j.identifier(v3ClientTypeName);
       const v3ClientTypeNameProperty = j.property.from({
         kind: "init",
         key: v3ClientTypeNameIdentifier,
