@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.8
+
+### Patch Changes
+
+- Update TypeScript Type Reference for Input/Output ([c4a97b1](https://github.com/awslabs/aws-sdk-js-codemod/commit/c4a97b1))
+
 ## 0.6.7
 
 ### Patch Changes
