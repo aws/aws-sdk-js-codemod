@@ -42,6 +42,7 @@ export const addV3ClientImports = (
           path.value.source.value === PACKAGE_NAME ||
           path.value.source.value === getV2ServiceModulePath(v2ClientName)
       )
+      .at(0)
       .insertAfter(
         j.importDeclaration(
           [j.importSpecifier(j.identifier(v3ClientName))],
