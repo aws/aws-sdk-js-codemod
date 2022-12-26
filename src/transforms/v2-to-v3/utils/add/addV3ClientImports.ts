@@ -1,4 +1,10 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
+import {
+  Collection,
+  Identifier,
+  ImportDeclaration,
+  JSCodeshift,
+  TSQualifiedName,
+} from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getTsTypeWithInputOutput, getV2ServiceModulePath } from "../get";
@@ -20,12 +26,13 @@ export const addV3ClientImports = (
 
   // Import declaration already exists.
   if (existingImports.size()) {
-    existingImports.forEach((nodePath) => {
-      // Append to existing import if specifier not present.
-      if (!nodePath.value.specifiers?.find((specifier) => specifier.local?.name === v3ClientName)) {
-        nodePath.value.specifiers?.push(j.importSpecifier(j.identifier(v3ClientName)));
-      }
-    });
+    const existingImportSpecifiers = existingImports
+      .nodes()
+      .map((importDeclaration) => importDeclaration.specifiers)
+      .flat();
+    if (!existingImportSpecifiers.find((specifier) => specifier?.local?.name === v3ClientName)) {
+      existingImports.nodes()[0].specifiers?.push(j.importSpecifier(j.identifier(v3ClientName)));
+    }
   } else {
     // Insert after default import if present. If not, insert after service import.
     source
