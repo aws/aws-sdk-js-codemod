@@ -1,4 +1,14 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
+import {
+  Collection,
+  Identifier,
+  ImportDeclaration,
+  ImportSpecifier,
+  JSCodeshift,
+  TSQualifiedName,
+  TSTypeReference,
+} from "jscodeshift";
+
+import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
@@ -28,6 +38,11 @@ export const getV2ClientTypeNames = (
     },
   } as TSTypeReference;
 
+  const v2ClientTypeFromNamedImport = {
+    type: "ImportDeclaration",
+    source: { value: getV2ServiceModulePath(v2ClientName) },
+  } as ImportDeclaration;
+
   return [
     ...source
       .find(j.TSTypeReference, v2DefaultTypeName)
@@ -37,5 +52,12 @@ export const getV2ClientTypeNames = (
       .find(j.TSTypeReference, v2ClientTypeName)
       .nodes()
       .map((node) => getRightIdentifierName(node)),
+    ...source
+      .find(j.ImportDeclaration, v2ClientTypeFromNamedImport)
+      .nodes()
+      .map((node) => node.specifiers)
+      .flat()
+      .filter((node) => (node as ImportSpecifier).type === "ImportSpecifier")
+      .map((node) => ((node as ImportSpecifier).local as Identifier).name),
   ];
 };
