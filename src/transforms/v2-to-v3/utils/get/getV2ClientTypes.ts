@@ -1,15 +1,18 @@
-import { Collection, JSCodeshift, TSTypeReference } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 export interface GetV2ClientTypesOptions {
   v2ClientName: string;
   v2DefaultModuleName: string;
 }
 
+const getRightIdentifierName = (node: TSTypeReference) =>
+  ((node.typeName as TSQualifiedName).right as Identifier).name;
+
 export const getV2ClientTypes = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2ClientName, v2DefaultModuleName }: GetV2ClientTypesOptions
-): TSTypeReference[] => {
+): string[] => {
   const v2DefaultTypeName = {
     typeName: {
       left: {
@@ -26,7 +29,13 @@ export const getV2ClientTypes = (
   } as TSTypeReference;
 
   return [
-    ...source.find(j.TSTypeReference, v2DefaultTypeName).nodes(),
-    ...source.find(j.TSTypeReference, v2ClientTypeName).nodes(),
+    ...source
+      .find(j.TSTypeReference, v2DefaultTypeName)
+      .nodes()
+      .map((node) => getRightIdentifierName(node)),
+    ...source
+      .find(j.TSTypeReference, v2ClientTypeName)
+      .nodes()
+      .map((node) => getRightIdentifierName(node)),
   ];
 };

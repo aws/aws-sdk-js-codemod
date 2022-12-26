@@ -1,7 +1,11 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getRequireVariableDeclaration, getV2ServiceModulePath, getV3ClientTypes } from "../get";
+import {
+  getRequireVariableDeclaration,
+  getV2ServiceModulePath,
+  getV3ClientTypeNames,
+} from "../get";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
@@ -49,14 +53,13 @@ export const addV3ClientRequires = (
   }
 
   // Add require for input/output types, if needed.
-  const v3ClientTypes = getV3ClientTypes(j, source, { v2ClientName, v2DefaultModuleName });
+  const v3ClientTypes = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
 
   if (v3ClientTypes.length > 0) {
     const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
     for (const v3ClientType of v3ClientTypes.sort()) {
-      const v3ClientTypeName = (v3ClientType.typeName as Identifier).name;
-      if (v3ClientTypeName.endsWith("CommandInput") || v3ClientTypeName.endsWith("CommandOutput")) {
-        const v3ClientTypeNameIdentifier = j.identifier(v3ClientTypeName);
+      if (v3ClientType.endsWith("CommandInput") || v3ClientType.endsWith("CommandOutput")) {
+        const v3ClientTypeNameIdentifier = j.identifier(v3ClientType);
         const v3ClientTypeNameProperty = j.property.from({
           kind: "init",
           key: v3ClientTypeNameIdentifier,
