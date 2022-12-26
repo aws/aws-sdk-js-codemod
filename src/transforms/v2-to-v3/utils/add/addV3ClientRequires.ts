@@ -4,6 +4,7 @@ import { PACKAGE_NAME } from "../config";
 import { getRequireVariableDeclaration, getV2ServiceModulePath, getV3ClientTypes } from "../get";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
+
 export const addV3ClientRequires = (
   j: JSCodeshift,
   source: Collection<unknown>,
@@ -52,17 +53,17 @@ export const addV3ClientRequires = (
 
   if (v3ClientTypes.length > 0) {
     const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
-    for (const clientTsType of v3ClientTypes.sort()) {
-      const clientsTypename = (clientTsType.typeName as Identifier).name;
-      if (clientsTypename.endsWith("CommandInput") || clientsTypename.endsWith("CommandOutput")) {
-        const clientsTypenameIdentifier = j.identifier(clientsTypename);
-        const clientsTypenameProperty = j.property.from({
+    for (const v3ClientType of v3ClientTypes.sort()) {
+      const v3ClientTypeName = (v3ClientType.typeName as Identifier).name;
+      if (v3ClientTypeName.endsWith("CommandInput") || v3ClientTypeName.endsWith("CommandOutput")) {
+        const v3ClientTypeNameIdentifier = j.identifier(v3ClientTypeName);
+        const v3ClientTypeNameProperty = j.property.from({
           kind: "init",
-          key: clientsTypenameIdentifier,
+          key: v3ClientTypeNameIdentifier,
           shorthand: true,
-          value: clientsTypenameIdentifier,
+          value: v3ClientTypeNameIdentifier,
         });
-        addV3ClientModuleRequire(j, clientRequires, clientsTypenameProperty);
+        addV3ClientModuleRequire(j, clientRequires, v3ClientTypeNameProperty);
       }
     }
   }
