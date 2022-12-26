@@ -7,5 +7,4 @@ export * from "./getV2DefaultModuleName";
 export * from "./getV2ServiceModuleNames";
 export * from "./getV2ServiceModulePath";
 export * from "./getV3ClientType";
-export * from "./getV3ClientTypeName";
 export * from "./getV3ClientTypeNames";
