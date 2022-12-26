@@ -35,14 +35,16 @@ export const addV3ClientRequires = (
 
     const requireVarDecl =
       defaultRequireVarDecl.size() > 0 ? defaultRequireVarDecl : serviceRequireVarDecl;
-    requireVarDecl.insertAfter(
-      j.variableDeclaration("const", [
-        j.variableDeclarator(
-          j.objectPattern([v3ClientNameProperty]),
-          j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
-        ),
-      ])
-    );
+    requireVarDecl
+      .at(0)
+      .insertAfter(
+        j.variableDeclaration("const", [
+          j.variableDeclarator(
+            j.objectPattern([v3ClientNameProperty]),
+            j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
+          ),
+        ])
+      );
   }
 
   // Add require for input/output types, if needed.
