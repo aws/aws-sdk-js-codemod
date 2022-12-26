@@ -1,13 +1,13 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV2ClientTypes, GetV2ClientTypesOptions } from "./getV2ClientTypes";
+import { getV2ClientTypeNames, GetV2ClientTypeNamesOptions } from "./getV2ClientTypeNames";
 import { getV3ClientTypeName } from "./getV3ClientTypeName";
 
 export const getV3ClientTypeNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: GetV2ClientTypesOptions
+  options: GetV2ClientTypeNamesOptions
 ) =>
-  getV2ClientTypes(j, source, options)
-    .map((v2ClientType) => getV3ClientTypeName(v2ClientType))
-    .filter((v3ClientType) => v3ClientType !== undefined) as string[];
+  getV2ClientTypeNames(j, source, options)
+    .map((v2ClientTypeName) => getV3ClientTypeName(v2ClientTypeName))
+    .filter((v3ClientTypeName) => v3ClientTypeName !== undefined) as string[];

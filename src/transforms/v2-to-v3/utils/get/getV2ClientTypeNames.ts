@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-export interface GetV2ClientTypesOptions {
+export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
   v2DefaultModuleName: string;
 }
@@ -8,10 +8,10 @@ export interface GetV2ClientTypesOptions {
 const getRightIdentifierName = (node: TSTypeReference) =>
   ((node.typeName as TSQualifiedName).right as Identifier).name;
 
-export const getV2ClientTypes = (
+export const getV2ClientTypeNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2DefaultModuleName }: GetV2ClientTypesOptions
+  { v2ClientName, v2DefaultModuleName }: GetV2ClientTypeNamesOptions
 ): string[] => {
   const v2DefaultTypeName = {
     typeName: {
