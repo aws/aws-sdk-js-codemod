@@ -1,8 +1,4 @@
-import {
-  DynamoDB,
-  ListTablesCommandInput,
-  ListTablesCommandOutput,
-} from "@aws-sdk/client-dynamodb";
+import { DynamoDB, ListTablesCommandInput, ListTablesCommandOutput } from "@aws-sdk/client-dynamodb";
 
 const client = new DynamoDB({ region: "us-west-2" });
 
