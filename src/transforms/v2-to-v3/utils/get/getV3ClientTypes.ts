@@ -8,12 +8,10 @@ export const getV3ClientTypes = (
   source: Collection<unknown>,
   options: GetV2ClientTypesOptions
 ) =>
-  getV2ClientTypes(j, source, options)
-    .nodes()
-    .map((tsTypeRef) =>
-      getV3ClientInputOutputType(
-        j,
-        tsTypeRef,
-        ((tsTypeRef.typeName as TSQualifiedName).right as Identifier).name
-      )
-    );
+  getV2ClientTypes(j, source, options).map((tsTypeRef) =>
+    getV3ClientInputOutputType(
+      j,
+      tsTypeRef,
+      ((tsTypeRef.typeName as TSQualifiedName).right as Identifier).name
+    )
+  );
