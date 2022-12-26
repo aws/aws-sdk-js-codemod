@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
+import { Collection, JSCodeshift, TSTypeReference } from "jscodeshift";
 
 export interface GetV2ClientTypesOptions {
   v2ClientName: string;
