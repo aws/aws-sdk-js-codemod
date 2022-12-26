@@ -1,5 +1,6 @@
 export * from "./getClientMetadata";
 export * from "./getRequireVariableDeclaration";
+export * from "./getTsTypeWithInputOutput";
 export * from "./getV2ClientIdentifiers";
 export * from "./getV2ClientIdThisExpressions";
 export * from "./getV2ClientNames";

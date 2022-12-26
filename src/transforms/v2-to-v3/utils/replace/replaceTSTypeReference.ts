@@ -1,4 +1,6 @@
-import { Collection, JSCodeshift, TSTypeReference } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
+
+import { getTsTypeWithInputOutput } from "../get";
 
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
@@ -8,15 +10,6 @@ export interface ReplaceTypeReferenceOptions {
 
 const getTsTypeWithClientName = (j: JSCodeshift, node: TSTypeReference, v3ClientName: string) => {
   node.typeName = j.identifier(v3ClientName);
-  return node;
-};
-
-const getTsTypeWithInputOutput = (j: JSCodeshift, node: TSTypeReference, v2IoName: string) => {
-  if (v2IoName.endsWith("Input")) {
-    node.typeName = j.identifier(v2IoName.replace(/Input$/, "CommandInput"));
-  } else if (v2IoName.endsWith("Output")) {
-    node.typeName = j.identifier(v2IoName.replace(/Output$/, "CommandOutput"));
-  }
   return node;
 };
 
@@ -40,16 +33,20 @@ export const replaceTSTypeReference = (
   source
     .find(j.TSTypeReference, {
       typeName: {
+        type: "TSQualifiedName",
         left: {
           left: { type: "Identifier", name: v2DefaultModuleName },
           right: { type: "Identifier", name: v2ClientName },
         },
+        right: { type: "Identifier" },
       },
     })
     .replaceWith((tsTypeRef) =>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore Property 'right' does not exist.
-      getTsTypeWithInputOutput(j, tsTypeRef.node, tsTypeRef.node.typeName.right.name)
+      getTsTypeWithInputOutput(
+        j,
+        tsTypeRef.node,
+        ((tsTypeRef.node.typeName as TSQualifiedName).right as Identifier).name
+      )
     );
 
   // Replace type reference to client created with client module.
