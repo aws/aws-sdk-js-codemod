@@ -1,5 +1,6 @@
 import {
   Collection,
+  Identifier,
   JSCodeshift,
   ObjectPattern,
   Property,
@@ -22,7 +23,9 @@ export const addV3ClientModuleRequire = (
   if (
     !existingRequireProperties.find((variableDeclarator) =>
       (variableDeclarator.id as ObjectPattern).properties.find(
-        (property) => property === v3ClientProperty
+        (property) =>
+          ((property as Property).key as Identifier).name ===
+          (v3ClientProperty.key as Identifier).name
       )
     )
   ) {
