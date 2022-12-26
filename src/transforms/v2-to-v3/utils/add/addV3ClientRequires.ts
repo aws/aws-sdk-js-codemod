@@ -37,7 +37,7 @@ export const addV3ClientRequires = (
   const existingRequire = getRequireVariableDeclaration(j, source, v3ClientPackageName);
 
   // Require declaration already exists.
-  if (existingRequire !== undefined) {
+  if (existingRequire && existingRequire.nodes().length > 0) {
     existingRequire
       .nodes()[0]
       .declarations.filter((declaration) => declaration.type === "VariableDeclarator")
