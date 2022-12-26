@@ -1,7 +1,7 @@
 import { API, FileInfo } from "jscodeshift";
 
 import {
-  addV3ClientModule,
+  addV3ClientModules,
   getClientMetadata,
   getV2ClientNames,
   getV2DefaultModuleName,
@@ -29,7 +29,7 @@ export default function transformer(file: FileInfo, api: API) {
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
     const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
-    addV3ClientModule(j, source, {
+    addV3ClientModules(j, source, {
       v2ClientName,
       v3ClientName,
       v3ClientPackageName,

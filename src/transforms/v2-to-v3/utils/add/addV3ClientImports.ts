@@ -2,12 +2,17 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshif
 
 import { PACKAGE_NAME } from "../config";
 import { getTsTypeWithInputOutput, getV2ServiceModulePath } from "../get";
-import { AddV3ClientModuleOptions } from "./addV3ClientModule";
+import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
 export const addV3ClientImports = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v3ClientName, v3ClientPackageName, v2DefaultModuleName }: AddV3ClientModuleOptions
+  {
+    v2ClientName,
+    v3ClientName,
+    v3ClientPackageName,
+    v2DefaultModuleName,
+  }: AddV3ClientModulesOptions
 ): void => {
   const existingImports = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },

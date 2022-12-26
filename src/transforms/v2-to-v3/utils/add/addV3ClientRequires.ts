@@ -14,12 +14,17 @@ import {
   getTsTypeWithInputOutput,
   getV2ServiceModulePath,
 } from "../get";
-import { AddV3ClientModuleOptions } from "./addV3ClientModule";
+import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
 export const addV3ClientRequires = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v3ClientName, v3ClientPackageName, v2DefaultModuleName }: AddV3ClientModuleOptions
+  {
+    v2ClientName,
+    v3ClientName,
+    v3ClientPackageName,
+    v2DefaultModuleName,
+  }: AddV3ClientModulesOptions
 ): void => {
   const v3ClientNameIdentifier = j.identifier(v3ClientName);
   const v3ClientNameProperty = j.property.from({

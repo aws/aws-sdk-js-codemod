@@ -1,1 +1,1 @@
-export * from "./addV3ClientModule";
+export * from "./addV3ClientModules";
