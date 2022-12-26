@@ -1,6 +1,6 @@
 import { JSCodeshift, TSTypeReference } from "jscodeshift";
 
-export const getTsTypeWithInputOutput = (
+export const getV3ClientInputOutputType = (
   j: JSCodeshift,
   node: TSTypeReference,
   v2IoName: string

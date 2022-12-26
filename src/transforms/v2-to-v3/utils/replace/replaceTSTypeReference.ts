@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getTsTypeWithInputOutput } from "../get";
+import { getV3ClientInputOutputType } from "../get";
 
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
@@ -42,7 +42,7 @@ export const replaceTSTypeReference = (
       },
     })
     .replaceWith((tsTypeRef) =>
-      getTsTypeWithInputOutput(
+      getV3ClientInputOutputType(
         j,
         tsTypeRef.node,
         ((tsTypeRef.node.typeName as TSQualifiedName).right as Identifier).name

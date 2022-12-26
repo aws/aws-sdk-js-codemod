@@ -1,13 +1,7 @@
-import {
-  Collection,
-  Identifier,
-  ImportDeclaration,
-  JSCodeshift,
-  TSQualifiedName,
-} from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getTsTypeWithInputOutput, getV2ServiceModulePath } from "../get";
+import { getV2ServiceModulePath, getV3ClientTypes } from "../get";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
 export const addV3ClientImports = (
@@ -52,29 +46,13 @@ export const addV3ClientImports = (
   }
 
   // Add require for input/output types, if needed.
-  const clientTsTypes = source
-    .find(j.TSTypeReference, {
-      typeName: {
-        left: {
-          left: { type: "Identifier", name: v2DefaultModuleName },
-          right: { type: "Identifier", name: v2ClientName },
-        },
-      },
-    })
-    .nodes()
-    .map((tsTypeRef) =>
-      getTsTypeWithInputOutput(
-        j,
-        tsTypeRef,
-        ((tsTypeRef.typeName as TSQualifiedName).right as Identifier).name
-      )
-    );
+  const v3ClientTypes = getV3ClientTypes(j, source, { v2ClientName, v2DefaultModuleName });
 
-  if (clientTsTypes.length > 0) {
+  if (v3ClientTypes.length > 0) {
     const clientImports = source.find(j.ImportDeclaration, {
       source: { value: v3ClientPackageName },
     });
-    for (const clientTsType of clientTsTypes.sort()) {
+    for (const clientTsType of v3ClientTypes.sort()) {
       const clientsTypename = (clientTsType.typeName as Identifier).name;
       if (clientsTypename.endsWith("CommandInput") || clientsTypename.endsWith("CommandOutput")) {
         clientImports.forEach((nodePath) => {
