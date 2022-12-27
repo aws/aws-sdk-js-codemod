@@ -51,14 +51,13 @@ export const getV2ClientIdNamesFromNewExpr = (
     callee: { type: "Identifier", name: v2ClientName },
   } as NewExpression;
 
-  const namesFromDefaultModule = [
-    ...getNamesFromVariableDeclarator(j, source, defaultNewExpr),
-    ...getNamesFromAssignmentPattern(j, source, defaultNewExpr),
-  ];
-  const namesFromServiceModule = [
-    ...getNamesFromVariableDeclarator(j, source, clientNewExpr),
-    ...getNamesFromAssignmentPattern(j, source, clientNewExpr),
-  ];
+  const namesFromDefaultModule = [];
+  const namesFromServiceModule = [];
+
+  for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
+    namesFromDefaultModule.push(...getNames(j, source, defaultNewExpr));
+    namesFromServiceModule.push(...getNames(j, source, clientNewExpr));
+  }
 
   return getMergedArrayWithoutDuplicates(namesFromDefaultModule, namesFromServiceModule);
 };
