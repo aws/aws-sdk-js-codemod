@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.9
+
+### Patch Changes
+
+- Replace named imports for Input/Output types ([222c00c](https://github.com/awslabs/aws-sdk-js-codemod/commit/222c00c))
+
 ## 0.6.8
 
 ### Patch Changes
