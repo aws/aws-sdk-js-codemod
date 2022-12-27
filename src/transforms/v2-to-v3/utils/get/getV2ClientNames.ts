@@ -1,24 +1,26 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
-import { getV2ClientNamesFromNewExpr } from "./getV2ClientNamesFromNewExpr";
-import { getV2ClientNamesFromTSTypeRef } from "./getV2ClientNamesFromTSTypeRef";
+import { CLIENT_NAMES } from "../config";
+import { containsRequire } from "../containsRequire";
+import { getImportSpecifiers } from "./getImportSpecifiers";
+import { getRequireIdentifierName } from "./getRequireIdentifierName";
+import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
-export interface GetV2ClientNamesOptions {
-  v2DefaultModuleName: string;
-  v2ServiceModuleNames: string[];
-}
+export const getV2ClientNames = (j: JSCodeshift, source: Collection<unknown>): string[] => {
+  if (containsRequire(j, source)) {
+    return CLIENT_NAMES.map((clientName) =>
+      getRequireIdentifierName(j, source, getV2ServiceModulePath(clientName))
+    ).filter((v2ServiceModuleName) => v2ServiceModuleName !== undefined) as string[];
+  }
 
-export const getV2ClientNames = (
-  j: JSCodeshift,
-  source: Collection<unknown>,
-  { v2DefaultModuleName, v2ServiceModuleNames }: GetV2ClientNamesOptions
-): string[] => {
-  const v2ClientNamesFromNewExpr = getV2ClientNamesFromNewExpr(j, source, v2DefaultModuleName);
-  const v2ClientNamesFromTSTypeRef = getV2ClientNamesFromTSTypeRef(j, source, v2DefaultModuleName);
-
-  return getMergedArrayWithoutDuplicates(
-    getMergedArrayWithoutDuplicates(v2ClientNamesFromNewExpr, v2ClientNamesFromTSTypeRef),
-    v2ServiceModuleNames
-  );
+  return CLIENT_NAMES.filter((clientName) => {
+    const importSpecifiers = getImportSpecifiers(j, source, getV2ServiceModulePath(clientName));
+    if (
+      importSpecifiers &&
+      importSpecifiers.map((importSpecifier) => importSpecifier.local?.name).includes(clientName)
+    ) {
+      return true;
+    }
+    return false;
+  });
 };
