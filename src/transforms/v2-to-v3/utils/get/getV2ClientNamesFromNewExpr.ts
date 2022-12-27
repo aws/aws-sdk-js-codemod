@@ -1,5 +1,7 @@
 import { Collection, Identifier, JSCodeshift, MemberExpression, NewExpression } from "jscodeshift";
 
+import { DYNAMODB_CLIENT_NAME } from "../config";
+
 const getClientNewExpression = (v2DefaultModuleName: string) =>
   ({
     callee: {
@@ -16,7 +18,7 @@ const getDocumentClientNewExpression = (v2DefaultModuleName: string) =>
       object: {
         type: "MemberExpression",
         object: { type: "Identifier", name: v2DefaultModuleName },
-        property: { type: "Identifier", name: "DynamoDB" },
+        property: { type: "Identifier", name: DYNAMODB_CLIENT_NAME },
       },
       property: { type: "Identifier" },
     },
