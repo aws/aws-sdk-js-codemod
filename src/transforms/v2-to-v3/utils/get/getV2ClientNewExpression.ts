@@ -24,10 +24,10 @@ export const getV2ClientNewExpression = ({
         property: { type: "Identifier", ...(v2ClientName && { name: v2ClientName }) },
       },
     } as NewExpression;
-  } else {
-    return {
-      type: "NewExpression",
-      callee: { type: "Identifier", name: v2ClientName },
-    } as NewExpression;
   }
+
+  return {
+    type: "NewExpression",
+    callee: { type: "Identifier", name: v2ClientName },
+  } as NewExpression;
 };
