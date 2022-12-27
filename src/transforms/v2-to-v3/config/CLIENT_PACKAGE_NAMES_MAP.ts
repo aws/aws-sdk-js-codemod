@@ -52,6 +52,10 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   DataPipeline: "client-data-pipeline",
   Discovery: "client-application-discovery-service",
   DevOpsGuru: "client-devops-guru",
+
+  // Exception: DocumentClient can be imported from DynamoDB
+  DocumentClient: "lib-dynamodb",
+
   DynamoDB: "client-dynamodb",
   DynamoDBStreams: "client-dynamodb-streams",
   DocDB: "client-docdb",

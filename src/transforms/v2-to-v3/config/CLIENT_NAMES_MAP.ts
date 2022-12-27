@@ -10,6 +10,10 @@ export const CLIENT_NAMES_MAP: Record<string, string> = {
   CognitoIdentityServiceProvider: "CognitoIdentityProvider",
   DMS: "DatabaseMigrationService",
   Discovery: "ApplicationDiscoveryService",
+
+  // Exception: DocumentClient can be imported from DynamoDB
+  DocumentClient: "DynamoDBDocument",
+
   ELB: "ElasticLoadBalancing",
   ELBv2: "ElasticLoadBalancingV2",
   EMRcontainers: "EMRContainers",
