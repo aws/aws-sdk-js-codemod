@@ -7,8 +7,7 @@ import {
   TSTypeReference,
 } from "jscodeshift";
 
-import { getV2ClientTypeNames } from "../get";
-import { getV3ClientTypeName } from "../get/getV3ClientTypeName";
+import { getV2ClientTypeNames, getV3ClientTypeName } from "../get";
 
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
