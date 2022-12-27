@@ -4,6 +4,7 @@ export * from "./getV2ClientIdentifiers";
 export * from "./getV2ClientIdThisExpressions";
 export * from "./getV2ClientNames";
 export * from "./getV2ClientNamesFromDefault";
+export * from "./getV2ClientNewExpression";
 export * from "./getV2ClientTypeNames";
 export * from "./getV2DefaultModuleName";
 export * from "./getV2ServiceModulePath";
