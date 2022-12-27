@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.6.10
+
+### Patch Changes
+
+- Replace named imports for Request/Response types ([9e64aa4](https://github.com/awslabs/aws-sdk-js-codemod/commit/9e64aa4))
+
 ## 0.6.9
 
 ### Patch Changes
