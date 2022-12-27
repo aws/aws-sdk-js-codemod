@@ -1,6 +1,7 @@
 import { Collection, Identifier, JSCodeshift, NewExpression } from "jscodeshift";
 
 import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
+import { getV2ClientNewExpression } from "./getV2ClientNewExpression";
 
 export interface GetV2ClientIdNamesFromNewExprOptions {
   v2ClientName: string;
@@ -38,25 +39,14 @@ export const getV2ClientIdNamesFromNewExpr = (
   source: Collection<unknown>,
   { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesFromNewExprOptions
 ): string[] => {
-  const defaultNewExpr = {
-    type: "NewExpression",
-    callee: {
-      object: { type: "Identifier", name: v2DefaultModuleName },
-      property: { type: "Identifier", name: v2ClientName },
-    },
-  } as NewExpression;
-
-  const clientNewExpr = {
-    type: "NewExpression",
-    callee: { type: "Identifier", name: v2ClientName },
-  } as NewExpression;
-
   const namesFromDefaultModule = [];
   const namesFromServiceModule = [];
 
   for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
-    namesFromDefaultModule.push(...getNames(j, source, defaultNewExpr));
-    namesFromServiceModule.push(...getNames(j, source, clientNewExpr));
+    namesFromDefaultModule.push(
+      ...getNames(j, source, getV2ClientNewExpression({ v2DefaultModuleName, v2ClientName }))
+    );
+    namesFromServiceModule.push(...getNames(j, source, getV2ClientNewExpression({ v2ClientName })));
   }
 
   return getMergedArrayWithoutDuplicates(namesFromDefaultModule, namesFromServiceModule);

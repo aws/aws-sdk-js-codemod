@@ -1,5 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getV2ClientNewExpression } from "../get";
+
 export interface ReplaceClientCreationOptions {
   v2ClientName: string;
   v3ClientName: string;
@@ -14,12 +16,7 @@ export const replaceClientCreation = (
 ): void => {
   // Replace clients created with default module.
   source
-    .find(j.NewExpression, {
-      callee: {
-        object: { type: "Identifier", name: v2DefaultModuleName },
-        property: { type: "Identifier", name: v2ClientName },
-      },
-    })
+    .find(j.NewExpression, getV2ClientNewExpression({ v2DefaultModuleName, v2ClientName }))
     .replaceWith((nodePath) => {
       const { node } = nodePath;
       node.callee = j.identifier(v3ClientName);
@@ -28,9 +25,7 @@ export const replaceClientCreation = (
 
   // Replace clients created with client module.
   source
-    .find(j.NewExpression, {
-      callee: { type: "Identifier", name: v2ClientName },
-    })
+    .find(j.NewExpression, getV2ClientNewExpression({ v2ClientName }))
     .replaceWith((nodePath) => {
       const { node } = nodePath;
       node.callee = j.identifier(v3ClientName);
