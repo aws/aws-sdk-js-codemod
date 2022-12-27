@@ -4,8 +4,8 @@ import {
   addV3ClientModules,
   getClientMetadata,
   getV2ClientNames,
+  getV2ClientNamesFromDefault,
   getV2DefaultModuleName,
-  getV2ServiceModuleNames,
   isTypeScriptFile,
   removeDefaultModuleIfNotUsed,
   removePromiseCalls,
@@ -18,13 +18,19 @@ export default function transformer(file: FileInfo, api: API) {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
+  // ToDo: Make v2DefaultModuleName optional downstream as it can be undefined.
+  // ToDo: Rename v2DefaultModuleName to v2GlobalName to align with v2ClientName.
   const v2DefaultModuleName = getV2DefaultModuleName(j, source) as string;
-  const v2ServiceModuleNames = getV2ServiceModuleNames(j, source);
-  if (!v2DefaultModuleName && v2ServiceModuleNames.length === 0) {
+  const v2ClientNames = getV2ClientNames(j, source);
+
+  if (!v2DefaultModuleName && v2ClientNames.length === 0) {
     return source.toSource();
   }
 
-  const v2ClientNames = getV2ClientNames(j, source, { v2DefaultModuleName, v2ServiceModuleNames });
+  if (v2DefaultModuleName) {
+    v2ClientNames.push(...getV2ClientNamesFromDefault(j, source, v2DefaultModuleName));
+  }
+
   const clientMetadata = getClientMetadata(v2ClientNames);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
