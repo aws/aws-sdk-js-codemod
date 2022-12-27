@@ -1,5 +1,4 @@
 import AWS from "aws-sdk";
 
-const documentClient = new AWS.DynamoDB.DocumentClient(
-  { region: "us-east-1" }
-);
+const documentClient = new AWS.DynamoDB.DocumentClient({ region: "us-west-2" });
+const response = await documentClient.scan({ TableName: "TABLE_NAME" }).promise();
