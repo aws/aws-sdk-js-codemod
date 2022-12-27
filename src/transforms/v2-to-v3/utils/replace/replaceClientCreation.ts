@@ -17,18 +17,14 @@ export const replaceClientCreation = (
   // Replace clients created with default module.
   source
     .find(j.NewExpression, getV2ClientNewExpression({ v2DefaultModuleName, v2ClientName }))
-    .replaceWith((nodePath) => {
-      const { node } = nodePath;
-      node.callee = j.identifier(v3ClientName);
-      return node;
-    });
+    .replaceWith((v2ClientNewExpression) =>
+      j.newExpression(j.identifier(v3ClientName), v2ClientNewExpression.node.arguments)
+    );
 
   // Replace clients created with client module.
   source
     .find(j.NewExpression, getV2ClientNewExpression({ v2ClientName }))
-    .replaceWith((nodePath) => {
-      const { node } = nodePath;
-      node.callee = j.identifier(v3ClientName);
-      return node;
-    });
+    .replaceWith((v2ClientNewExpression) =>
+      j.newExpression(j.identifier(v3ClientName), v2ClientNewExpression.node.arguments)
+    );
 };
