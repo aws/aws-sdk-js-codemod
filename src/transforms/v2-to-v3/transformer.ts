@@ -35,10 +35,10 @@ export default function transformer(file: FileInfo, api: API) {
       v3ClientPackageName,
       v2DefaultModuleName,
     });
-    removeV2ClientModule(j, source, v2ClientName);
-    removePromiseCalls(j, source, { v2DefaultModuleName, v2ClientName });
-    replaceClientCreation(j, source, { v2DefaultModuleName, v2ClientName, v3ClientName });
-    replaceTSTypeReference(j, source, { v2DefaultModuleName, v2ClientName, v3ClientName });
+    replaceTSTypeReference(j, source, { v2ClientName, v2DefaultModuleName, v3ClientName });
+    removeV2ClientModule(j, source, { v2ClientName, v2DefaultModuleName });
+    removePromiseCalls(j, source, { v2ClientName, v2DefaultModuleName });
+    replaceClientCreation(j, source, { v2ClientName, v2DefaultModuleName, v3ClientName });
   }
 
   removeDefaultModuleIfNotUsed(j, source, v2DefaultModuleName);
