@@ -2,6 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { containsRequire } from "../containsRequire";
 import { getV2ClientTypeNames, getV2ServiceModulePath } from "../get";
+import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
@@ -31,10 +32,12 @@ export const removeV2ClientModule = (
       v2DefaultModuleName,
     });
     for (const v2ClientTypeName of v2ClientTypeNames) {
-      removeImportIdentifierName(j, source, {
-        identifierName: v2ClientTypeName,
-        literalValue,
-      });
+      if (isV2ClientInputOutputType(v2ClientTypeName)) {
+        removeImportIdentifierName(j, source, {
+          identifierName: v2ClientTypeName,
+          literalValue,
+        });
+      }
     }
   }
 };

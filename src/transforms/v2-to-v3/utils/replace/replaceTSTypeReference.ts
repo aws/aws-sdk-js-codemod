@@ -8,6 +8,7 @@ import {
 } from "jscodeshift";
 
 import { getV2ClientTypeNames, getV3ClientTypeName } from "../get";
+import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
 
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
@@ -85,10 +86,12 @@ export const replaceTSTypeReference = (
     v2DefaultModuleName,
   });
   for (const v2ClientTypeName of v2ClientTypeNames) {
-    source
-      .find(j.TSTypeReference, {
-        typeName: { type: "Identifier", name: v2ClientTypeName },
-      })
-      .replaceWith((v2ClientType) => getV3ClientTypeFromIdentifier(j, v2ClientType));
+    if (isV2ClientInputOutputType(v2ClientTypeName)) {
+      source
+        .find(j.TSTypeReference, {
+          typeName: { type: "Identifier", name: v2ClientTypeName },
+        })
+        .replaceWith((v2ClientType) => getV3ClientTypeFromIdentifier(j, v2ClientType));
+    }
   }
 };
