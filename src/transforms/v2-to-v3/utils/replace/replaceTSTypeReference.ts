@@ -51,11 +51,9 @@ export const replaceTSTypeReference = (
         right: { type: "Identifier", name: v2ClientName },
       },
     })
-    .replaceWith((tsTypeRef) => {
-      const { node } = tsTypeRef;
-      node.typeName = j.identifier(v3ClientName);
-      return node;
-    });
+    .replaceWith((v2ClientType) =>
+      j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
+    );
 
   // Replace type reference to client input/output created with default module.
   source
