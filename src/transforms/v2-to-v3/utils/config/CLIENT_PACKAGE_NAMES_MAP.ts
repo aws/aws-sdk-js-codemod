@@ -1,4 +1,5 @@
 import { CLIENT_NAMES } from "./CLIENT_NAMES";
+import { DYNAMODB_DOCUMENT_CLIENT_NAME } from "./constants";
 
 export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ...CLIENT_NAMES.reduce(
@@ -54,7 +55,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   DevOpsGuru: "client-devops-guru",
 
   // Exception: DocumentClient can be imported from DynamoDB
-  DocumentClient: "lib-dynamodb",
+  [DYNAMODB_DOCUMENT_CLIENT_NAME]: "lib-dynamodb",
 
   DynamoDB: "client-dynamodb",
   DynamoDBStreams: "client-dynamodb-streams",

@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { DYNAMODB_CLIENT_NAME, DYNAMODB_DOCUMENT_CLIENT_NAME } from "../config";
 import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicates";
 import { getV2ClientNamesFromNewExpr } from "./getV2ClientNamesFromNewExpr";
 import { getV2ClientNamesFromTSTypeRef } from "./getV2ClientNamesFromTSTypeRef";
@@ -22,8 +23,11 @@ export const getV2ClientNames = (
     v2ServiceModuleNames
   );
 
-  if (v2ClientNames.includes("DocumentClient") && !v2ClientNames.includes("DynamoDB")) {
-    v2ClientNames.push("DynamoDB");
+  if (
+    v2ClientNames.includes(DYNAMODB_DOCUMENT_CLIENT_NAME) &&
+    !v2ClientNames.includes(DYNAMODB_CLIENT_NAME)
+  ) {
+    v2ClientNames.push(DYNAMODB_CLIENT_NAME);
   }
 
   return v2ClientNames;
