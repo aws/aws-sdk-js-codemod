@@ -17,8 +17,14 @@ export const getV2ClientNames = (
   const v2ClientNamesFromNewExpr = getV2ClientNamesFromNewExpr(j, source, v2DefaultModuleName);
   const v2ClientNamesFromTSTypeRef = getV2ClientNamesFromTSTypeRef(j, source, v2DefaultModuleName);
 
-  return getMergedArrayWithoutDuplicates(
+  const v2ClientNames = getMergedArrayWithoutDuplicates(
     getMergedArrayWithoutDuplicates(v2ClientNamesFromNewExpr, v2ClientNamesFromTSTypeRef),
     v2ServiceModuleNames
   );
+
+  if (v2ClientNames.includes("DocumentClient") && !v2ClientNames.includes("DynamoDB")) {
+    v2ClientNames.push("DynamoDB");
+  }
+
+  return v2ClientNames;
 };
