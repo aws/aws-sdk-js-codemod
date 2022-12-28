@@ -8,6 +8,7 @@ import {
   TSTypeReference,
 } from "jscodeshift";
 
+import { getV2ClientTSTypeRef } from "./getV2ClientTSTypeRef";
 import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export interface GetV2ClientTypeNamesOptions {
@@ -23,37 +24,29 @@ export const getV2ClientTypeNames = (
   source: Collection<unknown>,
   { v2ClientName, v2DefaultModuleName }: GetV2ClientTypeNamesOptions
 ): string[] => {
-  const v2DefaultTypeName = {
-    typeName: {
-      left: {
-        left: { type: "Identifier", name: v2DefaultModuleName },
-        right: { type: "Identifier", name: v2ClientName },
-      },
-    },
-  } as TSTypeReference;
+  const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
+    v2ClientName,
+    v2DefaultModuleName,
+    isType: true,
+  });
+  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientName, isType: true });
 
-  const v2ClientTypeName = {
-    typeName: {
-      left: { type: "Identifier", name: v2ClientName },
-    },
-  } as TSTypeReference;
-
-  const v2ClientTypeFromNamedImport = {
+  const v2ServiceModuleImportDeclaration = {
     type: "ImportDeclaration",
     source: { value: getV2ServiceModulePath(v2ClientName) },
   } as ImportDeclaration;
 
   return [
     ...source
-      .find(j.TSTypeReference, v2DefaultTypeName)
+      .find(j.TSTypeReference, v2GlobalTSTypeRef)
       .nodes()
       .map((node) => getRightIdentifierName(node)),
     ...source
-      .find(j.TSTypeReference, v2ClientTypeName)
+      .find(j.TSTypeReference, v2ClientTSTypeRef)
       .nodes()
       .map((node) => getRightIdentifierName(node)),
     ...source
-      .find(j.ImportDeclaration, v2ClientTypeFromNamedImport)
+      .find(j.ImportDeclaration, v2ServiceModuleImportDeclaration)
       .nodes()
       .map((node) => node.specifiers)
       .flat()
