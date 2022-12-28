@@ -26,12 +26,11 @@ export default function transformer(file: FileInfo, api: API) {
   }
 
   if (v2GlobalName) {
-    const v2ClientNamesFromGlobal = getV2ClientNamesFromGlobal(j, source, v2GlobalName);
-    for (const v2ClientNameFromGlobal of v2ClientNamesFromGlobal) {
+    getV2ClientNamesFromGlobal(j, source, v2GlobalName).forEach((v2ClientNameFromGlobal) => {
       if (!(v2ClientNameFromGlobal in v2ClientNamesRecord)) {
         v2ClientNamesRecord[v2ClientNameFromGlobal] = v2ClientNameFromGlobal;
       }
-    }
+    });
   }
 
   const clientMetadata = getClientMetadata(v2ClientNamesRecord);
