@@ -4,30 +4,18 @@ import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicat
 import { getV2ClientIdNamesFromNewExpr } from "./getV2ClientIdNamesFromNewExpr";
 import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeRef";
 
-export interface GetV2ClientIdNamesOptions {
+export interface GetV2ClientIdentifiersOptions {
   v2ClientName: string;
-  v2GlobalName: string;
+  v2GlobalName?: string;
 }
 
 export const getV2ClientIdentifiers = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2GlobalName, v2ClientName }: GetV2ClientIdNamesOptions
+  options: GetV2ClientIdentifiersOptions
 ): Identifier[] => {
-  const v2ClientIdNamesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, {
-    v2GlobalName,
-    v2ClientName,
-  });
-
-  const v2ClientIdNamesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, {
-    v2GlobalName,
-    v2ClientName,
-  });
-
-  const clientIdNames = getMergedArrayWithoutDuplicates(
-    v2ClientIdNamesFromNewExpr,
-    v2ClientIdNamesFromTSTypeRef
-  );
-
+  const namesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, options);
+  const namesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, options);
+  const clientIdNames = getMergedArrayWithoutDuplicates(namesFromNewExpr, namesFromTSTypeRef);
   return clientIdNames.map((clientidName) => ({ type: "Identifier", name: clientidName }));
 };
