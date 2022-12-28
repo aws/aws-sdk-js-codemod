@@ -1,5 +1,14 @@
 # aws-sdk-js-codemod
 
+## 0.6.11
+
+### Patch Changes
+
+- Add utility getV2ClientTSTypeRef ([66568ab](https://github.com/awslabs/aws-sdk-js-codemod/commit/66568ab))
+- Add utility getV2ClientNamesFromDefault ([9d2c537](https://github.com/awslabs/aws-sdk-js-codemod/commit/9d2c537))
+- Add utility getV2ClientNewExpression ([27a2f24](https://github.com/awslabs/aws-sdk-js-codemod/commit/27a2f24))
+- Create new object instead of modifying existing expression ([d3f130c](https://github.com/awslabs/aws-sdk-js-codemod/commit/d3f130c))
+
 ## 0.6.10
 
 ### Patch Changes
