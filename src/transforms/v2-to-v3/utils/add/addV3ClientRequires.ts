@@ -30,7 +30,7 @@ export const addV3ClientRequires = (
       valueName: v2ClientLocalName,
     });
   } else {
-    // Insert after default require if present. If not, insert after service require.
+    // Insert after require for global SDK if present. If not, insert after service require.
     const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
     const defaultRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
     const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);

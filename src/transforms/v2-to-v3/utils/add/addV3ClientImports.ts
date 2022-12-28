@@ -27,7 +27,7 @@ export const addV3ClientImports = (
       importedName: v3ClientName,
     });
   } else {
-    // Insert after default import or service import, whichever comes first.
+    // Insert after global import or service import, whichever comes first.
     source
       .find(j.ImportDeclaration)
       .filter((path) =>

@@ -20,7 +20,7 @@ export const removeImportIdentifierName = (
       source: { value: literalValue },
     })
     .forEach((declarationPath) => {
-      // Remove default import from ImportDeclaration.
+      // Remove import from ImportDeclaration.
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
         if (specifier.local?.name === localName) {
           if (specifier.type === "ImportSpecifier") {

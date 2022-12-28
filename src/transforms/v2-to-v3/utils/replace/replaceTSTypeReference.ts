@@ -23,14 +23,14 @@ export const replaceTSTypeReference = (
   source: Collection<unknown>,
   { v2GlobalName, v2ClientName, v3ClientName }: ReplaceTSTypeReferenceOptions
 ): void => {
-  // Replace type reference to client created with default module.
+  // Replace type reference to client created with global name.
   source
     .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2GlobalName }))
     .replaceWith((v2ClientType) =>
       j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
     );
 
-  // Replace type reference to client input/output created with default module.
+  // Replace type reference to client input/output created with global name.
   source
     .find(
       j.TSTypeReference,
