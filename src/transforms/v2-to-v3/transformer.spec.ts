@@ -37,7 +37,7 @@ describe("v2-to-v3", () => {
     return { input, outputCode };
   };
 
-  it.concurrent.each(getTestFileMetadata(fixtureDir))(
+  it.concurrent.skip.each(getTestFileMetadata(fixtureDir))(
     `transforms: %s.%s`,
     async (filePrefix, fileExtension) => {
       const { input, outputCode } = await getTestMetadata(fixtureDir, filePrefix, fileExtension);
@@ -45,9 +45,9 @@ describe("v2-to-v3", () => {
     }
   );
 
-  describe.each(fixtureSubDirs)("%s", (subDir) => {
+  describe.each(["api-promise"])("%s", (subDir) => {
     const subDirPath = join(fixtureDir, subDir);
-    it.concurrent.each(getTestFileMetadata(subDirPath))(
+    it.concurrent.each([["service-import", "js"]])(
       `transforms: %s.%s`,
       async (filePrefix, fileExtension) => {
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
