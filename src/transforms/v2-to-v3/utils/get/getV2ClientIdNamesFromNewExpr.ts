@@ -5,7 +5,7 @@ import { getV2ClientNewExpression } from "./getV2ClientNewExpression";
 
 export interface GetV2ClientIdNamesFromNewExprOptions {
   v2ClientName: string;
-  v2GlobalName: string;
+  v2GlobalName?: string;
 }
 
 const getNamesFromVariableDeclarator = (

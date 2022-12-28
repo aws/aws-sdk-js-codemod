@@ -4,7 +4,7 @@ import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicat
 
 export interface GetV2ClientIdNamesFromTSTypeRefOptions {
   v2ClientName: string;
-  v2GlobalName: string;
+  v2GlobalName?: string;
 }
 
 export const getV2ClientIdNamesFromTSTypeRef = (
@@ -12,21 +12,23 @@ export const getV2ClientIdNamesFromTSTypeRef = (
   source: Collection<unknown>,
   { v2GlobalName, v2ClientName }: GetV2ClientIdNamesFromTSTypeRefOptions
 ): string[] => {
-  const clientIdNamesFromGlobalModule = source
-    .find(j.Identifier, {
-      typeAnnotation: {
-        typeAnnotation: {
-          typeName: {
-            left: { name: v2GlobalName },
-            right: { name: v2ClientName },
+  const namesFromGlobalName = v2GlobalName
+    ? source
+        .find(j.Identifier, {
+          typeAnnotation: {
+            typeAnnotation: {
+              typeName: {
+                left: { name: v2GlobalName },
+                right: { name: v2ClientName },
+              },
+            },
           },
-        },
-      },
-    })
-    .nodes()
-    .map((identifier) => identifier.name);
+        })
+        .nodes()
+        .map((identifier) => identifier.name)
+    : [];
 
-  const clientIdNamesFromServiceModule = source
+  const namesFromClientName = source
     .find(j.Identifier, {
       typeAnnotation: {
         typeAnnotation: {
@@ -37,8 +39,5 @@ export const getV2ClientIdNamesFromTSTypeRef = (
     .nodes()
     .map((identifier) => identifier.name);
 
-  return getMergedArrayWithoutDuplicates(
-    clientIdNamesFromGlobalModule,
-    clientIdNamesFromServiceModule
-  );
+  return getMergedArrayWithoutDuplicates(namesFromGlobalName, namesFromClientName);
 };

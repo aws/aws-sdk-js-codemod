@@ -18,8 +18,7 @@ export default function transformer(file: FileInfo, api: API) {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
-  // ToDo: Make v2GlobalName optional downstream as it can be undefined.
-  const v2GlobalName = getV2GlobalName(j, source) as string;
+  const v2GlobalName = getV2GlobalName(j, source);
   const v2ClientNames = getV2ClientNames(j, source);
 
   if (!v2GlobalName && v2ClientNames.length === 0) {
@@ -45,7 +44,9 @@ export default function transformer(file: FileInfo, api: API) {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
   }
 
-  removeV2GlobalModule(j, source, v2GlobalName);
+  if (v2GlobalName) {
+    removeV2GlobalModule(j, source, v2GlobalName);
+  }
 
   return source.toSource();
 }

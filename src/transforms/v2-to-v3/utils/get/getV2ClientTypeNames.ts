@@ -13,7 +13,7 @@ import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
-  v2GlobalName: string;
+  v2GlobalName?: string;
 }
 
 const getRightIdentifierName = (
