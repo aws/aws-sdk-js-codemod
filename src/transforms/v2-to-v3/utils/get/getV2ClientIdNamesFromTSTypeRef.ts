@@ -12,7 +12,7 @@ export const getV2ClientIdNamesFromTSTypeRef = (
   source: Collection<unknown>,
   { v2GlobalName, v2ClientName }: GetV2ClientIdNamesFromTSTypeRefOptions
 ): string[] => {
-  const clientIdNamesFromDefaultModule = source
+  const clientIdNamesFromGlobalModule = source
     .find(j.Identifier, {
       typeAnnotation: {
         typeAnnotation: {
@@ -38,7 +38,7 @@ export const getV2ClientIdNamesFromTSTypeRef = (
     .map((identifier) => identifier.name);
 
   return getMergedArrayWithoutDuplicates(
-    clientIdNamesFromDefaultModule,
+    clientIdNamesFromGlobalModule,
     clientIdNamesFromServiceModule
   );
 };
