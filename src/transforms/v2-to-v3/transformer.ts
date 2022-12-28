@@ -42,7 +42,7 @@ export default function transformer(file: FileInfo, api: API) {
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     addV3ClientModules(j, source, { ...v2Options, ...v3Options });
-    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+    replaceTSTypeReference(j, source, v2Options);
     removeV2ClientModule(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
   }

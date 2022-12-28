@@ -6,7 +6,6 @@ import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
 export interface ReplaceTSTypeReferenceOptions {
   v2ClientName: string;
   v2GlobalName?: string;
-  v3ClientName: string;
 }
 
 const isRightSectionIdentifier = (node: TSTypeReference) =>
@@ -21,15 +20,8 @@ const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifie
 export const replaceTSTypeReference = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2GlobalName, v2ClientName, v3ClientName }: ReplaceTSTypeReferenceOptions
+  { v2GlobalName, v2ClientName }: ReplaceTSTypeReferenceOptions
 ): void => {
-  // Replace type reference to client created with default module.
-  source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2GlobalName }))
-    .replaceWith((v2ClientType) =>
-      j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
-    );
-
   // Replace type reference to client input/output created with default module.
   source
     .find(
