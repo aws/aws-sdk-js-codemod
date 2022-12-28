@@ -5,8 +5,8 @@ import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
 
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
+  v2GlobalName?: string;
   v3ClientName: string;
-  v2GlobalName: string;
 }
 
 const isRightSectionIdentifier = (node: TSTypeReference) =>
