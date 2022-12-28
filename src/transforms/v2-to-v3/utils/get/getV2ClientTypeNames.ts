@@ -27,9 +27,9 @@ export const getV2ClientTypeNames = (
   const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
     v2ClientName,
     v2DefaultModuleName,
-    isType: true,
+    withoutRightSection: true,
   });
-  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientName, isType: true });
+  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientName, withoutRightSection: true });
 
   const v2ServiceModuleImportDeclaration = {
     type: "ImportDeclaration",

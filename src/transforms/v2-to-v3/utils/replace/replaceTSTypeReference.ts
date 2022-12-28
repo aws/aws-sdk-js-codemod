@@ -31,14 +31,14 @@ export const replaceTSTypeReference = (
   source
     .find(
       j.TSTypeReference,
-      getV2ClientTSTypeRef({ v2ClientName, v2DefaultModuleName, isType: true })
+      getV2ClientTSTypeRef({ v2ClientName, v2DefaultModuleName, withoutRightSection: true })
     )
     .filter((v2ClientType) => isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node)))
     .replaceWith((v2ClientType) => getV3ClientTypeName(getRightIdentifierName(v2ClientType.node)));
 
   // Replace type reference to client created with client module.
   source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, isType: true }))
+    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, withoutRightSection: true }))
     .filter((v2ClientType) => isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node)))
     .replaceWith((v2ClientType) => getV3ClientTypeName(getRightIdentifierName(v2ClientType.node)));
 

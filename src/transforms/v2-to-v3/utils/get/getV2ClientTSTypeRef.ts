@@ -3,13 +3,13 @@ import { Identifier, TSQualifiedName, TSTypeReference } from "jscodeshift";
 export interface V2ClientTsTypeRefOptions {
   v2DefaultModuleName?: string;
   v2ClientName: string;
-  isType?: boolean;
+  withoutRightSection?: boolean;
 }
 
 export const getV2ClientTSTypeRef = ({
   v2DefaultModuleName,
   v2ClientName,
-  isType = false,
+  withoutRightSection = false,
 }: V2ClientTsTypeRefOptions): TSTypeReference => {
   if (v2DefaultModuleName) {
     const idWithGlobalName = {
@@ -20,7 +20,9 @@ export const getV2ClientTSTypeRef = ({
 
     return {
       typeName: {
-        ...(isType ? { left: idWithGlobalName, right: { type: "Identifier" } } : idWithGlobalName),
+        ...(withoutRightSection
+          ? { left: idWithGlobalName, right: { type: "Identifier" } }
+          : idWithGlobalName),
       },
     } as TSTypeReference;
   }
@@ -28,7 +30,9 @@ export const getV2ClientTSTypeRef = ({
   const idWithClientName = { type: "Identifier", name: v2ClientName } as Identifier;
   return {
     typeName: {
-      ...(isType ? { left: idWithClientName, right: { type: "Identifier" } } : idWithClientName),
+      ...(withoutRightSection
+        ? { left: idWithClientName, right: { type: "Identifier" } }
+        : idWithClientName),
     },
   } as TSTypeReference;
 };
