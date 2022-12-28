@@ -20,9 +20,7 @@ export const getV2ClientTSTypeRef = ({
 
     return {
       typeName: {
-        ...(withoutRightSection
-          ? { left: idWithGlobalName, right: { type: "Identifier" } }
-          : idWithGlobalName),
+        ...(withoutRightSection ? { left: idWithGlobalName } : idWithGlobalName),
       },
     } as TSTypeReference;
   }
@@ -30,9 +28,7 @@ export const getV2ClientTSTypeRef = ({
   const idWithClientName = { type: "Identifier", name: v2ClientName } as Identifier;
   return {
     typeName: {
-      ...(withoutRightSection
-        ? { left: idWithClientName, right: { type: "Identifier" } }
-        : idWithClientName),
+      ...(withoutRightSection ? { left: idWithClientName } : idWithClientName),
     },
   } as TSTypeReference;
 };
