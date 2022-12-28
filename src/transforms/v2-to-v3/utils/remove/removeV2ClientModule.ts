@@ -8,6 +8,7 @@ import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
 export interface RemoveV2ClientModuleOptions {
   v2ClientName: string;
+  v2ClientLocalName: string;
   v2GlobalName?: string;
 }
 
@@ -16,10 +17,10 @@ export const removeV2ClientModule = (
   source: Collection<unknown>,
   options: RemoveV2ClientModuleOptions
 ) => {
-  const { v2ClientName } = options;
+  const { v2ClientName, v2ClientLocalName } = options;
   const literalValue = getV2ServiceModulePath(v2ClientName);
   const removeIdentifierNameOptions = {
-    localName: v2ClientName,
+    localName: v2ClientLocalName,
     literalValue,
   };
 
