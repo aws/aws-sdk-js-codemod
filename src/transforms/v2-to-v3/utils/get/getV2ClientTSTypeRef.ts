@@ -1,20 +1,20 @@
 import { Identifier, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 export interface V2ClientTsTypeRefOptions {
-  v2DefaultModuleName?: string;
+  v2GlobalName?: string;
   v2ClientName: string;
   withoutRightSection?: boolean;
 }
 
 export const getV2ClientTSTypeRef = ({
-  v2DefaultModuleName,
+  v2GlobalName,
   v2ClientName,
   withoutRightSection = false,
 }: V2ClientTsTypeRefOptions): TSTypeReference => {
-  if (v2DefaultModuleName) {
+  if (v2GlobalName) {
     const idWithGlobalName = {
       type: "TSQualifiedName",
-      left: { type: "Identifier", name: v2DefaultModuleName },
+      left: { type: "Identifier", name: v2GlobalName },
       right: { type: "Identifier", name: v2ClientName },
     } as TSQualifiedName;
 

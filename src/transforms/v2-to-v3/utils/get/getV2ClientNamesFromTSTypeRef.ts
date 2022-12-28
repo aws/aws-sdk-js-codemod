@@ -3,11 +3,11 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshif
 export const getV2ClientNamesFromTSTypeRef = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2DefaultModuleName: string
+  v2GlobalName: string
 ): string[] =>
   source
     .find(j.TSTypeReference, {
-      typeName: { left: { name: v2DefaultModuleName } },
+      typeName: { left: { name: v2GlobalName } },
     })
     .nodes()
     .map(

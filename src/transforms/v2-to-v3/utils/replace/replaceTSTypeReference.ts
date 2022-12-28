@@ -6,7 +6,7 @@ import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
 export interface ReplaceTypeReferenceOptions {
   v2ClientName: string;
   v3ClientName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 const isRightSectionIdentifier = (node: TSTypeReference) =>
@@ -21,11 +21,11 @@ const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifie
 export const replaceTSTypeReference = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName, v3ClientName }: ReplaceTypeReferenceOptions
+  { v2GlobalName, v2ClientName, v3ClientName }: ReplaceTypeReferenceOptions
 ): void => {
   // Replace type reference to client created with default module.
   source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2DefaultModuleName }))
+    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2GlobalName }))
     .replaceWith((v2ClientType) =>
       j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
     );
@@ -34,7 +34,7 @@ export const replaceTSTypeReference = (
   source
     .find(
       j.TSTypeReference,
-      getV2ClientTSTypeRef({ v2ClientName, v2DefaultModuleName, withoutRightSection: true })
+      getV2ClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
     )
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
     .filter((v2ClientType) => isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node)))
@@ -48,7 +48,7 @@ export const replaceTSTypeReference = (
     .replaceWith((v2ClientType) => getV3ClientTypeName(getRightIdentifierName(v2ClientType.node)));
 
   // Replace type reference to client input/output import with named imports.
-  const v2ClientTypeNames = getV2ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
+  const v2ClientTypeNames = getV2ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
   for (const v2ClientTypeName of v2ClientTypeNames) {
     if (isV2ClientInputOutputType(v2ClientTypeName)) {
       source

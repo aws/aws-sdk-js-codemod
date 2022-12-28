@@ -5,7 +5,7 @@ import { containsRequire } from "../containsRequire";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getRequireIdentifierName } from "./getRequireIdentifierName";
 
-export const getV2DefaultModuleName = (
+export const getV2GlobalName = (
   j: JSCodeshift,
   source: Collection<unknown>
 ): string | undefined => {

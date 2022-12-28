@@ -5,17 +5,17 @@ import { removePromiseForCallExpression } from "./removePromiseForCallExpression
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 // Removes .promise() from client API calls.
 export const removePromiseCalls = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName }: RemovePromiseCallsOptions
+  { v2GlobalName, v2ClientName }: RemovePromiseCallsOptions
 ): void => {
   const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, {
-    v2DefaultModuleName,
+    v2GlobalName,
     v2ClientName,
   });
   const v2ClientIdThisExpressions = getV2ClientIdThisExpressions(j, source, v2ClientIdentifiers);

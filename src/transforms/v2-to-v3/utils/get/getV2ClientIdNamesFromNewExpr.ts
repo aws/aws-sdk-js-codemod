@@ -5,7 +5,7 @@ import { getV2ClientNewExpression } from "./getV2ClientNewExpression";
 
 export interface GetV2ClientIdNamesFromNewExprOptions {
   v2ClientName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 const getNamesFromVariableDeclarator = (
@@ -37,17 +37,17 @@ const getNamesFromAssignmentPattern = (
 export const getV2ClientIdNamesFromNewExpr = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesFromNewExprOptions
+  { v2GlobalName, v2ClientName }: GetV2ClientIdNamesFromNewExprOptions
 ): string[] => {
-  const namesFromDefaultModule = [];
+  const namesFromGlobalModule = [];
   const namesFromServiceModule = [];
 
   for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
-    namesFromDefaultModule.push(
-      ...getNames(j, source, getV2ClientNewExpression({ v2DefaultModuleName, v2ClientName }))
+    namesFromGlobalModule.push(
+      ...getNames(j, source, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
     );
     namesFromServiceModule.push(...getNames(j, source, getV2ClientNewExpression({ v2ClientName })));
   }
 
-  return getMergedArrayWithoutDuplicates(namesFromDefaultModule, namesFromServiceModule);
+  return getMergedArrayWithoutDuplicates(namesFromGlobalModule, namesFromServiceModule);
 };

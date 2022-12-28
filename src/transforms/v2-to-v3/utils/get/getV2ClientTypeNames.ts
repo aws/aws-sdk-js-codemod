@@ -13,7 +13,7 @@ import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 const getRightIdentifierName = (
@@ -31,11 +31,11 @@ const getRightIdentifierName = (
 export const getV2ClientTypeNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2DefaultModuleName }: GetV2ClientTypeNamesOptions
+  { v2ClientName, v2GlobalName }: GetV2ClientTypeNamesOptions
 ): string[] => {
   const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
     v2ClientName,
-    v2DefaultModuleName,
+    v2GlobalName,
     withoutRightSection: true,
   });
   const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientName, withoutRightSection: true });

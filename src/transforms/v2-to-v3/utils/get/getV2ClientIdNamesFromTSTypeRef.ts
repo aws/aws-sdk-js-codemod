@@ -4,20 +4,20 @@ import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicat
 
 export interface GetV2ClientIdNamesFromTSTypeRefOptions {
   v2ClientName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 export const getV2ClientIdNamesFromTSTypeRef = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesFromTSTypeRefOptions
+  { v2GlobalName, v2ClientName }: GetV2ClientIdNamesFromTSTypeRefOptions
 ): string[] => {
-  const clientIdNamesFromDefaultModule = source
+  const clientIdNamesFromGlobalModule = source
     .find(j.Identifier, {
       typeAnnotation: {
         typeAnnotation: {
           typeName: {
-            left: { name: v2DefaultModuleName },
+            left: { name: v2GlobalName },
             right: { name: v2ClientName },
           },
         },
@@ -38,7 +38,7 @@ export const getV2ClientIdNamesFromTSTypeRef = (
     .map((identifier) => identifier.name);
 
   return getMergedArrayWithoutDuplicates(
-    clientIdNamesFromDefaultModule,
+    clientIdNamesFromGlobalModule,
     clientIdNamesFromServiceModule
   );
 };
