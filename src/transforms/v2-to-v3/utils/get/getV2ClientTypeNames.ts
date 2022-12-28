@@ -37,20 +37,22 @@ export const getV2ClientTypeNames = (
   } as ImportDeclaration;
 
   return [
-    ...source
-      .find(j.TSTypeReference, v2GlobalTSTypeRef)
-      .nodes()
-      .map((node) => getRightIdentifierName(node)),
-    ...source
-      .find(j.TSTypeReference, v2ClientTSTypeRef)
-      .nodes()
-      .map((node) => getRightIdentifierName(node)),
-    ...source
-      .find(j.ImportDeclaration, v2ServiceModuleImportDeclaration)
-      .nodes()
-      .map((node) => node.specifiers)
-      .flat()
-      .filter((node) => (node as ImportSpecifier).type === "ImportSpecifier")
-      .map((node) => ((node as ImportSpecifier).local as Identifier).name),
+    ...new Set([
+      ...source
+        .find(j.TSTypeReference, v2GlobalTSTypeRef)
+        .nodes()
+        .map((node) => getRightIdentifierName(node)),
+      ...source
+        .find(j.TSTypeReference, v2ClientTSTypeRef)
+        .nodes()
+        .map((node) => getRightIdentifierName(node)),
+      ...source
+        .find(j.ImportDeclaration, v2ServiceModuleImportDeclaration)
+        .nodes()
+        .map((node) => node.specifiers)
+        .flat()
+        .filter((node) => (node as ImportSpecifier).type === "ImportSpecifier")
+        .map((node) => ((node as ImportSpecifier).local as Identifier).name),
+    ]),
   ];
 };
