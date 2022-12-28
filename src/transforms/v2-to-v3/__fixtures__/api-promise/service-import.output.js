@@ -1,6 +1,6 @@
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import { DynamoDB as AWS_DynamoDB } from "@aws-sdk/client-dynamodb";
 
-const client = new DynamoDB();
+const client = new AWS_DynamoDB();
 
 // Promise without params
 {
@@ -20,7 +20,7 @@ const client = new DynamoDB();
 
   // Client as class member
   class ClientClassMember {
-    constructor(clientInCtr = new DynamoDB()) {
+    constructor(clientInCtr = new AWS_DynamoDB()) {
       this.clientInClass = clientInCtr;
     }
   
