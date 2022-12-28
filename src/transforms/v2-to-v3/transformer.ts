@@ -45,7 +45,9 @@ export default function transformer(file: FileInfo, api: API) {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
   }
 
-  removeV2GlobalModule(j, source, v2GlobalName);
+  if (v2GlobalName) {
+    removeV2GlobalModule(j, source, v2GlobalName);
+  }
 
   return source.toSource();
 }
