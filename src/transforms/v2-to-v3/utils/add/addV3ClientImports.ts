@@ -10,7 +10,7 @@ export const addV3ClientImports = (
   source: Collection<unknown>,
   {
     v2ClientName,
-    v2ClientIdName,
+    v2ClientLocalName,
     v2GlobalName,
     v3ClientName,
     v3ClientPackageName,
@@ -23,7 +23,7 @@ export const addV3ClientImports = (
   // Import declaration already exists.
   if (existingImports.size()) {
     addV3ClientModuleImport(j, existingImports, {
-      localName: v2ClientIdName,
+      localName: v2ClientLocalName,
       importedName: v3ClientName,
     });
   } else {
@@ -40,7 +40,7 @@ export const addV3ClientImports = (
         j.importDeclaration(
           [
             getV3ClientImportSpecifier(j, {
-              localName: v2ClientIdName,
+              localName: v2ClientLocalName,
               importedName: v3ClientName,
             }),
           ],

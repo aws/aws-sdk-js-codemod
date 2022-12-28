@@ -18,6 +18,6 @@ export const getV2ClientNamesRecord = (
     CLIENT_NAMES.map((clientName) => [
       clientName,
       getIdentifierNameFn(j, source, getV2ServiceModulePath(clientName)),
-    ]).filter(([, v2ClientIdName]) => v2ClientIdName !== undefined)
+    ]).filter(([, v2ClientLocalName]) => v2ClientLocalName !== undefined)
   );
 };

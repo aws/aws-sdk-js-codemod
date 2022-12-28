@@ -5,10 +5,10 @@ import { getV3ClientPackageName } from "./getV3ClientPackageName";
 export const getClientMetadata = (v2ClientNamesRecord: Record<string, string>): ClientMetadataMap =>
   Object.entries(
     Object.entries(v2ClientNamesRecord).reduce(
-      (acc, [v2ClientName, v2ClientIdName]) => ({
+      (acc, [v2ClientName, v2ClientLocalName]) => ({
         ...acc,
         [v2ClientName]: {
-          v2ClientIdName,
+          v2ClientLocalName,
           v3ClientName: getV3ClientName(v2ClientName),
           v3ClientPackageName: getV3ClientPackageName(v2ClientName),
         },

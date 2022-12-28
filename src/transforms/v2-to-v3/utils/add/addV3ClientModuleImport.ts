@@ -5,7 +5,7 @@ import { getV3ClientImportSpecifier, V3ClientImportSpecifierOptions } from "../g
 export const addV3ClientModuleImport = (
   j: JSCodeshift,
   existingImports: Collection<ImportDeclaration>,
-  { localName: v2ClientIdName, importedName: v3ClientName }: V3ClientImportSpecifierOptions
+  { localName, importedName }: V3ClientImportSpecifierOptions
 ) => {
   const existingImportSpecifiers = existingImports
     .nodes()
@@ -16,13 +16,11 @@ export const addV3ClientModuleImport = (
   if (
     !existingImportSpecifiers.find(
       (specifier) =>
-        specifier?.imported?.name === v3ClientName && specifier?.local?.name === v2ClientIdName
+        specifier?.imported?.name === importedName && specifier?.local?.name === localName
     )
   ) {
     existingImports
       .nodes()[0]
-      .specifiers?.push(
-        getV3ClientImportSpecifier(j, { localName: v2ClientIdName, importedName: v3ClientName })
-      );
+      .specifiers?.push(getV3ClientImportSpecifier(j, { localName, importedName }));
   }
 };

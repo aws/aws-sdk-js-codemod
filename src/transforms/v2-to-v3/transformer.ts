@@ -37,9 +37,9 @@ export default function transformer(file: FileInfo, api: API) {
   const clientMetadata = getClientMetadata(v2ClientNamesRecord);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
-    const { v2ClientIdName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
+    const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
-    const v2Options = { v2ClientName, v2ClientIdName, v2GlobalName };
+    const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     addV3ClientModules(j, source, { ...v2Options, ...v3Options });
