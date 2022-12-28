@@ -33,23 +33,23 @@ export default function transformer(file: FileInfo, api: API) {
     });
   }
 
-  const clientMetadata = getClientMetadata(v2ClientNamesRecord);
+  Object.entries(getClientMetadata(v2ClientNamesRecord))
+    .reverse()
+    .forEach(([v2ClientName, v3ClientMetadata]) => {
+      const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
-  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
-    const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
+      const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
+      const v3Options = { v3ClientName, v3ClientPackageName };
 
-    const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
-    const v3Options = { v3ClientName, v3ClientPackageName };
+      addV3ClientModules(j, source, { ...v2Options, ...v3Options });
+      replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+      removeV2ClientModule(j, source, v2Options);
+      removePromiseCalls(j, source, v2Options);
 
-    addV3ClientModules(j, source, { ...v2Options, ...v3Options });
-    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
-    removeV2ClientModule(j, source, v2Options);
-    removePromiseCalls(j, source, v2Options);
-
-    if (v2GlobalName) {
-      replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
-    }
-  }
+      if (v2GlobalName) {
+        replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+      }
+    });
 
   if (v2GlobalName) {
     removeV2GlobalModule(j, source, v2GlobalName);
