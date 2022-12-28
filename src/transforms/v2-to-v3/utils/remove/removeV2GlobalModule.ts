@@ -15,7 +15,7 @@ export const removeV2GlobalModule = (
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
     const removeIdentifierNameOptions = {
-      identifierName: v2GlobalName,
+      localName: v2GlobalName,
       literalValue: PACKAGE_NAME,
     };
     if (containsRequire(j, source)) {

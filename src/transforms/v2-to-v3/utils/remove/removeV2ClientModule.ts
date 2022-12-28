@@ -19,7 +19,7 @@ export const removeV2ClientModule = (
   const { v2ClientName } = options;
   const literalValue = getV2ServiceModulePath(v2ClientName);
   const removeIdentifierNameOptions = {
-    identifierName: v2ClientName,
+    localName: v2ClientName,
     literalValue,
   };
 
@@ -32,7 +32,7 @@ export const removeV2ClientModule = (
     for (const v2ClientTypeName of v2ClientTypeNames) {
       if (isV2ClientInputOutputType(v2ClientTypeName)) {
         removeImportIdentifierName(j, source, {
-          identifierName: v2ClientTypeName,
+          localName: v2ClientTypeName,
           literalValue,
         });
       }
