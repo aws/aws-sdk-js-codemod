@@ -8,12 +8,7 @@ import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 export const addV3ClientImports = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  {
-    v2ClientName,
-    v3ClientName,
-    v3ClientPackageName,
-    v2DefaultModuleName,
-  }: AddV3ClientModulesOptions
+  { v2ClientName, v3ClientName, v3ClientPackageName, v2GlobalName }: AddV3ClientModulesOptions
 ): void => {
   const existingImports = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
@@ -41,7 +36,7 @@ export const addV3ClientImports = (
   }
 
   // Add require for input/output types, if needed.
-  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
+  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
 
   if (v3ClientTypeNames.length > 0) {
     const clientImports = source.find(j.ImportDeclaration, {

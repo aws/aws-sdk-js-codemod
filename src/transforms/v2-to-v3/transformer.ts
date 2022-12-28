@@ -18,17 +18,16 @@ export default function transformer(file: FileInfo, api: API) {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
-  // ToDo: Make v2DefaultModuleName optional downstream as it can be undefined.
-  // ToDo: Rename v2DefaultModuleName to v2GlobalName to align with v2ClientName.
-  const v2DefaultModuleName = getV2GlobalName(j, source) as string;
+  // ToDo: Make v2GlobalName optional downstream as it can be undefined.
+  const v2GlobalName = getV2GlobalName(j, source) as string;
   const v2ClientNames = getV2ClientNames(j, source);
 
-  if (!v2DefaultModuleName && v2ClientNames.length === 0) {
+  if (!v2GlobalName && v2ClientNames.length === 0) {
     return source.toSource();
   }
 
-  if (v2DefaultModuleName) {
-    v2ClientNames.push(...getV2ClientNamesFromDefault(j, source, v2DefaultModuleName));
+  if (v2GlobalName) {
+    v2ClientNames.push(...getV2ClientNamesFromDefault(j, source, v2GlobalName));
   }
 
   const clientMetadata = getClientMetadata(v2ClientNames);
@@ -39,15 +38,23 @@ export default function transformer(file: FileInfo, api: API) {
       v2ClientName,
       v3ClientName,
       v3ClientPackageName,
-      v2DefaultModuleName,
+      v2GlobalName: v2GlobalName,
     });
-    replaceTSTypeReference(j, source, { v2ClientName, v2DefaultModuleName, v3ClientName });
-    removeV2ClientModule(j, source, { v2ClientName, v2DefaultModuleName });
-    removePromiseCalls(j, source, { v2ClientName, v2DefaultModuleName });
-    replaceClientCreation(j, source, { v2ClientName, v2DefaultModuleName, v3ClientName });
+    replaceTSTypeReference(j, source, {
+      v2ClientName,
+      v2GlobalName: v2GlobalName,
+      v3ClientName,
+    });
+    removeV2ClientModule(j, source, { v2ClientName, v2GlobalName: v2GlobalName });
+    removePromiseCalls(j, source, { v2ClientName, v2GlobalName: v2GlobalName });
+    replaceClientCreation(j, source, {
+      v2ClientName,
+      v2GlobalName: v2GlobalName,
+      v3ClientName,
+    });
   }
 
-  removeDefaultModuleIfNotUsed(j, source, v2DefaultModuleName);
+  removeDefaultModuleIfNotUsed(j, source, v2GlobalName);
 
   return source.toSource();
 }

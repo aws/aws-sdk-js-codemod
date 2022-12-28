@@ -6,21 +6,21 @@ import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeR
 
 export interface GetV2ClientIdNamesOptions {
   v2ClientName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 export const getV2ClientIdentifiers = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2DefaultModuleName, v2ClientName }: GetV2ClientIdNamesOptions
+  { v2GlobalName, v2ClientName }: GetV2ClientIdNamesOptions
 ): Identifier[] => {
   const v2ClientIdNamesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, {
-    v2DefaultModuleName,
+    v2GlobalName,
     v2ClientName,
   });
 
   const v2ClientIdNamesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, {
-    v2DefaultModuleName,
+    v2GlobalName,
     v2ClientName,
   });
 

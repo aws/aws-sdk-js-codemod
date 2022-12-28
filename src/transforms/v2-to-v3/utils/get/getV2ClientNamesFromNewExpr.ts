@@ -5,10 +5,10 @@ import { getV2ClientNewExpression } from "../get";
 export const getV2ClientNamesFromNewExpr = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2DefaultModuleName: string
+  v2GlobalName: string
 ): string[] =>
   source
-    .find(j.NewExpression, getV2ClientNewExpression({ v2DefaultModuleName }))
+    .find(j.NewExpression, getV2ClientNewExpression({ v2GlobalName }))
     .nodes()
     .map(
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name

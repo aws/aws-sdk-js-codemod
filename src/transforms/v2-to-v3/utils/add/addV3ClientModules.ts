@@ -8,7 +8,7 @@ export interface AddV3ClientModulesOptions {
   v2ClientName: string;
   v3ClientName: string;
   v3ClientPackageName: string;
-  v2DefaultModuleName: string;
+  v2GlobalName: string;
 }
 
 export const addV3ClientModules = (

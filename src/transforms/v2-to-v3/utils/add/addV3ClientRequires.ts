@@ -20,12 +20,7 @@ const getClientProperty = (j: JSCodeshift, name: Identifier) =>
 export const addV3ClientRequires = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  {
-    v2ClientName,
-    v3ClientName,
-    v3ClientPackageName,
-    v2DefaultModuleName,
-  }: AddV3ClientModulesOptions
+  { v2ClientName, v3ClientName, v3ClientPackageName, v2GlobalName }: AddV3ClientModulesOptions
 ): void => {
   const v3ClientNameProperty = getClientProperty(j, j.identifier(v3ClientName));
   const existingRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
@@ -54,7 +49,7 @@ export const addV3ClientRequires = (
   }
 
   // Add require for input/output types, if needed.
-  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2DefaultModuleName });
+  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
 
   if (v3ClientTypeNames.length > 0) {
     const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
