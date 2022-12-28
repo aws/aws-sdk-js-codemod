@@ -57,7 +57,10 @@ export const addV3ClientImports = (
       source: { value: v3ClientPackageName },
     });
     for (const v3ClientTypeName of v3ClientTypeNames.sort()) {
-      addV3ClientModuleImport(j, clientImports, v3ClientTypeName);
+      addV3ClientModuleImport(j, clientImports, {
+        localName: v3ClientTypeName,
+        importedName: v3ClientTypeName,
+      });
     }
   }
 };
