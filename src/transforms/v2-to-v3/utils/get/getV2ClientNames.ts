@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES } from "../config";
 import { containsRequire } from "../containsRequire";
-import { getImportSpecifiers } from "./getImportSpecifiers";
+import { getImportIdentifierName } from "./getImportIdentifierName";
 import { getRequireIdentifierName } from "./getRequireIdentifierName";
 import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
@@ -14,7 +14,7 @@ export const getV2ClientNames = (j: JSCodeshift, source: Collection<unknown>): s
   }
 
   return CLIENT_NAMES.filter((clientName) => {
-    const importSpecifiers = getImportSpecifiers(j, source, getV2ServiceModulePath(clientName));
+    const importSpecifiers = getImportIdentifierName(j, source, getV2ServiceModulePath(clientName));
     if (
       importSpecifiers &&
       importSpecifiers.map((importSpecifier) => importSpecifier.local?.name).includes(clientName)
