@@ -8,4 +8,9 @@ export interface V3ClientRequirePropertyOptions {
 export const getV3ClientRequireProperty = (
   j: JSCodeshift,
   { keyName, valueName }: V3ClientRequirePropertyOptions
-) => j.objectProperty(j.identifier(keyName), j.identifier(valueName));
+) =>
+  j.objectProperty.from({
+    key: j.identifier(keyName),
+    value: j.identifier(valueName),
+    shorthand: true,
+  });

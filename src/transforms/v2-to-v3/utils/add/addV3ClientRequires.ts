@@ -29,7 +29,6 @@ export const addV3ClientRequires = (
     v2GlobalName,
   }: AddV3ClientModulesOptions
 ): void => {
-  const v3ClientNameProperty = getClientProperty(j, j.identifier(v3ClientName));
   const existingRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
 
   // Require declaration already exists.
