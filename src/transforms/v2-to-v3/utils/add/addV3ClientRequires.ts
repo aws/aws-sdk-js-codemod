@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import {
@@ -9,14 +9,6 @@ import {
 } from "../get";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
-
-const getClientProperty = (j: JSCodeshift, name: Identifier) =>
-  j.property.from({
-    kind: "init",
-    key: name,
-    shorthand: true,
-    value: name,
-  });
 
 export const addV3ClientRequires = (
   j: JSCodeshift,
