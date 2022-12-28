@@ -4,7 +4,7 @@ import { getMergedArrayWithoutDuplicates } from "./getMergedArrayWithoutDuplicat
 import { getV2ClientNamesFromNewExpr } from "./getV2ClientNamesFromNewExpr";
 import { getV2ClientNamesFromTSTypeRef } from "./getV2ClientNamesFromTSTypeRef";
 
-export const getV2ClientNamesFromDefault = (
+export const getV2ClientNamesFromGlobal = (
   j: JSCodeshift,
   source: Collection<unknown>,
   v2GlobalName: string

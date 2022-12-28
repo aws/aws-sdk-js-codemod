@@ -4,7 +4,7 @@ import {
   addV3ClientModules,
   getClientMetadata,
   getV2ClientNames,
-  getV2ClientNamesFromDefault,
+  getV2ClientNamesFromGlobal,
   getV2GlobalName,
   isTypeScriptFile,
   removePromiseCalls,
@@ -27,7 +27,7 @@ export default function transformer(file: FileInfo, api: API) {
   }
 
   if (v2GlobalName) {
-    v2ClientNames.push(...getV2ClientNamesFromDefault(j, source, v2GlobalName));
+    v2ClientNames.push(...getV2ClientNamesFromGlobal(j, source, v2GlobalName));
   }
 
   const clientMetadata = getClientMetadata(v2ClientNames);
