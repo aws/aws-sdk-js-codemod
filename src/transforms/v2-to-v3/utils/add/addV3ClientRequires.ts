@@ -32,11 +32,11 @@ export const addV3ClientRequires = (
   } else {
     // Insert after require for global SDK if present. If not, insert after service require.
     const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
-    const defaultRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
+    const globalRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
     const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);
 
     const requireVarDecl =
-      defaultRequireVarDecl.size() > 0 ? defaultRequireVarDecl : serviceRequireVarDecl;
+      globalRequireVarDecl.size() > 0 ? globalRequireVarDecl : serviceRequireVarDecl;
     requireVarDecl.at(0).insertAfter(
       j.variableDeclaration("const", [
         j.variableDeclarator(
