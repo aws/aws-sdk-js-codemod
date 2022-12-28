@@ -34,24 +34,15 @@ export default function transformer(file: FileInfo, api: API) {
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
     const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
-    addV3ClientModules(j, source, {
-      v2ClientName,
-      v3ClientName,
-      v3ClientPackageName,
-      v2GlobalName: v2GlobalName,
-    });
-    replaceTSTypeReference(j, source, {
-      v2ClientName,
-      v2GlobalName: v2GlobalName,
-      v3ClientName,
-    });
-    removeV2ClientModule(j, source, { v2ClientName, v2GlobalName: v2GlobalName });
-    removePromiseCalls(j, source, { v2ClientName, v2GlobalName: v2GlobalName });
-    replaceClientCreation(j, source, {
-      v2ClientName,
-      v2GlobalName: v2GlobalName,
-      v3ClientName,
-    });
+
+    const v2Options = { v2ClientName, v2GlobalName };
+    const v3Options = { v3ClientName, v3ClientPackageName };
+
+    addV3ClientModules(j, source, { ...v2Options, ...v3Options });
+    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+    removeV2ClientModule(j, source, v2Options);
+    removePromiseCalls(j, source, v2Options);
+    replaceClientCreation(j, source, { ...v2Options, v3ClientName });
   }
 
   removeDefaultModuleIfNotUsed(j, source, v2GlobalName);
