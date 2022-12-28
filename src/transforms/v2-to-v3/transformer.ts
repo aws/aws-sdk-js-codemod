@@ -46,6 +46,7 @@ export default function transformer(file: FileInfo, api: API) {
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeV2ClientModule(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
+
     if (v2GlobalName) {
       replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
     }
