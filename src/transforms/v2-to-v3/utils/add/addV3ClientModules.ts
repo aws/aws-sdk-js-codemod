@@ -6,6 +6,7 @@ import { addV3ClientRequires } from "./addV3ClientRequires";
 
 export interface AddV3ClientModulesOptions {
   v2ClientName: string;
+  v2ClientIdName: string;
   v2GlobalName?: string;
   v3ClientName: string;
   v3ClientPackageName: string;

@@ -3,8 +3,8 @@ import { API, FileInfo } from "jscodeshift";
 import {
   addV3ClientModules,
   getClientMetadata,
-  getV2ClientNames,
   getV2ClientNamesFromGlobal,
+  getV2ClientNamesRecord,
   getV2GlobalName,
   isTypeScriptFile,
   removePromiseCalls,
@@ -19,22 +19,27 @@ export default function transformer(file: FileInfo, api: API) {
   const source = j(file.source);
 
   const v2GlobalName = getV2GlobalName(j, source);
-  const v2ClientNames = getV2ClientNames(j, source);
+  const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
 
-  if (!v2GlobalName && v2ClientNames.length === 0) {
+  if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
   }
 
   if (v2GlobalName) {
-    v2ClientNames.push(...getV2ClientNamesFromGlobal(j, source, v2GlobalName));
+    const v2ClientNamesFromGlobal = getV2ClientNamesFromGlobal(j, source, v2GlobalName);
+    for (const v2ClientNameFromGlobal of v2ClientNamesFromGlobal) {
+      if (!(v2ClientNameFromGlobal in v2ClientNamesRecord)) {
+        v2ClientNamesRecord[v2ClientNameFromGlobal] = v2ClientNameFromGlobal;
+      }
+    }
   }
 
-  const clientMetadata = getClientMetadata(v2ClientNames);
+  const clientMetadata = getClientMetadata(v2ClientNamesRecord);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
-    const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
+    const { v2ClientIdName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
-    const v2Options = { v2ClientName, v2GlobalName };
+    const v2Options = { v2ClientName, v2ClientIdName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     addV3ClientModules(j, source, { ...v2Options, ...v3Options });

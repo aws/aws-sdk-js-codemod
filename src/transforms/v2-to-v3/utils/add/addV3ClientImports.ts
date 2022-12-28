@@ -1,14 +1,20 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ServiceModulePath, getV3ClientTypeNames } from "../get";
+import { getV2ServiceModulePath, getV3ClientImportSpecifier, getV3ClientTypeNames } from "../get";
 import { addV3ClientModuleImport } from "./addV3ClientModuleImport";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
 export const addV3ClientImports = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v3ClientName, v3ClientPackageName, v2GlobalName }: AddV3ClientModulesOptions
+  {
+    v2ClientName,
+    v2ClientIdName,
+    v2GlobalName,
+    v3ClientName,
+    v3ClientPackageName,
+  }: AddV3ClientModulesOptions
 ): void => {
   const existingImports = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
@@ -16,7 +22,10 @@ export const addV3ClientImports = (
 
   // Import declaration already exists.
   if (existingImports.size()) {
-    addV3ClientModuleImport(j, existingImports, v3ClientName);
+    addV3ClientModuleImport(j, existingImports, {
+      localName: v2ClientIdName,
+      importedName: v3ClientName,
+    });
   } else {
     // Insert after default import or service import, whichever comes first.
     source
@@ -29,7 +38,12 @@ export const addV3ClientImports = (
       .at(0)
       .insertAfter(
         j.importDeclaration(
-          [j.importSpecifier(j.identifier(v3ClientName))],
+          [
+            getV3ClientImportSpecifier(j, {
+              localName: v2ClientIdName,
+              importedName: v3ClientName,
+            }),
+          ],
           j.stringLiteral(v3ClientPackageName)
         )
       );
