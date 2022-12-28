@@ -6,6 +6,7 @@ import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeR
 
 export interface GetV2ClientIdentifiersOptions {
   v2ClientName: string;
+  v2ClientLocalName: string;
   v2GlobalName?: string;
 }
 

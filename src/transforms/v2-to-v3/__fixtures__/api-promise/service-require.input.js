@@ -1,4 +1,4 @@
-import { DynamoDB as AWS_DynamoDB } from "@aws-sdk/client-dynamodb";
+const AWS_DynamoDB = require("aws-sdk/clients/dynamodb");
 
 const client = new AWS_DynamoDB();
 
@@ -6,7 +6,7 @@ const client = new AWS_DynamoDB();
 {
   // async/await
   try {
-    await client.listTables();
+    await client.listTables().promise();
     console.log(data);
   } catch (err) {
     console.log(err, err.stack);
@@ -15,6 +15,7 @@ const client = new AWS_DynamoDB();
   // .then() and .catch()
   client
     .listTables()
+    .promise()
     .then((data) => console.log(data))
     .catch((err) => console.log(err, err.stack));
 
@@ -25,16 +26,17 @@ const client = new AWS_DynamoDB();
     }
   
     async listTables() {
-      return await this.clientInClass.listTables();
+      return await this.clientInClass.listTables().promise();
     }
   }
 
   // Variable declarator
-  const listTablesPromise = client.listTables();
+  const listTablesPromise = client.listTables().promise();
 
   // Promise call on request in variable declarator
   const listTablesRequest = client.listTables();
   listTablesRequest
+    .promise()
     .then((data) => console.log(data))
     .catch((err) => console.log(err, err.stack));
 }
@@ -43,7 +45,7 @@ const client = new AWS_DynamoDB();
 {
   // async/await
   try {
-    await client.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
+    await client.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
     console.log(data);
   } catch (err) {
     console.log(err, err.stack);
@@ -52,6 +54,7 @@ const client = new AWS_DynamoDB();
   // .then() and .catch()
   client
     .listTagsOfResource({ ResourceArn: "STRING_VALUE" })
+    .promise()
     .then((data) => console.log(data))
     .catch((err) => console.log(err, err.stack));
 }

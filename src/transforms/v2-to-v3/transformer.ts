@@ -3,8 +3,8 @@ import { API, FileInfo } from "jscodeshift";
 import {
   addV3ClientModules,
   getClientMetadata,
-  getV2ClientNames,
   getV2ClientNamesFromGlobal,
+  getV2ClientNamesRecord,
   getV2GlobalName,
   isTypeScriptFile,
   removePromiseCalls,
@@ -19,30 +19,37 @@ export default function transformer(file: FileInfo, api: API) {
   const source = j(file.source);
 
   const v2GlobalName = getV2GlobalName(j, source);
-  const v2ClientNames = getV2ClientNames(j, source);
+  const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
 
-  if (!v2GlobalName && v2ClientNames.length === 0) {
+  if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
   }
 
   if (v2GlobalName) {
-    v2ClientNames.push(...getV2ClientNamesFromGlobal(j, source, v2GlobalName));
+    getV2ClientNamesFromGlobal(j, source, v2GlobalName).forEach((v2ClientNameFromGlobal) => {
+      if (!(v2ClientNameFromGlobal in v2ClientNamesRecord)) {
+        v2ClientNamesRecord[v2ClientNameFromGlobal] = v2ClientNameFromGlobal;
+      }
+    });
   }
 
-  const clientMetadata = getClientMetadata(v2ClientNames);
+  Object.entries(getClientMetadata(v2ClientNamesRecord))
+    .reverse()
+    .forEach(([v2ClientName, v3ClientMetadata]) => {
+      const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
-  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadata).reverse()) {
-    const { v3ClientName, v3ClientPackageName } = v3ClientMetadata;
+      const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
+      const v3Options = { v3ClientName, v3ClientPackageName };
 
-    const v2Options = { v2ClientName, v2GlobalName };
-    const v3Options = { v3ClientName, v3ClientPackageName };
+      addV3ClientModules(j, source, { ...v2Options, ...v3Options });
+      replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+      removeV2ClientModule(j, source, v2Options);
+      removePromiseCalls(j, source, v2Options);
 
-    addV3ClientModules(j, source, { ...v2Options, ...v3Options });
-    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
-    removeV2ClientModule(j, source, v2Options);
-    removePromiseCalls(j, source, v2Options);
-    replaceClientCreation(j, source, { ...v2Options, v3ClientName });
-  }
+      if (v2GlobalName) {
+        replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+      }
+    });
 
   if (v2GlobalName) {
     removeV2GlobalModule(j, source, v2GlobalName);

@@ -4,29 +4,19 @@ import { getV2ClientNewExpression } from "../get";
 
 export interface ReplaceClientCreationOptions {
   v2ClientName: string;
-  v2GlobalName?: string;
-  v3ClientName: string;
+  v2ClientLocalName: string;
+  v2GlobalName: string;
 }
 
 // Replace v2 client creation with v3 client creation.
 export const replaceClientCreation = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2GlobalName, v3ClientName }: ReplaceClientCreationOptions
+  { v2ClientName, v2ClientLocalName, v2GlobalName }: ReplaceClientCreationOptions
 ): void => {
-  if (v2GlobalName) {
-    // Replace clients created with default module.
-    source
-      .find(j.NewExpression, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
-      .replaceWith((v2ClientNewExpression) =>
-        j.newExpression(j.identifier(v3ClientName), v2ClientNewExpression.node.arguments)
-      );
-  }
-
-  // Replace clients created with client module.
   source
-    .find(j.NewExpression, getV2ClientNewExpression({ v2ClientName }))
+    .find(j.NewExpression, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
     .replaceWith((v2ClientNewExpression) =>
-      j.newExpression(j.identifier(v3ClientName), v2ClientNewExpression.node.arguments)
+      j.newExpression(j.identifier(v2ClientLocalName), v2ClientNewExpression.node.arguments)
     );
 };
