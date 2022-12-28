@@ -8,14 +8,15 @@ import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
 export interface RemoveV2ClientModuleOptions {
   v2ClientName: string;
-  v2GlobalName: string;
+  v2GlobalName?: string;
 }
 
 export const removeV2ClientModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2GlobalName }: RemoveV2ClientModuleOptions
+  options: RemoveV2ClientModuleOptions
 ) => {
+  const { v2ClientName } = options;
   const literalValue = getV2ServiceModulePath(v2ClientName);
   const removeIdentifierNameOptions = {
     identifierName: v2ClientName,
@@ -27,10 +28,7 @@ export const removeV2ClientModule = (
   } else {
     removeImportIdentifierName(j, source, removeIdentifierNameOptions);
 
-    const v2ClientTypeNames = getV2ClientTypeNames(j, source, {
-      v2ClientName,
-      v2GlobalName,
-    });
+    const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
     for (const v2ClientTypeName of v2ClientTypeNames) {
       if (isV2ClientInputOutputType(v2ClientTypeName)) {
         removeImportIdentifierName(j, source, {
