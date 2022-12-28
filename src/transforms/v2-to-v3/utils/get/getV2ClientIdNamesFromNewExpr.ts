@@ -39,15 +39,15 @@ export const getV2ClientIdNamesFromNewExpr = (
   source: Collection<unknown>,
   { v2GlobalName, v2ClientName }: GetV2ClientIdNamesFromNewExprOptions
 ): string[] => {
-  const namesFromDefaultModule = [];
+  const namesFromGlobalModule = [];
   const namesFromServiceModule = [];
 
   for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
-    namesFromDefaultModule.push(
+    namesFromGlobalModule.push(
       ...getNames(j, source, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
     );
     namesFromServiceModule.push(...getNames(j, source, getV2ClientNewExpression({ v2ClientName })));
   }
 
-  return getMergedArrayWithoutDuplicates(namesFromDefaultModule, namesFromServiceModule);
+  return getMergedArrayWithoutDuplicates(namesFromGlobalModule, namesFromServiceModule);
 };
