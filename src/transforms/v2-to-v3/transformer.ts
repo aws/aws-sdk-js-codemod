@@ -47,7 +47,7 @@ export default function transformer(file: FileInfo, api: API) {
     removeV2ClientModule(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
     if (v2GlobalName) {
-      replaceClientCreation(j, source, { v2ClientName, v2GlobalName, v3ClientName });
+      replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
     }
   }
 
