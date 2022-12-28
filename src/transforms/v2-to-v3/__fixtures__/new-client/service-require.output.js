@@ -80,7 +80,7 @@ const {
   AuditManager
 } = require("@aws-sdk/client-auditmanager");
 const {
-  SageMakerA2IRuntime
+  SageMakerA2IRuntime: AugmentedAIRuntime
 } = require("@aws-sdk/client-sage-maker-a2iruntime");
 const {
   AutoScaling
@@ -110,7 +110,7 @@ const {
   Budgets
 } = require("@aws-sdk/client-budgets");
 const {
-  CostAndUsageReportService
+  CostAndUsageReportService: CUR
 } = require("@aws-sdk/client-cost-and-usage-report-service");
 const {
   Chime
@@ -170,7 +170,7 @@ const {
   CloudWatchLogs
 } = require("@aws-sdk/client-cloudwatch-logs");
 const {
-  Codeartifact
+  Codeartifact: CodeArtifact
 } = require("@aws-sdk/client-codeartifact");
 const {
   CodeBuild
@@ -197,16 +197,16 @@ const {
   CodeStar
 } = require("@aws-sdk/client-codestar");
 const {
-  CodestarNotifications
+  CodestarNotifications: CodeStarNotifications
 } = require("@aws-sdk/client-codestar-notifications");
 const {
-  CodeStarConnections
+  CodeStarConnections: CodeStarconnections
 } = require("@aws-sdk/client-codestar-connections");
 const {
   CognitoIdentity
 } = require("@aws-sdk/client-cognito-identity");
 const {
-  CognitoIdentityProvider
+  CognitoIdentityProvider: CognitoIdentityServiceProvider
 } = require("@aws-sdk/client-cognito-identity-provider");
 const {
   CognitoSync
@@ -254,7 +254,7 @@ const {
   DLM
 } = require("@aws-sdk/client-dlm");
 const {
-  DatabaseMigrationService
+  DatabaseMigrationService: DMS
 } = require("@aws-sdk/client-database-migration-service");
 const {
   DataBrew
@@ -284,7 +284,7 @@ const {
   DirectoryService
 } = require("@aws-sdk/client-directory-service");
 const {
-  ApplicationDiscoveryService
+  ApplicationDiscoveryService: Discovery
 } = require("@aws-sdk/client-application-discovery-service");
 const {
   DocDB
@@ -326,10 +326,10 @@ const {
   EKS
 } = require("@aws-sdk/client-eks");
 const {
-  ElasticLoadBalancing
+  ElasticLoadBalancing: ELB
 } = require("@aws-sdk/client-elastic-load-balancing");
 const {
-  ElasticLoadBalancingV2
+  ElasticLoadBalancingV2: ELBv2
 } = require("@aws-sdk/client-elastic-load-balancing-v2");
 const {
   EMR
@@ -338,10 +338,10 @@ const {
   EMRServerless
 } = require("@aws-sdk/client-emr-serverless");
 const {
-  EMRContainers
+  EMRContainers: EMRcontainers
 } = require("@aws-sdk/client-emr-containers");
 const {
-  ElasticsearchService
+  ElasticsearchService: ES
 } = require("@aws-sdk/client-elasticsearch-service");
 const {
   ElastiCache
@@ -371,7 +371,7 @@ const {
   Finspace
 } = require("@aws-sdk/client-finspace");
 const {
-  FinspaceData
+  FinspaceData: Finspacedata
 } = require("@aws-sdk/client-finspace-data");
 const {
   Firehose
@@ -380,10 +380,10 @@ const {
   Fis
 } = require("@aws-sdk/client-fis");
 const {
-  Forecastquery
+  Forecastquery: ForecastQueryService
 } = require("@aws-sdk/client-forecastquery");
 const {
-  Forecast
+  Forecast: ForecastService
 } = require("@aws-sdk/client-forecast");
 const {
   FraudDetector
@@ -431,10 +431,10 @@ const {
   IAM
 } = require("@aws-sdk/client-iam");
 const {
-  Ivs
+  Ivs: IVS
 } = require("@aws-sdk/client-ivs");
 const {
-  Identitystore
+  Identitystore: IdentityStore
 } = require("@aws-sdk/client-identitystore");
 const {
   Imagebuilder
@@ -488,10 +488,10 @@ const {
   IoTWireless
 } = require("@aws-sdk/client-iot-wireless");
 const {
-  IoT
+  IoT: Iot
 } = require("@aws-sdk/client-iot");
 const {
-  IoTDataPlane
+  IoTDataPlane: IotData
 } = require("@aws-sdk/client-iot-data-plane");
 const {
   IotDeviceAdvisor
@@ -533,7 +533,7 @@ const {
   KinesisVideoMedia
 } = require("@aws-sdk/client-kinesis-video-media");
 const {
-  KinesisVideoSignaling
+  KinesisVideoSignaling: KinesisVideoSignalingChannels
 } = require("@aws-sdk/client-kinesis-video-signaling");
 const {
   KinesisVideoWebRTCStorage
@@ -551,7 +551,7 @@ const {
   LexModelsV2
 } = require("@aws-sdk/client-lex-models-v2");
 const {
-  LexRuntimeService
+  LexRuntimeService: LexRuntime
 } = require("@aws-sdk/client-lex-runtime-service");
 const {
   LexRuntimeV2
@@ -584,7 +584,7 @@ const {
   M2
 } = require("@aws-sdk/client-m2");
 const {
-  Mq
+  Mq: MQ
 } = require("@aws-sdk/client-mq");
 const {
   MTurk
@@ -758,7 +758,7 @@ const {
   RDS
 } = require("@aws-sdk/client-rds");
 const {
-  RDSData
+  RDSData: RDSDataService
 } = require("@aws-sdk/client-rds-data");
 const {
   RUM
@@ -827,7 +827,7 @@ const {
   SES
 } = require("@aws-sdk/client-ses");
 const {
-  SESv2
+  SESv2: SESV2
 } = require("@aws-sdk/client-sesv2");
 const {
   SMS
@@ -881,7 +881,7 @@ const {
   SagemakerEdge
 } = require("@aws-sdk/client-sagemaker-edge");
 const {
-  Savingsplans
+  Savingsplans: SavingsPlans
 } = require("@aws-sdk/client-savingsplans");
 const {
   Scheduler
@@ -932,7 +932,7 @@ const {
   SsmSap
 } = require("@aws-sdk/client-ssm-sap");
 const {
-  SFN
+  SFN: StepFunctions
 } = require("@aws-sdk/client-sfn");
 const {
   StorageGateway
@@ -956,7 +956,7 @@ const {
   TimestreamWrite
 } = require("@aws-sdk/client-timestream-write");
 const {
-  Transcribe
+  Transcribe: TranscribeService
 } = require("@aws-sdk/client-transcribe");
 const {
   Transfer
