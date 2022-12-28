@@ -21,12 +21,12 @@ const client = new DynamoDB();
 
   // Client as class member
   class ClientClassMember {
-    constructor(client = new DynamoDB()) {
-      this.client = client;
+    constructor(clientInCtr = new DynamoDB()) {
+      this.clientInClass = clientInCtr;
     }
   
     async listTables() {
-      return await this.client.listTables().promise();
+      return await this.clientInClass.listTables().promise();
     }
   }
 

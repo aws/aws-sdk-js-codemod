@@ -4,13 +4,13 @@ export const listTables = (client: DynamoDB) => client.listTables().promise();
 
 // Client as class member
 class ClientClassMember {
-  private client: DynamoDB;
+  private clientInClass: DynamoDB;
   
-  constructor(client: DynamoDB) {
-    this.client = client;
+  constructor(clientInCtr: DynamoDB) {
+    this.clientInClass = clientInCtr;
   }
 
   async listTables() {
-    return await this.client.listTables().promise();
+    return await this.clientInClass.listTables().promise();
   }
 }
