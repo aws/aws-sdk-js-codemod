@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.0
+
+### Minor Changes
+
+- Use local names to minimize transformation ([c77b0d9](https://github.com/awslabs/aws-sdk-js-codemod/commit/c77b0d9))
+
 ## 0.6.12
 
 ### Patch Changes
