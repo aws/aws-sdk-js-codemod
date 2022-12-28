@@ -12,7 +12,9 @@ export const getV3PackageRequireCode = (
   for (const v2ClientName of sortedV2ClientNames) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
-    v3PackageRequireCode += `const {\n  ${v3ClientName}\n} = require("${v3ClientPackageName}");\n`;
+    const v3RequireKeyValuePair =
+      v3ClientName === v2ClientName ? v3ClientName : `${v3ClientName}: ${v2ClientName}`;
+    v3PackageRequireCode += `const {\n  ${v3RequireKeyValuePair}\n} = require("${v3ClientPackageName}");\n`;
     if (extraNewLine) v3PackageRequireCode += `\n`;
   }
   return v3PackageRequireCode;
