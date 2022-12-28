@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.6.12
+
+### Patch Changes
+
+- Rename v2DefaultModuleName to v2GlobalName to align with v2ClientName ([10be584](https://github.com/awslabs/aws-sdk-js-codemod/commit/10be584))
+- Remove enforcement of v2GlobalName to string ([aba497a](https://github.com/awslabs/aws-sdk-js-codemod/commit/aba497a))
+
 ## 0.6.11
 
 ### Patch Changes
