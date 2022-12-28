@@ -5,6 +5,7 @@ import { removePromiseForCallExpression } from "./removePromiseForCallExpression
 
 export interface RemovePromiseCallsOptions {
   v2ClientName: string;
+  v2ClientLocalName: string;
   v2GlobalName?: string;
 }
 
