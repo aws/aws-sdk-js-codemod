@@ -3,7 +3,7 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference }
 import { getV2ClientTSTypeRef, getV2ClientTypeNames, getV3ClientTypeName } from "../get";
 import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
 
-export interface ReplaceTypeReferenceOptions {
+export interface ReplaceTSTypeReferenceOptions {
   v2ClientName: string;
   v2GlobalName?: string;
   v3ClientName: string;
@@ -21,7 +21,7 @@ const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifie
 export const replaceTSTypeReference = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2GlobalName, v2ClientName, v3ClientName }: ReplaceTypeReferenceOptions
+  { v2GlobalName, v2ClientName, v3ClientName }: ReplaceTSTypeReferenceOptions
 ): void => {
   // Replace type reference to client created with default module.
   source
