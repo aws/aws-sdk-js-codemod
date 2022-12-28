@@ -38,7 +38,7 @@ export const replaceTSTypeReference = (
 
   // Replace type reference to client created with client module.
   source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName }))
+    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, isType: true }))
     .filter((v2ClientType) => isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node)))
     .replaceWith((v2ClientType) => getV3ClientTypeName(getRightIdentifierName(v2ClientType.node)));
 
