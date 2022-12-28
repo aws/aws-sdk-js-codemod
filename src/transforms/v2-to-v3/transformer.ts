@@ -7,9 +7,9 @@ import {
   getV2ClientNamesFromDefault,
   getV2GlobalName,
   isTypeScriptFile,
-  removeDefaultModuleIfNotUsed,
   removePromiseCalls,
   removeV2ClientModule,
+  removeV2GlobalModule,
   replaceClientCreation,
   replaceTSTypeReference,
 } from "./utils";
@@ -45,7 +45,7 @@ export default function transformer(file: FileInfo, api: API) {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
   }
 
-  removeDefaultModuleIfNotUsed(j, source, v2GlobalName);
+  removeV2GlobalModule(j, source, v2GlobalName);
 
   return source.toSource();
 }

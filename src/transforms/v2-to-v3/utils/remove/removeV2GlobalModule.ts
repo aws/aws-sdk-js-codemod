@@ -5,17 +5,17 @@ import { containsRequire } from "../containsRequire";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
-export const removeDefaultModuleIfNotUsed = (
+export const removeV2GlobalModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  defaultModuleName: string
+  v2GlobalName: string
 ) => {
-  const identifierUsages = source.find(j.Identifier, { name: defaultModuleName });
+  const identifierUsages = source.find(j.Identifier, { name: v2GlobalName });
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
     const removeIdentifierNameOptions = {
-      identifierName: defaultModuleName,
+      identifierName: v2GlobalName,
       literalValue: PACKAGE_NAME,
     };
     if (containsRequire(j, source)) {
