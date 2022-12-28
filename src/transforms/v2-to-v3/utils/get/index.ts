@@ -7,7 +7,7 @@ export * from "./getV2ClientNamesFromDefault";
 export * from "./getV2ClientNewExpression";
 export * from "./getV2ClientTSTypeRef";
 export * from "./getV2ClientTypeNames";
-export * from "./getV2DefaultModuleName";
+export * from "./getV2GlobalName";
 export * from "./getV2ServiceModulePath";
 export * from "./getV3ClientTypeName";
 export * from "./getV3ClientTypeNames";
