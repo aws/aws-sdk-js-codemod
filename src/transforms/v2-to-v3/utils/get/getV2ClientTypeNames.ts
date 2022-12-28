@@ -16,8 +16,17 @@ export interface GetV2ClientTypeNamesOptions {
   v2DefaultModuleName: string;
 }
 
-const getRightIdentifierName = (node: TSTypeReference) =>
-  ((node.typeName as TSQualifiedName).right as Identifier).name;
+const getRightIdentifierName = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
+  tsTypeRef: TSTypeReference
+) =>
+  source
+    .find(j.TSTypeReference, tsTypeRef)
+    .nodes()
+    .map((node) => (node.typeName as TSQualifiedName).right)
+    .filter((node) => node.type === "Identifier")
+    .map((node) => (node as Identifier).name);
 
 export const getV2ClientTypeNames = (
   j: JSCodeshift,
@@ -38,14 +47,8 @@ export const getV2ClientTypeNames = (
 
   return [
     ...new Set([
-      ...source
-        .find(j.TSTypeReference, v2GlobalTSTypeRef)
-        .nodes()
-        .map((node) => getRightIdentifierName(node)),
-      ...source
-        .find(j.TSTypeReference, v2ClientTSTypeRef)
-        .nodes()
-        .map((node) => getRightIdentifierName(node)),
+      ...getRightIdentifierName(j, source, v2GlobalTSTypeRef),
+      ...getRightIdentifierName(j, source, v2ClientTSTypeRef),
       ...source
         .find(j.ImportDeclaration, v2ServiceModuleImportDeclaration)
         .nodes()
