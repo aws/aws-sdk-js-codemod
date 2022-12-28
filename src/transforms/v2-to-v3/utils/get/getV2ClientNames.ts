@@ -13,14 +13,7 @@ export const getV2ClientNames = (j: JSCodeshift, source: Collection<unknown>): s
     ).filter((v2ServiceModuleName) => v2ServiceModuleName !== undefined) as string[];
   }
 
-  return CLIENT_NAMES.filter((clientName) => {
-    const importSpecifiers = getImportIdentifierName(j, source, getV2ServiceModulePath(clientName));
-    if (
-      importSpecifiers &&
-      importSpecifiers.map((importSpecifier) => importSpecifier.local?.name).includes(clientName)
-    ) {
-      return true;
-    }
-    return false;
-  });
+  return CLIENT_NAMES.map((clientName) =>
+    getImportIdentifierName(j, source, getV2ServiceModulePath(clientName))
+  ).filter((v2ServiceModuleName) => v2ServiceModuleName !== undefined) as string[];
 };
