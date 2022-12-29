@@ -13,6 +13,8 @@ import { getServiceImportInput } from "./getServiceImportInput";
 import { getServiceImportOutput } from "./getServiceImportOutput";
 import { getServiceRequireDeepInput } from "./getServiceRequireDeepInput";
 import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput";
+import { getServiceRequireInput } from "./getServiceRequireInput";
+import { getServiceRequireOutput } from "./getServiceRequireOutput";
 
 // The "use strict" directive is added to so that comments can be attached to it.
 // Recast removes the comments while removing import/require.
@@ -34,8 +36,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-import.output.js", getServiceImportOutput],
     ["service-import-deep.input.js", getServiceImportDeepInput],
     ["service-import-deep.output.js", getServiceImportDeepOutput],
-    ["service-require.input.js", getServiceRequireDeepInput],
-    ["service-require.output.js", getServiceRequireDeepOutput],
+    ["service-require.input.js", getServiceRequireInput],
+    ["service-require.output.js", getServiceRequireOutput],
     ["service-require-deep.input.js", getServiceRequireDeepInput],
     ["service-require-deep.output.js", getServiceRequireDeepOutput],
   ] as [string, (comment: string) => string][]) {
