@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift, ObjectPattern, VariableDeclarator } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import {
@@ -9,6 +9,18 @@ import {
 } from "../get";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
+
+const hasIdentifierName = (varDeclarator: VariableDeclarator, localName: string) =>
+  varDeclarator.id.type === "Identifier" && varDeclarator.id.name === localName;
+
+const hasObjectPropertyName = (varDeclarator: VariableDeclarator, localName: string) =>
+  varDeclarator.id.type === "ObjectPattern" &&
+  (varDeclarator.id as ObjectPattern).properties.some(
+    (property) =>
+      property.type === "Property" &&
+      property.value.type === "Identifier" &&
+      property.value.name === localName
+  );
 
 export const addV3ClientRequires = (
   j: JSCodeshift,
@@ -32,7 +44,28 @@ export const addV3ClientRequires = (
   } else {
     // Insert after require for global SDK if present. If not, insert after service require.
     const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
-    const globalRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
+    const globalRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME).filter(
+      (varDeclaration) => {
+        const declarations = varDeclaration.value.declarations.filter(
+          (declaration) => declaration.type === "VariableDeclarator"
+        ) as VariableDeclarator[];
+
+        if (
+          v2GlobalName &&
+          declarations.some((declaration) => hasIdentifierName(declaration, v2GlobalName))
+        ) {
+          return true;
+        }
+
+        if (
+          declarations.some((declaration) => hasObjectPropertyName(declaration, v2ClientLocalName))
+        ) {
+          return true;
+        }
+
+        return false;
+      }
+    );
     const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);
 
     const requireVarDecl =
