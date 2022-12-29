@@ -8,6 +8,7 @@ export const getRequireVariableDeclaration = (
   source.find(j.VariableDeclaration, {
     declarations: [
       {
+        type: "VariableDeclarator",
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
