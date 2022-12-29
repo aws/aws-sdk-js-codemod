@@ -34,6 +34,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-import.output.js", getServiceImportOutput],
     ["service-import-deep.input.js", getServiceImportDeepInput],
     ["service-import-deep.output.js", getServiceImportDeepOutput],
+    ["service-require.input.js", getServiceRequireDeepInput],
+    ["service-require.output.js", getServiceRequireDeepOutput],
     ["service-require-deep.input.js", getServiceRequireDeepInput],
     ["service-require-deep.output.js", getServiceRequireDeepOutput],
   ] as [string, (comment: string) => string][]) {
