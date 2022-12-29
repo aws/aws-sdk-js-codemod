@@ -1,6 +1,6 @@
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getGlobalRequireInputContent = (codegenComment: string) => {
+export const getGlobalRequireInput = (codegenComment: string) => {
   let globalRequireInputContent = `${codegenComment}\n`;
 
   globalRequireInputContent += `const AWS = require("aws-sdk");\n\n`;

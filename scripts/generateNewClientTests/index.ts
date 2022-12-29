@@ -3,14 +3,14 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
-import { getGlobalImportInputContent } from "./getGlobalImportInputContent";
-import { getGlobalImportOutputContent } from "./getGlobalImportOutputContent";
-import { getGlobalRequireInputContent } from "./getGlobalRequireInputContent";
-import { getGlobalRequireOutputContent } from "./getGlobalRequireOutputContent";
-import { getServiceImportInputContent } from "./getServiceImportInputContent";
-import { getServiceImportOutputContent } from "./getServiceImportOutputContent";
-import { getServiceRequireInputContent } from "./getServiceRequireInputContent";
-import { getServiceRequireOutputContent } from "./getServiceRequireOutputContent";
+import { getGlobalImportInput } from "./getGlobalImportInput";
+import { getGlobalImportOutput } from "./getGlobalImportOutput";
+import { getGlobalRequireInput } from "./getGlobalRequireInput";
+import { getGlobalRequireOutput } from "./getGlobalRequireOutput";
+import { getServiceImportDeepInput } from "./getServiceImportDeepInput";
+import { getServiceImportDeepOutput } from "./getServiceImportDeepOutput";
+import { getServiceRequireDeepInput } from "./getServiceRequireDeepInput";
+import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput";
 
 // The "use strict" directive is added to so that comments can be attached to it.
 // Recast removes the comments while removing import/require.
@@ -24,14 +24,14 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
 
 (async () => {
   for (const [fileName, getFileContent] of [
-    ["global-import.input.js", getGlobalImportInputContent],
-    ["global-import.output.js", getGlobalImportOutputContent],
-    ["global-require.input.js", getGlobalRequireInputContent],
-    ["global-require.output.js", getGlobalRequireOutputContent],
-    ["service-import-deep.input.js", getServiceImportInputContent],
-    ["service-import-deep.output.js", getServiceImportOutputContent],
-    ["service-require-deep.input.js", getServiceRequireInputContent],
-    ["service-require-deep.output.js", getServiceRequireOutputContent],
+    ["global-import.input.js", getGlobalImportInput],
+    ["global-import.output.js", getGlobalImportOutput],
+    ["global-require.input.js", getGlobalRequireInput],
+    ["global-require.output.js", getGlobalRequireOutput],
+    ["service-import-deep.input.js", getServiceImportDeepInput],
+    ["service-import-deep.output.js", getServiceImportDeepOutput],
+    ["service-require-deep.input.js", getServiceRequireDeepInput],
+    ["service-require-deep.output.js", getServiceRequireDeepOutput],
   ] as [string, (comment: string) => string][]) {
     const filePath = join(newClientTestsPath, fileName);
     await writeFile(filePath, getFileContent(codegenComment));
