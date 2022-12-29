@@ -4,18 +4,6 @@ import { PACKAGE_NAME } from "../config";
 import { getRequireVariableDeclaration, getV2ServiceModulePath } from "../get";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
-const getV3ClientRequire = (
-  j: JSCodeshift,
-  v2ClientLocalName: string,
-  v3ClientPackageName: string
-) =>
-  j.variableDeclaration("const", [
-    j.variableDeclarator(
-      j.identifier(v2ClientLocalName),
-      j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
-    ),
-  ]);
-
 export const addV3ClientRequires = (
   j: JSCodeshift,
   source: Collection<unknown>,
@@ -51,5 +39,14 @@ export const addV3ClientRequires = (
   const requireVarDecl =
     globalRequireVarDecl.size() > 0 ? globalRequireVarDecl : serviceRequireVarDecl;
 
-  requireVarDecl.at(0).insertAfter(getV3ClientRequire(j, v2ClientLocalName, v3ClientPackageName));
+  requireVarDecl
+    .at(0)
+    .insertAfter(
+      j.variableDeclaration("const", [
+        j.variableDeclarator(
+          j.identifier(v2ClientLocalName),
+          j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
+        ),
+      ])
+    );
 };
