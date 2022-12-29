@@ -37,13 +37,20 @@ describe("v2-to-v3", () => {
     return { input, outputCode };
   };
 
-  describe.each(fixtureSubDirs)("%s", (subDir) => {
+  describe.each(["new-client"])("%s", (subDir) => {
     const subDirPath = join(fixtureDir, subDir);
     it.concurrent.each(getTestFileMetadata(subDirPath))(
       `transforms: %s.%s`,
       async (filePrefix, fileExtension) => {
+        const startDate = new Date();
+        console.log(`${filePrefix} start: `, startDate.toTimeString());
+
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
         runInlineTest(transformer, null, input, outputCode);
+
+        const endDate = new Date();
+        console.log(`${filePrefix} end: ${endDate.toTimeString()}`);
+        console.log(`${filePrefix} test run time: ${endDate.getTime() - startDate.getTime()}ms`);
       }
     );
   });
