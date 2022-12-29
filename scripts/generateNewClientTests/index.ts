@@ -28,10 +28,10 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["global-import.output.js", getGlobalImportOutputContent],
     ["global-require.input.js", getGlobalRequireInputContent],
     ["global-require.output.js", getGlobalRequireOutputContent],
-    ["service-import.input.js", getServiceImportInputContent],
-    ["service-import.output.js", getServiceImportOutputContent],
-    ["service-require.input.js", getServiceRequireInputContent],
-    ["service-require.output.js", getServiceRequireOutputContent],
+    ["service-import-deep.input.js", getServiceImportInputContent],
+    ["service-import-deep.output.js", getServiceImportOutputContent],
+    ["service-require-deep.input.js", getServiceRequireInputContent],
+    ["service-require-deep.output.js", getServiceRequireOutputContent],
   ] as [string, (comment: string) => string][]) {
     const filePath = join(newClientTestsPath, fileName);
     await writeFile(filePath, getFileContent(codegenComment));
