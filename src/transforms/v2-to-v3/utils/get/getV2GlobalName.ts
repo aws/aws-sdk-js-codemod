@@ -18,6 +18,7 @@ export const getV2GlobalName = (
         },
       })
       .nodes();
+
     if (requireIdentifiers.length > 0) {
       return (requireIdentifiers[0]?.id as Identifier).name;
     }

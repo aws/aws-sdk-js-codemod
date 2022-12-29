@@ -7,10 +7,10 @@ export interface RemoveRequireIdentifierNameOptions {
   sourceValue: string;
 }
 
-const containsIdentifier = (varDeclarator: VariableDeclarator) =>
-  varDeclarator.id.type === "Identifier";
+const hasIdentifierName = (varDeclarator: VariableDeclarator, localName: string) =>
+  varDeclarator.id.type === "Identifier" && varDeclarator.id.name === localName;
 
-const containsObjectWithName = (varDeclarator: VariableDeclarator, localName: string) =>
+const hasObjectPropertyName = (varDeclarator: VariableDeclarator, localName: string) =>
   varDeclarator.id.type === "ObjectPattern" &&
   (varDeclarator.id as ObjectPattern).properties.some(
     (property) =>
@@ -27,10 +27,10 @@ export const removeRequireIdentifierName = (
   getRequireVariableDeclaration(j, source, sourceValue)
     .filter((variableDeclaration) => {
       const declarations = variableDeclaration.value.declarations as VariableDeclarator[];
-      if (declarations.some(containsIdentifier)) {
+      if (declarations.some((varDeclarator) => hasIdentifierName(varDeclarator, localName))) {
         return true;
       }
-      if (declarations.some((varDeclarator) => containsObjectWithName(varDeclarator, localName))) {
+      if (declarations.some((varDeclarator) => hasObjectPropertyName(varDeclarator, localName))) {
         return true;
       }
       return false;
