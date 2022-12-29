@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { PACKAGE_NAME } from "../config";
 import { getV2ClientTypeNames, getV2ServiceModulePath } from "../get";
 import { hasRequire } from "../has";
 import { isV2ClientInputOutputType } from "../is";
@@ -18,23 +19,31 @@ export const removeV2ClientModule = (
   options: RemoveV2ClientModuleOptions
 ) => {
   const { v2ClientName, v2ClientLocalName } = options;
-  const sourceValue = getV2ServiceModulePath(v2ClientName);
-  const removeIdentifierNameOptions = {
-    localName: v2ClientLocalName,
-    sourceValue,
-  };
+  const sourceValues = [PACKAGE_NAME, getV2ServiceModulePath(v2ClientName)];
 
   if (hasRequire(j, source)) {
-    removeRequireIdentifierName(j, source, removeIdentifierNameOptions);
+    sourceValues.forEach((sourceValue) => {
+      removeRequireIdentifierName(j, source, {
+        localName: v2ClientLocalName,
+        sourceValue,
+      });
+    });
   } else {
-    removeImportIdentifierName(j, source, removeIdentifierNameOptions);
+    sourceValues.forEach((sourceValue) => {
+      removeImportIdentifierName(j, source, {
+        localName: v2ClientLocalName,
+        sourceValue,
+      });
+    });
 
     const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
     for (const v2ClientTypeName of v2ClientTypeNames) {
       if (isV2ClientInputOutputType(v2ClientTypeName)) {
-        removeImportIdentifierName(j, source, {
-          localName: v2ClientTypeName,
-          sourceValue,
+        sourceValues.forEach((sourceValue) => {
+          removeImportIdentifierName(j, source, {
+            localName: v2ClientTypeName,
+            sourceValue,
+          });
         });
       }
     }
