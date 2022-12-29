@@ -3,7 +3,7 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 export const getRequireIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  literalValue: string
+  sourceValue: string
 ): string | undefined =>
   (
     source
@@ -12,7 +12,7 @@ export const getRequireIdentifierName = (
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
-          arguments: [{ value: literalValue }],
+          arguments: [{ value: sourceValue }],
         },
       })
       .nodes()[0]?.id as Identifier

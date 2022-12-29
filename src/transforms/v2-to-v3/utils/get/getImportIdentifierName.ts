@@ -3,12 +3,12 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 export const getImportIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  literalValue: string
+  sourceValue: string
 ): string | undefined => {
   const importSpecifiers = source
     .find(j.ImportDeclaration, {
       type: "ImportDeclaration",
-      source: { value: literalValue },
+      source: { value: sourceValue },
     })
     .nodes()
     .map((importDeclaration) => importDeclaration.specifiers)
