@@ -37,14 +37,6 @@ describe("v2-to-v3", () => {
     return { input, outputCode };
   };
 
-  it.concurrent.each(getTestFileMetadata(fixtureDir))(
-    `transforms: %s.%s`,
-    async (filePrefix, fileExtension) => {
-      const { input, outputCode } = await getTestMetadata(fixtureDir, filePrefix, fileExtension);
-      runInlineTest(transformer, null, input, outputCode);
-    }
-  );
-
   describe.each(fixtureSubDirs)("%s", (subDir) => {
     const subDirPath = join(fixtureDir, subDir);
     it.concurrent.each(getTestFileMetadata(subDirPath))(
