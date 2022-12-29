@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { hasRequire } from "../hasRequire";
+import { hasRequire } from "../has";
 import { addV3ClientImports } from "./addV3ClientImports";
 import { addV3ClientRequires } from "./addV3ClientRequires";
 
