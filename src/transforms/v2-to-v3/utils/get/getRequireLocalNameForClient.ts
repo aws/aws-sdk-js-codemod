@@ -15,7 +15,7 @@ const getRequireIds = (j: JSCodeshift, source: Collection<unknown>, sourceValue:
     .nodes()
     .map((variableDeclarator) => variableDeclarator.id);
 
-export const getRequireIdentifierName = (
+export const getRequireLocalNameForClient = (
   j: JSCodeshift,
   source: Collection<unknown>,
   clientName: string

@@ -3,14 +3,14 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { CLIENT_NAMES } from "../config";
 import { hasRequire } from "../has";
 import { getImportIdentifierName } from "./getImportIdentifierName";
-import { getRequireIdentifierName } from "./getRequireIdentifierName";
+import { getRequireLocalNameForClient } from "./getRequireLocalNameForClient";
 
 export const getV2ClientNamesRecord = (
   j: JSCodeshift,
   source: Collection<unknown>
 ): Record<string, string> => {
   const getIdentifierNameFn = hasRequire(j, source)
-    ? getRequireIdentifierName
+    ? getRequireLocalNameForClient
     : getImportIdentifierName;
 
   return Object.fromEntries(
