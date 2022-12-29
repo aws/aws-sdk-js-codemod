@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 import { getV2ClientTSTypeRef, getV2ClientTypeNames, getV3ClientTypeName } from "../get";
-import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
+import { isV2ClientInputOutputType } from "../is";
 
 export interface ReplaceTSTypeReferenceOptions {
   v2ClientName: string;

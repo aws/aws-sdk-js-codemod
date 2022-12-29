@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV2ClientTypeNames, getV2ServiceModulePath } from "../get";
 import { hasRequire } from "../has";
-import { isV2ClientInputOutputType } from "../isV2ClientInputOutputType";
+import { isV2ClientInputOutputType } from "../is";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
