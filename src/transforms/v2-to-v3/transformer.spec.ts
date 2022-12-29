@@ -1,11 +1,9 @@
 import { readdirSync } from "fs";
 import { readFile } from "fs/promises";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: Could not find a declaration file for module 'jscodeshift/dist/testUtils'
-import { runInlineTest } from "jscodeshift/dist/testUtils";
+import jscodeshift from "jscodeshift";
 import { join } from "path";
 
-import transformer from "./transformer";
+import transform from "./transformer";
 
 describe("v2-to-v3", () => {
   jest.setTimeout(30000);
@@ -46,7 +44,16 @@ describe("v2-to-v3", () => {
         console.log(`${filePrefix} start: `, startDate.toTimeString());
 
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
-        runInlineTest(transformer, null, input, outputCode);
+        const output = transform(input, {
+          j: jscodeshift,
+          jscodeshift,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          stats: () => {},
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          report: () => {},
+        });
+
+        expect(output.trim()).toEqual(outputCode.trim());
 
         const endDate = new Date();
         console.log(`${filePrefix} end: ${endDate.toTimeString()}`);
