@@ -1,26 +1,19 @@
-import { Collection, ImportDeclaration, ImportSpecifier, JSCodeshift } from "jscodeshift";
-
-import { getV3ClientImportSpecifier, V3ClientImportSpecifierOptions } from "../get";
+import { Collection, ImportDeclaration, ImportDefaultSpecifier, JSCodeshift } from "jscodeshift";
 
 export const addV3ClientModuleImport = (
   j: JSCodeshift,
   existingImports: Collection<ImportDeclaration>,
-  { localName, importedName }: V3ClientImportSpecifierOptions
+  localName: string
 ) => {
   const existingImportSpecifiers = existingImports
     .nodes()
     .map((importDeclaration) => importDeclaration.specifiers)
     .flat()
-    .filter((importSpecifier) => importSpecifier?.type === "ImportSpecifier") as ImportSpecifier[];
+    .filter(
+      (importSpecifier) => importSpecifier?.type === "ImportDefaultSpecifier"
+    ) as ImportDefaultSpecifier[];
 
-  if (
-    !existingImportSpecifiers.find(
-      (specifier) =>
-        specifier?.imported?.name === importedName && specifier?.local?.name === localName
-    )
-  ) {
-    existingImports
-      .nodes()[0]
-      .specifiers?.push(getV3ClientImportSpecifier(j, { localName, importedName }));
+  if (!existingImportSpecifiers.find((specifier) => specifier?.local?.name === localName)) {
+    existingImports.nodes()[0].specifiers?.push(j.importDefaultSpecifier(j.identifier(localName)));
   }
 };

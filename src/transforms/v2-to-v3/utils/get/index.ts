@@ -9,7 +9,6 @@ export * from "./getV2ClientTSTypeRef";
 export * from "./getV2ClientTypeNames";
 export * from "./getV2GlobalName";
 export * from "./getV2ServiceModulePath";
-export * from "./getV3ClientImportSpecifier";
 export * from "./getV3ClientRequireProperty";
 export * from "./getV3ClientTypeName";
 export * from "./getV3ClientTypeNames";
