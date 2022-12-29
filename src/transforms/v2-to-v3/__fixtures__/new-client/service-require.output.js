@@ -4,5 +4,4 @@
 const {
   ACM
 } = require("@aws-sdk/client-acm");
-
 new ACM();
