@@ -8,7 +8,7 @@ import { join } from "path";
 import transformer from "./transformer";
 
 describe("v2-to-v3", () => {
-  jest.setTimeout(20000);
+  jest.setTimeout(30000);
 
   const inputFileRegex = /(.*).input.[jt]sx?$/;
   const fixtureDir = join(__dirname, "__fixtures__");

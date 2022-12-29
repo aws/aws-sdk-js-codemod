@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift, ObjectPattern, VariableDeclarator } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import {
@@ -7,6 +7,7 @@ import {
   getV3ClientRequireProperty,
   getV3ClientTypeNames,
 } from "../get";
+import { hasPropertyWithName } from "../has";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { AddV3ClientModulesOptions } from "./addV3ClientModules";
 
@@ -32,7 +33,13 @@ export const addV3ClientRequires = (
   } else {
     // Insert after require for global SDK if present. If not, insert after service require.
     const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
-    const globalRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME);
+    const globalRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME).filter(
+      (varDeclaration) =>
+        hasPropertyWithName(varDeclaration, {
+          identifierName: v2GlobalName,
+          objectPropertyName: v2ClientLocalName,
+        })
+    );
     const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);
 
     const requireVarDecl =

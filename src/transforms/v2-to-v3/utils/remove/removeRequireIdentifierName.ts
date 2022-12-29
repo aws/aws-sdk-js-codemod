@@ -1,6 +1,7 @@
-import { Collection, Identifier, JSCodeshift, VariableDeclarator } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getRequireVariableDeclaration } from "../get";
+import { hasPropertyWithName } from "../has";
 
 export interface RemoveRequireIdentifierNameOptions {
   localName: string;
@@ -13,9 +14,11 @@ export const removeRequireIdentifierName = (
   { localName, sourceValue }: RemoveRequireIdentifierNameOptions
 ) => {
   getRequireVariableDeclaration(j, source, sourceValue)
-    .filter(
-      (nodePath) =>
-        ((nodePath.value.declarations[0] as VariableDeclarator).id as Identifier).name === localName
+    .filter((varDeclaration) =>
+      hasPropertyWithName(varDeclaration, {
+        identifierName: localName,
+        objectPropertyName: localName,
+      })
     )
     .remove();
 };

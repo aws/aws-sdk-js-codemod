@@ -27,14 +27,29 @@ export const addV3ClientImports = (
       importedName: v3ClientName,
     });
   } else {
-    // Insert after global import or service import, whichever comes first.
+    // Insert after global import, or service import.
     source
       .find(j.ImportDeclaration)
-      .filter((path) =>
-        [PACKAGE_NAME, getV2ServiceModulePath(v2ClientName)].includes(
-          path.value.source.value as string
-        )
-      )
+      .filter((importDeclaration) => {
+        const sourceValue = importDeclaration.value.source.value as string;
+
+        if (
+          sourceValue === PACKAGE_NAME &&
+          importDeclaration.value.specifiers?.some(
+            (specifier) =>
+              ["ImportNamespaceSpecifier", "ImportDefaultSpecifier"].includes(specifier.type) ||
+              (specifier.type === "ImportSpecifier" && specifier.local?.name === v2ClientLocalName)
+          )
+        ) {
+          return true;
+        }
+
+        if (sourceValue === getV2ServiceModulePath(v2ClientName)) {
+          return true;
+        }
+
+        return false;
+      })
       .at(0)
       .insertAfter(
         j.importDeclaration(

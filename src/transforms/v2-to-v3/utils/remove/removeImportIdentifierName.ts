@@ -11,8 +11,7 @@ export const removeImportIdentifierName = (
   source: Collection<unknown>,
   options: RemoveImportIdentifierNameOptions
 ) => {
-  const { localName, sourceValue } = options;
-  const importedName = options.importedName ?? localName;
+  const { importedName, localName, sourceValue } = options;
 
   source
     .find(j.ImportDeclaration, {
@@ -23,7 +22,7 @@ export const removeImportIdentifierName = (
       // Remove import from ImportDeclaration.
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
         if (specifier.local?.name === localName) {
-          if (specifier.type === "ImportSpecifier") {
+          if (specifier.type === "ImportSpecifier" && importedName) {
             return specifier.imported?.name === importedName;
           }
           return false;
