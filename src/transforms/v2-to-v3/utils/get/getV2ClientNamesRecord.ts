@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES } from "../config";
-import { containsRequire } from "../containsRequire";
+import { hasRequire } from "../has";
 import { getImportIdentifierName } from "./getImportIdentifierName";
 import { getRequireIdentifierName } from "./getRequireIdentifierName";
 import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
@@ -10,7 +10,7 @@ export const getV2ClientNamesRecord = (
   j: JSCodeshift,
   source: Collection<unknown>
 ): Record<string, string> => {
-  const getIdentifierNameFn = containsRequire(j, source)
+  const getIdentifierNameFn = hasRequire(j, source)
     ? getRequireIdentifierName
     : getImportIdentifierName;
 

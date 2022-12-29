@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { containsRequire } from "../containsRequire";
+import { hasRequire } from "../has";
 import { addV3ClientImports } from "./addV3ClientImports";
 import { addV3ClientRequires } from "./addV3ClientRequires";
 
@@ -17,6 +17,6 @@ export const addV3ClientModules = (
   source: Collection<unknown>,
   options: AddV3ClientModulesOptions
 ): void =>
-  containsRequire(j, source)
+  hasRequire(j, source)
     ? addV3ClientRequires(j, source, options)
     : addV3ClientImports(j, source, options);
