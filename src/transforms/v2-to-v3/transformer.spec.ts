@@ -44,7 +44,7 @@ describe("v2-to-v3", () => {
         console.log(`${filePrefix} start: `, startDate.toTimeString());
 
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
-        const output = transform(input, {
+        const output = await transform(input, {
           j: jscodeshift,
           jscodeshift,
           // eslint-disable-next-line @typescript-eslint/no-empty-function

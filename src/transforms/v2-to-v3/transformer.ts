@@ -14,7 +14,7 @@ import {
   replaceTSTypeReference,
 } from "./utils";
 
-export default function transformer(file: FileInfo, api: API) {
+export default async function transformer(file: FileInfo, api: API) {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
@@ -22,7 +22,7 @@ export default function transformer(file: FileInfo, api: API) {
   const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
-    return source.toSource();
+    return Promise.resolve(source.toSource());
   }
 
   if (v2GlobalName) {
@@ -55,5 +55,5 @@ export default function transformer(file: FileInfo, api: API) {
     removeV2GlobalModule(j, source, v2GlobalName);
   }
 
-  return source.toSource();
+  return Promise.resolve(source.toSource());
 }
