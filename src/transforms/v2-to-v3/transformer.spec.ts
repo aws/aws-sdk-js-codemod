@@ -1,3 +1,4 @@
+import { applyTransform } from "@codeshift/test-utils";
 import { readdirSync } from "fs";
 import { readFile } from "fs/promises";
 import jscodeshift from "jscodeshift";
@@ -44,16 +45,8 @@ describe("v2-to-v3", () => {
         console.log(`${filePrefix} start: `, startDate.toTimeString());
 
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
-        const output = await transform(input, {
-          j: jscodeshift,
-          jscodeshift,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          stats: () => {},
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          report: () => {},
-        });
-
-        expect(output.trim()).toEqual(outputCode.trim());
+        const output = await applyTransform(transform, input.source);
+        expect(output).toMatchSnapshot(outputCode);
 
         const endDate = new Date();
         console.log(`${filePrefix} end: ${endDate.toTimeString()}`);
