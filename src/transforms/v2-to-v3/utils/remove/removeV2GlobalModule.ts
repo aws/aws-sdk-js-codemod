@@ -16,7 +16,7 @@ export const removeV2GlobalModule = (
   if (identifierUsages.size() === 1) {
     const removeIdentifierNameOptions = {
       localName: v2GlobalName,
-      literalValue: PACKAGE_NAME,
+      sourceValue: PACKAGE_NAME,
     };
     if (containsRequire(j, source)) {
       removeRequireIdentifierName(j, source, removeIdentifierNameOptions);

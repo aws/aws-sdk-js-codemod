@@ -3,7 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 export const getRequireVariableDeclaration = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  literalValue: string
+  sourceValue: string
 ) =>
   source.find(j.VariableDeclaration, {
     declarations: [
@@ -11,7 +11,7 @@ export const getRequireVariableDeclaration = (
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
-          arguments: [{ value: literalValue }],
+          arguments: [{ value: sourceValue }],
         },
       },
     ],

@@ -3,7 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 export interface RemoveImportIdentifierNameOptions {
   importedName?: string;
   localName: string;
-  literalValue: string;
+  sourceValue: string;
 }
 
 export const removeImportIdentifierName = (
@@ -11,13 +11,13 @@ export const removeImportIdentifierName = (
   source: Collection<unknown>,
   options: RemoveImportIdentifierNameOptions
 ) => {
-  const { localName, literalValue } = options;
+  const { localName, sourceValue } = options;
   const importedName = options.importedName ?? localName;
 
   source
     .find(j.ImportDeclaration, {
       specifiers: [{ local: { name: localName } }],
-      source: { value: literalValue },
+      source: { value: sourceValue },
     })
     .forEach((declarationPath) => {
       // Remove import from ImportDeclaration.
