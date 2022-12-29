@@ -39,7 +39,7 @@ describe("v2-to-v3", () => {
 
   describe.each(["new-client"])("%s", (subDir) => {
     const subDirPath = join(fixtureDir, subDir);
-    it.concurrent.each([["service-require", "js"]])(
+    it.concurrent.each([["global-require", "js"]])(
       `transforms: %s.%s`,
       async (filePrefix, fileExtension) => {
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
