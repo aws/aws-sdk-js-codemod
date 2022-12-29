@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.1
+
+### Patch Changes
+
+- Support named imports from "aws-sdk" ([d236d4c](https://github.com/awslabs/aws-sdk-js-codemod/commit/d236d4c))
+
 ## 0.7.0
 
 ### Minor Changes
