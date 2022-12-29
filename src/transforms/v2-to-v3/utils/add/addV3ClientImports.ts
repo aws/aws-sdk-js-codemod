@@ -27,15 +27,11 @@ export const addV3ClientImports = (
       importedName: v3ClientName,
     });
   } else {
-    // Insert after service import, or after global import.
+    // Insert after global import, or service import.
     source
       .find(j.ImportDeclaration)
       .filter((importDeclaration) => {
         const sourceValue = importDeclaration.value.source.value as string;
-
-        if (sourceValue === getV2ServiceModulePath(v2ClientName)) {
-          return true;
-        }
 
         if (
           sourceValue === PACKAGE_NAME &&
@@ -45,6 +41,10 @@ export const addV3ClientImports = (
               (specifier.type === "ImportSpecifier" && specifier.local?.name === v2ClientLocalName)
           )
         ) {
+          return true;
+        }
+
+        if (sourceValue === getV2ServiceModulePath(v2ClientName)) {
           return true;
         }
 
