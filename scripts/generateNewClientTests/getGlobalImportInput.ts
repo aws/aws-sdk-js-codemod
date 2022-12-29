@@ -1,6 +1,6 @@
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getGlobalImportInputContent = (codegenComment: string) => {
+export const getGlobalImportInput = (codegenComment: string) => {
   let globalImportInputContent = `${codegenComment}\n`;
 
   globalImportInputContent += `import AWS from "aws-sdk";\n\n`;
