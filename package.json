@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.21.0",
+    "@codeshift/test-utils": "^0.2.0",
     "@tsconfig/node14": "^1.0.3",
     "@types/jest": "^29.2.3",
     "@types/jscodeshift": "^0.11.5",
