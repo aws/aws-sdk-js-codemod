@@ -22,7 +22,7 @@ const transformer = async (file: FileInfo, api: API) => {
   const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
-    return Promise.resolve(source.toSource());
+    return source.toSource();
   }
 
   if (v2GlobalName) {
@@ -55,7 +55,7 @@ const transformer = async (file: FileInfo, api: API) => {
     removeV2GlobalModule(j, source, v2GlobalName);
   }
 
-  return Promise.resolve(source.toSource());
+  return source.toSource();
 };
 
 export default transformer;
