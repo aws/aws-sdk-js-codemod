@@ -13,7 +13,7 @@ const getImportSpecifiers = (j: JSCodeshift, source: Collection<unknown>, source
     .map((importDeclaration) => importDeclaration.specifiers)
     .flat();
 
-export const getImportIdentifierName = (
+export const getImportLocalNameForClient = (
   j: JSCodeshift,
   source: Collection<unknown>,
   clientName: string

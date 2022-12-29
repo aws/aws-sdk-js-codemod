@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { hasRequire } from "../has";
-import { getImportIdentifierName } from "./getImportIdentifierName";
+import { getImportLocalNameForClient } from "./getImportLocalNameForClient";
 import { getRequireLocalNameForClient } from "./getRequireLocalNameForClient";
 
 export const getV2GlobalName = (
@@ -12,5 +12,5 @@ export const getV2GlobalName = (
   if (hasRequire(j, source)) {
     return getRequireLocalNameForClient(j, source, PACKAGE_NAME);
   }
-  return getImportIdentifierName(j, source, PACKAGE_NAME);
+  return getImportLocalNameForClient(j, source, PACKAGE_NAME);
 };

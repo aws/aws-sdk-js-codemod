@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES } from "../config";
 import { hasRequire } from "../has";
-import { getImportIdentifierName } from "./getImportIdentifierName";
+import { getImportLocalNameForClient } from "./getImportLocalNameForClient";
 import { getRequireLocalNameForClient } from "./getRequireLocalNameForClient";
 
 export const getV2ClientNamesRecord = (
@@ -11,7 +11,7 @@ export const getV2ClientNamesRecord = (
 ): Record<string, string> => {
   const getIdentifierNameFn = hasRequire(j, source)
     ? getRequireLocalNameForClient
-    : getImportIdentifierName;
+    : getImportLocalNameForClient;
 
   return Object.fromEntries(
     CLIENT_NAMES.map((clientName) => [
