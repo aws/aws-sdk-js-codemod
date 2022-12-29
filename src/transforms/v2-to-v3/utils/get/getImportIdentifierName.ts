@@ -1,10 +1,13 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
+import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
+
 export const getImportIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  sourceValue: string
+  clientName: string
 ): string | undefined => {
+  const sourceValue = getV2ServiceModulePath(clientName);
   const importSpecifiers = source
     .find(j.ImportDeclaration, {
       type: "ImportDeclaration",

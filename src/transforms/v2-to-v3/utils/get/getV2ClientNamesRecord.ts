@@ -4,7 +4,6 @@ import { CLIENT_NAMES } from "../config";
 import { hasRequire } from "../has";
 import { getImportIdentifierName } from "./getImportIdentifierName";
 import { getRequireIdentifierName } from "./getRequireIdentifierName";
-import { getV2ServiceModulePath } from "./getV2ServiceModulePath";
 
 export const getV2ClientNamesRecord = (
   j: JSCodeshift,
@@ -17,7 +16,7 @@ export const getV2ClientNamesRecord = (
   return Object.fromEntries(
     CLIENT_NAMES.map((clientName) => [
       clientName,
-      getIdentifierNameFn(j, source, getV2ServiceModulePath(clientName)),
+      getIdentifierNameFn(j, source, clientName),
     ]).filter(([, v2ClientLocalName]) => v2ClientLocalName !== undefined)
   );
 };
