@@ -1,22 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES } from "../config";
 import { hasRequire } from "../has";
-import { getImportLocalNameForClient } from "./getImportLocalNameForClient";
-import { getRequireLocalNameForClient } from "./getRequireLocalNameForClient";
+import { getV2ClientNamesRecordFromImport } from "./getV2ClientNamesRecordFromImport";
+import { getV2ClientNamesRecordFromRequire } from "./getV2ClientNamesRecordFromRequire";
 
-export const getV2ClientNamesRecord = (
-  j: JSCodeshift,
-  source: Collection<unknown>
-): Record<string, string> => {
-  const getIdentifierNameFn = hasRequire(j, source)
-    ? getRequireLocalNameForClient
-    : getImportLocalNameForClient;
-
-  return Object.fromEntries(
-    CLIENT_NAMES.map((clientName) => [
-      clientName,
-      getIdentifierNameFn(j, source, clientName),
-    ]).filter(([, v2ClientLocalName]) => v2ClientLocalName !== undefined)
-  );
-};
+export const getV2ClientNamesRecord = (j: JSCodeshift, source: Collection<unknown>) =>
+  hasRequire(j, source)
+    ? getV2ClientNamesRecordFromRequire(j, source)
+    : getV2ClientNamesRecordFromImport(j, source);
