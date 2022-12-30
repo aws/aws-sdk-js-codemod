@@ -2,12 +2,11 @@ import { readdirSync } from "fs";
 import { readFile } from "fs/promises";
 import jscodeshift from "jscodeshift";
 import { join } from "path";
+import { describe, expect, it } from "vitest";
 
 import transform from "./transformer";
 
 describe("v2-to-v3", () => {
-  jest.setTimeout(30000);
-
   const inputFileRegex = /(.*).input.[jt]sx?$/;
   const fixtureDir = join(__dirname, "__fixtures__");
   const fixtureSubDirs = readdirSync(fixtureDir, { withFileTypes: true })

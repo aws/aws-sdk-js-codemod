@@ -1,11 +1,12 @@
 import { spawn } from "child_process";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../package.json"; // eslint-disable-line
 import { run } from "./cli";
 
-jest.mock("child_process");
+vi.mock("child_process");
 
 describe("cli", () => {
   const verifySpawnCall = (args: string[]) => {
@@ -16,11 +17,11 @@ describe("cli", () => {
   };
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should print aws-sdk-js-codemod version", async () => {
-    jest.spyOn(process.stdout, "write");
+    vi.spyOn(process.stdout, "write");
 
     const mockArgs = ["--version"];
     await run(mockArgs);
