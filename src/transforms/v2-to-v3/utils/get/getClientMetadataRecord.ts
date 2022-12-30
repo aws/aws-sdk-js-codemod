@@ -1,10 +1,10 @@
-import { ClientMetadataMap } from "../types";
+import { ClientMetadataRecord } from "../types";
 import { getV3ClientName } from "./getV3ClientName";
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
 
 export const getClientMetadataRecord = (
   v2ClientNamesRecord: Record<string, string>
-): ClientMetadataMap =>
+): ClientMetadataRecord =>
   Object.entries(
     Object.entries(v2ClientNamesRecord).reduce(
       (acc, [v2ClientName, v2ClientLocalName]) => ({
@@ -16,7 +16,7 @@ export const getClientMetadataRecord = (
         },
       }),
       {}
-    ) as ClientMetadataMap
+    ) as ClientMetadataRecord
   )
     .sort(([, { v3ClientPackageName: a }], [, { v3ClientPackageName: b }]) => b.localeCompare(a))
     .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
