@@ -43,13 +43,13 @@ const transformer = async (file: FileInfo, api: API) => {
   };
 
   addV3ClientModules(j, source, clientCodemodOptions);
+  replaceTSTypeReference(j, source, clientCodemodOptions);
 
   Object.entries(clientMetadataRecord).forEach(([v2ClientName, v3ClientMetadata]) => {
-    const { v2ClientLocalName, v3ClientName } = v3ClientMetadata;
+    const { v2ClientLocalName } = v3ClientMetadata;
 
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
 
-    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeV2ClientModule(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
 

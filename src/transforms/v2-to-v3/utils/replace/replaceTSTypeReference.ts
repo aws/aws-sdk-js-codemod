@@ -2,12 +2,7 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference }
 
 import { getV2ClientTSTypeRef, getV2ClientTypeNames, getV3ClientTypeName } from "../get";
 import { isV2ClientInputOutputType } from "../is";
-
-export interface ReplaceTSTypeReferenceOptions {
-  v2ClientName: string;
-  v2GlobalName?: string;
-  v3ClientName: string;
-}
+import { ClientCodemodOptions } from "../types";
 
 const isRightSectionIdentifier = (node: TSTypeReference) =>
   (node.typeName as TSQualifiedName).right.type === "Identifier";
@@ -21,40 +16,54 @@ const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifie
 export const replaceTSTypeReference = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2GlobalName, v2ClientName, v3ClientName }: ReplaceTSTypeReferenceOptions
+  { v2GlobalName, clientMetadataRecord }: ClientCodemodOptions
 ): void => {
-  // Replace type reference to client created with global name.
-  source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2GlobalName }))
-    .replaceWith((v2ClientType) =>
-      j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
-    );
+  // ToDo: Update type references code to minimize calls while working on default imports.
+  // Ref: https://github.com/awslabs/aws-sdk-js-codemod/issues/239
+  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
+    const { v3ClientName } = v3ClientMetadata;
 
-  // Replace type reference to client input/output created with global name.
-  source
-    .find(
-      j.TSTypeReference,
-      getV2ClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
-    )
-    .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
-    .filter((v2ClientType) => isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node)))
-    .replaceWith((v2ClientType) => getV3ClientTypeName(getRightIdentifierName(v2ClientType.node)));
+    // Replace type reference to client created with global name.
+    source
+      .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2GlobalName }))
+      .replaceWith((v2ClientType) =>
+        j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
+      );
 
-  // Replace type reference to client created with client module.
-  source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, withoutRightSection: true }))
-    .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
-    .filter((v2ClientType) => isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node)))
-    .replaceWith((v2ClientType) => getV3ClientTypeName(getRightIdentifierName(v2ClientType.node)));
+    // Replace type reference to client input/output created with global name.
+    source
+      .find(
+        j.TSTypeReference,
+        getV2ClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
+      )
+      .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
+      .filter((v2ClientType) =>
+        isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node))
+      )
+      .replaceWith((v2ClientType) =>
+        getV3ClientTypeName(getRightIdentifierName(v2ClientType.node))
+      );
 
-  // Replace type reference to client input/output import with named imports.
-  const v2ClientTypeNames = getV2ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
-  for (const v2ClientTypeName of v2ClientTypeNames) {
-    if (isV2ClientInputOutputType(v2ClientTypeName)) {
-      source
-        .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientTypeName } })
-        .filter((v2ClientType) => isV2ClientInputOutputType(getIdentifierName(v2ClientType.node)))
-        .replaceWith((v2ClientType) => getV3ClientTypeName(getIdentifierName(v2ClientType.node)));
+    // Replace type reference to client created with client module.
+    source
+      .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, withoutRightSection: true }))
+      .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
+      .filter((v2ClientType) =>
+        isV2ClientInputOutputType(getRightIdentifierName(v2ClientType.node))
+      )
+      .replaceWith((v2ClientType) =>
+        getV3ClientTypeName(getRightIdentifierName(v2ClientType.node))
+      );
+
+    // Replace type reference to client input/output import with named imports.
+    const v2ClientTypeNames = getV2ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
+    for (const v2ClientTypeName of v2ClientTypeNames) {
+      if (isV2ClientInputOutputType(v2ClientTypeName)) {
+        source
+          .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientTypeName } })
+          .filter((v2ClientType) => isV2ClientInputOutputType(getIdentifierName(v2ClientType.node)))
+          .replaceWith((v2ClientType) => getV3ClientTypeName(getIdentifierName(v2ClientType.node)));
+      }
     }
   }
 };
