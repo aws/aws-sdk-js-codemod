@@ -34,9 +34,11 @@ export const getV2ClientNamesRecordFromRequire = (j: JSCodeshift, source: Collec
     }
 
     const deepRequirePath = getV2ServiceModulePath(clientName);
+    const startDate = new Date();
     const idsFromDefaultImport = getRequireIds(j, source, deepRequirePath).filter(
       (id) => id.type === "Identifier"
     );
+    console.log(`${clientName}: ${Date.now() - startDate.getTime()}ms`);
     if (idsFromDefaultImport.length) {
       v2ClientNamesRecord[clientName] = (idsFromDefaultImport[0] as Identifier).name;
     }
