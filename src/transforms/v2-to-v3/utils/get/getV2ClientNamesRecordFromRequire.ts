@@ -22,12 +22,12 @@ export const getV2ClientNamesRecordFromRequire = (
 ) => {
   const v2ClientNamesRecord: Record<string, string> = {};
 
-  const idPropertiesFromNamedImport = getRequireIds(j, source, PACKAGE_NAME)
+  const idPropertiesFromObjectPattern = getRequireIds(j, source, PACKAGE_NAME)
     .filter((id) => id.type === "ObjectPattern")
     .map((objectPattern) => (objectPattern as ObjectPattern).properties)
     .flat() as Property[];
 
-  for (const idProperty of idPropertiesFromNamedImport) {
+  for (const idProperty of idPropertiesFromObjectPattern) {
     if (idProperty.type !== "Property") {
       continue;
     }
