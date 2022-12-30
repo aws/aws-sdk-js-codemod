@@ -1,5 +1,4 @@
-import { readdirSync } from "fs";
-import { readFile } from "fs/promises";
+import { readdirSync, readFileSync } from "fs";
 import jscodeshift from "jscodeshift";
 import { join } from "path";
 
@@ -25,11 +24,11 @@ describe("v2-to-v3", () => {
           ] as const
       );
 
-  const getTestMetadata = async (dirPath: string, filePrefix: string, fileExtension: string) => {
+  const getTestMetadata = (dirPath: string, filePrefix: string, fileExtension: string) => {
     const inputPath = join(dirPath, [filePrefix, "input", fileExtension].join("."));
     const outputPath = join(dirPath, [filePrefix, "output", fileExtension].join("."));
-    const inputCode = await readFile(inputPath, "utf8");
-    const outputCode = await readFile(outputPath, "utf8");
+    const inputCode = readFileSync(inputPath, "utf8");
+    const outputCode = readFileSync(outputPath, "utf8");
 
     const input = { path: inputPath, source: inputCode };
     return { input, outputCode };
