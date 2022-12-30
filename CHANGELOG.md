@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.3
+
+### Patch Changes
+
+- Reduce number of calls to source API in getV2ClientNamesRecord ([a1134d4](https://github.com/awslabs/aws-sdk-js-codemod/commit/a1134d4))
+
 ## 0.7.2
 
 ### Patch Changes
