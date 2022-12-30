@@ -36,7 +36,7 @@
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts'",
     "release": "yarn build && changeset publish",
-    "test": "jest"
+    "test": "vitest run"
   },
   "dependencies": {
     "jscodeshift": "0.14.0"
