@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift, ObjectPattern, VariableDeclarator } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import {
