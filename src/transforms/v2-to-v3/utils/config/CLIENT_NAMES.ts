@@ -333,4 +333,4 @@ export const CLIENT_NAMES = [
   "WorkSpaces",
   "WorkSpacesWeb",
   "XRay",
-];
+] as const;
