@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.5
+
+### Patch Changes
+
+- Parse through named imports from global path instead of clients ([35d0638](https://github.com/awslabs/aws-sdk-js-codemod/commit/35d0638))
+
 ## 0.7.4
 
 ### Patch Changes
