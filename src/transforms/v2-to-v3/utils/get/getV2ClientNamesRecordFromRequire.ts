@@ -39,7 +39,9 @@ export const getV2ClientNamesRecordFromRequire = (
     if (value.type !== "Identifier") {
       continue;
     }
-    v2ClientNamesRecord[key.name] = value.name;
+    if (CLIENT_NAMES.includes(key.name)) {
+      v2ClientNamesRecord[key.name] = value.name;
+    }
   }
 
   for (const clientName of v2ClientNamesWithServiceModule) {
