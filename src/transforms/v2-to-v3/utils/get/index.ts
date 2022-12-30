@@ -4,6 +4,7 @@ export * from "./getV2ClientIdentifiers";
 export * from "./getV2ClientIdThisExpressions";
 export * from "./getV2ClientNamesFromGlobal";
 export * from "./getV2ClientNamesRecord";
+export * from "./getV2ClientNamesWithServiceModule";
 export * from "./getV2ClientNewExpression";
 export * from "./getV2ClientTSTypeRef";
 export * from "./getV2ClientTypeNames";

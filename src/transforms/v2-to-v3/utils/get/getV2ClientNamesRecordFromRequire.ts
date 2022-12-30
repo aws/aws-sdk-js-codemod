@@ -15,7 +15,11 @@ const getRequireIds = (j: JSCodeshift, source: Collection<unknown>, sourceValue:
     .nodes()
     .map((variableDeclarator) => variableDeclarator.id);
 
-export const getV2ClientNamesRecordFromRequire = (j: JSCodeshift, source: Collection<unknown>) => {
+export const getV2ClientNamesRecordFromRequire = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
+  v2ClientNamesWithServiceModule: string[]
+) => {
   const v2ClientNamesRecord: Record<string, string> = {};
 
   const idPropertiesFromNamedImport = getRequireIds(j, source, PACKAGE_NAME)
@@ -27,12 +31,12 @@ export const getV2ClientNamesRecordFromRequire = (j: JSCodeshift, source: Collec
     const propertyWithClientName = idPropertiesFromNamedImport.find(
       (property) => (property?.key as Identifier).name === clientName
     );
-
     if (propertyWithClientName) {
       v2ClientNamesRecord[clientName] = (propertyWithClientName.value as Identifier).name;
-      continue;
     }
+  }
 
+  for (const clientName of v2ClientNamesWithServiceModule) {
     const deepRequirePath = getV2ServiceModulePath(clientName);
     const idsFromDefaultImport = getRequireIds(j, source, deepRequirePath).filter(
       (id) => id.type === "Identifier"
