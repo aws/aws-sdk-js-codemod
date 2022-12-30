@@ -5,6 +5,7 @@ import {
   getClientMetadata,
   getV2ClientNamesFromGlobal,
   getV2ClientNamesRecord,
+  getV2ClientNamesWithServiceModule,
   getV2GlobalName,
   isTypeScriptFile,
   removePromiseCalls,
@@ -19,7 +20,8 @@ const transformer = async (file: FileInfo, api: API) => {
   const source = j(file.source);
 
   const v2GlobalName = getV2GlobalName(j, source);
-  const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
+  const v2ClientNamesWithServiceModule = getV2ClientNamesWithServiceModule(file.source);
+  const v2ClientNamesRecord = getV2ClientNamesRecord(j, source, v2ClientNamesWithServiceModule);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
