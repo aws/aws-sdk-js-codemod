@@ -16,5 +16,5 @@ export const getClientMetadata = (v2ClientNamesRecord: Record<string, string>): 
       {}
     ) as ClientMetadataMap
   )
-    .sort(([, { v3ClientPackageName: a }], [, { v3ClientPackageName: b }]) => a.localeCompare(b))
+    .sort(([, { v3ClientPackageName: a }], [, { v3ClientPackageName: b }]) => b.localeCompare(a))
     .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
