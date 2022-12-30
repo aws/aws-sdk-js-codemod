@@ -27,8 +27,7 @@ export const addV3ClientImports = (
       });
     } else {
       // Insert after global import, or service import.
-      source
-        .find(j.ImportDeclaration)
+      existingImports
         .filter((importDeclaration) => {
           const sourceValue = importDeclaration.value.source.value as string;
 
