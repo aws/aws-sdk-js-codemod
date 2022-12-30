@@ -35,15 +35,25 @@ const transformer = async (file: FileInfo, api: API) => {
     }
   }
 
-  const clientMetadataRecord = getClientMetadataRecord(v2ClientNamesRecord);
+  Object.entries(getClientMetadataRecord(v2ClientNamesRecord)).forEach(
+    ([v2ClientName, v3ClientMetadata]) => {
+      const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
-  addV3ClientModules(j, source, clientMetadataRecord);
-  replaceTSTypeReference(j, source, clientMetadataRecord);
-  removeV2ClientModule(j, source, clientMetadataRecord);
-  removePromiseCalls(j, source, clientMetadataRecord);
+      const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
+      const v3Options = { v3ClientName, v3ClientPackageName };
+
+      addV3ClientModules(j, source, { ...v2Options, ...v3Options });
+      replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+      removeV2ClientModule(j, source, v2Options);
+      removePromiseCalls(j, source, v2Options);
+
+      if (v2GlobalName) {
+        replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+      }
+    }
+  );
 
   if (v2GlobalName) {
-    replaceClientCreation(j, source, clientMetadataRecord);
     removeV2GlobalModule(j, source, v2GlobalName);
   }
 
