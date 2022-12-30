@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.4
+
+### Patch Changes
+
+- Deep import search only for available clients ([9b3dfb1](https://github.com/awslabs/aws-sdk-js-codemod/commit/9b3dfb1))
+
 ## 0.7.3
 
 ### Patch Changes
