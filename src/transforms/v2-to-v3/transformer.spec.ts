@@ -43,6 +43,7 @@ describe("v2-to-v3", () => {
         const startDate = new Date();
         console.log(`${filePrefix} start: `, startDate.toTimeString());
 
+        console.log(`${filePrefix} before file read: `, new Date().toTimeString());
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
         console.log(`${filePrefix} transform start: `, new Date().toTimeString());
         const output = await transform(input, {
