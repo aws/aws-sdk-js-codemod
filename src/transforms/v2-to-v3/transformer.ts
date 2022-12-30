@@ -35,9 +35,8 @@ const transformer = async (file: FileInfo, api: API) => {
     });
   }
 
-  Object.entries(getClientMetadata(v2ClientNamesRecord))
-    .reverse()
-    .forEach(([v2ClientName, v3ClientMetadata]) => {
+  Object.entries(getClientMetadata(v2ClientNamesRecord)).forEach(
+    ([v2ClientName, v3ClientMetadata]) => {
       const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
       const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
@@ -51,7 +50,8 @@ const transformer = async (file: FileInfo, api: API) => {
       if (v2GlobalName) {
         replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
       }
-    });
+    }
+  );
 
   if (v2GlobalName) {
     removeV2GlobalModule(j, source, v2GlobalName);
