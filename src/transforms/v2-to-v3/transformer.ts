@@ -2,6 +2,7 @@ import { API, FileInfo } from "jscodeshift";
 
 import {
   addV3ClientModules,
+  ClientCodemodOptions,
   getClientMetadataRecord,
   getV2ClientNamesFromGlobal,
   getV2ClientNamesRecord,
@@ -35,23 +36,27 @@ const transformer = async (file: FileInfo, api: API) => {
     }
   }
 
-  Object.entries(getClientMetadataRecord(v2ClientNamesRecord)).forEach(
-    ([v2ClientName, v3ClientMetadata]) => {
-      const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
+  const clientMetadataRecord = getClientMetadataRecord(v2ClientNamesRecord);
+  const clientCodemodOptions: ClientCodemodOptions = {
+    v2GlobalName,
+    clientMetadataRecord,
+  };
 
-      const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
-      const v3Options = { v3ClientName, v3ClientPackageName };
+  addV3ClientModules(j, source, clientCodemodOptions);
 
-      addV3ClientModules(j, source, { ...v2Options, ...v3Options });
-      replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
-      removeV2ClientModule(j, source, v2Options);
-      removePromiseCalls(j, source, v2Options);
+  Object.entries(clientMetadataRecord).forEach(([v2ClientName, v3ClientMetadata]) => {
+    const { v2ClientLocalName, v3ClientName } = v3ClientMetadata;
 
-      if (v2GlobalName) {
-        replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
-      }
+    const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
+
+    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+    removeV2ClientModule(j, source, v2Options);
+    removePromiseCalls(j, source, v2Options);
+
+    if (v2GlobalName) {
+      replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
     }
-  );
+  });
 
   if (v2GlobalName) {
     removeV2GlobalModule(j, source, v2GlobalName);
