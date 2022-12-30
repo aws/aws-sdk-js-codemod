@@ -14,7 +14,7 @@ import {
   replaceTSTypeReference,
 } from "./utils";
 
-const transformer = (file: FileInfo, api: API) => {
+const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
