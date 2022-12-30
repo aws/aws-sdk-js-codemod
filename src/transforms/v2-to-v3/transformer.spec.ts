@@ -59,7 +59,8 @@ describe("v2-to-v3", () => {
         const endDate = new Date();
         console.log(`${filePrefix} end: ${endDate.toTimeString()}`);
         console.log(`${filePrefix} test run time: ${endDate.getTime() - startDate.getTime()}ms`);
-      }
+      },
+      60000
     );
   });
 });
