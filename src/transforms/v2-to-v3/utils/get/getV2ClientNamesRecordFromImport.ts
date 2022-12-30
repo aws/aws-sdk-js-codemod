@@ -31,12 +31,11 @@ export const getV2ClientNamesRecordFromImport = (
     (specifier) => specifier?.type === "ImportSpecifier"
   ) as ImportSpecifier[];
 
-  for (const clientName of CLIENT_NAMES) {
-    const clientImportSpecifier = specifiersFromNamedImport.find(
-      (specifier) => specifier?.imported.name === clientName
-    );
-    if (clientImportSpecifier) {
-      v2ClientNamesRecord[clientName] = (clientImportSpecifier.local as Identifier).name;
+  for (const specifier of specifiersFromNamedImport) {
+    const importedName = specifier.imported.name;
+    const localName = (specifier.local as Identifier).name;
+    if (CLIENT_NAMES.includes(importedName)) {
+      v2ClientNamesRecord[importedName] = localName ?? importedName;
     }
   }
 
