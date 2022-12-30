@@ -2,7 +2,7 @@ import { API, FileInfo } from "jscodeshift";
 
 import {
   addV3ClientModules,
-  getClientMetadata,
+  getClientMetadataRecord,
   getV2ClientNamesFromGlobal,
   getV2ClientNamesRecord,
   getV2ClientNamesWithServiceModule,
@@ -35,7 +35,7 @@ const transformer = async (file: FileInfo, api: API) => {
     });
   }
 
-  Object.entries(getClientMetadata(v2ClientNamesRecord)).forEach(
+  Object.entries(getClientMetadataRecord(v2ClientNamesRecord)).forEach(
     ([v2ClientName, v3ClientMetadata]) => {
       const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 

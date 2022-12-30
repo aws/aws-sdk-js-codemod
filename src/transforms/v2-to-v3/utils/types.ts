@@ -1,4 +1,4 @@
-export type ClientMetadataMap = Record<string, ClientMetadata>;
+export type ClientMetadataRecord = Record<string, ClientMetadata>;
 
 export interface ClientMetadata {
   v2ClientLocalName: string;
