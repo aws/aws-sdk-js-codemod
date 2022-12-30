@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.2
+
+### Patch Changes
+
+- Make transformer async ([5f4e015](https://github.com/awslabs/aws-sdk-js-codemod/commit/5f4e015))
+
 ## 0.7.1
 
 ### Patch Changes
