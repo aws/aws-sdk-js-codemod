@@ -1,4 +1,4 @@
-export * from "./getClientMetadata";
+export * from "./getClientMetadataRecord";
 export * from "./getRequireVariableDeclaration";
 export * from "./getV2ClientIdentifiers";
 export * from "./getV2ClientIdThisExpressions";

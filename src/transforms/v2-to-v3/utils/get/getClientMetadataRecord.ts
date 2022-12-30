@@ -2,7 +2,9 @@ import { ClientMetadataMap } from "../types";
 import { getV3ClientName } from "./getV3ClientName";
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
 
-export const getClientMetadata = (v2ClientNamesRecord: Record<string, string>): ClientMetadataMap =>
+export const getClientMetadataRecord = (
+  v2ClientNamesRecord: Record<string, string>
+): ClientMetadataMap =>
   Object.entries(
     Object.entries(v2ClientNamesRecord).reduce(
       (acc, [v2ClientName, v2ClientLocalName]) => ({
