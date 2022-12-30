@@ -28,11 +28,11 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   if (v2GlobalName) {
-    getV2ClientNamesFromGlobal(j, source, v2GlobalName).forEach((v2ClientNameFromGlobal) => {
+    for (const v2ClientNameFromGlobal of getV2ClientNamesFromGlobal(j, source, v2GlobalName)) {
       if (!(v2ClientNameFromGlobal in v2ClientNamesRecord)) {
         v2ClientNamesRecord[v2ClientNameFromGlobal] = v2ClientNameFromGlobal;
       }
-    });
+    }
   }
 
   Object.entries(getClientMetadataRecord(v2ClientNamesRecord)).forEach(
