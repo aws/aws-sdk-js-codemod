@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
+import { getV3ClientTypeNames } from "../ts-type";
 import { getV2ServiceModulePath } from "../utils";
 import { addV3ClientModuleImport } from "./addV3ClientModuleImport";
 import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
-import { getV3ClientTypeNames } from "./getV3ClientTypeNames";
 import { V3ClientModulesOptions } from "./types";
 
 export const addV3ClientImports = (

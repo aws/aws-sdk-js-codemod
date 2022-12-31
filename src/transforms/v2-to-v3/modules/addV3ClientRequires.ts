@@ -1,11 +1,11 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
+import { getV3ClientTypeNames } from "../ts-type";
 import { getV2ServiceModulePath, hasPropertyWithName } from "../utils";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
 import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
-import { getV3ClientTypeNames } from "./getV3ClientTypeNames";
 import { V3ClientModulesOptions } from "./types";
 
 export const addV3ClientRequires = (

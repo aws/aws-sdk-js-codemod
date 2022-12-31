@@ -1,7 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ClientTypeNames, getV2ServiceModulePath, isV2ClientInputOutputType } from "../utils";
+import { getV2ClientTypeNames, isV2ClientInputOutputType } from "../ts-type";
+import { getV2ServiceModulePath } from "../utils";
 import { hasRequire } from "./hasRequire";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";

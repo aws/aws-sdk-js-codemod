@@ -13,7 +13,7 @@ import {
   removeV2ClientModule,
   removeV2GlobalModule,
 } from "./modules";
-import { replaceTSTypeReference } from "./ts-type-ref";
+import { replaceTSTypeReference } from "./ts-type";
 import { isTypeScriptFile } from "./utils";
 
 const transformer = async (file: FileInfo, api: API) => {

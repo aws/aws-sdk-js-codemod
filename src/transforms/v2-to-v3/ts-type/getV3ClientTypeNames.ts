@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3ClientTypeName } from "../ts-type-ref";
-import { getV2ClientTypeNames, GetV2ClientTypeNamesOptions } from "../utils";
+import { getV2ClientTypeNames, GetV2ClientTypeNamesOptions } from "./getV2ClientTypeNames";
+import { getV3ClientTypeName } from "./getV3ClientTypeName";
 
 export const getV3ClientTypeNames = (
   j: JSCodeshift,
