@@ -8,7 +8,7 @@ import {
   TSTypeReference,
 } from "jscodeshift";
 
-import { getV2ServiceModulePath } from "../utils/getV2ServiceModulePath";
+import { getV2ServiceModulePath } from "../utils";
 import { getV2ClientTSTypeRef } from "./getV2ClientTSTypeRef";
 
 export interface GetV2ClientTypeNamesOptions {
