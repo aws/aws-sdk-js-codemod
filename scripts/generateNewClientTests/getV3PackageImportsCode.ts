@@ -2,7 +2,7 @@ import {
   CLIENT_NAMES,
   CLIENT_NAMES_MAP,
   CLIENT_PACKAGE_NAMES_MAP,
-} from "../../src/transforms/v2-to-v3/utils/config";
+} from "../../src/transforms/v2-to-v3/config";
 
 export const getV3PackageImportsCode = (sortedV2ClientNames: typeof CLIENT_NAMES) => {
   let v3PackageImportsCode = ``;
