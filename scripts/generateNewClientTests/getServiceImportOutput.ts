@@ -1,4 +1,4 @@
-import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/utils/config";
+import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
 

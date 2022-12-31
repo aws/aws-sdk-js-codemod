@@ -1,4 +1,4 @@
-import { CLIENT_PACKAGE_NAMES_MAP } from "../../src/transforms/v2-to-v3/utils/config";
+import { CLIENT_PACKAGE_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
 
 export const getClientNamesSortedByPackageName = () =>
   Object.keys(CLIENT_PACKAGE_NAMES_MAP).sort((a, b) =>

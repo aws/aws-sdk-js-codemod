@@ -1,4 +1,4 @@
-import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/utils/config";
+import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
 
 export const getV2ClientsNewExpressionCode = (prefix?: string) => {
   let v2ClientsNewExpressionCode = ``;
