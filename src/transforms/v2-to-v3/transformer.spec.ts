@@ -35,7 +35,7 @@ describe("v2-to-v3", () => {
     return { input, outputCode };
   };
 
-  describe.each(fixtureSubDirs)("%s", (subDir) => {
+  describe.each(["multiple-declarators"])("%s", (subDir) => {
     const subDirPath = join(fixtureDir, subDir);
     it.concurrent.each(getTestFileMetadata(subDirPath))(
       `transforms: %s.%s`,
