@@ -1,11 +1,12 @@
 import { CLIENT_NAMES_MAP, CLIENT_PACKAGE_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
+import { CLIENTS_TO_TEST } from "./config";
 import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 
 export const getGlobalRequireOutput = (codegenComment: string) => {
   let globalRequireOutputContent = `${codegenComment}\n`;
 
-  const sortedClientNames = getClientNamesSortedByPackageName();
+  const sortedClientNames = getClientNamesSortedByPackageName(CLIENTS_TO_TEST);
   globalRequireOutputContent += `const `;
   for (const v2ClientName of sortedClientNames) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
@@ -19,7 +20,7 @@ export const getGlobalRequireOutput = (codegenComment: string) => {
       `      `;
   }
   globalRequireOutputContent = globalRequireOutputContent.replace(/,\n {6}$/, ";\n\n");
-  globalRequireOutputContent += getV3ClientsNewExpressionCode();
+  globalRequireOutputContent += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
   return globalRequireOutputContent;
 };

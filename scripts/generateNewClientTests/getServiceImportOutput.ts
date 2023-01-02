@@ -1,13 +1,13 @@
-import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
+import { CLIENTS_TO_TEST } from "./config";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
 
 export const getServiceImportOutput = (codegenComment: string) => {
   let serviceImportOutputContent = `${codegenComment}\n`;
 
-  serviceImportOutputContent += getV3PackageImportsCode(CLIENT_NAMES);
+  serviceImportOutputContent += getV3PackageImportsCode(CLIENTS_TO_TEST);
   serviceImportOutputContent += `\n`;
-  serviceImportOutputContent += getV3ClientsNewExpressionCode();
+  serviceImportOutputContent += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
   return serviceImportOutputContent;
 };

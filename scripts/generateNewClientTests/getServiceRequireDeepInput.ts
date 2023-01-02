@@ -1,14 +1,14 @@
-import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
+import { CLIENTS_TO_TEST } from "./config";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getServiceRequireDeepInput = (codegenComment: string) => {
   let serviceRequireInputContent = `${codegenComment}\n`;
 
-  for (const clientName of CLIENT_NAMES) {
+  for (const clientName of CLIENTS_TO_TEST) {
     serviceRequireInputContent += `const ${clientName} = require("aws-sdk/clients/${clientName.toLowerCase()}");\n`;
   }
   serviceRequireInputContent += `\n`;
-  serviceRequireInputContent += getV2ClientsNewExpressionCode();
+  serviceRequireInputContent += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
   return serviceRequireInputContent;
 };
