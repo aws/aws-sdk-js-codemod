@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.7.6
+
+### Patch Changes
+
+- Support updating variable declaration with require CallExpression ([3c5197d](https://github.com/awslabs/aws-sdk-js-codemod/commit/3c5197d))
+
 ## 0.7.5
 
 ### Patch Changes
