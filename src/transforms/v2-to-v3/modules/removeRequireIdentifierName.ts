@@ -38,7 +38,7 @@ export const removeRequireIdentifierName = (
       return true;
     });
 
-    // Remove ImportDeclaration if there are no other imports.
+    // Remove VariableDeclaration if there are no declarations.
     if (varDeclaration.declarations?.length === 0) {
       varDeclarationCollection.remove();
     }
