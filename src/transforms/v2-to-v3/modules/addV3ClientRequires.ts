@@ -1,10 +1,9 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
 import { getV3ClientTypeNames } from "../ts-type";
-import { getV2ServiceModulePath, hasPropertyWithName } from "../utils";
 import { addV3ClientModuleRequire } from "./addV3ClientModuleRequire";
-import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
+import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
+import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientModulesOptions } from "./types";
 
@@ -19,7 +18,7 @@ export const addV3ClientRequires = (
     v2GlobalName,
   }: V3ClientModulesOptions
 ): void => {
-  const existingRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
+  const existingRequires = getRequireVariableDeclarators(j, source, v3ClientPackageName);
 
   // Require declaration already exists.
   if (existingRequires && existingRequires.nodes().length > 0) {
@@ -29,38 +28,33 @@ export const addV3ClientRequires = (
     });
   } else {
     // Insert after require for global SDK if present. If not, insert after service require.
-    const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
-    const globalRequireVarDecl = getRequireVariableDeclaration(j, source, PACKAGE_NAME).filter(
-      (varDeclaration) =>
-        hasPropertyWithName(varDeclaration, {
-          identifierName: v2GlobalName,
-          objectPropertyName: v2ClientLocalName,
-        })
+    const requireDeclarator = j.variableDeclarator(
+      j.objectPattern([
+        getV3ClientRequireProperty(j, {
+          keyName: v3ClientName,
+          valueName: v2ClientLocalName,
+        }),
+      ]),
+      j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
     );
-    const serviceRequireVarDecl = getRequireVariableDeclaration(j, source, v2ServiceModulePath);
 
-    const requireVarDecl =
-      globalRequireVarDecl.size() > 0 ? globalRequireVarDecl : serviceRequireVarDecl;
-    requireVarDecl.at(0).insertAfter(
-      j.variableDeclaration("const", [
-        j.variableDeclarator(
-          j.objectPattern([
-            getV3ClientRequireProperty(j, {
-              keyName: v3ClientName,
-              valueName: v2ClientLocalName,
-            }),
-          ]),
-          j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
-        ),
-      ])
-    );
+    // prettier-ignore
+    const v2RequireDeclarator =
+      getV2RequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+
+    if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
+      v2RequireDeclarator.insertAfter(requireDeclarator);
+    } else {
+      // Insert at the top of the file.
+      source.insertBefore(requireDeclarator);
+    }
   }
 
   // Add require for input/output types, if needed.
   const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
 
   if (v3ClientTypeNames.length > 0) {
-    const clientRequires = getRequireVariableDeclaration(j, source, v3ClientPackageName);
+    const clientRequires = getRequireVariableDeclarators(j, source, v3ClientPackageName);
     for (const v3ClientTypeName of v3ClientTypeNames.sort()) {
       addV3ClientModuleRequire(j, clientRequires, {
         keyName: v3ClientTypeName,

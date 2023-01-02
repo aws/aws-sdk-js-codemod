@@ -1,27 +1,15 @@
-import {
-  Collection,
-  Identifier,
-  JSCodeshift,
-  ObjectPattern,
-  Property,
-  VariableDeclaration,
-  VariableDeclarator,
-} from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { ObjectPattern, Property, VariableDeclarator } from "jscodeshift";
 
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientModuleRequire = (
   j: JSCodeshift,
-  existingRequires: Collection<VariableDeclaration>,
+  existingRequires: Collection<VariableDeclarator>,
   { keyName, valueName }: V3ClientRequirePropertyOptions
 ) => {
-  const existingRequireProperties = existingRequires
-    .nodes()
-    .map((node) =>
-      node.declarations.filter((declaration) => declaration.type === "VariableDeclarator")
-    )
-    .flat() as VariableDeclarator[];
+  const existingRequireProperties = existingRequires.nodes() as VariableDeclarator[];
 
   if (
     !existingRequireProperties.find((variableDeclarator) =>
