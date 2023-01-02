@@ -15,7 +15,8 @@ export const removeRequireIdentifierName = (
   const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue);
 
   requireDeclarators.forEach((varDeclarator) => {
-    const varDeclaration = j(varDeclarator).closest(j.VariableDeclaration).nodes()[0];
+    const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
+    const varDeclaration = varDeclarationCollection.nodes()[0];
 
     // Remove Identifier or ObjectPattern from VariableDeclarator.
     varDeclaration.declarations = varDeclaration.declarations?.filter((declarator) => {
@@ -39,7 +40,7 @@ export const removeRequireIdentifierName = (
 
     // Remove ImportDeclaration if there are no other imports.
     if (varDeclaration.declarations?.length === 0) {
-      j(varDeclaration).remove();
+      varDeclarationCollection.remove();
     }
   });
 };
