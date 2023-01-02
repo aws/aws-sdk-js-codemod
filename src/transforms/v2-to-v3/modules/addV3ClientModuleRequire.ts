@@ -1,11 +1,5 @@
-import {
-  Collection,
-  Identifier,
-  JSCodeshift,
-  ObjectPattern,
-  Property,
-  VariableDeclarator,
-} from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { ObjectPattern, Property, VariableDeclarator } from "jscodeshift";
 
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientRequirePropertyOptions } from "./types";
