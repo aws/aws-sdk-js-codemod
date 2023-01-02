@@ -9,10 +9,8 @@ export interface RemoveImportIdentifierNameOptions {
 export const removeImportIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: RemoveImportIdentifierNameOptions
+  { importedName, localName, sourceValue }: RemoveImportIdentifierNameOptions
 ) => {
-  const { importedName, localName, sourceValue } = options;
-
   source
     .find(j.ImportDeclaration, {
       specifiers: [{ local: { name: localName } }],
