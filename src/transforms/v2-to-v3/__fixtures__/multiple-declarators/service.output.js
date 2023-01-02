@@ -1,6 +1,11 @@
 const {
-  DynamoDB
-} = require("@aws-sdk/client-dynamodb"),
-  client = new DynamoDB();
+        DynamoDB
+      } = require("@aws-sdk/client-dynamodb"),
+      {
+        ApplicationDiscoveryService: Discovery
+      } = require("@aws-sdk/client-application-discovery-service"),
+      ddbClient = new DynamoDB(),
+      discoveryClient = new Discovery();
 
-const response = await client.listTables();
+const ddbResponse = await ddbClient.listTables();
+const discoveryResponse = await discoveryClient.describeAgents();

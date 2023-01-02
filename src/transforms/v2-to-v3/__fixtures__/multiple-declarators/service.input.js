@@ -1,4 +1,7 @@
 const DynamoDB = require("aws-sdk/clients/dynamodb"),
-  client = new DynamoDB();
+  Discovery = require("aws-sdk/clients/discovery"),
+  ddbClient = new DynamoDB(),
+  discoveryClient = new Discovery();
 
-const response = await client.listTables().promise();
+const ddbResponse = await ddbClient.listTables().promise();
+const discoveryResponse = await discoveryClient.describeAgents().promise();
