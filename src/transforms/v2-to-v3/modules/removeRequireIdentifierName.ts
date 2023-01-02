@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getRequireVariableDeclaration } from "./getRequireVariableDeclaration";
+import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 
 export interface RemoveRequireIdentifierNameOptions {
   localName: string;
@@ -12,11 +12,13 @@ export const removeRequireIdentifierName = (
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireIdentifierNameOptions
 ) => {
-  const requireDeclaration = getRequireVariableDeclaration(j, source, sourceValue);
+  const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue);
 
-  requireDeclaration.forEach((varDeclaration) => {
+  requireDeclarators.forEach((varDeclarator) => {
+    const varDeclaration = j(varDeclarator).closest(j.VariableDeclaration).nodes()[0];
+
     // Remove Identifier or ObjectPattern from VariableDeclarator.
-    varDeclaration.value.declarations = varDeclaration.value.declarations?.filter((declarator) => {
+    varDeclaration.declarations = varDeclaration.declarations?.filter((declarator) => {
       if (declarator.type !== "VariableDeclarator") {
         return true;
       }
@@ -36,7 +38,7 @@ export const removeRequireIdentifierName = (
     });
 
     // Remove ImportDeclaration if there are no other imports.
-    if (varDeclaration.value.declarations?.length === 0) {
+    if (varDeclaration.declarations?.length === 0) {
       j(varDeclaration).remove();
     }
   });

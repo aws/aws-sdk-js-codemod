@@ -2,7 +2,7 @@ import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift"
 
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
-import { getRequireVariableDeclarator } from "./getRequireVariableDeclarator";
+import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 
 export interface GetV2BaseDeclaratorOptions {
   v2ClientName: string;
@@ -18,11 +18,11 @@ export const getV2RequireDeclarator = (
   if (v2GlobalName) {
     const v2GlobalNameIdentifier = { type: "Identifier", name: v2GlobalName } as Identifier;
     // prettier-ignore
-    const v2GlobalNameIdentifierDeclarator =
-      getRequireVariableDeclarator(j, source, v2GlobalNameIdentifier, PACKAGE_NAME);
+    const v2GlobalNameIdentifierDeclarators =
+      getRequireVariableDeclarators(j, source, PACKAGE_NAME, v2GlobalNameIdentifier);
 
-    if (v2GlobalNameIdentifierDeclarator && v2GlobalNameIdentifierDeclarator.nodes().length > 0) {
-      return v2GlobalNameIdentifierDeclarator;
+    if (v2GlobalNameIdentifierDeclarators && v2GlobalNameIdentifierDeclarators.nodes().length > 0) {
+      return v2GlobalNameIdentifierDeclarators;
     }
   }
 
@@ -31,20 +31,20 @@ export const getV2RequireDeclarator = (
     properties: [{ type: "Property", value: { type: "Identifier", name: v2ClientLocalName } }],
   } as ObjectPattern;
   // prettier-ignore
-  const v2ClientLocalNameObjectDeclarator =
-    getRequireVariableDeclarator(j, source, v2ClientLocalNameObject, PACKAGE_NAME);
+  const v2ClientLocalNameObjectDeclarators =
+    getRequireVariableDeclarators(j, source, PACKAGE_NAME, v2ClientLocalNameObject);
 
-  if (v2ClientLocalNameObjectDeclarator && v2ClientLocalNameObjectDeclarator.nodes().length > 0) {
-    return v2ClientLocalNameObjectDeclarator;
+  if (v2ClientLocalNameObjectDeclarators && v2ClientLocalNameObjectDeclarators.nodes().length > 0) {
+    return v2ClientLocalNameObjectDeclarators;
   }
 
   const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
   const v2ClientNameIdentifier = { type: "Identifier", name: v2ClientLocalName } as Identifier;
   // prettier-ignore
-  const v2ClientNameIdentifierDeclarator =
-    getRequireVariableDeclarator(j, source, v2ClientNameIdentifier, v2ServiceModulePath);
+  const v2ClientNameIdentifierDeclarators =
+    getRequireVariableDeclarators(j, source, v2ServiceModulePath, v2ClientNameIdentifier);
 
-  if (v2ClientNameIdentifierDeclarator && v2ClientNameIdentifierDeclarator.nodes().length > 0) {
-    return v2ClientNameIdentifierDeclarator;
+  if (v2ClientNameIdentifierDeclarators && v2ClientNameIdentifierDeclarators.nodes().length > 0) {
+    return v2ClientNameIdentifierDeclarators;
   }
 };
