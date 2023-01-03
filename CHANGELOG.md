@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.8.0
+
+### Minor Changes
+
+- Use default import/require for types ([25559fe](https://github.com/awslabs/aws-sdk-js-codemod/commit/25559fe))
+
 ## 0.7.6
 
 ### Patch Changes
