@@ -3,6 +3,8 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
+import { getGlobalImportEqualsInput } from "./getGlobalImportEqualsInput";
+import { getGlobalImportEqualsOutput } from "./getGlobalImportEqualsOutput";
 import { getGlobalImportInput } from "./getGlobalImportInput";
 import { getGlobalImportOutput } from "./getGlobalImportOutput";
 import { getGlobalRequireInput } from "./getGlobalRequireInput";
@@ -30,6 +32,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
   for (const [fileName, getFileContent] of [
     ["global-import.input.js", getGlobalImportInput],
     ["global-import.output.js", getGlobalImportOutput],
+    ["global-import-equals.input.ts", getGlobalImportEqualsInput],
+    ["global-import-equals.output.ts", getGlobalImportEqualsOutput],
     ["global-require.input.js", getGlobalRequireInput],
     ["global-require.output.js", getGlobalRequireOutput],
     ["service-import.input.js", getServiceImportInput],
