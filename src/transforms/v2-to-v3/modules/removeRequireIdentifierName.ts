@@ -20,27 +20,30 @@ export const removeRequireIdentifierName = (
 
     // Remove Identifier or ObjectPattern from VariableDeclarator.
     varDeclaration.declarations = varDeclaration.declarations?.filter((declarator) => {
-      if (declarator.type !== "VariableDeclarator") {
-        return true;
-      }
-      if (!declarator.init || declarator.init.type !== "Identifier") {
-        return true;
-      }
-      if (declarator.init.name !== sourceValue) {
-        return true;
-      }
-      if (declarator.id.type === "Identifier" && declarator.id.name === localName) {
-        return false;
-      }
-      if (declarator.id.type === "ObjectPattern" && declarator.id.properties) {
-        declarator.id.properties = declarator.id.properties.filter((property) => {
-          if (!["ObjectProperty", "Property"].includes(property.type)) {
-            return true;
-          }
-          const propertyValue = (property as Property).value as Identifier;
-          return propertyValue.type !== "Identifier" || propertyValue.name !== localName;
-        });
-        return declarator.id.properties.length > 0;
+      if (
+        declarator.type === "VariableDeclarator" &&
+        declarator.init &&
+        declarator.init.type === "CallExpression" &&
+        declarator.init.callee.type === "Identifier" &&
+        declarator.init.callee.name === "require" &&
+        declarator.init.arguments &&
+        declarator.init.arguments.length === 1 &&
+        declarator.init.arguments[0].type === "StringLiteral" &&
+        declarator.init.arguments[0].value === sourceValue
+      ) {
+        if (declarator.id.type === "Identifier" && declarator.id.name === localName) {
+          return false;
+        }
+        if (declarator.id.type === "ObjectPattern" && declarator.id.properties) {
+          declarator.id.properties = declarator.id.properties.filter((property) => {
+            if (!["ObjectProperty", "Property"].includes(property.type)) {
+              return true;
+            }
+            const propertyValue = (property as Property).value as Identifier;
+            return propertyValue.type !== "Identifier" || propertyValue.name !== localName;
+          });
+          return declarator.id.properties.length > 0;
+        }
       }
       return true;
     });
