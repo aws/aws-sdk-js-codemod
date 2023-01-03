@@ -8,6 +8,6 @@ export const getV3ClientTypeNames = (
   source: Collection<unknown>,
   options: GetV2ClientTypeNamesOptions
 ) =>
-  getV2ClientTypeNames(j, source, options)
-    .map((v2ClientTypeName) => getV3ClientTypeName(v2ClientTypeName))
-    .filter((v3ClientTypeName) => v3ClientTypeName !== undefined) as string[];
+  getV2ClientTypeNames(j, source, options).map((v2ClientTypeName) =>
+    getV3ClientTypeName(v2ClientTypeName)
+  );

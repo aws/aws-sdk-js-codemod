@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ClientTypeNames, isV2ClientInputOutputType } from "../ts-type";
+import { getV2ClientTypeNames } from "../ts-type";
 import { getV2ServiceModulePath } from "../utils";
 import { hasRequire } from "./hasRequire";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
@@ -38,14 +38,12 @@ export const removeV2ClientModule = (
 
     const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
     for (const v2ClientTypeName of v2ClientTypeNames) {
-      if (isV2ClientInputOutputType(v2ClientTypeName)) {
-        sourceValues.forEach((sourceValue) => {
-          removeImportIdentifierName(j, source, {
-            localName: v2ClientTypeName,
-            sourceValue,
-          });
+      sourceValues.forEach((sourceValue) => {
+        removeImportIdentifierName(j, source, {
+          localName: v2ClientTypeName,
+          sourceValue,
         });
-      }
+      });
     }
   }
 };

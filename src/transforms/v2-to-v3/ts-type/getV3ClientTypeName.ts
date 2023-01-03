@@ -13,5 +13,7 @@ export const getV3ClientTypeName = (v2ClientTypeName: string) => {
     }
   }
 
-  return undefined;
+  // ToDo: Handle v2 client name not present in v3.
+  // Test case: https://github.com/awslabs/aws-sdk-js-codemod/pull/274
+  return v2ClientTypeName;
 };
