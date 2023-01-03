@@ -40,20 +40,17 @@ export const getV2GlobalNameFromModule = (
     return (importDefaultNamespaceSpecifiers[0]?.local as Identifier).name;
   }
 
-  const importEqualsDeclarations = source.find(j.ImportEqualsDeclaration, {
-    // type: "ImportEqualsDeclaration",
-    // moduleReference: {
-    // type: "ExternalModuleReference",
-    // expression: {
-    // type: "StringLiteral",
-    // value: PACKAGE_NAME,
-    // },
-    // },
+  const importEqualsDeclarations = source.find(j.TSImportEqualsDeclaration, {
+    moduleReference: {
+      expression: {
+        type: "StringLiteral",
+        value: PACKAGE_NAME,
+      },
+    },
   });
-  console.log({ importEqualsDeclarationsLength: importEqualsDeclarations.length });
 
   if (importEqualsDeclarations.length > 0) {
-    return importEqualsDeclarations.at(0).name;
+    return importEqualsDeclarations.nodes()[0]?.id?.name;
   }
 
   return undefined;
