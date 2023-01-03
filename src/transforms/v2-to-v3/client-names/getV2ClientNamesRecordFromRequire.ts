@@ -17,7 +17,7 @@ export const getV2ClientNamesRecordFromRequire = (
     .flat() as Property[];
 
   for (const idProperty of idPropertiesFromObjectPattern) {
-    if (idProperty.type !== "Property") {
+    if (!["Property", "ObjectProperty"].includes(idProperty.type)) {
       continue;
     }
     const key = idProperty.key as Identifier;
