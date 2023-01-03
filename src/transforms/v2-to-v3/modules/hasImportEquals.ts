@@ -1,12 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+
 export const hasImportEquals = (j: JSCodeshift, source: Collection<unknown>) =>
-  source
-    .find(j.TSImportEqualsDeclaration, {
-      type: "TSImportEqualsDeclaration",
-      moduleReference: {
-        type: "TSExternalModuleReference",
-        expression: { type: "StringLiteral" },
-      },
-    })
-    .size() > 0;
+  source.find(j.TSImportEqualsDeclaration, getImportEqualsDeclaration()).size() > 0;

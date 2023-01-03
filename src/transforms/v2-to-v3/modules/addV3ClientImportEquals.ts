@@ -2,6 +2,7 @@ import { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift"
 
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath, getV3ClientDefaultLocalName } from "../utils";
+import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { V3ClientModulesOptions } from "./types";
 
 export const addV3ClientImportEquals = (
@@ -16,14 +17,10 @@ export const addV3ClientImportEquals = (
   }: V3ClientModulesOptions
 ): void => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
-  const existingImportEquals = source.find(j.TSImportEqualsDeclaration, {
-    moduleReference: {
-      expression: {
-        type: "StringLiteral",
-        value: v3ClientPackageName,
-      },
-    },
-  });
+  const existingImportEquals = source.find(
+    j.TSImportEqualsDeclaration,
+    getImportEqualsDeclaration(v3ClientPackageName)
+  );
 
   if (existingImportEquals.size()) {
     if (
@@ -39,13 +36,7 @@ export const addV3ClientImportEquals = (
 
   // Insert after global, or service import equals.
   source
-    .find(j.TSImportEqualsDeclaration, {
-      type: "TSImportEqualsDeclaration",
-      moduleReference: {
-        type: "TSExternalModuleReference",
-        expression: { type: "StringLiteral" },
-      },
-    })
+    .find(j.TSImportEqualsDeclaration, getImportEqualsDeclaration())
     .filter((importEqualsDeclaration) => {
       const identifierName = importEqualsDeclaration.value.id.name;
       const importEqualsModuleRef = importEqualsDeclaration.value

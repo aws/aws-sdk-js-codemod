@@ -1,6 +1,7 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
+import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { hasRequire } from "./hasRequire";
 
 export const getV2GlobalNameFromModule = (
@@ -40,16 +41,10 @@ export const getV2GlobalNameFromModule = (
     return (importDefaultNamespaceSpecifiers[0]?.local as Identifier).name;
   }
 
-  const importEqualsDeclarations = source.find(j.TSImportEqualsDeclaration, {
-    type: "TSImportEqualsDeclaration",
-    moduleReference: {
-      type: "TSExternalModuleReference",
-      expression: {
-        type: "StringLiteral",
-        value: PACKAGE_NAME,
-      },
-    },
-  });
+  const importEqualsDeclarations = source.find(
+    j.TSImportEqualsDeclaration,
+    getImportEqualsDeclaration(PACKAGE_NAME)
+  );
 
   if (importEqualsDeclarations.length > 0) {
     return importEqualsDeclarations.nodes()[0]?.id?.name;
