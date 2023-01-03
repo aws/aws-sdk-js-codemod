@@ -1,8 +1,11 @@
-const AWS_DynamoDB = require("@aws-sdk/client-dynamodb");
-const { DynamoDB } = AWS_DynamoDB;
-
-const AWS_STS = require("@aws-sdk/client-sts");
-const { STS } = AWS_STS;
+const AWS_DynamoDB = require("@aws-sdk/client-dynamodb"),
+      {
+        DynamoDB
+      } = AWS_DynamoDB;
+const AWS_STS = require("@aws-sdk/client-sts"),
+      {
+        STS
+      } = AWS_STS;
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
 const listTablesInput: AWS_DynamoDB.ListTablesCommandInput = { Limit: 10 };
