@@ -65,5 +65,19 @@ export const addV3ClientImportEquals = (
         j.identifier(v3ClientDefaultLocalName),
         j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
       )
+    )
+    .insertAfter(
+      j.variableDeclaration("const", [
+        j.variableDeclarator(
+          j.objectPattern([
+            j.objectProperty.from({
+              key: j.identifier(v2ClientLocalName),
+              value: j.identifier(v2ClientLocalName),
+              shorthand: true,
+            }),
+          ]),
+          j.identifier(v3ClientDefaultLocalName)
+        ),
+      ])
     );
 };
