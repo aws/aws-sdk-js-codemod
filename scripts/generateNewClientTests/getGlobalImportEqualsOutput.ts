@@ -9,16 +9,11 @@ export const getGlobalImportEqualsOutput = (codegenComment: string) => {
 
   const sortedClientNames = getClientNamesSortedByPackageName(CLIENTS_TO_TEST);
 
-  globalImportEqualsOutputContent += `const `;
   for (const v2ClientName of sortedClientNames) {
+    const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientName);
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
-    globalImportEqualsOutputContent += `${getV3ClientDefaultLocalName(
-      v2ClientName
-    )} = require("${v3ClientPackageName}"),\n      `;
-  }
-  globalImportEqualsOutputContent = globalImportEqualsOutputContent.replace(/,\n {6}$/, ";\n");
+    globalImportEqualsOutputContent += `import ${v3ClientDefaultLocalName} = require("${v3ClientPackageName}");\n`;
 
-  for (const v2ClientName of sortedClientNames) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
     const v3ObjectPattern =
       v3ClientName === v2ClientName ? v3ClientName : `${v3ClientName}: ${v2ClientName}`;
