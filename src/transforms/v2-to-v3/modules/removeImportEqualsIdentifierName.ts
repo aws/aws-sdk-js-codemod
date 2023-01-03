@@ -1,22 +1,22 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 export interface RemoveImportEqualsIdentifierNameOptions {
-  identifierName: string;
-  expressionValue: string;
+  localName: string;
+  sourceValue: string;
 }
 
 export const removeImportEqualsIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { identifierName, expressionValue }: RemoveImportEqualsIdentifierNameOptions
+  { localName, sourceValue }: RemoveImportEqualsIdentifierNameOptions
 ) => {
   source
     .find(j.TSImportEqualsDeclaration, {
       type: "TSImportEqualsDeclaration",
-      id: { name: identifierName },
+      id: { name: localName },
       moduleReference: {
         type: "TSExternalModuleReference",
-        expression: { type: "StringLiteral", value: expressionValue },
+        expression: { type: "StringLiteral", value: sourceValue },
       },
     })
     .remove();

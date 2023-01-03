@@ -33,8 +33,8 @@ export const removeV2ClientModule = (
     });
   } else if (hasImportEquals(j, source)) {
     removeImportEqualsIdentifierName(j, source, {
-      identifierName: v2ClientLocalName,
-      expressionValue: serviceModulePath,
+      localName: v2ClientLocalName,
+      sourceValue: serviceModulePath,
     });
   } else {
     sourceValues.forEach((sourceValue) => {
