@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.8.1
+
+### Patch Changes
+
+- Add support for ImportEqualsDeclaration ([dc417b9](https://github.com/awslabs/aws-sdk-js-codemod/commit/dc417b9))
+
 ## 0.8.0
 
 ### Minor Changes
