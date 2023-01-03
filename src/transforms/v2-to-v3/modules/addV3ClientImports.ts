@@ -3,7 +3,8 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
 import { getV3ClientTypeNames } from "../ts-type";
 import { getV2ServiceModulePath } from "../utils";
-import { addV3ClientModuleImport } from "./addV3ClientModuleImport";
+import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
+import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
 import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { V3ClientModulesOptions } from "./types";
 
@@ -24,9 +25,9 @@ export const addV3ClientImports = (
 
   // Import declaration already exists.
   if (existingImports.size()) {
-    addV3ClientModuleImport(j, existingImports, {
-      localName: v2ClientLocalName,
+    addV3ClientNamedImport(j, existingImports, {
       importedName: v3ClientName,
+      localName: v2ClientLocalName,
     });
   } else {
     // Insert after global import, or service import.
@@ -66,18 +67,13 @@ export const addV3ClientImports = (
       );
   }
 
-  // Add require for input/output types, if needed.
+  // Add default import for types, if needed.
   const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
 
   if (v3ClientTypeNames.length > 0) {
     const clientImports = source.find(j.ImportDeclaration, {
       source: { value: v3ClientPackageName },
     });
-    for (const v3ClientTypeName of v3ClientTypeNames.sort()) {
-      addV3ClientModuleImport(j, clientImports, {
-        localName: v3ClientTypeName,
-        importedName: v3ClientTypeName,
-      });
-    }
+    addV3ClientDefaultImport(j, clientImports, v2ClientLocalName);
   }
 };

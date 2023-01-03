@@ -3,7 +3,7 @@ import { Collection, ImportDeclaration, ImportSpecifier, JSCodeshift } from "jsc
 import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { V3ClientImportSpecifierOptions } from "./types";
 
-export const addV3ClientModuleImport = (
+export const addV3ClientNamedImport = (
   j: JSCodeshift,
   existingImports: Collection<ImportDeclaration>,
   { localName, importedName }: V3ClientImportSpecifierOptions
