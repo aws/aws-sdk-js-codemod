@@ -69,7 +69,10 @@ export const addV3ClientNamedRequire = (
       return;
     }
 
-    (existingRequireProperties[0].id as ObjectPattern).properties.push(v3ClientObjectProperty);
+    if (existingRequireProperties.length > 0) {
+      (existingRequireProperties[0].id as ObjectPattern).properties.push(v3ClientObjectProperty);
+      return;
+    }
   }
 
   const requireDeclarator = j.variableDeclarator(
