@@ -3,7 +3,6 @@ import { NewExpression } from "jscodeshift";
 export interface ClientNewExpressionOptions {
   v2GlobalName?: string;
   v2ClientName?: string;
-  isDocumentClient?: boolean;
 }
 
 export const getV2ClientNewExpression = ({

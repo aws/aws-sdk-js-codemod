@@ -3,7 +3,9 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
 import { getV2ClientTypeNames } from "../ts-type";
 import { getV2ServiceModulePath } from "../utils";
+import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
+import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
 
@@ -19,7 +21,8 @@ export const removeV2ClientModule = (
   options: RemoveV2ClientModuleOptions
 ) => {
   const { v2ClientName, v2ClientLocalName } = options;
-  const sourceValues = [PACKAGE_NAME, getV2ServiceModulePath(v2ClientName)];
+  const serviceModulePath = getV2ServiceModulePath(v2ClientName);
+  const sourceValues = [PACKAGE_NAME, serviceModulePath];
 
   if (hasRequire(j, source)) {
     sourceValues.forEach((sourceValue) => {
@@ -27,6 +30,11 @@ export const removeV2ClientModule = (
         localName: v2ClientLocalName,
         sourceValue,
       });
+    });
+  } else if (hasImportEquals(j, source)) {
+    removeImportEqualsIdentifierName(j, source, {
+      localName: v2ClientLocalName,
+      sourceValue: serviceModulePath,
     });
   } else {
     sourceValues.forEach((sourceValue) => {
