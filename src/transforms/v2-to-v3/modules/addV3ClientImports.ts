@@ -4,6 +4,7 @@ import { getV3ClientTypeNames } from "../ts-type";
 import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
 import { addV3ClientImportEquals } from "./addV3ClientImportEquals";
 import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
+import { hasImportEquals } from "./hasImportEquals";
 import { V3ClientModulesOptions } from "./types";
 
 export const addV3ClientImports = (
@@ -11,7 +12,7 @@ export const addV3ClientImports = (
   source: Collection<unknown>,
   options: V3ClientModulesOptions
 ): void => {
-  if (source.find(j.TSImportEqualsDeclaration)) {
+  if (hasImportEquals(j, source)) {
     addV3ClientImportEquals(j, source, options);
     return;
   }
