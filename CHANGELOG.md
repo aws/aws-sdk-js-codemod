@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.8.2
+
+### Patch Changes
+
+- Replace TypeScript types created with imports ([6344814](https://github.com/awslabs/aws-sdk-js-codemod/commit/6344814))
+
 ## 0.8.1
 
 ### Patch Changes
