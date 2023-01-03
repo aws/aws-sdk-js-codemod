@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, Property } from "jscodeshift";
 
 import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 
@@ -27,12 +27,13 @@ export const removeRequireIdentifierName = (
         return false;
       }
       if (declarator.id.type === "ObjectPattern" && declarator.id.properties) {
-        declarator.id.properties = declarator.id.properties.filter(
-          (property) =>
-            property.type !== "Property" ||
-            property.value.type !== "Identifier" ||
-            property.value.name !== localName
-        );
+        declarator.id.properties = declarator.id.properties.filter((property) => {
+          if (!["ObjectProperty", "Property"].includes(property.type)) {
+            return true;
+          }
+          const propertyValue = (property as Property).value as Identifier;
+          return propertyValue.type !== "Identifier" || propertyValue.name !== localName;
+        });
         return declarator.id.properties.length > 0;
       }
       return true;
