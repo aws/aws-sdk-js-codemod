@@ -41,7 +41,9 @@ export const getV2GlobalNameFromModule = (
   }
 
   const importEqualsDeclarations = source.find(j.TSImportEqualsDeclaration, {
+    type: "TSImportEqualsDeclaration",
     moduleReference: {
+      type: "TSExternalModuleReference",
       expression: {
         type: "StringLiteral",
         value: PACKAGE_NAME,
