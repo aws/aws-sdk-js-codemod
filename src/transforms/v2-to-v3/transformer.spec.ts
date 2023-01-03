@@ -37,7 +37,7 @@ describe("v2-to-v3", () => {
 
   describe.each(["new-client"])("%s", (subDir) => {
     const subDirPath = join(fixtureDir, subDir);
-    it.concurrent.each([["global-import-equals", "ts"]])(
+    it.concurrent.each([["service-import-equals", "ts"]])(
       `transforms: %s.%s`,
       async (filePrefix, fileExtension) => {
         const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
