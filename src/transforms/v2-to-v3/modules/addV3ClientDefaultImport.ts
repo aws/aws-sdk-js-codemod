@@ -5,9 +5,9 @@ import { getV3ClientDefaultLocalName } from "../utils";
 export const addV3ClientDefaultImport = (
   j: JSCodeshift,
   existingImports: Collection<ImportDeclaration>,
-  v2ClientName: string
+  v2ClientLocalName: string
 ) => {
-  const localName = getV3ClientDefaultLocalName(v2ClientName);
+  const localName = getV3ClientDefaultLocalName(v2ClientLocalName);
   const existingImportDefaultSpecifiers = existingImports
     .nodes()
     .map((importDeclaration) => importDeclaration.specifiers)
