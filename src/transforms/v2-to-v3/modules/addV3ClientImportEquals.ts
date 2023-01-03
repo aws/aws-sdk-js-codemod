@@ -61,12 +61,6 @@ export const addV3ClientImportEquals = (
     })
     .at(0)
     .insertAfter(
-      j.tsImportEqualsDeclaration(
-        j.identifier(v3ClientDefaultLocalName),
-        j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
-      )
-    )
-    .insertAfter(
       j.variableDeclaration("const", [
         j.variableDeclarator(
           j.objectPattern([
@@ -79,5 +73,11 @@ export const addV3ClientImportEquals = (
           j.identifier(v3ClientDefaultLocalName)
         ),
       ])
+    )
+    .insertAfter(
+      j.tsImportEqualsDeclaration(
+        j.identifier(v3ClientDefaultLocalName),
+        j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
+      )
     );
 };
