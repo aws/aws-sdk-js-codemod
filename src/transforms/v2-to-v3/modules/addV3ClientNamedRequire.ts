@@ -25,6 +25,28 @@ export const addV3ClientNamedRequire = (
   const existingRequires = getRequireVariableDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
+    const existingRequireProperties = existingRequires
+      .filter((variableDeclarator) => variableDeclarator.value.id.type === "ObjectPattern")
+      .nodes();
+
+    if (
+      existingRequireProperties.length > 0 &&
+      existingRequireProperties.find(
+        (variableDeclarator) =>
+          variableDeclarator.id.type === "ObjectPattern" &&
+          variableDeclarator.id.properties.find(
+            (property) =>
+              property.type === "Property" &&
+              property.key.type === "Identifier" &&
+              property.value.type === "Identifier" &&
+              property.key.name === v3ClientName &&
+              property.value.name === v2ClientLocalName
+          )
+      )
+    ) {
+      return;
+    }
+
     const v3ClientDefaultLocalNameIdentifier = {
       type: "Identifier",
       name: v3ClientDefaultLocalName,
@@ -47,28 +69,7 @@ export const addV3ClientNamedRequire = (
       return;
     }
 
-    const existingRequireProperties = existingRequires
-      .filter((variableDeclarator) => variableDeclarator.value.id.type === "ObjectPattern")
-      .nodes();
-
-    if (
-      existingRequireProperties.length > 0 &&
-      !existingRequireProperties.find(
-        (variableDeclarator) =>
-          variableDeclarator.id.type === "ObjectPattern" &&
-          variableDeclarator.id.properties.find(
-            (property) =>
-              property.type === "Property" &&
-              property.key.type === "Identifier" &&
-              property.value.type === "Identifier" &&
-              property.key.name === v3ClientName &&
-              property.value.name === v2ClientLocalName
-          )
-      )
-    ) {
-      (existingRequireProperties[0].id as ObjectPattern).properties.push(v3ClientObjectProperty);
-      return;
-    }
+    (existingRequireProperties[0].id as ObjectPattern).properties.push(v3ClientObjectProperty);
   }
 
   const requireDeclarator = j.variableDeclarator(
