@@ -23,6 +23,12 @@ export const removeRequireIdentifierName = (
       if (declarator.type !== "VariableDeclarator") {
         return true;
       }
+      if (!declarator.init || declarator.init.type !== "Identifier") {
+        return true;
+      }
+      if (declarator.init.name !== sourceValue) {
+        return true;
+      }
       if (declarator.id.type === "Identifier" && declarator.id.name === localName) {
         return false;
       }
