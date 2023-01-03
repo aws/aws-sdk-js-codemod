@@ -4,7 +4,7 @@ import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
 import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 
-export interface GetV2BaseDeclaratorOptions {
+export interface GetV2RequireDeclaratorOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
@@ -13,7 +13,7 @@ export interface GetV2BaseDeclaratorOptions {
 export const getV2RequireDeclarator = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetV2BaseDeclaratorOptions
+  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetV2RequireDeclaratorOptions
 ) => {
   if (v2GlobalName) {
     const v2GlobalNameIdentifier = { type: "Identifier", name: v2GlobalName } as Identifier;

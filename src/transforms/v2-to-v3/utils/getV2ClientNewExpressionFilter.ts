@@ -5,7 +5,7 @@ export interface ClientNewExpressionOptions {
   v2ClientName?: string;
 }
 
-export const getV2ClientNewExpression = ({
+export const getV2ClientNewExpressionFilter = ({
   v2GlobalName,
   v2ClientName,
 }: ClientNewExpressionOptions): NewExpression => {

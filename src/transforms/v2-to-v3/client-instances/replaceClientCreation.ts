@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV2ClientNewExpression } from "../utils";
+import { getV2ClientNewExpressionFilter } from "../utils";
 
 export interface ReplaceClientCreationOptions {
   v2ClientName: string;
@@ -15,7 +15,7 @@ export const replaceClientCreation = (
   { v2ClientName, v2ClientLocalName, v2GlobalName }: ReplaceClientCreationOptions
 ): void => {
   source
-    .find(j.NewExpression, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
+    .find(j.NewExpression, getV2ClientNewExpressionFilter({ v2GlobalName, v2ClientName }))
     .replaceWith((v2ClientNewExpression) =>
       j.newExpression(j.identifier(v2ClientLocalName), v2ClientNewExpression.node.arguments)
     );

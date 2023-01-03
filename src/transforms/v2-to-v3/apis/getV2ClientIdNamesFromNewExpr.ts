@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, NewExpression } from "jscodeshift";
 
-import { getV2ClientNewExpression } from "../utils";
+import { getV2ClientNewExpressionFilter } from "../utils";
 
 export interface GetV2ClientIdNamesFromNewExprOptions {
   v2ClientName: string;
@@ -44,10 +44,10 @@ export const getV2ClientIdNamesFromNewExpr = (
 
   for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
     namesFromGlobalModule.push(
-      ...getNames(j, source, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
+      ...getNames(j, source, getV2ClientNewExpressionFilter({ v2GlobalName, v2ClientName }))
     );
     namesFromServiceModule.push(
-      ...getNames(j, source, getV2ClientNewExpression({ v2ClientName: v2ClientLocalName }))
+      ...getNames(j, source, getV2ClientNewExpressionFilter({ v2ClientName: v2ClientLocalName }))
     );
   }
 
