@@ -7,7 +7,13 @@ import { V3ClientModulesOptions } from "./types";
 export const addV3ClientImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
+  {
+    v2ClientLocalName,
+    v2ClientName,
+    v2GlobalName,
+    v3ClientName,
+    v3ClientPackageName,
+  }: V3ClientModulesOptions
 ): void => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
   const existingImportEquals = source.find(j.TSImportEqualsDeclaration, {
@@ -65,7 +71,7 @@ export const addV3ClientImportEquals = (
         j.variableDeclarator(
           j.objectPattern([
             j.objectProperty.from({
-              key: j.identifier(v2ClientLocalName),
+              key: j.identifier(v3ClientName),
               value: j.identifier(v2ClientLocalName),
               shorthand: true,
             }),
