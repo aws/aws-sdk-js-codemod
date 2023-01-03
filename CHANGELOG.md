@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- Use default imports for types ([25559fe](https://github.com/awslabs/aws-sdk-js-codemod/commit/25559fe))
+- Use default import/require for types ([25559fe](https://github.com/awslabs/aws-sdk-js-codemod/commit/25559fe))
 
 ## 0.7.6
 
