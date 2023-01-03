@@ -25,12 +25,24 @@ export const getV2ClientNamesRecordFromImport = (
 
   for (const clientName of v2ClientNamesWithServiceModule) {
     const deepImportPath = getV2ServiceModulePath(clientName);
+
     const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
       (specifier) =>
         ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
     );
     if (specifiersFromDeepImport.length > 0) {
       v2ClientNamesRecord[clientName] = (specifiersFromDeepImport[0]?.local as Identifier).name;
+    }
+
+    const identifiersFromImportEquals = source.find(j.TSImportEqualsDeclaration, {
+      type: "TSImportEqualsDeclaration",
+      moduleReference: {
+        type: "TSExternalModuleReference",
+        expression: { type: "StringLiteral", value: deepImportPath },
+      },
+    });
+    if (identifiersFromImportEquals.length > 0) {
+      v2ClientNamesRecord[clientName] = identifiersFromImportEquals.nodes()[0]?.id.name;
     }
   }
 
