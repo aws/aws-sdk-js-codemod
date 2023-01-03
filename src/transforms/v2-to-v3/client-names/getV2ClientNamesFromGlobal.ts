@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV2ClientNamesFromNewExpr } from "./getV2ClientNamesFromNewExpr";
-import { getV2ClientNamesFromTSTypeRef } from "./getV2ClientNamesFromTSTypeRef";
+import { getV2ClientNamesFromTSQualifiedName } from "./getV2ClientNamesFromTSQualifiedName";
 
 export const getV2ClientNamesFromGlobal = (
   j: JSCodeshift,
@@ -9,6 +9,6 @@ export const getV2ClientNamesFromGlobal = (
   v2GlobalName: string
 ): string[] => {
   const namesFromNewExpr = getV2ClientNamesFromNewExpr(j, source, v2GlobalName);
-  const namesFromTSTypeRef = getV2ClientNamesFromTSTypeRef(j, source, v2GlobalName);
-  return [...new Set([...namesFromNewExpr, ...namesFromTSTypeRef])];
+  const namesFromTSQualifiedName = getV2ClientNamesFromTSQualifiedName(j, source, v2GlobalName);
+  return [...new Set([...namesFromNewExpr, ...namesFromTSQualifiedName])];
 };
