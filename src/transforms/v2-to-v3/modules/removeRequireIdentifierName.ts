@@ -18,25 +18,8 @@ export const removeRequireIdentifierName = (
     const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
     const varDeclaration = varDeclarationCollection.nodes()[0];
 
-    // Remove Identifier or ObjectPattern from VariableDeclarator.
-    varDeclaration.declarations = varDeclaration.declarations?.filter((declarator) => {
-      if (declarator.type !== "VariableDeclarator") {
-        return true;
-      }
-      if (declarator.id.type === "Identifier" && declarator.id.name === localName) {
-        return false;
-      }
-      if (declarator.id.type === "ObjectPattern" && declarator.id.properties) {
-        declarator.id.properties = declarator.id.properties.filter(
-          (property) =>
-            property.type !== "Property" ||
-            property.value.type !== "Identifier" ||
-            property.value.name !== localName
-        );
-        return declarator.id.properties.length > 0;
-      }
-      return true;
-    });
+    // ToDo: Add id calling getRequireVariableDeclarators which uses localName to filter.
+    j(varDeclarator).remove();
 
     // Remove VariableDeclaration if there are no declarations.
     if (varDeclaration.declarations?.length === 0) {
