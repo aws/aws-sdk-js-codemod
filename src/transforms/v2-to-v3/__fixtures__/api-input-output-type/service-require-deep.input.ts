@@ -1,5 +1,5 @@
-const { DynamoDB } = require("aws-sdk");
-const { STS } = require("aws-sdk");
+const DynamoDB = require("aws-sdk/clients/dynamodb");
+const STS = require("aws-sdk/clients/sts");
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
 const listTablesInput: DynamoDB.ListTablesInput = { Limit: 10 };

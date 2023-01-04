@@ -1,5 +1,5 @@
-import DynamoDB from "aws-sdk/clients/dynamodb";
-import STS from "aws-sdk/clients/sts";
+import { DynamoDB } from "aws-sdk";
+import { STS } from "aws-sdk";
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
 const listTablesInput: DynamoDB.ListTablesInput = { Limit: 10 };
