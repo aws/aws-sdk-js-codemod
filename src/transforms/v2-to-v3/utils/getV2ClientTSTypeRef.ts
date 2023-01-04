@@ -15,7 +15,13 @@ export const getV2ClientTSTypeRef = ({
 }: V2ClientTsTypeRefOptions): TSTypeReference => {
   if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
-      `At least one of the following options must be provided: v2ClientLocalName, v2GlobalName`
+      `One of the following options must be provided: v2ClientLocalName, v2GlobalName`
+    );
+  }
+
+  if (v2GlobalName && v2ClientLocalName) {
+    throw new Error(
+      `Only one of the following options must be provided: v2ClientLocalName, v2GlobalName`
     );
   }
 
