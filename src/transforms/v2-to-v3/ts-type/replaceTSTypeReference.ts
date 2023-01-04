@@ -1,7 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getV3ClientDefaultLocalName } from "../utils";
-import { getV2ClientTSTypeRef } from "./getV2ClientTSTypeRef";
+import { getV2ClientTSTypeRef, getV3ClientDefaultLocalName } from "../utils";
 import { getV2ClientTypeNames } from "./getV2ClientTypeNames";
 import { getV3ClientTypeName } from "./getV3ClientTypeName";
 
