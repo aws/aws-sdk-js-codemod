@@ -43,11 +43,13 @@ export const getV2ClientIdNamesFromNewExpr = (
   const namesFromServiceModule = [];
 
   for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
-    namesFromGlobalModule.push(
-      ...getNames(j, source, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
-    );
+    if (v2GlobalName) {
+      namesFromGlobalModule.push(
+        ...getNames(j, source, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
+      );
+    }
     namesFromServiceModule.push(
-      ...getNames(j, source, getV2ClientNewExpression({ v2ClientName: v2ClientLocalName }))
+      ...getNames(j, source, getV2ClientNewExpression({ v2ClientLocalName }))
     );
   }
 
