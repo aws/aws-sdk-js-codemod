@@ -16,16 +16,13 @@ export const removeV2GlobalModule = (
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
-    const removeIdentifierNameOptions = {
-      localName: v2GlobalName,
-      sourceValue: PACKAGE_NAME,
-    };
+    const defaultOptions = { localName: v2GlobalName, sourceValue: PACKAGE_NAME };
     if (hasRequire(j, source)) {
-      removeRequireIdentifier(j, source, removeIdentifierNameOptions);
+      removeRequireIdentifier(j, source, defaultOptions);
     } else if (hasImportEquals(j, source)) {
-      removeImportEqualsIdentifierName(j, source, removeIdentifierNameOptions);
+      removeImportEqualsIdentifierName(j, source, defaultOptions);
     } else {
-      removeImportDefault(j, source, removeIdentifierNameOptions);
+      removeImportDefault(j, source, defaultOptions);
     }
   }
 };
