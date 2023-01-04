@@ -25,14 +25,8 @@ export const removeV2ClientModule = (
   const { v2ClientName, v2ClientLocalName } = options;
   const serviceModulePath = getV2ServiceModulePath(v2ClientName);
 
-  const defaultOptions = {
-    localName: v2ClientLocalName,
-    sourceValue: serviceModulePath,
-  };
-  const namedOptions = {
-    localName: v2ClientLocalName,
-    sourceValue: PACKAGE_NAME,
-  };
+  const defaultOptions = { localName: v2ClientLocalName, sourceValue: serviceModulePath };
+  const namedOptions = { localName: v2ClientLocalName, sourceValue: PACKAGE_NAME };
 
   if (hasRequire(j, source)) {
     removeRequireIdentifier(j, source, defaultOptions);
