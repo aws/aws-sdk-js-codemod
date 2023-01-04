@@ -7,6 +7,7 @@ import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
+import { removeImportNamed } from "./removeImportNamed";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
 
@@ -23,37 +24,30 @@ export const removeV2ClientModule = (
 ) => {
   const { v2ClientName, v2ClientLocalName } = options;
   const serviceModulePath = getV2ServiceModulePath(v2ClientName);
-  const sourceValues = [PACKAGE_NAME, serviceModulePath];
+
+  const defaultOptions = {
+    localName: v2ClientLocalName,
+    sourceValue: serviceModulePath,
+  };
+  const namedOptions = {
+    localName: v2ClientLocalName,
+    sourceValue: PACKAGE_NAME,
+  };
 
   if (hasRequire(j, source)) {
-    removeRequireIdentifier(j, source, {
-      localName: v2ClientLocalName,
-      sourceValue: serviceModulePath,
-    });
-    removeRequireObjectProperty(j, source, {
-      localName: v2ClientLocalName,
-      sourceValue: PACKAGE_NAME,
-    });
+    removeRequireIdentifier(j, source, defaultOptions);
+    removeRequireObjectProperty(j, source, namedOptions);
   } else if (hasImportEquals(j, source)) {
-    removeImportEqualsIdentifierName(j, source, {
-      localName: v2ClientLocalName,
-      sourceValue: serviceModulePath,
-    });
+    removeImportEqualsIdentifierName(j, source, defaultOptions);
   } else {
-    sourceValues.forEach((sourceValue) => {
-      removeImportDefault(j, source, {
-        localName: v2ClientLocalName,
-        sourceValue,
-      });
-    });
+    removeImportDefault(j, source, defaultOptions);
+    removeImportNamed(j, source, namedOptions);
 
     const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
     for (const v2ClientTypeName of v2ClientTypeNames) {
-      sourceValues.forEach((sourceValue) => {
-        removeImportDefault(j, source, {
-          localName: v2ClientTypeName,
-          sourceValue,
-        });
+      removeImportNamed(j, source, {
+        localName: v2ClientTypeName,
+        sourceValue: serviceModulePath,
       });
     }
   }
