@@ -4,7 +4,7 @@ import { PACKAGE_NAME } from "../config";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportDefault } from "./removeImportDefault";
-import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
+import { removeImportEquals } from "./removeImportEquals";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 
 export const removeV2GlobalModule = (
@@ -20,7 +20,7 @@ export const removeV2GlobalModule = (
     if (hasRequire(j, source)) {
       removeRequireIdentifier(j, source, defaultOptions);
     } else if (hasImportEquals(j, source)) {
-      removeImportEqualsIdentifierName(j, source, defaultOptions);
+      removeImportEquals(j, source, defaultOptions);
     } else {
       removeImportDefault(j, source, defaultOptions);
     }

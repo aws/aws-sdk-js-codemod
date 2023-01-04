@@ -1,14 +1,14 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export interface RemoveImportEqualsIdentifierNameOptions {
+export interface RemoveImportEqualsOptions {
   localName: string;
   sourceValue: string;
 }
 
-export const removeImportEqualsIdentifierName = (
+export const removeImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { localName, sourceValue }: RemoveImportEqualsIdentifierNameOptions
+  { localName, sourceValue }: RemoveImportEqualsOptions
 ) => {
   source
     .find(j.TSImportEqualsDeclaration, {
