@@ -69,7 +69,12 @@ export const replaceTSTypeReference = (
     );
 
   // Replace type reference to client type with modules.
-  const v2ClientTypeNames = getV2ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
+  const v2ClientTypeNames = getV2ClientTypeNames(j, source, {
+    v2ClientLocalName,
+    v2ClientName,
+    v2GlobalName,
+  });
+
   for (const v2ClientTypeName of v2ClientTypeNames) {
     source
       .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientTypeName } })
