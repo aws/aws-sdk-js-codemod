@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.8.4
+
+### Patch Changes
+
+- Remove client require if clients are not created ([e64574d](https://github.com/awslabs/aws-sdk-js-codemod/commit/e64574d))
+- Remove client import if clients are not created ([135b8ab](https://github.com/awslabs/aws-sdk-js-codemod/commit/135b8ab))
+
 ## 0.8.3
 
 ### Patch Changes
