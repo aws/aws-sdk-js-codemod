@@ -4,6 +4,7 @@ import { getV3ClientTypeNames } from "../ts-type";
 import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
 import { addV3ClientImportEquals } from "./addV3ClientImportEquals";
 import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
+import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 import { hasImportEquals } from "./hasImportEquals";
 import { V3ClientModulesOptions } from "./types";
@@ -30,7 +31,10 @@ export const addV3ClientImports = (
     addV3ClientDefaultImport(j, source, options);
   }
 
-  if (getNewExpressionCount(j, source, options) > 0) {
+  if (
+    getNewExpressionCount(j, source, options) > 0 ||
+    getClientTSTypeRefCount(j, source, options) > 0
+  ) {
     addV3ClientNamedImport(j, source, options);
   }
 };
