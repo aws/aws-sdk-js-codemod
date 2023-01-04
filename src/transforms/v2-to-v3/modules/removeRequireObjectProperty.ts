@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift, ObjectPattern } from "jscodeshift";
 
-import { getRequireDeclarators } from "./getRequireDeclarators";
+import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 
 export interface RemoveRequireObjectPropertyOptions {
   localName: string;
@@ -16,7 +16,7 @@ export const removeRequireObjectProperty = (
     type: "ObjectPattern",
     properties: [{ type: "Property", value: { type: "Identifier", name: localName } }],
   } as ObjectPattern;
-  const requireDeclarators = getRequireDeclarators(j, source, sourceValue, id);
+  const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue, id);
 
   requireDeclarators.forEach((varDeclarator) => {
     const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);

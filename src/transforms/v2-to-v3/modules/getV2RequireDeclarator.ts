@@ -2,7 +2,7 @@ import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift"
 
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
-import { getRequireDeclarators } from "./getRequireDeclarators";
+import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 
 export interface GetV2BaseDeclaratorOptions {
   v2ClientName: string;
@@ -19,7 +19,7 @@ export const getV2RequireDeclarator = (
     const v2GlobalNameIdentifier = { type: "Identifier", name: v2GlobalName } as Identifier;
     // prettier-ignore
     const v2GlobalNameIdentifierDeclarators =
-      getRequireDeclarators(j, source, PACKAGE_NAME, v2GlobalNameIdentifier);
+      getRequireVariableDeclarators(j, source, PACKAGE_NAME, v2GlobalNameIdentifier);
 
     if (v2GlobalNameIdentifierDeclarators && v2GlobalNameIdentifierDeclarators.nodes().length > 0) {
       return v2GlobalNameIdentifierDeclarators;
@@ -32,7 +32,7 @@ export const getV2RequireDeclarator = (
   } as ObjectPattern;
   // prettier-ignore
   const v2ClientLocalNameObjectDeclarators =
-    getRequireDeclarators(j, source, PACKAGE_NAME, v2ClientLocalNameObject);
+    getRequireVariableDeclarators(j, source, PACKAGE_NAME, v2ClientLocalNameObject);
 
   if (v2ClientLocalNameObjectDeclarators && v2ClientLocalNameObjectDeclarators.nodes().length > 0) {
     return v2ClientLocalNameObjectDeclarators;
@@ -42,7 +42,7 @@ export const getV2RequireDeclarator = (
   const v2ClientNameIdentifier = { type: "Identifier", name: v2ClientLocalName } as Identifier;
   // prettier-ignore
   const v2ClientNameIdentifierDeclarators =
-    getRequireDeclarators(j, source, v2ServiceModulePath, v2ClientNameIdentifier);
+    getRequireVariableDeclarators(j, source, v2ServiceModulePath, v2ClientNameIdentifier);
 
   if (v2ClientNameIdentifierDeclarators && v2ClientNameIdentifierDeclarators.nodes().length > 0) {
     return v2ClientNameIdentifierDeclarators;

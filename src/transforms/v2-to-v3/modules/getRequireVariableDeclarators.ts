@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift";
 
-export const getRequireDeclarators = (
+export const getRequireVariableDeclarators = (
   j: JSCodeshift,
   source: Collection<unknown>,
   sourceValue: string,

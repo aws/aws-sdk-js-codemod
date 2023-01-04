@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
-import { getRequireDeclarators } from "./getRequireDeclarators";
+import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientModulesOptions } from "./types";
@@ -22,7 +22,7 @@ export const addV3ClientNamedRequire = (
     keyName: v3ClientName,
     valueName: v2ClientLocalName,
   });
-  const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
+  const existingRequires = getRequireVariableDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
     const existingRequireProperties = existingRequires
@@ -54,7 +54,7 @@ export const addV3ClientNamedRequire = (
 
     // prettier-ignore
     const v3ClientDefaultLocalNameIdentifierDeclarators =
-      getRequireDeclarators(j, source, v3ClientPackageName, v3ClientDefaultLocalNameIdentifier);
+      getRequireVariableDeclarators(j, source, v3ClientPackageName, v3ClientDefaultLocalNameIdentifier);
 
     if (
       v3ClientDefaultLocalNameIdentifierDeclarators &&
