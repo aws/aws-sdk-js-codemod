@@ -6,7 +6,7 @@ import { getV2ServiceModulePath } from "../utils";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportDefault } from "./removeImportDefault";
-import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
+import { removeImportEquals } from "./removeImportEquals";
 import { removeImportNamed } from "./removeImportNamed";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
@@ -32,7 +32,7 @@ export const removeV2ClientModule = (
     removeRequireIdentifier(j, source, defaultOptions);
     removeRequireObjectProperty(j, source, namedOptions);
   } else if (hasImportEquals(j, source)) {
-    removeImportEqualsIdentifierName(j, source, defaultOptions);
+    removeImportEquals(j, source, defaultOptions);
   } else {
     removeImportDefault(j, source, defaultOptions);
     removeImportNamed(j, source, namedOptions);
