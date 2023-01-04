@@ -19,8 +19,12 @@ export const addV3ClientImports = (
 
   addV3ClientNamedImport(j, source, options);
 
-  const { v2ClientName, v2GlobalName } = options;
-  const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
+  const { v2ClientLocalName, v2ClientName, v2GlobalName } = options;
+  const v3ClientTypeNames = getV3ClientTypeNames(j, source, {
+    v2ClientLocalName,
+    v2ClientName,
+    v2GlobalName,
+  });
 
   // Add default import for types, if needed.
   if (v3ClientTypeNames.length > 0) {
