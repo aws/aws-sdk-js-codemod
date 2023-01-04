@@ -3,6 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { getV3ClientTypeNames } from "../ts-type";
 import { addV3ClientDefaultRequire } from "./addV3ClientDefaultRequire";
 import { addV3ClientNamedRequire } from "./addV3ClientNamedRequire";
+import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 import { V3ClientModulesOptions } from "./types";
 
@@ -23,7 +24,10 @@ export const addV3ClientRequires = (
     addV3ClientDefaultRequire(j, source, options);
   }
 
-  if (getNewExpressionCount(j, source, options) > 0) {
+  if (
+    getNewExpressionCount(j, source, options) > 0 ||
+    getClientTSTypeRefCount(j, source, options) > 0
+  ) {
     addV3ClientNamedRequire(j, source, options);
   }
 };
