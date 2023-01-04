@@ -11,7 +11,7 @@ export const addV3ClientRequires = (
   source: Collection<unknown>,
   options: V3ClientModulesOptions
 ): void => {
-  const { v2ClientName, v2GlobalName } = options;
+  const { v2ClientName, v2ClientLocalName, v2GlobalName } = options;
   const v3ClientTypeNames = getV3ClientTypeNames(j, source, { v2ClientName, v2GlobalName });
 
   // Add default require for types, if needed.
@@ -21,7 +21,7 @@ export const addV3ClientRequires = (
 
   const newExpressions = source.find(
     j.NewExpression,
-    getV2ClientNewExpression({ v2ClientName, v2GlobalName })
+    getV2ClientNewExpression({ v2ClientName, v2ClientLocalName, v2GlobalName })
   );
 
   if (newExpressions.length) {
