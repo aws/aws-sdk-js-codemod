@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientTypeNames } from "../ts-type";
-import { getV2ClientNewExpression } from "../utils";
 import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
 import { addV3ClientImportEquals } from "./addV3ClientImportEquals";
 import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
+import { getNewExpressionCount } from "./getNewExpressionCount";
 import { hasImportEquals } from "./hasImportEquals";
 import { V3ClientModulesOptions } from "./types";
 
@@ -30,12 +30,7 @@ export const addV3ClientImports = (
     addV3ClientDefaultImport(j, source, options);
   }
 
-  const newExpressions = source.find(
-    j.NewExpression,
-    getV2ClientNewExpression({ v2ClientName, v2ClientLocalName, v2GlobalName })
-  );
-
-  if (newExpressions.length) {
+  if (getNewExpressionCount(j, source, options) > 0) {
     addV3ClientNamedImport(j, source, options);
   }
 };
