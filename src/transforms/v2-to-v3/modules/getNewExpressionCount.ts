@@ -11,11 +11,11 @@ export const getNewExpressionCount = (
   let newExpressionCount = 0;
 
   if (v2GlobalName) {
-    const newExpressionsFromGlobal = source.find(
+    const newExpressionsFromGlobalName = source.find(
       j.NewExpression,
       getV2ClientNewExpression({ v2ClientName, v2GlobalName })
     );
-    newExpressionCount += newExpressionsFromGlobal.length;
+    newExpressionCount += newExpressionsFromGlobalName.length;
   }
 
   const newExpressionsFromClientLocalName = source.find(
