@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientTypeNames } from "../ts-type";
+import { getV2ClientNewExpression } from "../utils";
 import { addV3ClientDefaultRequire } from "./addV3ClientDefaultRequire";
 import { addV3ClientNamedRequire } from "./addV3ClientNamedRequire";
 import { V3ClientModulesOptions } from "./types";
@@ -18,5 +19,12 @@ export const addV3ClientRequires = (
     addV3ClientDefaultRequire(j, source, options);
   }
 
-  addV3ClientNamedRequire(j, source, options);
+  const newExpressions = source.find(
+    j.NewExpression,
+    getV2ClientNewExpression({ v2ClientName, v2GlobalName })
+  );
+
+  if (newExpressions.length) {
+    addV3ClientNamedRequire(j, source, options);
+  }
 };
