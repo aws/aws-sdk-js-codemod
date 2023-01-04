@@ -47,7 +47,7 @@ export const getV2ClientIdNamesFromNewExpr = (
       ...getNames(j, source, getV2ClientNewExpression({ v2GlobalName, v2ClientName }))
     );
     namesFromServiceModule.push(
-      ...getNames(j, source, getV2ClientNewExpression({ v2ClientName: v2ClientLocalName }))
+      ...getNames(j, source, getV2ClientNewExpression({ v2ClientLocalName }))
     );
   }
 
