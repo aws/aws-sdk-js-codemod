@@ -8,7 +8,7 @@ import { hasRequire } from "./hasRequire";
 import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
-import { removeRequireObjectPattern } from "./removeRequireObjectPattern";
+import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
 
 export interface RemoveV2ClientModuleOptions {
   v2ClientName: string;
@@ -30,7 +30,7 @@ export const removeV2ClientModule = (
       localName: v2ClientLocalName,
       sourceValue: serviceModulePath,
     });
-    removeRequireObjectPattern(j, source, {
+    removeRequireObjectProperty(j, source, {
       localName: v2ClientLocalName,
       sourceValue: PACKAGE_NAME,
     });

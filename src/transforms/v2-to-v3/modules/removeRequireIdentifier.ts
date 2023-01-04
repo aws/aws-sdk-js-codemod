@@ -1,7 +1,6 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getRequireDeclarators } from "./getRequireDeclarators";
-import { removeRequireDeclarators } from "./removeRequireDeclarators";
 
 export interface RemoveRequireIdentifierOptions {
   localName: string;
@@ -14,5 +13,18 @@ export const removeRequireIdentifier = (
   { localName, sourceValue }: RemoveRequireIdentifierOptions
 ) => {
   const id = { type: "Identifier", name: localName } as Identifier;
-  removeRequireDeclarators(j, getRequireDeclarators(j, source, sourceValue, id));
+  const requireDeclarators = getRequireDeclarators(j, source, sourceValue, id);
+
+  requireDeclarators.forEach((varDeclarator) => {
+    const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
+
+    // Remove Identifier or ObjectPattern from VariableDeclarator.
+    j(varDeclarator).remove();
+
+    // Remove VariableDeclaration if there are no declarations.
+    const varDeclaration = varDeclarationCollection.nodes()[0];
+    if (varDeclaration && varDeclaration.declarations?.length === 0) {
+      varDeclarationCollection.remove();
+    }
+  });
 };
