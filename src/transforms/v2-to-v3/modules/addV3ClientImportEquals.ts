@@ -1,8 +1,8 @@
-import { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
-import { getV2ServiceModulePath, getV3ClientDefaultLocalName } from "../utils";
+import { getV3ClientDefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
 import { V3ClientModulesOptions } from "./types";
 
 export const addV3ClientImportEquals = (
@@ -35,27 +35,7 @@ export const addV3ClientImportEquals = (
   }
 
   // Insert after global, or service import equals.
-  source
-    .find(j.TSImportEqualsDeclaration, getImportEqualsDeclaration())
-    .filter((importEqualsDeclaration) => {
-      const identifierName = importEqualsDeclaration.value.id.name;
-      const importEqualsModuleRef = importEqualsDeclaration.value
-        .moduleReference as TSExternalModuleReference;
-      const expressionValue = importEqualsModuleRef.expression.value;
-
-      if (expressionValue === PACKAGE_NAME && identifierName === v2GlobalName) {
-        return true;
-      }
-
-      if (
-        expressionValue === getV2ServiceModulePath(v2ClientName) &&
-        identifierName === v2ClientLocalName
-      ) {
-        return true;
-      }
-
-      return false;
-    })
+  getV2ImportEqualsDeclaration(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName })
     .at(0)
     .insertAfter(
       j.variableDeclaration("const", [
