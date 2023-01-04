@@ -2,6 +2,7 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportSpecifiers } from "./getImportSpecifiers";
 import { hasRequire } from "./hasRequire";
 
 export const getV2GlobalNameFromModule = (
@@ -25,20 +26,12 @@ export const getV2GlobalNameFromModule = (
     }
   }
 
-  const importDefaultNamespaceSpecifiers = source
-    .find(j.ImportDeclaration, {
-      type: "ImportDeclaration",
-      source: { value: PACKAGE_NAME },
-    })
-    .nodes()
-    .map((importDeclaration) => importDeclaration.specifiers)
-    .flat()
-    .filter((specifier) =>
-      ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
-    );
+  const importDefaultSpecifiers = getImportSpecifiers(j, source, PACKAGE_NAME).filter((specifier) =>
+    ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
+  );
 
-  if (importDefaultNamespaceSpecifiers.length > 0) {
-    return (importDefaultNamespaceSpecifiers[0]?.local as Identifier).name;
+  if (importDefaultSpecifiers.length > 0) {
+    return (importDefaultSpecifiers[0]?.local as Identifier).name;
   }
 
   const importEqualsDeclarations = source.find(

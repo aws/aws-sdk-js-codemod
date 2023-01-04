@@ -2,8 +2,8 @@ import { Collection, Identifier, ImportSpecifier, JSCodeshift } from "jscodeshif
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclaration } from "../modules";
+import { getImportSpecifiers } from "../modules";
 import { getV2ServiceModulePath } from "../utils";
-import { getImportSpecifiers } from "./getImportSpecifiers";
 
 export const getV2ClientNamesRecordFromImport = (
   j: JSCodeshift,
