@@ -16,16 +16,15 @@ export const removeImportDefault = (
       source: { value: sourceValue },
     })
     .forEach((declarationPath) => {
-      // Remove import from ImportDeclaration.
+      // Remove default/namespace import from ImportDeclaration if there is a match
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
         if (!["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier.type)) {
           return true;
         }
-        if (specifier.local?.name === localName) {
-          return false;
-        }
+        return specifier.local?.name !== localName;
       });
-      // Remove ImportDeclaration if there are no other imports.
+
+      // Remove ImportDeclaration if there are no import specifiers.
       if (declarationPath.value.specifiers?.length === 0) {
         j(declarationPath).remove();
       }

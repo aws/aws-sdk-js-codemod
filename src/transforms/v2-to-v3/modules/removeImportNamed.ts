@@ -17,19 +17,18 @@ export const removeImportNamed = (
       source: { value: sourceValue },
     })
     .forEach((declarationPath) => {
-      // Remove import from ImportDeclaration.
+      // Remove named import from ImportDeclaration if there is a match.
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
         if (specifier.type !== "ImportSpecifier") {
           return true;
         }
-        if (specifier.local?.name === localName) {
-          if (importedName) {
-            return specifier.imported?.name === importedName;
-          }
-          return false;
-        }
+        return (
+          specifier.local?.name !== localName ||
+          (importedName && specifier.imported?.name !== importedName)
+        );
       });
-      // Remove ImportDeclaration if there are no other imports.
+
+      // Remove ImportDeclaration if there are no import specifiers.
       if (declarationPath.value.specifiers?.length === 0) {
         j(declarationPath).remove();
       }
