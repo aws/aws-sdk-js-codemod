@@ -1,16 +1,30 @@
 import { Identifier, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 export interface V2ClientTsTypeRefOptions {
+  v2ClientLocalName?: string;
+  v2ClientName?: string;
   v2GlobalName?: string;
-  v2ClientName: string;
   withoutRightSection?: boolean;
 }
 
 export const getV2ClientTSTypeRef = ({
-  v2GlobalName,
+  v2ClientLocalName,
   v2ClientName,
+  v2GlobalName,
   withoutRightSection = false,
 }: V2ClientTsTypeRefOptions): TSTypeReference => {
+  if (!v2GlobalName && !v2ClientLocalName) {
+    throw new Error(
+      `One of the following options must be provided: v2ClientLocalName, v2GlobalName`
+    );
+  }
+
+  if (v2GlobalName && v2ClientLocalName) {
+    throw new Error(
+      `Only one of the following options must be provided: v2ClientLocalName, v2GlobalName`
+    );
+  }
+
   if (v2GlobalName) {
     const idWithGlobalName = {
       type: "TSQualifiedName",
@@ -25,7 +39,7 @@ export const getV2ClientTSTypeRef = ({
     } as TSTypeReference;
   }
 
-  const idWithClientName = { type: "Identifier", name: v2ClientName } as Identifier;
+  const idWithClientName = { type: "Identifier", name: v2ClientLocalName } as Identifier;
   return {
     typeName: {
       ...(withoutRightSection ? { left: idWithClientName } : idWithClientName),

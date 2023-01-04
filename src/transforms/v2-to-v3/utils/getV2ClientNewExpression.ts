@@ -13,7 +13,7 @@ export const getV2ClientNewExpression = ({
 }: ClientNewExpressionOptions): NewExpression => {
   if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
-      `At least one of the following options must be provided: v2ClientLocalName, v2GlobalName`
+      `One of the following options must be provided: v2ClientLocalName, v2GlobalName`
     );
   }
 

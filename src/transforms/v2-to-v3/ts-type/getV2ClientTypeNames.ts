@@ -1,19 +1,12 @@
-import {
-  Collection,
-  Identifier,
-  ImportDeclaration,
-  ImportSpecifier,
-  JSCodeshift,
-  TSQualifiedName,
-  TSTypeReference,
-} from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getV2ServiceModulePath } from "../utils";
-import { getV2ClientTSTypeRef } from "./getV2ClientTSTypeRef";
+import { getImportSpecifiers } from "../modules";
+import { getV2ClientTSTypeRef, getV2ServiceModulePath } from "../utils";
 
 export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
   v2GlobalName?: string;
+  v2ClientLocalName: string;
 }
 
 const getRightIdentifierName = (
@@ -31,31 +24,32 @@ const getRightIdentifierName = (
 export const getV2ClientTypeNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2GlobalName }: GetV2ClientTypeNamesOptions
+  { v2ClientLocalName, v2ClientName, v2GlobalName }: GetV2ClientTypeNamesOptions
 ): string[] => {
-  const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
-    v2ClientName,
-    v2GlobalName,
-    withoutRightSection: true,
-  });
-  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientName, withoutRightSection: true });
+  const v2ClientTypeNames = [];
 
-  const v2ServiceModuleImportDeclaration = {
-    type: "ImportDeclaration",
-    source: { value: getV2ServiceModulePath(v2ClientName) },
-  } as ImportDeclaration;
+  if (v2GlobalName) {
+    const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
+      v2ClientName,
+      v2GlobalName,
+      withoutRightSection: true,
+    });
+    v2ClientTypeNames.push(...getRightIdentifierName(j, source, v2GlobalTSTypeRef));
+  }
 
-  return [
-    ...new Set([
-      ...getRightIdentifierName(j, source, v2GlobalTSTypeRef),
-      ...getRightIdentifierName(j, source, v2ClientTSTypeRef),
-      ...source
-        .find(j.ImportDeclaration, v2ServiceModuleImportDeclaration)
-        .nodes()
-        .map((node) => node.specifiers)
-        .flat()
-        .filter((node) => (node as ImportSpecifier).type === "ImportSpecifier")
-        .map((node) => ((node as ImportSpecifier).local as Identifier).name),
-    ]),
-  ];
+  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
+  v2ClientTypeNames.push(...getRightIdentifierName(j, source, v2ClientTSTypeRef));
+
+  v2ClientTypeNames.push(
+    ...getImportSpecifiers(j, source, getV2ServiceModulePath(v2ClientName))
+      .filter(
+        (importSpecifier) =>
+          importSpecifier.type === "ImportSpecifier" &&
+          importSpecifier.local &&
+          importSpecifier.local.type === "Identifier"
+      )
+      .map((importSpecifier) => (importSpecifier.local as Identifier).name)
+  );
+
+  return [...new Set(v2ClientTypeNames)];
 };
