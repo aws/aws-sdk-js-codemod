@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.8.3
+
+### Patch Changes
+
+- Replace types for requires ([6d29b35](https://github.com/awslabs/aws-sdk-js-codemod/commit/6d29b35))
+
 ## 0.8.2
 
 ### Patch Changes
