@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.8.5
+
+### Patch Changes
+
+- Remove client import equals if clients are not created ([88f6998](https://github.com/awslabs/aws-sdk-js-codemod/commit/88f6998))
+
 ## 0.8.4
 
 ### Patch Changes
