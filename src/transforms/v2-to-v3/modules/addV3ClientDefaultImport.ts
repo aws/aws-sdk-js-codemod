@@ -1,6 +1,7 @@
 import { Collection, ImportDefaultSpecifier, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
+import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
 import { V3ClientModulesOptions } from "./types";
 
@@ -11,23 +12,18 @@ export const addV3ClientDefaultImport = (
 ) => {
   const localName = getV3ClientDefaultLocalName(v2ClientLocalName);
   const defaultImportSpecifier = j.importDefaultSpecifier(j.identifier(localName));
-  const existingImports = source.find(j.ImportDeclaration, {
+
+  const importDeclarations = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
   });
 
-  const existingImportDefaultSpecifiers = existingImports
-    .nodes()
-    .map((importDeclaration) => importDeclaration.specifiers)
-    .flat()
-    .filter(
-      (importSpecifier) => importSpecifier?.type === "ImportDefaultSpecifier"
-    ) as ImportDefaultSpecifier[];
+  const importDefaultSpecifiers = getImportSpecifiers(j, source, v3ClientPackageName).filter(
+    (importSpecifier) => importSpecifier?.type === "ImportDefaultSpecifier"
+  ) as ImportDefaultSpecifier[];
 
-  if (existingImports.length) {
-    if (
-      !existingImportDefaultSpecifiers.find((specifier) => specifier?.local?.name === localName)
-    ) {
-      existingImports.nodes()[0].specifiers?.push(defaultImportSpecifier);
+  if (importDeclarations.length) {
+    if (!importDefaultSpecifiers.find((specifier) => specifier?.local?.name === localName)) {
+      importDeclarations.nodes()[0].specifiers?.push(defaultImportSpecifier);
       return;
     }
   }
