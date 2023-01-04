@@ -1,17 +1,19 @@
 import { NewExpression } from "jscodeshift";
 
 export interface ClientNewExpressionOptions {
-  v2GlobalName?: string;
+  v2ClientLocalName?: string;
   v2ClientName?: string;
+  v2GlobalName?: string;
 }
 
 export const getV2ClientNewExpression = ({
-  v2GlobalName,
+  v2ClientLocalName,
   v2ClientName,
+  v2GlobalName,
 }: ClientNewExpressionOptions): NewExpression => {
-  if (!v2GlobalName && !v2ClientName) {
+  if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
-      `At least one of the following options must be provided: v2GlobalName, v2ClientName`
+      `At least one of the following options must be provided: v2ClientLocalName, v2GlobalName`
     );
   }
 
@@ -27,6 +29,6 @@ export const getV2ClientNewExpression = ({
 
   return {
     type: "NewExpression",
-    callee: { type: "Identifier", name: v2ClientName },
+    callee: { type: "Identifier", name: v2ClientLocalName },
   } as NewExpression;
 };
