@@ -14,7 +14,7 @@ export const removeRequireObjectProperty = (
 ) => {
   const id = {
     type: "ObjectPattern",
-    properties: [{ type: "Property", value: { type: "Identifier", name: localName } }],
+    properties: [{ value: { type: "Identifier", name: localName } }],
   } as ObjectPattern;
   const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue, id);
 
@@ -25,7 +25,7 @@ export const removeRequireObjectProperty = (
     const varDeclaratorId = varDeclarator.value.id as ObjectPattern;
     varDeclaratorId.properties = varDeclaratorId.properties.filter(
       (property) =>
-        property.type !== "Property" ||
+        (property.type !== "Property" && property.type !== "ObjectProperty") ||
         property.value.type !== "Identifier" ||
         property.value.name !== localName
     );
