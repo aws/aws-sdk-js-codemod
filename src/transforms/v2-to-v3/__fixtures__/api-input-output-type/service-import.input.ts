@@ -1,14 +1,14 @@
-import DynamoDB, { ListTablesInput, ListTablesOutput } from "aws-sdk/clients/dynamodb";
-import STS, { GetCallerIdentityRequest, GetCallerIdentityResponse } from "aws-sdk/clients/sts";
+import { DynamoDB } from "aws-sdk";
+import { STS } from "aws-sdk";
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
-const listTablesInput: ListTablesInput = { Limit: 10 };
-const listTablesOutput: ListTablesOutput = await ddbClient
+const listTablesInput: DynamoDB.ListTablesInput = { Limit: 10 };
+const listTablesOutput: DynamoDB.ListTablesOutput = await ddbClient
   .listTables(listTablesInput)
   .promise();
 
 const stsClient = new STS({ region: "us-west-2" });
-const getCallerIdentityInput: GetCallerIdentityRequest = {};
-const getCallerIdentityOutput: GetCallerIdentityResponse = await stsClient
+const getCallerIdentityInput: STS.GetCallerIdentityRequest = {};
+const getCallerIdentityOutput: STS.GetCallerIdentityResponse = await stsClient
   .getCallerIdentity(getCallerIdentityInput)
   .promise();
