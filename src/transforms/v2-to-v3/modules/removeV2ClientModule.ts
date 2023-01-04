@@ -7,7 +7,8 @@ import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
-import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
+import { removeRequireIdentifier } from "./removeRequireIdentifier";
+import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
 
 export interface RemoveV2ClientModuleOptions {
   v2ClientName: string;
@@ -25,11 +26,13 @@ export const removeV2ClientModule = (
   const sourceValues = [PACKAGE_NAME, serviceModulePath];
 
   if (hasRequire(j, source)) {
-    sourceValues.forEach((sourceValue) => {
-      removeRequireIdentifierName(j, source, {
-        localName: v2ClientLocalName,
-        sourceValue,
-      });
+    removeRequireIdentifier(j, source, {
+      localName: v2ClientLocalName,
+      sourceValue: serviceModulePath,
+    });
+    removeRequireObjectProperty(j, source, {
+      localName: v2ClientLocalName,
+      sourceValue: PACKAGE_NAME,
     });
   } else if (hasImportEquals(j, source)) {
     removeImportEqualsIdentifierName(j, source, {

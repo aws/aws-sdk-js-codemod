@@ -5,7 +5,7 @@ import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
 import { removeImportIdentifierName } from "./removeImportIdentifierName";
-import { removeRequireIdentifierName } from "./removeRequireIdentifierName";
+import { removeRequireIdentifier } from "./removeRequireIdentifier";
 
 export const removeV2GlobalModule = (
   j: JSCodeshift,
@@ -21,7 +21,7 @@ export const removeV2GlobalModule = (
       sourceValue: PACKAGE_NAME,
     };
     if (hasRequire(j, source)) {
-      removeRequireIdentifierName(j, source, removeIdentifierNameOptions);
+      removeRequireIdentifier(j, source, removeIdentifierNameOptions);
     } else if (hasImportEquals(j, source)) {
       removeImportEqualsIdentifierName(j, source, removeIdentifierNameOptions);
     } else {
