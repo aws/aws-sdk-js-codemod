@@ -1,4 +1,11 @@
-import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "jscodeshift";
+import {
+  Collection,
+  Identifier,
+  JSCodeshift,
+  ObjectPattern,
+  ObjectProperty,
+  Property,
+} from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
@@ -14,20 +21,17 @@ export const getV2ClientNamesRecordFromRequire = (
   const idPropertiesFromObjectPattern = getRequireIds(j, source, PACKAGE_NAME)
     .filter((id) => id.type === "ObjectPattern")
     .map((objectPattern) => (objectPattern as ObjectPattern).properties)
-    .flat() as Property[];
+    .flat()
+    .filter(
+      (property) =>
+        (property.type === "Property" || property.type === "ObjectProperty") &&
+        property.key.type === "Identifier" &&
+        property.value.type === "Identifier"
+    ) as (Property | ObjectProperty)[];
 
   for (const idProperty of idPropertiesFromObjectPattern) {
-    if (!["Property", "ObjectProperty"].includes(idProperty.type)) {
-      continue;
-    }
     const key = idProperty.key as Identifier;
-    if (key.type !== "Identifier") {
-      continue;
-    }
     const value = idProperty.value as Identifier;
-    if (value.type !== "Identifier") {
-      continue;
-    }
     if (CLIENT_NAMES.includes(key.name)) {
       v2ClientNamesRecord[key.name] = value.name;
     }
