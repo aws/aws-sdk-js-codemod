@@ -17,6 +17,12 @@ export const getV2ClientNewExpression = ({
     );
   }
 
+  if (v2GlobalName && v2ClientLocalName) {
+    throw new Error(
+      `Only one of the following options must be provided: v2ClientLocalName, v2GlobalName`
+    );
+  }
+
   if (v2GlobalName) {
     return {
       type: "NewExpression",
