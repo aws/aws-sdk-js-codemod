@@ -18,7 +18,7 @@ export const removeRequireIdentifier = (
   requireDeclarators.forEach((varDeclarator) => {
     const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
 
-    // Remove Identifier or ObjectPattern from VariableDeclarator.
+    // Remove VariableDeclarator as it contains the only identifier.
     j(varDeclarator).remove();
 
     // Remove VariableDeclaration if there are no declarations.

@@ -21,7 +21,7 @@ export const removeRequireObjectProperty = (
   requireDeclarators.forEach((varDeclarator) => {
     const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
 
-    // Remove Identifier or ObjectPattern from VariableDeclarator.
+    // Remove ObjectProperty from Variable Declarator.
     const varDeclaratorId = varDeclarator.value.id as ObjectPattern;
     varDeclaratorId.properties = varDeclaratorId.properties.filter(
       (property) =>
