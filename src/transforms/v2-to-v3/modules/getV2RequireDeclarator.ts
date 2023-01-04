@@ -28,7 +28,7 @@ export const getV2RequireDeclarator = (
 
   const v2ClientLocalNameObject = {
     type: "ObjectPattern",
-    properties: [{ type: "Property", value: { type: "Identifier", name: v2ClientLocalName } }],
+    properties: [{ value: { type: "Identifier", name: v2ClientLocalName } }],
   } as ObjectPattern;
   // prettier-ignore
   const v2ClientLocalNameObjectDeclarators =
