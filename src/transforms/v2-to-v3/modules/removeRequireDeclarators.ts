@@ -12,7 +12,7 @@ export const removeRequireDeclarators = (
 
     // Remove VariableDeclaration if there are no declarations.
     const varDeclaration = varDeclarationCollection.nodes()[0];
-    if (varDeclaration.declarations?.length === 0) {
+    if (varDeclaration && varDeclaration.declarations?.length === 0) {
       varDeclarationCollection.remove();
     }
   });
