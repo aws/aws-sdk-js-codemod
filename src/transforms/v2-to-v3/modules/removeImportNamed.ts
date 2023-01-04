@@ -1,15 +1,15 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export interface RemoveImportIdentifierNameOptions {
+export interface RemoveImportNamedOptions {
   importedName?: string;
   localName: string;
   sourceValue: string;
 }
 
-export const removeImportIdentifierName = (
+export const removeImportNamed = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { importedName, localName, sourceValue }: RemoveImportIdentifierNameOptions
+  { importedName, localName, sourceValue }: RemoveImportNamedOptions
 ) => {
   source
     .find(j.ImportDeclaration, {
@@ -17,16 +17,18 @@ export const removeImportIdentifierName = (
       source: { value: sourceValue },
     })
     .forEach((declarationPath) => {
-      // Remove import from ImportDeclaration.
+      // Remove named import from ImportDeclaration if there is a match.
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
-        if (specifier.local?.name === localName) {
-          if (specifier.type === "ImportSpecifier" && importedName) {
-            return specifier.imported?.name === importedName;
-          }
-          return false;
+        if (specifier.type !== "ImportSpecifier") {
+          return true;
         }
+        return (
+          specifier.local?.name !== localName ||
+          (importedName && specifier.imported?.name !== importedName)
+        );
       });
-      // Remove ImportDeclaration if there are no other imports.
+
+      // Remove ImportDeclaration if there are no import specifiers.
       if (declarationPath.value.specifiers?.length === 0) {
         j(declarationPath).remove();
       }

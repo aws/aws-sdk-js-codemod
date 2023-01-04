@@ -3,8 +3,8 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
+import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
-import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 
 export const removeV2GlobalModule = (
@@ -16,16 +16,13 @@ export const removeV2GlobalModule = (
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
-    const removeIdentifierNameOptions = {
-      localName: v2GlobalName,
-      sourceValue: PACKAGE_NAME,
-    };
+    const defaultOptions = { localName: v2GlobalName, sourceValue: PACKAGE_NAME };
     if (hasRequire(j, source)) {
-      removeRequireIdentifier(j, source, removeIdentifierNameOptions);
+      removeRequireIdentifier(j, source, defaultOptions);
     } else if (hasImportEquals(j, source)) {
-      removeImportEqualsIdentifierName(j, source, removeIdentifierNameOptions);
+      removeImportEqualsIdentifierName(j, source, defaultOptions);
     } else {
-      removeImportIdentifierName(j, source, removeIdentifierNameOptions);
+      removeImportDefault(j, source, defaultOptions);
     }
   }
 };
