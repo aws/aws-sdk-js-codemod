@@ -1,15 +1,14 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export interface RemoveImportIdentifierNameOptions {
-  importedName?: string;
+export interface RemoveImportDefaultOptions {
   localName: string;
   sourceValue: string;
 }
 
-export const removeImportIdentifierName = (
+export const removeImportDefault = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { importedName, localName, sourceValue }: RemoveImportIdentifierNameOptions
+  { localName, sourceValue }: RemoveImportDefaultOptions
 ) => {
   source
     .find(j.ImportDeclaration, {
@@ -19,10 +18,10 @@ export const removeImportIdentifierName = (
     .forEach((declarationPath) => {
       // Remove import from ImportDeclaration.
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
+        if (!["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier.type)) {
+          return true;
+        }
         if (specifier.local?.name === localName) {
-          if (specifier.type === "ImportSpecifier" && importedName) {
-            return specifier.imported?.name === importedName;
-          }
           return false;
         }
       });

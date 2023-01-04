@@ -5,8 +5,8 @@ import { getV2ClientTypeNames } from "../ts-type";
 import { getV2ServiceModulePath } from "../utils";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
+import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEqualsIdentifierName } from "./removeImportEqualsIdentifierName";
-import { removeImportIdentifierName } from "./removeImportIdentifierName";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
 
@@ -41,7 +41,7 @@ export const removeV2ClientModule = (
     });
   } else {
     sourceValues.forEach((sourceValue) => {
-      removeImportIdentifierName(j, source, {
+      removeImportDefault(j, source, {
         localName: v2ClientLocalName,
         sourceValue,
       });
@@ -50,7 +50,7 @@ export const removeV2ClientModule = (
     const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
     for (const v2ClientTypeName of v2ClientTypeNames) {
       sourceValues.forEach((sourceValue) => {
-        removeImportIdentifierName(j, source, {
+        removeImportDefault(j, source, {
           localName: v2ClientTypeName,
           sourceValue,
         });
