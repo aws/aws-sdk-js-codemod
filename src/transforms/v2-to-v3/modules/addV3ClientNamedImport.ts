@@ -1,5 +1,6 @@
 import { Collection, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
+import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
 import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { V3ClientModulesOptions } from "./types";
@@ -9,21 +10,17 @@ export const addV3ClientNamedImport = (
   source: Collection<unknown>,
   { v2ClientName, v2ClientLocalName, v3ClientPackageName, v3ClientName }: V3ClientModulesOptions
 ) => {
-  const existingImports = source.find(j.ImportDeclaration, {
+  const importDeclarations = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
   });
 
-  if (existingImports.size()) {
-    const existingImportSpecifiers = existingImports
-      .nodes()
-      .map((importDeclaration) => importDeclaration.specifiers)
-      .flat()
-      .filter(
-        (importSpecifier) => importSpecifier?.type === "ImportSpecifier"
-      ) as ImportSpecifier[];
+  if (importDeclarations.size()) {
+    const importSpecifiers = getImportSpecifiers(j, source, v3ClientPackageName).filter(
+      (importSpecifier) => importSpecifier?.type === "ImportSpecifier"
+    ) as ImportSpecifier[];
 
     if (
-      existingImportSpecifiers.find(
+      importSpecifiers.find(
         (specifier) =>
           specifier?.imported?.name === v3ClientName && specifier?.local?.name === v2ClientLocalName
       )
@@ -31,7 +28,7 @@ export const addV3ClientNamedImport = (
       return;
     }
 
-    existingImports
+    importDeclarations
       .nodes()[0]
       .specifiers?.push(
         getV3ClientImportSpecifier(j, { localName: v2ClientLocalName, importedName: v3ClientName })
