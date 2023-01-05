@@ -12,3 +12,5 @@ const blobType: AWS.ACM.CertificateBodyBlob = new Uint8Array();
 const stringArray: AWS.S3.AllowedHeaders = ["string1", "string2"]; // string[]
 const booleanArray: AWS.RDSDataService.BooleanArray = [true, false]; // boolean[]
 const numberArray: AWS.RDSDataService.LongArray = [123, 456]; // number[]
+const enumArray: AWS.S3.ChecksumAlgorithmList = ["CRC32"]; // ChecksumAlgorithm[]
+const structureArray: AWS.S3.Buckets = [{ Name: "bucketName" }]; // Bucket[]
