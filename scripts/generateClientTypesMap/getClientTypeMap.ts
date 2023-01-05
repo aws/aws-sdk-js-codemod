@@ -64,6 +64,9 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
           if (typeName.type === "Identifier") {
             if (clientTypesMap[typeName.name]) {
               clientTypesMap[name] = `Array<${clientTypesMap[typeName.name]}>`;
+            } else {
+              // Assume it's an interface which would be available in v3.
+              clientTypesMap[name] = `Array<${typeName.name}>`;
             }
           }
         }
