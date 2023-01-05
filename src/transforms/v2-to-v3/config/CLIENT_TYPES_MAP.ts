@@ -52,7 +52,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     ValidationEmailList: "",
     ValidationMethod: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ACMPCA: {
@@ -123,7 +122,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     ValidityPeriodType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   APIGateway: {
@@ -196,7 +194,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     UnauthorizedCacheControlHeaderStrategy: "",
     VpcLinkStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ARCZonalShift: {
@@ -219,7 +216,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ZonalShiftStatus: "",
     ZonalShiftSummaries: "",
     ZonalShiftsInResource: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AccessAnalyzer: {
@@ -329,7 +325,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidatePolicyResourceType: "",
     ValueList: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Account: {
@@ -349,7 +344,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StateOrRegion: "",
     Title: "",
     WebsiteUrl: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AlexaForBusiness: {
@@ -526,7 +520,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     user_FirstName: "",
     user_LastName: "",
     user_UserId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Amp: {
@@ -555,7 +548,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkspaceId: "",
     WorkspaceStatusCode: "",
     WorkspaceSummaryList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Amplify: {
@@ -671,7 +663,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WebhookId: "",
     WebhookUrl: "",
     Webhooks: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AmplifyBackend: {
@@ -705,7 +696,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ListOfUnAuthenticatedElement: "",
     ListOf__string: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AmplifyUIBuilder: {
@@ -760,14 +750,12 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Uuid: "",
     ValidationsList: "",
     ValueMappingList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ApiGatewayManagementApi: {
     Data: "",
     __string: "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ApiGatewayV2: {
@@ -838,7 +826,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __listOf__string: "",
     __string: "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppConfig: {
@@ -898,7 +885,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidatorType: "",
     ValidatorTypeList: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppConfigData: {
@@ -908,7 +894,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     String: "",
     SyntheticGetLatestConfigurationResponseBlob: "",
     Token: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppIntegrations: {
@@ -936,7 +921,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     UUID: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppMesh: {
@@ -1045,7 +1029,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VirtualServiceList: "",
     VirtualServiceStatusCode: "",
     WeightedTargets: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppRunner: {
@@ -1121,7 +1104,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcIngressConnectionName: "",
     VpcIngressConnectionStatus: "",
     VpcIngressConnectionSummaryList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppStream: {
@@ -1228,7 +1210,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserStackAssociationList: "",
     Username: "",
     VisibilityType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AppSync: {
@@ -1289,7 +1270,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Template: "",
     TypeDefinitionFormat: "",
     TypeList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Appflow: {
@@ -1485,7 +1465,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkgroupName: "",
     WriteOperationType: "",
     ZendeskConnectorOperator: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ApplicationAutoScaling: {
@@ -1527,7 +1506,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StepAdjustments: "",
     TimestampType: "",
     XmlString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ApplicationCostProfiler: {
@@ -1544,7 +1522,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     S3Prefix: "",
     Timestamp: "",
     Token: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ApplicationInsights: {
@@ -1652,7 +1629,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XRayRequestAverageLatency: "",
     XRayRequestCount: "",
     XRayThrottlePercent: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Athena: {
@@ -1773,7 +1749,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkGroupsList: "",
     datumList: "",
     datumString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AuditManager: {
@@ -1907,7 +1882,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Username: "",
     ValidationErrors: "",
     organizationId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AugmentedAIRuntime: {
@@ -1925,7 +1899,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SortOrder: "",
     String: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AutoScaling: {
@@ -2113,7 +2086,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XmlStringMetricLabel: "",
     XmlStringMetricStat: "",
     XmlStringUserData: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   AutoScalingPlans: {
@@ -2162,7 +2134,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XmlString: "",
     XmlStringMaxLen128: "",
     XmlStringMaxLen256: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Backup: {
@@ -2255,7 +2226,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     stringList: "",
     stringMap: "",
     timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   BackupGateway: {
@@ -2297,7 +2267,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VmwareTags: "",
     VmwareToAwsTagMappings: "",
     VpcEndpoint: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   BackupStorage: {
@@ -2311,7 +2280,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SummaryChecksumAlgorithm: "",
     long: "",
     timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Batch: {
@@ -2391,7 +2359,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TmpfsList: "",
     Ulimits: "",
     Volumes: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Billingconductor: {
@@ -2473,7 +2440,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     TieringActivated: "",
     Token: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Braket: {
@@ -2535,7 +2501,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagKeys: "",
     TagsMap: "",
     Uri: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Budgets: {
@@ -2592,7 +2557,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UnitValue: "",
     User: "",
     Users: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CUR: {
@@ -2614,7 +2578,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SchemaElement: "",
     SchemaElementList: "",
     TimeUnit: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Chime: {
@@ -2807,7 +2770,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VoiceConnectorItemPriority: "",
     VoiceConnectorList: "",
     VoiceConnectorName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ChimeSDKIdentity: {
@@ -2838,7 +2800,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     UserId: "",
     UserName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ChimeSDKMediaPipelines: {
@@ -2883,7 +2844,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     VideoMuxType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ChimeSDKMeetings: {
@@ -2926,7 +2886,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TranscribePiiEntityTypes: "",
     TranscribeRegion: "",
     TranscribeVocabularyFilterMethod: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ChimeSDKMessaging: {
@@ -2998,7 +2957,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetMembershipsPerSubChannel: "",
     Timestamp: "",
     UrlType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ChimeSDKVoice: {
@@ -3092,7 +3050,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VoiceConnectorItemPriority: "",
     VoiceConnectorList: "",
     VoiceConnectorName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Cloud9: {
@@ -3127,7 +3084,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     UserArn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudControl: {
@@ -3151,7 +3107,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     TypeName: "",
     TypeVersionId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudDirectory: {
@@ -3230,7 +3185,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TypedLinkSpecifierList: "",
     UpdateActionType: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudFormation: {
@@ -3490,7 +3444,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Version: "",
     VersionBump: "",
     Visibility: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudFront: {
@@ -3604,7 +3557,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     long: "",
     sensitiveStringType: "",
     timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudHSM: {
@@ -3644,7 +3596,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudHSMV2: {
@@ -3688,7 +3639,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudSearch: {
@@ -3734,7 +3684,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UIntValue: "",
     UpdateTimestamp: "",
     Word: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudSearchDomain: {
@@ -3771,7 +3720,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Suggester: "",
     Suggestions: "",
     SuggestionsSize: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudTrail: {
@@ -3850,7 +3798,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TrailNameList: "",
     Trails: "",
     UUID: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudWatch: {
@@ -3996,7 +3943,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamps: "",
     TreatMissingData: "",
     Values: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudWatchEvents: {
@@ -4137,7 +4083,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TraceHeader: "",
     TransformerInput: "",
     TransformerPaths: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CloudWatchLogs: {
@@ -4239,7 +4184,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Token: "",
     Unmask: "",
     Value: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeArtifact: {
@@ -4303,7 +4247,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     UpstreamRepositoryInfoList: "",
     UpstreamRepositoryList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeBuild: {
@@ -4406,7 +4349,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WrapperBoolean: "",
     WrapperInt: "",
     WrapperLong: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeCatalyst: {
@@ -4485,7 +4427,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserType: "",
     Uuid: "",
     VerifySessionResponseIdentityString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeCommit: {
@@ -4628,7 +4569,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetList: "",
     Title: "",
     blob: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeDeploy: {
@@ -4772,7 +4712,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Version: "",
     VersionId: "",
     WaitTimeInMins: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeGuruProfiler: {
@@ -4833,7 +4772,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ThreadStates: "",
     Timestamp: "",
     UnprocessedEndTimeMap: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeGuruReviewer: {
@@ -4904,7 +4842,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserId: "",
     UserIds: "",
     VendorName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodePipeline: {
@@ -5051,7 +4988,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WebhookList: "",
     WebhookName: "",
     WebhookUrl: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeStar: {
@@ -5098,7 +5034,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserArn: "",
     UserProfileDisplayName: "",
     UserProfilesList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeStarNotifications: {
@@ -5140,7 +5075,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetType: "",
     Targets: "",
     TargetsBatch: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CodeStarconnections: {
@@ -5169,7 +5103,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TlsCertificate: "",
     Url: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CognitoIdentity: {
@@ -5226,7 +5159,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TokenDuration: "",
     UnprocessedIdentityIdList: "",
     UseDefaults: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CognitoIdentityServiceProvider: {
@@ -5398,7 +5330,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VerifiedAttributesListType: "",
     VerifySoftwareTokenResponseType: "",
     WrappedBooleanType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CognitoSync: {
@@ -5433,7 +5364,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StreamingStatus: "",
     String: "",
     SyncSessionToken: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Comprehend: {
@@ -5554,7 +5484,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     TopicsDetectionJobPropertiesList: "",
     VersionName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ComprehendMedical: {
@@ -5612,7 +5541,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     TraitList: "",
     UnmappedAttributeList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ComputeOptimizer: {
@@ -5787,7 +5715,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VolumeRecommendations: "",
     VolumeSize: "",
     VolumeType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ConfigService: {
@@ -6013,7 +5940,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UnprocessedResourceIdentifierList: "",
     Value: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Connect: {
@@ -6325,7 +6251,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VocabularySummaryList: "",
     VoiceRecordingTrack: "",
     timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ConnectCampaigns: {
@@ -6369,7 +6294,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     TimeStamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ConnectCases: {
@@ -6453,7 +6377,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateCaseRequestFieldsList: "",
     Value: "",
     ValuesList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ConnectContactLens: {
@@ -6474,7 +6397,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SentimentValue: "",
     TranscriptContent: "",
     TranscriptId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ConnectParticipant: {
@@ -6514,7 +6436,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UploadMetadataSignedHeadersKey: "",
     UploadMetadataSignedHeadersValue: "",
     UploadMetadataUrl: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ControlTower: {
@@ -6527,7 +6448,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     String: "",
     SyntheticTimestamp_date_time: "",
     TargetIdentifier: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CostExplorer: {
@@ -6682,7 +6602,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Values: "",
     YearMonthDay: "",
     ZonedDateTime: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   CustomerProfiles: {
@@ -6782,7 +6701,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     token: "",
     typeName: "",
     uuid: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DAX: {
@@ -6816,7 +6734,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SubnetList: "",
     TStamp: "",
     TagList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DLM: {
@@ -6880,7 +6797,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimesList: "",
     Timestamp: "",
     VariableTagsList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DMS: {
@@ -6974,7 +6890,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VersionStatus: "",
     VpcSecurityGroupIdList: "",
     VpcSecurityGroupMembershipList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DataBrew: {
@@ -7111,7 +7026,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidationMode: "",
     ValueReference: "",
     ValuesMap: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DataExchange: {
@@ -7165,7 +7079,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMin0Max16384: "",
     __stringMin10Max512: "",
     __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DataPipeline: {
@@ -7200,7 +7113,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     timestamp: "",
     validationMessage: "",
     validationMessages: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DataSync: {
@@ -7310,7 +7222,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VerifyMode: "",
     VpcEndpointId: "",
     long: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Detective: {
@@ -7350,7 +7261,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UnprocessedGraphList: "",
     UnprocessedReason: "",
     VolumeUsageByDatasourcePackage: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DevOpsGuru: {
@@ -7517,7 +7427,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateTagCollectionFilters: "",
     UpdateTagValues: "",
     UuidNextToken: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DeviceFarm: {
@@ -7640,7 +7549,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VideoCapture: "",
     VpcSecurityGroupIds: "",
     VpcSubnetIds: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DirectConnect: {
@@ -7759,7 +7667,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VirtualInterfaceType: "",
     XsltTemplateName: "",
     XsltTemplateNameForMacSec: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DirectoryService: {
@@ -7921,7 +7828,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserName: "",
     UserPassword: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Discovery: {
@@ -7998,7 +7904,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeStamp: "",
     ToDeleteIdentifierList: "",
     orderString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DocDB: {
@@ -8048,7 +7953,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidUpgradeTargetList: "",
     VpcSecurityGroupIdList: "",
     VpcSecurityGroupMembershipList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DocDBElastic: {
@@ -8069,7 +7973,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagKeyList: "",
     TagMap: "",
     TagValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Drs: {
@@ -8167,7 +8070,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VolumeToConversionMap: "",
     VolumeToSizeMap: "",
     ebsSnapshot: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DynamoDB: {
@@ -8378,7 +8280,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TransactWriteItemList: "",
     UpdateExpression: "",
     WriteRequests: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   DynamoDBStreams: {
@@ -8413,7 +8314,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StringAttributeValue: "",
     StringSetAttributeValue: "",
     TableName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EBS: {
@@ -8444,7 +8344,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeStamp: "",
     Timeout: "",
     VolumeSize: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EC2: {
@@ -9581,7 +9480,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     snapshotTierStatusSet: "",
     totalFpgaMemory: "",
     totalGpuMemory: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EC2InstanceConnect: {
@@ -9592,7 +9490,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SSHPublicKey: "",
     SerialPort: "",
     Success: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ECR: {
@@ -9729,7 +9626,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VulnerabilitySourceUpdateTimestamp: "",
     VulnerablePackageName: "",
     VulnerablePackagesList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ECRPUBLIC: {
@@ -9795,7 +9691,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UploadId: "",
     Url: "",
     UsageText: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ECS: {
@@ -9946,7 +9841,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UlimitName: "",
     VolumeFromList: "",
     VolumeList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EFS: {
@@ -10011,7 +9905,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TransitionToPrimaryStorageClassRules: "",
     Uid: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EKS: {
@@ -10083,7 +9976,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     taintKey: "",
     taintValue: "",
     taintsList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ELB: {
@@ -10162,7 +10054,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     UnhealthyThreshold: "",
     VPCId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ELBv2: {
@@ -10305,7 +10196,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetTypeEnum: "",
     VpcId: "",
     ZoneName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EMR: {
@@ -10424,7 +10314,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XmlStringList: "",
     XmlStringMaxLen256: "",
     XmlStringMaxLen256List: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EMRServerless: {
@@ -10484,7 +10373,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Url: "",
     WorkerCounts: "",
     WorkerTypeString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EMRcontainers: {
@@ -10546,7 +10434,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VirtualClusterState: "",
     VirtualClusterStates: "",
     VirtualClusters: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ES: {
@@ -10695,7 +10582,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcEndpointStatus: "",
     VpcEndpointSummaryList: "",
     VpcEndpoints: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ElastiCache: {
@@ -10814,7 +10700,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserIdListInput: "",
     UserList: "",
     UserName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ElasticBeanstalk: {
@@ -10989,7 +10874,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VersionLabels: "",
     VersionLabelsList: "",
     VirtualizationType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ElasticInference: {
@@ -11020,7 +10904,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ThroughputInfoList: "",
     Value: "",
     ValueStringList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ElasticTranscoder: {
@@ -11123,7 +11006,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WatermarkSizingPolicy: "",
     ZeroTo255String: "",
     ZeroTo512String: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   EventBridge: {
@@ -11279,7 +11161,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TraceHeader: "",
     TransformerInput: "",
     TransformerPaths: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Evidently: {
@@ -11393,7 +11274,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VariationNameList: "",
     VariationValueType: "",
     VariationsList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   FMS: {
@@ -11499,7 +11379,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateToken: "",
     ViolationReason: "",
     ViolationTarget: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   FSx: {
@@ -11695,7 +11574,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WeeklyTime: "",
     WindowsAccessAuditLogLevel: "",
     WindowsDeploymentType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Finspace: {
@@ -11724,7 +11602,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     url: "",
     urn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Finspacedata: {
@@ -11803,7 +11680,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     stringValueLength1to255: "",
     stringValueLength1to63: "",
     stringValueMaxLength1000: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Firehose: {
@@ -11920,7 +11796,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     Username: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Fis: {
@@ -12023,7 +11898,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateExperimentTemplateActionInputMap: "",
     UpdateExperimentTemplateStopConditionInputList: "",
     UpdateExperimentTemplateTargetInputMap: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ForecastQueryService: {
@@ -12039,7 +11913,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Statistic: "",
     TimeSeries: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ForecastService: {
@@ -12141,7 +12014,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WhatIfForecastArnListForExport: "",
     WhatIfForecastExports: "",
     WhatIfForecasts: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   FraudDetector: {
@@ -12258,7 +12130,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     variableName: "",
     variableValue: "",
     wholeNumberVersionString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   GameLift: {
@@ -12460,7 +12331,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WeightedCapacity: "",
     WholeNumber: "",
     ZipBlob: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   GameSparks: {
@@ -12522,7 +12392,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     TargetPlatform: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Glacier: {
@@ -12555,7 +12424,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     hashmap: "",
     httpstatus: "",
     long: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   GlobalAccelerator: {
@@ -12617,7 +12485,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ThresholdCount: "",
     Timestamp: "",
     TrafficDialPercentage: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Glue: {
@@ -13026,7 +12893,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkflowRunStatus: "",
     WorkflowRuns: "",
     Workflows: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Grafana: {
@@ -13088,7 +12954,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkspaceList: "",
     WorkspaceName: "",
     WorkspaceStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Greengrass: {
@@ -13131,7 +12996,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __listOf__string: "",
     __mapOf__string: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   GreengrassV2: {
@@ -13240,7 +13104,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TopicString: "",
     VendorGuidance: "",
     connectivityInfoList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   GroundStation: {
@@ -13310,7 +13173,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Year: "",
     noradSatelliteID: "",
     satelliteArn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   GuardDuty: {
@@ -13415,7 +13277,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VolumeDetails: "",
     VolumeMounts: "",
     Volumes: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Health: {
@@ -13479,7 +13340,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     tagSet: "",
     tagValue: "",
     timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   HealthLake: {
@@ -13511,7 +13371,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Honeycode: {
@@ -13573,7 +13432,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VariableName: "",
     VariableValueMap: "",
     WorkbookCursor: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IAM: {
@@ -13726,7 +13584,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     userNameType: "",
     virtualMFADeviceListType: "",
     virtualMFADeviceName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IVS: {
@@ -13786,7 +13643,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Time: "",
     errorCode: "",
     errorMessage: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IdentityStore: {
@@ -13812,7 +13668,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SensitiveStringType: "",
     UserName: "",
     Users: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Imagebuilder: {
@@ -13922,7 +13777,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Uri: "",
     UserDataOverride: "",
     VersionNumber: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Inspector: {
@@ -14027,7 +13881,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserAttributeKeyList: "",
     UserAttributeList: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Inspector2: {
@@ -14201,7 +14054,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VulnerabilityIdList: "",
     VulnerablePackageList: "",
     VulnerablePackageRemediation: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoT1ClickDevicesService: {
@@ -14218,7 +14070,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __string: "",
     __stringMin12Max40: "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoT1ClickProjects: {
@@ -14248,7 +14099,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     Time: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTAnalytics: {
@@ -14351,7 +14201,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VariableName: "",
     Variables: "",
     VolumeSizeInGB: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTEvents: {
@@ -14453,7 +14302,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UseBase64: "",
     VariableName: "",
     VariableValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTEventsData: {
@@ -14505,7 +14353,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VariableName: "",
     VariableValue: "",
     Variables: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTFleetHub: {
@@ -14526,7 +14373,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     Url: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTFleetWise: {
@@ -14620,7 +14466,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     vehicleSummaries: "",
     vehicles: "",
     wildcardSignalName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTJobsDataPlane: {
@@ -14643,7 +14488,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StepTimeoutInMinutes: "",
     ThingName: "",
     VersionNumber: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTRoboRunner: {
@@ -14685,7 +14529,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkerGenericIdentifier: "",
     WorkerId: "",
     Workers: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTSecureTunneling: {
@@ -14710,7 +14553,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TunnelId: "",
     TunnelStatus: "",
     TunnelSummaryList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTSiteWise: {
@@ -14866,7 +14708,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Unlimited: "",
     Url: "",
     VariableName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTThingsGraph: {
@@ -14935,7 +14776,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Urn: "",
     Urns: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTTwinMaker: {
@@ -15043,7 +14883,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Value: "",
     Values: "",
     WorkspaceSummaries: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IoTWireless: {
@@ -15318,7 +15157,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WirelessGatewayTaskName: "",
     WirelessGatewayTaskStatus: "",
     WirelessGatewayType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Iot: {
@@ -15914,7 +15752,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WaitingForDataCollectionChecksCount: "",
     stringValue: "",
     usePrefixAttributeValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IotData: {
@@ -15938,7 +15775,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     Topic: "",
     UserProperties: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   IotDeviceAdvisor: {
@@ -15980,7 +15816,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Token: "",
     UUID: "",
     Warnings: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Ivschat: {
@@ -16026,7 +15861,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Time: "",
     UpdateLoggingConfigurationState: "",
     UserID: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KMS: {
@@ -16102,7 +15936,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XksProxyUriEndpointType: "",
     XksProxyUriPathType: "",
     XksProxyVpcEndpointServiceNameType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Kafka: {
@@ -16142,7 +15975,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMin1Max64: "",
     __stringMin5Max32: "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KafkaConnect: {
@@ -16173,7 +16005,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMax1024: "",
     __stringMin1Max128: "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Kendra: {
@@ -16461,7 +16292,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WarningList: "",
     WarningMessage: "",
     WebCrawlerMode: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Keyspaces: {
@@ -16491,7 +16321,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeToLiveStatus: "",
     Timestamp: "",
     kmsKeyARN: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Kinesis: {
@@ -16548,7 +16377,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KinesisAnalytics: {
@@ -16605,7 +16433,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Tags: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KinesisAnalyticsV2: {
@@ -16712,7 +16539,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcConfigurations: "",
     VpcId: "",
     ZipFileContent: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KinesisVideo: {
@@ -16774,7 +16600,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateDataRetentionOperation: "",
     Version: "",
     WidthPixels: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KinesisVideoArchivedMedia: {
@@ -16817,7 +16642,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StreamName: "",
     Timestamp: "",
     WidthPixels: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KinesisVideoMedia: {
@@ -16829,7 +16653,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StartSelectorType: "",
     StreamName: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   KinesisVideoSignalingChannels: {
@@ -16844,14 +16667,9 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Uri: "",
     Uris: "",
     Username: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
-  KinesisVideoWebRTCStorage: {
-    ChannelArn: "",
-    apiVersion: "",
-    ClientConfiguration: "",
-  },
+  KinesisVideoWebRTCStorage: { ChannelArn: "", ClientConfiguration: "" },
   LakeFormation: {
     AccessKeyIdString: "",
     AuditContextString: "",
@@ -16960,7 +16778,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkUnitRangeList: "",
     WorkUnitTokenString: "",
     WriteOperationList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Lambda: {
@@ -17111,7 +16928,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcId: "",
     Weight: "",
     WorkingDirectory: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LexModelBuildingService: {
@@ -17227,7 +17043,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Value: "",
     Version: "",
     roleArn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LexModelsV2: {
@@ -17441,7 +17256,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VoiceEngine: "",
     VoiceId: "",
     Weight: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LexRuntime: {
@@ -17484,7 +17298,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserId: "",
     genericAttachmentList: "",
     listOfButtons: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LexRuntimeV2: {
@@ -17527,7 +17340,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StyleType: "",
     Text: "",
     Values: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LicenseManager: {
@@ -17602,7 +17414,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TokenString: "",
     TokenType: "",
     UsageOperation: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LicenseManagerLinuxSubscriptions: {
@@ -17623,7 +17434,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StringListMemberString: "",
     StringMap: "",
     SubscriptionList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LicenseManagerUserSubscriptions: {
@@ -17639,7 +17449,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StringList: "",
     Subnet: "",
     Subnets: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Lightsail: {
@@ -17840,7 +17649,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     integer: "",
     long: "",
     timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Location: {
@@ -17956,7 +17764,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TruckDimensionsWidthDouble: "",
     TruckWeightTotalDouble: "",
     VehicleWeightUnit: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LookoutEquipment: {
@@ -18028,7 +17835,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetSamplingRate: "",
     TimeZoneOffset: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LookoutMetrics: {
@@ -18145,7 +17951,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimestampString: "",
     Timezone: "",
     UUID: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   LookoutVision: {
@@ -18210,7 +18015,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetPlatformAccelerator: "",
     TargetPlatformArch: "",
     TargetPlatformOs: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   M2: {
@@ -18268,7 +18072,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MQ: {
@@ -18302,7 +18105,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __mapOf__string: "",
     __string: "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MTurk: {
@@ -18352,7 +18154,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StringList: "",
     Timestamp: "",
     WorkerBlockList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MWAA: {
@@ -18404,7 +18205,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WebserverAccessMode: "",
     WebserverUrl: "",
     WeeklyMaintenanceWindowStart: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MachineLearning: {
@@ -18477,7 +18277,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Verbose: "",
     VipURL: "",
     floatLabel: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Macie: {
@@ -18495,7 +18294,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     S3Resources: "",
     S3ResourcesClassification: "",
     S3ResourcesClassificationUpdate: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Macie2: {
@@ -18626,7 +18424,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922:
       "",
     __timestampIso8601: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ManagedBlockchain: {
@@ -18682,7 +18479,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UsernameString: "",
     VoteCount: "",
     VoteValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MarketplaceCatalog: {
@@ -18722,7 +18518,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     ValueList: "",
     VisibilityValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MarketplaceCommerceAnalytics: {
@@ -18738,7 +18533,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     RoleNameArn: "",
     SnsTopicArn: "",
     SupportDataSetType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MarketplaceEntitlementService: {
@@ -18754,7 +18548,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ProductCode: "",
     String: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MarketplaceMetering: {
@@ -18777,7 +18570,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UsageRecordResultList: "",
     UsageRecordResultStatus: "",
     VersionInteger: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaConnect: {
@@ -18830,7 +18622,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __listOf__string: "",
     __mapOf__string: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaConvert: {
@@ -19432,7 +19223,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringPatternW: "",
     __stringPatternWS: "",
     __timestampUnix: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaLive: {
@@ -19833,7 +19623,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     AcceptHeader: "",
     ContentType: "",
     __timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaPackage: {
@@ -19868,7 +19657,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __listOf__string: "",
     __mapOf__string: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaPackageVod: {
@@ -19897,7 +19685,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __listOf__string: "",
     __mapOf__string: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaStore: {
@@ -19929,7 +19716,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     TimeStamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaStoreData: {
@@ -19952,7 +19738,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeStamp: "",
     UploadAvailability: "",
     statusCode: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MediaTailor: {
@@ -19997,7 +19782,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __mapOf__string: "",
     __string: "",
     __timestampUnix: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MemoryDB: {
@@ -20059,7 +19843,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserName: "",
     UserNameList: "",
     UserNameListInput: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Mgn: {
@@ -20172,7 +19955,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WaveName: "",
     WaveProgressStatus: "",
     WavesList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MigrationHub: {
@@ -20205,7 +19987,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     StatusDetail: "",
     Token: "",
     UpdateDateTime: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MigrationHubConfig: {
@@ -20218,7 +19999,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetId: "",
     TargetType: "",
     Token: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MigrationHubOrchestrator: {
@@ -20288,7 +20068,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkflowStepOutputList: "",
     WorkflowStepOutputName: "",
     WorkflowStepsSummaryList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MigrationHubRefactorSpaces: {
@@ -20354,7 +20133,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UriPath: "",
     VpcId: "",
     VpcLinkId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   MigrationHubStrategy: {
@@ -20465,7 +20243,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VersionControlType: "",
     importS3Bucket: "",
     importS3Key: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Mobile: {
@@ -20499,7 +20276,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Resources: "",
     ShareUrl: "",
     SnapshotId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Neptune: {
@@ -20566,7 +20342,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidUpgradeTargetList: "",
     VpcSecurityGroupIdList: "",
     VpcSecurityGroupMembershipList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   NetworkFirewall: {
@@ -20665,7 +20440,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VariableDefinitionList: "",
     VpcId: "",
     VpcIds: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   NetworkManager: {
@@ -20799,7 +20573,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TunnelProtocol: "",
     VpcArn: "",
     VpnConnectionArn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Nimble: {
@@ -20917,7 +20690,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VolumeSizeInGiB: "",
     VolumeThroughputInMiBs: "",
     WindowsMountDrive: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   OAM: {
@@ -20942,7 +20714,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMapInput: "",
     TagMapOutput: "",
     TagValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Omics: {
@@ -21169,7 +20940,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkflowStatusMessage: "",
     WorkflowTimestamp: "",
     WorkflowType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   OpenSearch: {
@@ -21320,7 +21090,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcEndpointStatus: "",
     VpcEndpointSummaryList: "",
     VpcEndpoints: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   OpenSearchServerless: {
@@ -21382,7 +21151,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     samlGroupAttribute: "",
     samlMetadata: "",
     samlUserAttribute: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   OpsWorks: {
@@ -21449,7 +21217,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VolumeConfigurations: "",
     VolumeType: "",
     Volumes: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   OpsWorksCM: {
@@ -21491,7 +21258,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     TimeWindowDefinition: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Organizations: {
@@ -21570,7 +21336,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetName: "",
     TargetType: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Outposts: {
@@ -21681,7 +21446,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WireGuardPublicKey: "",
     outpostListDefinition: "",
     siteListDefinition: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PI: {
@@ -21718,7 +21482,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ResponseResourceMetricList: "",
     ServiceType: "",
     String: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Panorama: {
@@ -21839,7 +21602,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateCreatedTime: "",
     UpdateProgress: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Personalize: {
@@ -21925,7 +21687,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TrainingMode: "",
     TransactionsPerSecond: "",
     Tunable: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PersonalizeEvents: {
@@ -21944,7 +21705,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserId: "",
     UserList: "",
     UserProperties: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PersonalizeRuntime: {
@@ -21965,7 +21725,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     RecommendationID: "",
     Score: "",
     UserID: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Pinpoint: {
@@ -22047,7 +21806,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ListOfOpenHoursRules: "",
     MapOfListOfOpenHoursRules: "",
     ListOfClosedDaysRules: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PinpointEmail: {
@@ -22133,7 +21891,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TlsPolicy: "",
     Volume: "",
     WarmupStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PinpointSMSVoice: {
@@ -22147,7 +21904,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     String: "",
     WordCharactersWithDelimiters: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PinpointSMSVoiceV2: {
@@ -22250,7 +22006,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VoiceMessageBody: "",
     VoiceMessageBodyTextType: "",
     VoiceMessageOriginationIdentity: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Pipes: {
@@ -22366,7 +22121,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     URI: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Polly: {
@@ -22409,7 +22163,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VoiceId: "",
     VoiceList: "",
     VoiceName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Pricing: {
@@ -22422,7 +22175,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     PriceListJsonItems: "",
     ServiceList: "",
     String: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   PrivateNetworks: {
@@ -22484,7 +22236,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     TrackingInformationList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Proton: {
@@ -22580,7 +22331,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TemplateVersionPart: "",
     TemplateVersionStatus: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   QLDB: {
@@ -22613,7 +22363,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Tags: "",
     Timestamp: "",
     UniqueId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   QLDBSession: {
@@ -22630,7 +22379,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TransactionId: "",
     ValueHolders: "",
     WriteIOs: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   QuickSight: {
@@ -23097,7 +22845,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WordCloudWordPadding: "",
     WordCloudWordScaling: "",
     WorkGroup: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RAM: {
@@ -23135,7 +22882,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     TagValueList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RDS: {
@@ -23292,7 +23038,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcSecurityGroupIdList: "",
     VpcSecurityGroupMembershipList: "",
     WriteForwardingStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RDSDataService: {
@@ -23333,7 +23078,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TransactionStatus: "",
     TypeHint: "",
     UpdateResults: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RUM: {
@@ -23388,7 +23132,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UnitLabel: "",
     Url: "",
     ValueKey: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Rbin: {
@@ -23413,7 +23156,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeStamp: "",
     UnlockDelayUnit: "",
     UnlockDelayValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Redshift: {
@@ -23546,7 +23288,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcIdentifierList: "",
     VpcSecurityGroupIdList: "",
     VpcSecurityGroupMembershipList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RedshiftData: {
@@ -23585,7 +23326,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     WorkgroupNameString: "",
     bool: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RedshiftServerless: {
@@ -23645,7 +23385,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkgroupList: "",
     WorkgroupName: "",
     WorkgroupStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Rekognition: {
@@ -23826,7 +23565,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VideoColorRange: "",
     VideoJobStatus: "",
     VideoMetadataList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Resiliencehub: {
@@ -23913,7 +23651,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeStamp: "",
     UnsupportedResourceList: "",
     Uuid: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ResourceExplorer2: {
@@ -23954,7 +23691,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ViewArnList: "",
     ViewList: "",
     ViewName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ResourceGroups: {
@@ -24001,7 +23737,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagKeyList: "",
     TagValue: "",
     Tags: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ResourceGroupsTaggingAPI: {
@@ -24045,7 +23780,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetId: "",
     TargetIdFilterList: "",
     TargetIdType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RoboMaker: {
@@ -24164,7 +23898,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorldGenerationJobStatus: "",
     WorldGenerationJobSummaries: "",
     WorldSummaries: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   RolesAnywhere: {
@@ -24202,7 +23935,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateProfileRequestDurationSecondsInteger: "",
     UpdateProfileRequestSessionPolicyString: "",
     Uuid: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Route53: {
@@ -24351,7 +24083,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VPCId: "",
     VPCRegion: "",
     VPCs: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Route53Domains: {
@@ -24427,7 +24158,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Value: "",
     Values: "",
     ZipCode: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Route53RecoveryCluster: {
@@ -24440,7 +24170,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     RoutingControlState: "",
     RoutingControls: "",
     UpdateRoutingControlStateEntries: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Route53RecoveryControlConfig: {
@@ -24466,7 +24195,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMin1Max32PatternS: "",
     __stringMin1Max64PatternS: "",
     __stringMin1Max8096PatternS: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Route53RecoveryReadiness: {
@@ -24494,7 +24222,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMax64: "",
     __stringMax64PatternAAZAZ09Z: "",
     __stringPatternAWSAZaZ09AZaZ09: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Route53Resolver: {
@@ -24581,7 +24308,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetList: "",
     Unsigned: "",
     Validation: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   S3: {
@@ -24862,7 +24588,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VersionIdMarker: "",
     WebsiteRedirectLocation: "",
     Years: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   S3Control: {
@@ -25019,7 +24744,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TransitionList: "",
     TransitionStorageClass: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   S3Outposts: {
@@ -25039,7 +24763,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     SecurityGroupId: "",
     SubnetId: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SES: {
@@ -25150,7 +24873,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VerificationStatus: "",
     VerificationToken: "",
     VerificationTokenList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SESV2: {
@@ -25317,7 +25039,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Volume: "",
     WarmupStatus: "",
     WebsiteURL: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SMS: {
@@ -25423,7 +25144,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VmName: "",
     VmPath: "",
     VmServerAddressList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SNS: {
@@ -25481,7 +25201,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     token: "",
     topicARN: "",
     topicName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SQS: {
@@ -25518,7 +25237,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     Token: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SSM: {
@@ -26150,7 +25868,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidNextStep: "",
     ValidNextStepList: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SSMContacts: {
@@ -26196,7 +25913,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     TagsList: "",
     TargetsList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SSMIncidents: {
@@ -26278,7 +25994,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateReplicationSetInputActionsList: "",
     Url: "",
     VariableType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SSO: {
@@ -26295,7 +26010,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     RoleNameType: "",
     SecretAccessKeyType: "",
     SessionTokenType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SSOAdmin: {
@@ -26343,7 +26057,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetType: "",
     Token: "",
     UUId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SSOOIDC: {
@@ -26365,7 +26078,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TokenType: "",
     URI: "",
     UserCode: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   STS: {
@@ -26404,7 +26116,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     userIdType: "",
     userNameType: "",
     webIdentitySubjectType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SWF: {
@@ -26482,7 +26193,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkflowRunId: "",
     WorkflowRunIdOptional: "",
     WorkflowTypeInfoList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SageMaker: {
@@ -27415,7 +27125,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkteamArn: "",
     WorkteamName: "",
     Workteams: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SageMakerFeatureStoreRuntime: {
@@ -27432,7 +27141,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetStores: "",
     UnprocessedIdentifiers: "",
     ValueAsString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SageMakerGeospatial: {
@@ -27495,7 +27203,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VectorEnrichmentJobType: "",
     ZonalStatistics: "",
     ZonalStatisticsListInput: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SageMakerMetrics: {
@@ -27508,7 +27215,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     RawMetricDataList: "",
     Step: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SageMakerRuntime: {
@@ -27523,7 +27229,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetContainerHostnameHeader: "",
     TargetModelHeader: "",
     TargetVariantHeader: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SagemakerEdge: {
@@ -27551,7 +27256,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     Value: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SavingsPlans: {
@@ -27624,7 +27328,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TermDurationInSeconds: "",
     UUID: "",
     UUIDs: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Scheduler: {
@@ -27695,7 +27398,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetPartitionKey: "",
     TaskCount: "",
     TaskDefinitionArn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Schemas: {
@@ -27722,7 +27424,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __stringMin20Max1600: "",
     __timestampIso8601: "",
     Body: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SecretsManager: {
@@ -27787,7 +27488,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValueType: "",
     TimestampType: "",
     ValidationErrorsType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SecurityHub: {
@@ -28061,7 +27761,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WafExcludedRuleList: "",
     WorkflowState: "",
     WorkflowStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SecurityLake: {
@@ -28119,7 +27818,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
       "",
     ValueSet: "",
     settingsStatus: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ServerlessApplicationRepository: {
@@ -28139,7 +27837,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     __listOfVersionSummary: "",
     __listOf__string: "",
     __string: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ServiceCatalog: {
@@ -28375,7 +28072,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserArn: "",
     UserArnSession: "",
     Verbose: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ServiceCatalogAppRegistry: {
@@ -28410,7 +28106,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Tags: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ServiceDiscovery: {
@@ -28472,7 +28167,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   ServiceQuotas: {
@@ -28514,7 +28208,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Statistic: "",
     TagKey: "",
     TagValue: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Shield: {
@@ -28578,7 +28271,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Token: "",
     TopContributors: "",
     Unit: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Signer: {
@@ -28628,7 +28320,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidityType: "",
     Version: "",
     bool: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SimSpaceWeaver: {
@@ -28665,7 +28356,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TimeToLiveString: "",
     Timestamp: "",
     UUID: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SnowDeviceManagement: {
@@ -28705,7 +28395,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TaskSummaryList: "",
     Timestamp: "",
     UnlockState: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Snowball: {
@@ -28753,7 +28442,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TargetOnDeviceServiceList: "",
     Timestamp: "",
     TransferOption: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SsmSap: {
@@ -28801,7 +28489,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagMap: "",
     TagValue: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   StepFunctions: {
@@ -28854,7 +28541,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UnsignedLong: "",
     includedDetails: "",
     truncated: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   StorageGateway: {
@@ -29023,7 +28709,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     double: "",
     integer: "",
     long: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Support: {
@@ -29076,7 +28761,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TrustedAdvisorCheckRefreshStatusList: "",
     TrustedAdvisorCheckSummaryList: "",
     TrustedAdvisorResourceDetailList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   SupportApp: {
@@ -29092,7 +28776,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     slackChannelConfigurationList: "",
     teamId: "",
     teamName: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Synthetics: {
@@ -29148,7 +28831,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Token: "",
     UUID: "",
     VpcId: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Textract: {
@@ -29220,7 +28902,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UndetectedSignatureList: "",
     ValueType: "",
     Warnings: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   TimestreamQuery: {
@@ -29274,7 +28955,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Time: "",
     TimeSeriesDataPointList: "",
     Timestamp: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   TimestreamWrite: {
@@ -29311,7 +28991,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagList: "",
     TagValue: "",
     TimeUnit: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   TranscribeService: {
@@ -29390,7 +29069,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VocabularyState: "",
     Word: "",
     Words: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Transfer: {
@@ -29527,7 +29205,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkflowStepName: "",
     WorkflowStepType: "",
     WorkflowSteps: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Translate: {
@@ -29578,7 +29255,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Timestamp: "",
     TranslatedTextString: "",
     UnboundedLengthString: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   VoiceID: {
@@ -29630,7 +29306,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     TagValue: "",
     Timestamp: "",
     UniqueIdLarge: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WAF: {
@@ -29724,7 +29399,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XssMatchSetSummaries: "",
     XssMatchSetUpdates: "",
     XssMatchTuples: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WAFRegional: {
@@ -29820,7 +29494,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     XssMatchSetSummaries: "",
     XssMatchSetUpdates: "",
     XssMatchTuples: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WAFV2: {
@@ -29942,7 +29615,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VersionKeyString: "",
     VersionsToPublish: "",
     WebACLSummaries: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WellArchitected: {
@@ -30068,7 +29740,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkloadReviewOwner: "",
     WorkloadShareSummaries: "",
     WorkloadSummaries: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   Wisdom: {
@@ -30127,7 +29798,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Uuid: "",
     UuidOrArn: "",
     WaitTimeSeconds: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WorkDocs: {
@@ -30213,7 +29883,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserStatusType: "",
     UserType: "",
     UsernameType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WorkLink: {
@@ -30257,7 +29926,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     VpcId: "",
     WebsiteAuthorizationProvidersSummaryList: "",
     WebsiteCaSummaryList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WorkMail: {
@@ -30371,7 +30039,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Users: "",
     WorkMailDomainName: "",
     WorkMailIdentifier: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WorkMailMessageFlow: {
@@ -30380,7 +30047,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     s3BucketIdType: "",
     s3KeyIdType: "",
     s3VersionType: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WorkSpaces: {
@@ -30530,7 +30196,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     WorkspaceRequestList: "",
     WorkspaceState: "",
     WorkspacesIpGroupsList: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   WorkSpacesWeb: {
@@ -30580,7 +30245,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UserSettingsList: "",
     VpcId: "",
     keyArn: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
   XRay: {
@@ -30691,7 +30355,6 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UnprocessedTraceSegmentList: "",
     ValuesWithServiceIds: "",
     Version: "",
-    apiVersion: "",
     ClientConfiguration: "",
   },
 };
