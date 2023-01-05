@@ -16,11 +16,16 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
   source.find(j.TSModuleDeclaration, { id: { name: clientName } }).forEach((moduleDeclaration) => {
     const tsTypes = j(moduleDeclaration).find(j.TSTypeAliasDeclaration).nodes();
 
-    tsTypes
-      .filter((tsType) => tsType.typeAnnotation.type === "TSStringKeyword")
-      .forEach((tsType) => {
-        clientTypesMap[tsType.id.name] = "string";
-      });
+    for (const [type, value] of [
+      ["TSStringKeyword", "string"],
+      ["TSNumberKeyword", "number"],
+    ]) {
+      tsTypes
+        .filter((tsType) => tsType.typeAnnotation.type === type)
+        .forEach((tsType) => {
+          clientTypesMap[tsType.id.name] = value;
+        });
+    }
 
     tsTypes
       .filter((tsType) => tsType.typeAnnotation.type === "TSUnionType")
@@ -31,12 +36,6 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         } else if (name !== "apiVersion") {
           clientTypesMap[name] = "string";
         }
-      });
-
-    tsTypes
-      .filter((tsType) => tsType.typeAnnotation.type === "TSNumberKeyword")
-      .forEach((tsType) => {
-        clientTypesMap[tsType.id.name] = "number";
       });
 
     tsTypes.forEach((tsType) => {
