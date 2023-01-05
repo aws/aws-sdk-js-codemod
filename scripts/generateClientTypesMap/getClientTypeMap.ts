@@ -2,9 +2,7 @@ import { readFile } from "fs/promises";
 import jscodeshift from "jscodeshift";
 import { join } from "path";
 
-export const getClientTypeMapForClient = async (
-  clientName: string
-): Promise<Record<string, string>> => {
+export const getClientTypeMap = async (clientName: string): Promise<Record<string, string>> => {
   const clientTypesMap = {};
 
   const typesPath = join("node_modules", "aws-sdk", "clients", `${clientName.toLowerCase()}.d.ts`);
@@ -20,7 +18,7 @@ export const getClientTypeMapForClient = async (
       .find(j.TSTypeAliasDeclaration)
       .nodes()
       .forEach((tsType) => {
-        const { id } = tsType;
+        const { id, typeAnnotation } = tsType;
         if (id.name !== "apiVersion") {
           clientTypesMap[id.name] = "";
         }
