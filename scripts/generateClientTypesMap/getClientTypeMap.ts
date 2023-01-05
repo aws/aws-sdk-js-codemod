@@ -33,6 +33,12 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         }
       });
 
+    tsTypes
+      .filter((tsType) => tsType.typeAnnotation.type === "TSNumberKeyword")
+      .forEach((tsType) => {
+        clientTypesMap[tsType.id.name] = "number";
+      });
+
     tsTypes.forEach((tsType) => {
       const name = tsType.id.name;
       if (name !== "apiVersion" && !clientTypesMap[name]) {
