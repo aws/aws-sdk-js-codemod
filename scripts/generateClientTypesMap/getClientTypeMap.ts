@@ -3,6 +3,11 @@ import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } 
 import { join } from "path";
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
+const ElementTypeToNativeTypeMap = {
+  TSStringKeyword: "string",
+  TSNumberKeyword: "number",
+  TSBooleanKeyword: "boolean",
+};
 
 export const getClientTypeMap = async (clientName: string): Promise<Record<string, string>> => {
   const clientTypesMap = {};
@@ -18,11 +23,7 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
   source.find(j.TSModuleDeclaration, { id: { name: clientName } }).forEach((moduleDeclaration) => {
     const tsTypes = j(moduleDeclaration).find(j.TSTypeAliasDeclaration).nodes();
 
-    for (const [type, value] of [
-      ["TSStringKeyword", "string"],
-      ["TSNumberKeyword", "number"],
-      ["TSBooleanKeyword", "boolean"],
-    ]) {
+    for (const [type, value] of Object.entries(ElementTypeToNativeTypeMap)) {
       tsTypes
         .filter((tsType) => tsType.typeAnnotation.type === type)
         .forEach((tsType) => {
@@ -71,6 +72,8 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
           } else {
             console.log("TSArrayType TSTypeReference without Identifier type:", name);
           }
+        } else if (Object.keys(ElementTypeToNativeTypeMap).includes(elementType.type)) {
+          clientTypesMap[name] = `Array<${ElementTypeToNativeTypeMap[elementType.type]}>`;
         } else {
           console.log("TSArrayType without TSTypeReference type:", name);
         }
