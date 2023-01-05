@@ -19,6 +19,7 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
     for (const [type, value] of [
       ["TSStringKeyword", "string"],
       ["TSNumberKeyword", "number"],
+      ["TSBooleanKeyword", "boolean"],
     ]) {
       tsTypes
         .filter((tsType) => tsType.typeAnnotation.type === type)
