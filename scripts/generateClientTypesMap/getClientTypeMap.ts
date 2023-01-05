@@ -14,15 +14,20 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
   const source = j(typesCode);
 
   source.find(j.TSModuleDeclaration, { id: { name: clientName } }).forEach((moduleDeclaration) => {
-    j(moduleDeclaration)
-      .find(j.TSTypeAliasDeclaration)
-      .nodes()
+    const tsTypes = j(moduleDeclaration).find(j.TSTypeAliasDeclaration).nodes();
+
+    tsTypes
+      .filter((tsType) => tsType.typeAnnotation.type === "TSStringKeyword")
       .forEach((tsType) => {
-        const { id, typeAnnotation } = tsType;
-        if (id.name !== "apiVersion") {
-          clientTypesMap[id.name] = "";
-        }
+        clientTypesMap[tsType.id.name] = "string";
       });
+
+    tsTypes.forEach((tsType) => {
+      const { id } = tsType;
+      if (id.name !== "apiVersion" && !clientTypesMap[id.name]) {
+        clientTypesMap[id.name] = "";
+      }
+    });
   });
 
   return Object.entries(clientTypesMap)
