@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import jscodeshift, { Identifier, TSTypeReference } from "jscodeshift";
+import jscodeshift, { Identifier, TSArrayType, TSTypeReference } from "jscodeshift";
 import { join } from "path";
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
@@ -51,6 +51,21 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
           clientTypesMap[name] = "Uint8Array";
         } else if (name !== "apiVersion") {
           clientTypesMap[name] = "string";
+        }
+      });
+
+    tsTypes
+      .filter((tsType) => tsType.typeAnnotation.type === "TSArrayType")
+      .forEach((tsType) => {
+        const name = tsType.id.name;
+        const elementType = (tsType.typeAnnotation as TSArrayType).elementType;
+        if (elementType.type === "TSTypeReference") {
+          const typeName = elementType.typeName;
+          if (typeName.type === "Identifier") {
+            if (clientTypesMap[typeName.name]) {
+              clientTypesMap[name] = `Array<${clientTypesMap[typeName.name]}>`;
+            }
+          }
         }
       });
 
