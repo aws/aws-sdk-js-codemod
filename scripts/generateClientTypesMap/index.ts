@@ -26,5 +26,5 @@ const relativeFilePath = join(__dirname, "..", "..", filePath);
   fileContent += JSON.stringify(clientTypesMap);
   fileContent += `;\n`;
 
-  await writeFile(relativeFilePath, format(fileContent, { parser: "typescript" }));
+  await writeFile(relativeFilePath, format(fileContent, { parser: "typescript", printWidth: 100 }));
 })();

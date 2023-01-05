@@ -742,11 +742,7 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     ValidationsList: "Array<FieldValidationConfiguration>",
     ValueMappingList: "Array<ValueMapping>",
   },
-  ApiGatewayManagementApi: {
-    __string: "string",
-    __timestampIso8601: "Date",
-    Data: "string",
-  },
+  ApiGatewayManagementApi: { __string: "string", __timestampIso8601: "Date", Data: "string" },
   ApiGatewayV2: {
     __boolean: "boolean",
     __double: "number",
