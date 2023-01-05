@@ -21,7 +21,9 @@ export const getClientTypeMapForClient = async (
       .nodes()
       .forEach((tsType) => {
         const { id } = tsType;
-        clientTypesMap[id.name] = "";
+        if (id.name !== "apiVersion") {
+          clientTypesMap[id.name] = "";
+        }
       });
   });
 
