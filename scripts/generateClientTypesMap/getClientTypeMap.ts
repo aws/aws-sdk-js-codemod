@@ -41,6 +41,8 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         } else if (typeName === "EventStream") {
           // Exception for SelectObjectContentEventStream
           clientTypesMap[name] = "AsyncIterable<KEY>";
+        } else {
+          console.log("TSTypeReference with unsupported type:", name, typeName);
         }
       });
 
@@ -97,6 +99,8 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
                     // Assume it's an interface which would be available in v3.
                     clientTypesMap[name] = `Record<string, ${typeName.name}>`;
                   }
+                } else {
+                  console.log("TSTypeLiteral TSTypeReference without Identifier type:", name);
                 }
               } else if (Object.keys(ElementTypeToNativeTypeMap).includes(typeAnnotation.type)) {
                 clientTypesMap[name] = `Record<string, ${
