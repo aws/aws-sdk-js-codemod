@@ -5,7 +5,7 @@
 export const hasReferenceToKeysInValues = (clientTypesMap: Record<string, string>) => {
   const keys = Object.keys(clientTypesMap);
   for (const value of Object.values(clientTypesMap)) {
-    if (keys.some((key) => value.includes(`<${key}>`))) {
+    if (keys.some((key) => value.includes(`Array<${key}>`))) {
       return true;
     }
   }
