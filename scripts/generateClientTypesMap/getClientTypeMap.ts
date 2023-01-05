@@ -68,7 +68,11 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
               // Assume it's an interface which would be available in v3.
               clientTypesMap[name] = `Array<${typeName.name}>`;
             }
+          } else {
+            console.log("TSArrayType TSTypeReference without Identifier type:", name);
           }
+        } else {
+          console.log("TSArrayType without TSTypeReference type:", name);
         }
       });
 
