@@ -19,7 +19,7 @@ export const getClientTypesMapWithKeysRemovedFromValues = (
       newClientTypeMap[key] = value;
     } else {
       newClientTypeMap[key] = refs.reduce(
-        (ref) => value.replace(`<${ref}>`, newClientTypeMap[ref]),
+        (acc, ref) => acc.replace(`<${ref}>`, `<${clientTypesMap[ref]}>`),
         value
       );
     }
