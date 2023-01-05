@@ -75,7 +75,7 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         } else if (Object.keys(ElementTypeToNativeTypeMap).includes(elementType.type)) {
           clientTypesMap[name] = `Array<${ElementTypeToNativeTypeMap[elementType.type]}>`;
         } else {
-          console.log("TSArrayType without TSTypeReference type:", name);
+          console.log("TSArrayType with unsupported elemental type:", name);
         }
       });
 
@@ -87,8 +87,9 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         if (member.type === "TSIndexSignature") {
           if (member.typeAnnotation) {
             if (member.typeAnnotation.typeAnnotation) {
-              if (member.typeAnnotation.typeAnnotation.type === "TSTypeReference") {
-                const typeName = member.typeAnnotation.typeAnnotation.typeName;
+              const typeAnnotation = member.typeAnnotation.typeAnnotation;
+              if (typeAnnotation.type === "TSTypeReference") {
+                const typeName = typeAnnotation.typeName;
                 if (typeName.type === "Identifier") {
                   if (clientTypesMap[typeName.name]) {
                     clientTypesMap[name] = `Record<string, ${clientTypesMap[typeName.name]}>`;
@@ -97,6 +98,12 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
                     clientTypesMap[name] = `Record<string, ${typeName.name}>`;
                   }
                 }
+              } else if (Object.keys(ElementTypeToNativeTypeMap).includes(typeAnnotation.type)) {
+                clientTypesMap[name] = `Record<string, ${
+                  ElementTypeToNativeTypeMap[typeAnnotation.type]
+                }>`;
+              } else {
+                console.log("TSTypeLiteral with unsupported typeAnnotation type:", name);
               }
             }
           }
