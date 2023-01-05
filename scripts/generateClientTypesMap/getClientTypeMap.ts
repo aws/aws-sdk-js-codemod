@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import jscodeshift, { Identifier, TSArrayType, TSTypeReference } from "jscodeshift";
+import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } from "jscodeshift";
 import { join } from "path";
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
@@ -73,6 +73,30 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
           }
         } else {
           console.log("TSArrayType without TSTypeReference type:", name);
+        }
+      });
+
+    tsTypes
+      .filter((tsType) => tsType.typeAnnotation.type === "TSTypeLiteral")
+      .forEach((tsType) => {
+        const name = tsType.id.name;
+        const member = (tsType.typeAnnotation as TSTypeLiteral).members[0];
+        if (member.type === "TSIndexSignature") {
+          if (member.typeAnnotation) {
+            if (member.typeAnnotation.typeAnnotation) {
+              if (member.typeAnnotation.typeAnnotation.type === "TSTypeReference") {
+                const typeName = member.typeAnnotation.typeAnnotation.typeName;
+                if (typeName.type === "Identifier") {
+                  if (clientTypesMap[typeName.name]) {
+                    clientTypesMap[name] = `Record<string, ${clientTypesMap[typeName.name]}>`;
+                  } else {
+                    // Assume it's an interface which would be available in v3.
+                    clientTypesMap[name] = `Record<string, ${typeName.name}>`;
+                  }
+                }
+              }
+            }
+          }
         }
       });
 
