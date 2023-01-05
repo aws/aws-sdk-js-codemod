@@ -14,7 +14,8 @@ const relativeFilePath = join(__dirname, "..", "..", filePath);
 (async () => {
   let fileContent = codegenComment;
 
-  fileContent += `\n\nexport const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = `;
+  fileContent += `\n\n/* eslint-disable @typescript-eslint/naming-convention */`;
+  fileContent += `\nexport const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = `;
 
   const clientTypesMap = {};
 
