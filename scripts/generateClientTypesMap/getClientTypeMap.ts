@@ -25,5 +25,10 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
       });
   });
 
-  return clientTypesMap;
+  return Object.entries(clientTypesMap)
+    .sort(([key1], [key2]) => key1.localeCompare(key2))
+    .reduce((obj, [key, value]) => {
+      obj[key] = value;
+      return obj;
+    }, {});
 };
