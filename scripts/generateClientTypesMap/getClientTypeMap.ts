@@ -114,7 +114,8 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
 
     tsTypes.forEach((tsType) => {
       const name = tsType.id.name;
-      if (!TYPES_TO_SKIP.includes(name) && !clientTypesMap[name]) {
+      const type = tsType.typeAnnotation.type;
+      if (!TYPES_TO_SKIP.includes(name) && !clientTypesMap[name] && type !== "TSUnionType") {
         console.log("Unsupported type:", name);
       }
     });
