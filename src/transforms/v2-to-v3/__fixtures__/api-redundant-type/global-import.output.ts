@@ -1,4 +1,5 @@
 import AWS_S3 from "@aws-sdk/client-s3";
+import AWS_APIGateway from "@aws-sdk/client-api-gateway";
 
 // Native types
 const stringType: string = "string"; // string
@@ -15,3 +16,9 @@ const numberArray: number[] = [123, 456]; // number[]
 const blobArray: Uint8Array[] = [new Uint8Array()]; // Uint8Array[]
 const enumArray: AWS_S3.ChecksumAlgorithm[] = ["CRC32"]; // ChecksumAlgorithm[]
 const structureArray: AWS_S3.Bucket[] = [{ Name: "bucketName" }]; // Bucket[]
+
+// Maps
+const stringMap: Record<string, string> = { key: "value" }; // Record<string, string>
+const booleanMap: Record<string, boolean> = { key: true }; // Record<string, boolean>
+const numberMap: Record<string, number> = { key: 123 }; // Record<string, number>
+const structureMap: Record<string, AWS_APIGateway.MethodSnapshot> = { key: { apiKeyRequired: true } }; // Record<string, MethodSnapshot>
