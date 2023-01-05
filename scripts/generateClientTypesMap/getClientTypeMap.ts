@@ -2,6 +2,8 @@ import { readFile } from "fs/promises";
 import jscodeshift from "jscodeshift";
 import { join } from "path";
 
+const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
+
 export const getClientTypeMap = async (clientName: string): Promise<Record<string, string>> => {
   const clientTypesMap = {};
 
@@ -34,14 +36,14 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         const name = tsType.id.name;
         if (name.endsWith("Blob")) {
           clientTypesMap[name] = "Uint8Array";
-        } else if (name !== "apiVersion") {
+        } else if (!TYPES_TO_SKIP.includes(name)) {
           clientTypesMap[name] = "string";
         }
       });
 
     tsTypes.forEach((tsType) => {
       const name = tsType.id.name;
-      if (name !== "apiVersion" && !clientTypesMap[name]) {
+      if (!TYPES_TO_SKIP.includes(name) && !clientTypesMap[name]) {
         clientTypesMap[name] = "";
       }
     });
