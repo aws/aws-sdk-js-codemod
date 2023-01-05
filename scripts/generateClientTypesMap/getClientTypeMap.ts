@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import jscodeshift from "jscodeshift";
+import jscodeshift, { Identifier, TSTypeReference } from "jscodeshift";
 import { join } from "path";
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
@@ -31,12 +31,22 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
     }
 
     tsTypes
+      .filter((tsType) => tsType.typeAnnotation.type === "TSTypeReference")
+      .forEach((tsType) => {
+        const name = tsType.id.name;
+        const typeName = ((tsType.typeAnnotation as TSTypeReference).typeName as Identifier).name;
+        if (typeName === "Date") {
+          clientTypesMap[name] = typeName;
+        }
+      });
+
+    tsTypes
       .filter((tsType) => tsType.typeAnnotation.type === "TSUnionType")
       .forEach((tsType) => {
         const name = tsType.id.name;
         if (name.endsWith("Blob")) {
           clientTypesMap[name] = "Uint8Array";
-        } else if (!TYPES_TO_SKIP.includes(name)) {
+        } else if (name !== "apiVersion") {
           clientTypesMap[name] = "string";
         }
       });
