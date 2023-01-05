@@ -52,9 +52,6 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         const name = tsType.id.name;
         if (name.endsWith("Blob")) {
           clientTypesMap[name] = "Uint8Array";
-        } else if (name !== "apiVersion") {
-          // Assume that the Enum Type exists in v3.
-          clientTypesMap[name] = name;
         }
       });
 
