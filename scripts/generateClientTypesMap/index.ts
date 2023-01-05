@@ -19,7 +19,7 @@ const relativeFilePath = join(__dirname, "..", "..", filePath);
   const clientTypesMap = {};
 
   for (const clientName of CLIENT_NAMES) {
-    clientTypesMap[clientName] = getClientTypeMapForClient(clientName);
+    clientTypesMap[clientName] = await getClientTypeMapForClient(clientName);
   }
 
   fileContent += JSON.stringify(clientTypesMap);
