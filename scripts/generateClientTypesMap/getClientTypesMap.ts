@@ -2,6 +2,8 @@ import { readFile } from "fs/promises";
 import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } from "jscodeshift";
 import { join } from "path";
 
+import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
+
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
 const ElementTypeToNativeTypeMap = {
   TSStringKeyword: "string",
@@ -9,7 +11,7 @@ const ElementTypeToNativeTypeMap = {
   TSBooleanKeyword: "boolean",
 };
 
-export const getClientTypeMap = async (clientName: string): Promise<Record<string, string>> => {
+export const getClientTypesMap = async (clientName: string): Promise<Record<string, string>> => {
   const clientTypesMap = {};
 
   const typesPath = join("node_modules", "aws-sdk", "clients", `${clientName.toLowerCase()}.d.ts`);
@@ -121,7 +123,9 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
     });
   });
 
-  return Object.entries(clientTypesMap)
+  const updatedClientTypesMap = getClientTypesMapWithKeysRemovedFromValues(clientTypesMap);
+
+  return Object.entries(updatedClientTypesMap)
     .sort(([key1], [key2]) => key1.localeCompare(key2))
     .reduce((obj, [key, value]) => {
       obj[key] = value;
