@@ -8,6 +8,14 @@ const filePath = join("src", "transforms", "v2-to-v3", "config", "CLIENT_TYPES_M
 const relativeFilePath = join(__dirname, "..", "..", filePath);
 
 (async () => {
-  const fileContent = codegenComment;
+  let fileContent = codegenComment;
+
+  fileContent += `\n\nexport const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = `;
+
+  const clientTypesMap = {};
+
+  fileContent += JSON.stringify(clientTypesMap, null, 2);
+  fileContent += `;\n`;
+
   await writeFile(relativeFilePath, fileContent);
 })();
