@@ -22,10 +22,21 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         clientTypesMap[tsType.id.name] = "string";
       });
 
+    tsTypes
+      .filter((tsType) => tsType.typeAnnotation.type === "TSUnionType")
+      .forEach((tsType) => {
+        const name = tsType.id.name;
+        if (name.endsWith("Blob")) {
+          clientTypesMap[name] = "Uint8Array";
+        } else if (name !== "apiVersion") {
+          clientTypesMap[name] = "string";
+        }
+      });
+
     tsTypes.forEach((tsType) => {
-      const { id } = tsType;
-      if (id.name !== "apiVersion" && !clientTypesMap[id.name]) {
-        clientTypesMap[id.name] = "";
+      const name = tsType.id.name;
+      if (name !== "apiVersion" && !clientTypesMap[name]) {
+        clientTypesMap[name] = "";
       }
     });
   });
