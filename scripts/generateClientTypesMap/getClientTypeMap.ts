@@ -37,6 +37,9 @@ export const getClientTypeMap = async (clientName: string): Promise<Record<strin
         const typeName = ((tsType.typeAnnotation as TSTypeReference).typeName as Identifier).name;
         if (typeName === "Date") {
           clientTypesMap[name] = typeName;
+        } else if (typeName === "EventStream") {
+          // Exception for SelectObjectContentEventStream
+          clientTypesMap[name] = "AsyncIterable<KEY>";
         }
       });
 

@@ -24278,7 +24278,7 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     Role: "string",
     RoutingRules: "",
     Rules: "",
-    SelectObjectContentEventStream: "",
+    SelectObjectContentEventStream: "AsyncIterable<KEY>",
     ServerSideEncryption: "string",
     ServerSideEncryptionRules: "",
     Setting: "boolean",
