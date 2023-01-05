@@ -9,7 +9,7 @@ const ElementTypeToNativeTypeMap = {
   TSBooleanKeyword: "boolean",
 };
 
-export const getClientTypeMap = async (clientName: string): Promise<Record<string, string>> => {
+export const getClientTypesMap = async (clientName: string): Promise<Record<string, string>> => {
   const clientTypesMap = {};
 
   const typesPath = join("node_modules", "aws-sdk", "clients", `${clientName.toLowerCase()}.d.ts`);
