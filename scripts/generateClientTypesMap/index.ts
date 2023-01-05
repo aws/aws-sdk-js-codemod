@@ -1,5 +1,6 @@
 import { writeFile } from "fs/promises";
 import { join } from "path";
+import { format } from "prettier";
 
 import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
 import { getClientTypeMapForClient } from "./getClientTypeMapForClient";
@@ -21,8 +22,8 @@ const relativeFilePath = join(__dirname, "..", "..", filePath);
     clientTypesMap[clientName] = getClientTypeMapForClient(clientName);
   }
 
-  fileContent += JSON.stringify(clientTypesMap, null, 2);
+  fileContent += JSON.stringify(clientTypesMap);
   fileContent += `;\n`;
 
-  await writeFile(relativeFilePath, fileContent);
+  await writeFile(relativeFilePath, format(fileContent, { parser: "typescript" }));
 })();
