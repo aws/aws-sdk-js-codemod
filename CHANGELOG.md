@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.9.1
+
+### Patch Changes
+
+- Use filter API to shortlist import declarations to be deleted ([e623543](https://github.com/awslabs/aws-sdk-js-codemod/commit/e623543))
+
 ## 0.9.0
 
 ### Minor Changes
