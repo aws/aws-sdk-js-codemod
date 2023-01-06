@@ -1,5 +1,8 @@
 import { JSCodeshift, TSType } from "jscodeshift";
 
+const arrayRegex = /^Array<(.*)>$/;
+const recordRegex = /^Record<string, (.*)>$/;
+
 export const getTypeRefForString = (
   j: JSCodeshift,
   v3ClientDefaultLocalName: string,
@@ -19,6 +22,17 @@ export const getTypeRefForString = (
 
   if (["Date", "Uint8Array"].includes(v3ClientTypeString)) {
     return j.tsTypeReference(j.identifier(v3ClientTypeString));
+  }
+
+  if (v3ClientTypeString.startsWith("Array<")) {
+    const type = arrayRegex.exec(v3ClientTypeString)![1];
+    const typeArgument = getTypeRefForString(j, v3ClientDefaultLocalName, type);
+    return j.tsTypeReference.from({
+      typeName: j.identifier("Array"),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      typeParameters: j.tsTypeParameterInstantiation([typeArgument]),
+    });
   }
 
   return j.tsStringKeyword();
