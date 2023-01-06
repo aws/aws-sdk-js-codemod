@@ -1,4 +1,5 @@
-import { hasReferenceToKeysInValues } from "./hasReferenceToKeysInValues";
+import { hasKeyReferenceInClientTypesMap } from "./hasKeyReferenceInClientTypesMap";
+import { hasKeyReferenceInValue } from "./hasKeyReferenceinValue";
 
 /**
  * Checks if any of the values have reference to key, and replaces them recursively.
@@ -6,7 +7,7 @@ import { hasReferenceToKeysInValues } from "./hasReferenceToKeysInValues";
 export const getClientTypesMapWithKeysRemovedFromValues = (
   clientTypesMap: Record<string, string>
 ) => {
-  if (!hasReferenceToKeysInValues(clientTypesMap)) {
+  if (!hasKeyReferenceInClientTypesMap(clientTypesMap)) {
     return clientTypesMap;
   }
 
@@ -14,12 +15,15 @@ export const getClientTypesMapWithKeysRemovedFromValues = (
   const keys = Object.keys(clientTypesMap);
 
   for (const [key, value] of Object.entries(clientTypesMap)) {
-    const refs = keys.filter((key) => value.includes(`<${key}>`));
+    const refs = keys.filter((key) => hasKeyReferenceInValue(key, value));
     if (refs.length === 0) {
       newClientTypeMap[key] = value;
     } else {
       newClientTypeMap[key] = refs.reduce(
-        (acc, ref) => acc.replace(`<${ref}>`, `<${clientTypesMap[ref]}>`),
+        (acc, ref) =>
+          acc
+            .replace(`Array<${ref}>`, `Array<${clientTypesMap[ref]}>`)
+            .replace(`Record<string, ${ref}>`, `Record<string, ${clientTypesMap[ref]}>`),
         value
       );
     }
