@@ -1,4 +1,4 @@
-import { JSCodeshift, TSTypeReference } from "jscodeshift";
+import { JSCodeshift, TSType } from "jscodeshift";
 
 import {
   CLIENT_TYPES_MAP,
@@ -6,6 +6,7 @@ import {
   V2_CLIENT_OUTPUT_SUFFIX_LIST,
 } from "../config";
 import { getV3ClientDefaultLocalName } from "../utils";
+import { getTypeRefForString } from "./getTypeRefForString";
 
 export interface GetV3ClientTypeReferenceOptions {
   v2ClientLocalName: string;
@@ -15,28 +16,26 @@ export interface GetV3ClientTypeReferenceOptions {
 
 const getTypeRefWithV3ClientDefaultLocalName = (
   j: JSCodeshift,
-  v2ClientLocalName: string,
+  v3ClientDefaultLocalName: string,
   v3ClientTypeName: string
-) =>
-  j.tsTypeReference(
-    j.identifier([getV3ClientDefaultLocalName(v2ClientLocalName), v3ClientTypeName].join("."))
-  );
+) => j.tsTypeReference(j.identifier([v3ClientDefaultLocalName, v3ClientTypeName].join(".")));
 
 export const getV3ClientTypeReference = (
   j: JSCodeshift,
   { v2ClientLocalName, v2ClientName, v2ClientTypeName }: GetV3ClientTypeReferenceOptions
-): TSTypeReference => {
+): TSType => {
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
+  const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
+
   if (Object.keys(clientTypesMap).includes(v2ClientTypeName)) {
-    // ToDo: Convert the string value into a TSTypeReference
-    return clientTypesMap[v2ClientTypeName];
+    return getTypeRefForString(j, v3ClientDefaultLocalName, clientTypesMap[v2ClientTypeName]);
   }
 
   for (const inputSuffix of V2_CLIENT_INPUT_SUFFIX_LIST) {
     if (v2ClientTypeName.endsWith(inputSuffix)) {
       return getTypeRefWithV3ClientDefaultLocalName(
         j,
-        v2ClientLocalName,
+        v3ClientDefaultLocalName,
         v2ClientTypeName.replace(new RegExp(`${inputSuffix}$`), "CommandInput")
       );
     }
@@ -46,11 +45,11 @@ export const getV3ClientTypeReference = (
     if (v2ClientTypeName.endsWith(outputSuffix)) {
       return getTypeRefWithV3ClientDefaultLocalName(
         j,
-        v2ClientLocalName,
+        v3ClientDefaultLocalName,
         v2ClientTypeName.replace(new RegExp(`${outputSuffix}$`), "CommandOutput")
       );
     }
   }
 
-  return getTypeRefWithV3ClientDefaultLocalName(j, v2ClientLocalName, v2ClientTypeName);
+  return getTypeRefWithV3ClientDefaultLocalName(j, v3ClientDefaultLocalName, v2ClientTypeName);
 };
