@@ -20,7 +20,7 @@ export const addV3ClientImportEquals = (
     addV3ClientDefaultImportEquals(j, source, options);
   }
 
-  if (newExpressionCount || clientTSTypeRefCount) {
+  if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
     addV3ClientDefaultImportEquals(j, source, options);
     addV3ClientNamedImportEquals(j, source, options);
   }
