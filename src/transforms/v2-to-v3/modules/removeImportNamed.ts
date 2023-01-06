@@ -13,9 +13,15 @@ export const removeImportNamed = (
 ) => {
   source
     .find(j.ImportDeclaration, {
-      specifiers: [{ local: { name: localName } }],
       source: { value: sourceValue },
     })
+    .filter(
+      (importDeclaration) =>
+        importDeclaration.value.specifiers !== undefined &&
+        importDeclaration.value.specifiers.some(
+          (specifier) => specifier.type === "ImportSpecifier" && specifier.local?.name === localName
+        )
+    )
     .forEach((declarationPath) => {
       // Remove named import from ImportDeclaration if there is a match.
       declarationPath.value.specifiers = declarationPath.value.specifiers?.filter((specifier) => {
