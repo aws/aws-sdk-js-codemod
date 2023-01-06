@@ -24,3 +24,11 @@ const stringMap: AWS.S3.Metadata = { key: "value" }; // Record<string, string>
 const booleanMap: AWS.APIGateway.MapOfStringToBoolean = { key: true }; // Record<string, boolean>
 const numberMap: AWS.SSM.AssociationStatusAggregatedCount = { key: 123 }; // Record<string, number>
 const structureMap: AWS.APIGateway.MapOfMethodSnapshot = { key: { apiKeyRequired: true } }; // Record<string, MethodSnapshot>
+
+// Nested arrays
+const arrayNestedTwice: AWS.SageMakerGeospatial.LinearRing = [[1, 2], [3, 4]]; // number[][]
+const arrayNestedThrice: AWS.SageMakerGeospatial.LinearRings = [[[1, 2], [3, 4]], [[4, 5], [6, 7]]]; // number[][][]
+const arrayNestedFour: AWS.SageMakerGeospatial.LinearRingsList = [
+  [[[1], [2]], [[3], [4]]],
+  [[[5], [6]], [[7], [8]]]
+]; // number[][][][]

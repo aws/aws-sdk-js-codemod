@@ -25,3 +25,11 @@ const stringMap: Record<string, string> = { key: "value" }; // Record<string, st
 const booleanMap: Record<string, boolean> = { key: true }; // Record<string, boolean>
 const numberMap: Record<string, number> = { key: 123 }; // Record<string, number>
 const structureMap: Record<string, AWS_APIGateway.MethodSnapshot> = { key: { apiKeyRequired: true } }; // Record<string, MethodSnapshot>
+
+// Nested arrays
+const arrayNestedTwice: number[][] = [[1, 2], [3, 4]]; // number[][]
+const arrayNestedThrice: number[][][] = [[[1, 2], [3, 4]], [[4, 5], [6, 7]]]; // number[][][]
+const arrayNestedFour: number[][][][] = [
+  [[[1], [2]], [[3], [4]]],
+  [[[5], [6]], [[7], [8]]]
+]; // number[][][][]
