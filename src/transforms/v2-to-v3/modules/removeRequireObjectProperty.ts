@@ -12,11 +12,18 @@ export const removeRequireObjectProperty = (
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireObjectPropertyOptions
 ) => {
-  const id = {
-    type: "ObjectPattern",
-    properties: [{ value: { type: "Identifier", name: localName } }],
-  } as ObjectPattern;
-  const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue, id);
+  const id = { type: "ObjectPattern" } as ObjectPattern;
+  const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue, id).filter(
+    (declarator) => {
+      const { properties } = declarator.value.id as ObjectPattern;
+      return properties.some(
+        (property) =>
+          (property.type === "Property" || property.type === "ObjectProperty") &&
+          property.value.type === "Identifier" &&
+          property.value.name === localName
+      );
+    }
+  );
 
   requireDeclarators.forEach((varDeclarator) => {
     const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
