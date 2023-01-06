@@ -6,6 +6,9 @@ const stringType: string = "string"; // string
 const booleanType: boolean = true; // boolean
 const numberType: number = 123; // number
 
+// Date
+const dateType: Date = new Date(); // Date
+
 // Uint8Array
 const blobType: Uint8Array = new Uint8Array();
 

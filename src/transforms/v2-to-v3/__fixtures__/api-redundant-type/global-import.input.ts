@@ -5,6 +5,9 @@ const stringType: AWS.S3.AccountId = "string"; // string
 const booleanType: AWS.S3.BucketKeyEnabled = true; // boolean
 const numberType: AWS.S3.ContentLength = 123; // number
 
+// Date
+const dateType: AWS.S3.CreationDate = new Date(); // Date
+
 // Uint8Array
 const blobType: AWS.RDSDataService._Blob = new Uint8Array();
 
