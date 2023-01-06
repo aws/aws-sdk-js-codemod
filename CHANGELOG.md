@@ -1,5 +1,16 @@
 # aws-sdk-js-codemod
 
+## 0.9.0
+
+### Minor Changes
+
+- Support type definitions which are not available in v3 ([915dcfe](https://github.com/awslabs/aws-sdk-js-codemod/commit/915dcfe))
+
+### Patch Changes
+
+- Remove reference to non-existent types from CLIENT_TYPES_MAP records ([ac605d5](https://github.com/awslabs/aws-sdk-js-codemod/commit/ac605d5))
+- Generate CLIENT_TYPES_MAP by processing client types from v2 ([2f3a713](https://github.com/awslabs/aws-sdk-js-codemod/commit/2f3a713))
+
 ## 0.8.5
 
 ### Patch Changes
