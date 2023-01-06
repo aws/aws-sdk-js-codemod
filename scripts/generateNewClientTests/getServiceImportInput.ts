@@ -4,9 +4,7 @@ import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 export const getServiceImportInput = (codegenComment: string) => {
   let serviceImportInputContent = `${codegenComment}\n`;
 
-  for (const clientName of CLIENTS_TO_TEST) {
-    serviceImportInputContent += `import { ${clientName} } from "aws-sdk";\n`;
-  }
+  serviceImportInputContent += `import { ${CLIENTS_TO_TEST.join(", ")} } from "aws-sdk";\n`;
   serviceImportInputContent += `\n`;
   serviceImportInputContent += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
