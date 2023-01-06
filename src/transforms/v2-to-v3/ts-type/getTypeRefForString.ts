@@ -35,5 +35,5 @@ export const getTypeRefForString = (
     });
   }
 
-  return j.tsStringKeyword();
+  return j.tsTypeReference(j.identifier([v3ClientDefaultLocalName, v3ClientTypeString].join(".")));
 };
