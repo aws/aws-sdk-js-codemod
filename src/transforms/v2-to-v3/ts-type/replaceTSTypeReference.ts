@@ -1,8 +1,8 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getV2ClientTSTypeRef, getV3ClientDefaultLocalName } from "../utils";
+import { getV2ClientTSTypeRef } from "../utils";
 import { getV2ClientTypeNames } from "./getV2ClientTypeNames";
-import { getV3ClientTypeName } from "./getV3ClientTypeName";
+import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
 export interface ReplaceTSTypeReferenceOptions {
   v2ClientName: string;
@@ -18,15 +18,6 @@ const getRightIdentifierName = (node: TSTypeReference) =>
   ((node.typeName as TSQualifiedName).right as Identifier).name;
 
 const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifier).name;
-
-const getV3ClientTypeReference = (
-  j: JSCodeshift,
-  v2ClientLocalName: string,
-  v3ClientTypeName: string
-) =>
-  j.tsTypeReference(
-    j.identifier([getV3ClientDefaultLocalName(v2ClientLocalName), v3ClientTypeName].join("."))
-  );
 
 // Replace v2 client type reference with v3 client type reference.
 export const replaceTSTypeReference = (
@@ -49,26 +40,20 @@ export const replaceTSTypeReference = (
         getV2ClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
       )
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
-      .replaceWith((v2ClientType) =>
-        getV3ClientTypeReference(
-          j,
-          v2ClientLocalName,
-          getV3ClientTypeName(getRightIdentifierName(v2ClientType.node))
-        )
-      );
+      .replaceWith((v2ClientType) => {
+        const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
+        return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+      });
   }
 
   // Replace reference to client types created with client module.
   source
     .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true }))
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
-    .replaceWith((v2ClientType) =>
-      getV3ClientTypeReference(
-        j,
-        v2ClientLocalName,
-        getV3ClientTypeName(getRightIdentifierName(v2ClientType.node))
-      )
-    );
+    .replaceWith((v2ClientType) => {
+      const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
+      return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+    });
 
   // Replace type reference to client type with modules.
   const v2ClientTypeNames = getV2ClientTypeNames(j, source, {
@@ -80,12 +65,9 @@ export const replaceTSTypeReference = (
   for (const v2ClientTypeName of v2ClientTypeNames) {
     source
       .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientTypeName } })
-      .replaceWith((v2ClientType) =>
-        getV3ClientTypeReference(
-          j,
-          v2ClientLocalName,
-          getV3ClientTypeName(getIdentifierName(v2ClientType.node))
-        )
-      );
+      .replaceWith((v2ClientType) => {
+        const v2ClientTypeName = getIdentifierName(v2ClientType.node);
+        return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+      });
   }
 };
