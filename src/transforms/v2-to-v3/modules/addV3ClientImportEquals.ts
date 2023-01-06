@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getV3ClientTypesCount } from "../ts-type";
 import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
 import { addV3ClientNamedImportEquals } from "./addV3ClientNamedImportEquals";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
@@ -11,12 +12,16 @@ export const addV3ClientImportEquals = (
   source: Collection<unknown>,
   options: V3ClientModulesOptions
 ): void => {
-  addV3ClientDefaultImportEquals(j, source, options);
+  const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
+  const newExpressionCount = getNewExpressionCount(j, source, options);
+  const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
 
-  if (
-    getNewExpressionCount(j, source, options) > 0 ||
-    getClientTSTypeRefCount(j, source, options) > 0
-  ) {
+  if (v3ClientTypesCount > 0) {
+    addV3ClientDefaultImportEquals(j, source, options);
+  }
+
+  if (newExpressionCount || clientTSTypeRefCount) {
+    addV3ClientDefaultImportEquals(j, source, options);
     addV3ClientNamedImportEquals(j, source, options);
   }
 };
