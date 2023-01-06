@@ -1,5 +1,6 @@
-import AWS_S3 from "@aws-sdk/client-s3";
 import AWS_APIGateway from "@aws-sdk/client-api-gateway";
+import AWS_DynamoDB from "@aws-sdk/client-dynamodb";
+import AWS_S3 from "@aws-sdk/client-s3";
 
 // Native types
 const stringType: string = "string"; // string
@@ -33,3 +34,16 @@ const arrayNestedFour: number[][][][] = [
   [[[1], [2]], [[3], [4]]],
   [[[5], [6]], [[7], [8]]]
 ]; // number[][][][]
+
+// Nested maps
+const mapNestedTwice: Record<string, Record<string, string>> = { key: stringMap }; // Record<string, Record<string, string>>
+const mapNestedTwiceStruct: Record<string, Record<string, AWS_APIGateway.MethodSnapshot>> = { key: structureMap }; // Record<string, Record<string, MethodSnapshot>>
+
+// Nested arrays and maps
+const mapOfArrays: Record<string, string[]> = { key: ["value"] }; // Record<string, string[]>
+const mapOfMapOfArrays: Record<string, Record<string, string[]>> = { key: mapOfArrays }; // Record<string, Record<string, Array<string>>>
+const mapOfArrayOfMaps: Record<string, Record<string, AWS_DynamoDB.AttributeValue>[]> = { key: [{ key: { S:"A" }}] }; // Record<string, Record<string, AttributeValue>[]>
+const mapOfArrayOfArrays: Record<string, number[][]> = { key: [[1], [2]] }; // Record<string, number[][]>
+const arrayOfMaps: Record<string, string>[] = [stringMap]; // Record<string, string>[]
+const arrayOfMapOfArrays: Record<string, string[]>[] = [mapOfArrays]; // Record<string, string[]>[]
+const arrayOfMapOfMapOfArrays: Record<string, Record<string, string[]>>[] = [mapOfMapOfArrays]; // Record<string, Record<string, string[]>>[]

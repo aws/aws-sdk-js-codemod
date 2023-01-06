@@ -32,3 +32,16 @@ const arrayNestedFour: AWS.SageMakerGeospatial.LinearRingsList = [
   [[[1], [2]], [[3], [4]]],
   [[[5], [6]], [[7], [8]]]
 ]; // number[][][][]
+
+// Nested maps
+const mapNestedTwice: AWS.LexModelsV2.ConditionMap = { key: stringMap }; // Record<string, Record<string, string>>
+const mapNestedTwiceStruct: AWS.APIGateway.PathToMapOfMethodSnapshot = { key: structureMap }; // Record<string, Record<string, MethodSnapshot>>
+
+// Nested arrays and maps
+const mapOfArrays: AWS.NetworkManager.FilterMap = { key: ["value"] }; // Record<string, string[]>
+const mapOfMapOfArrays: AWS.SecurityLake.AllDimensionsMap = { key: mapOfArrays }; // Record<string, Record<string, string[]>>
+const mapOfArrayOfMaps: AWS.DynamoDB.BatchGetResponseMap = { key: [{ key: { S:"A" }}] }; // Record<string, Record<string, AttributeValue>[]>
+const mapOfArrayOfArrays: AWS.APIGateway.MapOfKeyUsages = { key: [[1], [2]] }; // Record<string, number[][]>
+const arrayOfMaps: AWS.SSM.InventoryItemEntryList = [stringMap]; // Record<string, string>[]
+const arrayOfMapOfArrays: AWS.SSM.TargetMaps = [mapOfArrays]; // Record<string, string[]>[]
+const arrayOfMapOfMapOfArrays: AWS.SecurityLake.RegionSourceTypesAccountsList = [mapOfMapOfArrays]; // Record<string, Record<string, string[]>>[]
