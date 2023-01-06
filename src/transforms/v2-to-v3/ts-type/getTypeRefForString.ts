@@ -17,5 +17,9 @@ export const getTypeRefForString = (
     return j.tsBooleanKeyword();
   }
 
+  if (["Date", "Uint8Array"].includes(v3ClientTypeString)) {
+    return j.tsTypeReference(j.identifier(v3ClientTypeString));
+  }
+
   return j.tsStringKeyword();
 };
