@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3ClientTypeNames } from "../ts-type";
+import { getV3ClientTypesCount } from "../ts-type";
 import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
 import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
@@ -13,14 +13,14 @@ export const addV3ClientImports = (
   options: V3ClientModulesOptions
 ): void => {
   const { v2ClientLocalName, v2ClientName, v2GlobalName } = options;
-  const v3ClientTypeNames = getV3ClientTypeNames(j, source, {
+  const v3ClientTypesCount = getV3ClientTypesCount(j, source, {
     v2ClientLocalName,
     v2ClientName,
     v2GlobalName,
   });
 
   // Add default import for types, if needed.
-  if (v3ClientTypeNames.length > 0) {
+  if (v3ClientTypesCount > 0) {
     addV3ClientDefaultImport(j, source, options);
   }
 
