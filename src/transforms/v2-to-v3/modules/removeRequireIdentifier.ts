@@ -1,6 +1,6 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
+import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 
 export interface RemoveRequireIdentifierOptions {
   localName: string;
@@ -12,8 +12,10 @@ export const removeRequireIdentifier = (
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireIdentifierOptions
 ) => {
-  const id = { type: "Identifier", name: localName } as Identifier;
-  const requireDeclarators = getRequireVariableDeclarators(j, source, sourceValue, id);
+  const requireDeclarators = getRequireDeclaratorsWithIdentifier(j, source, {
+    identifierName: localName,
+    sourceValue,
+  });
 
   requireDeclarators.forEach((varDeclarator) => {
     const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);

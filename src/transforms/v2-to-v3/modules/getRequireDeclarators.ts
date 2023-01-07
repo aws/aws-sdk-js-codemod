@@ -1,13 +1,11 @@
-import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
-export const getRequireVariableDeclarators = (
+export const getRequireDeclarators = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  sourceValue: string,
-  id?: Identifier | ObjectPattern
+  sourceValue: string
 ) =>
   source.find(j.VariableDeclarator, {
-    ...(id && { id }),
     init: {
       arguments: [{ value: sourceValue }],
       callee: { type: "Identifier", name: "require" },
