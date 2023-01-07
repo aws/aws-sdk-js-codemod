@@ -41,7 +41,7 @@ export const getV2RequireDeclarator = (
 
   const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
   const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
-    identifierName: v2ServiceModulePath,
+    identifierName: v2ClientLocalName,
     sourceValue: v2ServiceModulePath,
   });
 
