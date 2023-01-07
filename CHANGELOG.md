@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.9.2
+
+### Patch Changes
+
+- Use filter API to delete identifiers from require object pattern ([0f4ca88](https://github.com/awslabs/aws-sdk-js-codemod/commit/0f4ca88))
+
 ## 0.9.1
 
 ### Patch Changes
