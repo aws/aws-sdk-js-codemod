@@ -2,7 +2,7 @@ import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshi
 
 import { getV2ClientNewExpression } from "../utils";
 
-export const getV2ClientNamesFromNewExpr = (
+export const getNamesFromNewExpr = (
   j: JSCodeshift,
   source: Collection<unknown>,
   v2GlobalName: string
