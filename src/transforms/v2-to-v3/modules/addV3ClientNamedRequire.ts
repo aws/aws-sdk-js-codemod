@@ -87,7 +87,10 @@ export const addV3ClientNamedRequire = (
   if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
     v2RequireDeclarator.insertAfter(requireDeclarator);
   } else {
-    // Insert at the top of the file.
-    source.insertBefore(requireDeclarator);
+    // Unreachable code, throw error
+    throw new Error(
+      "Base Require Declarator not found to insert new Require Declarator.\n" +
+        "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod"
+    );
   }
 };
