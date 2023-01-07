@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
-import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
+import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { V3ClientModulesOptions } from "./types";
 
@@ -11,7 +11,10 @@ export const addV3ClientDefaultRequire = (
   { v2ClientName, v2ClientLocalName, v3ClientPackageName, v2GlobalName }: V3ClientModulesOptions
 ) => {
   const identifierName = getV3ClientDefaultLocalName(v2ClientLocalName);
-  const existingRequires = getRequireVariableDeclarators(j, source, v3ClientPackageName);
+  const existingRequires = getRequireDeclaratorsWithIdentifier(j, source, {
+    identifierName,
+    sourceValue: v3ClientPackageName,
+  });
 
   if (
     existingRequires &&

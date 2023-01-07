@@ -1,7 +1,8 @@
 import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
-import { getRequireVariableDeclarators } from "./getRequireVariableDeclarators";
+import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
+import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientModulesOptions } from "./types";
@@ -22,7 +23,10 @@ export const addV3ClientNamedRequire = (
     keyName: v3ClientName,
     valueName: v2ClientLocalName,
   });
-  const existingRequires = getRequireVariableDeclarators(j, source, v3ClientPackageName);
+  const existingRequires = getRequireDeclaratorsWithObjectPattern(j, source, {
+    identifierName: v2ClientLocalName,
+    sourceValue: v3ClientPackageName,
+  });
 
   if (existingRequires && existingRequires.nodes().length > 0) {
     const existingRequireProperties = existingRequires
@@ -47,20 +51,13 @@ export const addV3ClientNamedRequire = (
       return;
     }
 
-    const v3ClientDefaultLocalNameIdentifier = {
-      type: "Identifier",
-      name: v3ClientDefaultLocalName,
-    } as Identifier;
+    const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
+      identifierName: v3ClientDefaultLocalName,
+      sourceValue: v3ClientPackageName,
+    });
 
-    // prettier-ignore
-    const v3ClientDefaultLocalNameIdentifierDeclarators =
-      getRequireVariableDeclarators(j, source, v3ClientPackageName, v3ClientDefaultLocalNameIdentifier);
-
-    if (
-      v3ClientDefaultLocalNameIdentifierDeclarators &&
-      v3ClientDefaultLocalNameIdentifierDeclarators.nodes().length > 0
-    ) {
-      v3ClientDefaultLocalNameIdentifierDeclarators.at(0).insertAfter(
+    if (requireDeclaratorsWithIdentifier && requireDeclaratorsWithIdentifier.nodes().length > 0) {
+      requireDeclaratorsWithIdentifier.at(0).insertAfter(
         j.variableDeclarator(j.objectPattern([v3ClientObjectProperty]), {
           type: "Identifier",
           name: v3ClientDefaultLocalName,
