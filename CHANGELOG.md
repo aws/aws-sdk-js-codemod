@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.0
+
+### Minor Changes
+
+- Default parser to babylon ([49ec6f4](https://github.com/awslabs/aws-sdk-js-codemod/commit/49ec6f4))
+
 ## 0.9.3
 
 ### Patch Changes
