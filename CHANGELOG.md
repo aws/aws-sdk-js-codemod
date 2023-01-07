@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.9.3
+
+### Patch Changes
+
+- Filter client names received from new expressions and TS Types ([a998205](https://github.com/awslabs/aws-sdk-js-codemod/commit/a998205))
+
 ## 0.9.2
 
 ### Patch Changes
