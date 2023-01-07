@@ -22,7 +22,7 @@ export const getV2RequireDeclarator = (
       sourceValue: PACKAGE_NAME,
     });
 
-    if (requireDeclaratorsWithIdentifier && requireDeclaratorsWithIdentifier.nodes().length > 0) {
+    if (requireDeclaratorsWithIdentifier.size() > 0) {
       return requireDeclaratorsWithIdentifier;
     }
   }
@@ -32,10 +32,7 @@ export const getV2RequireDeclarator = (
     sourceValue: PACKAGE_NAME,
   });
 
-  if (
-    requireDeclaratorsWithObjectPattern &&
-    requireDeclaratorsWithObjectPattern.nodes().length > 0
-  ) {
+  if (requireDeclaratorsWithObjectPattern.size() > 0) {
     return requireDeclaratorsWithObjectPattern;
   }
 
@@ -45,7 +42,7 @@ export const getV2RequireDeclarator = (
     sourceValue: v2ServiceModulePath,
   });
 
-  if (requireDeclaratorsWithIdentifier && requireDeclaratorsWithIdentifier.nodes().length > 0) {
+  if (requireDeclaratorsWithIdentifier.size() > 0) {
     return requireDeclaratorsWithIdentifier;
   }
 };
