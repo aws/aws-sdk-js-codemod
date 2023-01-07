@@ -60,3 +60,5 @@ const transformer = async (file: FileInfo, api: API) => {
 };
 
 export default transformer;
+
+export const parser = "babylon";
