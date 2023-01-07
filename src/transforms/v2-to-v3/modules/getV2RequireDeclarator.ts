@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift, ObjectPattern } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
