@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { CLIENT_NAMES } from "../config";
 import { getNamesFromNewExpr } from "./getNamesFromNewExpr";
 import { getNamesFromTSQualifiedName } from "./getNamesFromTSQualifiedName";
 
@@ -10,5 +11,8 @@ export const getV2ClientNamesFromGlobal = (
 ): string[] => {
   const namesFromNewExpr = getNamesFromNewExpr(j, source, v2GlobalName);
   const namesFromTSQualifiedName = getNamesFromTSQualifiedName(j, source, v2GlobalName);
-  return [...new Set([...namesFromNewExpr, ...namesFromTSQualifiedName])];
+
+  return [...new Set([...namesFromNewExpr, ...namesFromTSQualifiedName])].filter((name) =>
+    CLIENT_NAMES.includes(name)
+  );
 };
