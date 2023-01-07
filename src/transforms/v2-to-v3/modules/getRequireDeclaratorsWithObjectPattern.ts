@@ -1,4 +1,6 @@
-import { Collection, JSCodeshift, ObjectPattern } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
+
+import { getRequireDeclarators } from "./getRequireDeclarators";
 
 export interface GetRequireDeclaratorsWithObjectPattern {
   identifierName: string;
@@ -10,22 +12,15 @@ export const getRequireDeclaratorsWithObjectPattern = (
   source: Collection<unknown>,
   { identifierName, sourceValue }: GetRequireDeclaratorsWithObjectPattern
 ) =>
-  source
-    .find(j.VariableDeclarator, {
-      id: { type: "ObjectPattern" },
-      init: {
-        arguments: [{ value: sourceValue }],
-        callee: { type: "Identifier", name: "require" },
-        type: "CallExpression",
-      },
-      type: "VariableDeclarator",
-    })
-    .filter((declarator) => {
-      const { properties } = declarator.value.id as ObjectPattern;
-      return properties.some(
-        (property) =>
-          (property.type === "Property" || property.type === "ObjectProperty") &&
-          property.value.type === "Identifier" &&
-          property.value.name === identifierName
-      );
-    });
+  getRequireDeclarators(j, source, sourceValue).filter((declarator) => {
+    if (declarator.value.id.type !== "ObjectPattern") {
+      return false;
+    }
+    const { properties } = declarator.value.id;
+    return properties.some(
+      (property) =>
+        (property.type === "Property" || property.type === "ObjectProperty") &&
+        property.value.type === "Identifier" &&
+        property.value.name === identifierName
+    );
+  });
