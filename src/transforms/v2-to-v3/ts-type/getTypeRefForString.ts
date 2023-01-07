@@ -24,8 +24,9 @@ export const getTypeRefForString = (
     return j.tsTypeReference(j.identifier(v3ClientTypeString));
   }
 
-  if (v3ClientTypeString.startsWith("Array<")) {
-    const type = arrayRegex.exec(v3ClientTypeString)![1];
+  const arrayRegexMatches = arrayRegex.exec(v3ClientTypeString);
+  if (arrayRegexMatches) {
+    const type = arrayRegexMatches[1];
     const typeArgument = getTypeRefForString(j, v3ClientDefaultLocalName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Array"),
@@ -35,8 +36,9 @@ export const getTypeRefForString = (
     });
   }
 
-  if (v3ClientTypeString.startsWith("Record<")) {
-    const type = recordRegex.exec(v3ClientTypeString)![1];
+  const recordRegexMatches = recordRegex.exec(v3ClientTypeString);
+  if (recordRegexMatches) {
+    const type = recordRegexMatches[1];
     const typeArgument = getTypeRefForString(j, v3ClientDefaultLocalName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Record"),
