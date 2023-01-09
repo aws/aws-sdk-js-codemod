@@ -1,4 +1,4 @@
-name: Bug Report
+name: Bug Report (transform)
 description: Create a report to help us improve
 title: "[Bug?]: "
 labels: ["bug", "triage"]
@@ -12,16 +12,6 @@ body:
       options:
         - label: "I'd be willing to implement a fix"
 
-  - type: textarea
-    attributes:
-      label: Describe the bug
-      description: |
-        A clear and concise description of what the bug is. A bug is **unintended**. A feature not being implemented is **not a bug**.
-      placeholder: |
-        eg: Running transform "transformName" on the provided input causes it to crash.
-    validations:
-      required: true
-
   - type: dropdown
     id: template-name
     attributes:
@@ -30,6 +20,16 @@ body:
       options:
         - v2-to-v3
         - N/A (described above)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: |
+        A clear and concise description of what the bug is. A bug is **unintended**. A feature not being implemented is **not a bug**.
+      placeholder: |
+        eg: Running transform "transformName" on the provided input causes it to crash.
     validations:
       required: true
 
@@ -62,7 +62,6 @@ body:
       label: Expected output
       description: Thw output file you expected to see.
       placeholder: |
-        ### Expected Output
         ```ts
         import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
@@ -80,13 +79,13 @@ body:
       description: |
         Run `aws-sdk-js-codemod --version` and paste the result into the form
       placeholder: |
-        aws-sdk-js-codemod: 0.1.0
+        aws-sdk-js-codemod: 0.10.2
 
-        jscodeshift: 0.13.1
-          - babel: 7.17.5
-          - babylon: 7.17.3
-          - flow: 0.172.0
-          - recast: 0.20.5
+        jscodeshift: 0.14.0
+        - babel: 7.20.12
+        - babylon: 7.20.7
+        - flow: 0.196.3
+        - recast: 0.21.5
     validations:
       required: true
 
