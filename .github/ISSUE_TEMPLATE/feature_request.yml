@@ -1,5 +1,5 @@
-name: Feature Request (generic)
-description: This is a generic feature request for aws-sdk-js-codemod.
+name: Feature Request
+description: A generic feature request about aws-sdk-js-codemod.
 title: "[Feature]: "
 labels: ["enhancement"]
 

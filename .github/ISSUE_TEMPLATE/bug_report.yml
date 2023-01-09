@@ -1,5 +1,5 @@
-name: Bug Report (generic)
-description: Create a report to help us improve
+name: Bug Report
+description: A generic bug report about aws-sdk-js-codemod.
 title: "[Bug?]: "
 labels: ["bug", "triage"]
 
