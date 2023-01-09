@@ -1,9 +1,14 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+export interface GetRequireDeclaratorsWithPropertyOptions {
+  identifierName?: string;
+  sourceValue: string;
+}
+
 export const getRequireDeclaratorsWithProperty = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  sourceValue: string
+  { identifierName, sourceValue }: GetRequireDeclaratorsWithPropertyOptions
 ) =>
   source.find(j.VariableDeclarator, {
     id: { type: "Identifier" },
@@ -14,6 +19,6 @@ export const getRequireDeclaratorsWithProperty = (
         callee: { type: "Identifier", name: "require" },
         arguments: [{ value: sourceValue }],
       },
-      property: { type: "Identifier" },
+      property: { type: "Identifier", ...(identifierName && { name: identifierName }) },
     },
   });

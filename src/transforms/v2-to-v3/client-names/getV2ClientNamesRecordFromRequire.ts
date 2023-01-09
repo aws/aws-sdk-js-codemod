@@ -34,9 +34,9 @@ export const getV2ClientNamesRecordFromRequire = (
     }
   }
 
-  // prettier-ignore
-  const declaratorsWithProperty =
-    getRequireDeclaratorsWithProperty(j, source, PACKAGE_NAME).nodes();
+  const declaratorsWithProperty = getRequireDeclaratorsWithProperty(j, source, {
+    sourceValue: PACKAGE_NAME,
+  }).nodes();
 
   for (const declaratorWithProperty of declaratorsWithProperty) {
     const { id, init } = declaratorWithProperty;
