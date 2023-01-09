@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.2
+
+### Patch Changes
+
+- Support requires with MemberExpression property ([8b09bb6](https://github.com/awslabs/aws-sdk-js-codemod/commit/8b09bb6))
+
 ## 0.10.1
 
 ### Patch Changes
