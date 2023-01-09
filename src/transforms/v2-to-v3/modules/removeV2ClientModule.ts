@@ -10,6 +10,7 @@ import { removeImportEquals } from "./removeImportEquals";
 import { removeImportNamed } from "./removeImportNamed";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
+import { removeRequireProperty } from "./removeRequireProperty";
 
 export interface RemoveV2ClientModuleOptions {
   v2ClientName: string;
@@ -31,6 +32,7 @@ export const removeV2ClientModule = (
   if (hasRequire(j, source)) {
     removeRequireIdentifier(j, source, defaultOptions);
     removeRequireObjectProperty(j, source, namedOptions);
+    removeRequireProperty(j, source, { ...namedOptions, propertyName: v2ClientName });
   } else if (hasImportEquals(j, source)) {
     removeImportEquals(j, source, defaultOptions);
   } else {
