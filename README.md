@@ -23,9 +23,14 @@ To use aws-sdk-js-codemod, please install [Node.js][install-nodejs].
   ```console
   npx aws-sdk-js-codemod --dry --print -t v2-to-v3 PATH...
   ```
-- Run transform:
+- Run transform, and make changes to files:
   ```console
   npx aws-sdk-js-codemod -t v2-to-v3 PATH...
+  ```
+- To use the latest version of aws-sdk-js-codemod, clear your npx cache. You can either
+  manually delete folder `$(npm get cache)/_npx/*`, or run `clear-npx-cache`.
+  ```console
+  npx clear-npx-cache
   ```
 
 ## Example
