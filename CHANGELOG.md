@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.1
+
+### Patch Changes
+
+- Enable transformation when a mixture of require and imports is present ([39b1518](https://github.com/awslabs/aws-sdk-js-codemod/commit/39b1518))
+
 ## 0.10.0
 
 ### Minor Changes
