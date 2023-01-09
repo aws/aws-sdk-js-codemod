@@ -14,4 +14,6 @@ ${transforms.map((transform) => getTransformDescription(transform).join("\n"))}
 
 Example: aws-sdk-js-codemod -t v2-to-v3 example.js
 
+To use the latest version of aws-sdk-js-codemod, please clear your npx cache and re-run.
+
 ${separator}\n\n`;
