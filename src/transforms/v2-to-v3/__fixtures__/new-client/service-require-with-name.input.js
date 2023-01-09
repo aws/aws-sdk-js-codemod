@@ -5,7 +5,7 @@ const {
   ACM: ACMClient,
   AccessAnalyzer: AccessAnalyzerClient,
   Discovery: DiscoveryClient
- } = require("aws-sdk");
+} = require("aws-sdk");
 
 new ACMClient();
 new AccessAnalyzerClient();
