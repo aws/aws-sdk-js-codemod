@@ -2,6 +2,7 @@ import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "js
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
+import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 import { getRequireIds } from "./getRequireIds";
 
 export const getV2ClientNamesRecordFromRequire = (
@@ -30,6 +31,25 @@ export const getV2ClientNamesRecordFromRequire = (
     }
     if (CLIENT_NAMES.includes(key.name)) {
       v2ClientNamesRecord[key.name] = value.name;
+    }
+  }
+
+  // prettier-ignore
+  const declaratorsWithProperty =
+    getRequireDeclaratorsWithProperty(j, source, PACKAGE_NAME).nodes();
+
+  for (const declaratorWithProperty of declaratorsWithProperty) {
+    const { id, init } = declaratorWithProperty;
+    if (
+      id.type === "Identifier" &&
+      init != undefined &&
+      init.type === "MemberExpression" &&
+      init.property.type === "Identifier"
+    ) {
+      const v2ClientName = (init.property as Identifier).name;
+      if (CLIENT_NAMES.includes(v2ClientName)) {
+        v2ClientNamesRecord[v2ClientName] = (id as Identifier).name;
+      }
     }
   }
 
