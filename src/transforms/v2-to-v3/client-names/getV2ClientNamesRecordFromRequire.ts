@@ -1,8 +1,8 @@
 import { Collection, Identifier, JSCodeshift, ObjectPattern, Property } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
+import { getRequireDeclaratorsWithProperty } from "../modules";
 import { getV2ServiceModulePath } from "../utils";
-import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 import { getRequireIds } from "./getRequireIds";
 
 export const getV2ClientNamesRecordFromRequire = (

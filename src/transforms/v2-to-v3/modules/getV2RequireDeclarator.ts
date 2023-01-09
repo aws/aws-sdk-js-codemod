@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getRequireDeclaratorsWithProperty } from "../client-names";
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
+import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 
 export interface GetV2BaseDeclaratorOptions {
   v2ClientName: string;

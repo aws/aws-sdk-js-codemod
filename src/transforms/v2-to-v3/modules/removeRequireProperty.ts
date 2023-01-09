@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getRequireDeclaratorsWithProperty } from "../client-names";
+import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 
 export interface RemoveRequireObjectPropertyOptions {
   localName: string;
