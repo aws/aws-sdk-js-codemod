@@ -1,6 +1,5 @@
 name: Feature Request (transform)
-description: These issues are for **concrete and actionable proposals**. If you just have
-  a general problem that you would like to brainstorm, open a generic feature request.
+description: Feature request specific to a particular transform (like `v2-to-v3`)
 title: "[Feature]: "
 labels: ["enhancement"]
 
