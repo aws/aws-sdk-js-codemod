@@ -1,3 +1,3 @@
-import { getGlobalRequireOutput } from "./getGlobalRequireOutput";
+import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput";
 
-export const getGlobalRequirePropertyOutput = getGlobalRequireOutput;
+export const getGlobalRequirePropertyOutput = getServiceRequireDeepOutput;
