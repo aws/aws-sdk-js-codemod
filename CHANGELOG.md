@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.3
+
+### Patch Changes
+
+- Add instructions to clear npx cache to use latest version of aws-sdk-js-codemod ([1c76e12](https://github.com/awslabs/aws-sdk-js-codemod/commit/1c76e12))
+
 ## 0.10.2
 
 ### Patch Changes
