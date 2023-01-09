@@ -15,6 +15,8 @@ import { getServiceImportEqualsInput } from "./getServiceImportEqualsInput";
 import { getServiceImportEqualsOutput } from "./getServiceImportEqualsOutput";
 import { getServiceImportInput } from "./getServiceImportInput";
 import { getServiceImportOutput } from "./getServiceImportOutput";
+import { getServiceImportWithNameInput } from "./getServiceImportWithNameInput";
+import { getServiceImportWithNameOutput } from "./getServiceImportWithNameOutput";
 import { getServiceRequireDeepInput } from "./getServiceRequireDeepInput";
 import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput";
 import { getServiceRequireInput } from "./getServiceRequireInput";
@@ -44,6 +46,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-import-equals.output.ts", getServiceImportEqualsOutput],
     ["service-import-deep.input.js", getServiceImportDeepInput],
     ["service-import-deep.output.js", getServiceImportDeepOutput],
+    ["service-import-with-name.input.js", getServiceImportWithNameInput],
+    ["service-import-with-name.output.js", getServiceImportWithNameOutput],
     ["service-require.input.js", getServiceRequireInput],
     ["service-require.output.js", getServiceRequireOutput],
     ["service-require-deep.input.js", getServiceRequireDeepInput],
