@@ -21,6 +21,8 @@ import { getServiceRequireDeepInput } from "./getServiceRequireDeepInput";
 import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput";
 import { getServiceRequireInput } from "./getServiceRequireInput";
 import { getServiceRequireOutput } from "./getServiceRequireOutput";
+import { getServiceRequireWithNameInput } from "./getServiceRequireWithNameInput";
+import { getServiceRequireWithNameOutput } from "./getServiceRequireWithNameOutput";
 
 // The "use strict" directive is added to so that comments can be attached to it.
 // Recast removes the comments while removing import/require.
@@ -52,6 +54,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-require.output.js", getServiceRequireOutput],
     ["service-require-deep.input.js", getServiceRequireDeepInput],
     ["service-require-deep.output.js", getServiceRequireDeepOutput],
+    ["service-require-with-name.input.js", getServiceRequireWithNameInput],
+    ["service-require-with-name.output.js", getServiceRequireWithNameOutput],
   ] as [string, (comment: string) => string][]) {
     const filePath = join(newClientTestsPath, fileName);
     await writeFile(filePath, getFileContent(codegenComment));
