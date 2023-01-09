@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getRequireDeclaratorsWithProperty } from "../client-names";
 import { PACKAGE_NAME } from "../config";
 import { getV2ServiceModulePath } from "../utils";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
@@ -34,6 +35,15 @@ export const getV2RequireDeclarator = (
 
   if (requireDeclaratorsWithObjectPattern.size() > 0) {
     return requireDeclaratorsWithObjectPattern;
+  }
+
+  const requireDeclaratorsWithProperty = getRequireDeclaratorsWithProperty(j, source, {
+    identifierName: v2ClientName,
+    sourceValue: PACKAGE_NAME,
+  });
+
+  if (requireDeclaratorsWithProperty.size() > 0) {
+    return requireDeclaratorsWithProperty;
   }
 
   const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
