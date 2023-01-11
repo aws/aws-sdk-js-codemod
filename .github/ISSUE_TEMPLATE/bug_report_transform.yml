@@ -79,12 +79,8 @@ body:
       description: |
         Run `aws-sdk-js-codemod --version` and paste the result into the form
       placeholder: |
-        aws-sdk-js-codemod: 0.10.2
-
-        jscodeshift: 0.14.0
-        - babel: 7.20.12
-        - babylon: 7.20.7
-        - flow: 0.196.3
+        aws-sdk-js-codemod: 0.10.4
+        - jscodeshift: 0.14.0
         - recast: 0.21.5
     validations:
       required: true
