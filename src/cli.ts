@@ -18,7 +18,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { spawn } from "child_process";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Could not find a declaration file for module 'jscodeshift/dist/Runner'
+import { run as jRun } from "jscodeshift/dist/Runner";
+import { resolve } from "path";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
@@ -26,6 +29,7 @@ import { version } from "../package.json"; // eslint-disable-line
 import {
   getArgsWithUpdatedTransformFile,
   getHelpParagraph,
+  getJsCodeshiftParser,
   getTransformFileFromArgs,
   getTransforms,
   getUpdatedTransformFile,
@@ -45,10 +49,27 @@ export const run = async (args: string[]): Promise<void> => {
       args = getArgsWithUpdatedTransformFile(args, updatedTransformFile);
     }
   }
-  spawn("npm", ["exec", "jscodeshift", "--", ...args], {
-    stdio: "inherit",
-    shell: process.platform == "win32",
-  });
+
+  const parser = getJsCodeshiftParser();
+  let options, positionalArguments;
+
+  try {
+    ({ options, positionalArguments } = parser.parse());
+    if (positionalArguments.length === 0) {
+      process.stderr.write(
+        "Error: You have to provide at least one file/directory to transform." +
+          "\n\n---\n\n" +
+          parser.getHelpText()
+      );
+      process.exit(1);
+    }
+  } catch (e: any) {
+    const exitCode = e.exitCode === undefined ? 1 : e.exitCode;
+    (exitCode ? process.stderr : process.stdout).write(e.message);
+    process.exit(exitCode);
+  }
+
+  jRun(resolve(options.transform), positionalArguments, options);
 };
 
 const [, , ...args] = process.argv;
