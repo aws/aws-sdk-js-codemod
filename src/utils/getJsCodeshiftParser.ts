@@ -1,12 +1,16 @@
-import { readFileSync } from "fs";
+// Most of the code from here is from bin/jscodeshift.js
+// It's kept that way so that users can reuse jscodeshift options.
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: Could not find a declaration file for module 'jscodeshift/dist/argsParser'
+// @ts-nocheck
+
+import { readFileSync } from "fs";
 import argsParser from "jscodeshift/dist/argsParser";
 import { dirname, join } from "path";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
-import { version } from "../../package.json"; // eslint-disable-line
+import { version } from "../../package.json";
 
 const requirePackage = (name: string) => {
   const entry = require.resolve(name);
@@ -26,7 +30,7 @@ const requirePackage = (name: string) => {
 export const getJsCodeshiftParser = () =>
   argsParser.options({
     transform: {
-      display_index: 14,
+      display_index: 15,
       abbr: "t",
       default: "./transform.js",
       help: "path to the transform file. Can be either a local path or url",
@@ -42,7 +46,7 @@ export const getJsCodeshiftParser = () =>
       process: Number,
     },
     verbose: {
-      display_index: 15,
+      display_index: 16,
       abbr: "v",
       choices: [0, 1, 2],
       default: 0,
@@ -131,7 +135,7 @@ export const getJsCodeshiftParser = () =>
       default: false,
     },
     version: {
-      display_index: 16,
+      display_index: 17,
       help: "print version and exit",
       callback: function () {
         return [
@@ -140,5 +144,11 @@ export const getJsCodeshiftParser = () =>
           `- recast: ${requirePackage("recast").version}\n`,
         ].join("\n");
       },
+    },
+    stdin: {
+      display_index: 14,
+      help: "read file/directory list from stdin",
+      flag: true,
+      default: false,
     },
   });
