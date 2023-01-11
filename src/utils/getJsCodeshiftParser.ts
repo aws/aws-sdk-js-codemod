@@ -132,7 +132,7 @@ export const getJsCodeshiftParser = () =>
       callback: function () {
         return [
           `- jscodeshift: ${requirePackage("jscodeshift").version}`,
-          `- recast: ${requirePackage("recast").version}`,
+          `- recast: ${requirePackage("recast").version}\n`,
         ].join("\n");
       },
     },
