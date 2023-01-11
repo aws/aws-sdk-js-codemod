@@ -1,5 +1,4 @@
-export * from "./getArgsWithUpdatedTransformFile";
 export * from "./getHelpParagraph";
-export * from "./getTransformFileFromArgs";
+export * from "./getJsCodeshiftParser";
 export * from "./getTransforms";
 export * from "./getUpdatedTransformFile";

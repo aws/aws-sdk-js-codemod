@@ -18,39 +18,64 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import { spawn } from "child_process";
+// Most of the code from here is from bin/jscodeshift.js
+// It's kept that way so that users can reuse jscodeshift options.
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: package.json will be imported from dist folders
-import { version } from "../package.json"; // eslint-disable-line
+// @ts-nocheck
+import Runner from "jscodeshift/dist/Runner";
+import path from "path";
+
 import {
-  getArgsWithUpdatedTransformFile,
   getHelpParagraph,
-  getTransformFileFromArgs,
+  getJsCodeshiftParser,
   getTransforms,
   getUpdatedTransformFile,
 } from "./utils";
 
-export const run = async (args: string[]): Promise<void> => {
-  const transforms = getTransforms();
+const args = process.argv;
+const transforms = getTransforms();
 
-  if (args[0] === "--version") {
-    process.stdout.write(`aws-sdk-js-codemod: ${version}\n\n`);
-  } else if (args[0] === "--help" || args[0] === "-h") {
-    process.stdout.write(getHelpParagraph(transforms));
-  } else if (args.includes("-t") || args.some((arg) => arg.startsWith("--transform="))) {
-    const transformFile = getTransformFileFromArgs(args);
-    if (transforms.map(({ name }) => name).includes(transformFile)) {
-      const updatedTransformFile = getUpdatedTransformFile(transformFile);
-      args = getArgsWithUpdatedTransformFile(args, updatedTransformFile);
-    }
+if (args[2] === "--help" || args[2] === "-h") {
+  process.stdout.write(getHelpParagraph(transforms));
+}
+
+const parser = getJsCodeshiftParser();
+
+let options, positionalArguments;
+try {
+  ({ options, positionalArguments } = parser.parse());
+  if (positionalArguments.length === 0 && !options.stdin) {
+    process.stderr.write(
+      "Error: You have to provide at least one file/directory to transform." +
+        "\n\n---\n\n" +
+        parser.getHelpText()
+    );
+    process.exit(1);
   }
-  spawn("npm", ["exec", "jscodeshift", "--", ...args], {
-    stdio: "inherit",
-    shell: process.platform == "win32",
-  });
-};
+} catch (e) {
+  const exitCode = e.exitCode === undefined ? 1 : e.exitCode;
+  (exitCode ? process.stderr : process.stdout).write(e.message);
+  process.exit(exitCode);
+}
 
-const [, , ...args] = process.argv;
+const { transform } = options;
+if (transforms.map(({ name }) => name).includes(transform)) {
+  options.transform = getUpdatedTransformFile(transform);
+}
 
-run(args);
+function run(paths, options) {
+  Runner.run(
+    /^https?/.test(options.transform) ? options.transform : path.resolve(options.transform),
+    paths,
+    options
+  );
+}
+
+if (options.stdin) {
+  let buffer = "";
+  process.stdin.on("data", (data) => (buffer += data));
+  process.stdin.on("end", () => run(buffer.split("\n"), options));
+} else {
+  run(positionalArguments, options);
+}
