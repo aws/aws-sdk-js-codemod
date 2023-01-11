@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.4
+
+### Patch Changes
+
+- Call JS API of jscodeshift instead of using spawn ([d446899](https://github.com/awslabs/aws-sdk-js-codemod/commit/d446899))
+
 ## 0.10.3
 
 ### Patch Changes
