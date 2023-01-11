@@ -4,6 +4,10 @@ import { readFileSync } from "fs";
 import argsParser from "jscodeshift/dist/argsParser";
 import { dirname, join } from "path";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: package.json will be imported from dist folders
+import { version } from "../../package.json"; // eslint-disable-line
+
 const requirePackage = (name: string) => {
   const entry = require.resolve(name);
   let dir = dirname(entry);
@@ -131,6 +135,7 @@ export const getJsCodeshiftParser = () =>
       help: "print version and exit",
       callback: function () {
         return [
+          `aws-sdk-js-codemod: ${version}`,
           `- jscodeshift: ${requirePackage("jscodeshift").version}`,
           `- recast: ${requirePackage("recast").version}\n`,
         ].join("\n");
