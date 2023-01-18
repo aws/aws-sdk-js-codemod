@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.5
+
+### Patch Changes
+
+- Add callExpression arguments in ArrowFunction/Return while remove promise() ([bca11ad](https://github.com/awslabs/aws-sdk-js-codemod/commit/bca11ad))
+
 ## 0.10.4
 
 ### Patch Changes
