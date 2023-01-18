@@ -15,4 +15,8 @@ class ClientClassMember {
   async listTables() {
     return await this.clientInClass.listTables();
   }
+
+  async listTagsOfResource() {
+    return await this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
+  }
 }
