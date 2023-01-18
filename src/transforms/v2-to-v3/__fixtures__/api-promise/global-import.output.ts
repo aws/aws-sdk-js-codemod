@@ -1,7 +1,7 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
-export const listTables = (client: DynamoDB) => client.listTables();
-export const listTagsOfResource = (client: DynamoDB) =>
+export const listTables = async (client: DynamoDB) => client.listTables();
+export const listTagsOfResource = async (client: DynamoDB) =>
   client.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
 
 // Client as class member
