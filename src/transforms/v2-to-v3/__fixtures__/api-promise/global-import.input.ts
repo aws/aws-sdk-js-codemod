@@ -1,6 +1,8 @@
 import AWS from "aws-sdk";
 
 export const listTables = (client: AWS.DynamoDB) => client.listTables().promise();
+export const listTagsOfResource = (client: AWS.DynamoDB) =>
+  client.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
 
 // Client as class member
 class ClientClassMember {
