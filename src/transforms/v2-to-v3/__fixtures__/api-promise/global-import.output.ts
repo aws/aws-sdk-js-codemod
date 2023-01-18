@@ -13,10 +13,10 @@ class ClientClassMember {
   }
 
   async listTables() {
-    return await this.clientInClass.listTables();
+    return this.clientInClass.listTables();
   }
 
   async listTagsOfResource() {
-    return await this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
+    return this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
   }
 }

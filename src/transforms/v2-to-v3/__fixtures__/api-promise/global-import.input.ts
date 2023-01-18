@@ -13,10 +13,10 @@ class ClientClassMember {
   }
 
   async listTables() {
-    return await this.clientInClass.listTables().promise();
+    return this.clientInClass.listTables().promise();
   }
 
   async listTagsOfResource() {
-    return await this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
+    return this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
   }
 }
