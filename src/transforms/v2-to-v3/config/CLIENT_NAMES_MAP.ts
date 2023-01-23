@@ -1,5 +1,4 @@
 import { CLIENT_NAMES } from "./CLIENT_NAMES";
-import { DYNAMODB_DOCUMENT_CLIENT_NAME } from "./constants";
 
 export const CLIENT_NAMES_MAP: Record<string, string> = {
   ...CLIENT_NAMES.reduce((acc, name) => ({ ...acc, [name]: name }), {}),
@@ -11,10 +10,6 @@ export const CLIENT_NAMES_MAP: Record<string, string> = {
   CognitoIdentityServiceProvider: "CognitoIdentityProvider",
   DMS: "DatabaseMigrationService",
   Discovery: "ApplicationDiscoveryService",
-
-  // Exception: DocumentClient can be imported from DynamoDB
-  [DYNAMODB_DOCUMENT_CLIENT_NAME]: "DynamoDBDocument",
-
   ELB: "ElasticLoadBalancing",
   ELBv2: "ElasticLoadBalancingV2",
   EMRcontainers: "EMRContainers",
