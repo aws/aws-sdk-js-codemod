@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.6
+
+### Patch Changes
+
+- Print code in removePromiseForCallExpression error message ([e385d89](https://github.com/awslabs/aws-sdk-js-codemod/commit/e385d89))
+
 ## 0.10.5
 
 ### Patch Changes
