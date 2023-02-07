@@ -1,4 +1,5 @@
 import { ASTPath, CallExpression, MemberExpression } from "jscodeshift";
+import { print } from "recast";
 
 export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpression>) => {
   switch (callExpression.parentPath.value.type) {
@@ -32,7 +33,9 @@ export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpre
     }
     default:
       throw new Error(
-        `Removal of .promise() not implemented for ${callExpression.parentPath.value.type}`
+        `Removal of .promise() not implemented for parentPath: ${callExpression.parentPath.value.type}\n` +
+          `Code processed: ${print(callExpression.parentPath.node).code}\n\n` +
+          "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod\n"
       );
   }
 };
