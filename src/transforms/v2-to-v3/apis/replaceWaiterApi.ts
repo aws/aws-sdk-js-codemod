@@ -40,6 +40,11 @@ export const replaceWaiterApi = (
                 value: v2ClientId,
                 shorthand: true,
               }),
+              // ToDo: Read maxWaitTime from the waiter configuration
+              j.objectProperty.from({
+                key: j.identifier("maxWaitTime"),
+                value: j.numericLiteral(180),
+              }),
             ]),
             callExpression.node.arguments[1],
           ]);
