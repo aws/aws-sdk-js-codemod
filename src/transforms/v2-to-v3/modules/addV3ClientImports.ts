@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getClientWaiterStates } from "../apis";
+import { getClientWaiterStates, getV3ClientWaiterApiName } from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
 import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
 import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
@@ -32,7 +32,7 @@ export const addV3ClientImports = (
   }
 
   for (const waiterState of waiterStates) {
-    const v3WaiterApiName = `waitUntil${waiterState[0].toUpperCase()}${waiterState.slice(1)}`;
+    const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
     addV3ClientNamedImport(j, source, {
       ...options,
       importedName: v3WaiterApiName,
