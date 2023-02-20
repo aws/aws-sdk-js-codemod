@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.10.7
+
+### Patch Changes
+
+- Update CLIENT_TYPES_MAP as per aws-sdk@2.1319.0 ([0d0c035](https://github.com/awslabs/aws-sdk-js-codemod/commit/0d0c035))
+
 ## 0.10.6
 
 ### Patch Changes
