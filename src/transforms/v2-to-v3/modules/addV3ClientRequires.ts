@@ -21,6 +21,10 @@ export const addV3ClientRequires = (
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
-    addV3ClientNamedRequire(j, source, options);
+    addV3ClientNamedRequire(j, source, {
+      ...options,
+      keyName: options.v3ClientName,
+      valueName: options.v2ClientLocalName,
+    });
   }
 };

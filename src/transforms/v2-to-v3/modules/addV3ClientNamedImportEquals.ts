@@ -2,12 +2,17 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
-import { V3ClientModulesOptions } from "./types";
+import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientNamedImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v3ClientName, v3ClientPackageName }: V3ClientModulesOptions
+  {
+    keyName,
+    valueName,
+    v2ClientLocalName,
+    v3ClientPackageName,
+  }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
   const existingImportEquals = source.find(
@@ -19,8 +24,8 @@ export const addV3ClientNamedImportEquals = (
     j.variableDeclarator(
       j.objectPattern([
         j.objectProperty.from({
-          key: j.identifier(v3ClientName),
-          value: j.identifier(v2ClientLocalName),
+          key: j.identifier(keyName),
+          value: j.identifier(valueName),
           shorthand: true,
         }),
       ]),
