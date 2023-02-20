@@ -5,24 +5,22 @@ import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
-import { V3ClientModulesOptions } from "./types";
+import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientNamedRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
   {
+    keyName,
+    valueName,
     v2ClientName,
     v2ClientLocalName,
     v2GlobalName,
-    v3ClientName,
     v3ClientPackageName,
-  }: V3ClientModulesOptions
+  }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
-  const v3ClientObjectProperty = getV3ClientRequireProperty(j, {
-    keyName: v3ClientName,
-    valueName: v2ClientLocalName,
-  });
+  const v3ClientObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
@@ -40,8 +38,8 @@ export const addV3ClientNamedRequire = (
               property.type === "Property" &&
               property.key.type === "Identifier" &&
               property.value.type === "Identifier" &&
-              property.key.name === v3ClientName &&
-              property.value.name === v2ClientLocalName
+              property.key.name === keyName &&
+              property.value.name === valueName
           )
       )
     ) {
