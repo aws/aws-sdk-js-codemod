@@ -22,6 +22,10 @@ export const addV3ClientImports = (
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
-    addV3ClientNamedImport(j, source, options);
+    addV3ClientNamedImport(j, source, {
+      ...options,
+      importedName: options.v3ClientName,
+      localName: options.v2ClientLocalName,
+    });
   }
 };
