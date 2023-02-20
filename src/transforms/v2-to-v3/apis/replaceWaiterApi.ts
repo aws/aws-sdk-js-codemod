@@ -33,7 +33,16 @@ export const replaceWaiterApi = (
           },
         })
         .replaceWith((callExpression) => {
-          return j.callExpression(j.identifier(v3WaiterApiName), callExpression.node.arguments);
+          return j.callExpression(j.identifier(v3WaiterApiName), [
+            j.objectExpression([
+              j.objectProperty.from({
+                key: j.identifier("client"),
+                value: v2ClientId,
+                shorthand: true,
+              }),
+            ]),
+            callExpression.node.arguments[1],
+          ]);
         });
     }
   }
