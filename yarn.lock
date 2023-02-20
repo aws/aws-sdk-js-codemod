@@ -1606,7 +1606,7 @@ __metadata:
     "@types/node": ^14.18.33
     "@typescript-eslint/eslint-plugin": ^5.43.0
     "@typescript-eslint/parser": ^5.43.0
-    aws-sdk: 2.1288.0
+    aws-sdk: 2.1319.0
     eslint: ^8.27.0
     eslint-plugin-simple-import-sort: ^9.0.0
     jscodeshift: 0.14.0
@@ -1622,9 +1622,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aws-sdk@npm:2.1288.0":
-  version: 2.1288.0
-  resolution: "aws-sdk@npm:2.1288.0"
+"aws-sdk@npm:2.1319.0":
+  version: 2.1319.0
+  resolution: "aws-sdk@npm:2.1319.0"
   dependencies:
     buffer: 4.9.2
     events: 1.1.1
@@ -1636,7 +1636,7 @@ __metadata:
     util: ^0.12.4
     uuid: 8.0.0
     xml2js: 0.4.19
-  checksum: 47189c4de75fcfd5e9c87f2d39adc19448cd1caa82f9915d197c7c2cf2fbaa02d0eda7d6dae0b834af3e54ff7eff560d558f28e75c10a0ef22d53b11cc56101f
+  checksum: 54441643615f7808701550617560191deced6f840f7a4f0312323293765f141ccb20f8d2b1e7624b547f57d682bf534d225dcfa06dd7911f2c3bfd4ac16a6ed2
   languageName: node
   linkType: hard
 
