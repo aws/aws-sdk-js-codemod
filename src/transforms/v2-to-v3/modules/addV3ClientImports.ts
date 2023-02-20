@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getClientWaiterStates } from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
 import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
 import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
@@ -15,6 +16,7 @@ export const addV3ClientImports = (
   const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);
   const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
+  const waiterStates = getClientWaiterStates(j, source, options);
 
   // Add default import for types, if needed.
   if (v3ClientTypesCount > 0) {
@@ -26,6 +28,15 @@ export const addV3ClientImports = (
       ...options,
       importedName: options.v3ClientName,
       localName: options.v2ClientLocalName,
+    });
+  }
+
+  for (const waiterState of waiterStates) {
+    const v3WaiterApiName = `waitUntil${waiterState[0].toUpperCase()}${waiterState.slice(1)}`;
+    addV3ClientNamedImport(j, source, {
+      ...options,
+      importedName: v3WaiterApiName,
+      localName: v3WaiterApiName,
     });
   }
 };
