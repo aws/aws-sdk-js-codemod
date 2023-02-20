@@ -22,6 +22,10 @@ export const addV3ClientImportEquals = (
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
     addV3ClientDefaultImportEquals(j, source, options);
-    addV3ClientNamedImportEquals(j, source, options);
+    addV3ClientNamedImportEquals(j, source, {
+      ...options,
+      keyName: options.v3ClientName,
+      valueName: options.v2ClientLocalName,
+    });
   }
 };
