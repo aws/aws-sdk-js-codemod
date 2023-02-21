@@ -1,5 +1,6 @@
-import { Collection, JSCodeshift, ObjectPattern } from "jscodeshift";
+import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
 
 export interface RemoveRequireObjectPropertyOptions {
@@ -22,12 +23,11 @@ export const removeRequireObjectProperty = (
 
     // Remove ObjectProperty from Variable Declarator.
     const varDeclaratorId = varDeclarator.value.id as ObjectPattern;
-    varDeclaratorId.properties = varDeclaratorId.properties.filter(
-      (property) =>
-        (property.type !== "Property" && property.type !== "ObjectProperty") ||
-        property.value.type !== "Identifier" ||
-        property.value.name !== localName
-    );
+    varDeclaratorId.properties = varDeclaratorId.properties.filter((property) => {
+      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return true;
+      const propertyValue = (property as Property | ObjectProperty).value;
+      return propertyValue.type !== "Identifier" || propertyValue.name !== localName;
+    });
 
     // Remove VariableDeclarator if there are no properties.
     if (varDeclaratorId.properties.length === 0) {
