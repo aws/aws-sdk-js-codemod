@@ -16,18 +16,15 @@ export const addV3ClientNamedImportEquals = (
   }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
-  const objectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
+  const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",
-    init: {
-      type: "Identifier",
-      name: v3ClientDefaultLocalName,
-    },
+    init: { type: "Identifier", name: v3ClientDefaultLocalName },
   });
 
   if (existingVarDeclarator.size()) {
-    existingVarDeclarator.get(0).node.id.properties.push(objectProperty);
+    existingVarDeclarator.get(0).node.id.properties.push(namedImportObjectProperty);
     return;
   }
 
@@ -37,7 +34,10 @@ export const addV3ClientNamedImportEquals = (
   );
 
   const varDeclaration = j.variableDeclaration("const", [
-    j.variableDeclarator(j.objectPattern([objectProperty]), j.identifier(v3ClientDefaultLocalName)),
+    j.variableDeclarator(
+      j.objectPattern([namedImportObjectProperty]),
+      j.identifier(v3ClientDefaultLocalName)
+    ),
   ]);
 
   if (existingImportEquals.size()) {
