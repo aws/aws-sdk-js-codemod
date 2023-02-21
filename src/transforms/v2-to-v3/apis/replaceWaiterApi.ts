@@ -31,6 +31,7 @@ export const replaceWaiterApi = (
             object: v2ClientId,
             property: { type: "Identifier", name: "waitFor" },
           },
+          arguments: [{ value: waiterState }],
         })
         .replaceWith((callExpression) => {
           return j.callExpression(j.identifier(v3WaiterApiName), [

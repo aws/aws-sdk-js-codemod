@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": patch
 ---
 
-Use specific waiter state when doing transformation
+Use waiterState when searching for waitFor calls
