@@ -15,10 +15,6 @@ export const addV3ClientNamedImportEquals = (
   }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
-  const existingImportEquals = source.find(
-    j.TSImportEqualsDeclaration,
-    getImportEqualsDeclaration(v3ClientPackageName)
-  );
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",
@@ -38,6 +34,11 @@ export const addV3ClientNamedImportEquals = (
     );
     return;
   }
+
+  const existingImportEquals = source.find(
+    j.TSImportEqualsDeclaration,
+    getImportEqualsDeclaration(v3ClientPackageName)
+  );
 
   const varDeclaration = j.variableDeclaration("const", [
     j.variableDeclarator(
