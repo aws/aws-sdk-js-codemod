@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
+import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
@@ -8,13 +9,11 @@ import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types"
 export const addV3ClientNamedImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  {
-    keyName,
-    valueName,
-    v2ClientLocalName,
-    v3ClientPackageName,
-  }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
+  options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
+  const { keyName, valueName, ...v3ClientModulesOptions } = options;
+  const { v2ClientLocalName, v3ClientPackageName } = v3ClientModulesOptions;
+
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
   const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
 
@@ -28,10 +27,10 @@ export const addV3ClientNamedImportEquals = (
     return;
   }
 
-  const existingImportEquals = source.find(
-    j.TSImportEqualsDeclaration,
-    getImportEqualsDeclaration(v3ClientPackageName)
-  );
+  const importEqualsDeclaration = getImportEqualsDeclaration(v3ClientPackageName);
+  if (source.find(j.TSImportEqualsDeclaration, importEqualsDeclaration).size() === 0) {
+    addV3ClientDefaultImportEquals(j, source, v3ClientModulesOptions);
+  }
 
   const varDeclaration = j.variableDeclaration("const", [
     j.variableDeclarator(
@@ -40,16 +39,16 @@ export const addV3ClientNamedImportEquals = (
     ),
   ]);
 
-  if (existingImportEquals.size()) {
-    const v3ClientImportEquals = existingImportEquals.filter(
+  const v3ClientImportEquals = source
+    .find(j.TSImportEqualsDeclaration, importEqualsDeclaration)
+    .filter(
       (importEqualsDeclaration) =>
         importEqualsDeclaration.value.id.name === v3ClientDefaultLocalName
     );
 
-    if (v3ClientImportEquals.size() > 0) {
-      v3ClientImportEquals.at(0).insertAfter(varDeclaration);
-      return;
-    }
+  if (v3ClientImportEquals.size() > 0) {
+    v3ClientImportEquals.at(0).insertAfter(varDeclaration);
+    return;
   }
 
   // Unreachable code, throw error
