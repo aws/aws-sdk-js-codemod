@@ -7,6 +7,8 @@ import {
   SpreadPropertyPattern,
 } from "jscodeshift";
 
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+
 export type ObjectPatternProperty =
   | Property
   | PropertyPattern
@@ -19,9 +21,14 @@ export const objectPatternPropertyCompareFn = (
   property1: ObjectPatternProperty,
   property2: ObjectPatternProperty
 ) => {
-  if (property1.type === "Property" && property2.type === "Property") {
-    if (property1.key.type === "Identifier" && property2.key.type === "Identifier")
-      return property1.key.name.localeCompare(property2.key.name);
+  if (
+    OBJECT_PROPERTY_TYPE_LIST.includes(property1.type) &&
+    OBJECT_PROPERTY_TYPE_LIST.includes(property2.type)
+  ) {
+    const property1Key = (property1 as Property | ObjectProperty).key;
+    const property2Key = (property2 as Property | ObjectProperty).key;
+    if (property1Key.type === "Identifier" && property2Key.type === "Identifier")
+      return property1Key.name.localeCompare(property2Key.name);
   }
   return 0;
 };
