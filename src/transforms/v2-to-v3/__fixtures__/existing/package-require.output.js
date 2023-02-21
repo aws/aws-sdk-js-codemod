@@ -1,6 +1,6 @@
 const {
-  DynamoDBClient,
-  DynamoDB
+  DynamoDB,
+  DynamoDBClient
 } = require("@aws-sdk/client-dynamodb");
 
 const client1 = new DynamoDB();
