@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.11.0
+
+### Minor Changes
+
+- Add initial support for waiter API transformation ([a04403b](https://github.com/awslabs/aws-sdk-js-codemod/commit/a04403b))
+
 ## 0.10.7
 
 ### Patch Changes
