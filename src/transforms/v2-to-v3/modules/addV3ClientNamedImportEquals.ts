@@ -20,6 +20,25 @@ export const addV3ClientNamedImportEquals = (
     getImportEqualsDeclaration(v3ClientPackageName)
   );
 
+  const existingVarDeclarator = source.find(j.VariableDeclarator, {
+    type: "VariableDeclarator",
+    init: {
+      type: "Identifier",
+      name: v3ClientDefaultLocalName,
+    },
+  });
+
+  if (existingVarDeclarator.size()) {
+    existingVarDeclarator.get(0).node.id.properties.push(
+      j.objectProperty.from({
+        key: j.identifier(keyName),
+        value: j.identifier(valueName),
+        shorthand: true,
+      })
+    );
+    return;
+  }
+
   const varDeclaration = j.variableDeclaration("const", [
     j.variableDeclarator(
       j.objectPattern([
