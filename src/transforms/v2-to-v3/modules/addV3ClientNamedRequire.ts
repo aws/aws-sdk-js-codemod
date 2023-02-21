@@ -1,5 +1,6 @@
-import { Collection, JSCodeshift, ObjectPattern } from "jscodeshift";
+import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getV3ClientDefaultLocalName } from "../utils";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
@@ -33,14 +34,15 @@ export const addV3ClientNamedRequire = (
       existingRequireProperties.find(
         (variableDeclarator) =>
           variableDeclarator.id.type === "ObjectPattern" &&
-          variableDeclarator.id.properties.find(
-            (property) =>
-              property.type === "Property" &&
-              property.key.type === "Identifier" &&
-              property.value.type === "Identifier" &&
-              property.key.name === keyName &&
-              property.value.name === valueName
-          )
+          variableDeclarator.id.properties.find((property) => {
+            if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return false;
+            const key = (property as Property | ObjectProperty).key;
+            const value = (property as Property | ObjectProperty).value;
+            if (key.type !== "Identifier" || value.type !== "Identifier") {
+              return false;
+            }
+            return key.name === keyName && value.name === valueName;
+          })
       )
     ) {
       return;
