@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.11.1
+
+### Patch Changes
+
+- Use waiterState when searching for waitFor calls to replace ([69f2ea7](https://github.com/awslabs/aws-sdk-js-codemod/commit/69f2ea7))
+
 ## 0.11.0
 
 ### Minor Changes
