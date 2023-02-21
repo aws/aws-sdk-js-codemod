@@ -3,6 +3,7 @@ import { Collection, ImportSpecifier, JSCodeshift } from "jscodeshift";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
 import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
+import { importSpecifierCompareFn } from "./importSpecifierCompareFn";
 import { V3ClientImportSpecifierOptions, V3ClientModulesOptions } from "./types";
 
 export const addV3ClientNamedImport = (
@@ -21,12 +22,12 @@ export const addV3ClientNamedImport = (
   });
 
   if (importDeclarations.size()) {
-    const importSpecifiers = getImportSpecifiers(j, source, v3ClientPackageName).filter(
+    const allImportSpecifiers = getImportSpecifiers(j, source, v3ClientPackageName).filter(
       (importSpecifier) => importSpecifier?.type === "ImportSpecifier"
     ) as ImportSpecifier[];
 
     if (
-      importSpecifiers.find(
+      allImportSpecifiers.find(
         (specifier) =>
           specifier?.imported?.name === importedName && specifier?.local?.name === localName
       )
@@ -34,10 +35,12 @@ export const addV3ClientNamedImport = (
       return;
     }
 
-    importDeclarations
-      .nodes()[0]
-      .specifiers?.push(getV3ClientImportSpecifier(j, { importedName, localName }));
-    return;
+    const firstImportDeclSpecifiers = importDeclarations.nodes()[0].specifiers;
+    if (firstImportDeclSpecifiers) {
+      firstImportDeclSpecifiers.push(getV3ClientImportSpecifier(j, { importedName, localName }));
+      firstImportDeclSpecifiers.sort(importSpecifierCompareFn);
+      return;
+    }
   }
 
   // Insert after global import, or service import.

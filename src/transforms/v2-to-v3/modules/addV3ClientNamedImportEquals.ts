@@ -4,6 +4,7 @@ import { getV3ClientDefaultLocalName } from "../utils";
 import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
+import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientNamedImportEquals = (
@@ -23,7 +24,9 @@ export const addV3ClientNamedImportEquals = (
   });
 
   if (existingVarDeclarator.size()) {
-    existingVarDeclarator.get(0).node.id.properties.push(namedImportObjectProperty);
+    const firstDeclaratorProperties = existingVarDeclarator.get(0).node.id.properties;
+    firstDeclaratorProperties.push(namedImportObjectProperty);
+    firstDeclaratorProperties.sort(objectPatternPropertyCompareFn);
     return;
   }
 
