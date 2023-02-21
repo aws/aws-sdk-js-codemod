@@ -2,6 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientNamedImportEquals = (
@@ -15,6 +16,7 @@ export const addV3ClientNamedImportEquals = (
   }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
+  const objectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",
@@ -25,13 +27,7 @@ export const addV3ClientNamedImportEquals = (
   });
 
   if (existingVarDeclarator.size()) {
-    existingVarDeclarator.get(0).node.id.properties.push(
-      j.objectProperty.from({
-        key: j.identifier(keyName),
-        value: j.identifier(valueName),
-        shorthand: true,
-      })
-    );
+    existingVarDeclarator.get(0).node.id.properties.push(objectProperty);
     return;
   }
 
@@ -41,16 +37,7 @@ export const addV3ClientNamedImportEquals = (
   );
 
   const varDeclaration = j.variableDeclaration("const", [
-    j.variableDeclarator(
-      j.objectPattern([
-        j.objectProperty.from({
-          key: j.identifier(keyName),
-          value: j.identifier(valueName),
-          shorthand: true,
-        }),
-      ]),
-      j.identifier(v3ClientDefaultLocalName)
-    ),
+    j.variableDeclarator(j.objectPattern([objectProperty]), j.identifier(v3ClientDefaultLocalName)),
   ]);
 
   if (existingImportEquals.size()) {
