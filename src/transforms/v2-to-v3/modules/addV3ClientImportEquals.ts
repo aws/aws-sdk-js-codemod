@@ -18,12 +18,7 @@ export const addV3ClientImportEquals = (
   const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
   const waiterStates = getClientWaiterStates(j, source, options);
 
-  if (
-    v3ClientTypesCount > 0 ||
-    newExpressionCount > 0 ||
-    clientTSTypeRefCount > 0 ||
-    waiterStates.length > 0
-  ) {
+  if (v3ClientTypesCount > 0) {
     addV3ClientDefaultImportEquals(j, source, options);
   }
 
