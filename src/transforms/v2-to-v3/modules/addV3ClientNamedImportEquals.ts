@@ -1,9 +1,10 @@
-import { Collection, Identifier, JSCodeshift, ObjectProperty } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
 import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
+import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientNamedImportEquals = (
@@ -24,11 +25,7 @@ export const addV3ClientNamedImportEquals = (
 
   if (existingVarDeclarator.size()) {
     existingVarDeclarator.get(0).node.id.properties.push(namedImportObjectProperty);
-    existingVarDeclarator
-      .get(0)
-      .node.id.properties.sort((a: ObjectProperty, b: ObjectProperty) =>
-        (a.key as Identifier).name.localeCompare((b.key as Identifier).name)
-      );
+    existingVarDeclarator.get(0).node.id.properties.sort(objectPatternPropertyCompareFn);
     return;
   }
 
