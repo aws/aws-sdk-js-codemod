@@ -27,18 +27,10 @@ export const addV3ClientNamedImportEquals = (
     return;
   }
 
-  if (
-    source
-      .find(j.TSImportEqualsDeclaration, getImportEqualsDeclaration(v3ClientPackageName))
-      .size() === 0
-  ) {
+  const importEqualsDeclaration = getImportEqualsDeclaration(v3ClientPackageName);
+  if (source.find(j.TSImportEqualsDeclaration, importEqualsDeclaration).size() === 0) {
     addV3ClientDefaultImportEquals(j, source, v3ClientModulesOptions);
   }
-
-  const existingImportEquals = source.find(
-    j.TSImportEqualsDeclaration,
-    getImportEqualsDeclaration(v3ClientPackageName)
-  );
 
   const varDeclaration = j.variableDeclaration("const", [
     j.variableDeclarator(
@@ -47,16 +39,16 @@ export const addV3ClientNamedImportEquals = (
     ),
   ]);
 
-  if (existingImportEquals.size()) {
-    const v3ClientImportEquals = existingImportEquals.filter(
+  const v3ClientImportEquals = source
+    .find(j.TSImportEqualsDeclaration, importEqualsDeclaration)
+    .filter(
       (importEqualsDeclaration) =>
         importEqualsDeclaration.value.id.name === v3ClientDefaultLocalName
     );
 
-    if (v3ClientImportEquals.size() > 0) {
-      v3ClientImportEquals.at(0).insertAfter(varDeclaration);
-      return;
-    }
+  if (v3ClientImportEquals.size() > 0) {
+    v3ClientImportEquals.at(0).insertAfter(varDeclaration);
+    return;
   }
 
   // Unreachable code, throw error
