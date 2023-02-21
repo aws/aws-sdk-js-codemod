@@ -1,4 +1,4 @@
-import { S3, waitUntilBucketNotExists, waitUntilBucketExists } from "@aws-sdk/client-s3";
+import { S3, waitUntilBucketExists, waitUntilBucketNotExists } from "@aws-sdk/client-s3";
 
 const Bucket = "BUCKET_NAME";
 const client = new S3({ region: "REGION" });
