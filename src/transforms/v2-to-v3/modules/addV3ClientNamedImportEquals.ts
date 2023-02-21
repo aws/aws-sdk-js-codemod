@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, ObjectProperty } from "jscodeshift";
 
 import { getV3ClientDefaultLocalName } from "../utils";
 import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
@@ -24,6 +24,11 @@ export const addV3ClientNamedImportEquals = (
 
   if (existingVarDeclarator.size()) {
     existingVarDeclarator.get(0).node.id.properties.push(namedImportObjectProperty);
+    existingVarDeclarator
+      .get(0)
+      .node.id.properties.sort((a: ObjectProperty, b: ObjectProperty) =>
+        (a.key as Identifier).name.localeCompare((b.key as Identifier).name)
+      );
     return;
   }
 
