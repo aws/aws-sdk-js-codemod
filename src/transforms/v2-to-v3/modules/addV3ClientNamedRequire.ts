@@ -6,6 +6,7 @@ import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
+import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
 export const addV3ClientNamedRequire = (
@@ -64,7 +65,9 @@ export const addV3ClientNamedRequire = (
     }
 
     if (existingRequireProperties.length > 0) {
-      (existingRequireProperties[0].id as ObjectPattern).properties.push(v3ClientObjectProperty);
+      const firstRequireProperties = (existingRequireProperties[0].id as ObjectPattern).properties;
+      firstRequireProperties.push(v3ClientObjectProperty);
+      firstRequireProperties.sort(objectPatternPropertyCompareFn);
       return;
     }
   }
