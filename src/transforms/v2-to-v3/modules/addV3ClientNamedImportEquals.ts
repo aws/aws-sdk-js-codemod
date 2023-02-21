@@ -24,8 +24,9 @@ export const addV3ClientNamedImportEquals = (
   });
 
   if (existingVarDeclarator.size()) {
-    existingVarDeclarator.get(0).node.id.properties.push(namedImportObjectProperty);
-    existingVarDeclarator.get(0).node.id.properties.sort(objectPatternPropertyCompareFn);
+    const firstDeclaratorProperties = existingVarDeclarator.get(0).node.id.properties;
+    firstDeclaratorProperties.push(namedImportObjectProperty);
+    firstDeclaratorProperties.sort(objectPatternPropertyCompareFn);
     return;
   }
 
