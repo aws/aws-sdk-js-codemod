@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.11.2
+
+### Patch Changes
+
+- Sort v3 named require/imports ([77f08e8](https://github.com/awslabs/aws-sdk-js-codemod/commit/77f08e8))
+
 ## 0.11.1
 
 ### Patch Changes
