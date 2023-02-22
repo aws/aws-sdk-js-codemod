@@ -51,5 +51,19 @@ export const replaceS3UploadApi = (
 
         return j.newExpression(j.identifier("Upload"), [j.objectExpression(properties)]);
       });
+
+    // Replace `.promise()` call with `.done()` if present.
+    source
+      .find(j.MemberExpression, {
+        type: "MemberExpression",
+        object: {
+          type: "NewExpression",
+          callee: { type: "Identifier", name: "Upload" },
+        },
+        property: { type: "Identifier", name: "promise" },
+      })
+      .forEach((memberExpression) => {
+        memberExpression.value.property.name = "done";
+      });
   }
 };
