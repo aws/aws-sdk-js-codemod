@@ -22,6 +22,7 @@ export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpre
       break;
     }
     case "ArrowFunctionExpression":
+    case "ObjectProperty":
     case "ReturnStatement": {
       const currentCalleeObject = (callExpression.value.callee as MemberExpression)
         .object as CallExpression;
