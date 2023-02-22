@@ -5,10 +5,10 @@ const client = new S3({ region: "REGION" });
 
 await waitUntilBucketNotExists({
   client,
-  maxWaitTime: 180
+  maxWaitTime: 200
 }, { Bucket });
 await client.createBucket({ Bucket });
 await waitUntilBucketExists({
   client,
-  maxWaitTime: 180
+  maxWaitTime: 200
 }, { Bucket });

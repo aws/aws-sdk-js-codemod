@@ -39,6 +39,7 @@ export const replaceWaiterApi = (
         .replaceWith((callExpression) => {
           const waiterConfig = getWaiterConfig(callExpression.node.arguments[1]);
           const delay = getWaiterConfigValue(waiterConfig, "delay");
+          const maxAttempts = getWaiterConfigValue(waiterConfig, "maxAttempts");
 
           const properties = [];
           properties.push(
@@ -58,10 +59,14 @@ export const replaceWaiterApi = (
             );
           }
 
+          const delayForWaitTime = delay ? Number(delay) : 10;
+          const maxAttemptsForWaitTime = maxAttempts ? Number(maxAttempts) : 10;
+          const maxWaitTime = 2 * delayForWaitTime * maxAttemptsForWaitTime;
+
           properties.push(
             j.objectProperty.from({
               key: j.identifier("maxWaitTime"),
-              value: j.numericLiteral(180),
+              value: j.numericLiteral(maxWaitTime),
             })
           );
 
