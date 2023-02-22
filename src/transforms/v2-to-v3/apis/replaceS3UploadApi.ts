@@ -1,0 +1,55 @@
+import { Collection, JSCodeshift } from "jscodeshift";
+
+import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+
+export interface ReplaceS3UploadApiOptions {
+  v2ClientName: string;
+  v2ClientLocalName: string;
+  v2GlobalName?: string;
+}
+
+// Updates `s3.upload()` API with `new Upload()` API.
+export const replaceS3UploadApi = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
+  options: ReplaceS3UploadApiOptions
+): void => {
+  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
+
+  for (const v2ClientId of v2ClientIdentifiers) {
+    source
+      .find(j.CallExpression, {
+        type: "CallExpression",
+        callee: {
+          type: "MemberExpression",
+          object: v2ClientId,
+          property: { type: "Identifier", name: "upload" },
+        },
+      })
+      .replaceWith((callExpression) => {
+        const params = callExpression.node.arguments[0];
+
+        const properties = [];
+        properties.push(
+          j.objectProperty.from({
+            key: j.identifier("client"),
+            value: v2ClientId,
+            shorthand: true,
+          })
+        );
+
+        if (params) {
+          properties.push(
+            j.objectProperty.from({
+              key: j.identifier("params"),
+              // @ts-expect-error Type 'SpreadElement | ExpressionKind' is not assignable
+              value: params,
+              shorthand: true,
+            })
+          );
+        }
+
+        return j.newExpression(j.identifier("Upload"), [j.objectExpression(properties)]);
+      });
+  }
+};

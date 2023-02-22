@@ -1,6 +1,7 @@
 import { API, FileInfo } from "jscodeshift";
 
 import { removePromiseCalls, replaceWaiterApi } from "./apis";
+import { replaceS3UploadApi } from "./apis/replaceS3UploadApi";
 import { replaceClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
@@ -47,6 +48,7 @@ const transformer = async (file: FileInfo, api: API) => {
     removeV2ClientModule(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
+    replaceS3UploadApi(j, source, v2Options);
 
     if (v2GlobalName) {
       replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
