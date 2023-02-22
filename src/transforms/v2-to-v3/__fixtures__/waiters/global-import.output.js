@@ -18,4 +18,6 @@ await waitUntilBucketExists({
   client,
   minDelay: 2,
   maxWaitTime: 180
-}, { Bucket });
+}, {
+  Bucket
+});

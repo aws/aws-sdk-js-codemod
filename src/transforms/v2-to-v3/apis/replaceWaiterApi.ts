@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
 import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
@@ -66,7 +67,7 @@ export const replaceWaiterApi = (
 
           return j.callExpression(j.identifier(v3WaiterApiName), [
             j.objectExpression(properties),
-            callExpression.node.arguments[1],
+            getArgsWithoutWaiterConfig(callExpression.node.arguments[1]),
           ]);
         });
     }
