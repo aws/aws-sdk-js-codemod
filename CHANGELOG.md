@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.11.4
+
+### Patch Changes
+
+- Support removal of .promise() with parentPath ObjectProperty ([ec4577c](https://github.com/awslabs/aws-sdk-js-codemod/commit/ec4577c))
+
 ## 0.11.3
 
 ### Patch Changes
