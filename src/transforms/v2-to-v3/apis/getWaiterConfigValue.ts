@@ -2,7 +2,7 @@ import { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-export const getWaiterConfigurationValue = (
+export const getWaiterConfigValue = (
   waiterConfiguration: ObjectExpression | undefined,
   key: string
 ): string | undefined => {

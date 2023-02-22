@@ -3,8 +3,8 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
 import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
-import { getWaiterConfiguration } from "./getWaiterConfiguration";
-import { getWaiterConfigurationValue } from "./getWaiterConfigurationValue";
+import { getWaiterConfig } from "./getWaiterConfig";
+import { getWaiterConfigValue } from "./getWaiterConfigValue";
 
 export interface ReplaceWaiterApiOptions {
   v2ClientName: string;
@@ -36,8 +36,8 @@ export const replaceWaiterApi = (
           arguments: [{ value: waiterState }],
         })
         .replaceWith((callExpression) => {
-          const waiterConfiguration = getWaiterConfiguration(callExpression.node.arguments[1]);
-          const delay = getWaiterConfigurationValue(waiterConfiguration, "delay");
+          const waiterConfig = getWaiterConfig(callExpression.node.arguments[1]);
+          const delay = getWaiterConfigValue(waiterConfig, "delay");
 
           const properties = [];
           properties.push(

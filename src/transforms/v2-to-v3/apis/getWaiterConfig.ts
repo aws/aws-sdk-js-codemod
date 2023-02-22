@@ -2,7 +2,7 @@ import { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-export const getWaiterConfiguration = (callArgument: unknown): ObjectExpression | undefined => {
+export const getWaiterConfig = (callArgument: unknown): ObjectExpression | undefined => {
   if ((callArgument as ObjectExpression).type !== "ObjectExpression") {
     return;
   }
