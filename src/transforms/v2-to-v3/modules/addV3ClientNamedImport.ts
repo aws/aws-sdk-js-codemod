@@ -9,14 +9,11 @@ import { V3ClientImportSpecifierOptions, V3ClientModulesOptions } from "./types"
 export const addV3ClientNamedImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  {
-    localName,
-    importedName,
-    v2ClientName,
-    v2ClientLocalName,
-    v3ClientPackageName,
-  }: V3ClientModulesOptions & V3ClientImportSpecifierOptions
+  options: V3ClientModulesOptions & V3ClientImportSpecifierOptions
 ) => {
+  const { importedName, v2ClientName, v2ClientLocalName, v3ClientPackageName } = options;
+  const localName = options.localName ?? importedName;
+
   const importDeclarations = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
   });
