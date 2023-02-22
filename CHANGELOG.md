@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.11.3
+
+### Patch Changes
+
+- Support transformation of waiter configuration ([2d477e0](https://github.com/awslabs/aws-sdk-js-codemod/commit/2d477e0))
+
 ## 0.11.2
 
 ### Patch Changes
