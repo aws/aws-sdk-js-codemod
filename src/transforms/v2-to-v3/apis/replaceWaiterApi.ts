@@ -3,6 +3,8 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
 import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
+import { getWaiterConfiguration } from "./getWaiterConfiguration";
+import { getWaiterConfigurationValue } from "./getWaiterConfigurationValue";
 
 export interface ReplaceWaiterApiOptions {
   v2ClientName: string;
@@ -34,19 +36,36 @@ export const replaceWaiterApi = (
           arguments: [{ value: waiterState }],
         })
         .replaceWith((callExpression) => {
+          const waiterConfiguration = getWaiterConfiguration(callExpression.node.arguments[1]);
+          const delay = getWaiterConfigurationValue(waiterConfiguration, "delay");
+
+          const properties = [];
+          properties.push(
+            j.objectProperty.from({
+              key: j.identifier("client"),
+              value: v2ClientId,
+              shorthand: true,
+            })
+          );
+
+          if (delay) {
+            properties.push(
+              j.objectProperty.from({
+                key: j.identifier("minDelay"),
+                value: j.numericLiteral(Number(delay)),
+              })
+            );
+          }
+
+          properties.push(
+            j.objectProperty.from({
+              key: j.identifier("maxWaitTime"),
+              value: j.numericLiteral(180),
+            })
+          );
+
           return j.callExpression(j.identifier(v3WaiterApiName), [
-            j.objectExpression([
-              j.objectProperty.from({
-                key: j.identifier("client"),
-                value: v2ClientId,
-                shorthand: true,
-              }),
-              // ToDo: Read maxWaitTime from the waiter configuration
-              j.objectProperty.from({
-                key: j.identifier("maxWaitTime"),
-                value: j.numericLiteral(180),
-              }),
-            ]),
+            j.objectExpression(properties),
             callExpression.node.arguments[1],
           ]);
         });
