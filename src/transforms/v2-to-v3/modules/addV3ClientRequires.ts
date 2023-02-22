@@ -35,7 +35,6 @@ export const addV3ClientRequires = (
     addV3ClientNamedRequire(j, source, {
       ...options,
       keyName: v3WaiterApiName,
-      valueName: v3WaiterApiName,
     });
   }
 };

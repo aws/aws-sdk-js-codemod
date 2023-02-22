@@ -35,7 +35,6 @@ export const addV3ClientImportEquals = (
     addV3ClientNamedImportEquals(j, source, {
       ...options,
       keyName: v3WaiterApiName,
-      valueName: v3WaiterApiName,
     });
   }
 };
