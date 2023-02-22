@@ -29,3 +29,12 @@ await waitUntilBucketExists({
 }, {
   Bucket
 });
+
+// Waiter configuration: delay+maxAttempts
+await waitUntilBucketExists({
+  client,
+  minDelay: 2,
+  maxWaitTime: 20
+}, {
+  Bucket
+});
