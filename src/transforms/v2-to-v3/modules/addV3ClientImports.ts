@@ -43,7 +43,6 @@ export const addV3ClientImports = (
     addV3ClientNamedImport(j, source, {
       ...options,
       importedName: "Upload",
-      localName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",
     });
   }
