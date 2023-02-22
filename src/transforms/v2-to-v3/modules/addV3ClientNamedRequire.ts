@@ -12,15 +12,11 @@ import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types"
 export const addV3ClientNamedRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  {
-    keyName,
-    valueName,
-    v2ClientName,
-    v2ClientLocalName,
-    v2GlobalName,
-    v3ClientPackageName,
-  }: V3ClientModulesOptions & V3ClientRequirePropertyOptions
+  options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
+  const { keyName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } = options;
+  const valueName = options.valueName ?? keyName;
+
   const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
   const v3ClientObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
