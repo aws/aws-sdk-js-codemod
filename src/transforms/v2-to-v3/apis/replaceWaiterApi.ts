@@ -1,8 +1,11 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
 import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
+import { getWaiterConfig } from "./getWaiterConfig";
+import { getWaiterConfigValue } from "./getWaiterConfigValue";
 
 export interface ReplaceWaiterApiOptions {
   v2ClientName: string;
@@ -34,20 +37,42 @@ export const replaceWaiterApi = (
           arguments: [{ value: waiterState }],
         })
         .replaceWith((callExpression) => {
+          const waiterConfig = getWaiterConfig(callExpression.node.arguments[1]);
+          const delay = getWaiterConfigValue(waiterConfig, "delay");
+          const maxAttempts = getWaiterConfigValue(waiterConfig, "maxAttempts");
+
+          const properties = [];
+          properties.push(
+            j.objectProperty.from({
+              key: j.identifier("client"),
+              value: v2ClientId,
+              shorthand: true,
+            })
+          );
+
+          if (delay) {
+            properties.push(
+              j.objectProperty.from({
+                key: j.identifier("minDelay"),
+                value: j.numericLiteral(Number(delay)),
+              })
+            );
+          }
+
+          const delayForWaitTime = delay ? Number(delay) : 10;
+          const maxAttemptsForWaitTime = maxAttempts ? Number(maxAttempts) : 10;
+          const maxWaitTime = 2 * delayForWaitTime * maxAttemptsForWaitTime;
+
+          properties.push(
+            j.objectProperty.from({
+              key: j.identifier("maxWaitTime"),
+              value: j.numericLiteral(maxWaitTime),
+            })
+          );
+
           return j.callExpression(j.identifier(v3WaiterApiName), [
-            j.objectExpression([
-              j.objectProperty.from({
-                key: j.identifier("client"),
-                value: v2ClientId,
-                shorthand: true,
-              }),
-              // ToDo: Read maxWaitTime from the waiter configuration
-              j.objectProperty.from({
-                key: j.identifier("maxWaitTime"),
-                value: j.numericLiteral(180),
-              }),
-            ]),
-            callExpression.node.arguments[1],
+            j.objectExpression(properties),
+            getArgsWithoutWaiterConfig(callExpression.node.arguments[1]),
           ]);
         });
     }

@@ -12,7 +12,7 @@ export const getClientWaiterStates = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: GetClientWaiterStatesOptions
-): string[] => {
+): Set<string> => {
   const waiterStates: string[] = [];
 
   const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
@@ -33,5 +33,5 @@ export const getClientWaiterStates = (
       });
   }
 
-  return waiterStates;
+  return new Set(waiterStates);
 };
