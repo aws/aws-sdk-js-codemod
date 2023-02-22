@@ -36,7 +36,6 @@ export const addV3ClientImports = (
     addV3ClientNamedImport(j, source, {
       ...options,
       importedName: v3WaiterApiName,
-      localName: v3WaiterApiName,
     });
   }
 };

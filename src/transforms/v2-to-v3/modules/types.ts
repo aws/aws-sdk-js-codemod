@@ -13,5 +13,5 @@ export interface V3ClientRequirePropertyOptions {
 
 export interface V3ClientImportSpecifierOptions {
   importedName: string;
-  localName: string;
+  localName?: string;
 }
