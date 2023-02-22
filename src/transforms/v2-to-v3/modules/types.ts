@@ -8,7 +8,7 @@ export interface V3ClientModulesOptions {
 
 export interface V3ClientRequirePropertyOptions {
   keyName: string;
-  valueName: string;
+  valueName?: string;
 }
 
 export interface V3ClientImportSpecifierOptions {

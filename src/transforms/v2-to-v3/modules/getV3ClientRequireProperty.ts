@@ -8,6 +8,6 @@ export const getV3ClientRequireProperty = (
 ) =>
   j.objectProperty.from({
     key: j.identifier(keyName),
-    value: j.identifier(valueName),
+    value: j.identifier(valueName ?? keyName),
     shorthand: true,
   });
