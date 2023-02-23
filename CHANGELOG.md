@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.12.0
+
+### Minor Changes
+
+- Add initial transformation for s3.upload API ([5aeb73e](https://github.com/awslabs/aws-sdk-js-codemod/commit/5aeb73e))
+
 ## 0.11.4
 
 ### Patch Changes
