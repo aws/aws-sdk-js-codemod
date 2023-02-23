@@ -2,6 +2,9 @@ import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
 const client = new DynamoDB();
 
+// ExpressionStatement
+client.listTables();
+
 // async/await
 try {
   await client.listTables();

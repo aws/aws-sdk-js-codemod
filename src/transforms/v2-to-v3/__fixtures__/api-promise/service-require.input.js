@@ -2,6 +2,9 @@ const DynamoDBClient = require("aws-sdk/clients/dynamodb");
 
 const client = new DynamoDBClient();
 
+// ExpressionStatement
+client.listTables().promise();
+
 // async/await
 try {
   await client.listTables().promise();

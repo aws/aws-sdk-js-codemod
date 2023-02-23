@@ -11,6 +11,7 @@ export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpre
     }
     case "ArrowFunctionExpression":
     case "AwaitExpression":
+    case "ExpressionStatement":
     case "ObjectProperty":
     case "ReturnStatement":
     case "VariableDeclarator": {

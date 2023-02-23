@@ -4,6 +4,9 @@ const {
 
 const client = new DynamoDBClient();
 
+// ExpressionStatement
+client.listTables();
+
 // async/await
 try {
   await client.listTables();
