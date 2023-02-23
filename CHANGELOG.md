@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 0.13.0
+
+### Minor Changes
+
+- Add comment with warning when removing .promise() from untested cases ([0447472](https://github.com/awslabs/aws-sdk-js-codemod/commit/0447472))
+
+### Patch Changes
+
+- Support removal of promise() for ExpressionStatement ([a024eeb](https://github.com/awslabs/aws-sdk-js-codemod/commit/a024eeb))
+
 ## 0.12.1
 
 ### Patch Changes
