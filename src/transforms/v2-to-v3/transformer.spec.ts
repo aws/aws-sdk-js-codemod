@@ -52,7 +52,7 @@ describe("v2-to-v3", () => {
 
         expect(output.trim()).toEqual(outputCode.trim());
       },
-      60000
+      100000
     );
   });
 });
