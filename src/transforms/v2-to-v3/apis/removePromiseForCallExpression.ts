@@ -3,27 +3,17 @@ import { print } from "recast";
 
 export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpression>) => {
   switch (callExpression.parentPath.value.type) {
-    case "AwaitExpression": {
-      callExpression.parentPath.value.argument = (
-        callExpression.value.callee as MemberExpression
-      ).object;
-      break;
-    }
     case "MemberExpression": {
       callExpression.parentPath.value.object = (
         callExpression.value.callee as MemberExpression
       ).object;
       break;
     }
-    case "VariableDeclarator": {
-      callExpression.parentPath.value.init = (
-        callExpression.value.callee as MemberExpression
-      ).object;
-      break;
-    }
     case "ArrowFunctionExpression":
+    case "AwaitExpression":
     case "ObjectProperty":
-    case "ReturnStatement": {
+    case "ReturnStatement":
+    case "VariableDeclarator": {
       const currentCalleeObject = (callExpression.value.callee as MemberExpression)
         .object as CallExpression;
       if (currentCalleeObject.arguments.length > 0) {
