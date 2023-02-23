@@ -5,7 +5,7 @@ import {
   V2_CLIENT_INPUT_SUFFIX_LIST,
   V2_CLIENT_OUTPUT_SUFFIX_LIST,
 } from "../config";
-import { getV3ClientDefaultLocalName } from "../utils";
+import { getV3DefaultLocalName } from "../utils";
 import { getTypeRefForString } from "./getTypeRefForString";
 
 export interface GetV3ClientTypeReferenceOptions {
@@ -25,7 +25,7 @@ export const getV3ClientTypeReference = (
   { v2ClientLocalName, v2ClientName, v2ClientTypeName }: GetV3ClientTypeReferenceOptions
 ): TSType => {
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
-  const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
+  const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
 
   if (Object.keys(clientTypesMap).includes(v2ClientTypeName)) {
     return getTypeRefForString(j, v3ClientDefaultLocalName, clientTypesMap[v2ClientTypeName]);

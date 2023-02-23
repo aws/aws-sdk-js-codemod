@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { getV3ClientDefaultLocalName } from "../utils";
+import { getV3DefaultLocalName } from "../utils";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
@@ -17,7 +17,7 @@ export const addV3ClientNamedRequire = (
   const { keyName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } = options;
   const valueName = options.valueName ?? keyName;
 
-  const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
+  const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
   const v3ClientObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
