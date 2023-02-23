@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3ClientDefaultLocalName } from "../utils";
+import { getV3DefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
 import { V3ClientModulesOptions } from "./types";
@@ -10,7 +10,7 @@ export const addV3ClientDefaultImportEquals = (
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
 ) => {
-  const v3ClientDefaultLocalName = getV3ClientDefaultLocalName(v2ClientLocalName);
+  const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
   const existingImportEquals = source.find(
     j.TSImportEqualsDeclaration,
     getImportEqualsDeclaration(v3ClientPackageName)
