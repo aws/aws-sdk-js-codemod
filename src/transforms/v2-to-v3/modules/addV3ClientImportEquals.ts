@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getClientWaiterStates, getV3ClientWaiterApiName } from "../apis";
+import { getClientWaiterStates, getV3ClientWaiterApiName, isS3UploadApiUsed } from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
 import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
 import { addV3ClientNamedImportEquals } from "./addV3ClientNamedImportEquals";
@@ -35,6 +35,14 @@ export const addV3ClientImportEquals = (
     addV3ClientNamedImportEquals(j, source, {
       ...options,
       keyName: v3WaiterApiName,
+    });
+  }
+
+  if (isS3UploadApiUsed(j, source, options)) {
+    addV3ClientNamedImportEquals(j, source, {
+      ...options,
+      keyName: "Upload",
+      v3ClientPackageName: "@aws-sdk/lib-storage",
     });
   }
 };

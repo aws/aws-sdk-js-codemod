@@ -15,7 +15,10 @@ export const addV3ClientNamedImportEquals = (
   const { keyName, valueName, ...v3ClientModulesOptions } = options;
   const { v2ClientLocalName, v3ClientPackageName } = v3ClientModulesOptions;
 
-  const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
+  const localNameSuffix = v3ClientPackageName.startsWith("@aws-sdk/client-")
+    ? v2ClientLocalName
+    : v3ClientPackageName.substring(9).replace(/-/g, "_");
+  const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
   const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {

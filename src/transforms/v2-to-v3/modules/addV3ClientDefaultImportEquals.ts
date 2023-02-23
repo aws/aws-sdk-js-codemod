@@ -10,7 +10,10 @@ export const addV3ClientDefaultImportEquals = (
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
 ) => {
-  const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
+  const localNameSuffix = v3ClientPackageName.startsWith("@aws-sdk/client-")
+    ? v2ClientLocalName
+    : v3ClientPackageName.substring(9).replace(/-/g, "_");
+  const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
   const existingImportEquals = source.find(
     j.TSImportEqualsDeclaration,
     getImportEqualsDeclaration(v3ClientPackageName)

@@ -1,6 +1,7 @@
 import { API, FileInfo } from "jscodeshift";
 
 import { removePromiseCalls, replaceWaiterApi } from "./apis";
+import { replaceS3UploadApi } from "./apis/replaceS3UploadApi";
 import { replaceClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
@@ -45,6 +46,7 @@ const transformer = async (file: FileInfo, api: API) => {
     addV3ClientModules(j, source, { ...v2Options, ...v3Options });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeV2ClientModule(j, source, v2Options);
+    replaceS3UploadApi(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
 
