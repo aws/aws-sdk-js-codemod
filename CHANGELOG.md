@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.12.1
+
+### Patch Changes
+
+- Make AwaitExpression/VariableDeclarator generic while removing .promise() API ([13fd08a](https://github.com/awslabs/aws-sdk-js-codemod/commit/13fd08a))
+
 ## 0.12.0
 
 ### Minor Changes
