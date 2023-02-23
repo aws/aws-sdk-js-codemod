@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
 
@@ -63,7 +63,7 @@ export const replaceS3UploadApi = (
         property: { type: "Identifier", name: "promise" },
       })
       .forEach((memberExpression) => {
-        memberExpression.value.property.name = "done";
+        (memberExpression.value.property as Identifier).name = "done";
       });
   }
 };
