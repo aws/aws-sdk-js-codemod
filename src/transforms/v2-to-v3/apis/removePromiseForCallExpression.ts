@@ -1,7 +1,10 @@
-import { ASTPath, CallExpression, MemberExpression } from "jscodeshift";
-import { print } from "recast";
+import { ASTPath, CallExpression, JSCodeshift, MemberExpression } from "jscodeshift";
+import { emitWarning } from "process";
 
-export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpression>) => {
+export const removePromiseForCallExpression = (
+  j: JSCodeshift,
+  callExpression: ASTPath<CallExpression>
+) => {
   switch (callExpression.parentPath.value.type) {
     case "MemberExpression": {
       callExpression.parentPath.value.object = (
@@ -9,6 +12,26 @@ export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpre
       ).object;
       break;
     }
+    default: {
+      emitWarning(
+        `Removal of .promise() not implemented for parentPath: ${callExpression.parentPath.value.type}\n` +
+          `Code processed: ${j(callExpression.parentPath).toSource()}\n\n` +
+          "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod\n"
+      );
+      const comments = callExpression.parentPath.node.comments || [];
+      comments.push(
+        j.commentLine(
+          " The promise() call was removed by aws-sdk-js-codemod v2-to-v3 transform using best guess."
+        )
+      );
+      comments.push(
+        j.commentLine(
+          " Please check that it is correct, and create an issue on GitHub to report this use case."
+        )
+      );
+      callExpression.parentPath.node.comments = comments;
+    }
+    // eslint-disable-next-line no-fallthrough
     case "ArrowFunctionExpression":
     case "AwaitExpression":
     case "ExpressionStatement":
@@ -23,11 +46,5 @@ export const removePromiseForCallExpression = (callExpression: ASTPath<CallExpre
       callExpression.value.callee = currentCalleeObject.callee;
       break;
     }
-    default:
-      throw new Error(
-        `Removal of .promise() not implemented for parentPath: ${callExpression.parentPath.value.type}\n` +
-          `Code processed: ${print(callExpression.parentPath.node).code}\n\n` +
-          "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod\n"
-      );
   }
 };

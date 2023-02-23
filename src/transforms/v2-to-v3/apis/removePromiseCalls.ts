@@ -36,7 +36,7 @@ export const removePromiseCalls = (
         },
       })
       .forEach((callExpression) => {
-        removePromiseForCallExpression(callExpression);
+        removePromiseForCallExpression(j, callExpression);
       });
 
     // Remove .promise() from client API request stored in a variable.
@@ -64,7 +64,7 @@ export const removePromiseCalls = (
             },
           })
           .forEach((callExpression) => {
-            removePromiseForCallExpression(callExpression);
+            removePromiseForCallExpression(j, callExpression);
           });
       });
   }
