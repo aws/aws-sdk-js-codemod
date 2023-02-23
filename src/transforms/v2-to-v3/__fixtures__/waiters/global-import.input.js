@@ -15,3 +15,14 @@ await client.waitFor("bucketExists", { Bucket, $waiter: { maxAttempts: 5 } }).pr
 
 // Waiter configuration: delay+maxAttempts
 await client.waitFor("bucketExists", { Bucket, $waiter: { delay: 2, maxAttempts: 5 } }).promise();
+
+// Client as class member
+class ClientClassMember {
+  constructor(clientInCtr = new AWS.S3()) {
+    this.clientInClass = clientInCtr;
+  }
+
+  async listTables() {
+    return await this.clientInClass.waitFor("bucketExists", { Bucket }).promise();
+  }
+}

@@ -38,3 +38,17 @@ await waitUntilBucketExists({
 }, {
   Bucket
 });
+
+// Client as class member
+class ClientClassMember {
+  constructor(clientInCtr = new S3()) {
+    this.clientInClass = clientInCtr;
+  }
+
+  async listTables() {
+    return await waitUntilBucketExists({
+      client: this.clientInClass,
+      maxWaitTime: 200
+    }, { Bucket });
+  }
+}
