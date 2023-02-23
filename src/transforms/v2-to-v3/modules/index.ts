@@ -1,4 +1,4 @@
-export * from "./addV3ClientModules";
+export * from "./addV3Modules";
 export * from "./getImportEqualsDeclaration";
 export * from "./getImportSpecifiers";
 export * from "./getRequireDeclaratorsWithProperty";

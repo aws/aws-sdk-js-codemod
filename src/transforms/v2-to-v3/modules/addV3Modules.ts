@@ -7,7 +7,7 @@ import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { V3ClientModulesOptions } from "./types";
 
-export const addV3ClientModules = (
+export const addV3Modules = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: V3ClientModulesOptions
