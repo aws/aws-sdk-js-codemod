@@ -5,15 +5,6 @@ const client = new DynamoDB();
 // ExpressionStatement
 client.listTables();
 
-// async/await
-try {
-  await client.listTables();
-  await client.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
-  console.log(data);
-} catch (err) {
-  console.log(err, err.stack);
-}
-
 // .then() and .catch()
 client
   .listTables()
