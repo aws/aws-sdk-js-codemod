@@ -7,16 +7,6 @@ const client = new DynamoDBClient();
 // ExpressionStatement
 client.listTables();
 
-// .then() and .catch()
-client
-  .listTables()
-  .then((data) => console.log(data))
-  .catch((err) => console.log(err, err.stack));
-client
-  .listTagsOfResource({ ResourceArn: "STRING_VALUE" })
-  .then((data) => console.log(data))
-  .catch((err) => console.log(err, err.stack));
-
 // Client as class member
 class ClientClassMember {
   constructor(clientInCtr = new DynamoDBClient()) {
