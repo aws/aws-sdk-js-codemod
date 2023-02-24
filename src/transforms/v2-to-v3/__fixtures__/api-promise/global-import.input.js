@@ -5,10 +5,6 @@ const client = new AWS.DynamoDB();
 // ExpressionStatement
 client.listTables().promise();
 
-// Variable declarator
-const listTablesPromise = client.listTables().promise();
-const listTagsOfResourcePromise = client.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
-
 // Promise call on request in variable declarator
 const listTablesRequest = client.listTables();
 listTablesRequest

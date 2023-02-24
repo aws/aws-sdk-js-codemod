@@ -5,10 +5,6 @@ const client = new DynamoDBClient();
 // ExpressionStatement
 client.listTables();
 
-// Variable declarator
-const listTablesPromise = client.listTables();
-const listTagsOfResourcePromise = client.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
-
 // Promise call on request in variable declarator
 const listTablesRequest = client.listTables();
 listTablesRequest
