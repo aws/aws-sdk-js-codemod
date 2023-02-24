@@ -5,21 +5,6 @@ const client = new DynamoDBClient();
 // ExpressionStatement
 client.listTables();
 
-// Client as class member
-class ClientClassMember {
-  constructor(clientInCtr = new DynamoDBClient()) {
-    this.clientInClass = clientInCtr;
-  }
-
-  async listTables() {
-    return await this.clientInClass.listTables();
-  }
-
-  async listTagsOfResource() {
-    return await this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
-  }
-}
-
 // Variable declarator
 const listTablesPromise = client.listTables();
 const listTagsOfResourcePromise = client.listTagsOfResource({ ResourceArn: "STRING_VALUE" });
