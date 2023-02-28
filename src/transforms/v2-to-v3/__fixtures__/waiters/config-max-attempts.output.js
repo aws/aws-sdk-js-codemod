@@ -7,8 +7,7 @@ await client.createBucket({ Bucket });
 
 await waitUntilBucketExists({
   client,
-  minDelay: 2,
-  maxWaitTime: 40
+  maxWaitTime: 100
 }, {
   Bucket
 });

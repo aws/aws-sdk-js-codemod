@@ -5,4 +5,4 @@ const client = new AWS.S3({ region: "REGION" });
 
 await client.createBucket({ Bucket }).promise();
 
-await client.waitFor("bucketExists", { Bucket, $waiter: { delay: 2 } }).promise();
+await client.waitFor("bucketExists", { Bucket, $waiter: { maxAttempts: 5 } }).promise();

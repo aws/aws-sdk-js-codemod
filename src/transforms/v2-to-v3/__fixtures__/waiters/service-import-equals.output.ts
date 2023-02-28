@@ -19,14 +19,6 @@ await waitUntilBucketExists({
   maxWaitTime: 200
 }, { Bucket });
 
-// Waiter configuration: maxAttempts
-await waitUntilBucketExists({
-  client,
-  maxWaitTime: 100
-}, {
-  Bucket
-});
-
 // Waiter configuration: delay+maxAttempts
 await waitUntilBucketExists({
   client,
