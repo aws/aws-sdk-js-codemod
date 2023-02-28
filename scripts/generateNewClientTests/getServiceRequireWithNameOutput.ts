@@ -1,7 +1,7 @@
 import { CLIENT_NAMES_MAP, CLIENT_PACKAGE_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
 import { CLIENTS_TO_TEST, LOCAL_NAME_SUFFIX } from "./config";
 import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
-import { getClientNamesWithLocalSuffix } from "./getClientNamesWithLocalSuffix";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 
 export const getServiceRequireWithNameOutput = (codegenComment: string) => {
@@ -22,7 +22,7 @@ export const getServiceRequireWithNameOutput = (codegenComment: string) => {
       `      `;
   }
   content = content.replace(/,\n {6}$/, ";\n\n");
-  content += getV3ClientsNewExpressionCode(getClientNamesWithLocalSuffix(CLIENTS_TO_TEST));
+  content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;
 };
