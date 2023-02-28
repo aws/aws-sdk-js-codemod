@@ -1,7 +1,7 @@
 export const getV2ClientsNewExpressionCode = (clientsToTest: string[], prefix?: string) => {
-  let v2ClientsNewExpressionCode = ``;
+  let content = ``;
   for (const clientName of clientsToTest) {
-    v2ClientsNewExpressionCode += `new ${prefix || ""}${clientName}();\n`;
+    content += `new ${prefix || ""}${clientName}();\n`;
   }
-  return v2ClientsNewExpressionCode;
+  return content;
 };

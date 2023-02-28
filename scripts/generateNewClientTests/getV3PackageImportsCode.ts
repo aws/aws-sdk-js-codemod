@@ -5,13 +5,13 @@ import {
 } from "../../src/transforms/v2-to-v3/config";
 
 export const getV3PackageImportsCode = (sortedV2ClientNames: typeof CLIENT_NAMES) => {
-  let v3PackageImportsCode = ``;
+  let content = ``;
   for (const v2ClientName of sortedV2ClientNames) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
     const v3ImportSpecifier =
       v3ClientName === v2ClientName ? v3ClientName : `${v3ClientName} as ${v2ClientName}`;
-    v3PackageImportsCode += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
+    content += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
   }
-  return v3PackageImportsCode;
+  return content;
 };
