@@ -1,7 +1,7 @@
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
+import { LOCAL_NAME_SUFFIX } from "./config";
 
 export interface V3ClientsNewExpressionCodeOptions {
-  sortByPackageName?: boolean;
+  addLocalNameSuffix?: boolean;
 }
 
 export const getV3ClientsNewExpressionCode = (
@@ -10,13 +10,9 @@ export const getV3ClientsNewExpressionCode = (
 ) => {
   let content = ``;
 
-  const { sortByPackageName = false } = options || {};
-  const clientNames = sortByPackageName
-    ? getClientNamesSortedByPackageName(clientsToTest)
-    : clientsToTest;
-
-  for (const clientName of clientNames) {
-    content += `new ${clientName}();\n`;
+  const { addLocalNameSuffix = false } = options || {};
+  for (const clientName of clientsToTest) {
+    content += `new ${clientName}${addLocalNameSuffix ? LOCAL_NAME_SUFFIX : ""}();\n`;
   }
   return content;
 };

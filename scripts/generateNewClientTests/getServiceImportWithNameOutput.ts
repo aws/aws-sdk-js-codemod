@@ -15,9 +15,7 @@ export const getServiceImportWithNameOutput = (codegenComment: string) => {
     content += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
   }
   content += `\n`;
-  content += getV3ClientsNewExpressionCode(
-    CLIENTS_TO_TEST.map((clientName) => `${clientName}${LOCAL_NAME_SUFFIX}`)
-  );
+  content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST, { addLocalNameSuffix: true });
 
   return content;
 };
