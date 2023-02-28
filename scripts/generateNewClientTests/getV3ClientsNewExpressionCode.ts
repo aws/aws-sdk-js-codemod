@@ -1,7 +1,22 @@
-export const getV3ClientsNewExpressionCode = (clientsToTest: string[]) => {
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
+
+export interface V3ClientsNewExpressionCodeOptions {
+  sortByPackageName?: boolean;
+}
+
+export const getV3ClientsNewExpressionCode = (
+  clientsToTest: string[],
+  options?: V3ClientsNewExpressionCodeOptions
+) => {
   let content = ``;
-  for (const v2ClientName of clientsToTest) {
-    content += `new ${v2ClientName}();\n`;
+
+  const { sortByPackageName = false } = options || {};
+  const clientNames = sortByPackageName
+    ? getClientNamesSortedByPackageName(clientsToTest)
+    : clientsToTest;
+
+  for (const clientName of clientNames) {
+    content += `new ${clientName}();\n`;
   }
   return content;
 };
