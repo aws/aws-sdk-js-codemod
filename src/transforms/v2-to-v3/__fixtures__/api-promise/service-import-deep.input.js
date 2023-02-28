@@ -1,4 +1,4 @@
-import DynamoDBClient from "aws-sdk/clients/dynamodb";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 
-const client = new DynamoDBClient();
+const client = new DynamoDB();
 const data = await client.listTables().promise();
