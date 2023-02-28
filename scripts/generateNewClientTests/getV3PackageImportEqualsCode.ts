@@ -5,7 +5,7 @@ import {
 } from "../../src/transforms/v2-to-v3/config";
 import { getV3DefaultLocalName } from "../../src/transforms/v2-to-v3/utils";
 
-export const getV3ImportEqualsCode = (clientsToTest: typeof CLIENT_NAMES) => {
+export const getV3PackageImportEqualsCode = (clientsToTest: typeof CLIENT_NAMES) => {
   let content = ``;
 
   for (const v2ClientName of clientsToTest) {
