@@ -1,4 +1,4 @@
-import { DynamoDB } from "aws-sdk";
+import DynamoDB = require("aws-sdk/clients/dynamodb");
 
 const client = new DynamoDB();
 const data = await client.listTables().promise();
