@@ -1,5 +1,6 @@
 import { CLIENTS_TO_TEST, LOCAL_NAME_SUFFIX } from "./config";
 import { getClientDeepImportPath } from "./getClientDeepImportPath";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getServiceImportDeepStarWithNameInput = (codegenComment: string) => {
@@ -11,9 +12,7 @@ export const getServiceImportDeepStarWithNameInput = (codegenComment: string) =>
     )}";\n`;
   }
   content += `\n`;
-  content += getV2ClientsNewExpressionCode(
-    CLIENTS_TO_TEST.map((clientName) => `${clientName}${LOCAL_NAME_SUFFIX}`)
-  );
+  content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;
 };
