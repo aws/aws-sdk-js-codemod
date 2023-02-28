@@ -7,12 +7,18 @@ import { getGlobalImportEqualsInput } from "./getGlobalImportEqualsInput";
 import { getGlobalImportEqualsOutput } from "./getGlobalImportEqualsOutput";
 import { getGlobalImportInput } from "./getGlobalImportInput";
 import { getGlobalImportOutput } from "./getGlobalImportOutput";
+import { getGlobalImportStarInput } from "./getGlobalImportStarInput";
+import { getGlobalImportStarOutput } from "./getGlobalImportStarOutput";
 import { getGlobalRequireInput } from "./getGlobalRequireInput";
 import { getGlobalRequireOutput } from "./getGlobalRequireOutput";
 import { getGlobalRequirePropertyInput } from "./getGlobalRequirePropertyInput";
 import { getGlobalRequirePropertyOutput } from "./getGlobalRequirePropertyOutput";
 import { getServiceImportDeepInput } from "./getServiceImportDeepInput";
 import { getServiceImportDeepOutput } from "./getServiceImportDeepOutput";
+import { getServiceImportDeepStarInput } from "./getServiceImportDeepStarInput";
+import { getServiceImportDeepStarOutput } from "./getServiceImportDeepStarOutput";
+import { getServiceImportDeepStarWithNameInput } from "./getServiceImportDeepStarWithNameInput";
+import { getServiceImportDeepStarWithNameOutput } from "./getServiceImportDeepStarWithNameOutput";
 import { getServiceImportEqualsInput } from "./getServiceImportEqualsInput";
 import { getServiceImportEqualsOutput } from "./getServiceImportEqualsOutput";
 import { getServiceImportInput } from "./getServiceImportInput";
@@ -42,6 +48,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["global-import.output.js", getGlobalImportOutput],
     ["global-import-equals.input.ts", getGlobalImportEqualsInput],
     ["global-import-equals.output.ts", getGlobalImportEqualsOutput],
+    ["global-import-star.input.js", getGlobalImportStarInput],
+    ["global-import-star.output.js", getGlobalImportStarOutput],
     ["global-require.input.js", getGlobalRequireInput],
     ["global-require.output.js", getGlobalRequireOutput],
     ["global-require-property.input.js", getGlobalRequirePropertyInput],
@@ -52,6 +60,10 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-import-equals.output.ts", getServiceImportEqualsOutput],
     ["service-import-deep.input.js", getServiceImportDeepInput],
     ["service-import-deep.output.js", getServiceImportDeepOutput],
+    ["service-import-deep-star.input.js", getServiceImportDeepStarInput],
+    ["service-import-deep-star.output.js", getServiceImportDeepStarOutput],
+    ["service-import-deep-star-with-name.input.js", getServiceImportDeepStarWithNameInput],
+    ["service-import-deep-star-with-name.output.js", getServiceImportDeepStarWithNameOutput],
     ["service-import-with-name.input.js", getServiceImportWithNameInput],
     ["service-import-with-name.output.js", getServiceImportWithNameOutput],
     ["service-require.input.js", getServiceRequireInput],
