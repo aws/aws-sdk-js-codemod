@@ -1,6 +1,6 @@
 const {
-  DynamoDB
+  DynamoDB: DynamoDBClient
 } = require("@aws-sdk/client-dynamodb");
 
-const client = new DynamoDB();
+const client = new DynamoDBClient();
 const data = await client.listTables();
