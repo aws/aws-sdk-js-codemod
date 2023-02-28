@@ -3,16 +3,29 @@ import {
   CLIENT_NAMES_MAP,
   CLIENT_PACKAGE_NAMES_MAP,
 } from "../../src/transforms/v2-to-v3/config";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 
-export const getV3PackageRequiresCode = (clientsToTest: typeof CLIENT_NAMES) => {
+export interface V3PackageRequiresCodeOptions {
+  useLocalSuffix?: boolean;
+}
+
+export const getV3PackageRequiresCode = (
+  clientsToTest: typeof CLIENT_NAMES,
+  options?: V3PackageRequiresCodeOptions
+) => {
   let content = ``;
+  const { useLocalSuffix = false } = options || {};
 
   content += `const `;
   for (const v2ClientName of clientsToTest) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
+    const v2ClientLocalName = useLocalSuffix
+      ? getClientNameWithLocalSuffix(v2ClientName)
+      : v2ClientName;
+
     const v3RequireKeyValuePair =
-      v3ClientName === v2ClientName ? v3ClientName : `${v3ClientName}: ${v2ClientName}`;
+      v3ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
     content +=
       `{\n` +
       `        ${v3RequireKeyValuePair}\n` +
