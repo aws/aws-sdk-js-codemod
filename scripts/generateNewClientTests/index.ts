@@ -7,6 +7,8 @@ import { getGlobalImportEqualsInput } from "./getGlobalImportEqualsInput";
 import { getGlobalImportEqualsOutput } from "./getGlobalImportEqualsOutput";
 import { getGlobalImportInput } from "./getGlobalImportInput";
 import { getGlobalImportOutput } from "./getGlobalImportOutput";
+import { getGlobalImportStarInput } from "./getGlobalImportStarInput";
+import { getGlobalImportStarOutput } from "./getGlobalImportStarOutput";
 import { getGlobalRequireInput } from "./getGlobalRequireInput";
 import { getGlobalRequireOutput } from "./getGlobalRequireOutput";
 import { getGlobalRequirePropertyInput } from "./getGlobalRequirePropertyInput";
@@ -42,6 +44,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["global-import.output.js", getGlobalImportOutput],
     ["global-import-equals.input.ts", getGlobalImportEqualsInput],
     ["global-import-equals.output.ts", getGlobalImportEqualsOutput],
+    ["global-import-star.input.js", getGlobalImportStarInput],
+    ["global-import-star.output.js", getGlobalImportStarOutput],
     ["global-require.input.js", getGlobalRequireInput],
     ["global-require.output.js", getGlobalRequireOutput],
     ["global-require-property.input.js", getGlobalRequirePropertyInput],
