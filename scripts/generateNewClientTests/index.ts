@@ -17,6 +17,8 @@ import { getServiceImportDeepInput } from "./getServiceImportDeepInput";
 import { getServiceImportDeepOutput } from "./getServiceImportDeepOutput";
 import { getServiceImportDeepStarInput } from "./getServiceImportDeepStarInput";
 import { getServiceImportDeepStarOutput } from "./getServiceImportDeepStarOutput";
+import { getServiceImportDeepStarWithNameInput } from "./getServiceImportDeepStarWithNameInput";
+import { getServiceImportDeepStarWithNameOutput } from "./getServiceImportDeepStarWithNameOutput";
 import { getServiceImportEqualsInput } from "./getServiceImportEqualsInput";
 import { getServiceImportEqualsOutput } from "./getServiceImportEqualsOutput";
 import { getServiceImportInput } from "./getServiceImportInput";
@@ -60,6 +62,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-import-deep.output.js", getServiceImportDeepOutput],
     ["service-import-deep-star.input.js", getServiceImportDeepStarInput],
     ["service-import-deep-star.output.js", getServiceImportDeepStarOutput],
+    ["service-import-deep-star-with-name.input.js", getServiceImportDeepStarWithNameInput],
+    ["service-import-deep-star-with-name.output.js", getServiceImportDeepStarWithNameOutput],
     ["service-import-with-name.input.js", getServiceImportWithNameInput],
     ["service-import-with-name.output.js", getServiceImportWithNameOutput],
     ["service-require.input.js", getServiceRequireInput],
