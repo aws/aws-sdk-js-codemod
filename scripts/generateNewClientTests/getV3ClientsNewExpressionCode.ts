@@ -1,7 +1,18 @@
-export const getV3ClientsNewExpressionCode = (clientsToTest: string[]) => {
+import { LOCAL_NAME_SUFFIX } from "./config";
+
+export interface V3ClientsNewExpressionCodeOptions {
+  addLocalNameSuffix?: boolean;
+}
+
+export const getV3ClientsNewExpressionCode = (
+  clientsToTest: string[],
+  options?: V3ClientsNewExpressionCodeOptions
+) => {
   let content = ``;
-  for (const v2ClientName of clientsToTest) {
-    content += `new ${v2ClientName}();\n`;
+
+  const { addLocalNameSuffix = false } = options || {};
+  for (const clientName of clientsToTest) {
+    content += `new ${clientName}${addLocalNameSuffix ? LOCAL_NAME_SUFFIX : ""}();\n`;
   }
   return content;
 };
