@@ -3,7 +3,7 @@ import { CLIENTS_TO_TEST, LOCAL_NAME_SUFFIX } from "./config";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 
 export const getServiceImportDeepStarWithNameOutput = (codegenComment: string) => {
-  let serviceImportOutputContent = `${codegenComment}\n`;
+  let content = `${codegenComment}\n`;
 
   for (const v2ClientName of CLIENTS_TO_TEST) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
@@ -11,12 +11,12 @@ export const getServiceImportDeepStarWithNameOutput = (codegenComment: string) =
     const v3ClientLocalName = `${v2ClientName}${LOCAL_NAME_SUFFIX}`;
     const v3ImportSpecifier =
       v3ClientName === v3ClientLocalName ? v3ClientName : `${v3ClientName} as ${v3ClientLocalName}`;
-    serviceImportOutputContent += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
+    content += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
   }
-  serviceImportOutputContent += `\n`;
-  serviceImportOutputContent += getV3ClientsNewExpressionCode(
+  content += `\n`;
+  content += getV3ClientsNewExpressionCode(
     CLIENTS_TO_TEST.map((clientName) => `${clientName}${LOCAL_NAME_SUFFIX}`)
   );
 
-  return serviceImportOutputContent;
+  return content;
 };

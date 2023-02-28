@@ -5,23 +5,23 @@ import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPacka
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 
 export const getGlobalImportEqualsOutput = (codegenComment: string) => {
-  let globalImportEqualsOutputContent = `${codegenComment};\n`;
+  let content = `${codegenComment};\n`;
 
   const sortedClientNames = getClientNamesSortedByPackageName(CLIENTS_TO_TEST);
 
   for (const v2ClientName of sortedClientNames) {
     const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientName);
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
-    globalImportEqualsOutputContent += `import ${v3ClientDefaultLocalName} = require("${v3ClientPackageName}");\n\n`;
+    content += `import ${v3ClientDefaultLocalName} = require("${v3ClientPackageName}");\n\n`;
 
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
     const v3ObjectPattern =
       v3ClientName === v2ClientName ? v3ClientName : `${v3ClientName}: ${v2ClientName}`;
-    globalImportEqualsOutputContent +=
+    content +=
       `const {\n` + `  ${v3ObjectPattern}\n` + `} = ${getV3DefaultLocalName(v2ClientName)};\n\n`;
   }
 
-  globalImportEqualsOutputContent += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
+  content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
-  return globalImportEqualsOutputContent;
+  return content;
 };
