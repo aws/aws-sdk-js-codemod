@@ -1,5 +1,6 @@
 import { CLIENT_NAMES_MAP, CLIENT_PACKAGE_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
 import { CLIENTS_TO_TEST, LOCAL_NAME_SUFFIX } from "./config";
+import { getClientNamesWithLocalSuffix } from "./getClientNamesWithLocalSuffix";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 
 export const getServiceImportDeepStarWithNameOutput = (codegenComment: string) => {
@@ -14,7 +15,7 @@ export const getServiceImportDeepStarWithNameOutput = (codegenComment: string) =
     content += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
   }
   content += `\n`;
-  content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST, { addLocalNameSuffix: true });
+  content += getV3ClientsNewExpressionCode(getClientNamesWithLocalSuffix(CLIENTS_TO_TEST));
 
   return content;
 };
