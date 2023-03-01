@@ -2,7 +2,9 @@ import { S3, waitUntilBucketExists } from "@aws-sdk/client-s3";
 
 // Client as class member
 class ClientClassMember {
-  constructor(clientInCtr = new S3()) {
+  private clientInClass: S3;
+
+  constructor(clientInCtr: S3) {
     this.clientInClass = clientInCtr;
   }
 

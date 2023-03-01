@@ -2,7 +2,9 @@ import AWS from "aws-sdk";
 
 // Client as class member
 class ClientClassMember {
-  constructor(clientInCtr = new AWS.S3()) {
+  private clientInClass: AWS.S3;
+
+  constructor(clientInCtr: AWS.S3) {
     this.clientInClass = clientInCtr;
   }
 
