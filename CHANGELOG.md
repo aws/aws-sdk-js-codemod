@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.13.4
+
+### Patch Changes
+
+- Add transformation for s3 ManagedUploadOptions in an identifier ([049b329](https://github.com/awslabs/aws-sdk-js-codemod/commit/049b329))
+- Add transformation for s3 ManagedUploadOptions ([4b17da0](https://github.com/awslabs/aws-sdk-js-codemod/commit/4b17da0))
+
 ## 0.13.3
 
 ### Patch Changes
