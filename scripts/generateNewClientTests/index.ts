@@ -33,6 +33,8 @@ import { getServiceImportWithNameInput } from "./getServiceImportWithNameInput";
 import { getServiceImportWithNameOutput } from "./getServiceImportWithNameOutput";
 import { getServiceRequireDeepInput } from "./getServiceRequireDeepInput";
 import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput";
+import { getServiceRequireDeepWithNameInput } from "./getServiceRequireDeepWithNameInput";
+import { getServiceRequireDeepWithNameOutput } from "./getServiceRequireDeepWithNameOutput";
 import { getServiceRequireInput } from "./getServiceRequireInput";
 import { getServiceRequireOutput } from "./getServiceRequireOutput";
 import { getServiceRequireWithNameInput } from "./getServiceRequireWithNameInput";
@@ -82,6 +84,8 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-require.output.js", getServiceRequireOutput],
     ["service-require-deep.input.js", getServiceRequireDeepInput],
     ["service-require-deep.output.js", getServiceRequireDeepOutput],
+    ["service-require-deep-with-name.input.js", getServiceRequireDeepWithNameInput],
+    ["service-require-deep-with-name.output.js", getServiceRequireDeepWithNameOutput],
     ["service-require-with-name.input.js", getServiceRequireWithNameInput],
     ["service-require-with-name.output.js", getServiceRequireWithNameOutput],
   ] as [string, (comment: string) => string][]) {
