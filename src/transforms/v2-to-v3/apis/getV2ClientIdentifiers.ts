@@ -10,11 +10,13 @@ export interface GetV2ClientIdentifiersOptions {
   v2GlobalName?: string;
 }
 
+export type V2ClientIdentifier = Identifier | ThisMemberExpression;
+
 export const getV2ClientIdentifiers = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: GetV2ClientIdentifiersOptions
-): (Identifier | ThisMemberExpression)[] => {
+): V2ClientIdentifier[] => {
   const namesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, options);
   const namesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, options);
   const clientIdNames = [...new Set([...namesFromNewExpr, ...namesFromTSTypeRef])];
