@@ -50,8 +50,15 @@ export const replaceS3UploadApi = (
         }
 
         const options = callExpression.node.arguments[1];
-        if (options && options.type === "ObjectExpression") {
-          properties.push(...options.properties);
+        if (options) {
+          switch (options.type) {
+            case "ObjectExpression":
+              properties.push(...options.properties);
+              break;
+            case "Identifier":
+              properties.push(j.spreadElement(options));
+              break;
+          }
         }
 
         return j.newExpression(j.identifier("Upload"), [j.objectExpression(properties)]);
