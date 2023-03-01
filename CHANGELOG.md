@@ -1,5 +1,13 @@
 # aws-sdk-js-codemod
 
+## 0.13.5
+
+### Patch Changes
+
+- Add comments for unsupported S3 ManagedUpload with callback ([26eb091](https://github.com/awslabs/aws-sdk-js-codemod/commit/26eb091))
+- Add check for s3 client name before transforming upload API ([6e6c41f](https://github.com/awslabs/aws-sdk-js-codemod/commit/6e6c41f))
+- Do not apply babeljs to the transform file ([c74fb09](https://github.com/awslabs/aws-sdk-js-codemod/commit/c74fb09))
+
 ## 0.13.4
 
 ### Patch Changes
