@@ -3,6 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { getV3DefaultLocalName } from "../utils";
 import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
@@ -13,11 +14,9 @@ export const addV3ClientNamedImportEquals = (
   options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const { keyName, valueName, ...v3ClientModulesOptions } = options;
-  const { v2ClientLocalName, v3ClientPackageName } = v3ClientModulesOptions;
+  const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
 
-  const localNameSuffix = v3ClientPackageName.startsWith("@aws-sdk/client-")
-    ? v2ClientLocalName
-    : v3ClientPackageName.substring(9).replace(/-/g, "_");
+  const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
   const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
 
