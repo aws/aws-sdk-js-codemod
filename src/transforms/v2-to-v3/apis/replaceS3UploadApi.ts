@@ -29,27 +29,24 @@ export const replaceS3UploadApi = (
       .replaceWith((callExpression) => {
         const params = callExpression.node.arguments[0];
 
-        const properties = [];
-        properties.push(
-          j.objectProperty.from({
-            key: j.identifier("client"),
-            value: v2ClientId,
-            shorthand: true,
-          })
-        );
+        const clientProperty = j.objectProperty.from({
+          key: j.identifier("client"),
+          value: v2ClientId,
+          shorthand: true,
+        });
 
-        if (params) {
-          properties.push(
-            j.objectProperty.from({
+        const paramsProperty = params
+          ? j.objectProperty.from({
               key: j.identifier("params"),
               // @ts-expect-error Type 'SpreadElement | ExpressionKind' is not assignable
               value: params,
               shorthand: true,
             })
-          );
-        }
+          : undefined;
 
-        return j.newExpression(j.identifier("Upload"), [j.objectExpression(properties)]);
+        return j.newExpression(j.identifier("Upload"), [
+          j.objectExpression([clientProperty, paramsProperty].filter((a) => a !== undefined)),
+        ]);
       });
 
     // Replace `.promise()` call with `.done()` if present.
