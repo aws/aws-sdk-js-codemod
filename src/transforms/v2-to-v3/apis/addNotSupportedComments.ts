@@ -3,6 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { FUNCTION_TYPE_LIST } from "../config";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getV2ClientWaiterCallExpression } from "./getV2ClientWaiterCallExpression";
 
 export interface CommentsForUnsupportedAPIsOptions {
   v2ClientName: string;
@@ -22,15 +23,7 @@ export const addNotSupportedComments = (
 
     for (const waiterState of waiterStates) {
       source
-        .find(j.CallExpression, {
-          type: "CallExpression",
-          callee: {
-            type: "MemberExpression",
-            object: v2ClientId,
-            property: { type: "Identifier", name: "waitFor" },
-          },
-          arguments: [{ value: waiterState }],
-        })
+        .find(j.CallExpression, getV2ClientWaiterCallExpression(v2ClientId, waiterState))
         .forEach((callExpression) => {
           const args = callExpression.node.arguments;
 
