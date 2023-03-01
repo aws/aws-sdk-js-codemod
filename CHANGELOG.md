@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.13.1
+
+### Patch Changes
+
+- Compute variable name for import equals from v2ClientName ([06a92c7](https://github.com/awslabs/aws-sdk-js-codemod/commit/06a92c7))
+
 ## 0.13.0
 
 ### Minor Changes
