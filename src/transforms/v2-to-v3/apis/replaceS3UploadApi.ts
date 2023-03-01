@@ -14,6 +14,8 @@ export const replaceS3UploadApi = (
   source: Collection<unknown>,
   options: ReplaceS3UploadApiOptions
 ): void => {
+  if (options.v2ClientName !== "S3") return;
+
   const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
 
   for (const v2ClientId of v2ClientIdentifiers) {
