@@ -2,6 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3DefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
 import { V3ClientModulesOptions } from "./types";
 
@@ -10,9 +11,7 @@ export const addV3ClientDefaultImportEquals = (
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
 ) => {
-  const localNameSuffix = v3ClientPackageName.startsWith("@aws-sdk/client-")
-    ? v2ClientName
-    : v3ClientPackageName.substring(9).replace(/-/g, "_");
+  const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
   const existingImportEquals = source.find(
     j.TSImportEqualsDeclaration,
