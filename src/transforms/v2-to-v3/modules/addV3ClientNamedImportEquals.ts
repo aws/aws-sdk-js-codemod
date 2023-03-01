@@ -13,10 +13,10 @@ export const addV3ClientNamedImportEquals = (
   options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
 ) => {
   const { keyName, valueName, ...v3ClientModulesOptions } = options;
-  const { v2ClientLocalName, v3ClientPackageName } = v3ClientModulesOptions;
+  const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
 
   const localNameSuffix = v3ClientPackageName.startsWith("@aws-sdk/client-")
-    ? v2ClientLocalName
+    ? v2ClientName
     : v3ClientPackageName.substring(9).replace(/-/g, "_");
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
   const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });

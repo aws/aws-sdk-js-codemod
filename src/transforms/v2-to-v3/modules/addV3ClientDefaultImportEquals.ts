@@ -11,7 +11,7 @@ export const addV3ClientDefaultImportEquals = (
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
 ) => {
   const localNameSuffix = v3ClientPackageName.startsWith("@aws-sdk/client-")
-    ? v2ClientLocalName
+    ? v2ClientName
     : v3ClientPackageName.substring(9).replace(/-/g, "_");
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
   const existingImportEquals = source.find(
