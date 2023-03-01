@@ -71,7 +71,7 @@ export const getJsCodeshiftParser = () =>
     babel: {
       display_index: 0,
       flag: true,
-      default: true,
+      default: false,
       help: "apply babeljs to the transform file",
     },
     extensions: {
