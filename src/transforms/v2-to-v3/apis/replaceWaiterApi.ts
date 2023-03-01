@@ -3,6 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getV2ClientWaiterCallExpression } from "./getV2ClientWaiterCallExpression";
 import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
 import { getWaiterConfig } from "./getWaiterConfig";
 import { getWaiterConfigValue } from "./getWaiterConfigValue";
@@ -27,15 +28,7 @@ export const replaceWaiterApi = (
     for (const waiterState of waiterStates) {
       const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
       source
-        .find(j.CallExpression, {
-          type: "CallExpression",
-          callee: {
-            type: "MemberExpression",
-            object: v2ClientId,
-            property: { type: "Identifier", name: "waitFor" },
-          },
-          arguments: [{ value: waiterState }],
-        })
+        .find(j.CallExpression, getV2ClientWaiterCallExpression(v2ClientId, waiterState))
         .replaceWith((callExpression) => {
           const waiterConfig = getWaiterConfig(callExpression.node.arguments[1]);
           const delay = getWaiterConfigValue(waiterConfig, "delay");
