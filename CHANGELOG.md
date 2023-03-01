@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.13.2
+
+### Patch Changes
+
+- Support transformation of waiter API on a client class member ([692b989](https://github.com/awslabs/aws-sdk-js-codemod/commit/692b989))
+
 ## 0.13.1
 
 ### Patch Changes
