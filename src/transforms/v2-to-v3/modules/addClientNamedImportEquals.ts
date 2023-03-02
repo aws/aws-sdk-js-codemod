@@ -1,24 +1,24 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3DefaultLocalName } from "../utils";
-import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
+import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
-import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
+import { getRequireProperty } from "./getRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
-import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
+import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
-export const addV3ClientNamedImportEquals = (
+export const addClientNamedImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
+  options: ClientModulesOptions & RequirePropertyOptions
 ) => {
   const { keyName, valueName, ...v3ClientModulesOptions } = options;
   const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
 
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
-  const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
+  const namedImportObjectProperty = getRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",
@@ -34,7 +34,7 @@ export const addV3ClientNamedImportEquals = (
 
   const importEqualsDeclaration = getImportEqualsDeclaration(v3ClientPackageName);
   if (source.find(j.TSImportEqualsDeclaration, importEqualsDeclaration).size() === 0) {
-    addV3ClientDefaultImportEquals(j, source, v3ClientModulesOptions);
+    addClientDefaultImportEquals(j, source, v3ClientModulesOptions);
   }
 
   const varDeclaration = j.variableDeclaration("const", [

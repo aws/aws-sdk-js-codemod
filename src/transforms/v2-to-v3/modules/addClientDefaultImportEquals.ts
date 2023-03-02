@@ -4,12 +4,12 @@ import { getV3DefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
-import { V3ClientModulesOptions } from "./types";
+import { ClientModulesOptions } from "./types";
 
-export const addV3ClientDefaultImportEquals = (
+export const addClientDefaultImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
+  { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: ClientModulesOptions
 ) => {
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
@@ -37,13 +37,13 @@ export const addV3ClientDefaultImportEquals = (
     v2GlobalName,
   }).at(0);
 
-  const importDeclaration = j.tsImportEqualsDeclaration(
+  const v3importEqualsDeclaration = j.tsImportEqualsDeclaration(
     j.identifier(v3ClientDefaultLocalName),
     j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
   );
 
   if (v2ImportEqualsDeclaration && v2ImportEqualsDeclaration.nodes().length > 0) {
-    v2ImportEqualsDeclaration.at(0).insertAfter(importDeclaration);
+    v2ImportEqualsDeclaration.at(0).insertAfter(v3importEqualsDeclaration);
   } else {
     // Unreachable code, throw error
     throw new Error(

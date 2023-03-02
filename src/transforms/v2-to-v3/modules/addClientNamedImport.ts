@@ -1,15 +1,15 @@
 import { Collection, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
+import { getImportSpecifier } from "./getImportSpecifier";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
-import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { importSpecifierCompareFn } from "./importSpecifierCompareFn";
-import { V3ClientImportSpecifierOptions, V3ClientModulesOptions } from "./types";
+import { ClientModulesOptions, ImportSpecifierOptions } from "./types";
 
-export const addV3ClientNamedImport = (
+export const addClientNamedImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: V3ClientModulesOptions & V3ClientImportSpecifierOptions
+  options: ClientModulesOptions & ImportSpecifierOptions
 ) => {
   const { importedName, v2ClientName, v2ClientLocalName, v3ClientPackageName } = options;
   const localName = options.localName ?? importedName;
@@ -34,7 +34,7 @@ export const addV3ClientNamedImport = (
 
     const firstImportDeclSpecifiers = importDeclarations.nodes()[0].specifiers;
     if (firstImportDeclSpecifiers) {
-      firstImportDeclSpecifiers.push(getV3ClientImportSpecifier(j, { importedName, localName }));
+      firstImportDeclSpecifiers.push(getImportSpecifier(j, { importedName, localName }));
       firstImportDeclSpecifiers.sort(importSpecifierCompareFn);
       return;
     }
@@ -46,13 +46,13 @@ export const addV3ClientNamedImport = (
     v2ClientLocalName,
   });
 
-  const importDeclaration = j.importDeclaration(
-    [getV3ClientImportSpecifier(j, { importedName, localName })],
+  const v3ImportDeclaration = j.importDeclaration(
+    [getImportSpecifier(j, { importedName, localName })],
     j.stringLiteral(v3ClientPackageName)
   );
 
   if (v2ImportDeclaration && v2ImportDeclaration.nodes().length > 0) {
-    v2ImportDeclaration.at(0).insertAfter(importDeclaration);
+    v2ImportDeclaration.at(0).insertAfter(v3ImportDeclaration);
   } else {
     // Unreachable code, throw error
     throw new Error(

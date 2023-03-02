@@ -4,21 +4,21 @@ import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getV3DefaultLocalName } from "../utils";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
+import { getRequireProperty } from "./getRequireProperty";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
-import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
-import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
+import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
-export const addV3ClientNamedRequire = (
+export const addClientNamedRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
+  options: ClientModulesOptions & RequirePropertyOptions
 ) => {
   const { keyName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } = options;
   const valueName = options.valueName ?? keyName;
 
   const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
-  const v3ClientObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
+  const v3ClientObjectProperty = getRequireProperty(j, { keyName, valueName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
@@ -68,7 +68,7 @@ export const addV3ClientNamedRequire = (
     }
   }
 
-  const requireDeclarator = j.variableDeclarator(
+  const v3RequireDeclarator = j.variableDeclarator(
     j.objectPattern([v3ClientObjectProperty]),
     j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
   );
@@ -78,7 +78,7 @@ export const addV3ClientNamedRequire = (
     getV2RequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
 
   if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
-    v2RequireDeclarator.insertAfter(requireDeclarator);
+    v2RequireDeclarator.insertAfter(v3RequireDeclarator);
   } else {
     // Unreachable code, throw error
     throw new Error(

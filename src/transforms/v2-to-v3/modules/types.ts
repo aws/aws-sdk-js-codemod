@@ -1,4 +1,4 @@
-export interface V3ClientModulesOptions {
+export interface ClientModulesOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
@@ -6,12 +6,12 @@ export interface V3ClientModulesOptions {
   v3ClientPackageName: string;
 }
 
-export interface V3ClientRequirePropertyOptions {
+export interface RequirePropertyOptions {
   keyName: string;
   valueName?: string;
 }
 
-export interface V3ClientImportSpecifierOptions {
+export interface ImportSpecifierOptions {
   importedName: string;
   localName?: string;
 }

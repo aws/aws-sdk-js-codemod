@@ -1,10 +1,10 @@
 import { JSCodeshift } from "jscodeshift";
 
-import { V3ClientRequirePropertyOptions } from "./types";
+import { RequirePropertyOptions } from "./types";
 
-export const getV3ClientRequireProperty = (
+export const getRequireProperty = (
   j: JSCodeshift,
-  { keyName, valueName }: V3ClientRequirePropertyOptions
+  { keyName, valueName }: RequirePropertyOptions
 ) =>
   j.objectProperty.from({
     key: j.identifier(keyName),

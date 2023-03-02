@@ -2,16 +2,16 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getClientWaiterStates, getV3ClientWaiterApiName, isS3UploadApiUsed } from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
-import { addV3ClientDefaultRequire } from "./addV3ClientDefaultRequire";
-import { addV3ClientNamedRequire } from "./addV3ClientNamedRequire";
+import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
+import { addClientNamedImportEquals } from "./addClientNamedImportEquals";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
-import { V3ClientModulesOptions } from "./types";
+import { ClientModulesOptions } from "./types";
 
-export const addV3ClientRequires = (
+export const addClientImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: V3ClientModulesOptions
+  options: ClientModulesOptions
 ): void => {
   const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);
@@ -19,11 +19,11 @@ export const addV3ClientRequires = (
   const waiterStates = getClientWaiterStates(j, source, options);
 
   if (v3ClientTypesCount > 0) {
-    addV3ClientDefaultRequire(j, source, options);
+    addClientDefaultImportEquals(j, source, options);
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
-    addV3ClientNamedRequire(j, source, {
+    addClientNamedImportEquals(j, source, {
       ...options,
       keyName: options.v3ClientName,
       valueName: options.v2ClientLocalName,
@@ -32,14 +32,14 @@ export const addV3ClientRequires = (
 
   for (const waiterState of waiterStates) {
     const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
-    addV3ClientNamedRequire(j, source, {
+    addClientNamedImportEquals(j, source, {
       ...options,
       keyName: v3WaiterApiName,
     });
   }
 
   if (isS3UploadApiUsed(j, source, options)) {
-    addV3ClientNamedRequire(j, source, {
+    addClientNamedImportEquals(j, source, {
       ...options,
       keyName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",
