@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getV2ClientTypeNames } from "../ts-type";
-import { getV2ServiceModulePath } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportDefault } from "./removeImportDefault";
@@ -24,9 +24,9 @@ export const removeV2ClientModule = (
   options: RemoveV2ClientModuleOptions
 ) => {
   const { v2ClientName, v2ClientLocalName } = options;
-  const serviceModulePath = getV2ServiceModulePath(v2ClientName);
+  const deepImportPath = getClientDeepImportPath(v2ClientName);
 
-  const defaultOptions = { localName: v2ClientLocalName, sourceValue: serviceModulePath };
+  const defaultOptions = { localName: v2ClientLocalName, sourceValue: deepImportPath };
   const namedOptions = { localName: v2ClientLocalName, sourceValue: PACKAGE_NAME };
 
   if (hasRequire(j, source)) {
@@ -43,7 +43,7 @@ export const removeV2ClientModule = (
     for (const v2ClientTypeName of v2ClientTypeNames) {
       removeImportNamed(j, source, {
         localName: v2ClientTypeName,
-        sourceValue: serviceModulePath,
+        sourceValue: deepImportPath,
       });
     }
   }

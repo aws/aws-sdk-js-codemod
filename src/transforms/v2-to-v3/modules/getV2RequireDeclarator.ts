@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ServiceModulePath } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
 import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
@@ -46,10 +46,9 @@ export const getV2RequireDeclarator = (
     return requireDeclaratorsWithProperty;
   }
 
-  const v2ServiceModulePath = getV2ServiceModulePath(v2ClientName);
   const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
     identifierName: v2ClientLocalName,
-    sourceValue: v2ServiceModulePath,
+    sourceValue: getClientDeepImportPath(v2ClientName),
   });
 
   if (requireDeclaratorsWithIdentifier.size() > 0) {

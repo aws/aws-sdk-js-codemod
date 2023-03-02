@@ -9,7 +9,7 @@ import {
 
 import { CLIENT_NAMES, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../config";
 import { getRequireDeclaratorsWithProperty } from "../modules";
-import { getV2ServiceModulePath } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 import { getRequireIds } from "./getRequireIds";
 
 export const getV2ClientNamesRecordFromRequire = (
@@ -58,8 +58,8 @@ export const getV2ClientNamesRecordFromRequire = (
   }
 
   for (const clientName of v2ClientNamesWithServiceModule) {
-    const deepRequirePath = getV2ServiceModulePath(clientName);
-    const idsFromDefaultImport = getRequireIds(j, source, deepRequirePath).filter(
+    const deepImportPath = getClientDeepImportPath(clientName);
+    const idsFromDefaultImport = getRequireIds(j, source, deepImportPath).filter(
       (id) => id.type === "Identifier"
     );
     if (idsFromDefaultImport.length) {
