@@ -33,5 +33,13 @@ export const getNewExpressionCount = (
   );
   newExpressionCount += newExpressionsFromClientLocalName.length;
 
+  if (v2ClientName === DYNAMODB) {
+    const newExpressionsFromClientLocalNameDocClient = source.find(
+      j.NewExpression,
+      getV2DocClientNewExpression({ v2ClientLocalName })
+    );
+    newExpressionCount += newExpressionsFromClientLocalNameDocClient.length;
+  }
+
   return newExpressionCount;
 };
