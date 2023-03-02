@@ -9,7 +9,7 @@ import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
-export const addV3ClientNamedRequire = (
+export const addClientNamedRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: V3ClientModulesOptions & V3ClientRequirePropertyOptions

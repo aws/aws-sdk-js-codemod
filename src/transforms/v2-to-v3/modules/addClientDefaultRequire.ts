@@ -5,7 +5,7 @@ import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { V3ClientModulesOptions } from "./types";
 
-export const addV3ClientDefaultRequire = (
+export const addClientDefaultRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2ClientName, v2ClientLocalName, v3ClientPackageName, v2GlobalName }: V3ClientModulesOptions
