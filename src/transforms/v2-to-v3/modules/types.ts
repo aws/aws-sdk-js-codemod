@@ -11,7 +11,7 @@ export interface RequirePropertyOptions {
   valueName?: string;
 }
 
-export interface V3ClientImportSpecifierOptions {
+export interface ImportSpecifierOptions {
   importedName: string;
   localName?: string;
 }

@@ -4,12 +4,12 @@ import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
 import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { importSpecifierCompareFn } from "./importSpecifierCompareFn";
-import { ClientModulesOptions, V3ClientImportSpecifierOptions } from "./types";
+import { ClientModulesOptions, ImportSpecifierOptions } from "./types";
 
 export const addClientNamedImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & V3ClientImportSpecifierOptions
+  options: ClientModulesOptions & ImportSpecifierOptions
 ) => {
   const { importedName, v2ClientName, v2ClientLocalName, v3ClientPackageName } = options;
   const localName = options.localName ?? importedName;
