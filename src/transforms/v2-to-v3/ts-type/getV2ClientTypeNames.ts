@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 import { getImportSpecifiers } from "../modules";
-import { getV2ClientTSTypeRef, getV2ServiceModulePath } from "../utils";
+import { getClientTSTypeRef, getV2ServiceModulePath } from "../utils";
 
 export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
@@ -29,7 +29,7 @@ export const getV2ClientTypeNames = (
   const v2ClientTypeNames = [];
 
   if (v2GlobalName) {
-    const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
+    const v2GlobalTSTypeRef = getClientTSTypeRef({
       v2ClientName,
       v2GlobalName,
       withoutRightSection: true,
@@ -37,7 +37,7 @@ export const getV2ClientTypeNames = (
     v2ClientTypeNames.push(...getRightIdentifierName(j, source, v2GlobalTSTypeRef));
   }
 
-  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
+  const v2ClientTSTypeRef = getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
   v2ClientTypeNames.push(...getRightIdentifierName(j, source, v2ClientTSTypeRef));
 
   v2ClientTypeNames.push(

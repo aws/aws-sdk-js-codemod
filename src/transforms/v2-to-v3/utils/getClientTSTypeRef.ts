@@ -1,18 +1,18 @@
 import { Identifier, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-export interface V2ClientTsTypeRefOptions {
+export interface GetClientTsTypeRefOptions {
   v2ClientLocalName?: string;
   v2ClientName?: string;
   v2GlobalName?: string;
   withoutRightSection?: boolean;
 }
 
-export const getV2ClientTSTypeRef = ({
+export const getClientTSTypeRef = ({
   v2ClientLocalName,
   v2ClientName,
   v2GlobalName,
   withoutRightSection = false,
-}: V2ClientTsTypeRefOptions): TSTypeReference => {
+}: GetClientTsTypeRefOptions): TSTypeReference => {
   if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
       `One of the following options must be provided: v2ClientLocalName, v2GlobalName`
