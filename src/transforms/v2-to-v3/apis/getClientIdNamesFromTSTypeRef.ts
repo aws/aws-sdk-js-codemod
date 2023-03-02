@@ -1,14 +1,14 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export interface GetV2ClientIdNamesFromTSTypeRefOptions {
+export interface GetClientIdNamesFromTSTypeRefOptions {
   v2ClientName: string;
   v2GlobalName?: string;
 }
 
-export const getV2ClientIdNamesFromTSTypeRef = (
+export const getClientIdNamesFromTSTypeRef = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2GlobalName, v2ClientName }: GetV2ClientIdNamesFromTSTypeRefOptions
+  { v2GlobalName, v2ClientName }: GetClientIdNamesFromTSTypeRefOptions
 ): string[] => {
   const namesFromGlobalName = v2GlobalName
     ? source

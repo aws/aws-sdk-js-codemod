@@ -1,8 +1,8 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { getClientIdNamesFromNewExpr } from "./getClientIdNamesFromNewExpr";
+import { getClientIdNamesFromTSTypeRef } from "./getClientIdNamesFromTSTypeRef";
 import { getClientIdThisExpressions, ThisMemberExpression } from "./getClientIdThisExpressions";
-import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeRef";
 
 export interface GetClientIdentifiersOptions {
   v2ClientName: string;
@@ -18,7 +18,7 @@ export const getClientIdentifiers = (
   options: GetClientIdentifiersOptions
 ): ClientIdentifier[] => {
   const namesFromNewExpr = getClientIdNamesFromNewExpr(j, source, options);
-  const namesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, options);
+  const namesFromTSTypeRef = getClientIdNamesFromTSTypeRef(j, source, options);
   const clientIdNames = [...new Set([...namesFromNewExpr, ...namesFromTSTypeRef])];
 
   const clientIdentifiers: Identifier[] = clientIdNames.map((clientidName) => ({
