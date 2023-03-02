@@ -1,8 +1,8 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
+import { getClientIdThisExpressions, ThisMemberExpression } from "./getClientIdThisExpressions";
 import { getV2ClientIdNamesFromNewExpr } from "./getV2ClientIdNamesFromNewExpr";
 import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeRef";
-import { getV2ClientIdThisExpressions, ThisMemberExpression } from "./getV2ClientIdThisExpressions";
 
 export interface GetClientIdentifiersOptions {
   v2ClientName: string;
@@ -25,7 +25,7 @@ export const getClientIdentifiers = (
     type: "Identifier",
     name: clientidName,
   }));
-  const clientIdThisExpressions = getV2ClientIdThisExpressions(j, source, clientIdentifiers);
+  const clientIdThisExpressions = getClientIdThisExpressions(j, source, clientIdentifiers);
 
   return [...clientIdentifiers, ...clientIdThisExpressions];
 };
