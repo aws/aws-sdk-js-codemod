@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3DefaultLocalName } from "../utils";
+import { getDefaultLocalName } from "../utils";
 import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
@@ -17,12 +17,12 @@ export const addClientNamedImportEquals = (
   const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
 
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
-  const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
+  const defaultLocalName = getDefaultLocalName(localNameSuffix);
   const namedImportObjectProperty = getRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",
-    init: { type: "Identifier", name: v3ClientDefaultLocalName },
+    init: { type: "Identifier", name: defaultLocalName },
   });
 
   if (existingVarDeclarator.size()) {
@@ -40,15 +40,14 @@ export const addClientNamedImportEquals = (
   const varDeclaration = j.variableDeclaration("const", [
     j.variableDeclarator(
       j.objectPattern([namedImportObjectProperty]),
-      j.identifier(v3ClientDefaultLocalName)
+      j.identifier(defaultLocalName)
     ),
   ]);
 
   const v3ClientImportEquals = source
     .find(j.TSImportEqualsDeclaration, importEqualsDeclaration)
     .filter(
-      (importEqualsDeclaration) =>
-        importEqualsDeclaration.value.id.name === v3ClientDefaultLocalName
+      (importEqualsDeclaration) => importEqualsDeclaration.value.id.name === defaultLocalName
     );
 
   if (v3ClientImportEquals.size() > 0) {

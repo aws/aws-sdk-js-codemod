@@ -5,7 +5,7 @@ import {
   V2_CLIENT_INPUT_SUFFIX_LIST,
   V2_CLIENT_OUTPUT_SUFFIX_LIST,
 } from "../config";
-import { getV3DefaultLocalName } from "../utils";
+import { getDefaultLocalName } from "../utils";
 import { getTypeRefForString } from "./getTypeRefForString";
 
 export interface GetV3ClientTypeReferenceOptions {
@@ -25,17 +25,17 @@ export const getV3ClientTypeReference = (
   { v2ClientLocalName, v2ClientName, v2ClientTypeName }: GetV3ClientTypeReferenceOptions
 ): TSType => {
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
-  const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
+  const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
 
   if (Object.keys(clientTypesMap).includes(v2ClientTypeName)) {
-    return getTypeRefForString(j, v3ClientDefaultLocalName, clientTypesMap[v2ClientTypeName]);
+    return getTypeRefForString(j, defaultLocalName, clientTypesMap[v2ClientTypeName]);
   }
 
   for (const inputSuffix of V2_CLIENT_INPUT_SUFFIX_LIST) {
     if (v2ClientTypeName.endsWith(inputSuffix)) {
       return getTypeRefWithV3ClientDefaultLocalName(
         j,
-        v3ClientDefaultLocalName,
+        defaultLocalName,
         v2ClientTypeName.replace(new RegExp(`${inputSuffix}$`), "CommandInput")
       );
     }
@@ -45,11 +45,11 @@ export const getV3ClientTypeReference = (
     if (v2ClientTypeName.endsWith(outputSuffix)) {
       return getTypeRefWithV3ClientDefaultLocalName(
         j,
-        v3ClientDefaultLocalName,
+        defaultLocalName,
         v2ClientTypeName.replace(new RegExp(`${outputSuffix}$`), "CommandOutput")
       );
     }
   }
 
-  return getTypeRefWithV3ClientDefaultLocalName(j, v3ClientDefaultLocalName, v2ClientTypeName);
+  return getTypeRefWithV3ClientDefaultLocalName(j, defaultLocalName, v2ClientTypeName);
 };

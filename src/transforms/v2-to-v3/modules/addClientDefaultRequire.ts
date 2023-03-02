@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3DefaultLocalName } from "../utils";
+import { getDefaultLocalName } from "../utils";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { ClientModulesOptions } from "./types";
@@ -10,7 +10,7 @@ export const addClientDefaultRequire = (
   source: Collection<unknown>,
   { v2ClientName, v2ClientLocalName, v3ClientPackageName, v2GlobalName }: ClientModulesOptions
 ) => {
-  const identifierName = getV3DefaultLocalName(v2ClientLocalName);
+  const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
   if (
@@ -21,7 +21,7 @@ export const addClientDefaultRequire = (
       .find(
         (variableDeclarator) =>
           variableDeclarator.id.type === "Identifier" &&
-          variableDeclarator.id.name === identifierName
+          variableDeclarator.id.name === defaultLocalName
       )
   ) {
     return;
@@ -32,7 +32,7 @@ export const addClientDefaultRequire = (
     getV2RequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
 
   const v3RequireDeclarator = j.variableDeclarator(
-    j.identifier(identifierName),
+    j.identifier(defaultLocalName),
     j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
   );
 
