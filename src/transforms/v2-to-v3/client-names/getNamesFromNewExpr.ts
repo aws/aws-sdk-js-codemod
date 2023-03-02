@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
 
-import { getV2ClientNewExpression } from "../utils";
+import { getClientNewExpression } from "../utils";
 
 export const getNamesFromNewExpr = (
   j: JSCodeshift,
@@ -8,7 +8,7 @@ export const getNamesFromNewExpr = (
   v2GlobalName: string
 ): string[] =>
   source
-    .find(j.NewExpression, getV2ClientNewExpression({ v2GlobalName }))
+    .find(j.NewExpression, getClientNewExpression({ v2GlobalName }))
     .nodes()
     .map(
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name
