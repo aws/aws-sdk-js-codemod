@@ -15,7 +15,7 @@ import { getRequireIds } from "./getRequireIds";
 export const getClientNamesRecordFromRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  clientNamesWithServiceModule: string[]
+  clientNamesFromDeepImport: string[]
 ) => {
   const clientNamesRecord: Record<string, string> = {};
 
@@ -57,7 +57,7 @@ export const getClientNamesRecordFromRequire = (
     }
   }
 
-  for (const clientName of clientNamesWithServiceModule) {
+  for (const clientName of clientNamesFromDeepImport) {
     const deepImportPath = getClientDeepImportPath(clientName);
     const idsFromDefaultImport = getRequireIds(j, source, deepImportPath).filter(
       (id) => id.type === "Identifier"

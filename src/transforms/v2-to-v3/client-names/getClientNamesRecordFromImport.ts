@@ -8,7 +8,7 @@ import { getClientDeepImportPath } from "../utils";
 export const getClientNamesRecordFromImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  clientNamesWithServiceModule: string[]
+  clientNamesFromDeepImport: string[]
 ) => {
   const clientNamesRecord: Record<string, string> = {};
 
@@ -24,7 +24,7 @@ export const getClientNamesRecordFromImport = (
     }
   }
 
-  for (const clientName of clientNamesWithServiceModule) {
+  for (const clientName of clientNamesFromDeepImport) {
     const deepImportPath = getClientDeepImportPath(clientName);
 
     const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
