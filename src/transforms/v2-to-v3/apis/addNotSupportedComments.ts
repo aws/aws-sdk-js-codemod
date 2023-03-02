@@ -2,9 +2,9 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { FUNCTION_TYPE_LIST } from "../config";
 import { getClientIdentifiers } from "./getClientIdentifiers";
+import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getS3UploadCallExpression } from "./getS3UploadCallExpression";
-import { getV2ClientWaiterCallExpression } from "./getV2ClientWaiterCallExpression";
 
 export interface CommentsForUnsupportedAPIsOptions {
   v2ClientName: string;
@@ -24,7 +24,7 @@ export const addNotSupportedComments = (
 
     for (const waiterState of waiterStates) {
       source
-        .find(j.CallExpression, getV2ClientWaiterCallExpression(clientId, waiterState))
+        .find(j.CallExpression, getClientWaiterCallExpression(clientId, waiterState))
         .forEach((callExpression) => {
           const args = callExpression.node.arguments;
 
