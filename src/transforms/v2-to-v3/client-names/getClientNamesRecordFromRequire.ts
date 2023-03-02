@@ -12,12 +12,12 @@ import { getRequireDeclaratorsWithProperty } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 import { getRequireIds } from "./getRequireIds";
 
-export const getV2ClientNamesRecordFromRequire = (
+export const getClientNamesRecordFromRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2ClientNamesWithServiceModule: string[]
+  clientNamesFromDeepImport: string[]
 ) => {
-  const v2ClientNamesRecord: Record<string, string> = {};
+  const clientNamesRecord: Record<string, string> = {};
 
   const idPropertiesFromObjectPattern = getRequireIds(j, source, PACKAGE_NAME)
     .filter((id) => id.type === "ObjectPattern")
@@ -34,7 +34,7 @@ export const getV2ClientNamesRecordFromRequire = (
       continue;
     }
     if (CLIENT_NAMES.includes(key.name)) {
-      v2ClientNamesRecord[key.name] = value.name;
+      clientNamesRecord[key.name] = value.name;
     }
   }
 
@@ -50,22 +50,22 @@ export const getV2ClientNamesRecordFromRequire = (
       init.type === "MemberExpression" &&
       init.property.type === "Identifier"
     ) {
-      const v2ClientName = (init.property as Identifier).name;
-      if (CLIENT_NAMES.includes(v2ClientName)) {
-        v2ClientNamesRecord[v2ClientName] = (id as Identifier).name;
+      const clientName = (init.property as Identifier).name;
+      if (CLIENT_NAMES.includes(clientName)) {
+        clientNamesRecord[clientName] = (id as Identifier).name;
       }
     }
   }
 
-  for (const clientName of v2ClientNamesWithServiceModule) {
+  for (const clientName of clientNamesFromDeepImport) {
     const deepImportPath = getClientDeepImportPath(clientName);
     const idsFromDefaultImport = getRequireIds(j, source, deepImportPath).filter(
       (id) => id.type === "Identifier"
     );
     if (idsFromDefaultImport.length) {
-      v2ClientNamesRecord[clientName] = (idsFromDefaultImport[0] as Identifier).name;
+      clientNamesRecord[clientName] = (idsFromDefaultImport[0] as Identifier).name;
     }
   }
 
-  return v2ClientNamesRecord;
+  return clientNamesRecord;
 };

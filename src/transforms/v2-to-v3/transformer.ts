@@ -5,8 +5,8 @@ import { replaceS3UploadApi } from "./apis/replaceS3UploadApi";
 import { replaceClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
-  getV2ClientNamesFromGlobal,
-  getV2ClientNamesRecord,
+  getClientNamesFromGlobal,
+  getClientNamesRecord,
 } from "./client-names";
 import {
   addClientModules,
@@ -22,14 +22,14 @@ const transformer = async (file: FileInfo, api: API) => {
   const source = j(file.source);
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
-  const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
+  const v2ClientNamesRecord = getClientNamesRecord(j, source);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
   }
 
   if (v2GlobalName) {
-    for (const v2ClientNameFromGlobal of getV2ClientNamesFromGlobal(j, source, v2GlobalName)) {
+    for (const v2ClientNameFromGlobal of getClientNamesFromGlobal(j, source, v2GlobalName)) {
       if (!(v2ClientNameFromGlobal in v2ClientNamesRecord)) {
         v2ClientNamesRecord[v2ClientNameFromGlobal] = v2ClientNameFromGlobal;
       }
