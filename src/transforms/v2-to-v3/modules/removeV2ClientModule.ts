@@ -39,10 +39,10 @@ export const removeV2ClientModule = (
     removeImportDefault(j, source, defaultOptions);
     removeImportNamed(j, source, namedOptions);
 
-    const v2ClientTypeNames = getClientTypeNames(j, source, options);
-    for (const v2ClientTypeName of v2ClientTypeNames) {
+    const clientTypeNames = getClientTypeNames(j, source, options);
+    for (const clientTypeName of clientTypeNames) {
       removeImportNamed(j, source, {
-        localName: v2ClientTypeName,
+        localName: clientTypeName,
         sourceValue: deepImportPath,
       });
     }

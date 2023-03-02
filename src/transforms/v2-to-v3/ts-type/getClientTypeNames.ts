@@ -26,7 +26,7 @@ export const getClientTypeNames = (
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v2GlobalName }: GetClientTypeNamesOptions
 ): string[] => {
-  const v2ClientTypeNames = [];
+  const clientTypeNames = [];
 
   if (v2GlobalName) {
     const globalTSTypeRef = getClientTSTypeRef({
@@ -34,13 +34,13 @@ export const getClientTypeNames = (
       v2GlobalName,
       withoutRightSection: true,
     });
-    v2ClientTypeNames.push(...getRightIdentifierName(j, source, globalTSTypeRef));
+    clientTypeNames.push(...getRightIdentifierName(j, source, globalTSTypeRef));
   }
 
   const clientTSTypeRef = getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
-  v2ClientTypeNames.push(...getRightIdentifierName(j, source, clientTSTypeRef));
+  clientTypeNames.push(...getRightIdentifierName(j, source, clientTSTypeRef));
 
-  v2ClientTypeNames.push(
+  clientTypeNames.push(
     ...getImportSpecifiers(j, source, getClientDeepImportPath(v2ClientName))
       .filter(
         (importSpecifier) =>
@@ -51,5 +51,5 @@ export const getClientTypeNames = (
       .map((importSpecifier) => (importSpecifier.local as Identifier).name)
   );
 
-  return [...new Set(v2ClientTypeNames)];
+  return [...new Set(clientTypeNames)];
 };

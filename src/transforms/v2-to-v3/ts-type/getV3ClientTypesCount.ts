@@ -21,15 +21,15 @@ export const getV3ClientTypesCount = (
 ) => {
   const { v2ClientName } = options;
 
-  const v2ClientTypeNames = getClientTypeNames(j, source, options);
+  const clientTypeNames = getClientTypeNames(j, source, options);
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
   const v3ClientUnavailableTypes = Object.keys(clientTypesMap);
 
-  return v2ClientTypeNames.filter((v2ClientTypeName) => {
-    if (!v3ClientUnavailableTypes.includes(v2ClientTypeName)) {
+  return clientTypeNames.filter((clientTypeName) => {
+    if (!v3ClientUnavailableTypes.includes(clientTypeName)) {
       return true;
     }
-    const typesFromString = getTypesFromString(clientTypesMap[v2ClientTypeName]);
+    const typesFromString = getTypesFromString(clientTypesMap[clientTypeName]);
     return typesFromString.some((type) => !nativeTypes.includes(type));
   }).length;
 };
