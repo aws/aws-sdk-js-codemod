@@ -17,8 +17,8 @@ export const addClientNamedRequire = (
   const { keyName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } = options;
   const valueName = options.valueName ?? keyName;
 
-  const v3ClientDefaultLocalName = getDefaultLocalName(v2ClientLocalName);
-  const v3ClientObjectProperty = getRequireProperty(j, { keyName, valueName });
+  const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
+  const clientObjectProperty = getRequireProperty(j, { keyName, valueName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
@@ -46,15 +46,15 @@ export const addClientNamedRequire = (
     }
 
     const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
-      identifierName: v3ClientDefaultLocalName,
+      identifierName: defaultLocalName,
       sourceValue: v3ClientPackageName,
     });
 
     if (requireDeclaratorsWithIdentifier && requireDeclaratorsWithIdentifier.nodes().length > 0) {
       requireDeclaratorsWithIdentifier.at(0).insertAfter(
-        j.variableDeclarator(j.objectPattern([v3ClientObjectProperty]), {
+        j.variableDeclarator(j.objectPattern([clientObjectProperty]), {
           type: "Identifier",
-          name: v3ClientDefaultLocalName,
+          name: defaultLocalName,
         })
       );
       return;
@@ -62,14 +62,14 @@ export const addClientNamedRequire = (
 
     if (existingRequireProperties.length > 0) {
       const firstRequireProperties = (existingRequireProperties[0].id as ObjectPattern).properties;
-      firstRequireProperties.push(v3ClientObjectProperty);
+      firstRequireProperties.push(clientObjectProperty);
       firstRequireProperties.sort(objectPatternPropertyCompareFn);
       return;
     }
   }
 
   const v3RequireDeclarator = j.variableDeclarator(
-    j.objectPattern([v3ClientObjectProperty]),
+    j.objectPattern([clientObjectProperty]),
     j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
   );
 

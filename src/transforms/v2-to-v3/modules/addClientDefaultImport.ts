@@ -10,8 +10,8 @@ export const addClientDefaultImport = (
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v3ClientPackageName }: ClientModulesOptions
 ) => {
-  const localName = getDefaultLocalName(v2ClientLocalName);
-  const defaultImportSpecifier = j.importDefaultSpecifier(j.identifier(localName));
+  const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
+  const defaultImportSpecifier = j.importDefaultSpecifier(j.identifier(defaultLocalName));
 
   const importDeclarations = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
@@ -22,7 +22,7 @@ export const addClientDefaultImport = (
   ) as ImportDefaultSpecifier[];
 
   if (importDeclarations.length) {
-    if (!importDefaultSpecifiers.find((specifier) => specifier?.local?.name === localName)) {
+    if (!importDefaultSpecifiers.find((specifier) => specifier?.local?.name === defaultLocalName)) {
       importDeclarations.nodes()[0].specifiers?.push(defaultImportSpecifier);
       return;
     }

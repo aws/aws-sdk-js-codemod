@@ -12,7 +12,7 @@ export const addClientDefaultImportEquals = (
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: ClientModulesOptions
 ) => {
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
-  const v3ClientDefaultLocalName = getDefaultLocalName(localNameSuffix);
+  const defaultLocalName = getDefaultLocalName(localNameSuffix);
   const existingImportEquals = source.find(
     j.TSImportEqualsDeclaration,
     getImportEqualsDeclaration(v3ClientPackageName)
@@ -22,9 +22,7 @@ export const addClientDefaultImportEquals = (
     if (
       existingImportEquals
         .nodes()
-        .some(
-          (importEqualsDeclaration) => importEqualsDeclaration.id.name === v3ClientDefaultLocalName
-        )
+        .some((importEqualsDeclaration) => importEqualsDeclaration.id.name === defaultLocalName)
     ) {
       return;
     }
@@ -38,7 +36,7 @@ export const addClientDefaultImportEquals = (
   }).at(0);
 
   const v3importEqualsDeclaration = j.tsImportEqualsDeclaration(
-    j.identifier(v3ClientDefaultLocalName),
+    j.identifier(defaultLocalName),
     j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
   );
 
