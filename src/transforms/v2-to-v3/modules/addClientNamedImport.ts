@@ -6,7 +6,7 @@ import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { importSpecifierCompareFn } from "./importSpecifierCompareFn";
 import { V3ClientImportSpecifierOptions, V3ClientModulesOptions } from "./types";
 
-export const addV3ClientNamedImport = (
+export const addClientNamedImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: V3ClientModulesOptions & V3ClientImportSpecifierOptions

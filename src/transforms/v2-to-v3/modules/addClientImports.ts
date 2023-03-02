@@ -2,13 +2,13 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getClientWaiterStates, getV3ClientWaiterApiName, isS3UploadApiUsed } from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
-import { addV3ClientDefaultImport } from "./addV3ClientDefaultImport";
-import { addV3ClientNamedImport } from "./addV3ClientNamedImport";
+import { addClientDefaultImport } from "./addClientDefaultImport";
+import { addClientNamedImport } from "./addClientNamedImport";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 import { V3ClientModulesOptions } from "./types";
 
-export const addV3ClientImports = (
+export const addClientImports = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: V3ClientModulesOptions
@@ -20,11 +20,11 @@ export const addV3ClientImports = (
 
   // Add default import for types, if needed.
   if (v3ClientTypesCount > 0) {
-    addV3ClientDefaultImport(j, source, options);
+    addClientDefaultImport(j, source, options);
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
-    addV3ClientNamedImport(j, source, {
+    addClientNamedImport(j, source, {
       ...options,
       importedName: options.v3ClientName,
       localName: options.v2ClientLocalName,
@@ -33,14 +33,14 @@ export const addV3ClientImports = (
 
   for (const waiterState of waiterStates) {
     const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
-    addV3ClientNamedImport(j, source, {
+    addClientNamedImport(j, source, {
       ...options,
       importedName: v3WaiterApiName,
     });
   }
 
   if (isS3UploadApiUsed(j, source, options)) {
-    addV3ClientNamedImport(j, source, {
+    addClientNamedImport(j, source, {
       ...options,
       importedName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",

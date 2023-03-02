@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { addClientImportEquals } from "./addClientImportEquals";
+import { addClientImports } from "./addClientImports";
 import { addClientRequires } from "./addClientRequires";
-import { addV3ClientImports } from "./addV3ClientImports";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { V3ClientModulesOptions } from "./types";
@@ -16,4 +16,4 @@ export const addClientModules = (
     ? addClientRequires(j, source, options)
     : hasImportEquals(j, source)
     ? addClientImportEquals(j, source, options)
-    : addV3ClientImports(j, source, options);
+    : addClientImports(j, source, options);
