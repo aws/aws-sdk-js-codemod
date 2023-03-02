@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
 
-import { getClientNewExpression, getV2DocClientNewExpression } from "../utils";
+import { getClientNewExpression, getDocClientNewExpression } from "../utils";
 
 export const getNamesFromNewExpr = (
   j: JSCodeshift,
@@ -14,7 +14,7 @@ export const getNamesFromNewExpr = (
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name
     ),
   ...source
-    .find(j.NewExpression, getV2DocClientNewExpression({ v2GlobalName }))
+    .find(j.NewExpression, getDocClientNewExpression({ v2GlobalName }))
     .nodes()
     .map(
       (newExpression) =>

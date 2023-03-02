@@ -7,7 +7,7 @@ export interface DocClientNewExpression {
   v2GlobalName?: string;
 }
 
-export const getV2DocClientNewExpression = ({
+export const getDocClientNewExpression = ({
   v2ClientLocalName,
   v2GlobalName,
 }: DocClientNewExpression): NewExpression => {
