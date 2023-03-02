@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getClientIdentifiers } from "./getClientIdentifiers";
 
 export interface GetClientWaiterStatesOptions {
   v2ClientName: string;
@@ -15,14 +15,14 @@ export const getClientWaiterStates = (
 ): Set<string> => {
   const waiterStates: string[] = [];
 
-  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
+  const clientIdentifiers = getClientIdentifiers(j, source, options);
 
-  for (const v2ClientId of v2ClientIdentifiers) {
+  for (const clientId of clientIdentifiers) {
     source
       .find(j.CallExpression, {
         callee: {
           type: "MemberExpression",
-          object: v2ClientId,
+          object: clientId,
           property: { type: "Identifier", name: "waitFor" },
         },
       })

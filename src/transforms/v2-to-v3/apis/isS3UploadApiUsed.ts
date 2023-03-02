@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getClientIdentifiers } from "./getClientIdentifiers";
 
 export interface IsS3UploadApiUsedOptions {
   v2ClientName: string;
@@ -15,13 +15,13 @@ export const isS3UploadApiUsed = (
 ) => {
   if (options.v2ClientName !== "S3") return false;
 
-  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
+  const clientIdentifiers = getClientIdentifiers(j, source, options);
 
-  for (const v2ClientId of v2ClientIdentifiers) {
+  for (const clientId of clientIdentifiers) {
     const s3UploadCallExpressions = source.find(j.CallExpression, {
       callee: {
         type: "MemberExpression",
-        object: v2ClientId,
+        object: clientId,
         property: { type: "Identifier", name: "upload" },
       },
     });

@@ -1,9 +1,9 @@
 import { CallExpression } from "jscodeshift";
 
-import { V2ClientIdentifier } from "./getV2ClientIdentifiers";
+import { ClientIdentifier } from "./getClientIdentifiers";
 
 export const getV2ClientWaiterCallExpression = (
-  v2ClientId: V2ClientIdentifier,
+  v2ClientId: ClientIdentifier,
   waiterState: string
 ): CallExpression => ({
   type: "CallExpression",

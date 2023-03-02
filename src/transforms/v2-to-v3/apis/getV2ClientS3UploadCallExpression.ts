@@ -1,9 +1,9 @@
 import { CallExpression } from "jscodeshift";
 
-import { V2ClientIdentifier } from "./getV2ClientIdentifiers";
+import { ClientIdentifier } from "./getClientIdentifiers";
 
 export const getV2ClientS3UploadCallExpression = (
-  v2ClientId: V2ClientIdentifier
+  v2ClientId: ClientIdentifier
   // @ts-expect-error Property 'arguments' is missing in type
 ): CallExpression => ({
   type: "CallExpression",

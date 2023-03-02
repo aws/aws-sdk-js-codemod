@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getClientIdentifiers } from "./getClientIdentifiers";
 import { getV2ClientS3UploadCallExpression } from "./getV2ClientS3UploadCallExpression";
 
 export interface ReplaceS3UploadApiOptions {
@@ -17,11 +17,11 @@ export const replaceS3UploadApi = (
 ): void => {
   if (options.v2ClientName !== "S3") return;
 
-  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
+  const clientIdentifiers = getClientIdentifiers(j, source, options);
 
-  for (const v2ClientId of v2ClientIdentifiers) {
+  for (const clientId of clientIdentifiers) {
     source
-      .find(j.CallExpression, getV2ClientS3UploadCallExpression(v2ClientId))
+      .find(j.CallExpression, getV2ClientS3UploadCallExpression(clientId))
       .replaceWith((callExpression) => {
         const params = callExpression.node.arguments[0];
 
@@ -29,7 +29,7 @@ export const replaceS3UploadApi = (
         properties.push(
           j.objectProperty.from({
             key: j.identifier("client"),
-            value: v2ClientId,
+            value: clientId,
             shorthand: true,
           })
         );
