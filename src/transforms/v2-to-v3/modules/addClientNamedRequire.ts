@@ -2,10 +2,10 @@ import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getDefaultLocalName } from "../utils";
+import { getRequireDeclarator } from "./getRequireDeclarator";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getRequireProperty } from "./getRequireProperty";
-import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
@@ -75,7 +75,7 @@ export const addClientNamedRequire = (
 
   // prettier-ignore
   const v2RequireDeclarator =
-    getV2RequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    getRequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
 
   if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
     v2RequireDeclarator.insertAfter(v3RequireDeclarator);

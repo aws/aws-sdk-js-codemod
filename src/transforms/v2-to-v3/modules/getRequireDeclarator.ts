@@ -6,16 +6,16 @@ import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWith
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
 import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 
-export interface GetV2BaseDeclaratorOptions {
+export interface GetRequireDeclaratorOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
 }
 
-export const getV2RequireDeclarator = (
+export const getRequireDeclarator = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetV2BaseDeclaratorOptions
+  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetRequireDeclaratorOptions
 ) => {
   if (v2GlobalName) {
     const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
