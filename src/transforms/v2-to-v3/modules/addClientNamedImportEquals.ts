@@ -4,7 +4,7 @@ import { getV3DefaultLocalName } from "../utils";
 import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
-import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
+import { getRequireProperty } from "./getRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
@@ -18,7 +18,7 @@ export const addClientNamedImportEquals = (
 
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
-  const namedImportObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
+  const namedImportObjectProperty = getRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",

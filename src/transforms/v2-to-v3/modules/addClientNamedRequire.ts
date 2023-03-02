@@ -4,8 +4,8 @@ import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getV3DefaultLocalName } from "../utils";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
+import { getRequireProperty } from "./getRequireProperty";
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
-import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
@@ -18,7 +18,7 @@ export const addClientNamedRequire = (
   const valueName = options.valueName ?? keyName;
 
   const v3ClientDefaultLocalName = getV3DefaultLocalName(v2ClientLocalName);
-  const v3ClientObjectProperty = getV3ClientRequireProperty(j, { keyName, valueName });
+  const v3ClientObjectProperty = getRequireProperty(j, { keyName, valueName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {

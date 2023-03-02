@@ -2,7 +2,7 @@ import { JSCodeshift } from "jscodeshift";
 
 import { RequirePropertyOptions } from "./types";
 
-export const getV3ClientRequireProperty = (
+export const getRequireProperty = (
   j: JSCodeshift,
   { keyName, valueName }: RequirePropertyOptions
 ) =>
