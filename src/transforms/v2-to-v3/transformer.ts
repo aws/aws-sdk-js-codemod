@@ -9,7 +9,7 @@ import {
   getV2ClientNamesRecord,
 } from "./client-names";
 import {
-  addV3ClientModules,
+  addClientModules,
   getV2GlobalNameFromModule,
   removeV2ClientModule,
   removeV2GlobalModule,
@@ -53,7 +53,7 @@ const transformer = async (file: FileInfo, api: API) => {
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
-    addV3ClientModules(j, source, { ...v2Options, ...v3Options });
+    addClientModules(j, source, { ...v2Options, ...v3Options });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeV2ClientModule(j, source, v2Options);
     replaceS3UploadApi(j, source, v2Options);
