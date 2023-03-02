@@ -3,7 +3,7 @@ import { Collection, Identifier, ImportSpecifier, JSCodeshift } from "jscodeshif
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclaration } from "../modules";
 import { getImportSpecifiers } from "../modules";
-import { getV2ServiceModulePath } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 
 export const getV2ClientNamesRecordFromImport = (
   j: JSCodeshift,
@@ -25,7 +25,7 @@ export const getV2ClientNamesRecordFromImport = (
   }
 
   for (const clientName of v2ClientNamesWithServiceModule) {
-    const deepImportPath = getV2ServiceModulePath(clientName);
+    const deepImportPath = getClientDeepImportPath(clientName);
 
     const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
       (specifier) =>

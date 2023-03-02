@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ServiceModulePath } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 
 export interface GetV2ImportEqualsDeclarationOptions {
@@ -29,7 +29,7 @@ export const getV2ImportEqualsDeclaration = (
       }
 
       if (
-        expressionValue === getV2ServiceModulePath(v2ClientName) &&
+        expressionValue === getClientDeepImportPath(v2ClientName) &&
         identifierName === v2ClientLocalName
       ) {
         return true;

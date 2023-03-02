@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ServiceModulePath } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 
 export interface GetV2ImportDeclarationOptions {
   v2ClientName: string;
@@ -29,7 +29,7 @@ export const getV2ImportDeclaration = (
     }
 
     if (
-      sourceValue === getV2ServiceModulePath(v2ClientName) &&
+      sourceValue === getClientDeepImportPath(v2ClientName) &&
       importDeclaration.value.specifiers?.some(
         (specifier) =>
           ["ImportNamespaceSpecifier", "ImportDefaultSpecifier"].includes(specifier.type) &&
