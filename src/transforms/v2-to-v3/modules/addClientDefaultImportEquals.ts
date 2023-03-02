@@ -4,12 +4,12 @@ import { getV3DefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
-import { V3ClientModulesOptions } from "./types";
+import { ClientModulesOptions } from "./types";
 
 export const addClientDefaultImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions
+  { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: ClientModulesOptions
 ) => {
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);

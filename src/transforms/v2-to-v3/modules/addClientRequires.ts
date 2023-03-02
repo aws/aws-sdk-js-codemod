@@ -6,12 +6,12 @@ import { addClientDefaultRequire } from "./addClientDefaultRequire";
 import { addClientNamedRequire } from "./addClientNamedRequire";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
-import { V3ClientModulesOptions } from "./types";
+import { ClientModulesOptions } from "./types";
 
 export const addClientRequires = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: V3ClientModulesOptions
+  options: ClientModulesOptions
 ): void => {
   const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);

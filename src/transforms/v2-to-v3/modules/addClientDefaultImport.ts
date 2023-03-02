@@ -3,12 +3,12 @@ import { Collection, ImportDefaultSpecifier, JSCodeshift } from "jscodeshift";
 import { getV3DefaultLocalName } from "../utils";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
-import { V3ClientModulesOptions } from "./types";
+import { ClientModulesOptions } from "./types";
 
 export const addClientDefaultImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v3ClientPackageName }: V3ClientModulesOptions
+  { v2ClientLocalName, v2ClientName, v3ClientPackageName }: ClientModulesOptions
 ) => {
   const localName = getV3DefaultLocalName(v2ClientLocalName);
   const defaultImportSpecifier = j.importDefaultSpecifier(j.identifier(localName));

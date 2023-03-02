@@ -1,4 +1,4 @@
-export interface V3ClientModulesOptions {
+export interface ClientModulesOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
