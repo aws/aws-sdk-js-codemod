@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getDefaultLocalName } from "../utils";
+import { getRequireDeclarator } from "./getRequireDeclarator";
 import { getRequireDeclarators } from "./getRequireDeclarators";
-import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { ClientModulesOptions } from "./types";
 
 export const addClientDefaultRequire = (
@@ -29,7 +29,7 @@ export const addClientDefaultRequire = (
 
   // prettier-ignore
   const v2RequireDeclarator =
-    getV2RequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    getRequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
 
   const v3RequireDeclarator = j.variableDeclarator(
     j.identifier(defaultLocalName),

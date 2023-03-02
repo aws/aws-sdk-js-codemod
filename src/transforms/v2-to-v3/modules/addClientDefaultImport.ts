@@ -1,8 +1,8 @@
 import { Collection, ImportDefaultSpecifier, JSCodeshift } from "jscodeshift";
 
 import { getDefaultLocalName } from "../utils";
+import { getImportDeclaration } from "./getImportDeclaration";
 import { getImportSpecifiers } from "./getImportSpecifiers";
-import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
 import { ClientModulesOptions } from "./types";
 
 export const addClientDefaultImport = (
@@ -29,7 +29,7 @@ export const addClientDefaultImport = (
   }
 
   // Insert after global import, or service import.
-  const v2ImportDeclaration = getV2ImportDeclaration(j, source, {
+  const v2ImportDeclaration = getImportDeclaration(j, source, {
     v2ClientName,
     v2ClientLocalName,
   });

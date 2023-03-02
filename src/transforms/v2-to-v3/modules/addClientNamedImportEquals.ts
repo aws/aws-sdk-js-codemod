@@ -2,7 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getDefaultLocalName } from "../utils";
 import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
-import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getRequireProperty } from "./getRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
@@ -32,7 +32,7 @@ export const addClientNamedImportEquals = (
     return;
   }
 
-  const importEqualsDeclaration = getImportEqualsDeclaration(v3ClientPackageName);
+  const importEqualsDeclaration = getImportEqualsDeclarationType(v3ClientPackageName);
   if (source.find(j.TSImportEqualsDeclaration, importEqualsDeclaration).size() === 0) {
     addClientDefaultImportEquals(j, source, v3ClientModulesOptions);
   }

@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 
 export const hasImportEquals = (j: JSCodeshift, source: Collection<unknown>) =>
   source
-    .find(j.TSImportEqualsDeclaration, getImportEqualsDeclaration())
+    .find(j.TSImportEqualsDeclaration, getImportEqualsDeclarationType())
     .filter((importEqualsDeclaration) => {
       const { moduleReference } = importEqualsDeclaration.value;
       if (moduleReference.type !== "TSExternalModuleReference") return false;

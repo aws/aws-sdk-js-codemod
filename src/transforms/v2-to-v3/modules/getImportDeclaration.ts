@@ -3,15 +3,15 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
 import { getClientDeepImportPath } from "../utils";
 
-export interface GetV2ImportDeclarationOptions {
+export interface GetImportDeclarationOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
 }
 
-export const getV2ImportDeclaration = (
+export const getImportDeclaration = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName }: GetV2ImportDeclarationOptions
+  { v2ClientName, v2ClientLocalName }: GetImportDeclarationOptions
 ) =>
   // Return global or service import declaration.
   source.find(j.ImportDeclaration).filter((importDeclaration) => {

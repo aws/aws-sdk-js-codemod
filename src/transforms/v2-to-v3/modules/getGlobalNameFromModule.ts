@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { hasRequire } from "./hasRequire";
 
@@ -36,7 +36,7 @@ export const getGlobalNameFromModule = (
 
   const importEqualsDeclarations = source.find(
     j.TSImportEqualsDeclaration,
-    getImportEqualsDeclaration(PACKAGE_NAME)
+    getImportEqualsDeclarationType(PACKAGE_NAME)
   );
 
   if (importEqualsDeclarations.length > 0) {

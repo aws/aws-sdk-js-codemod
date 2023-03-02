@@ -1,7 +1,7 @@
 import { Collection, Identifier, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import { getImportEqualsDeclaration } from "../modules";
+import { getImportEqualsDeclarationType } from "../modules";
 import { getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
@@ -37,7 +37,7 @@ export const getV2ClientNamesRecordFromImport = (
 
     const identifiersFromImportEquals = source.find(
       j.TSImportEqualsDeclaration,
-      getImportEqualsDeclaration(deepImportPath)
+      getImportEqualsDeclarationType(deepImportPath)
     );
     if (identifiersFromImportEquals.length > 0) {
       v2ClientNamesRecord[clientName] = identifiersFromImportEquals.nodes()[0]?.id.name;
