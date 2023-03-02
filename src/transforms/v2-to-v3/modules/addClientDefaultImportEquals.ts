@@ -2,8 +2,8 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getDefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
+import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
-import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
 import { ClientModulesOptions } from "./types";
 
 export const addClientDefaultImportEquals = (
@@ -15,7 +15,7 @@ export const addClientDefaultImportEquals = (
   const defaultLocalName = getDefaultLocalName(localNameSuffix);
   const existingImportEquals = source.find(
     j.TSImportEqualsDeclaration,
-    getImportEqualsDeclaration(v3ClientPackageName)
+    getImportEqualsDeclarationType(v3ClientPackageName)
   );
 
   if (existingImportEquals.size()) {
@@ -29,7 +29,7 @@ export const addClientDefaultImportEquals = (
   }
 
   // Insert after global, or service import equals.
-  const v2ImportEqualsDeclaration = getV2ImportEqualsDeclaration(j, source, {
+  const v2ImportEqualsDeclaration = getImportEqualsDeclaration(j, source, {
     v2ClientName,
     v2ClientLocalName,
     v2GlobalName,
