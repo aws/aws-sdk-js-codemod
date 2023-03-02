@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
+import { getClientIdNamesFromNewExpr } from "./getClientIdNamesFromNewExpr";
 import { getClientIdThisExpressions, ThisMemberExpression } from "./getClientIdThisExpressions";
-import { getV2ClientIdNamesFromNewExpr } from "./getV2ClientIdNamesFromNewExpr";
 import { getV2ClientIdNamesFromTSTypeRef } from "./getV2ClientIdNamesFromTSTypeRef";
 
 export interface GetClientIdentifiersOptions {
@@ -17,7 +17,7 @@ export const getClientIdentifiers = (
   source: Collection<unknown>,
   options: GetClientIdentifiersOptions
 ): ClientIdentifier[] => {
-  const namesFromNewExpr = getV2ClientIdNamesFromNewExpr(j, source, options);
+  const namesFromNewExpr = getClientIdNamesFromNewExpr(j, source, options);
   const namesFromTSTypeRef = getV2ClientIdNamesFromTSTypeRef(j, source, options);
   const clientIdNames = [...new Set([...namesFromNewExpr, ...namesFromTSTypeRef])];
 

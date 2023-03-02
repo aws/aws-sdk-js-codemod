@@ -2,7 +2,7 @@ import { Collection, Identifier, JSCodeshift, NewExpression } from "jscodeshift"
 
 import { getClientNewExpression } from "../utils";
 
-export interface GetV2ClientIdNamesFromNewExprOptions {
+export interface GetClientIdNamesFromNewExprOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
@@ -34,10 +34,10 @@ const getNamesFromAssignmentPattern = (
     .nodes()
     .map((assignmentPattern) => (assignmentPattern.left as Identifier).name);
 
-export const getV2ClientIdNamesFromNewExpr = (
+export const getClientIdNamesFromNewExpr = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetV2ClientIdNamesFromNewExprOptions
+  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetClientIdNamesFromNewExprOptions
 ): string[] => {
   const namesFromGlobalModule = [];
   const namesFromServiceModule = [];
