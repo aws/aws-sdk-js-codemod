@@ -12,16 +12,16 @@ import { removeRequireIdentifier } from "./removeRequireIdentifier";
 import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
 import { removeRequireProperty } from "./removeRequireProperty";
 
-export interface RemoveV2ClientModuleOptions {
+export interface RemoveClientModuleOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
 }
 
-export const removeV2ClientModule = (
+export const removeClientModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: RemoveV2ClientModuleOptions
+  options: RemoveClientModuleOptions
 ) => {
   const { v2ClientName, v2ClientLocalName } = options;
   const deepImportPath = getClientDeepImportPath(v2ClientName);

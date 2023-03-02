@@ -11,7 +11,7 @@ import {
 import {
   addClientModules,
   getV2GlobalNameFromModule,
-  removeV2ClientModule,
+  removeClientModule,
   removeV2GlobalModule,
 } from "./modules";
 import { replaceTSTypeReference } from "./ts-type";
@@ -55,7 +55,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
     addClientModules(j, source, { ...v2Options, ...v3Options });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
-    removeV2ClientModule(j, source, v2Options);
+    removeClientModule(j, source, v2Options);
     replaceS3UploadApi(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
