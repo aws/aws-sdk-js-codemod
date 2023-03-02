@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_TYPES_MAP } from "../config";
-import { getV2ClientTypeNames, GetV2ClientTypeNamesOptions } from "./getV2ClientTypeNames";
+import { getClientTypeNames, GetClientTypeNamesOptions } from "./getClientTypeNames";
 
 const arrayBracketRegex = /<([\w]+)>/g;
 const recordBracketRegex = /<string, ([\w]+)>/g;
@@ -17,11 +17,11 @@ const getTypesFromString = (str: string): string[] => {
 export const getV3ClientTypesCount = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: GetV2ClientTypeNamesOptions
+  options: GetClientTypeNamesOptions
 ) => {
   const { v2ClientName } = options;
 
-  const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
+  const v2ClientTypeNames = getClientTypeNames(j, source, options);
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
   const v3ClientUnavailableTypes = Object.keys(clientTypesMap);
 

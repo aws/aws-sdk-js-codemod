@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getV2ClientTypeNames } from "../ts-type";
+import { getClientTypeNames } from "../ts-type";
 import { getClientDeepImportPath } from "../utils";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
@@ -39,7 +39,7 @@ export const removeV2ClientModule = (
     removeImportDefault(j, source, defaultOptions);
     removeImportNamed(j, source, namedOptions);
 
-    const v2ClientTypeNames = getV2ClientTypeNames(j, source, options);
+    const v2ClientTypeNames = getClientTypeNames(j, source, options);
     for (const v2ClientTypeName of v2ClientTypeNames) {
       removeImportNamed(j, source, {
         localName: v2ClientTypeName,

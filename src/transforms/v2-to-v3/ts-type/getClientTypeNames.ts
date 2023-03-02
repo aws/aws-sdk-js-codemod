@@ -3,7 +3,7 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference }
 import { getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath, getClientTSTypeRef } from "../utils";
 
-export interface GetV2ClientTypeNamesOptions {
+export interface GetClientTypeNamesOptions {
   v2ClientName: string;
   v2GlobalName?: string;
   v2ClientLocalName: string;
@@ -21,10 +21,10 @@ const getRightIdentifierName = (
     .filter((node) => node.type === "Identifier")
     .map((node) => (node as Identifier).name);
 
-export const getV2ClientTypeNames = (
+export const getClientTypeNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v2GlobalName }: GetV2ClientTypeNamesOptions
+  { v2ClientLocalName, v2ClientName, v2GlobalName }: GetClientTypeNamesOptions
 ): string[] => {
   const v2ClientTypeNames = [];
 

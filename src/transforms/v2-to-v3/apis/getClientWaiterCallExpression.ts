@@ -3,13 +3,13 @@ import { CallExpression } from "jscodeshift";
 import { ClientIdentifier } from "./getClientIdentifiers";
 
 export const getClientWaiterCallExpression = (
-  v2ClientId: ClientIdentifier,
+  clientId: ClientIdentifier,
   waiterState: string
 ): CallExpression => ({
   type: "CallExpression",
   callee: {
     type: "MemberExpression",
-    object: v2ClientId,
+    object: clientId,
     property: { type: "Identifier", name: "waitFor" },
   },
   // @ts-expect-error Type 'string' is not assignable to type 'RegExp'
