@@ -7,7 +7,7 @@ import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEquals } from "./removeImportEquals";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 
-export const removeV2GlobalModule = (
+export const removeGlobalModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
   v2GlobalName: string

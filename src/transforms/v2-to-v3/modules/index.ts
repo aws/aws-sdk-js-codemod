@@ -5,4 +5,4 @@ export * from "./getRequireDeclaratorsWithProperty";
 export * from "./getV2GlobalNameFromModule";
 export * from "./hasRequire";
 export * from "./removeClientModule";
-export * from "./removeV2GlobalModule";
+export * from "./removeGlobalModule";

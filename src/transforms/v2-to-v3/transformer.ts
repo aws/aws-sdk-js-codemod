@@ -12,7 +12,7 @@ import {
   addClientModules,
   getV2GlobalNameFromModule,
   removeClientModule,
-  removeV2GlobalModule,
+  removeGlobalModule,
 } from "./modules";
 import { replaceTSTypeReference } from "./ts-type";
 import { isTypeScriptFile } from "./utils";
@@ -66,7 +66,7 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   if (v2GlobalName) {
-    removeV2GlobalModule(j, source, v2GlobalName);
+    removeGlobalModule(j, source, v2GlobalName);
   }
 
   return source.toSource();
