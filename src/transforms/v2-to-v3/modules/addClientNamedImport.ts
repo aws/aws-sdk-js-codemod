@@ -1,8 +1,8 @@
 import { Collection, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
+import { getImportSpecifier } from "./getImportSpecifier";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { getV2ImportDeclaration } from "./getV2ImportDeclaration";
-import { getV3ClientImportSpecifier } from "./getV3ClientImportSpecifier";
 import { importSpecifierCompareFn } from "./importSpecifierCompareFn";
 import { ClientModulesOptions, ImportSpecifierOptions } from "./types";
 
@@ -34,7 +34,7 @@ export const addClientNamedImport = (
 
     const firstImportDeclSpecifiers = importDeclarations.nodes()[0].specifiers;
     if (firstImportDeclSpecifiers) {
-      firstImportDeclSpecifiers.push(getV3ClientImportSpecifier(j, { importedName, localName }));
+      firstImportDeclSpecifiers.push(getImportSpecifier(j, { importedName, localName }));
       firstImportDeclSpecifiers.sort(importSpecifierCompareFn);
       return;
     }
@@ -47,7 +47,7 @@ export const addClientNamedImport = (
   });
 
   const importDeclaration = j.importDeclaration(
-    [getV3ClientImportSpecifier(j, { importedName, localName })],
+    [getImportSpecifier(j, { importedName, localName })],
     j.stringLiteral(v3ClientPackageName)
   );
 

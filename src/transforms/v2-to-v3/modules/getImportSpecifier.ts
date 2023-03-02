@@ -2,7 +2,7 @@ import { JSCodeshift } from "jscodeshift";
 
 import { ImportSpecifierOptions } from "./types";
 
-export const getV3ClientImportSpecifier = (
+export const getImportSpecifier = (
   j: JSCodeshift,
   { importedName, localName }: ImportSpecifierOptions
 ) =>
