@@ -5,7 +5,7 @@ import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { hasRequire } from "./hasRequire";
 
-export const getV2GlobalNameFromModule = (
+export const getGlobalNameFromModule = (
   j: JSCodeshift,
   source: Collection<unknown>
 ): string | undefined => {
