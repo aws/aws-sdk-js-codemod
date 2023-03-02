@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getV2ClientTSTypeRef } from "../utils";
+import { getClientTSTypeRef } from "../utils";
 import { getV2ClientTypeNames } from "./getV2ClientTypeNames";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
@@ -28,7 +28,7 @@ export const replaceTSTypeReference = (
   // Replace type reference to client created with global name.
   if (v2GlobalName) {
     source
-      .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientName, v2GlobalName }))
+      .find(j.TSTypeReference, getClientTSTypeRef({ v2ClientName, v2GlobalName }))
       .replaceWith((v2ClientType) =>
         j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
       );
@@ -37,7 +37,7 @@ export const replaceTSTypeReference = (
     source
       .find(
         j.TSTypeReference,
-        getV2ClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
+        getClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
       )
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
       .replaceWith((v2ClientType) => {
@@ -48,7 +48,7 @@ export const replaceTSTypeReference = (
 
   // Replace reference to client types created with client module.
   source
-    .find(j.TSTypeReference, getV2ClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true }))
+    .find(j.TSTypeReference, getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true }))
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
     .replaceWith((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);

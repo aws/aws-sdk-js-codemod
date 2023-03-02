@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 import { getImportSpecifiers } from "../modules";
-import { getV2ClientTSTypeRef, getV2ServiceModulePath } from "../utils";
+import { getClientTSTypeRef, getV2ServiceModulePath } from "../utils";
 
 export interface GetV2ClientTypeNamesOptions {
   v2ClientName: string;
@@ -29,16 +29,16 @@ export const getV2ClientTypeNames = (
   const v2ClientTypeNames = [];
 
   if (v2GlobalName) {
-    const v2GlobalTSTypeRef = getV2ClientTSTypeRef({
+    const globalTSTypeRef = getClientTSTypeRef({
       v2ClientName,
       v2GlobalName,
       withoutRightSection: true,
     });
-    v2ClientTypeNames.push(...getRightIdentifierName(j, source, v2GlobalTSTypeRef));
+    v2ClientTypeNames.push(...getRightIdentifierName(j, source, globalTSTypeRef));
   }
 
-  const v2ClientTSTypeRef = getV2ClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
-  v2ClientTypeNames.push(...getRightIdentifierName(j, source, v2ClientTSTypeRef));
+  const clientTSTypeRef = getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
+  v2ClientTypeNames.push(...getRightIdentifierName(j, source, clientTSTypeRef));
 
   v2ClientTypeNames.push(
     ...getImportSpecifiers(j, source, getV2ServiceModulePath(v2ClientName))
