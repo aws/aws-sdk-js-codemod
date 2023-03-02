@@ -31,13 +31,13 @@ export const addClientDefaultRequire = (
   const v2RequireDeclarator =
     getV2RequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
 
-  const requireDeclarator = j.variableDeclarator(
+  const v3RequireDeclarator = j.variableDeclarator(
     j.identifier(identifierName),
     j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
   );
 
   if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
-    v2RequireDeclarator.insertAfter(requireDeclarator);
+    v2RequireDeclarator.insertAfter(v3RequireDeclarator);
   } else {
     // Unreachable code, throw error
     throw new Error(

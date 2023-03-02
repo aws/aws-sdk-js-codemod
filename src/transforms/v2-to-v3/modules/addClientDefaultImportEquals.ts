@@ -37,13 +37,13 @@ export const addClientDefaultImportEquals = (
     v2GlobalName,
   }).at(0);
 
-  const importDeclaration = j.tsImportEqualsDeclaration(
+  const v3importEqualsDeclaration = j.tsImportEqualsDeclaration(
     j.identifier(v3ClientDefaultLocalName),
     j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
   );
 
   if (v2ImportEqualsDeclaration && v2ImportEqualsDeclaration.nodes().length > 0) {
-    v2ImportEqualsDeclaration.at(0).insertAfter(importDeclaration);
+    v2ImportEqualsDeclaration.at(0).insertAfter(v3importEqualsDeclaration);
   } else {
     // Unreachable code, throw error
     throw new Error(

@@ -46,13 +46,13 @@ export const addClientNamedImport = (
     v2ClientLocalName,
   });
 
-  const importDeclaration = j.importDeclaration(
+  const v3ImportDeclaration = j.importDeclaration(
     [getImportSpecifier(j, { importedName, localName })],
     j.stringLiteral(v3ClientPackageName)
   );
 
   if (v2ImportDeclaration && v2ImportDeclaration.nodes().length > 0) {
-    v2ImportDeclaration.at(0).insertAfter(importDeclaration);
+    v2ImportDeclaration.at(0).insertAfter(v3ImportDeclaration);
   } else {
     // Unreachable code, throw error
     throw new Error(
