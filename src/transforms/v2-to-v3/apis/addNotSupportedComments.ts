@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { FUNCTION_TYPE_LIST } from "../config";
+import { getClientIdentifiers } from "./getClientIdentifiers";
+import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
-import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
-import { getV2ClientS3UploadCallExpression } from "./getV2ClientS3UploadCallExpression";
-import { getV2ClientWaiterCallExpression } from "./getV2ClientWaiterCallExpression";
+import { getS3UploadCallExpression } from "./getS3UploadCallExpression";
 
 export interface CommentsForUnsupportedAPIsOptions {
   v2ClientName: string;
@@ -17,14 +17,14 @@ export const addNotSupportedComments = (
   source: Collection<unknown>,
   options: CommentsForUnsupportedAPIsOptions
 ): void => {
-  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
+  const clientIdentifiers = getClientIdentifiers(j, source, options);
 
-  for (const v2ClientId of v2ClientIdentifiers) {
+  for (const clientId of clientIdentifiers) {
     const waiterStates = getClientWaiterStates(j, source, options);
 
     for (const waiterState of waiterStates) {
       source
-        .find(j.CallExpression, getV2ClientWaiterCallExpression(v2ClientId, waiterState))
+        .find(j.CallExpression, getClientWaiterCallExpression(clientId, waiterState))
         .forEach((callExpression) => {
           const args = callExpression.node.arguments;
 
@@ -47,9 +47,9 @@ export const addNotSupportedComments = (
   }
 
   if (options.v2ClientName === "S3") {
-    for (const v2ClientId of v2ClientIdentifiers) {
+    for (const clientId of clientIdentifiers) {
       source
-        .find(j.CallExpression, getV2ClientS3UploadCallExpression(v2ClientId))
+        .find(j.CallExpression, getS3UploadCallExpression(clientId))
         .forEach((callExpression) => {
           const args = callExpression.node.arguments;
 

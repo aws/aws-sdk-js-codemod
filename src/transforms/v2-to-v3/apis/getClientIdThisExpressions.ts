@@ -8,16 +8,16 @@ export interface ThisMemberExpression {
 
 const thisMemberExpression = { type: "MemberExpression", object: { type: "ThisExpression" } };
 
-export const getV2ClientIdThisExpressions = (
+export const getClientIdThisExpressions = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2ClientIdentifiers: Identifier[]
+  clientIdentifiers: Identifier[]
 ): ThisMemberExpression[] =>
-  v2ClientIdentifiers.flatMap((v2ClientIdentifier) =>
+  clientIdentifiers.flatMap((clientIdentifier) =>
     source
       .find(j.AssignmentExpression, {
         left: thisMemberExpression as MemberExpression,
-        right: v2ClientIdentifier,
+        right: clientIdentifier,
       })
       .nodes()
       .map(

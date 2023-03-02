@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { getV2ClientIdentifiers } from "./getV2ClientIdentifiers";
+import { getClientIdentifiers } from "./getClientIdentifiers";
 import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
 
 export interface RemovePromiseCallsOptions {
@@ -15,9 +15,9 @@ export const removePromiseCalls = (
   source: Collection<unknown>,
   options: RemovePromiseCallsOptions
 ): void => {
-  const v2ClientIdentifiers = getV2ClientIdentifiers(j, source, options);
+  const clientIdentifiers = getClientIdentifiers(j, source, options);
 
-  for (const v2ClientId of v2ClientIdentifiers) {
+  for (const clientId of clientIdentifiers) {
     // Remove .promise() from client API calls.
     source
       .find(j.CallExpression, {
@@ -27,7 +27,7 @@ export const removePromiseCalls = (
             type: "CallExpression",
             callee: {
               type: "MemberExpression",
-              object: v2ClientId,
+              object: clientId,
             },
           },
           property: { type: "Identifier", name: "promise" },
@@ -45,7 +45,7 @@ export const removePromiseCalls = (
           type: "CallExpression",
           callee: {
             type: "MemberExpression",
-            object: v2ClientId,
+            object: clientId,
           },
         },
       })
