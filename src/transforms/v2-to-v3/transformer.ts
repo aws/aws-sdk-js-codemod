@@ -10,7 +10,7 @@ import {
 } from "./client-names";
 import {
   addClientModules,
-  getV2GlobalNameFromModule,
+  getGlobalNameFromModule,
   removeClientModule,
   removeGlobalModule,
 } from "./modules";
@@ -21,7 +21,7 @@ const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
-  const v2GlobalName = getV2GlobalNameFromModule(j, source);
+  const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getV2ClientNamesRecord(j, source);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
