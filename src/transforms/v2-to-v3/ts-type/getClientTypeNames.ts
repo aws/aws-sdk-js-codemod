@@ -3,7 +3,7 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference }
 import { getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath, getClientTSTypeRef } from "../utils";
 
-export interface GetV2ClientTypeNamesOptions {
+export interface GetClientTypeNamesOptions {
   v2ClientName: string;
   v2GlobalName?: string;
   v2ClientLocalName: string;
@@ -21,12 +21,12 @@ const getRightIdentifierName = (
     .filter((node) => node.type === "Identifier")
     .map((node) => (node as Identifier).name);
 
-export const getV2ClientTypeNames = (
+export const getClientTypeNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v2GlobalName }: GetV2ClientTypeNamesOptions
+  { v2ClientLocalName, v2ClientName, v2GlobalName }: GetClientTypeNamesOptions
 ): string[] => {
-  const v2ClientTypeNames = [];
+  const clientTypeNames = [];
 
   if (v2GlobalName) {
     const globalTSTypeRef = getClientTSTypeRef({
@@ -34,13 +34,13 @@ export const getV2ClientTypeNames = (
       v2GlobalName,
       withoutRightSection: true,
     });
-    v2ClientTypeNames.push(...getRightIdentifierName(j, source, globalTSTypeRef));
+    clientTypeNames.push(...getRightIdentifierName(j, source, globalTSTypeRef));
   }
 
   const clientTSTypeRef = getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
-  v2ClientTypeNames.push(...getRightIdentifierName(j, source, clientTSTypeRef));
+  clientTypeNames.push(...getRightIdentifierName(j, source, clientTSTypeRef));
 
-  v2ClientTypeNames.push(
+  clientTypeNames.push(
     ...getImportSpecifiers(j, source, getClientDeepImportPath(v2ClientName))
       .filter(
         (importSpecifier) =>
@@ -51,5 +51,5 @@ export const getV2ClientTypeNames = (
       .map((importSpecifier) => (importSpecifier.local as Identifier).name)
   );
 
-  return [...new Set(v2ClientTypeNames)];
+  return [...new Set(clientTypeNames)];
 };

@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 import { getClientTSTypeRef } from "../utils";
-import { getV2ClientTypeNames } from "./getV2ClientTypeNames";
+import { getClientTypeNames } from "./getClientTypeNames";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
 export interface ReplaceTSTypeReferenceOptions {
@@ -56,15 +56,15 @@ export const replaceTSTypeReference = (
     });
 
   // Replace type reference to client type with modules.
-  const v2ClientTypeNames = getV2ClientTypeNames(j, source, {
+  const clientTypeNames = getClientTypeNames(j, source, {
     v2ClientLocalName,
     v2ClientName,
     v2GlobalName,
   });
 
-  for (const v2ClientTypeName of v2ClientTypeNames) {
+  for (const clientTypeName of clientTypeNames) {
     source
-      .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientTypeName } })
+      .find(j.TSTypeReference, { typeName: { type: "Identifier", name: clientTypeName } })
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = getIdentifierName(v2ClientType.node);
         return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
