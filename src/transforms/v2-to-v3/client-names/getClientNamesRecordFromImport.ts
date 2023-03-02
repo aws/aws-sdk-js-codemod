@@ -5,12 +5,12 @@ import { getImportEqualsDeclarationType } from "../modules";
 import { getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
-export const getV2ClientNamesRecordFromImport = (
+export const getClientNamesRecordFromImport = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2ClientNamesWithServiceModule: string[]
+  clientNamesWithServiceModule: string[]
 ) => {
-  const v2ClientNamesRecord: Record<string, string> = {};
+  const clientNamesRecord: Record<string, string> = {};
 
   const specifiersFromNamedImport = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
     (specifier) => specifier?.type === "ImportSpecifier"
@@ -20,11 +20,11 @@ export const getV2ClientNamesRecordFromImport = (
     const importedName = specifier.imported.name;
     const localName = (specifier.local as Identifier).name;
     if (CLIENT_NAMES.includes(importedName)) {
-      v2ClientNamesRecord[importedName] = localName ?? importedName;
+      clientNamesRecord[importedName] = localName ?? importedName;
     }
   }
 
-  for (const clientName of v2ClientNamesWithServiceModule) {
+  for (const clientName of clientNamesWithServiceModule) {
     const deepImportPath = getClientDeepImportPath(clientName);
 
     const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
@@ -32,7 +32,7 @@ export const getV2ClientNamesRecordFromImport = (
         ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
     );
     if (specifiersFromDeepImport.length > 0) {
-      v2ClientNamesRecord[clientName] = (specifiersFromDeepImport[0]?.local as Identifier).name;
+      clientNamesRecord[clientName] = (specifiersFromDeepImport[0]?.local as Identifier).name;
     }
 
     const identifiersFromImportEquals = source.find(
@@ -40,9 +40,9 @@ export const getV2ClientNamesRecordFromImport = (
       getImportEqualsDeclarationType(deepImportPath)
     );
     if (identifiersFromImportEquals.length > 0) {
-      v2ClientNamesRecord[clientName] = identifiersFromImportEquals.nodes()[0]?.id.name;
+      clientNamesRecord[clientName] = identifiersFromImportEquals.nodes()[0]?.id.name;
     }
   }
 
-  return v2ClientNamesRecord;
+  return clientNamesRecord;
 };
