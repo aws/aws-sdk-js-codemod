@@ -6,7 +6,7 @@ import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix
 import { getV2ImportEqualsDeclaration } from "./getV2ImportEqualsDeclaration";
 import { V3ClientModulesOptions } from "./types";
 
-export const addV3ClientDefaultImportEquals = (
+export const addClientDefaultImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: V3ClientModulesOptions

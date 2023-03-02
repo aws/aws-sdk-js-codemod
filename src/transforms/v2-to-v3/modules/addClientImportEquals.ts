@@ -2,13 +2,13 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getClientWaiterStates, getV3ClientWaiterApiName, isS3UploadApiUsed } from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
-import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
-import { addV3ClientNamedImportEquals } from "./addV3ClientNamedImportEquals";
+import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
+import { addClientNamedImportEquals } from "./addClientNamedImportEquals";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 import { V3ClientModulesOptions } from "./types";
 
-export const addV3ClientImportEquals = (
+export const addClientImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: V3ClientModulesOptions
@@ -19,11 +19,11 @@ export const addV3ClientImportEquals = (
   const waiterStates = getClientWaiterStates(j, source, options);
 
   if (v3ClientTypesCount > 0) {
-    addV3ClientDefaultImportEquals(j, source, options);
+    addClientDefaultImportEquals(j, source, options);
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
-    addV3ClientNamedImportEquals(j, source, {
+    addClientNamedImportEquals(j, source, {
       ...options,
       keyName: options.v3ClientName,
       valueName: options.v2ClientLocalName,
@@ -32,14 +32,14 @@ export const addV3ClientImportEquals = (
 
   for (const waiterState of waiterStates) {
     const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
-    addV3ClientNamedImportEquals(j, source, {
+    addClientNamedImportEquals(j, source, {
       ...options,
       keyName: v3WaiterApiName,
     });
   }
 
   if (isS3UploadApiUsed(j, source, options)) {
-    addV3ClientNamedImportEquals(j, source, {
+    addClientNamedImportEquals(j, source, {
       ...options,
       keyName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",

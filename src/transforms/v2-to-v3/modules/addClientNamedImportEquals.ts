@@ -1,14 +1,14 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getV3DefaultLocalName } from "../utils";
-import { addV3ClientDefaultImportEquals } from "./addV3ClientDefaultImportEquals";
+import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { V3ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
 
-export const addV3ClientNamedImportEquals = (
+export const addClientNamedImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: V3ClientModulesOptions & V3ClientRequirePropertyOptions
@@ -34,7 +34,7 @@ export const addV3ClientNamedImportEquals = (
 
   const importEqualsDeclaration = getImportEqualsDeclaration(v3ClientPackageName);
   if (source.find(j.TSImportEqualsDeclaration, importEqualsDeclaration).size() === 0) {
-    addV3ClientDefaultImportEquals(j, source, v3ClientModulesOptions);
+    addClientDefaultImportEquals(j, source, v3ClientModulesOptions);
   }
 
   const varDeclaration = j.variableDeclaration("const", [
