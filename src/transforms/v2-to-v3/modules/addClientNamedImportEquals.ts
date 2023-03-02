@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getV3DefaultLocalName } from "../utils";
+import { getDefaultLocalName } from "../utils";
 import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
@@ -17,7 +17,7 @@ export const addClientNamedImportEquals = (
   const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
 
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
-  const v3ClientDefaultLocalName = getV3DefaultLocalName(localNameSuffix);
+  const v3ClientDefaultLocalName = getDefaultLocalName(localNameSuffix);
   const namedImportObjectProperty = getRequireProperty(j, { keyName, valueName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
