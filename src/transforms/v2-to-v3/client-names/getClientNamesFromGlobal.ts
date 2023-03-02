@@ -4,7 +4,7 @@ import { CLIENT_NAMES } from "../config";
 import { getNamesFromNewExpr } from "./getNamesFromNewExpr";
 import { getNamesFromTSQualifiedName } from "./getNamesFromTSQualifiedName";
 
-export const getV2ClientNamesFromGlobal = (
+export const getClientNamesFromGlobal = (
   j: JSCodeshift,
   source: Collection<unknown>,
   v2GlobalName: string
