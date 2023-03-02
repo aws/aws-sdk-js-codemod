@@ -46,10 +46,9 @@ export const getV2RequireDeclarator = (
     return requireDeclaratorsWithProperty;
   }
 
-  const v2ServiceModulePath = getClientDeepImportPath(v2ClientName);
   const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
     identifierName: v2ClientLocalName,
-    sourceValue: v2ServiceModulePath,
+    sourceValue: getClientDeepImportPath(v2ClientName),
   });
 
   if (requireDeclaratorsWithIdentifier.size() > 0) {

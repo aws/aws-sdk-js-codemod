@@ -58,8 +58,8 @@ export const getV2ClientNamesRecordFromRequire = (
   }
 
   for (const clientName of v2ClientNamesWithServiceModule) {
-    const deepRequirePath = getClientDeepImportPath(clientName);
-    const idsFromDefaultImport = getRequireIds(j, source, deepRequirePath).filter(
+    const deepImportPath = getClientDeepImportPath(clientName);
+    const idsFromDefaultImport = getRequireIds(j, source, deepImportPath).filter(
       (id) => id.type === "Identifier"
     );
     if (idsFromDefaultImport.length) {
