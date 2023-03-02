@@ -6,12 +6,12 @@ import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
-import { ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
+import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
 export const addClientNamedImportEquals = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & V3ClientRequirePropertyOptions
+  options: ClientModulesOptions & RequirePropertyOptions
 ) => {
   const { keyName, valueName, ...v3ClientModulesOptions } = options;
   const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;

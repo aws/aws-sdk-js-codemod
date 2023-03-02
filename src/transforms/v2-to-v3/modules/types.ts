@@ -6,7 +6,7 @@ export interface ClientModulesOptions {
   v3ClientPackageName: string;
 }
 
-export interface V3ClientRequirePropertyOptions {
+export interface RequirePropertyOptions {
   keyName: string;
   valueName?: string;
 }

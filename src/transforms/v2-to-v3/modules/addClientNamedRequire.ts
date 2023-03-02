@@ -7,12 +7,12 @@ import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWith
 import { getV2RequireDeclarator } from "./getV2RequireDeclarator";
 import { getV3ClientRequireProperty } from "./getV3ClientRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
-import { ClientModulesOptions, V3ClientRequirePropertyOptions } from "./types";
+import { ClientModulesOptions, RequirePropertyOptions } from "./types";
 
 export const addClientNamedRequire = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & V3ClientRequirePropertyOptions
+  options: ClientModulesOptions & RequirePropertyOptions
 ) => {
   const { keyName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } = options;
   const valueName = options.valueName ?? keyName;
