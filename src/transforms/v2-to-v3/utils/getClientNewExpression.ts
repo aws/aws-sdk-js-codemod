@@ -1,6 +1,6 @@
 import { NewExpression } from "jscodeshift";
 
-export interface GetClientNewExpressionOptions {
+export interface ClientNewExpressionOptions {
   v2ClientLocalName?: string;
   v2ClientName?: string;
   v2GlobalName?: string;
@@ -10,7 +10,7 @@ export const getClientNewExpression = ({
   v2ClientLocalName,
   v2ClientName,
   v2GlobalName,
-}: GetClientNewExpressionOptions): NewExpression => {
+}: ClientNewExpressionOptions): NewExpression => {
   if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
       `One of the following options must be provided: v2ClientLocalName, v2GlobalName`

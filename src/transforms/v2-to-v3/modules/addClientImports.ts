@@ -5,6 +5,7 @@ import { getV3ClientTypesCount } from "../ts-type";
 import { addClientDefaultImport } from "./addClientDefaultImport";
 import { addClientNamedImport } from "./addClientNamedImport";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
+import { getDocClientNewExpressionCount } from "./getDocClientNewExpressionCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 import { ClientModulesOptions } from "./types";
 
@@ -44,6 +45,15 @@ export const addClientImports = (
       ...options,
       importedName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",
+    });
+  }
+
+  const docClientNewExpressionCount = getDocClientNewExpressionCount(j, source, options);
+  if (docClientNewExpressionCount > 0) {
+    addClientNamedImport(j, source, {
+      ...options,
+      importedName: "DynamoDBDocument",
+      v3ClientPackageName: "@aws-sdk/lib-dynamodb",
     });
   }
 };
