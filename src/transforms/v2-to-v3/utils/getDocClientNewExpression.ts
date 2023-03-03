@@ -2,7 +2,7 @@ import { NewExpression } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 
-export interface DocClientNewExpression {
+export interface GetDocClientNewExpressionOptions {
   v2ClientLocalName?: string;
   v2GlobalName?: string;
 }
@@ -10,7 +10,7 @@ export interface DocClientNewExpression {
 export const getDocClientNewExpression = ({
   v2ClientLocalName,
   v2GlobalName,
-}: DocClientNewExpression): NewExpression => {
+}: GetDocClientNewExpressionOptions): NewExpression => {
   if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
       `One of the following options must be provided: v2ClientLocalName, v2GlobalName`

@@ -2,12 +2,13 @@ import { API, FileInfo } from "jscodeshift";
 
 import { addNotSupportedComments, removePromiseCalls, replaceWaiterApi } from "./apis";
 import { replaceS3UploadApi } from "./apis/replaceS3UploadApi";
-import { replaceClientCreation } from "./client-instances";
+import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
   getClientNamesFromGlobal,
   getClientNamesRecord,
 } from "./client-names";
+import { DYNAMODB } from "./config";
 import {
   addClientModules,
   getGlobalNameFromModule,
@@ -62,6 +63,10 @@ const transformer = async (file: FileInfo, api: API) => {
 
     if (v2GlobalName) {
       replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    }
+
+    if (v2ClientName === DYNAMODB) {
+      replaceDocClientCreation(j, source, { v2ClientLocalName, v2GlobalName });
     }
   }
 
