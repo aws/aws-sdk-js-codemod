@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.14.0
+
+### Minor Changes
+
+- Add initial support for DynamoDB DocumentClient transformation ([15b1d6c](https://github.com/awslabs/aws-sdk-js-codemod/commit/15b1d6c))
+
 ## 0.13.5
 
 ### Patch Changes
