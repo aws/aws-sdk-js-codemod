@@ -1,14 +1,15 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { DYNAMODB } from "../config";
-import { getClientNewExpression, getDocClientNewExpression } from "../utils";
+import { getClientNewExpression } from "../utils";
+import { getDocClientNewExpressionCount } from "./getDocClientNewExpressionCount";
 import { ClientModulesOptions } from "./types";
 
 export const getNewExpressionCount = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName }: ClientModulesOptions
+  options: ClientModulesOptions
 ): number => {
+  const { v2ClientName, v2ClientLocalName, v2GlobalName } = options;
   let newExpressionCount = 0;
 
   if (v2GlobalName) {
@@ -17,14 +18,6 @@ export const getNewExpressionCount = (
       getClientNewExpression({ v2ClientName, v2GlobalName })
     );
     newExpressionCount += newExpressionsFromGlobalName.length;
-
-    if (v2ClientName === DYNAMODB) {
-      const newExpressionsFromGlobalNameDocClient = source.find(
-        j.NewExpression,
-        getDocClientNewExpression({ v2GlobalName })
-      );
-      newExpressionCount += newExpressionsFromGlobalNameDocClient.length;
-    }
   }
 
   const newExpressionsFromClientLocalName = source.find(
@@ -33,13 +26,7 @@ export const getNewExpressionCount = (
   );
   newExpressionCount += newExpressionsFromClientLocalName.length;
 
-  if (v2ClientName === DYNAMODB) {
-    const newExpressionsFromClientLocalNameDocClient = source.find(
-      j.NewExpression,
-      getDocClientNewExpression({ v2ClientLocalName })
-    );
-    newExpressionCount += newExpressionsFromClientLocalNameDocClient.length;
-  }
+  newExpressionCount += getDocClientNewExpressionCount(j, source, options);
 
   return newExpressionCount;
 };
