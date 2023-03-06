@@ -1,4 +1,11 @@
-import { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
+import {
+  ASTPath,
+  Expression,
+  JSCodeshift,
+  NewExpression,
+  ObjectProperty,
+  Property,
+} from "jscodeshift";
 
 import { DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
@@ -29,7 +36,9 @@ export const getDynamoDBForDocClient = (
       }) as Property | ObjectProperty | undefined;
 
       if (serviceProperty) {
-        return serviceProperty.value;
+        // The value here will work in most Document Client creations.
+        // Adding typecast to skip TypeScript errors.
+        return serviceProperty.value as NewExpression;
       }
     }
   }
