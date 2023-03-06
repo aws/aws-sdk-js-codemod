@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.14.1
+
+### Patch Changes
+
+- Use value from service param for creating DynamoDB DocumentClient ([6b09a0d](https://github.com/awslabs/aws-sdk-js-codemod/commit/6b09a0d))
+
 ## 0.14.0
 
 ### Minor Changes
