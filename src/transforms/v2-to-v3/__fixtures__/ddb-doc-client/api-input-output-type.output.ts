@@ -3,10 +3,9 @@ import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
 const docClient = DynamoDBDocument.from(new DynamoDB({ region: "us-west-2" }));
 
-const docClientGetInput: AWS_DynamoDBDocument.GetCommandInput = {
-  TableName: "TableName",
-  Key: { key: "value" }
+const docClientScanInput: AWS_DynamoDBDocument.ScanCommandInput = {
+  TableName: "TableName"
 };
 
-const docClientGetOutput: AWS_DynamoDBDocument.GetCommandInput = await docClient
-  .get(docClientGetInput);
+const docClientScanOutput: AWS_DynamoDBDocument.ScanCommandOutput = await docClient
+  .scan(docClientScanInput);
