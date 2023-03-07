@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 import { getImportSpecifiers } from "../modules";
-import { getClientDeepImportPath, getClientTSTypeRef } from "../utils";
+import { getClientDeepImportPath } from "../utils";
 
 export interface GetClientTypeNamesOptions {
   v2ClientName: string;
@@ -9,10 +9,12 @@ export interface GetClientTypeNamesOptions {
   v2ClientLocalName: string;
 }
 
+type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
+
 const getRightIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  tsTypeRef: TSTypeReference
+  tsTypeRef: DeepPartial<TSTypeReference>
 ) =>
   source
     .find(j.TSTypeReference, tsTypeRef)
@@ -29,16 +31,25 @@ export const getClientTypeNames = (
   const clientTypeNames = [];
 
   if (v2GlobalName) {
-    const globalTSTypeRef = getClientTSTypeRef({
-      v2ClientName,
-      v2GlobalName,
-      withoutRightSection: true,
-    });
-    clientTypeNames.push(...getRightIdentifierName(j, source, globalTSTypeRef));
+    clientTypeNames.push(
+      ...getRightIdentifierName(j, source, {
+        typeName: {
+          left: {
+            left: { type: "Identifier", name: v2GlobalName },
+            right: { type: "Identifier", name: v2ClientName },
+          },
+        },
+      })
+    );
   }
 
-  const clientTSTypeRef = getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true });
-  clientTypeNames.push(...getRightIdentifierName(j, source, clientTSTypeRef));
+  clientTypeNames.push(
+    ...getRightIdentifierName(j, source, {
+      typeName: {
+        left: { type: "Identifier", name: v2ClientLocalName },
+      },
+    })
+  );
 
   clientTypeNames.push(
     ...getImportSpecifiers(j, source, getClientDeepImportPath(v2ClientName))

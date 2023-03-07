@@ -1,6 +1,5 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getClientTSTypeRef } from "../utils";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
@@ -28,17 +27,26 @@ export const replaceTSTypeReference = (
   // Replace type reference to client created with global name.
   if (v2GlobalName) {
     source
-      .find(j.TSTypeReference, getClientTSTypeRef({ v2ClientName, v2GlobalName }))
+      .find(j.TSTypeReference, {
+        typeName: {
+          left: { type: "Identifier", name: v2GlobalName },
+          right: { type: "Identifier", name: v2ClientName },
+        },
+      })
       .replaceWith((v2ClientType) =>
         j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
       );
 
     // Replace reference to client types created with global name.
     source
-      .find(
-        j.TSTypeReference,
-        getClientTSTypeRef({ v2ClientName, v2GlobalName, withoutRightSection: true })
-      )
+      .find(j.TSTypeReference, {
+        typeName: {
+          left: {
+            left: { type: "Identifier", name: v2GlobalName },
+            right: { type: "Identifier", name: v2ClientName },
+          },
+        },
+      })
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
@@ -48,7 +56,11 @@ export const replaceTSTypeReference = (
 
   // Replace reference to client types created with client module.
   source
-    .find(j.TSTypeReference, getClientTSTypeRef({ v2ClientLocalName, withoutRightSection: true }))
+    .find(j.TSTypeReference, {
+      typeName: {
+        left: { type: "Identifier", name: v2ClientLocalName },
+      },
+    })
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
     .replaceWith((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
