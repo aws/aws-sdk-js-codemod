@@ -1,16 +1,16 @@
 import { Identifier, TSQualifiedName } from "jscodeshift";
 
-export interface GetClientTypeTSQualifiedNameOptions {
+export interface GetClientTypeNameOptions {
   v2ClientLocalName?: string;
   v2ClientName?: string;
   v2GlobalName?: string;
 }
 
-export const getClientTypeTSQualifiedName = ({
+export const getClientTypeName = ({
   v2ClientLocalName,
   v2ClientName,
   v2GlobalName,
-}: GetClientTypeTSQualifiedNameOptions) => {
+}: GetClientTypeNameOptions) => {
   if (!v2GlobalName && !v2ClientLocalName) {
     throw new Error(
       `One of the following options must be provided: v2ClientLocalName, v2GlobalName`
