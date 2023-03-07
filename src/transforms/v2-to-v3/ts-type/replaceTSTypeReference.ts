@@ -29,10 +29,8 @@ export const replaceTSTypeReference = (
     source
       .find(j.TSTypeReference, {
         typeName: {
-          left: {
-            left: { type: "Identifier", name: v2GlobalName },
-            right: { type: "Identifier", name: v2ClientName },
-          },
+          left: { type: "Identifier", name: v2GlobalName },
+          right: { type: "Identifier", name: v2ClientName },
         },
       })
       .replaceWith((v2ClientType) =>
@@ -43,8 +41,10 @@ export const replaceTSTypeReference = (
     source
       .find(j.TSTypeReference, {
         typeName: {
-          left: { type: "Identifier", name: v2GlobalName },
-          right: { type: "Identifier", name: v2ClientName },
+          left: {
+            left: { type: "Identifier", name: v2GlobalName },
+            right: { type: "Identifier", name: v2ClientName },
+          },
         },
       })
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
