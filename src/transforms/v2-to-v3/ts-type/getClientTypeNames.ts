@@ -9,10 +9,12 @@ export interface GetClientTypeNamesOptions {
   v2ClientLocalName: string;
 }
 
+type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
+
 const getRightIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  tsTypeRef: TSTypeReference
+  tsTypeRef: DeepPartial<TSTypeReference>
 ) =>
   source
     .find(j.TSTypeReference, tsTypeRef)
@@ -31,11 +33,11 @@ export const getClientTypeNames = (
   if (v2GlobalName) {
     clientTypeNames.push(
       ...getRightIdentifierName(j, source, {
-        type: "TSTypeReference",
         typeName: {
-          type: "TSQualifiedName",
-          left: { type: "Identifier", name: v2GlobalName },
-          right: { type: "Identifier", name: v2ClientName },
+          left: {
+            left: { type: "Identifier", name: v2GlobalName },
+            right: { type: "Identifier", name: v2ClientName },
+          },
         },
       })
     );
@@ -43,8 +45,9 @@ export const getClientTypeNames = (
 
   clientTypeNames.push(
     ...getRightIdentifierName(j, source, {
-      type: "TSTypeReference",
-      typeName: { type: "Identifier", name: v2ClientLocalName },
+      typeName: {
+        left: { type: "Identifier", name: v2ClientLocalName },
+      },
     })
   );
 
