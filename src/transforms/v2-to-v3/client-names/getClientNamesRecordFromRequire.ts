@@ -7,7 +7,7 @@ import {
   Property,
 } from "jscodeshift";
 
-import { CLIENT_NAMES, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../config";
+import { CLIENT_NAMES, DYNAMODB, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../config";
 import { getRequireDeclaratorsWithProperty } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 import { getRequireIds } from "./getRequireIds";
@@ -59,11 +59,21 @@ export const getClientNamesRecordFromRequire = (
 
   for (const clientName of clientNamesFromDeepImport) {
     const deepImportPath = getClientDeepImportPath(clientName);
+
     const idsFromDefaultImport = getRequireIds(j, source, deepImportPath).filter(
       (id) => id.type === "Identifier"
     );
     if (idsFromDefaultImport.length) {
       clientNamesRecord[clientName] = (idsFromDefaultImport[0] as Identifier).name;
+    }
+
+    if (clientName === DYNAMODB && !clientNamesRecord[clientName]) {
+      const declaratorsWithDdbProperty = getRequireDeclaratorsWithProperty(j, source, {
+        sourceValue: deepImportPath,
+      }).nodes();
+      if (declaratorsWithDdbProperty.length) {
+        clientNamesRecord[DYNAMODB] = DYNAMODB;
+      }
     }
   }
 
