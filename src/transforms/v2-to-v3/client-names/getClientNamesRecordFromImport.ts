@@ -1,8 +1,7 @@
 import { Collection, Identifier, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import { getImportEqualsDeclarationType } from "../modules";
-import { getImportSpecifiers } from "../modules";
+import { getImportEqualsDeclarationType, getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
 export const getClientNamesRecordFromImport = (

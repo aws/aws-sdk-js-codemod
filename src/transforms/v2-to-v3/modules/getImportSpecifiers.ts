@@ -1,5 +1,10 @@
-import { Collection, JSCodeshift } from "jscodeshift";
-import { ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier } from "jscodeshift";
+import {
+  Collection,
+  JSCodeshift,
+  ImportDefaultSpecifier,
+  ImportNamespaceSpecifier,
+  ImportSpecifier,
+} from "jscodeshift";
 
 export const getImportSpecifiers = (
   j: JSCodeshift,

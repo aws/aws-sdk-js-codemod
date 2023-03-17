@@ -23,8 +23,8 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import Runner from "jscodeshift/dist/Runner";
 import path from "path";
+import Runner from "jscodeshift/dist/Runner";
 
 import {
   getHelpParagraph,

@@ -5,8 +5,8 @@
 // @ts-nocheck
 
 import { readFileSync } from "fs";
-import argsParser from "jscodeshift/dist/argsParser";
 import { dirname, join } from "path";
+import argsParser from "jscodeshift/dist/argsParser";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
