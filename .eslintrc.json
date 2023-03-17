@@ -9,6 +9,7 @@
   ],
   "rules": {
     "import/order": "error",
+    "import/first": "error",
     "import/no-unresolved": "off",
     "@typescript-eslint/array-type": ["error", { "default": "array" }],
     "@typescript-eslint/naming-convention": [
