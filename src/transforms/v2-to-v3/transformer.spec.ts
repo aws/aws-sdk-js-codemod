@@ -1,7 +1,7 @@
 import { readdirSync } from "fs";
 import { readFile } from "fs/promises";
-import jscodeshift from "jscodeshift";
 import { join } from "path";
+import jscodeshift from "jscodeshift";
 import { describe, expect, it } from "vitest";
 
 import transform from "./transformer";

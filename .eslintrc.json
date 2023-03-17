@@ -1,11 +1,17 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "simple-import-sort"],
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
+    "import/order": "error",
+    "import/first": "error",
+    "import/no-mutable-exports": "error",
+    "import/no-unresolved": "off",
     "@typescript-eslint/array-type": ["error", { "default": "array" }],
     "@typescript-eslint/naming-convention": [
       "error",

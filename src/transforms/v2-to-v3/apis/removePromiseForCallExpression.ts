@@ -1,5 +1,5 @@
-import { ASTPath, CallExpression, JSCodeshift, MemberExpression } from "jscodeshift";
 import { emitWarning } from "process";
+import { ASTPath, CallExpression, JSCodeshift, MemberExpression } from "jscodeshift";
 
 export const removePromiseForCallExpression = (
   j: JSCodeshift,
