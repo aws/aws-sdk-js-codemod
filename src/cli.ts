@@ -66,7 +66,7 @@ if (transforms.map(({ name }) => name).includes(transform)) {
 
 function run(paths, options) {
   Runner.run(
-    /^https?/.test(options.transform) ? options.transform : path.resolve(options.transform),
+    /^https?/.test(options.transform) ? options.transform : path.resolve(process.cwd(), options.transform),
     paths,
     options
   );
