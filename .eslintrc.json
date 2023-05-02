@@ -8,7 +8,13 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "import/order": ["error", { "alphabetize": { "order": "asc" } }],
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc" },
+        "groups": ["builtin", "external", ["parent", "sibling"]]
+      }
+    ],
     "import/first": "error",
     "import/no-mutable-exports": "error",
     "import/no-unresolved": "off",
