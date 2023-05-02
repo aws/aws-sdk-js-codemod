@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { CLIENT_NAMES_MAP } from "../config";
+
 import { getV3ClientName } from "./getV3ClientName";
 
 describe(getV3ClientName.name, () => {

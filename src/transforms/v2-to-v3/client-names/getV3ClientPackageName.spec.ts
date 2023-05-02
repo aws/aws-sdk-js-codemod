@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { CLIENT_PACKAGE_NAMES_MAP } from "../config";
+
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
 
 describe(getV3ClientPackageName.name, () => {

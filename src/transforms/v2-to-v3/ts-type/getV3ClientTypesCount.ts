@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_TYPES_MAP } from "../config";
+
 import { getClientTypeNames, GetClientTypeNamesOptions } from "./getClientTypeNames";
 
 const arrayBracketRegex = /<([\w]+)>/g;

@@ -1,6 +1,7 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
+
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { hasRequire } from "./hasRequire";

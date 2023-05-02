@@ -6,6 +6,7 @@
 
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
+
 import argsParser from "jscodeshift/dist/argsParser";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

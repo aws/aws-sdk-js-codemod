@@ -2,6 +2,7 @@ import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getDefaultLocalName } from "../utils";
+
 import { getRequireDeclarator } from "./getRequireDeclarator";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";

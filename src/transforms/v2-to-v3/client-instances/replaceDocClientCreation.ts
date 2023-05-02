@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getDocClientNewExpression } from "../utils";
+
 import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
 
 export interface ReplaceDocClientCreationOptions {

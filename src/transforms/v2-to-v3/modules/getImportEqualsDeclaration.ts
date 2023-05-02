@@ -2,6 +2,7 @@ import { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift"
 
 import { PACKAGE_NAME } from "../config";
 import { getClientDeepImportPath } from "../utils";
+
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 
 export interface GetImportEqualsDeclarationOptions {

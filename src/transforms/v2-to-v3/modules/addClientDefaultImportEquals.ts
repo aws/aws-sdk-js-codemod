@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getDefaultLocalName } from "../utils";
+
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";

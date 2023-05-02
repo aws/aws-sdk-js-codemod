@@ -10,6 +10,7 @@ import {
 import { CLIENT_NAMES, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../config";
 import { getRequireDeclaratorsWithProperty } from "../modules";
 import { getClientDeepImportPath } from "../utils";
+
 import { getRequireIds } from "./getRequireIds";
 
 export const getClientNamesRecordFromRequire = (
