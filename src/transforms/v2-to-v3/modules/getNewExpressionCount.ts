@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getClientNewExpression } from "../utils";
 import { getDocClientNewExpressionCount } from "./getDocClientNewExpressionCount";
 import { ClientModulesOptions } from "./types";
+import { getClientNewExpression } from "../utils";
 
 export const getNewExpressionCount = (
   j: JSCodeshift,

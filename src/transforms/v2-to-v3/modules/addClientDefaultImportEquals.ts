@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../utils";
 import { getImportEqualsDeclaration } from "./getImportEqualsDeclaration";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
 import { ClientModulesOptions } from "./types";
+import { getDefaultLocalName } from "../utils";
 
 export const addClientDefaultImportEquals = (
   j: JSCodeshift,

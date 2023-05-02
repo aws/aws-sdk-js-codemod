@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { FUNCTION_TYPE_LIST } from "../config";
 import { getClientIdentifiers } from "./getClientIdentifiers";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getS3UploadCallExpression } from "./getS3UploadCallExpression";
+import { FUNCTION_TYPE_LIST } from "../config";
 
 export interface CommentsForUnsupportedAPIsOptions {
   v2ClientName: string;

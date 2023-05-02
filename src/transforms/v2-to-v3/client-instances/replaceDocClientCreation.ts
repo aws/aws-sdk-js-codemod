@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDocClientNewExpression } from "../utils";
 import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
+import { getDocClientNewExpression } from "../utils";
 
 export interface ReplaceDocClientCreationOptions {
   v2ClientLocalName: string;

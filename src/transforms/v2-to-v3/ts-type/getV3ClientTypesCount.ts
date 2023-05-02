@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_TYPES_MAP } from "../config";
 import { getClientTypeNames, GetClientTypeNamesOptions } from "./getClientTypeNames";
+import { CLIENT_TYPES_MAP } from "../config";
 
 const arrayBracketRegex = /<([\w]+)>/g;
 const recordBracketRegex = /<string, ([\w]+)>/g;

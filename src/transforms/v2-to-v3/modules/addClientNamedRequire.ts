@@ -1,13 +1,13 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { getDefaultLocalName } from "../utils";
 import { getRequireDeclarator } from "./getRequireDeclarator";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getRequireProperty } from "./getRequireProperty";
 import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
 import { ClientModulesOptions, RequirePropertyOptions } from "./types";
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import { getDefaultLocalName } from "../utils";
 
 export const addClientNamedRequire = (
   j: JSCodeshift,

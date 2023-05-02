@@ -1,9 +1,9 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../utils";
 import { getRequireDeclarator } from "./getRequireDeclarator";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 import { ClientModulesOptions } from "./types";
+import { getDefaultLocalName } from "../utils";
 
 export const addClientDefaultRequire = (
   j: JSCodeshift,

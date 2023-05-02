@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
-import { getClientDeepImportPath } from "../utils";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
 import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
+import { PACKAGE_NAME } from "../config";
+import { getClientDeepImportPath } from "../utils";
 
 export interface GetRequireDeclaratorOptions {
   v2ClientName: string;

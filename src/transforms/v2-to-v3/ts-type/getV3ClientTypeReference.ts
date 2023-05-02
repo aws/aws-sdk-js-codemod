@@ -1,12 +1,12 @@
 import { JSCodeshift, TSType } from "jscodeshift";
 
+import { getTypeRefForString } from "./getTypeRefForString";
 import {
   CLIENT_TYPES_MAP,
   V2_CLIENT_INPUT_SUFFIX_LIST,
   V2_CLIENT_OUTPUT_SUFFIX_LIST,
 } from "../config";
 import { getDefaultLocalName } from "../utils";
-import { getTypeRefForString } from "./getTypeRefForString";
 
 export interface GetV3ClientTypeReferenceOptions {
   v2ClientLocalName: string;

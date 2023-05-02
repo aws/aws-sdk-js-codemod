@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getRequireDeclarators } from "./getRequireDeclarators";
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
 export interface GetRequireDeclaratorsWithObjectPattern {
   identifierName: string;

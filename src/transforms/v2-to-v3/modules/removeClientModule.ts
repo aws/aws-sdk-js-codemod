@@ -1,8 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
-import { getClientTypeNames } from "../ts-type";
-import { getClientDeepImportPath } from "../utils";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportDefault } from "./removeImportDefault";
@@ -11,6 +8,9 @@ import { removeImportNamed } from "./removeImportNamed";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
 import { removeRequireProperty } from "./removeRequireProperty";
+import { PACKAGE_NAME } from "../config";
+import { getClientTypeNames } from "../ts-type";
+import { getClientDeepImportPath } from "../utils";
 
 export interface RemoveClientModuleOptions {
   v2ClientName: string;

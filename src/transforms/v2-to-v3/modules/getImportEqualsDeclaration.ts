@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift";
 
+import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { PACKAGE_NAME } from "../config";
 import { getClientDeepImportPath } from "../utils";
-import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 
 export interface GetImportEqualsDeclarationOptions {
   v2ClientName: string;

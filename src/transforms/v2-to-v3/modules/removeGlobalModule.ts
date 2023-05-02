@@ -1,11 +1,11 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
 import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEquals } from "./removeImportEquals";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
+import { PACKAGE_NAME } from "../config";
 
 export const removeGlobalModule = (
   j: JSCodeshift,

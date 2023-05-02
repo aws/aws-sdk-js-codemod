@@ -1,9 +1,9 @@
 import { Collection, ImportDefaultSpecifier, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../utils";
 import { getImportDeclaration } from "./getImportDeclaration";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { ClientModulesOptions } from "./types";
+import { getDefaultLocalName } from "../utils";
 
 export const addClientDefaultImport = (
   j: JSCodeshift,
