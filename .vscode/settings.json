@@ -7,7 +7,6 @@
   "editor.rulers": [80, 120],
   "editor.tabSize": 2,
   "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/.yarn": true
   }
 }
