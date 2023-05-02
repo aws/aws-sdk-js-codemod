@@ -1,8 +1,11 @@
 {
-  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.rulers": [80, 120],
+  "editor.tabSize": 2,
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
