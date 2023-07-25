@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.15.0
+
+### Minor Changes
+
+- Bump jscodeshift to 0.15.0 ([183eee2](https://github.com/awslabs/aws-sdk-js-codemod/commit/183eee2))
+
 ## 0.14.1
 
 ### Patch Changes
