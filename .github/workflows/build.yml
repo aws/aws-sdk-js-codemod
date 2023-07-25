@@ -17,7 +17,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-      - run: yarn
-      - run: yarn lint
-      - run: yarn build
-      - run: yarn test
+      - name: install
+        run: yarn
+      - name: lint
+        # If check is added as typescript-eslint@v6 is not supported on node 14.x.
+        # Remove the if check when Node.js 14.x support is dropped in CI.
+        if: ${{ matrix.node-version != '14.x' }}
+        run: yarn lint
+      - name: build
+        run: yarn build
+      - name: test
+        run: yarn test
