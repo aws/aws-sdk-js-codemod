@@ -20,7 +20,7 @@ jobs:
       - name: install
         run: yarn
       - name: lint
-        if: ${{ matrix.node-version }} != 14.x
+        if: ${{ matrix.node-version != '14.x' }}
         run: yarn lint
       - name: build
         run: yarn build
