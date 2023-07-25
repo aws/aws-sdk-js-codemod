@@ -28,6 +28,6 @@ export const getClientIdThisExpressions = (
               type: "Identifier",
               name: ((assignmentExpression.left as MemberExpression).property as Identifier).name,
             },
-          } as ThisMemberExpression)
+          }) as ThisMemberExpression
       )
   );

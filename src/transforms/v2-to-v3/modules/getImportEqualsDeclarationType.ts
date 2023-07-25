@@ -7,4 +7,4 @@ export const getImportEqualsDeclarationType = (expressionValue?: string) =>
       type: "TSExternalModuleReference",
       expression: { type: "StringLiteral", ...(expressionValue && { value: expressionValue }) },
     },
-  } as TSImportEqualsDeclaration);
+  }) as TSImportEqualsDeclaration;
