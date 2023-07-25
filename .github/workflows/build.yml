@@ -17,11 +17,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-      - run: yarn
-      - run: |
-          # Remove if condition when node 14 support is dropped
-          if [[ ${{ matrix.node-version }} != 14.x ]]; then
-            yarn lint
-          fi
-      - run: yarn build
-      - run: yarn test
+      - name: install
+        run: yarn
+      - name: lint
+        if: ${{ matrix.node-version }} != 14.x
+        run: yarn lint
+      - name: build
+        run: yarn build
+      - name: test
+        run: yarn test
