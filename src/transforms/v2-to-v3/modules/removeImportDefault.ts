@@ -28,7 +28,11 @@ export const removeImportDefault = (
       if (declarationPath.value.specifiers?.length === 0) {
         const { comments } = declarationPath.value;
         if (comments?.length) {
-          declarationPath.insertBefore(j.emptyStatement.from({ comments }));
+          const siblings = declarationPath.parent?.value.body;
+          if (siblings?.length) {
+            const nextSibling = siblings[siblings.indexOf(declarationPath.value) + 1];
+            nextSibling.comments = [...comments, ...(nextSibling.comments || [])];
+          }
         }
         j(declarationPath).remove();
       }
