@@ -46,4 +46,3 @@ const mapOfArrayOfMaps: Record<string, Array<Record<string, AWS_DynamoDB.Attribu
 const mapOfArrayOfArrays: Record<string, Array<Array<number>>> = { key: [[1], [2]] };
 const arrayOfMaps: Array<Record<string, string>> = [stringMap];
 const arrayOfMapOfArrays: Array<Record<string, Array<string>>> = [mapOfArrays];
-const arrayOfMapOfMapOfArrays: Array<Record<string, Record<string, Array<string>>>> = [mapOfMapOfArrays];

@@ -6,7 +6,7 @@ import { NetworkManager } from "aws-sdk";
 import { RDSDataService } from "aws-sdk";
 import { S3 } from "aws-sdk";
 import { SageMakerGeospatial } from "aws-sdk";
-import { SecurityLake } from "aws-sdk";
+import { AppIntegrations } from "aws-sdk";
 import { SSM } from "aws-sdk";
 
 // Native types
@@ -48,9 +48,8 @@ const mapNestedTwiceStruct: APIGateway.PathToMapOfMethodSnapshot = { key: struct
 
 // Nested arrays and maps
 const mapOfArrays: NetworkManager.FilterMap = { key: ["value"] };
-const mapOfMapOfArrays: SecurityLake.AllDimensionsMap = { key: mapOfArrays };
+const mapOfMapOfArrays: AppIntegrations.ObjectConfiguration = { key: mapOfArrays };
 const mapOfArrayOfMaps: DynamoDB.BatchGetResponseMap = { key: [{ key: { S:"A" }}] };
 const mapOfArrayOfArrays: APIGateway.MapOfKeyUsages = { key: [[1], [2]] };
 const arrayOfMaps: SSM.InventoryItemEntryList = [stringMap];
 const arrayOfMapOfArrays: SSM.TargetMaps = [mapOfArrays];
-const arrayOfMapOfMapOfArrays: SecurityLake.RegionSourceTypesAccountsList = [mapOfMapOfArrays];
