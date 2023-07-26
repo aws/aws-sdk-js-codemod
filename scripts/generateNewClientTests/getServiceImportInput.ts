@@ -1,8 +1,8 @@
 import { CLIENTS_TO_TEST } from "./config";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getServiceImportInput = (codegenComment: string) => {
-  let content = `${codegenComment}\n`;
+export const getServiceImportInput = () => {
+  let content = ``;
 
   content += `import { ${CLIENTS_TO_TEST.join(", ")} } from "aws-sdk";\n`;
   content += `\n`;

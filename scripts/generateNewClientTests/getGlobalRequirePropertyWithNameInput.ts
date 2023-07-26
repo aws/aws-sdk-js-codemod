@@ -2,8 +2,8 @@ import { CLIENTS_TO_TEST } from "./config";
 import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getGlobalRequirePropertyWithNameInput = (codegenComment: string) => {
-  let content = `${codegenComment}\n`;
+export const getGlobalRequirePropertyWithNameInput = () => {
+  let content = ``;
 
   for (const clientName of CLIENTS_TO_TEST) {
     const importName = getClientNameWithLocalSuffix(clientName);

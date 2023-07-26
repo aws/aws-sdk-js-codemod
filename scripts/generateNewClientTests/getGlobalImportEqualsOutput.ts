@@ -3,8 +3,8 @@ import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPacka
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportEqualsCode } from "./getV3PackageImportEqualsCode";
 
-export const getGlobalImportEqualsOutput = (codegenComment: string) => {
-  let content = `${codegenComment};\n`;
+export const getGlobalImportEqualsOutput = () => {
+  let content = ``;
 
   content += getV3PackageImportEqualsCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST));
   content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
