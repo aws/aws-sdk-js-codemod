@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": patch
 ---
 
-Preserve file header comments when transforming
+Preserve import comments when transforming code
