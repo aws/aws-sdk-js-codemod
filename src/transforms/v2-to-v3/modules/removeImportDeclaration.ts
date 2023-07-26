@@ -1,18 +1,18 @@
-import { ASTPath, ImportDeclaration, JSCodeshift } from "jscodeshift";
+import { ASTPath, Collection, ImportDeclaration, JSCodeshift } from "jscodeshift";
 
 /**
- * Removes import declaration, but preserves comments by adding them to next sibling.
+ * Removes import declaration, but preserves comments if they're top level comments.
  */
 export const removeImportDeclaration = (
   j: JSCodeshift,
+  source: Collection<unknown>,
   declarationPath: ASTPath<ImportDeclaration>
 ) => {
-  const { comments } = declarationPath.value;
-  if (comments?.length) {
-    const siblings = declarationPath.parent?.value.body;
-    if (siblings?.length) {
-      const nextSibling = siblings[siblings.indexOf(declarationPath.value) + 1];
-      nextSibling.comments = [...comments, ...(nextSibling.comments || [])];
+  const firstNode = source.find(j.Program).get("body", 0).node;
+  if (firstNode === declarationPath.node) {
+    const { comments } = declarationPath.value;
+    if (comments?.length) {
+      declarationPath.insertBefore(j.emptyStatement.from({ comments }));
     }
   }
   j(declarationPath).remove();

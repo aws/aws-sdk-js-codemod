@@ -37,7 +37,7 @@ export const removeImportNamed = (
 
       // Remove ImportDeclaration if there are no import specifiers.
       if (declarationPath.value.specifiers?.length === 0) {
-        removeImportDeclaration(j, declarationPath);
+        removeImportDeclaration(j, source, declarationPath);
       }
     });
 };
