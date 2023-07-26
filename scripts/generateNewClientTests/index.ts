@@ -88,10 +88,10 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     const filePath = join(newClientTestsPath, fileName);
     const fileContent = getFileContent();
 
-    // Retaining top-level comment adds extra newlines to the output.
-    const fileContentWithComment = fileName.includes(".input.")
-      ? `${codegenComment}\n${fileContent}`
-      : `${codegenComment}\n\n\n${fileContent}`;
+    // Retaining top-level comment adds extra newlines to the output in case of imports.
+    const fileContentWithComment = [".output.", "-import"].every((s) => fileName.includes(s))
+      ? `${codegenComment}\n\n\n${fileContent}`
+      : `${codegenComment}\n${fileContent}`;
 
     await writeFile(filePath, fileContentWithComment);
   }
