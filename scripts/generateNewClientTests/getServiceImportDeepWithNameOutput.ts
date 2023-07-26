@@ -3,8 +3,8 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
 
-export const getServiceImportDeepWithNameOutput = (codegenComment: string) => {
-  let content = `${codegenComment}\n`;
+export const getServiceImportDeepWithNameOutput = () => {
+  let content = ``;
 
   content += getV3PackageImportsCode(CLIENTS_TO_TEST, { useLocalSuffix: true });
   content += `\n`;

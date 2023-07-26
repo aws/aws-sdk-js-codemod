@@ -3,8 +3,8 @@ import { getClientDeepImportPath } from "./getClientDeepImportPath";
 import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getServiceRequireDeepWithNameInput = (codegenComment: string) => {
-  let content = `${codegenComment}\n`;
+export const getServiceRequireDeepWithNameInput = () => {
+  let content = ``;
 
   for (const clientName of CLIENTS_TO_TEST) {
     const importedName = getClientNameWithLocalSuffix(clientName);

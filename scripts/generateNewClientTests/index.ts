@@ -84,8 +84,15 @@ const newClientTestsPath = join(__dirname, "..", "..", newClientsTestsFolder);
     ["service-require-deep-with-name.output.js", getServiceRequireDeepWithNameOutput],
     ["service-require-with-name.input.js", getServiceRequireWithNameInput],
     ["service-require-with-name.output.js", getServiceRequireWithNameOutput],
-  ] as [string, (comment: string) => string][]) {
+  ] as [string, () => string][]) {
     const filePath = join(newClientTestsPath, fileName);
-    await writeFile(filePath, getFileContent(codegenComment));
+    const fileContent = getFileContent();
+
+    // Retaining top-level comment adds extra newlines to the output.
+    const fileContentWithComment = fileName.includes(".input.")
+      ? `${codegenComment}\n${fileContent}`
+      : `${codegenComment}\n\n\n${fileContent}`;
+
+    await writeFile(filePath, fileContentWithComment);
   }
 })();

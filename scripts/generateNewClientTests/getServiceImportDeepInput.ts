@@ -2,8 +2,8 @@ import { CLIENTS_TO_TEST } from "./config";
 import { getClientDeepImportPath } from "./getClientDeepImportPath";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getServiceImportDeepInput = (codegenComment: string) => {
-  let content = `${codegenComment}\n`;
+export const getServiceImportDeepInput = () => {
+  let content = ``;
 
   for (const clientName of CLIENTS_TO_TEST) {
     content += `import ${clientName} from "${getClientDeepImportPath(clientName)}";\n`;

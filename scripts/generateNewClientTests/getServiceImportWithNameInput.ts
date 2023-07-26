@@ -2,8 +2,8 @@ import { CLIENTS_TO_TEST } from "./config";
 import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
-export const getServiceImportWithNameInput = (codegenComment: string) => {
-  let content = `${codegenComment}\n`;
+export const getServiceImportWithNameInput = () => {
+  let content = ``;
 
   content += `import { \n${CLIENTS_TO_TEST.map(
     (clientName) => `  ${clientName} as ${getClientNameWithLocalSuffix(clientName)}`
