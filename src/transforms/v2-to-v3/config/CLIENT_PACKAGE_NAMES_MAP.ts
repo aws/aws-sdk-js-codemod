@@ -1,5 +1,6 @@
 import { CLIENT_NAMES } from "./CLIENT_NAMES";
 
+// The key is the client name in v2, and value is the client package name in v3.
 export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ...CLIENT_NAMES.reduce(
     (acc, name) => ({

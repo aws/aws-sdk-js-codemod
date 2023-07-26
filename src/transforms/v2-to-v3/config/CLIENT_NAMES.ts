@@ -1,3 +1,4 @@
+// The client names as they appear in v2.
 export const CLIENT_NAMES = [
   "ACM",
   "ACMPCA",
