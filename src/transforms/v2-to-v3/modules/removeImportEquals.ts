@@ -20,6 +20,6 @@ export const removeImportEquals = (
     },
   });
   if (importEqualsDeclaration.length) {
-    removeImportDeclaration(j, importEqualsDeclaration.get());
+    removeImportDeclaration(j, source, importEqualsDeclaration.get());
   }
 };
