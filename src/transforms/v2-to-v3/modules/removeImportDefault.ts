@@ -26,12 +26,9 @@ export const removeImportDefault = (
 
       // Remove ImportDeclaration if there are no import specifiers.
       if (declarationPath.value.specifiers?.length === 0) {
-        if (declarationPath.value.comments?.length) {
-          declarationPath.insertBefore(
-            j.emptyStatement.from({
-              comments: declarationPath.value.comments,
-            })
-          );
+        const { comments } = declarationPath.value;
+        if (comments?.length) {
+          declarationPath.insertBefore(j.emptyStatement.from({ comments }));
         }
         j(declarationPath).remove();
       }
