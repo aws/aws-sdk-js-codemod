@@ -1,5 +1,5 @@
 /*
- * Example comment which should not be replaced.
+ * Example comment which should not be removed.
  */
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
