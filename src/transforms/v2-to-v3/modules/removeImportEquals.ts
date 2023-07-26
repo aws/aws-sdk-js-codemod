@@ -1,5 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
-import { removeImportDeclarationWithoutComments } from "./removeImportDeclarationWithoutComments";
+import { removeImportDeclaration } from "./removeImportDeclaration";
 
 export interface RemoveImportEqualsOptions {
   localName: string;
@@ -20,6 +20,6 @@ export const removeImportEquals = (
     },
   });
   if (importEqualsDeclaration.length) {
-    removeImportDeclarationWithoutComments(j, importEqualsDeclaration.get());
+    removeImportDeclaration(j, importEqualsDeclaration.get());
   }
 };

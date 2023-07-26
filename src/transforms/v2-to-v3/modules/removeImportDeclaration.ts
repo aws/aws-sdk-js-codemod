@@ -1,6 +1,9 @@
 import { ASTPath, ImportDeclaration, JSCodeshift } from "jscodeshift";
 
-export const removeImportDeclarationWithoutComments = (
+/**
+ * Removes import declaration, but preserves comments by adding them to next sibling.
+ */
+export const removeImportDeclaration = (
   j: JSCodeshift,
   declarationPath: ASTPath<ImportDeclaration>
 ) => {
