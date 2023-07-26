@@ -6,7 +6,7 @@ import NetworkManager from "aws-sdk/clients/networkmanager";
 import RDSDataService from "aws-sdk/clients/rdsdataservice";
 import S3 from "aws-sdk/clients/s3";
 import SageMakerGeospatial from "aws-sdk/clients/sagemakergeospatial";
-import SecurityLake from "aws-sdk/clients/securitylake";
+import AppIntegrations from "aws-sdk/clients/appintegrations";
 import SSM from "aws-sdk/clients/ssm";
 
 // Native types

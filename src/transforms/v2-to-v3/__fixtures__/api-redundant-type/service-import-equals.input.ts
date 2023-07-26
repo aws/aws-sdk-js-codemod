@@ -6,7 +6,7 @@ import NetworkManager = require("aws-sdk/clients/networkmanager");
 import RDSDataService = require("aws-sdk/clients/rdsdataservice");
 import S3 = require("aws-sdk/clients/s3");
 import SageMakerGeospatial = require("aws-sdk/clients/sagemakergeospatial");
-import SecurityLake = require("aws-sdk/clients/securitylake");
+import AppIntegrations = require("aws-sdk/clients/appintegrations");
 import SSM = require("aws-sdk/clients/ssm");
 
 // Native types

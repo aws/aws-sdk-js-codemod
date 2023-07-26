@@ -6,7 +6,7 @@ const { NetworkManager } = require("aws-sdk");
 const { RDSDataService } = require("aws-sdk");
 const { S3 } = require("aws-sdk");
 const { SageMakerGeospatial } = require("aws-sdk");
-const { SecurityLake } = require("aws-sdk");
+const { AppIntegrations } = require("aws-sdk");
 const { SSM } = require("aws-sdk");
 
 // Native types
