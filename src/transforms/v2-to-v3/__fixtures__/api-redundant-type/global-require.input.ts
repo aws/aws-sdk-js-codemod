@@ -39,7 +39,7 @@ const mapNestedTwiceStruct: AWS.APIGateway.PathToMapOfMethodSnapshot = { key: st
 
 // Nested arrays and maps
 const mapOfArrays: AWS.NetworkManager.FilterMap = { key: ["value"] };
-const mapOfMapOfArrays: AWS.SecurityLake.AllDimensionsMap = { key: mapOfArrays };
+const mapOfMapOfArrays: AWS.AppIntegrations.ObjectConfiguration = { key: mapOfArrays };
 const mapOfArrayOfMaps: AWS.DynamoDB.BatchGetResponseMap = { key: [{ key: { S:"A" }}] };
 const mapOfArrayOfArrays: AWS.APIGateway.MapOfKeyUsages = { key: [[1], [2]] };
 const arrayOfMaps: AWS.SSM.InventoryItemEntryList = [stringMap];
