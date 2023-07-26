@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.15.2
+
+### Patch Changes
+
+- Preserve import comments when transforming code ([f4d2497](https://github.com/awslabs/aws-sdk-js-codemod/commit/f4d2497))
+- Retain only top level comments while transforming ([83832c8](https://github.com/awslabs/aws-sdk-js-codemod/commit/83832c8))
+
 ## 0.15.1
 
 ### Patch Changes
