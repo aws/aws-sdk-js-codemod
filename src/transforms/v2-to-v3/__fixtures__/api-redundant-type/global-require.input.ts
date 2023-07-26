@@ -44,4 +44,3 @@ const mapOfArrayOfMaps: AWS.DynamoDB.BatchGetResponseMap = { key: [{ key: { S:"A
 const mapOfArrayOfArrays: AWS.APIGateway.MapOfKeyUsages = { key: [[1], [2]] };
 const arrayOfMaps: AWS.SSM.InventoryItemEntryList = [stringMap];
 const arrayOfMapOfArrays: AWS.SSM.TargetMaps = [mapOfArrays];
-const arrayOfMapOfMapOfArrays: AWS.SecurityLake.RegionSourceTypesAccountsList = [mapOfMapOfArrays];
