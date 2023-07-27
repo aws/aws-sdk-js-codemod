@@ -34,5 +34,5 @@ export const getS3SignedUrlApiNames = (
     }
   }
 
-  return [...apiNames];
+  return [...apiNames].sort();
 };

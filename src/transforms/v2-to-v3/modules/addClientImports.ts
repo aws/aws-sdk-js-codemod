@@ -2,6 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import {
   getClientWaiterStates,
+  getS3SignedUrlApiNames,
   getV3ClientWaiterApiName,
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
@@ -59,6 +60,12 @@ export const addClientImports = (
       importedName: "getSignedUrl",
       v3ClientPackageName: "@aws-sdk/s3-request-presigner",
     });
+    for (const apiName of getS3SignedUrlApiNames(j, source, options)) {
+      addClientNamedImport(j, source, {
+        ...options,
+        importedName: `${apiName[0].toUpperCase()}${apiName.slice(1)}Command`,
+      });
+    }
   }
 
   const docClientNewExpressionCount = getDocClientNewExpressionCount(j, source, options);
