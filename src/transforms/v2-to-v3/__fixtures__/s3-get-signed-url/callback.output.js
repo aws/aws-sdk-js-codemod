@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 
-const s3 = new AWS.S3({});
+const s3 = new AWS.S3();
 const params = { Bucket: "bucket", Key: "key" };
 
 // S3 getSignedUrl with callbacks are not supported in AWS SDK for JavaScript (v3).
