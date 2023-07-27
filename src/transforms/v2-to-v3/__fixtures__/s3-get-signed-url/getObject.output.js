@@ -11,4 +11,5 @@ url = await getSignedUrl(s3, new GetObjectCommand(params) /**, { expiresIn: 900 
 // Pass it as the 'expiresIn' value in the third argument of the getSignedUrl call.
 url = await getSignedUrl(s3, new GetObjectCommand(params) /**, { expiresIn: 900 } */);
 
+url = await getSignedUrl(s3, new GetObjectCommand({ Bucket: "bucket", Key: "key" }));
 url = await getSignedUrl(s3, new GetObjectCommand({ Bucket: "bucket", Key: "key" }), { expiresIn: 60 });
