@@ -1,6 +1,11 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getClientWaiterStates, getV3ClientWaiterApiName, isS3UploadApiUsed } from "../apis";
+import {
+  getClientWaiterStates,
+  getV3ClientWaiterApiName,
+  isS3GetSignedUrlApiUsed,
+  isS3UploadApiUsed,
+} from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
 import { addClientDefaultImport } from "./addClientDefaultImport";
 import { addClientNamedImport } from "./addClientNamedImport";
@@ -45,6 +50,14 @@ export const addClientImports = (
       ...options,
       importedName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",
+    });
+  }
+
+  if (isS3GetSignedUrlApiUsed(j, source, options)) {
+    addClientNamedImport(j, source, {
+      ...options,
+      importedName: "getSignedUrl",
+      v3ClientPackageName: "@aws-sdk/s3-request-presigner",
     });
   }
 
