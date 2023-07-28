@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.16.0
+
+### Minor Changes
+
+- Support transformation of S3 getSignedUrl ([d194142](https://github.com/awslabs/aws-sdk-js-codemod/commit/d194142))
+
 ## 0.15.2
 
 ### Patch Changes
