@@ -1,6 +1,13 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getClientWaiterStates, getV3ClientWaiterApiName, isS3UploadApiUsed } from "../apis";
+import {
+  getClientWaiterStates,
+  getCommandName,
+  getS3SignedUrlApiNames,
+  getV3ClientWaiterApiName,
+  isS3GetSignedUrlApiUsed,
+  isS3UploadApiUsed,
+} from "../apis";
 import { getV3ClientTypesCount } from "../ts-type";
 import { addClientDefaultRequire } from "./addClientDefaultRequire";
 import { addClientNamedRequire } from "./addClientNamedRequire";
@@ -45,6 +52,20 @@ export const addClientRequires = (
       keyName: "Upload",
       v3ClientPackageName: "@aws-sdk/lib-storage",
     });
+  }
+
+  if (isS3GetSignedUrlApiUsed(j, source, options)) {
+    addClientNamedRequire(j, source, {
+      ...options,
+      keyName: "getSignedUrl",
+      v3ClientPackageName: "@aws-sdk/s3-request-presigner",
+    });
+    for (const apiName of getS3SignedUrlApiNames(j, source, options)) {
+      addClientNamedRequire(j, source, {
+        ...options,
+        keyName: getCommandName(apiName),
+      });
+    }
   }
 
   const docClientNewExpressionCount = getDocClientNewExpressionCount(j, source, options);

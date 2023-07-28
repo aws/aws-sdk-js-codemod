@@ -9,7 +9,7 @@ const uploadParams = {
 };
 
 // S3 ManagedUpload with callbacks are not supported in AWS SDK for JavaScript (v3).
-// Please convert to `await client.upload(params, options).promise()`, and re-run aws-sdk-js-codemod.
+// Please convert to 'await client.upload(params, options).promise()', and re-run aws-sdk-js-codemod.
 client.upload(uploadParams, (err, data) => {
   if (err) console.log(err, err.stack); // an error occurred
   else console.log(data); // successful response
