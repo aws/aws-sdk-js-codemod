@@ -64,7 +64,7 @@ const transformer = async (file: FileInfo, api: API) => {
       replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
     }
 
-    replaceDocClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    replaceDocClientCreation(j, source, v2Options);
   }
 
   if (v2GlobalName) {
