@@ -63,10 +63,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceClientCreation(j, source, v2Options);
     replaceDocClientCreation(j, source, v2Options);
   }
-
-  if (v2GlobalName) {
-    removeGlobalModule(j, source, v2GlobalName);
-  }
+  removeGlobalModule(j, source, v2GlobalName);
 
   return source.toSource();
 };
