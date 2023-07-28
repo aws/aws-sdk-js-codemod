@@ -48,26 +48,40 @@ export const addNotSupportedComments = (
 
   if (options.v2ClientName === "S3") {
     for (const clientId of clientIdentifiers) {
-      source
-        .find(j.CallExpression, getClientApiCallExpression(clientId, "upload"))
-        .forEach((callExpression) => {
-          const args = callExpression.node.arguments;
+      const apiMetadata = [
+        {
+          apiName: "upload",
+          apiDescription: "S3 ManagedUpload",
+          apiSuggestion: "await client.upload(params, options).promise()",
+        },
+        {
+          apiName: "getSignedUrl",
+          apiDescription: "S3 getSignedUrl",
+          apiSuggestion: "client.getSignedUrl(apiName, options)",
+        },
+      ];
+      for (const { apiName, apiDescription, apiSuggestion } of apiMetadata) {
+        source
+          .find(j.CallExpression, getClientApiCallExpression(clientId, apiName))
+          .forEach((callExpression) => {
+            const args = callExpression.node.arguments;
 
-          if (FUNCTION_TYPE_LIST.includes(args[args.length - 1].type)) {
-            const comments = callExpression.node.comments || [];
-            comments.push(
-              j.commentLine(
-                " S3 ManagedUpload with callbacks are not supported in AWS SDK for JavaScript (v3)."
-              )
-            );
-            comments.push(
-              j.commentLine(
-                " Please convert to `await client.upload(params, options).promise()`, and re-run aws-sdk-js-codemod."
-              )
-            );
-            callExpression.node.comments = comments;
-          }
-        });
+            if (FUNCTION_TYPE_LIST.includes(args[args.length - 1].type)) {
+              const comments = callExpression.node.comments || [];
+              comments.push(
+                j.commentLine(
+                  ` ${apiDescription} with callbacks are not supported in AWS SDK for JavaScript (v3).`
+                )
+              );
+              comments.push(
+                j.commentLine(
+                  ` Please convert to '${apiSuggestion}', and re-run aws-sdk-js-codemod.`
+                )
+              );
+              callExpression.node.comments = comments;
+            }
+          });
+      }
     }
   }
 };
