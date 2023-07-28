@@ -1,10 +1,10 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { FUNCTION_TYPE_LIST } from "../config";
+import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getClientIdentifiers } from "./getClientIdentifiers";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
-import { getS3UploadCallExpression } from "./getS3UploadCallExpression";
 
 export interface CommentsForUnsupportedAPIsOptions {
   v2ClientName: string;
@@ -49,7 +49,7 @@ export const addNotSupportedComments = (
   if (options.v2ClientName === "S3") {
     for (const clientId of clientIdentifiers) {
       source
-        .find(j.CallExpression, getS3UploadCallExpression(clientId))
+        .find(j.CallExpression, getClientApiCallExpression(clientId, "upload"))
         .forEach((callExpression) => {
           const args = callExpression.node.arguments;
 

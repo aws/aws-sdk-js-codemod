@@ -1,7 +1,12 @@
 import { API, FileInfo } from "jscodeshift";
 
-import { addNotSupportedComments, removePromiseCalls, replaceWaiterApi } from "./apis";
-import { replaceS3UploadApi } from "./apis/replaceS3UploadApi";
+import {
+  addNotSupportedComments,
+  removePromiseCalls,
+  replaceWaiterApi,
+  replaceS3UploadApi,
+  replaceS3GetSignedUrlApi,
+} from "./apis";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
@@ -58,6 +63,7 @@ const transformer = async (file: FileInfo, api: API) => {
     removeClientModule(j, source, v2Options);
     replaceS3UploadApi(j, source, v2Options);
     removePromiseCalls(j, source, v2Options);
+    replaceS3GetSignedUrlApi(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
 
     replaceClientCreation(j, source, v2Options);

@@ -2,6 +2,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import {
   getClientWaiterStates,
+  getCommandName,
   getS3SignedUrlApiNames,
   getV3ClientWaiterApiName,
   isS3GetSignedUrlApiUsed,
@@ -62,7 +63,7 @@ export const addClientImportEquals = (
     for (const apiName of getS3SignedUrlApiNames(j, source, options)) {
       addClientNamedImportEquals(j, source, {
         ...options,
-        keyName: `${apiName[0].toUpperCase()}${apiName.slice(1)}Command`,
+        keyName: getCommandName(apiName),
       });
     }
   }

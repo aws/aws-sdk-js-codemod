@@ -5,4 +5,7 @@ export * from "./getS3SignedUrlApiNames";
 export * from "./isS3GetSignedUrlApiUsed";
 export * from "./isS3UploadApiUsed";
 export * from "./removePromiseCalls";
+export * from "./replaceS3GetSignedUrlApi";
+export * from "./replaceS3UploadApi";
 export * from "./replaceWaiterApi";
+export * from "./getCommandName";
