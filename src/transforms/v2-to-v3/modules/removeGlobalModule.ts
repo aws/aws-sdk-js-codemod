@@ -7,11 +7,14 @@ import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEquals } from "./removeImportEquals";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
 
+// Removes the import of "aws-sdk" if it's not used.
 export const removeGlobalModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2GlobalName: string
+  v2GlobalName?: string
 ) => {
+  if (!v2GlobalName) return;
+
   const identifierUsages = source.find(j.Identifier, { name: v2GlobalName });
 
   // Only usage is import/require.
