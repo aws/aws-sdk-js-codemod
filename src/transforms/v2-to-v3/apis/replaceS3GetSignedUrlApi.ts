@@ -1,7 +1,16 @@
-import { Collection, JSCodeshift, Literal } from "jscodeshift";
+import {
+  Collection,
+  JSCodeshift,
+  Literal,
+  NewExpression,
+  ObjectExpression,
+  Property,
+  ObjectProperty,
+} from "jscodeshift";
 
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { getClientIdentifiers } from "./getClientIdentifiers";
+import { ClientIdentifier, getClientIdentifiers } from "./getClientIdentifiers";
 import { getCommandName } from "./getCommandName";
 
 export interface ReplaceS3GetSignedUrlApiOptions {
@@ -29,10 +38,46 @@ export const replaceS3GetSignedUrlApi = (
         const apiName = (args[0] as Literal).value as string;
         const params = args[1];
 
+        const options = j.objectExpression([]);
+        if (params.type === "ObjectExpression") {
+          // Check if params has property 'Expires' and add it to options.
+          for (const property of params.properties) {
+            if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) continue;
+            const propertyKey = (property as Property | ObjectProperty).key;
+            const propertyValue = (property as Property | ObjectProperty).value;
+            if (propertyKey.type === "Identifier") {
+              const propertyKeyName = propertyKey.name;
+              if (propertyKeyName === "Expires") {
+                // Add 'expiresIn' property to options.
+                options.properties.push(
+                  j.objectProperty.from({
+                    key: j.identifier("expiresIn"),
+                    value: propertyValue,
+                    shorthand: true,
+                  })
+                );
+                // Remove 'Expires' property from params.
+                params.properties = params.properties.filter(
+                  (property) => (property as Property | ObjectProperty).key.name !== "Expires"
+                );
+              }
+            }
+          }
+        }
+
+        const getSignedUrlArgs: (ClientIdentifier | NewExpression | ObjectExpression)[] = [
+          clientId,
+          j.newExpression(j.identifier(getCommandName(apiName)), [params]),
+        ];
+
+        if (options.properties.length > 0) {
+          getSignedUrlArgs.push(options);
+        }
+
         return j.awaitExpression.from({
           argument: j.callExpression.from({
             callee: j.identifier("getSignedUrl"),
-            arguments: [clientId, j.newExpression(j.identifier(getCommandName(apiName)), [params])],
+            arguments: getSignedUrlArgs,
           }),
         });
       });
