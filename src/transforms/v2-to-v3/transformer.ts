@@ -56,15 +56,18 @@ const transformer = async (file: FileInfo, api: API) => {
     addClientModules(j, source, { ...v2Options, ...v3Options });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
-    replaceS3UploadApi(j, source, v2Options);
-    removePromiseCalls(j, source, v2Options);
-    replaceWaiterApi(j, source, v2Options);
 
     if (v2GlobalName) {
       replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
     }
 
+    // Client specific replacements.
+    replaceS3UploadApi(j, source, v2Options);
     replaceDocClientCreation(j, source, v2Options);
+
+    // Promise calls are removed after all API replacements.
+    removePromiseCalls(j, source, v2Options);
+    replaceWaiterApi(j, source, v2Options);
   }
 
   if (v2GlobalName) {
