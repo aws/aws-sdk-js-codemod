@@ -60,10 +60,7 @@ const transformer = async (file: FileInfo, api: API) => {
     removePromiseCalls(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
 
-    if (v2GlobalName) {
-      replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
-    }
-
+    replaceClientCreation(j, source, v2Options);
     replaceDocClientCreation(j, source, v2Options);
   }
 
