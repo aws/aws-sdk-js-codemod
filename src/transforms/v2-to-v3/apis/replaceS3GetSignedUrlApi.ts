@@ -39,6 +39,7 @@ export const replaceS3GetSignedUrlApi = (
         const params = args[1];
 
         const options = j.objectExpression([]);
+
         if (params.type === "ObjectExpression") {
           // Check if params has property 'Expires' and add it to options.
           for (const property of params.properties) {
@@ -66,6 +67,17 @@ export const replaceS3GetSignedUrlApi = (
               }
             }
           }
+        } else {
+          // Add comment that expiredIn need to explicitly set.
+          options.properties.push(
+            j.objectProperty.from({
+              key: j.identifier("expiresIn"),
+              value: j.literal.from({
+                value: "/* add value from 'Expires' from v2 call if present, else remove */",
+              }),
+              shorthand: true,
+            })
+          );
         }
 
         const getSignedUrlArgs: (ClientIdentifier | NewExpression | ObjectExpression)[] = [
