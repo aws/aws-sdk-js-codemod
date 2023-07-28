@@ -57,9 +57,12 @@ export const replaceS3GetSignedUrlApi = (
                   })
                 );
                 // Remove 'Expires' property from params.
-                params.properties = params.properties.filter(
-                  (property) => (property as Property | ObjectProperty).key.name !== "Expires"
-                );
+                params.properties = params.properties.filter((property) => {
+                  if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return true;
+                  const propertyKey = (property as Property | ObjectProperty).key;
+                  if (propertyKey.type !== "Identifier") return true;
+                  return propertyKey.name !== "Expires";
+                });
               }
             }
           }
