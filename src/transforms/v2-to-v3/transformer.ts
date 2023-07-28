@@ -8,7 +8,6 @@ import {
   getClientNamesFromGlobal,
   getClientNamesRecord,
 } from "./client-names";
-import { DYNAMODB } from "./config";
 import {
   addClientModules,
   getGlobalNameFromModule,
@@ -65,9 +64,7 @@ const transformer = async (file: FileInfo, api: API) => {
       replaceClientCreation(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
     }
 
-    if (v2ClientName === DYNAMODB) {
-      replaceDocClientCreation(j, source, { v2ClientLocalName, v2GlobalName });
-    }
+    replaceDocClientCreation(j, source, v2Options);
   }
 
   if (v2GlobalName) {
