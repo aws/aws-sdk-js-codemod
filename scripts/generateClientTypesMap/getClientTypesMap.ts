@@ -5,7 +5,7 @@ import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } 
 import { DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config";
 import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
 
-const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration", "AttributeValue"];
+const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
 const ElementTypeToNativeTypeMap = {
   TSStringKeyword: "string",
   TSNumberKeyword: "number",
