@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { DYNAMODB } from "../config";
-import { getDocClientNewExpression } from "../utils";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { getClientNewExpression } from "../utils";
 import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
 
 export interface ReplaceDocClientCreationOptions {
@@ -19,7 +19,10 @@ export const replaceDocClientCreation = (
 
   if (v2GlobalName) {
     source
-      .find(j.NewExpression, getDocClientNewExpression({ v2GlobalName }))
+      .find(
+        j.NewExpression,
+        getClientNewExpression({ v2GlobalName, v2ClientName: DYNAMODB_DOCUMENT_CLIENT })
+      )
       .replaceWith((v2DocClientNewExpression) =>
         j.callExpression(
           j.memberExpression(j.identifier("DynamoDBDocument"), j.identifier("from")),
@@ -29,7 +32,10 @@ export const replaceDocClientCreation = (
   }
 
   source
-    .find(j.NewExpression, getDocClientNewExpression({ v2ClientLocalName }))
+    .find(
+      j.NewExpression,
+      getClientNewExpression({ v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}` })
+    )
     .replaceWith((v2DocClientNewExpression) =>
       j.callExpression(j.memberExpression(j.identifier("DynamoDBDocument"), j.identifier("from")), [
         getDynamoDBForDocClient(j, v2DocClientNewExpression, { v2ClientLocalName }),
