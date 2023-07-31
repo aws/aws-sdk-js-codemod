@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift, NewExpression } from "jscodeshift";
 
-import { DYNAMODB } from "../config";
-import { getClientNewExpression, getDocClientNewExpression } from "../utils";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { getClientNewExpression } from "../utils";
 
 export interface GetClientIdNamesFromNewExprOptions {
   v2ClientName: string;
@@ -50,7 +50,11 @@ export const getClientIdNamesFromNewExpr = (
       );
       if (v2ClientName === DYNAMODB) {
         namesFromGlobalModule.push(
-          ...getNames(j, source, getDocClientNewExpression({ v2GlobalName }))
+          ...getNames(
+            j,
+            source,
+            getClientNewExpression({ v2GlobalName, v2ClientName: DYNAMODB_DOCUMENT_CLIENT })
+          )
         );
       }
     }
@@ -59,7 +63,11 @@ export const getClientIdNamesFromNewExpr = (
     );
     if (v2ClientName === DYNAMODB) {
       namesFromServiceModule.push(
-        ...getNames(j, source, getDocClientNewExpression({ v2ClientLocalName }))
+        ...getNames(
+          j,
+          source,
+          getClientNewExpression({ v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}` })
+        )
       );
     }
   }
