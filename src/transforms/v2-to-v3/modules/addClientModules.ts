@@ -8,9 +8,9 @@ import {
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
 } from "../apis";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getV3ClientTypesCount } from "../ts-type";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
-import { getDocClientNewExpressionCount } from "./getDocClientNewExpressionCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
@@ -79,12 +79,22 @@ export const addClientModules = (
     }
   }
 
-  const docClientNewExpressionCount = getDocClientNewExpressionCount(j, source, options);
-  if (docClientNewExpressionCount > 0) {
-    addClientNamedModule(j, source, {
+  if (options.v2ClientName === DYNAMODB) {
+    const { v2ClientLocalName } = options;
+    const docClientOptions = {
       ...options,
-      importedName: "DynamoDBDocument",
-      v3ClientPackageName: "@aws-sdk/lib-dynamodb",
-    });
+      v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
+      ...(v2ClientLocalName && {
+        v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+      }),
+    };
+    const docClientNewExpressionCount = getNewExpressionCount(j, source, docClientOptions);
+    if (docClientNewExpressionCount > 0) {
+      addClientNamedModule(j, source, {
+        ...options,
+        importedName: "DynamoDBDocument",
+        v3ClientPackageName: "@aws-sdk/lib-dynamodb",
+      });
+    }
   }
 };

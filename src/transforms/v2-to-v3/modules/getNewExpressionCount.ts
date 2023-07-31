@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientNewExpression } from "../utils";
-import { getDocClientNewExpressionCount } from "./getDocClientNewExpressionCount";
 import { ClientModulesOptions } from "./types";
 
 export const getNewExpressionCount = (
@@ -26,7 +26,15 @@ export const getNewExpressionCount = (
   );
   newExpressionCount += newExpressionsFromClientLocalName.length;
 
-  newExpressionCount += getDocClientNewExpressionCount(j, source, options);
+  if (v2ClientName === DYNAMODB) {
+    newExpressionCount += getNewExpressionCount(j, source, {
+      ...options,
+      v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
+      ...(v2ClientLocalName && {
+        v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+      }),
+    });
+  }
 
   return newExpressionCount;
 };
