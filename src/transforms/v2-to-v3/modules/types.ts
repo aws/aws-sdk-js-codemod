@@ -6,11 +6,6 @@ export interface ClientModulesOptions {
   v3ClientPackageName: string;
 }
 
-export interface RequirePropertyOptions {
-  keyName: string;
-  valueName?: string;
-}
-
 export interface ImportSpecifierOptions {
   importedName: string;
   localName?: string;

@@ -1,24 +1,24 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../utils";
-import { addClientDefaultImportEquals } from "./addClientDefaultImportEquals";
-import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
-import { getImportEqualsLocalNameSuffix } from "./getImportEqualsLocalNameSuffix";
-import { getRequireProperty } from "./getRequireProperty";
-import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
-import { ClientModulesOptions, RequirePropertyOptions } from "./types";
+import { getDefaultLocalName } from "../../utils";
+import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationType";
+import { getImportEqualsLocalNameSuffix } from "../getImportEqualsLocalNameSuffix";
+import { getRequireProperty } from "../getRequireProperty";
+import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
+import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
+import { addClientDefaultModule } from "./addClientDefaultModule";
 
-export const addClientNamedImportEquals = (
+export const addClientNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & RequirePropertyOptions
+  options: ClientModulesOptions & ImportSpecifierOptions
 ) => {
-  const { keyName, valueName, ...v3ClientModulesOptions } = options;
+  const { importedName, localName, ...v3ClientModulesOptions } = options;
   const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
 
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const defaultLocalName = getDefaultLocalName(localNameSuffix);
-  const namedImportObjectProperty = getRequireProperty(j, { keyName, valueName });
+  const namedImportObjectProperty = getRequireProperty(j, { importedName, localName });
 
   const existingVarDeclarator = source.find(j.VariableDeclarator, {
     type: "VariableDeclarator",
@@ -34,7 +34,7 @@ export const addClientNamedImportEquals = (
 
   const importEqualsDeclaration = getImportEqualsDeclarationType(v3ClientPackageName);
   if (source.find(j.TSImportEqualsDeclaration, importEqualsDeclaration).size() === 0) {
-    addClientDefaultImportEquals(j, source, v3ClientModulesOptions);
+    addClientDefaultModule(j, source, v3ClientModulesOptions);
   }
 
   const varDeclaration = j.variableDeclaration("const", [

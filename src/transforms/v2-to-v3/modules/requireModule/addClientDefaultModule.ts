@@ -1,11 +1,11 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../utils";
-import { getRequireDeclarator } from "./getRequireDeclarator";
-import { getRequireDeclarators } from "./getRequireDeclarators";
-import { ClientModulesOptions } from "./types";
+import { getDefaultLocalName } from "../../utils";
+import { getRequireDeclarator } from "../getRequireDeclarator";
+import { getRequireDeclarators } from "../getRequireDeclarators";
+import { ClientModulesOptions } from "../types";
 
-export const addClientDefaultRequire = (
+export const addClientDefaultModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2ClientName, v2ClientLocalName, v3ClientPackageName, v2GlobalName }: ClientModulesOptions

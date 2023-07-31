@@ -1,19 +1,90 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { addClientImportEquals } from "./addClientImportEquals";
-import { addClientImports } from "./addClientImports";
-import { addClientRequires } from "./addClientRequires";
+import {
+  getClientWaiterStates,
+  getCommandName,
+  getS3SignedUrlApiNames,
+  getV3ClientWaiterApiName,
+  isS3GetSignedUrlApiUsed,
+  isS3UploadApiUsed,
+} from "../apis";
+import { getV3ClientTypesCount } from "../ts-type";
+import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
+import { getDocClientNewExpressionCount } from "./getDocClientNewExpressionCount";
+import { getNewExpressionCount } from "./getNewExpressionCount";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";
+
+import * as importEqualsModule from "./importEqualsModule";
+import * as importModule from "./importModule";
+import * as requireModule from "./requireModule";
 import { ClientModulesOptions } from "./types";
 
 export const addClientModules = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: ClientModulesOptions
-): void =>
-  hasRequire(j, source)
-    ? addClientRequires(j, source, options)
+): void => {
+  const { addClientDefaultModule, addClientNamedModule } = hasRequire(j, source)
+    ? requireModule
     : hasImportEquals(j, source)
-    ? addClientImportEquals(j, source, options)
-    : addClientImports(j, source, options);
+    ? importEqualsModule
+    : importModule;
+
+  const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
+  const newExpressionCount = getNewExpressionCount(j, source, options);
+  const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
+  const waiterStates = getClientWaiterStates(j, source, options);
+
+  // Add default import for types, if needed.
+  if (v3ClientTypesCount > 0) {
+    addClientDefaultModule(j, source, options);
+  }
+
+  if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
+    addClientNamedModule(j, source, {
+      ...options,
+      importedName: options.v3ClientName,
+      localName: options.v2ClientLocalName,
+    });
+  }
+
+  for (const waiterState of waiterStates) {
+    const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
+    addClientNamedModule(j, source, {
+      ...options,
+      importedName: v3WaiterApiName,
+    });
+  }
+
+  if (isS3UploadApiUsed(j, source, options)) {
+    addClientNamedModule(j, source, {
+      ...options,
+      importedName: "Upload",
+      v3ClientPackageName: "@aws-sdk/lib-storage",
+    });
+  }
+
+  if (isS3GetSignedUrlApiUsed(j, source, options)) {
+    addClientNamedModule(j, source, {
+      ...options,
+      importedName: "getSignedUrl",
+      v3ClientPackageName: "@aws-sdk/s3-request-presigner",
+    });
+    for (const apiName of getS3SignedUrlApiNames(j, source, options)) {
+      addClientNamedModule(j, source, {
+        ...options,
+        importedName: getCommandName(apiName),
+      });
+    }
+  }
+
+  const docClientNewExpressionCount = getDocClientNewExpressionCount(j, source, options);
+  if (docClientNewExpressionCount > 0) {
+    addClientNamedModule(j, source, {
+      ...options,
+      importedName: "DynamoDBDocument",
+      v3ClientPackageName: "@aws-sdk/lib-dynamodb",
+    });
+  }
+};
