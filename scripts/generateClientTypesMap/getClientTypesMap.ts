@@ -7,6 +7,7 @@ import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapW
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
 const ElementTypeToNativeTypeMap = {
+  TSAnyKeyword: "any",
   TSStringKeyword: "string",
   TSNumberKeyword: "number",
   TSBooleanKeyword: "boolean",
