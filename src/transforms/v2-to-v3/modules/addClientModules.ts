@@ -80,13 +80,14 @@ export const addClientModules = (
   }
 
   if (options.v2ClientName === DYNAMODB) {
+    const { v2ClientLocalName } = options;
     const docClientOptions = {
       ...options,
       v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
+      ...(v2ClientLocalName && {
+        v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+      }),
     };
-    if (options.v2ClientLocalName) {
-      docClientOptions.v2ClientLocalName = `${options.v2ClientLocalName}.${DOCUMENT_CLIENT}`;
-    }
     const docClientNewExpressionCount = getNewExpressionCount(j, source, docClientOptions);
     if (docClientNewExpressionCount > 0) {
       addClientNamedModule(j, source, {
