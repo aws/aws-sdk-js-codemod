@@ -81,6 +81,7 @@ export const addClientModules = (
 
   if (options.v2ClientName === DYNAMODB) {
     const { v2ClientLocalName } = options;
+
     const docClientOptions = {
       ...options,
       v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
@@ -88,7 +89,19 @@ export const addClientModules = (
         v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
       }),
     };
+
+    const docClientTypesCount = getV3ClientTypesCount(j, source, docClientOptions);
     const docClientNewExpressionCount = getNewExpressionCount(j, source, docClientOptions);
+
+    // Add default import for types, if needed.
+    if (docClientTypesCount > 0) {
+      addClientDefaultModule(j, source, {
+        ...options,
+        v2ClientLocalName: "DynamoDBDocument",
+        v3ClientPackageName: "@aws-sdk/lib-dynamodb",
+      });
+    }
+
     if (docClientNewExpressionCount > 0) {
       addClientNamedModule(j, source, {
         ...options,
