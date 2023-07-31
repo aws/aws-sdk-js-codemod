@@ -56,10 +56,20 @@ export const getClientTypeNames = (
     );
   }
 
+  // Support for DynamoDB.DocumentClient
+  const [clientName, subClientName] = v2ClientLocalName!.split(".");
+
   clientTypeNames.push(
     ...getRightIdentifierName(j, source, {
       typeName: {
-        left: { type: "Identifier", name: v2ClientLocalName },
+        ...(subClientName
+          ? {
+              left: {
+                left: { type: "Identifier", name: clientName },
+                right: { type: "Identifier", name: subClientName },
+              },
+            }
+          : { left: { type: "Identifier", name: clientName } }),
       },
     })
   );
