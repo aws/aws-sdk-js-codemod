@@ -1,13 +1,13 @@
 import { JSCodeshift } from "jscodeshift";
 
-import { RequirePropertyOptions } from "./types";
+import { ImportSpecifierOptions } from "./types";
 
 export const getRequireProperty = (
   j: JSCodeshift,
-  { keyName, valueName }: RequirePropertyOptions
+  { importedName, localName }: ImportSpecifierOptions
 ) =>
   j.objectProperty.from({
-    key: j.identifier(keyName),
-    value: j.identifier(valueName ?? keyName),
+    key: j.identifier(importedName),
+    value: j.identifier(localName ?? importedName),
     shorthand: true,
   });

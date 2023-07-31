@@ -1,24 +1,25 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { getDefaultLocalName } from "../utils";
-import { getRequireDeclarator } from "./getRequireDeclarator";
-import { getRequireDeclarators } from "./getRequireDeclarators";
-import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
-import { getRequireProperty } from "./getRequireProperty";
-import { objectPatternPropertyCompareFn } from "./objectPatternPropertyCompareFn";
-import { ClientModulesOptions, RequirePropertyOptions } from "./types";
+import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
+import { getDefaultLocalName } from "../../utils";
+import { getRequireDeclarator } from "../getRequireDeclarator";
+import { getRequireDeclarators } from "../getRequireDeclarators";
+import { getRequireDeclaratorsWithIdentifier } from "../getRequireDeclaratorsWithIdentifier";
+import { getRequireProperty } from "../getRequireProperty";
+import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
+import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
 
-export const addClientNamedRequire = (
+export const addClientNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & RequirePropertyOptions
+  options: ClientModulesOptions & ImportSpecifierOptions
 ) => {
-  const { keyName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } = options;
-  const valueName = options.valueName ?? keyName;
+  const { importedName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } =
+    options;
+  const localName = options.localName ?? importedName;
 
   const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
-  const clientObjectProperty = getRequireProperty(j, { keyName, valueName });
+  const clientObjectProperty = getRequireProperty(j, { importedName, localName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
@@ -38,7 +39,7 @@ export const addClientNamedRequire = (
             if (key.type !== "Identifier" || value.type !== "Identifier") {
               return false;
             }
-            return key.name === keyName && value.name === valueName;
+            return key.name === importedName && value.name === localName;
           })
       )
     ) {

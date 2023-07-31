@@ -1,12 +1,12 @@
 import { Collection, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
-import { getImportDeclaration } from "./getImportDeclaration";
-import { getImportSpecifier } from "./getImportSpecifier";
-import { getImportSpecifiers } from "./getImportSpecifiers";
-import { importSpecifierCompareFn } from "./importSpecifierCompareFn";
-import { ClientModulesOptions, ImportSpecifierOptions } from "./types";
+import { getImportDeclaration } from "../getImportDeclaration";
+import { getImportSpecifier } from "../getImportSpecifier";
+import { getImportSpecifiers } from "../getImportSpecifiers";
+import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
+import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
 
-export const addClientNamedImport = (
+export const addClientNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: ClientModulesOptions & ImportSpecifierOptions
