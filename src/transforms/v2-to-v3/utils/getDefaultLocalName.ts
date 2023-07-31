@@ -1,1 +1,2 @@
-export const getDefaultLocalName = (localNameSuffix: string) => `AWS_${localNameSuffix}`;
+export const getDefaultLocalName = (localNameSuffix: string) =>
+  `AWS_${localNameSuffix.replace(".", "")}`;

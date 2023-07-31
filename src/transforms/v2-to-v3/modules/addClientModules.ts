@@ -97,7 +97,7 @@ export const addClientModules = (
     if (docClientTypesCount > 0) {
       addClientDefaultModule(j, source, {
         ...options,
-        v2ClientLocalName: "DynamoDBDocument",
+        v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
         v3ClientPackageName: "@aws-sdk/lib-dynamodb",
       });
     }
