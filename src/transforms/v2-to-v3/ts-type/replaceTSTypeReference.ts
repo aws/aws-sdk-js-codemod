@@ -73,11 +73,19 @@ export const replaceTSTypeReference = (
       });
   }
 
+  const [clientNamePrefix, clientNameSuffix] = v2ClientLocalName.split(".");
   // Replace reference to client types created with client module.
   source
     .find(j.TSTypeReference, {
       typeName: {
-        left: { type: "Identifier", name: v2ClientLocalName },
+        ...(clientNameSuffix
+          ? {
+              left: {
+                left: { type: "Identifier", name: clientNamePrefix },
+                right: { type: "Identifier", name: clientNameSuffix },
+              },
+            }
+          : { left: { type: "Identifier", name: clientNamePrefix } }),
       },
     })
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
