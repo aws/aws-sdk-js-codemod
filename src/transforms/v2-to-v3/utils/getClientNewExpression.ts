@@ -24,17 +24,58 @@ export const getClientNewExpression = ({
   }
 
   if (v2GlobalName) {
+    if (v2ClientName) {
+      // Support for DynamoDB.DocumentClient
+      const [clientName, subClientName] = v2ClientName.split(".");
+
+      if (subClientName) {
+        return {
+          type: "NewExpression",
+          callee: {
+            type: "MemberExpression",
+            object: {
+              type: "MemberExpression",
+              object: { type: "Identifier", name: v2GlobalName },
+              property: { type: "Identifier", name: clientName },
+            },
+            property: { type: "Identifier", name: subClientName },
+          },
+        } as NewExpression;
+      }
+
+      return {
+        type: "NewExpression",
+        callee: {
+          object: { type: "Identifier", name: v2GlobalName },
+          property: { type: "Identifier", name: clientName },
+        },
+      } as NewExpression;
+    }
+
     return {
       type: "NewExpression",
       callee: {
         object: { type: "Identifier", name: v2GlobalName },
-        property: { type: "Identifier", ...(v2ClientName && { name: v2ClientName }) },
+        property: { type: "Identifier" },
+      },
+    } as NewExpression;
+  }
+
+  // Support for DynamoDB.DocumentClient
+  const [clientName, subClientName] = v2ClientLocalName!.split(".");
+
+  if (subClientName) {
+    return {
+      type: "NewExpression",
+      callee: {
+        object: { type: "Identifier", name: clientName },
+        property: { type: "Identifier", name: subClientName },
       },
     } as NewExpression;
   }
 
   return {
     type: "NewExpression",
-    callee: { type: "Identifier", name: v2ClientLocalName },
+    callee: { type: "Identifier", name: clientName },
   } as NewExpression;
 };
