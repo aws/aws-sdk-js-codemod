@@ -19,6 +19,29 @@ const getRightIdentifierName = (node: TSTypeReference) =>
 
 const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifier).name;
 
+const getTypeNameRefFromClientName = (
+  v2GlobalName: string,
+  clientName: string
+): TSQualifiedName => {
+  // Support for DynamoDB.DocumentClient
+  const [clientNamePrefix, clientNameSuffix] = clientName.split(".");
+
+  if (clientNameSuffix) {
+    return {
+      left: {
+        left: { type: "Identifier", name: v2GlobalName },
+        right: { type: "Identifier", name: clientNamePrefix },
+      },
+      right: { type: "Identifier", name: clientNameSuffix },
+    } as TSQualifiedName;
+  }
+
+  return {
+    left: { type: "Identifier", name: v2GlobalName },
+    right: { type: "Identifier", name: clientNamePrefix },
+  } as TSQualifiedName;
+};
+
 // Replace v2 client type reference with v3 client type reference.
 export const replaceTSTypeReference = (
   j: JSCodeshift,
@@ -27,26 +50,10 @@ export const replaceTSTypeReference = (
 ): void => {
   const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
   if (v2GlobalName) {
-    // Support for DynamoDB.DocumentClient
-    const [clientName, subClientName] = v2ClientName.split(".");
-
     // Replace type reference to client created with global name.
     source
       .find(j.TSTypeReference, {
-        typeName: {
-          ...(subClientName
-            ? {
-                left: {
-                  left: { type: "Identifier", name: v2GlobalName },
-                  right: { type: "Identifier", name: clientName },
-                },
-                right: { type: "Identifier", name: subClientName },
-              }
-            : {
-                left: { type: "Identifier", name: v2GlobalName },
-                right: { type: "Identifier", name: clientName },
-              }),
-        },
+        typeName: getTypeNameRefFromClientName(v2GlobalName, v2ClientName),
       })
       .replaceWith((v2ClientType) =>
         j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
@@ -56,20 +63,7 @@ export const replaceTSTypeReference = (
     source
       .find(j.TSTypeReference, {
         typeName: {
-          left: {
-            ...(subClientName
-              ? {
-                  left: {
-                    left: { type: "Identifier", name: v2GlobalName },
-                    right: { type: "Identifier", name: clientName },
-                  },
-                  right: { type: "Identifier", name: subClientName },
-                }
-              : {
-                  left: { type: "Identifier", name: v2GlobalName },
-                  right: { type: "Identifier", name: clientName },
-                }),
-          },
+          left: getTypeNameRefFromClientName(v2GlobalName, v2ClientName),
         },
       })
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
