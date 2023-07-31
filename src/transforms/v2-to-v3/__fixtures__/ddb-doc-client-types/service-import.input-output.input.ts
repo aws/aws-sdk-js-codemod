@@ -1,11 +1,11 @@
-import { DynamoDB } from "aws-sdk";
+import { DynamoDB as DynDB } from "aws-sdk";
 
-const docClient = new DynamoDB.DocumentClient({ region: "us-west-2" });
+const docClient = new DynDB.DocumentClient({ region: "us-west-2" });
 
-const docClientScanInput: DynamoDB.DocumentClient.ScanInput = {
+const docClientScanInput: DynDB.DocumentClient.ScanInput = {
   TableName: "TableName"
 };
 
-const docClientScanOutput: DynamoDB.DocumentClient.ScanOutput = await docClient
+const docClientScanOutput: DynDB.DocumentClient.ScanOutput = await docClient
   .scan(docClientScanInput)
   .promise();

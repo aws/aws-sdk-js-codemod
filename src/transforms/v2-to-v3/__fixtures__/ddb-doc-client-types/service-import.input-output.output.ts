@@ -1,11 +1,11 @@
-import AWS_DynamoDBDocumentClient, { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
+import AWS_DynDBDocumentClient, { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDB as DynDB } from "@aws-sdk/client-dynamodb";
 
-const docClient = DynamoDBDocument.from(new DynamoDB({ region: "us-west-2" }));
+const docClient = DynamoDBDocument.from(new DynDB({ region: "us-west-2" }));
 
-const docClientScanInput: AWS_DynamoDBDocumentClient.ScanCommandInput = {
+const docClientScanInput: AWS_DynDBDocumentClient.ScanCommandInput = {
   TableName: "TableName"
 };
 
-const docClientScanOutput: AWS_DynamoDBDocumentClient.ScanCommandOutput = await docClient
+const docClientScanOutput: AWS_DynDBDocumentClient.ScanCommandOutput = await docClient
   .scan(docClientScanInput);
