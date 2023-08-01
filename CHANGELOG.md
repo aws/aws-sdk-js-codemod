@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 0.17.0
+
+### Minor Changes
+
+- Support transformation of DocumentClient input/output types ([53a49aa](https://github.com/awslabs/aws-sdk-js-codemod/commit/53a49aa))
+
+### Patch Changes
+
+- Create types map for DocumentClient ([31f3ef4](https://github.com/awslabs/aws-sdk-js-codemod/commit/31f3ef4))
+
 ## 0.16.0
 
 ### Minor Changes
