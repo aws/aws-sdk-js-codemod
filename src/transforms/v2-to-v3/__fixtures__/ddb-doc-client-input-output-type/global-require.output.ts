@@ -1,7 +1,7 @@
-const {
+const AWS_DynamoDBDocumentClient = require("@aws-sdk/lib-dynamodb"),
+      {
         DynamoDBDocument
-      } = require("@aws-sdk/lib-dynamodb"),
-      AWS_DynamoDBDocumentClient = require("@aws-sdk/lib-dynamodb"),
+      } = AWS_DynamoDBDocumentClient,
       {
         DynamoDB
       } = require("@aws-sdk/client-dynamodb");
