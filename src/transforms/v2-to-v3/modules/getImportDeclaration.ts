@@ -11,10 +11,13 @@ export interface GetImportDeclarationOptions {
 export const getImportDeclaration = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName }: GetImportDeclarationOptions
-) =>
+  options: GetImportDeclarationOptions
+) => {
+  // Support DynamoDB.DocumentClient
+  const v2ClientLocalName = options.v2ClientLocalName.split(".")[0];
+
   // Return global or service import declaration.
-  source.find(j.ImportDeclaration).filter((importDeclaration) => {
+  return source.find(j.ImportDeclaration).filter((importDeclaration) => {
     const sourceValue = importDeclaration.value.source.value as string;
 
     if (
@@ -29,7 +32,7 @@ export const getImportDeclaration = (
     }
 
     if (
-      sourceValue === getClientDeepImportPath(v2ClientName) &&
+      sourceValue === getClientDeepImportPath(options.v2ClientName) &&
       importDeclaration.value.specifiers?.some(
         (specifier) =>
           ["ImportNamespaceSpecifier", "ImportDefaultSpecifier"].includes(specifier.type) &&
@@ -41,3 +44,4 @@ export const getImportDeclaration = (
 
     return false;
   });
+};

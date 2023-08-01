@@ -7162,7 +7162,7 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     UpdateExpression: "string",
     WriteRequests: "Array<WriteRequest>",
   },
-  DocumentClient: {
+  "DynamoDB.DocumentClient": {
     _Date: "Date",
     ArchivalReason: "string",
     AttributeDefinitions: "Array<AttributeDefinition>",

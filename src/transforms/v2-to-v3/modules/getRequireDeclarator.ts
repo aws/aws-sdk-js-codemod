@@ -15,8 +15,13 @@ export interface GetRequireDeclaratorOptions {
 export const getRequireDeclarator = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetRequireDeclaratorOptions
+  options: GetRequireDeclaratorOptions
 ) => {
+  const { v2ClientName, v2GlobalName } = options;
+
+  // Support DynamoDB.DocumentClient
+  const v2ClientLocalName = options.v2ClientLocalName.split(".")[0];
+
   if (v2GlobalName) {
     const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
       identifierName: v2GlobalName,

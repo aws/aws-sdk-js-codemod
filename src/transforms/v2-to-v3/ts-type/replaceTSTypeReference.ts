@@ -1,5 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
@@ -18,20 +19,41 @@ const getRightIdentifierName = (node: TSTypeReference) =>
 
 const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifier).name;
 
+const getTypeNameRefFromClientName = (
+  v2GlobalName: string,
+  clientName: string
+): TSQualifiedName => {
+  // Support for DynamoDB.DocumentClient
+  const [clientNamePrefix, clientNameSuffix] = clientName.split(".");
+
+  if (clientNameSuffix) {
+    return {
+      left: {
+        left: { type: "Identifier", name: v2GlobalName },
+        right: { type: "Identifier", name: clientNamePrefix },
+      },
+      right: { type: "Identifier", name: clientNameSuffix },
+    } as TSQualifiedName;
+  }
+
+  return {
+    left: { type: "Identifier", name: v2GlobalName },
+    right: { type: "Identifier", name: clientNamePrefix },
+  } as TSQualifiedName;
+};
+
 // Replace v2 client type reference with v3 client type reference.
 export const replaceTSTypeReference = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName }: ReplaceTSTypeReferenceOptions
+  options: ReplaceTSTypeReferenceOptions
 ): void => {
-  // Replace type reference to client created with global name.
+  const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
   if (v2GlobalName) {
+    // Replace type reference to client created with global name.
     source
       .find(j.TSTypeReference, {
-        typeName: {
-          left: { type: "Identifier", name: v2GlobalName },
-          right: { type: "Identifier", name: v2ClientName },
-        },
+        typeName: getTypeNameRefFromClientName(v2GlobalName, v2ClientName),
       })
       .replaceWith((v2ClientType) =>
         j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
@@ -41,10 +63,7 @@ export const replaceTSTypeReference = (
     source
       .find(j.TSTypeReference, {
         typeName: {
-          left: {
-            left: { type: "Identifier", name: v2GlobalName },
-            right: { type: "Identifier", name: v2ClientName },
-          },
+          left: getTypeNameRefFromClientName(v2GlobalName, v2ClientName),
         },
       })
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
@@ -54,11 +73,19 @@ export const replaceTSTypeReference = (
       });
   }
 
+  const [clientNamePrefix, clientNameSuffix] = v2ClientLocalName.split(".");
   // Replace reference to client types created with client module.
   source
     .find(j.TSTypeReference, {
       typeName: {
-        left: { type: "Identifier", name: v2ClientLocalName },
+        ...(clientNameSuffix
+          ? {
+              left: {
+                left: { type: "Identifier", name: clientNamePrefix },
+                right: { type: "Identifier", name: clientNameSuffix },
+              },
+            }
+          : { left: { type: "Identifier", name: clientNamePrefix } }),
       },
     })
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
@@ -81,5 +108,13 @@ export const replaceTSTypeReference = (
         const v2ClientTypeName = getIdentifierName(v2ClientType.node);
         return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
       });
+  }
+
+  if (v2ClientName === DYNAMODB) {
+    replaceTSTypeReference(j, source, {
+      ...options,
+      v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
+      v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+    });
   }
 };

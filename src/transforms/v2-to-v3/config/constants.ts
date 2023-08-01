@@ -2,6 +2,7 @@ export const PACKAGE_NAME = "aws-sdk";
 
 export const DYNAMODB = "DynamoDB";
 export const DOCUMENT_CLIENT = "DocumentClient";
+export const DYNAMODB_DOCUMENT = "DynamoDBDocument";
 export const DYNAMODB_DOCUMENT_CLIENT = [DYNAMODB, DOCUMENT_CLIENT].join(".");
 
 export const V2_CLIENT_INPUT_SUFFIX_LIST = ["Input", "Request"];
