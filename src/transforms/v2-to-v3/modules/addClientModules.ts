@@ -8,7 +8,7 @@ import {
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
 } from "../apis";
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getV3ClientTypesCount } from "../ts-type";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
@@ -107,7 +107,7 @@ export const addClientModules = (
     if (docClientNewExpressionCount > 0) {
       addClientNamedModule(j, source, {
         ...docClientModuleOptions,
-        importedName: "DynamoDBDocument",
+        importedName: DYNAMODB_DOCUMENT,
       });
     }
   }
