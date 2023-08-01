@@ -13,10 +13,13 @@ export interface GetImportEqualsDeclarationOptions {
 export const getImportEqualsDeclaration = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientName, v2ClientLocalName, v2GlobalName }: GetImportEqualsDeclarationOptions
-) =>
+  options: GetImportEqualsDeclarationOptions
+) => {
+  // Support DynamoDB.DocumentClient
+  const v2ClientLocalName = options.v2ClientLocalName.split(".")[0];
+
   // Return global or service import declaration.
-  source
+  return source
     .find(j.TSImportEqualsDeclaration, getImportEqualsDeclarationType())
     .filter((importEqualsDeclaration) => {
       const identifierName = importEqualsDeclaration.value.id.name;
@@ -24,12 +27,12 @@ export const getImportEqualsDeclaration = (
         .moduleReference as TSExternalModuleReference;
       const expressionValue = importEqualsModuleRef.expression.value;
 
-      if (expressionValue === PACKAGE_NAME && identifierName === v2GlobalName) {
+      if (expressionValue === PACKAGE_NAME && identifierName === options.v2GlobalName) {
         return true;
       }
 
       if (
-        expressionValue === getClientDeepImportPath(v2ClientName) &&
+        expressionValue === getClientDeepImportPath(options.v2ClientName) &&
         identifierName === v2ClientLocalName
       ) {
         return true;
@@ -37,3 +40,4 @@ export const getImportEqualsDeclaration = (
 
       return false;
     });
+};
