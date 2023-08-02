@@ -15,6 +15,7 @@ export const getDynamoDBDocClientArgs = (
 
   const v2DocClientArgs = v2DocClientNewExpression.node.arguments || [];
 
+  // Add DocumentClient option convertEmptyValues.
   if (v2DocClientArgs.length > 0) {
     const params = v2DocClientArgs[0];
     if (params.type === "ObjectExpression") {
