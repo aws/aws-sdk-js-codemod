@@ -41,7 +41,7 @@ export const getDynamoDBForDocClient = (
   const v3DocClientArgs = v2DocClientArgs[0];
   const v3DocClientNewExpressionArgs = [];
 
-  // Remove DocumentClient option convertEmptyValues.
+  // Remove DocumentClient option convertEmptyValues and wrapNumbers.
   if (v3DocClientArgs.type === "ObjectExpression") {
     v3DocClientArgs.properties = v3DocClientArgs.properties.filter((property) => {
       if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
@@ -51,7 +51,7 @@ export const getDynamoDBForDocClient = (
       if (propertyKey.type !== "Identifier") {
         return true;
       }
-      return propertyKey.name !== "convertEmptyValues";
+      return !["convertEmptyValues", "wrapNumbers"].includes(propertyKey.name);
     });
 
     if (v3DocClientArgs.properties.length > 0) {
