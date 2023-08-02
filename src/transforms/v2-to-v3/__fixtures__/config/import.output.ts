@@ -1,1 +1,3 @@
-const config = { region: "us-east-1" };
+const config = {
+  region: "us-east-1"
+};
