@@ -11,9 +11,11 @@ export const getDynamoDBForDocClient = (
   v2DocClientNewExpression: ASTPath<NewExpression>,
   { v2ClientLocalName }: GetDynamoDBForDocClientOptions
 ) => {
+  const v2DocClientArgs = v2DocClientNewExpression.node.arguments || [];
+
   // Return value in `service` param if it's provided.
-  if (v2DocClientNewExpression.node.arguments.length > 0) {
-    const params = v2DocClientNewExpression.node.arguments[0];
+  if (v2DocClientArgs.length > 0) {
+    const params = v2DocClientArgs[0];
     if (params.type === "ObjectExpression") {
       const serviceProperty = params.properties.find((property) => {
         if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
@@ -36,8 +38,33 @@ export const getDynamoDBForDocClient = (
     }
   }
 
+  const v3DocClientArgs = v2DocClientArgs[0];
+  const v3DocClientNewExpressionArgs = [];
+
+  // Remove DocumentClient option convertEmptyValues.
+  if (v3DocClientArgs.type === "ObjectExpression") {
+    v3DocClientArgs.properties = v3DocClientArgs.properties.filter((property) => {
+      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+        return false;
+      }
+      const propertyKey = (property as Property | ObjectProperty).key;
+      if (propertyKey.type !== "Identifier") {
+        return false;
+      }
+      if (propertyKey.name === "convertEmptyValues") {
+        return false;
+      }
+    });
+
+    if (v3DocClientArgs.properties.length !== 0) {
+      v3DocClientNewExpressionArgs.push(v3DocClientArgs);
+    }
+  } else {
+    v3DocClientNewExpressionArgs.push(v3DocClientArgs);
+  }
+
   return j.newExpression(
     v2ClientLocalName ? j.identifier(v2ClientLocalName) : j.identifier(DYNAMODB),
-    v2DocClientNewExpression.node.arguments
+    v3DocClientNewExpressionArgs
   );
 };
