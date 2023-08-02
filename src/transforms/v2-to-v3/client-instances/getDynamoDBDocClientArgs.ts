@@ -29,15 +29,20 @@ export const getDynamoDBDocClientArgs = (
           continue;
         }
 
-        if (propertyKey.name === "convertEmptyValues") {
+        const docClientOptionsHash: Record<string, string> = {
+          convertEmptyValues: "marshallOptions",
+          wrapNumbers: "unmarshallOptions",
+        };
+
+        if (Object.keys(docClientOptionsHash).includes(propertyKey.name)) {
           dynamoDBDocClientOptions.properties.push(
             j.property(
               "init",
-              j.identifier("marshallOptions"),
+              j.identifier(docClientOptionsHash[propertyKey.name]),
               j.objectExpression([
                 j.property(
                   "init",
-                  j.identifier("convertEmptyValues"),
+                  j.identifier(propertyKey.name),
                   (property as Property | ObjectProperty).value
                 ),
               ])
