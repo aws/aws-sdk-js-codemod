@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.17.1
+
+### Patch Changes
+
+- Transform DynamoDB DocumentClient wrapNumbers option ([d1cea6f](https://github.com/awslabs/aws-sdk-js-codemod/commit/d1cea6f))
+- Transform DynamoDB DocumentClient convertEmptyValues option ([1a54680](https://github.com/awslabs/aws-sdk-js-codemod/commit/1a54680))
+
 ## 0.17.0
 
 ### Minor Changes
