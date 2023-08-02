@@ -45,18 +45,16 @@ export const getDynamoDBForDocClient = (
   if (v3DocClientArgs.type === "ObjectExpression") {
     v3DocClientArgs.properties = v3DocClientArgs.properties.filter((property) => {
       if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
-        return false;
+        return true;
       }
       const propertyKey = (property as Property | ObjectProperty).key;
       if (propertyKey.type !== "Identifier") {
-        return false;
+        return true;
       }
-      if (propertyKey.name === "convertEmptyValues") {
-        return false;
-      }
+      return propertyKey.name !== "convertEmptyValues";
     });
 
-    if (v3DocClientArgs.properties.length !== 0) {
+    if (v3DocClientArgs.properties.length > 0) {
       v3DocClientNewExpressionArgs.push(v3DocClientArgs);
     }
   } else {
