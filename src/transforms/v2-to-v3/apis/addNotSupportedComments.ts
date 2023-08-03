@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift, Property, ObjectProperty } from "jscodeshift";
 import { getClientNamesFromDeepImport } from "../client-names";
-import { DOCUMENT_CLIENT, DYNAMODB } from "../config";
+import { DOCUMENT_CLIENT, DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { hasRequire } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
@@ -18,23 +18,44 @@ export const addNotSupportedComments = (j: JSCodeshift, source: Collection<unkno
     ];
 
     if (hasRequire(j, source)) {
-      // const idsFromNamedImport = getRequireIds(j, source, deepImportPath).filter(
-      //   (id) => id.type === "ObjectPattern"
-      // );
-      // ToDo: Add comments.
-    } else {
+      source
+        .find(j.VariableDeclarator, {
+          init: {
+            type: "CallExpression",
+            callee: { type: "Identifier", name: "require" },
+            arguments: [{ value: deepImportPath }],
+          },
+        })
+        .filter(
+          (variableDeclarator) =>
+            variableDeclarator.value.id.type === "ObjectPattern" &&
+            (variableDeclarator.value.id.properties || []).some((property) => {
+              if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+                return false;
+              }
+              const propertyKey = (property as Property | ObjectProperty).key;
+              return propertyKey.type === "Identifier" && propertyKey.name === DOCUMENT_CLIENT;
+            })
+        )
+        .forEach((variableDeclarator) => {
+          const comments = variableDeclarator.parentPath.parentPath.value.comments || [];
+          variableDeclarator.parentPath.parentPath.value.comments = [
+            ...comments,
+            ...documentClientDeepNamedImportUnsupportedComments,
+          ];
+        });
       source
         .find(j.ImportDeclaration, {
           type: "ImportDeclaration",
           source: { value: deepImportPath },
         })
-        .filter((importDeclaration) => {
-          return (importDeclaration.value.specifiers || []).some(
+        .filter((importDeclaration) =>
+          (importDeclaration.value.specifiers || []).some(
             (importDeclaration) =>
               importDeclaration.type === "ImportSpecifier" &&
               importDeclaration.imported.name === DOCUMENT_CLIENT
-          );
-        })
+          )
+        )
         .forEach((importDeclaration) => {
           const comments = importDeclaration.value.comments || [];
           importDeclaration.value.comments = [
