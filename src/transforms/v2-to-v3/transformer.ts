@@ -2,6 +2,7 @@ import { API, FileInfo } from "jscodeshift";
 
 import {
   addNotSupportedComments,
+  addNotSupportedClientComments,
   removePromiseCalls,
   replaceWaiterApi,
   replaceS3UploadApi,
@@ -26,6 +27,8 @@ const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
 
+  addNotSupportedComments(j, source);
+
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source);
 
@@ -45,7 +48,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const { v2ClientLocalName } = v3ClientMetadata;
-    addNotSupportedComments(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    addNotSupportedClientComments(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
   }
 
   if (source.toSource() !== file.source) {
