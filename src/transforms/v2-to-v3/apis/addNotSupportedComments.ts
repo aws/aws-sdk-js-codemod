@@ -44,6 +44,7 @@ export const addNotSupportedComments = (j: JSCodeshift, source: Collection<unkno
             ...documentClientDeepNamedImportUnsupportedComments,
           ];
         });
+    } else {
       source
         .find(j.ImportDeclaration, {
           type: "ImportDeclaration",
