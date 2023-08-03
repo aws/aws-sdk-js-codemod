@@ -12,7 +12,7 @@ export interface CommentsForUnsupportedAPIsOptions {
   v2GlobalName?: string;
 }
 
-export const addNotSupportedComments = (
+export const addNotSupportedClientComments = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: CommentsForUnsupportedAPIsOptions

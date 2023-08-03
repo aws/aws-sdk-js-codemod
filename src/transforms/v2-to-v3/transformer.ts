@@ -1,7 +1,7 @@
 import { API, FileInfo } from "jscodeshift";
 
 import {
-  addNotSupportedComments,
+  addNotSupportedClientComments,
   removePromiseCalls,
   replaceWaiterApi,
   replaceS3UploadApi,
@@ -45,7 +45,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const { v2ClientLocalName } = v3ClientMetadata;
-    addNotSupportedComments(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    addNotSupportedClientComments(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
   }
 
   if (source.toSource() !== file.source) {
