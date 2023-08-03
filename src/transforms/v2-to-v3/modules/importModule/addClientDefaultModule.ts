@@ -11,7 +11,7 @@ export const addClientDefaultModule = (
   { v2ClientLocalName, v2ClientName, v3ClientPackageName }: ClientModulesOptions
 ) => {
   const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
-  const defaultImportSpecifier = j.importDefaultSpecifier(j.identifier(defaultLocalName));
+  const importNamespaceSpecifier = j.importNamespaceSpecifier(j.identifier(defaultLocalName));
 
   const importDeclarations = source.find(j.ImportDeclaration, {
     source: { value: v3ClientPackageName },
@@ -23,7 +23,7 @@ export const addClientDefaultModule = (
 
   if (importDeclarations.length) {
     if (!importDefaultSpecifiers.find((specifier) => specifier?.local?.name === defaultLocalName)) {
-      importDeclarations.nodes()[0].specifiers?.push(defaultImportSpecifier);
+      importDeclarations.nodes()[0].specifiers?.push(importNamespaceSpecifier);
       return;
     }
   }
@@ -35,7 +35,7 @@ export const addClientDefaultModule = (
   });
 
   const v3ImportDeclaration = j.importDeclaration(
-    [defaultImportSpecifier],
+    [importNamespaceSpecifier],
     j.stringLiteral(v3ClientPackageName)
   );
 
