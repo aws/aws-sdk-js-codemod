@@ -1,6 +1,7 @@
 import { API, FileInfo } from "jscodeshift";
 
 import {
+  addNotSupportedComments,
   addNotSupportedClientComments,
   removePromiseCalls,
   replaceWaiterApi,
@@ -25,6 +26,8 @@ import { isTypeScriptFile } from "./utils";
 const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
+
+  addNotSupportedComments(j, source);
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source);

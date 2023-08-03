@@ -1,3 +1,4 @@
+export * from "./addNotSupportedComments";
 export * from "./addNotSupportedClientComments";
 export * from "./getClientWaiterStates";
 export * from "./getV3ClientWaiterApiName";
