@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.17.2
+
+### Patch Changes
+
+- Add comments for unsupported named deep import of DocumentClient ([0ed75c4](https://github.com/awslabs/aws-sdk-js-codemod/commit/0ed75c4))
+
 ## 0.17.1
 
 ### Patch Changes
