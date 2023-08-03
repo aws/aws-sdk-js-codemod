@@ -1,4 +1,4 @@
-// Transformation DocumentClient named import is unsupported in aws-sdk-js-codemod.
+// Transformation of DocumentClient named import from deep path is unsupported in aws-sdk-js-codemod.
 // Please convert to a default import, and rerun codemod.
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
