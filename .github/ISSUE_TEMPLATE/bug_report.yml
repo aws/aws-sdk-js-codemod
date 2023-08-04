@@ -18,7 +18,7 @@ body:
       description: |
         A clear and concise description of what the bug is. A bug is **unintended**. A feature not being implemented is **not a bug**.
       placeholder: |
-        eg: aws-sdk-js-codemod crashes with a specific error.
+        eg: Running transform "transformName" on the provided input causes it to crash.
     validations:
       required: true
 
@@ -28,6 +28,15 @@ body:
       description: The _minimal_ steps to reproduce your issue.
       placeholder: |
         Please share code or minimal repo, and steps to reproduce the behavior.
+        Like an example input file, and the command you ran.
+
+        ```ts
+        import AWS from "aws-sdk";
+
+        const region = "us-west-2";
+        const client = new AWS.DynamoDB({ region });
+        const response = await client.listTables({}).promise();
+        ```
     validations:
       required: true
 
@@ -45,7 +54,7 @@ body:
       label: Expected behavior
       description: A clear and concise description of what you were expecting to happen.
       placeholder: |
-        eg: The aws-sdk-js-codemod script should have run successfully.
+        eg: The aws-sdk-js-codemod script should have run successfully, and/or return specific output.
     validations:
       required: true
 
