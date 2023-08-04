@@ -15,8 +15,6 @@ const isRightSectionIdentifier = (node: TSQualifiedName) => node.right.type === 
 
 const getRightIdentifierName = (node: TSQualifiedName) => (node.right as Identifier).name;
 
-const getIdentifierName = (node: Identifier) => (node as Identifier).name;
-
 const getTSQualifiedNameFromClientName = (
   v2GlobalName: string,
   clientName: string
@@ -95,10 +93,12 @@ export const replaceTSQualifiedName = (
   });
 
   for (const clientTypeName of clientTypeNames) {
-    source.find(j.Identifier, { name: clientTypeName }).replaceWith((v2ClientType) => {
-      const v2ClientTypeName = getIdentifierName(v2ClientType.node);
-      return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
-    });
+    source
+      .find(j.TSTypeReference, { typeName: { type: "Identifier", name: clientTypeName } })
+      .replaceWith((v2ClientType) => {
+        const v2ClientTypeName = (v2ClientType.node.typeName as Identifier).name;
+        return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+      });
   }
 
   if (v2ClientName === DYNAMODB) {
