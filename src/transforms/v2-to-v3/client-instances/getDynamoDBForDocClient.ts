@@ -42,23 +42,25 @@ export const getDynamoDBForDocClient = (
   const v3DocClientNewExpressionArgs = [];
 
   // Remove DocumentClient option convertEmptyValues and wrapNumbers.
-  if (v3DocClientArgs.type === "ObjectExpression") {
-    v3DocClientArgs.properties = v3DocClientArgs.properties.filter((property) => {
-      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
-        return true;
-      }
-      const propertyKey = (property as Property | ObjectProperty).key;
-      if (propertyKey.type !== "Identifier") {
-        return true;
-      }
-      return !["convertEmptyValues", "wrapNumbers"].includes(propertyKey.name);
-    });
+  if (v3DocClientArgs) {
+    if (v3DocClientArgs.type === "ObjectExpression") {
+      v3DocClientArgs.properties = v3DocClientArgs.properties.filter((property) => {
+        if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+          return true;
+        }
+        const propertyKey = (property as Property | ObjectProperty).key;
+        if (propertyKey.type !== "Identifier") {
+          return true;
+        }
+        return !["convertEmptyValues", "wrapNumbers"].includes(propertyKey.name);
+      });
 
-    if (v3DocClientArgs.properties.length > 0) {
+      if (v3DocClientArgs.properties.length > 0) {
+        v3DocClientNewExpressionArgs.push(v3DocClientArgs);
+      }
+    } else {
       v3DocClientNewExpressionArgs.push(v3DocClientArgs);
     }
-  } else {
-    v3DocClientNewExpressionArgs.push(v3DocClientArgs);
   }
 
   return j.newExpression(
