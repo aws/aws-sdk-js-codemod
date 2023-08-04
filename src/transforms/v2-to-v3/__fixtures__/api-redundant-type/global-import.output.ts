@@ -1,6 +1,6 @@
-import AWS_APIGateway from "@aws-sdk/client-api-gateway";
-import AWS_DynamoDB from "@aws-sdk/client-dynamodb";
-import AWS_S3 from "@aws-sdk/client-s3";
+import * as AWS_APIGateway from "@aws-sdk/client-api-gateway";
+import * as AWS_DynamoDB from "@aws-sdk/client-dynamodb";
+import * as AWS_S3 from "@aws-sdk/client-s3";
 
 // Native types
 const stringType: string = "string";
