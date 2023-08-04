@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.17.3
+
+### Patch Changes
+
+- Add namespace import instead of default import ([432133e](https://github.com/awslabs/aws-sdk-js-codemod/commit/432133e))
+- Check if parameters are passed during DocumentClient creation ([56ac51a](https://github.com/awslabs/aws-sdk-js-codemod/commit/56ac51a))
+
 ## 0.17.2
 
 ### Patch Changes
