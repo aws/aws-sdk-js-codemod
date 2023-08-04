@@ -12,11 +12,18 @@ export interface GetClientIdentifiersOptions {
 
 export type ClientIdentifier = Identifier | ThisMemberExpression;
 
+// Cache value from clientIdentifiers from first call.
+const clientIdentifiersCache: ClientIdentifier[] = [];
+
 export const getClientIdentifiers = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: GetClientIdentifiersOptions
 ): ClientIdentifier[] => {
+  if (clientIdentifiersCache.length > 0) {
+    return clientIdentifiersCache;
+  }
+
   const namesFromNewExpr = getClientIdNamesFromNewExpr(j, source, options);
   const namesFromTSTypeRef = getClientIdNamesFromTSTypeRef(j, source, options);
   const clientIdNames = [...new Set([...namesFromNewExpr, ...namesFromTSTypeRef])];
@@ -27,5 +34,8 @@ export const getClientIdentifiers = (
   }));
   const clientIdThisExpressions = getClientIdThisExpressions(j, source, clientIdentifiers);
 
-  return [...clientIdentifiers, ...clientIdThisExpressions];
+  clientIdentifiersCache.push(...clientIdentifiers);
+  clientIdentifiersCache.push(...clientIdThisExpressions);
+
+  return clientIdentifiersCache;
 };
