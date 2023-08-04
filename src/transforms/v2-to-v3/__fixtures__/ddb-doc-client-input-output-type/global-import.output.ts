@@ -1,4 +1,9 @@
-import AWS_DynamoDBDocumentClient, { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import * as AWS_DynamoDBDocumentClient from "@aws-sdk/lib-dynamodb";
+
+const {
+  DynamoDBDocument
+} = AWS_DynamoDBDocumentClient;
+
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
 const docClient = DynamoDBDocument.from(new DynamoDB({ region: "us-west-2" }));
