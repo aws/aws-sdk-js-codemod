@@ -47,6 +47,12 @@ export const replaceTSQualifiedName = (
   const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
 
   if (v2GlobalName) {
+    // Replace type reference to client created with global name.
+    source
+      .find(j.TSQualifiedName, getTSQualifiedNameFromClientName(v2GlobalName, v2ClientName))
+      .filter((v2ClientType) => v2ClientType.parentPath?.value.type !== "TSQualifiedName")
+      .replaceWith(() => j.tsTypeReference(j.identifier(v3ClientName)));
+
     // Replace reference to client types created with global name.
     source
       .find(j.TSQualifiedName, {
@@ -57,13 +63,6 @@ export const replaceTSQualifiedName = (
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
         return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
       });
-
-    // Replace type reference to client created with global name.
-    source
-      .find(j.TSQualifiedName, getTSQualifiedNameFromClientName(v2GlobalName, v2ClientName))
-      .replaceWith((v2ClientType) =>
-        j.tsQualifiedName(j.identifier(v3ClientName), v2ClientType.node.right)
-      );
   }
 
   const [clientNamePrefix, clientNameSuffix] = v2ClientLocalName.split(".");
