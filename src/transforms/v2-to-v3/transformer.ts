@@ -78,7 +78,11 @@ const transformer = async (file: FileInfo, api: API) => {
     }
 
     removePromiseCalls(j, source, clientIdentifiers);
-    replaceS3GetSignedUrlApi(j, source, v2Options);
+
+    if (v2ClientName === S3) {
+      replaceS3GetSignedUrlApi(j, source, clientIdentifiers);
+    }
+
     replaceWaiterApi(j, source, v2Options);
 
     replaceClientCreation(j, source, v2Options);
