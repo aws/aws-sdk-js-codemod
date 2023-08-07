@@ -3,12 +3,6 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 import { ClientIdentifier } from "../types";
 import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
 
-export interface RemovePromiseCallsOptions {
-  v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
-}
-
 // Removes .promise() from client API calls.
 export const removePromiseCalls = (
   j: JSCodeshift,
