@@ -18,6 +18,7 @@ const getRightIdentifierName = (
 ) =>
   source
     .find(j.TSQualifiedName, tsQualifiedName)
+    .filter((tsQualifiedName) => tsQualifiedName.parentPath?.value.type !== "TSQualifiedName")
     .nodes()
     .map((node) => node.right)
     .filter((node) => node.type === "Identifier")
