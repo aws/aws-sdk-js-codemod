@@ -94,7 +94,10 @@ export const replaceTSQualifiedName = (
   for (const clientTypeName of clientTypeNames) {
     source
       .find(j.Identifier, { name: clientTypeName })
-      .filter((v2ClientType) => v2ClientType.parentPath?.value.type !== "TSQualifiedName")
+      .filter(
+        (v2ClientType) =>
+          !["TSQualifiedName", "ImportSpecifier"].includes(v2ClientType.parentPath?.value.type)
+      )
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = v2ClientType.node.name;
         return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
