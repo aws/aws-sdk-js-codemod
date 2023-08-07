@@ -1,16 +1,15 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
+import { ClientIdentifier } from "../types";
 import { getClientIdNamesFromNewExpr } from "./getClientIdNamesFromNewExpr";
 import { getClientIdNamesFromTSTypeRef } from "./getClientIdNamesFromTSTypeRef";
-import { getClientIdThisExpressions, ThisMemberExpression } from "./getClientIdThisExpressions";
+import { getClientIdThisExpressions } from "./getClientIdThisExpressions";
 
 export interface GetClientIdentifiersOptions {
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
 }
-
-export type ClientIdentifier = Identifier | ThisMemberExpression;
 
 export const getClientIdentifiers = (
   j: JSCodeshift,

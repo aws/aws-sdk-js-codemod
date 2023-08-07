@@ -9,8 +9,9 @@ import {
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { ClientIdentifier, getClientIdentifiers } from "./getClientIdentifiers";
+import { getClientIdentifiers } from "./getClientIdentifiers";
 import { getCommandName } from "./getCommandName";
 
 export interface ReplaceS3GetSignedUrlApiOptions {

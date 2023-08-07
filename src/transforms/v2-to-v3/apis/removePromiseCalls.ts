@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { ClientIdentifier } from "./getClientIdentifiers";
+import { ClientIdentifier } from "../types";
 import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
 
 export interface RemovePromiseCallsOptions {

@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { ClientIdentifier, getClientIdentifiers } from "./getClientIdentifiers";
+import { ClientIdentifiersRecord } from "../types";
+import { getClientIdentifiers } from "./getClientIdentifiers";
 
 export interface GetClientIdentifiersRecordOptions {
   v2GlobalName?: string;
@@ -11,7 +12,7 @@ export const getClientIdentifiersRecord = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2GlobalName, v2ClientNamesRecord }: GetClientIdentifiersRecordOptions
-): Record<string, ClientIdentifier[]> =>
+): ClientIdentifiersRecord =>
   Object.fromEntries(
     Object.entries(v2ClientNamesRecord).map(([v2ClientName, v2ClientLocalName]) => [
       v2ClientName,

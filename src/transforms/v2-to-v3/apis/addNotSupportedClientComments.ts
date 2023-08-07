@@ -1,8 +1,8 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { FUNCTION_TYPE_LIST } from "../config";
+import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { ClientIdentifier } from "./getClientIdentifiers";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 
