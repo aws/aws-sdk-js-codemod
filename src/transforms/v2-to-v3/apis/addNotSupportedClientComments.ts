@@ -7,10 +7,8 @@ import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 
 export interface CommentsForUnsupportedAPIsOptions {
-  clientIdentifiers: ClientIdentifier[];
   v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
+  clientIdentifiers: ClientIdentifier[];
 }
 
 export const addNotSupportedClientComments = (
@@ -18,10 +16,10 @@ export const addNotSupportedClientComments = (
   source: Collection<unknown>,
   options: CommentsForUnsupportedAPIsOptions
 ): void => {
-  const { clientIdentifiers } = options;
+  const { v2ClientName, clientIdentifiers } = options;
 
   for (const clientId of clientIdentifiers) {
-    const waiterStates = getClientWaiterStates(j, source, options);
+    const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
     for (const waiterState of waiterStates) {
       source
@@ -47,7 +45,7 @@ export const addNotSupportedClientComments = (
     }
   }
 
-  if (options.v2ClientName === "S3") {
+  if (v2ClientName === "S3") {
     for (const clientId of clientIdentifiers) {
       const apiMetadata = [
         {

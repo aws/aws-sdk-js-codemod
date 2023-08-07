@@ -23,7 +23,7 @@ export const replaceWaiterApi = (
   const clientIdentifiers = getClientIdentifiers(j, source, options);
 
   for (const clientId of clientIdentifiers) {
-    const waiterStates = getClientWaiterStates(j, source, options);
+    const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
     for (const waiterState of waiterStates) {
       const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);

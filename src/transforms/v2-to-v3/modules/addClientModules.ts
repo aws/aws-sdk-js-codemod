@@ -25,6 +25,8 @@ export const addClientModules = (
   source: Collection<unknown>,
   options: ClientModulesOptions
 ): void => {
+  const { clientIdentifiers } = options;
+
   const { addClientDefaultModule, addClientNamedModule } = hasRequire(j, source)
     ? requireModule
     : hasImportEquals(j, source)
@@ -34,7 +36,7 @@ export const addClientModules = (
   const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);
   const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
-  const waiterStates = getClientWaiterStates(j, source, options);
+  const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
   // Add default import for types, if needed.
   if (v3ClientTypesCount > 0) {

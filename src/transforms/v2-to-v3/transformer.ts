@@ -51,15 +51,9 @@ const transformer = async (file: FileInfo, api: API) => {
     v2ClientNamesRecord,
   });
 
-  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
-    const { v2ClientLocalName } = v3ClientMetadata;
+  for (const v2ClientName of Object.keys(clientMetadataRecord)) {
     const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
-    addNotSupportedClientComments(j, source, {
-      clientIdentifiers,
-      v2ClientName,
-      v2ClientLocalName,
-      v2GlobalName,
-    });
+    addNotSupportedClientComments(j, source, { v2ClientName, clientIdentifiers });
   }
 
   if (source.toSource() !== file.source) {
@@ -73,7 +67,7 @@ const transformer = async (file: FileInfo, api: API) => {
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
-    addClientModules(j, source, { ...v2Options, ...v3Options });
+    addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
     replaceS3UploadApi(j, source, v2Options);
