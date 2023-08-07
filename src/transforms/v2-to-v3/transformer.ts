@@ -15,6 +15,7 @@ import {
   getClientNamesFromGlobal,
   getClientNamesRecord,
 } from "./client-names";
+import { S3 } from "./config";
 import {
   addClientModules,
   getGlobalNameFromModule,
@@ -70,7 +71,12 @@ const transformer = async (file: FileInfo, api: API) => {
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
-    replaceS3UploadApi(j, source, v2Options);
+
+    if (v2ClientName === S3) {
+      // Needs to be called before removing promise calls, as replacement has `.done()` call.
+      replaceS3UploadApi(j, source, clientIdentifiers);
+    }
+
     removePromiseCalls(j, source, clientIdentifiers);
     replaceS3GetSignedUrlApi(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
