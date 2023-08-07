@@ -65,25 +65,27 @@ export const addClientModules = (
     });
   }
 
-  if (isS3UploadApiUsed(j, source, options)) {
-    addClientNamedModule(j, source, {
-      ...options,
-      importedName: "Upload",
-      v3ClientPackageName: "@aws-sdk/lib-storage",
-    });
-  }
-
-  if (options.v2ClientName === S3 && isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
-    addClientNamedModule(j, source, {
-      ...options,
-      importedName: "getSignedUrl",
-      v3ClientPackageName: "@aws-sdk/s3-request-presigner",
-    });
-    for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
+  if (options.v2ClientName === S3) {
+    if (isS3UploadApiUsed(j, source, clientIdentifiers)) {
       addClientNamedModule(j, source, {
         ...options,
-        importedName: getCommandName(apiName),
+        importedName: "Upload",
+        v3ClientPackageName: "@aws-sdk/lib-storage",
       });
+    }
+
+    if (isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
+      addClientNamedModule(j, source, {
+        ...options,
+        importedName: "getSignedUrl",
+        v3ClientPackageName: "@aws-sdk/s3-request-presigner",
+      });
+      for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
+        addClientNamedModule(j, source, {
+          ...options,
+          importedName: getCommandName(apiName),
+        });
+      }
     }
   }
 
