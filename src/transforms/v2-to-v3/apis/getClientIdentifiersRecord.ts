@@ -16,10 +16,6 @@ export const getClientIdentifiersRecord = (
   Object.fromEntries(
     Object.entries(v2ClientNamesRecord).map(([v2ClientName, v2ClientLocalName]) => [
       v2ClientName,
-      getClientIdentifiers(j, source, {
-        v2ClientName,
-        v2ClientLocalName,
-        v2GlobalName,
-      }),
+      getClientIdentifiers(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName }),
     ])
   );
