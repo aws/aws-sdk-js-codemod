@@ -83,7 +83,7 @@ const transformer = async (file: FileInfo, api: API) => {
       replaceS3GetSignedUrlApi(j, source, clientIdentifiers);
     }
 
-    replaceWaiterApi(j, source, v2Options);
+    replaceWaiterApi(j, source, clientIdentifiers);
 
     replaceClientCreation(j, source, v2Options);
     replaceDocClientCreation(j, source, v2Options);
