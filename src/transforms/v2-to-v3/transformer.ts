@@ -7,8 +7,8 @@ import {
   replaceWaiterApi,
   replaceS3UploadApi,
   replaceS3GetSignedUrlApi,
+  getClientIdentifiersRecord,
 } from "./apis";
-import { getClientIdentifiersRecord } from "./apis/getClientIdentifiersRecord";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
