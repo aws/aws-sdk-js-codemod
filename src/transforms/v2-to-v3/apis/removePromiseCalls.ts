@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { getClientIdentifiers } from "./getClientIdentifiers";
+import { ClientIdentifier } from "./getClientIdentifiers";
 import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
 
 export interface RemovePromiseCallsOptions {
@@ -13,10 +13,8 @@ export interface RemovePromiseCallsOptions {
 export const removePromiseCalls = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: RemovePromiseCallsOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
-  const clientIdentifiers = getClientIdentifiers(j, source, options);
-
   for (const clientId of clientIdentifiers) {
     // Remove .promise() from client API calls.
     source

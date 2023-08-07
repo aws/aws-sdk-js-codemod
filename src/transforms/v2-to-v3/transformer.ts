@@ -67,6 +67,7 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
+    const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
     const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
@@ -76,7 +77,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
     replaceS3UploadApi(j, source, v2Options);
-    removePromiseCalls(j, source, v2Options);
+    removePromiseCalls(j, source, clientIdentifiers);
     replaceS3GetSignedUrlApi(j, source, v2Options);
     replaceWaiterApi(j, source, v2Options);
 
