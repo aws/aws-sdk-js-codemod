@@ -2,12 +2,6 @@ import { Collection, JSCodeshift, Literal } from "jscodeshift";
 
 import { ClientIdentifier } from "../types";
 
-export interface GetS3SignedUrlApiNameOptions {
-  v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
-}
-
 export const getS3SignedUrlApiNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
