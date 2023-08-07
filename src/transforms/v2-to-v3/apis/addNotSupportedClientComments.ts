@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { FUNCTION_TYPE_LIST } from "../config";
+import { FUNCTION_TYPE_LIST, S3 } from "../config";
 import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
@@ -45,7 +45,7 @@ export const addNotSupportedClientComments = (
     }
   }
 
-  if (v2ClientName === "S3") {
+  if (v2ClientName === S3) {
     for (const clientId of clientIdentifiers) {
       const apiMetadata = [
         {
