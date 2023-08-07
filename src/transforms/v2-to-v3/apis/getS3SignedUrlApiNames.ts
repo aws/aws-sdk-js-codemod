@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift, Literal } from "jscodeshift";
 
-import { getClientIdentifiers } from "./getClientIdentifiers";
+import { ClientIdentifier } from "../types";
 
 export interface GetS3SignedUrlApiNameOptions {
   v2ClientName: string;
@@ -11,12 +11,9 @@ export interface GetS3SignedUrlApiNameOptions {
 export const getS3SignedUrlApiNames = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: GetS3SignedUrlApiNameOptions
+  clientIdentifiers: ClientIdentifier[]
 ): string[] => {
-  if (options.v2ClientName !== "S3") return [];
-
   const apiNames: Set<string> = new Set();
-  const clientIdentifiers = getClientIdentifiers(j, source, options);
 
   for (const clientId of clientIdentifiers) {
     for (const apiName of ["getSignedUrl", "getSignedUrlPromise"]) {

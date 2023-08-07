@@ -8,7 +8,13 @@ import {
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
 } from "../apis";
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import {
+  DOCUMENT_CLIENT,
+  DYNAMODB,
+  DYNAMODB_DOCUMENT,
+  DYNAMODB_DOCUMENT_CLIENT,
+  S3,
+} from "../config";
 import { getV3ClientTypesCount } from "../ts-type";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
@@ -67,13 +73,13 @@ export const addClientModules = (
     });
   }
 
-  if (isS3GetSignedUrlApiUsed(j, source, options)) {
+  if (options.v2ClientName === S3 && isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
     addClientNamedModule(j, source, {
       ...options,
       importedName: "getSignedUrl",
       v3ClientPackageName: "@aws-sdk/s3-request-presigner",
     });
-    for (const apiName of getS3SignedUrlApiNames(j, source, options)) {
+    for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
       addClientNamedModule(j, source, {
         ...options,
         importedName: getCommandName(apiName),
