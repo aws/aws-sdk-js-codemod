@@ -7,6 +7,7 @@ import {
   replaceWaiterApi,
   replaceS3UploadApi,
   replaceS3GetSignedUrlApi,
+  getClientIdentifiersRecord,
 } from "./apis";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
@@ -14,6 +15,7 @@ import {
   getClientNamesFromGlobal,
   getClientNamesRecord,
 } from "./client-names";
+import { S3 } from "./config";
 import {
   addClientModules,
   getGlobalNameFromModule,
@@ -45,10 +47,14 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   const clientMetadataRecord = getClientMetadataRecord(v2ClientNamesRecord);
+  const clientIdentifiersRecord = getClientIdentifiersRecord(j, source, {
+    v2GlobalName,
+    v2ClientNamesRecord,
+  });
 
-  for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
-    const { v2ClientLocalName } = v3ClientMetadata;
-    addNotSupportedClientComments(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+  for (const v2ClientName of Object.keys(clientMetadataRecord)) {
+    const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
+    addNotSupportedClientComments(j, source, { v2ClientName, clientIdentifiers });
   }
 
   if (source.toSource() !== file.source) {
@@ -56,18 +62,28 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
+    const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
     const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
 
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
-    addClientModules(j, source, { ...v2Options, ...v3Options });
+    addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
-    replaceS3UploadApi(j, source, v2Options);
-    removePromiseCalls(j, source, v2Options);
-    replaceS3GetSignedUrlApi(j, source, v2Options);
-    replaceWaiterApi(j, source, v2Options);
+
+    if (v2ClientName === S3) {
+      // Needs to be called before removing promise calls, as replacement has `.done()` call.
+      replaceS3UploadApi(j, source, clientIdentifiers);
+    }
+
+    removePromiseCalls(j, source, clientIdentifiers);
+
+    if (v2ClientName === S3) {
+      replaceS3GetSignedUrlApi(j, source, clientIdentifiers);
+    }
+
+    replaceWaiterApi(j, source, clientIdentifiers);
 
     replaceClientCreation(j, source, v2Options);
     replaceDocClientCreation(j, source, v2Options);

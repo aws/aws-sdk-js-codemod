@@ -1,29 +1,21 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { ClientIdentifier } from "../types";
 import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig";
-import { getClientIdentifiers } from "./getClientIdentifiers";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
 import { getWaiterConfig } from "./getWaiterConfig";
 import { getWaiterConfigValue } from "./getWaiterConfigValue";
 
-export interface ReplaceWaiterApiOptions {
-  v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
-}
-
 // Updates .waitFor() API with waitUntil* API.
 export const replaceWaiterApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ReplaceWaiterApiOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
-  const clientIdentifiers = getClientIdentifiers(j, source, options);
-
   for (const clientId of clientIdentifiers) {
-    const waiterStates = getClientWaiterStates(j, source, options);
+    const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
     for (const waiterState of waiterStates) {
       const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);

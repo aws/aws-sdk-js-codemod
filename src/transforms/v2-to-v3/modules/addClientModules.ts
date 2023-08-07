@@ -8,7 +8,13 @@ import {
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
 } from "../apis";
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import {
+  DOCUMENT_CLIENT,
+  DYNAMODB,
+  DYNAMODB_DOCUMENT,
+  DYNAMODB_DOCUMENT_CLIENT,
+  S3,
+} from "../config";
 import { getV3ClientTypesCount } from "../ts-type";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
@@ -25,6 +31,8 @@ export const addClientModules = (
   source: Collection<unknown>,
   options: ClientModulesOptions
 ): void => {
+  const { clientIdentifiers } = options;
+
   const { addClientDefaultModule, addClientNamedModule } = hasRequire(j, source)
     ? requireModule
     : hasImportEquals(j, source)
@@ -34,7 +42,7 @@ export const addClientModules = (
   const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);
   const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
-  const waiterStates = getClientWaiterStates(j, source, options);
+  const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
   // Add default import for types, if needed.
   if (v3ClientTypesCount > 0) {
@@ -57,25 +65,27 @@ export const addClientModules = (
     });
   }
 
-  if (isS3UploadApiUsed(j, source, options)) {
-    addClientNamedModule(j, source, {
-      ...options,
-      importedName: "Upload",
-      v3ClientPackageName: "@aws-sdk/lib-storage",
-    });
-  }
-
-  if (isS3GetSignedUrlApiUsed(j, source, options)) {
-    addClientNamedModule(j, source, {
-      ...options,
-      importedName: "getSignedUrl",
-      v3ClientPackageName: "@aws-sdk/s3-request-presigner",
-    });
-    for (const apiName of getS3SignedUrlApiNames(j, source, options)) {
+  if (options.v2ClientName === S3) {
+    if (isS3UploadApiUsed(j, source, clientIdentifiers)) {
       addClientNamedModule(j, source, {
         ...options,
-        importedName: getCommandName(apiName),
+        importedName: "Upload",
+        v3ClientPackageName: "@aws-sdk/lib-storage",
       });
+    }
+
+    if (isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
+      addClientNamedModule(j, source, {
+        ...options,
+        importedName: "getSignedUrl",
+        v3ClientPackageName: "@aws-sdk/s3-request-presigner",
+      });
+      for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
+        addClientNamedModule(j, source, {
+          ...options,
+          importedName: getCommandName(apiName),
+        });
+      }
     }
   }
 

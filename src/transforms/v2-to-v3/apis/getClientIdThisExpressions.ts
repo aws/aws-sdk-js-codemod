@@ -1,10 +1,5 @@
-import { Collection, Identifier, JSCodeshift, MemberExpression, ThisExpression } from "jscodeshift";
-
-export interface ThisMemberExpression {
-  type: "MemberExpression";
-  object: ThisExpression;
-  property: Identifier;
-}
+import { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
+import { ThisMemberExpression } from "../types";
 
 const thisMemberExpression = { type: "MemberExpression", object: { type: "ThisExpression" } };
 

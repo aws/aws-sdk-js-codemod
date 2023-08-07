@@ -9,26 +9,16 @@ import {
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { ClientIdentifier, getClientIdentifiers } from "./getClientIdentifiers";
 import { getCommandName } from "./getCommandName";
-
-export interface ReplaceS3GetSignedUrlApiOptions {
-  v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
-}
 
 // Updates `s3.getSignedUrl()` API with `await getSignedUrl(s3, command)` API.
 export const replaceS3GetSignedUrlApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ReplaceS3GetSignedUrlApiOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
-  if (options.v2ClientName !== "S3") return;
-
-  const clientIdentifiers = getClientIdentifiers(j, source, options);
-
   for (const clientId of clientIdentifiers) {
     for (const getSignedUrlApiName of ["getSignedUrl", "getSignedUrlPromise"]) {
       source

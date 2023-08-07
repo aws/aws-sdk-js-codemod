@@ -1,5 +1,6 @@
 export const PACKAGE_NAME = "aws-sdk";
 
+export const S3 = "S3";
 export const DYNAMODB = "DynamoDB";
 export const DOCUMENT_CLIENT = "DocumentClient";
 export const DYNAMODB_DOCUMENT = "DynamoDBDocument";

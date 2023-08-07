@@ -1,24 +1,14 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
+import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { getClientIdentifiers } from "./getClientIdentifiers";
-
-export interface ReplaceS3UploadApiOptions {
-  v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
-}
 
 // Updates `s3.upload()` API with `new Upload()` API.
 export const replaceS3UploadApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ReplaceS3UploadApiOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
-  if (options.v2ClientName !== "S3") return;
-
-  const clientIdentifiers = getClientIdentifiers(j, source, options);
-
   for (const clientId of clientIdentifiers) {
     source
       .find(j.CallExpression, getClientApiCallExpression(clientId, "upload"))
