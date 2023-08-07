@@ -2,11 +2,12 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 import { FUNCTION_TYPE_LIST } from "../config";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { getClientIdentifiers } from "./getClientIdentifiers";
+import { ClientIdentifier } from "./getClientIdentifiers";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";
 
 export interface CommentsForUnsupportedAPIsOptions {
+  clientIdentifiers: ClientIdentifier[];
   v2ClientName: string;
   v2ClientLocalName: string;
   v2GlobalName?: string;
@@ -17,7 +18,7 @@ export const addNotSupportedClientComments = (
   source: Collection<unknown>,
   options: CommentsForUnsupportedAPIsOptions
 ): void => {
-  const clientIdentifiers = getClientIdentifiers(j, source, options);
+  const { clientIdentifiers } = options;
 
   for (const clientId of clientIdentifiers) {
     const waiterStates = getClientWaiterStates(j, source, options);

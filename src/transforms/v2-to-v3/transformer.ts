@@ -8,6 +8,7 @@ import {
   replaceS3UploadApi,
   replaceS3GetSignedUrlApi,
 } from "./apis";
+import { getClientIdentifiersRecord } from "./apis/getClientIdentifiersRecord";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
@@ -45,10 +46,20 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   const clientMetadataRecord = getClientMetadataRecord(v2ClientNamesRecord);
+  const clientIdentifiersRecord = getClientIdentifiersRecord(j, source, {
+    v2GlobalName,
+    v2ClientNamesRecord,
+  });
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const { v2ClientLocalName } = v3ClientMetadata;
-    addNotSupportedClientComments(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
+    const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
+    addNotSupportedClientComments(j, source, {
+      clientIdentifiers,
+      v2ClientName,
+      v2ClientLocalName,
+      v2GlobalName,
+    });
   }
 
   if (source.toSource() !== file.source) {
