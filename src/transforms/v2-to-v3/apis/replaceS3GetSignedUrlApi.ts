@@ -13,12 +13,6 @@ import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getCommandName } from "./getCommandName";
 
-export interface ReplaceS3GetSignedUrlApiOptions {
-  v2ClientName: string;
-  v2ClientLocalName: string;
-  v2GlobalName?: string;
-}
-
 // Updates `s3.getSignedUrl()` API with `await getSignedUrl(s3, command)` API.
 export const replaceS3GetSignedUrlApi = (
   j: JSCodeshift,
