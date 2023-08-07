@@ -1,8 +1,11 @@
+import { Collection, JSCodeshift } from "jscodeshift";
 import { ClientMetadataRecord } from "../types";
 import { getV3ClientName } from "./getV3ClientName";
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
 
 export const getClientMetadataRecord = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
   v2ClientNamesRecord: Record<string, string>
 ): ClientMetadataRecord =>
   Object.entries(

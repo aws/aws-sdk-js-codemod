@@ -44,7 +44,7 @@ const transformer = async (file: FileInfo, api: API) => {
     }
   }
 
-  const clientMetadataRecord = getClientMetadataRecord(v2ClientNamesRecord);
+  const clientMetadataRecord = getClientMetadataRecord(j, source, v2ClientNamesRecord);
 
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const { v2ClientLocalName } = v3ClientMetadata;

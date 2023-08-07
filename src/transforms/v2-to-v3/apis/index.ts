@@ -10,3 +10,4 @@ export * from "./replaceS3GetSignedUrlApi";
 export * from "./replaceS3UploadApi";
 export * from "./replaceWaiterApi";
 export * from "./getCommandName";
+export * from "./getClientIdentifiers";
