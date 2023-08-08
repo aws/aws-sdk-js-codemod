@@ -3,8 +3,8 @@ import { ASTPath, Collection, Identifier, JSCodeshift, TSQualifiedName } from "j
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
-import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
-import { updateV2ClientTypeRef } from "./updateV2ClientTypeRef";
+import { getV3ClientType } from "./getV3ClientType";
+import { updateV2ClientType } from "./updateV2ClientType";
 
 export interface ReplaceTSQualifiedNameOptions {
   v2ClientName: string;
@@ -46,11 +46,7 @@ export const replaceTSQualifiedName = (
       )
       .forEach((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-        updateV2ClientTypeRef(j, v2ClientType, {
-          v2ClientName,
-          v2ClientTypeName,
-          v2ClientLocalName,
-        });
+        updateV2ClientType(j, v2ClientType, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
       });
   }
 
@@ -73,11 +69,7 @@ export const replaceTSQualifiedName = (
     )
     .forEach((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-      updateV2ClientTypeRef(j, v2ClientType, {
-        v2ClientName,
-        v2ClientTypeName,
-        v2ClientLocalName,
-      });
+      updateV2ClientType(j, v2ClientType, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
     });
 
   // Replace type reference to client type with modules.
@@ -96,7 +88,7 @@ export const replaceTSQualifiedName = (
       )
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = v2ClientType.node.name;
-        return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+        return getV3ClientType(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
       });
   }
 
