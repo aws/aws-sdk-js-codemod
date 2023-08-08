@@ -19,22 +19,26 @@ export const updateV2ClientType = (
 ) => {
   const v3ClientType = getV3ClientType(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
 
-  if (v2ClientType.parentPath?.value.type === "TSTypeQuery") {
-    if (nativeTsRefTypes.includes(v3ClientType.type)) {
-      v2ClientType.parentPath?.replace(v3ClientType);
-    } else if (v3ClientType.type === "TSTypeReference") {
-      const v3ClientTypeRef = v3ClientType as TSTypeReference;
-      if (v3ClientTypeRef.typeName.type === "Identifier") {
-        const v3ClientTypeRefIdentifier = v3ClientTypeRef.typeName as Identifier;
-        if (nativeTsIdentifierTypes.includes(v3ClientTypeRefIdentifier.name)) {
-          if (nativeTsUnionTypes.includes(v3ClientTypeRefIdentifier.name)) {
-            addTsTypeQueryToRefType(v3ClientTypeRef);
-          }
-          v2ClientType.parentPath?.replace(v3ClientType);
+  if (
+    v2ClientType.parentPath?.value.type === "TSTypeQuery" &&
+    nativeTsRefTypes.includes(v3ClientType.type)
+  ) {
+    v2ClientType.parentPath?.replace(v3ClientType);
+    return;
+  }
+
+  if (v3ClientType.type === "TSTypeReference") {
+    const v3ClientTypeRef = v3ClientType as TSTypeReference;
+    if (v3ClientTypeRef.typeName.type === "Identifier") {
+      const v3ClientTypeRefIdentifier = v3ClientTypeRef.typeName as Identifier;
+      if (nativeTsIdentifierTypes.includes(v3ClientTypeRefIdentifier.name)) {
+        if (nativeTsUnionTypes.includes(v3ClientTypeRefIdentifier.name)) {
+          addTsTypeQueryToRefType(v3ClientTypeRef);
         }
+        v2ClientType.parentPath?.replace(v3ClientType);
+        return;
       }
     }
-  } else {
-    v2ClientType.replace(v3ClientType);
   }
+  v2ClientType.replace(v3ClientType);
 };
