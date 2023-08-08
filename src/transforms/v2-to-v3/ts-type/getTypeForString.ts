@@ -3,7 +3,7 @@ import { JSCodeshift, TSType } from "jscodeshift";
 const arrayRegex = /^Array<(.*)>$/;
 const recordRegex = /^Record<string, (.*)>$/;
 
-export const getTypeRefForString = (
+export const getTypeForString = (
   j: JSCodeshift,
   v3ClientDefaultLocalName: string,
   v3ClientTypeString: string
@@ -27,7 +27,7 @@ export const getTypeRefForString = (
   const arrayRegexMatches = arrayRegex.exec(v3ClientTypeString);
   if (arrayRegexMatches) {
     const type = arrayRegexMatches[1];
-    const typeArgument = getTypeRefForString(j, v3ClientDefaultLocalName, type);
+    const typeArgument = getTypeForString(j, v3ClientDefaultLocalName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Array"),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -39,7 +39,7 @@ export const getTypeRefForString = (
   const recordRegexMatches = recordRegex.exec(v3ClientTypeString);
   if (recordRegexMatches) {
     const type = recordRegexMatches[1];
-    const typeArgument = getTypeRefForString(j, v3ClientDefaultLocalName, type);
+    const typeArgument = getTypeForString(j, v3ClientDefaultLocalName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Record"),
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
