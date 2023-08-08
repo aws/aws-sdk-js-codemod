@@ -1,4 +1,4 @@
-import { ASTPath, JSCodeshift, TSQualifiedName } from "jscodeshift";
+import { ASTPath, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
 const nativeTsTypes = ["TSAnyKeyword", "TSStringKeyword", "TSNumberKeyword", "TSBooleanKeyword"];
@@ -21,8 +21,11 @@ export const updateV2ClientTypeRef = (
   });
 
   if (
-    v2ClientType.parentPath?.value.type === "TSTypeQuery" &&
-    nativeTsTypes.includes(v3ClientTypeRef.type)
+    (v2ClientType.parentPath?.value.type === "TSTypeQuery" &&
+      nativeTsTypes.includes(v3ClientTypeRef.type)) ||
+    (v3ClientTypeRef.type === "TSTypeReference" &&
+      (v3ClientTypeRef as TSTypeReference).typeName.type === "Identifier" &&
+      ((v3ClientTypeRef as TSTypeReference).typeName as Identifier).name === "Date")
   ) {
     v2ClientType.parentPath?.replace(v3ClientTypeRef);
   } else {
