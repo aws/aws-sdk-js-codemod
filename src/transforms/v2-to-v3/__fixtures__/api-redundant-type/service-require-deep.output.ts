@@ -18,14 +18,14 @@ const stringArray: Array<string> = ["string1", "string2"];
 const booleanArray: Array<boolean> = [true, false];
 const numberArray: Array<number> = [123, 456];
 const blobArray: Array<Uint8Array> = [new Uint8Array()];
-const enumArray: Array<AWS_S3.ChecksumAlgorithm> = ["CRC32"];
-const structureArray: Array<AWS_S3.Bucket> = [{ Name: "bucketName" }];
+const enumArray: Array<typeof AWS_S3.ChecksumAlgorithm> = ["CRC32"];
+const structureArray: Array<typeof AWS_S3.Bucket> = [{ Name: "bucketName" }];
 
 // Maps
 const stringMap: Record<string, string> = { key: "value" };
 const booleanMap: Record<string, boolean> = { key: true };
 const numberMap: Record<string, number> = { key: 123 };
-const structureMap: Record<string, AWS_APIGateway.MethodSnapshot> = { key: { apiKeyRequired: true } };
+const structureMap: Record<string, typeof AWS_APIGateway.MethodSnapshot> = { key: { apiKeyRequired: true } };
 
 // Nested arrays
 const arrayNestedTwice: Array<Array<number>> = [[1, 2], [3, 4]];
@@ -37,12 +37,12 @@ const arrayNestedFour: Array<Array<Array<Array<number>>>> = [
 
 // Nested maps
 const mapNestedTwice: Record<string, Record<string, string>> = { key: stringMap };
-const mapNestedTwiceStruct: Record<string, Record<string, AWS_APIGateway.MethodSnapshot>> = { key: structureMap };
+const mapNestedTwiceStruct: Record<string, Record<string, typeof AWS_APIGateway.MethodSnapshot>> = { key: structureMap };
 
 // Nested arrays and maps
 const mapOfArrays: Record<string, Array<string>> = { key: ["value"] };
 const mapOfMapOfArrays: Record<string, Record<string, Array<string>>> = { key: mapOfArrays };
-const mapOfArrayOfMaps: Record<string, Array<Record<string, AWS_DynamoDB.AttributeValue>>> = { key: [{ key: { S:"A" }}] };
+const mapOfArrayOfMaps: Record<string, Array<Record<string, typeof AWS_DynamoDB.AttributeValue>>> = { key: [{ key: { S:"A" }}] };
 const mapOfArrayOfArrays: Record<string, Array<Array<number>>> = { key: [[1], [2]] };
 const arrayOfMaps: Array<Record<string, string>> = [stringMap];
 const arrayOfMapOfArrays: Array<Record<string, Array<string>>> = [mapOfArrays];
