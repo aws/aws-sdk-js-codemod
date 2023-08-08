@@ -11,6 +11,8 @@ export interface ReplaceTSQualifiedNameOptions {
   v3ClientName: string;
 }
 
+const nativeTsTypes = ["TSAnyKeyword", "TSStringKeyword", "TSNumberKeyword", "TSBooleanKeyword"];
+
 const isRightSectionIdentifier = (node: TSQualifiedName) => node.right.type === "Identifier";
 
 const getRightIdentifierName = (node: TSQualifiedName) => (node.right as Identifier).name;
@@ -67,7 +69,18 @@ export const replaceTSQualifiedName = (
       )
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-        return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+        const v3ClientTypeRef = getV3ClientTypeReference(j, {
+          v2ClientName,
+          v2ClientTypeName,
+          v2ClientLocalName,
+        });
+        // if (
+        //   v2ClientType.parentPath?.value.type === "TSTypeQuery" &&
+        //   nativeTsTypes.includes(v3ClientTypeRef.type)
+        // ) {
+        //   v2ClientType.parentPath.value = v2ClientType.parentPath.parentPath.value;
+        // }
+        return v3ClientTypeRef;
       });
   }
 
