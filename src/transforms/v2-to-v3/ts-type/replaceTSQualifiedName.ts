@@ -82,7 +82,11 @@ export const replaceTSQualifiedName = (
           }
         : { left: { type: "Identifier", name: clientNamePrefix } }),
     })
-    .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
+    .filter(
+      (v2ClientType) =>
+        isRightSectionIdentifier(v2ClientType.node) &&
+        v2ClientType.parentPath?.value.type !== "TSQualifiedName"
+    )
     .replaceWith((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
       return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
