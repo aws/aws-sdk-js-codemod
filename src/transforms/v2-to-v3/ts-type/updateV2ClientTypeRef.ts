@@ -25,7 +25,9 @@ export const updateV2ClientTypeRef = (
       nativeTsTypes.includes(v3ClientTypeRef.type)) ||
     (v3ClientTypeRef.type === "TSTypeReference" &&
       (v3ClientTypeRef as TSTypeReference).typeName.type === "Identifier" &&
-      ((v3ClientTypeRef as TSTypeReference).typeName as Identifier).name === "Date")
+      ["Date", "Uint8Array"].includes(
+        ((v3ClientTypeRef as TSTypeReference).typeName as Identifier).name
+      ))
   ) {
     v2ClientType.parentPath?.replace(v3ClientTypeRef);
   } else {
