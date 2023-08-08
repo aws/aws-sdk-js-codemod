@@ -94,7 +94,7 @@ export const replaceTSQualifiedName = (
         (v2ClientType) =>
           !["TSQualifiedName", "ImportSpecifier"].includes(v2ClientType.parentPath?.value.type)
       )
-      .forEach((v2ClientType) => {
+      .replaceWith((v2ClientType) => {
         const v2ClientTypeName = v2ClientType.node.name;
         return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
       });
