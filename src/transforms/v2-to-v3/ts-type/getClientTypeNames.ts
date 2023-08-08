@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
 import { getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath } from "../utils";
@@ -14,12 +14,13 @@ type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 const getRightIdentifierName = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  tsTypeRef: DeepPartial<TSTypeReference>
+  tsQualifiedName: DeepPartial<TSQualifiedName>
 ) =>
   source
-    .find(j.TSTypeReference, tsTypeRef)
+    .find(j.TSQualifiedName, tsQualifiedName)
+    .filter((tsQualifiedName) => tsQualifiedName.parentPath?.value.type !== "TSQualifiedName")
     .nodes()
-    .map((node) => (node.typeName as TSQualifiedName).right)
+    .map((node) => node.right)
     .filter((node) => node.type === "Identifier")
     .map((node) => (node as Identifier).name);
 
@@ -36,21 +37,19 @@ export const getClientTypeNames = (
 
     clientTypeNames.push(
       ...getRightIdentifierName(j, source, {
-        typeName: {
-          left: {
-            ...(subClientName
-              ? {
-                  left: {
-                    left: { type: "Identifier", name: v2GlobalName },
-                    right: { type: "Identifier", name: clientName },
-                  },
-                  right: { type: "Identifier", name: subClientName },
-                }
-              : {
+        left: {
+          ...(subClientName
+            ? {
+                left: {
                   left: { type: "Identifier", name: v2GlobalName },
                   right: { type: "Identifier", name: clientName },
-                }),
-          },
+                },
+                right: { type: "Identifier", name: subClientName },
+              }
+            : {
+                left: { type: "Identifier", name: v2GlobalName },
+                right: { type: "Identifier", name: clientName },
+              }),
         },
       })
     );
@@ -61,16 +60,14 @@ export const getClientTypeNames = (
 
   clientTypeNames.push(
     ...getRightIdentifierName(j, source, {
-      typeName: {
-        ...(subClientName
-          ? {
-              left: {
-                left: { type: "Identifier", name: clientName },
-                right: { type: "Identifier", name: subClientName },
-              },
-            }
-          : { left: { type: "Identifier", name: clientName } }),
-      },
+      ...(subClientName
+        ? {
+            left: {
+              left: { type: "Identifier", name: clientName },
+              right: { type: "Identifier", name: subClientName },
+            },
+          }
+        : { left: { type: "Identifier", name: clientName } }),
     })
   );
 

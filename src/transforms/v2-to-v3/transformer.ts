@@ -22,7 +22,7 @@ import {
   removeClientModule,
   removeGlobalModule,
 } from "./modules";
-import { replaceTSTypeReference } from "./ts-type";
+import { replaceTSQualifiedName } from "./ts-type";
 import { isTypeScriptFile } from "./utils";
 
 const transformer = async (file: FileInfo, api: API) => {
@@ -69,7 +69,7 @@ const transformer = async (file: FileInfo, api: API) => {
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers });
-    replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
+    replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
 
     if (v2ClientName === S3) {

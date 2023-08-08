@@ -8,11 +8,11 @@ const AWS_DynamoDB = require("@aws-sdk/client-dynamodb"),
       } = AWS_STS;
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
-const listTablesInput: AWS_DynamoDB.ListTablesCommandInput = { Limit: 10 };
-const listTablesOutput: AWS_DynamoDB.ListTablesCommandOutput = await ddbClient
+const listTablesInput: typeof AWS_DynamoDB.ListTablesCommandInput = { Limit: 10 };
+const listTablesOutput: typeof AWS_DynamoDB.ListTablesCommandOutput = await ddbClient
   .listTables(listTablesInput);
 
 const stsClient = new STS({ region: "us-west-2" });
-const getCallerIdentityInput: AWS_STS.GetCallerIdentityCommandInput = {};
-const getCallerIdentityOutput: AWS_STS.GetCallerIdentityCommandOutput = await stsClient
+const getCallerIdentityInput: typeof AWS_STS.GetCallerIdentityCommandInput = {};
+const getCallerIdentityOutput: typeof AWS_STS.GetCallerIdentityCommandOutput = await stsClient
   .getCallerIdentity(getCallerIdentityInput);
