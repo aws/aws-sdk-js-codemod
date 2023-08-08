@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
+import { ASTPath, Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
@@ -14,6 +14,9 @@ export interface ReplaceTSQualifiedNameOptions {
 const isRightSectionIdentifier = (node: TSQualifiedName) => node.right.type === "Identifier";
 
 const getRightIdentifierName = (node: TSQualifiedName) => (node.right as Identifier).name;
+
+const isParentTSQualifiedName = (node: ASTPath<TSQualifiedName>) =>
+  node.parentPath?.value.type === "TSQualifiedName";
 
 const getTSQualifiedNameFromClientName = (
   v2GlobalName: string,
@@ -50,7 +53,7 @@ export const replaceTSQualifiedName = (
     // Replace type reference to client created with global name.
     source
       .find(j.TSQualifiedName, getTSQualifiedNameFromClientName(v2GlobalName, v2ClientName))
-      .filter((v2ClientType) => v2ClientType.parentPath?.value.type !== "TSQualifiedName")
+      .filter((v2ClientType) => !isParentTSQualifiedName(v2ClientType))
       .replaceWith(() => j.tsTypeReference(j.identifier(v3ClientName)));
 
     // Replace reference to client types created with global name.
@@ -60,8 +63,7 @@ export const replaceTSQualifiedName = (
       })
       .filter(
         (v2ClientType) =>
-          isRightSectionIdentifier(v2ClientType.node) &&
-          v2ClientType.parentPath?.value.type !== "TSQualifiedName"
+          isRightSectionIdentifier(v2ClientType.node) && !isParentTSQualifiedName(v2ClientType)
       )
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
@@ -84,8 +86,7 @@ export const replaceTSQualifiedName = (
     })
     .filter(
       (v2ClientType) =>
-        isRightSectionIdentifier(v2ClientType.node) &&
-        v2ClientType.parentPath?.value.type !== "TSQualifiedName"
+        isRightSectionIdentifier(v2ClientType.node) && !isParentTSQualifiedName(v2ClientType)
     )
     .replaceWith((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
