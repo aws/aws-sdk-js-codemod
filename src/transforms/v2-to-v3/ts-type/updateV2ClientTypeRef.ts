@@ -1,7 +1,8 @@
 import { ASTPath, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
 
-const nativeTsTypes = ["TSAnyKeyword", "TSStringKeyword", "TSNumberKeyword", "TSBooleanKeyword"];
+const nativeTsRefTypes = ["TSAnyKeyword", "TSStringKeyword", "TSNumberKeyword", "TSBooleanKeyword"];
+const nativeTsIdentifierTypes = ["Date", "Uint8Array", "Array", "Record"];
 
 interface UpdateV2ClientTypeRefOptions {
   v2ClientName: string;
@@ -22,10 +23,10 @@ export const updateV2ClientTypeRef = (
 
   if (
     (v2ClientType.parentPath?.value.type === "TSTypeQuery" &&
-      nativeTsTypes.includes(v3ClientTypeRef.type)) ||
+      nativeTsRefTypes.includes(v3ClientTypeRef.type)) ||
     (v3ClientTypeRef.type === "TSTypeReference" &&
       (v3ClientTypeRef as TSTypeReference).typeName.type === "Identifier" &&
-      ["Date", "Uint8Array"].includes(
+      nativeTsIdentifierTypes.includes(
         ((v3ClientTypeRef as TSTypeReference).typeName as Identifier).name
       ))
   ) {
