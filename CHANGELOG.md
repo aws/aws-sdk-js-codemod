@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.17.4
+
+### Patch Changes
+
+- Store clientIdentifiersRecord at transformer level ([1431238](https://github.com/awslabs/aws-sdk-js-codemod/commit/1431238))
+- Support transformation for types with type annotation ([5f1a930](https://github.com/awslabs/aws-sdk-js-codemod/commit/5f1a930))
+
 ## 0.17.3
 
 ### Patch Changes
