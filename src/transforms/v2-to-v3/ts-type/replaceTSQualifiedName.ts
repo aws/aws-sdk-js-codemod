@@ -4,6 +4,7 @@ import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 import { getV3ClientTypeReference } from "./getV3ClientTypeReference";
+import { updateV2ClientTypeRef } from "./updateV2ClientTypeRef";
 
 export interface ReplaceTSQualifiedNameOptions {
   v2ClientName: string;
@@ -11,8 +12,6 @@ export interface ReplaceTSQualifiedNameOptions {
   v2GlobalName?: string;
   v3ClientName: string;
 }
-
-const nativeTsTypes = ["TSAnyKeyword", "TSStringKeyword", "TSNumberKeyword", "TSBooleanKeyword"];
 
 const isRightSectionIdentifier = (node: TSQualifiedName) => node.right.type === "Identifier";
 
@@ -47,19 +46,11 @@ export const replaceTSQualifiedName = (
       )
       .forEach((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-        const v3ClientTypeRef = getV3ClientTypeReference(j, {
+        updateV2ClientTypeRef(j, v2ClientType, {
           v2ClientName,
           v2ClientTypeName,
           v2ClientLocalName,
         });
-        if (
-          v2ClientType.parentPath?.value.type === "TSTypeQuery" &&
-          nativeTsTypes.includes(v3ClientTypeRef.type)
-        ) {
-          v2ClientType.parentPath?.replace(v3ClientTypeRef);
-        } else {
-          v2ClientType.replace(v3ClientTypeRef);
-        }
       });
   }
 
@@ -80,9 +71,13 @@ export const replaceTSQualifiedName = (
       (v2ClientType) =>
         isRightSectionIdentifier(v2ClientType.node) && !isParentTSQualifiedName(v2ClientType)
     )
-    .replaceWith((v2ClientType) => {
+    .forEach((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-      return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+      updateV2ClientTypeRef(j, v2ClientType, {
+        v2ClientName,
+        v2ClientTypeName,
+        v2ClientLocalName,
+      });
     });
 
   // Replace type reference to client type with modules.
@@ -99,7 +94,7 @@ export const replaceTSQualifiedName = (
         (v2ClientType) =>
           !["TSQualifiedName", "ImportSpecifier"].includes(v2ClientType.parentPath?.value.type)
       )
-      .replaceWith((v2ClientType) => {
+      .forEach((v2ClientType) => {
         const v2ClientTypeName = v2ClientType.node.name;
         return getV3ClientTypeReference(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
       });
