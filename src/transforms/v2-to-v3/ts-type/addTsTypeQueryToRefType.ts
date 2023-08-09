@@ -1,6 +1,8 @@
 import { Identifier, TSTypeReference } from "jscodeshift";
 import { getDefaultLocalName } from "../utils";
 
+const nativeTsUnionTypes = ["Array", "Record"];
+
 export const addTsTypeQueryToRefType = (v3ClientType: TSTypeReference) => {
   const { typeParameters } = v3ClientType;
   if (typeParameters?.type === "TSTypeParameterInstantiation") {
@@ -12,6 +14,8 @@ export const addTsTypeQueryToRefType = (v3ClientType: TSTypeReference) => {
           if (typeRefIdentifier.name.startsWith(getDefaultLocalName(""))) {
             // TODO: Add TS Type Query to typeRefIdentifier instead.
             typeRefIdentifier.name = `typeof ${typeRefIdentifier.name}`;
+          } else if (nativeTsUnionTypes.includes(typeRefIdentifier.name)) {
+            addTsTypeQueryToRefType(typeRef);
           }
         }
       }
