@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.17.5
+
+### Patch Changes
+
+- Add type annotation for union of required types ([725034e](https://github.com/awslabs/aws-sdk-js-codemod/commit/725034e))
+- Retain type annotation when transforming redundant types ([2fcf263](https://github.com/awslabs/aws-sdk-js-codemod/commit/2fcf263))
+
 ## 0.17.4
 
 ### Patch Changes
