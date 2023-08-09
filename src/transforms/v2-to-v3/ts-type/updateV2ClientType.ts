@@ -31,7 +31,7 @@ export const updateV2ClientType = (
         const v3ClientTypeRefIdentifier = v3ClientTypeRef.typeName as Identifier;
         if (nativeTsIdentifierTypes.includes(v3ClientTypeRefIdentifier.name)) {
           if (nativeTsUnionTypes.includes(v3ClientTypeRefIdentifier.name)) {
-            addTsTypeQueryToRefType(v3ClientTypeRef);
+            addTsTypeQueryToRefType(j, v3ClientTypeRef);
           }
           v2ClientType.parentPath?.replace(v3ClientType);
           return;
