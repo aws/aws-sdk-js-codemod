@@ -12,8 +12,6 @@ You can provide names of the custom transforms instead of a local path or url:
 
 ${transforms.map((transform) => getTransformDescription(transform).join("\n"))}
 
-Example: aws-sdk-js-codemod -t v2-to-v3 example.js
-
-To use the latest version of aws-sdk-js-codemod, please clear your npx cache and re-run.
+Example: npx aws-sdk-js-codemod@latest -t v2-to-v3 example.js
 
 ${separator}\n\n`;
