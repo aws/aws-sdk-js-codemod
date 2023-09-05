@@ -21,16 +21,11 @@ To use aws-sdk-js-codemod, please install [Node.js][install-nodejs].
 
 - Optionally execute dry-run for the transform, and print transformed files on stdout:
   ```console
-  npx aws-sdk-js-codemod --dry --print -t v2-to-v3 PATH...
+  npx aws-sdk-js-codemod@latest --dry --print -t v2-to-v3 PATH...
   ```
 - Run transform, and make changes to files:
   ```console
-  npx aws-sdk-js-codemod -t v2-to-v3 PATH...
-  ```
-- To use the latest version of aws-sdk-js-codemod, clear your npx cache. You can either
-  manually delete folder `$(npm get cache)/_npx/*`, or run `clear-npx-cache`.
-  ```console
-  npx clear-npx-cache
+  npx aws-sdk-js-codemod@latest -t v2-to-v3 PATH...
   ```
 
 ## Example
@@ -46,7 +41,7 @@ client.listTables({}, (err, data) => {
   else console.log(data);
 });
 
-$ npx aws-sdk-js-codemod -t v2-to-v3 example.ts
+$ npx aws-sdk-js-codemod@latest -t v2-to-v3 example.ts
 
 $ cat example.ts
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
