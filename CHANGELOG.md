@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.17.6
+
+### Patch Changes
+
+- Recommend using latest version of aws-sdk-js-codemod ([d31a5d4](https://github.com/awslabs/aws-sdk-js-codemod/commit/d31a5d4))
+
 ## 0.17.5
 
 ### Patch Changes
