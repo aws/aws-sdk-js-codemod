@@ -5,7 +5,10 @@ export const removePromiseForCallExpression = (
   j: JSCodeshift,
   callExpression: ASTPath<CallExpression>
 ) => {
-  switch (callExpression.parentPath.value.type) {
+  const parentPathValue = Array.isArray(callExpression.parentPath.value)
+    ? callExpression.parentPath.value[0]
+    : callExpression.parentPath.value;
+  switch (parentPathValue.type) {
     case "MemberExpression": {
       callExpression.parentPath.value.object = (
         callExpression.value.callee as MemberExpression
@@ -34,6 +37,7 @@ export const removePromiseForCallExpression = (
     // eslint-disable-next-line no-fallthrough
     case "ArrowFunctionExpression":
     case "AwaitExpression":
+    case "CallExpression":
     case "ExpressionStatement":
     case "ObjectProperty":
     case "ReturnStatement":
