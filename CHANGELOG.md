@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.17.7
+
+### Patch Changes
+
+- Remove promise calls when parentPath is CallExpression ([dbf3a3f](https://github.com/awslabs/aws-sdk-js-codemod/commit/dbf3a3f))
+
 ## 0.17.6
 
 ### Patch Changes
