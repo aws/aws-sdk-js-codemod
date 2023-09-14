@@ -1,9 +1,7 @@
-import { readFile } from "fs/promises";
-import { join } from "path";
 import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } from "jscodeshift";
 
-import { DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config";
 import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
+import { getTypesSource } from "./getTypesSource";
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
 const ElementTypeToNativeTypeMap = {
@@ -16,16 +14,8 @@ const ElementTypeToNativeTypeMap = {
 export const getClientTypesMap = async (clientName: string): Promise<Record<string, string>> => {
   const clientTypesMap = {};
 
-  const typesPath =
-    clientName === DOCUMENT_CLIENT
-      ? join("node_modules", "aws-sdk", "lib", "dynamodb", `document_client.d.ts`)
-      : join("node_modules", "aws-sdk", "clients", `${clientName.toLowerCase()}.d.ts`);
-  const relativeTypesPath = join(__dirname, "..", "..", typesPath);
-
-  const typesCode = await readFile(relativeTypesPath, "utf8");
-
   const j = jscodeshift.withParser("ts");
-  const source = j(typesCode);
+  const source = getTypesSource(j, clientName);
 
   source.find(j.TSModuleDeclaration, { id: { name: clientName } }).forEach((moduleDeclaration) => {
     const tsTypes = j(moduleDeclaration).find(j.TSTypeAliasDeclaration).nodes();
