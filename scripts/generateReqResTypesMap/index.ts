@@ -1,6 +1,11 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
-import jscodeshift, { Identifier, TSQualifiedName, TSTypeReference } from "jscodeshift";
+import jscodeshift, {
+  Identifier,
+  TSFunctionType,
+  TSQualifiedName,
+  TSTypeReference,
+} from "jscodeshift";
 import { format } from "prettier";
 
 import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
@@ -58,15 +63,48 @@ const relativeFilePath = join(__dirname, "..", "..", filePath);
 
         if (!paramsTypeRefName.right) return;
         if (paramsTypeRefName.right.type !== "Identifier") return;
-        const paramsTypeName = (paramsTypeRef.typeName as TSQualifiedName).right as Identifier;
+        const paramsTypeName = paramsTypeRefName.right as Identifier;
         const requestTypeName = paramsTypeName.name;
 
-        if (!requestTypeName.startsWith(commandName)) {
-          if (reqResTypesMap[requestTypeName] === undefined) reqResTypesMap[requestTypeName] = {};
+        if (requestTypeName !== `${commandName}Request`) {
+          if (reqResTypesMap[requestTypeName] === undefined) {
+            reqResTypesMap[requestTypeName] = {};
+          }
           reqResTypesMap[requestTypeName][clientName] = commandName;
+        }
 
-          const responseTypeName = requestTypeName.replace("Request", "Response");
-          if (reqResTypesMap[responseTypeName] === undefined) reqResTypesMap[responseTypeName] = {};
+        if (classMethod.params[1].type !== "Identifier") return;
+        if (classMethod.params[1].name !== "callback") return;
+        const callback = classMethod.params[1] as Identifier;
+
+        if (!callback.typeAnnotation) return;
+        if (!callback.typeAnnotation.typeAnnotation) return;
+        if (callback.typeAnnotation.typeAnnotation.type !== "TSFunctionType") return;
+        const callbackTypeRef = callback.typeAnnotation!.typeAnnotation! as TSFunctionType;
+
+        if (!callbackTypeRef.parameters) return;
+        if (callbackTypeRef.parameters.length !== 2) return;
+        if (callbackTypeRef.parameters[1].type !== "Identifier") return;
+        const responseType = callbackTypeRef.parameters[1] as Identifier;
+
+        if (!responseType.typeAnnotation) return;
+        if (responseType.typeAnnotation.type !== "TSTypeAnnotation") return;
+        if (!responseType.typeAnnotation.typeAnnotation) return;
+        if (responseType.typeAnnotation.typeAnnotation.type !== "TSTypeReference") return;
+        const responseTypeRef = responseType.typeAnnotation!.typeAnnotation! as TSTypeReference;
+
+        if (!responseTypeRef.typeName) return;
+        if (responseTypeRef.typeName.type !== "TSQualifiedName") return;
+        const responseTypeRefName = responseTypeRef.typeName as TSQualifiedName;
+
+        if (!responseTypeRefName.right) return;
+        if (responseTypeRefName.right.type !== "Identifier") return;
+        const responseTypeName = (responseTypeRefName.right as Identifier).name;
+
+        if (responseTypeName !== `${commandName}Response`) {
+          if (reqResTypesMap[responseTypeName] === undefined) {
+            reqResTypesMap[responseTypeName] = {};
+          }
           reqResTypesMap[responseTypeName][clientName] = commandName;
         }
       });
