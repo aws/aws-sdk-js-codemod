@@ -1,5 +1,4 @@
-import { DynamoDB } from "aws-sdk";
-import { STS } from "aws-sdk";
+import { DynamoDB, Lambda, STS } from "aws-sdk";
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
 const listTablesInput: DynamoDB.ListTablesInput = { Limit: 10 };
@@ -12,3 +11,10 @@ const getCallerIdentityInput: STS.GetCallerIdentityRequest = {};
 const getCallerIdentityOutput: STS.GetCallerIdentityResponse = await stsClient
   .getCallerIdentity(getCallerIdentityInput)
   .promise();
+
+const lambdaClient = new Lambda({ region: "us-west-2" });
+const invokeInput: Lambda.InvocationRequest = { FunctionName: "my-function" };
+const invokeOutput: Lambda.InvocationResponse = await lambdaClient
+  .invoke(invokeInput)
+  .promise();
+  
