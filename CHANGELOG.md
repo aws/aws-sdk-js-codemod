@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.18.0
+
+### Minor Changes
+
+- Create input/output types mapping in CLIENT_REQ_RESP_TYPES_MAP ([531767c](https://github.com/awslabs/aws-sdk-js-codemod/commit/531767c))
+- Use CLIENT_REQ_RESP_TYPES_MAP for input/output transformation ([8de1c52](https://github.com/awslabs/aws-sdk-js-codemod/commit/8de1c52))
+
 ## 0.17.7
 
 ### Patch Changes
