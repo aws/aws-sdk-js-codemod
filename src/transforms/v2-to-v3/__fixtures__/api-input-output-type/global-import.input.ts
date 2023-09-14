@@ -11,3 +11,9 @@ const getCallerIdentityInput: AWS.STS.GetCallerIdentityRequest = {};
 const getCallerIdentityOutput: AWS.STS.GetCallerIdentityResponse = await stsClient
   .getCallerIdentity(getCallerIdentityInput)
   .promise();
+  
+const lambdaClient = new AWS.Lambda({ region: "us-west-2" });
+const invokeInput: AWS.Lambda.InvocationRequest = { FunctionName: "my-function" };
+const invokeOutput: AWS.Lambda.InvocationResponse = await lambdaClient
+  .invoke(invokeInput)
+  .promise();
