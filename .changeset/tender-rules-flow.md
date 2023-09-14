@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": minor
 ---
 
-Transform Input/Output types without operation name prefix
+Use CLIENT_REQ_RESP_TYPES_MAP for input/output transformation
