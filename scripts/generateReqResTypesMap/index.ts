@@ -1,11 +1,6 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
-import jscodeshift, {
-  Identifier,
-  TSFunctionType,
-  TSQualifiedName,
-  TSTypeReference,
-} from "jscodeshift";
+import jscodeshift, { Identifier, TSQualifiedName, TSTypeReference } from "jscodeshift";
 import { format } from "prettier";
 
 import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
@@ -66,29 +61,14 @@ const relativeFilePath = join(__dirname, "..", "..", filePath);
         const paramsTypeName = (paramsTypeRef.typeName as TSQualifiedName).right as Identifier;
         const requestTypeName = paramsTypeName.name;
 
-        console.log({ commandName, requestTypeName });
+        if (!requestTypeName.startsWith(commandName)) {
+          if (reqResTypesMap[requestTypeName] === undefined) reqResTypesMap[requestTypeName] = {};
+          reqResTypesMap[requestTypeName][clientName] = commandName;
 
-        if (classMethod.params[1].type !== "Identifier") return;
-        if (classMethod.params[1].name !== "callback") return;
-        const callback = classMethod.params[1] as Identifier;
-
-        if (!callback.typeAnnotation) return;
-        if (!callback.typeAnnotation.typeAnnotation) return;
-        if (callback.typeAnnotation.typeAnnotation.type !== "TSFunctionType") return;
-        const callbackTypeRef = callback.typeAnnotation!.typeAnnotation! as TSFunctionType;
-
-        if (!callbackTypeRef.parameters) return;
-        if (callbackTypeRef.parameters.length !== 2) return;
-        if (callbackTypeRef.parameters[1].type !== "Identifier") return;
-        const responseType = callbackTypeRef.parameters[1] as Identifier;
-
-        if (!responseType.typeAnnotation) return;
-        if (responseType.typeAnnotation.type !== "TSTypeAnnotation") return;
-        if (!responseType.typeAnnotation.typeAnnotation) return;
-        if (responseType.typeAnnotation.typeAnnotation.type !== "TSTypeLiteral") return;
-        console.log(responseType);
-
-        throw new Error("Stop");
+          const responseTypeName = requestTypeName.replace("Request", "Response");
+          if (reqResTypesMap[responseTypeName] === undefined) reqResTypesMap[responseTypeName] = {};
+          reqResTypesMap[responseTypeName][clientName] = commandName;
+        }
       });
     });
   }
