@@ -1,4 +1,5 @@
 import { Collection, FunctionExpression, Identifier, JSCodeshift } from "jscodeshift";
+import { getAwsUtilCallExpression } from "./getAwsUtilCallExpression";
 
 export const replaceAwsUtilArrayFunctions = (
   j: JSCodeshift,
@@ -6,21 +7,7 @@ export const replaceAwsUtilArrayFunctions = (
   v2GlobalName: string
 ) => {
   // replace arrayEach
-  source
-    .find(j.CallExpression, {
-      callee: {
-        type: "MemberExpression",
-        object: {
-          type: "MemberExpression",
-          object: {
-            type: "Identifier",
-            name: v2GlobalName,
-          },
-          property: { name: "util" },
-        },
-        property: { name: "arrayEach" },
-      },
-    })
+  getAwsUtilCallExpression(j, source, { v2GlobalName, functionName: "arrayEach" })
     .filter(({ node }) => node.arguments.length === 2)
     .replaceWith(({ node }) => {
       const array = node.arguments[0] as Identifier;
