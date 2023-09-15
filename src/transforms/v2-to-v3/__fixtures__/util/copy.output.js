@@ -1,0 +1,1 @@
+const clone = structuredClone({ foo: "bar" });
