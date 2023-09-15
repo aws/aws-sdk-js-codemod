@@ -14,4 +14,11 @@ export const replaceAwsUtilArrayFunctions = (
       const iteratee = node.arguments[1] as FunctionExpression;
       return j.callExpression(j.memberExpression(array, j.identifier("forEach")), [iteratee]);
     });
+
+  // replace arraySliceFn
+  getAwsUtilCallExpression(j, source, { v2GlobalName, functionName: "arraySliceFn" })
+    .filter(({ node }) => node.arguments.length === 1)
+    .replaceWith(({ node }) =>
+      j.memberExpression(node.arguments[0] as Identifier, j.identifier("slice"))
+    );
 };
