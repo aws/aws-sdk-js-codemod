@@ -1,0 +1,1 @@
+const clone = Object.assign({}, { foo: "bar" });
