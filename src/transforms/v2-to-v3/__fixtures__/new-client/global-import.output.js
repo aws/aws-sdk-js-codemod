@@ -123,7 +123,7 @@ import { ElasticsearchService as ES } from "@aws-sdk/client-elasticsearch-servic
 import { EMR } from "@aws-sdk/client-emr";
 import { EMRContainers as EMRcontainers } from "@aws-sdk/client-emr-containers";
 import { EMRServerless } from "@aws-sdk/client-emr-serverless";
-import { EntityResolution } from "@aws-sdk/client-entity-resolution";
+import { EntityResolution } from "@aws-sdk/client-entityresolution";
 import { EventBridge } from "@aws-sdk/client-eventbridge";
 import { Evidently } from "@aws-sdk/client-evidently";
 import { Finspace } from "@aws-sdk/client-finspace";
@@ -206,8 +206,8 @@ import { M2 } from "@aws-sdk/client-m2";
 import { MachineLearning } from "@aws-sdk/client-machine-learning";
 import { Macie } from "@aws-sdk/client-macie";
 import { Macie2 } from "@aws-sdk/client-macie2";
-import { ManagedBlockchainQuery } from "@aws-sdk/client-managed-blockchain-query";
 import { ManagedBlockchain } from "@aws-sdk/client-managedblockchain";
+import { ManagedBlockchainQuery } from "@aws-sdk/client-managedblockchain-query";
 import { MarketplaceCatalog } from "@aws-sdk/client-marketplace-catalog";
 import { MarketplaceCommerceAnalytics } from "@aws-sdk/client-marketplace-commerce-analytics";
 import { MarketplaceEntitlementService } from "@aws-sdk/client-marketplace-entitlement-service";
