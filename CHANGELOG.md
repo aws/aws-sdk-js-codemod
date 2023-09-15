@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.18.1
+
+### Patch Changes
+
+- Transform clients published between 2023-07-27 and 2023-09-13 ([ca4c2af](https://github.com/awslabs/aws-sdk-js-codemod/commit/ca4c2af))
+
 ## 0.18.0
 
 ### Minor Changes
