@@ -9,6 +9,7 @@ import {
   replaceS3GetSignedUrlApi,
   getClientIdentifiersRecord,
 } from "./apis";
+import { replaceAwsUtilFunctions } from "./aws-util";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
   getClientMetadataRecord,
@@ -88,6 +89,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceClientCreation(j, source, v2Options);
     replaceDocClientCreation(j, source, v2Options);
   }
+  replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
 
   return source.toSource();
