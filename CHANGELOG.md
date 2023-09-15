@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.18.2
+
+### Patch Changes
+
+- Transform AWS.util.array functions ([bcee631](https://github.com/awslabs/aws-sdk-js-codemod/commit/bcee631))
+
 ## 0.18.1
 
 ### Patch Changes
