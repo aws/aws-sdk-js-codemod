@@ -1,1 +1,1 @@
-const clone = structuredClone({ foo: "bar" });
+const clone = Object.assign({}, { foo: "bar" });
