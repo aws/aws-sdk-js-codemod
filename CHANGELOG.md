@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.18.3
+
+### Patch Changes
+
+- Transform AWS.util.copy ([bdf04b8](https://github.com/awslabs/aws-sdk-js-codemod/commit/bdf04b8))
+
 ## 0.18.2
 
 ### Patch Changes
