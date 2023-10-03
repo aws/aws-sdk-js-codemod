@@ -7,7 +7,9 @@ import { getV3PackageImportEqualsCode } from "./getV3PackageImportEqualsCode";
 export const getGlobalImportEqualsOutput = () => {
   let content = ``;
 
-  content += getV3PackageImportEqualsCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST));
+  content += getV3PackageImportEqualsCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST), {
+    useV3ClientName: true,
+  });
   content += getV3ClientsNewExpressionCode(
     CLIENTS_TO_TEST.map((clientName) => CLIENT_NAMES_MAP[clientName])
   );

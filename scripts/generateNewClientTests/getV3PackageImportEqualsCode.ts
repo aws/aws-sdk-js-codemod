@@ -8,6 +8,7 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 
 export interface V3PackageImportEqualsCodeOptions {
   useLocalSuffix?: boolean;
+  useV3ClientName?: boolean;
 }
 
 export const getV3PackageImportEqualsCode = (
@@ -15,7 +16,7 @@ export const getV3PackageImportEqualsCode = (
   options?: V3PackageImportEqualsCodeOptions
 ) => {
   let content = ``;
-  const { useLocalSuffix = false } = options || {};
+  const { useLocalSuffix = false, useV3ClientName = false } = options || {};
 
   for (const v2ClientName of clientsToTest) {
     const v3ClientDefaultLocalName = getDefaultLocalName(v2ClientName);
@@ -28,7 +29,10 @@ export const getV3PackageImportEqualsCode = (
       : v2ClientName;
 
     const v3ObjectPattern =
-      v3ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
+      useV3ClientName || v3ClientName === v2ClientLocalName
+        ? v3ClientName
+        : `${v3ClientName}: ${v2ClientLocalName}`;
+
     content +=
       `const {\n` + `  ${v3ObjectPattern}\n` + `} = ${getDefaultLocalName(v2ClientName)};\n\n`;
   }
