@@ -5,7 +5,7 @@ export interface GetAwsCredentialsNewExpressionOptions {
   className: string;
 }
 
-export const getAwsCredentialsNewExpression = (
+export const getAwsCredentialsNewExpressions = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2GlobalName, className }: GetAwsCredentialsNewExpressionOptions
