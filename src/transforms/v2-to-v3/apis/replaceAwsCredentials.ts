@@ -1,4 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
+import { AWS_CREDENTIALS_MAP } from "../config";
 import { getAwsCredentialsNewExpression } from "./getAwsCredentialsNewExpression";
 
 export const replaceAwsCredentials = (
@@ -8,8 +9,10 @@ export const replaceAwsCredentials = (
 ) => {
   if (!v2GlobalName) return;
 
-  const functionName = "EnvironmentCredentials";
-  getAwsCredentialsNewExpression(j, source, { v2GlobalName, functionName }).replaceWith(
-    ({ node }) => j.callExpression(j.identifier("fromEnv"), node.arguments)
-  );
+  for (const [v2CredentialsName, v3ProviderName] of Object.entries(AWS_CREDENTIALS_MAP)) {
+    getAwsCredentialsNewExpression(j, source, {
+      v2GlobalName,
+      className: v2CredentialsName,
+    }).replaceWith(({ node }) => j.callExpression(j.identifier(v3ProviderName), node.arguments));
+  }
 };

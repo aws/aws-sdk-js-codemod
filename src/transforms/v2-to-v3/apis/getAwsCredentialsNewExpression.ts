@@ -2,13 +2,13 @@ import { Collection, JSCodeshift } from "jscodeshift";
 
 export interface GetAwsCredentialsNewExpressionOptions {
   v2GlobalName: string;
-  functionName: string;
+  className: string;
 }
 
 export const getAwsCredentialsNewExpression = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2GlobalName, functionName }: GetAwsCredentialsNewExpressionOptions
+  { v2GlobalName, className }: GetAwsCredentialsNewExpressionOptions
 ) =>
   source.find(j.NewExpression, {
     type: "NewExpression",
@@ -18,6 +18,6 @@ export const getAwsCredentialsNewExpression = (
         type: "Identifier",
         name: v2GlobalName,
       },
-      property: { name: functionName },
+      property: { name: className },
     },
   });
