@@ -1,5 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
-import { replaceEnvCredentials } from "./replaceEnvCredentials";
+import { getAwsCredentialsNewExpression } from "./getAwsCredentialsNewExpression";
 
 export const replaceAwsCredentials = (
   j: JSCodeshift,
@@ -8,5 +8,8 @@ export const replaceAwsCredentials = (
 ) => {
   if (!v2GlobalName) return;
 
-  replaceEnvCredentials(j, source, v2GlobalName);
+  const functionName = "EnvironmentCredentials";
+  getAwsCredentialsNewExpression(j, source, { v2GlobalName, functionName }).replaceWith(
+    ({ node }) => j.callExpression(j.identifier("fromEnv"), node.arguments)
+  );
 };
