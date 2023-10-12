@@ -8,8 +8,8 @@ import {
   replaceS3UploadApi,
   replaceS3GetSignedUrlApi,
   getClientIdentifiersRecord,
+  replaceAwsCredentials,
 } from "./apis";
-import { replaceAwsCredentials } from "./aws-credentials";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
 import {
