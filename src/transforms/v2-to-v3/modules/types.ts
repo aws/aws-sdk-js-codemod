@@ -19,3 +19,7 @@ export enum ImportType {
   IMPORT = "import",
   IMPORT_EQUALS = "import-equals",
 }
+
+export interface ModulesOptions extends ImportSpecifierOptions {
+  packageName: string;
+}
