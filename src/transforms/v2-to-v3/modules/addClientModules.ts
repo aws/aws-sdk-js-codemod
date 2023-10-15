@@ -31,7 +31,7 @@ export const addClientModules = (
   source: Collection<unknown>,
   options: ClientModulesOptions
 ): void => {
-  const { clientIdentifiers } = options;
+  const { clientIdentifiers, v2ClientName, v3ClientName, v2ClientLocalName } = options;
 
   const { addClientDefaultModule, addClientNamedModule } = hasRequire(j, source)
     ? requireModule
@@ -52,8 +52,8 @@ export const addClientModules = (
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
     addClientNamedModule(j, source, {
       ...options,
-      importedName: options.v3ClientName,
-      localName: options.v2ClientLocalName,
+      importedName: v3ClientName,
+      localName: v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName,
     });
   }
 
@@ -65,7 +65,7 @@ export const addClientModules = (
     });
   }
 
-  if (options.v2ClientName === S3) {
+  if (v2ClientName === S3) {
     if (isS3UploadApiUsed(j, source, clientIdentifiers)) {
       addClientNamedModule(j, source, {
         ...options,
@@ -89,7 +89,7 @@ export const addClientModules = (
     }
   }
 
-  if (options.v2ClientName === DYNAMODB) {
+  if (v2ClientName === DYNAMODB) {
     const { v2ClientLocalName } = options;
 
     const docClientOptions = {
