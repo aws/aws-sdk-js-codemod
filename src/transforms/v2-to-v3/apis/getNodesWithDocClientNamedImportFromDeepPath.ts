@@ -6,7 +6,7 @@ import {
   VariableDeclaration,
 } from "jscodeshift";
 import { DOCUMENT_CLIENT, DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { ImportType } from "../modules/types";
+import { ImportType } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
 export const getNodesWithDocClientNamedImportFromDeepPath = (

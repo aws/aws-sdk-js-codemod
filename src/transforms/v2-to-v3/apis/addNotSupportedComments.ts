@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { getClientNamesFromDeepImport } from "../client-names";
 import { DYNAMODB } from "../config";
-import { ImportType } from "../modules/types";
+import { ImportType } from "../modules";
 import { getNodesWithDocClientNamedImportFromDeepPath } from "./getNodesWithDocClientNamedImportFromDeepPath";
 
 export const addNotSupportedComments = (

@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { ImportType } from "../modules/types";
+import { ImportType } from "../modules";
 import { getClientNamesFromDeepImport } from "./getClientNamesFromDeepImport";
 import { getClientNamesRecordFromImport } from "./getClientNamesRecordFromImport";
 import { getClientNamesRecordFromRequire } from "./getClientNamesRecordFromRequire";
