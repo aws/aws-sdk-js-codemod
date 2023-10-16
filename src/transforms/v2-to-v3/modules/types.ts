@@ -13,3 +13,9 @@ export interface ImportSpecifierOptions {
   importedName: string;
   localName?: string;
 }
+
+export enum ImportType {
+  REQUIRE = "require",
+  IMPORT = "import",
+  IMPORT_EQUALS = "import-equals",
+}
