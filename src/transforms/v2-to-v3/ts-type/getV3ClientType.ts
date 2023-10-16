@@ -42,7 +42,10 @@ export const getV3ClientType = (
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
 
   if (Object.keys(clientTypesMap).includes(v2ClientTypeName)) {
-    return getTypeForString(j, defaultLocalName, clientTypesMap[v2ClientTypeName]);
+    return getTypeForString(j, importType, {
+      v3ClientDefaultLocalName: defaultLocalName,
+      v3ClientTypeString: clientTypesMap[v2ClientTypeName],
+    });
   }
 
   return j.tsTypeReference(
