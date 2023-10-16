@@ -11,7 +11,7 @@ const getTypesFromString = (str: string): string[] => {
   const arraryMatches = [...str.matchAll(arrayBracketRegex)].map((match) => match[1]);
   const recordMatches = [...str.matchAll(recordBracketRegex)].map((match) => match[1]);
 
-  return [...arraryMatches, ...recordMatches];
+  return [...arraryMatches, ...recordMatches].sort();
 };
 
 export const getV3ClientTypes = (
@@ -41,9 +41,10 @@ export const getV3ClientTypes = (
       }
 
       if (Object.keys(clientTypesMap).includes(clientTypeName)) {
-        return clientTypesMap[clientTypeName];
+        return getTypesFromString(clientTypesMap[clientTypeName]);
       }
 
       return clientTypeName;
-    });
+    })
+    .flat();
 };
