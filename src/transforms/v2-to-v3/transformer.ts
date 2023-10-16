@@ -35,7 +35,7 @@ const transformer = async (file: FileInfo, api: API) => {
   addNotSupportedComments(j, source, importType);
 
   const v2GlobalName = getGlobalNameFromModule(j, source, importType);
-  const v2ClientNamesRecord = getClientNamesRecord(j, source);
+  const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
