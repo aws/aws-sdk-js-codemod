@@ -14,7 +14,7 @@ const getTypesFromString = (str: string): string[] => {
   return [...arraryMatches, ...recordMatches];
 };
 
-export const getV3ClientTypesCount = (
+export const getV3ClientTypes = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: GetClientTypeNamesOptions
@@ -31,5 +31,5 @@ export const getV3ClientTypesCount = (
     }
     const typesFromString = getTypesFromString(clientTypesMap[clientTypeName]);
     return typesFromString.some((type) => !nativeTypes.includes(type));
-  }).length;
+  });
 };
