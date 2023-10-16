@@ -8,4 +8,4 @@ import { ApplicationDiscoveryService } from "@aws-sdk/client-application-discove
 
 new ACM();
 new AccessAnalyzer();
-new Discovery();
+new ApplicationDiscoveryService();

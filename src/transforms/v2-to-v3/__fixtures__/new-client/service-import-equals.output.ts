@@ -22,4 +22,4 @@ const {
 
 new ACM();
 new AccessAnalyzer();
-new Discovery();
+new ApplicationDiscoveryService();
