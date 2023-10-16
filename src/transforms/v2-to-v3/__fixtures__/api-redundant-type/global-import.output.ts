@@ -1,6 +1,6 @@
 import { MethodSnapshot } from "@aws-sdk/client-api-gateway";
 import { AttributeValue } from "@aws-sdk/client-dynamodb";
-import { ChecksumAlgorithm, Bucket } from "@aws-sdk/client-s3";
+import { Bucket, ChecksumAlgorithm } from "@aws-sdk/client-s3";
 
 // Native types
 const stringType: string = "string";
