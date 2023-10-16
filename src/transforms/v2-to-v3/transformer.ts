@@ -20,6 +20,7 @@ import { S3 } from "./config";
 import {
   addClientModules,
   getGlobalNameFromModule,
+  getImportType,
   removeClientModule,
   removeGlobalModule,
 } from "./modules";
@@ -29,11 +30,12 @@ import { isTypeScriptFile } from "./utils";
 const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
+  const importType = getImportType(j, source);
 
-  addNotSupportedComments(j, source);
+  addNotSupportedComments(j, source, importType);
 
-  const v2GlobalName = getGlobalNameFromModule(j, source);
-  const v2ClientNamesRecord = getClientNamesRecord(j, source);
+  const v2GlobalName = getGlobalNameFromModule(j, source, importType);
+  const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
@@ -69,9 +71,9 @@ const transformer = async (file: FileInfo, api: API) => {
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
-    addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers });
+    addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
     replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName });
-    removeClientModule(j, source, v2Options);
+    removeClientModule(j, source, { ...v2Options, importType });
 
     if (v2ClientName === S3) {
       // Needs to be called before removing promise calls, as replacement has `.done()` call.
@@ -90,7 +92,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceDocClientCreation(j, source, v2Options);
   }
   replaceAwsUtilFunctions(j, source, v2GlobalName);
-  removeGlobalModule(j, source, v2GlobalName);
+  removeGlobalModule(j, source, { v2GlobalName, importType });
 
   return source.toSource();
 };

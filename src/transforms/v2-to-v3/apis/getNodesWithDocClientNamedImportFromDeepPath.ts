@@ -6,15 +6,17 @@ import {
   VariableDeclaration,
 } from "jscodeshift";
 import { DOCUMENT_CLIENT, DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { hasRequire } from "../modules";
+import { ImportType } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
 export const getNodesWithDocClientNamedImportFromDeepPath = (
   j: JSCodeshift,
-  source: Collection<unknown>
+  source: Collection<unknown>,
+  importType: ImportType
 ) => {
   const deepImportPath = getClientDeepImportPath(DYNAMODB);
-  if (hasRequire(j, source)) {
+
+  if (importType === ImportType.REQUIRE) {
     return source
       .find(j.VariableDeclarator, {
         init: {
@@ -37,18 +39,18 @@ export const getNodesWithDocClientNamedImportFromDeepPath = (
       .map(
         (variableDeclarator) => variableDeclarator.parentPath.parentPath
       ) as Collection<VariableDeclaration>;
-  } else {
-    return source
-      .find(j.ImportDeclaration, {
-        type: "ImportDeclaration",
-        source: { value: deepImportPath },
-      })
-      .filter((importDeclaration) =>
-        (importDeclaration.value.specifiers || []).some(
-          (importDeclaration) =>
-            importDeclaration.type === "ImportSpecifier" &&
-            importDeclaration.imported.name === DOCUMENT_CLIENT
-        )
-      );
   }
+
+  return source
+    .find(j.ImportDeclaration, {
+      type: "ImportDeclaration",
+      source: { value: deepImportPath },
+    })
+    .filter((importDeclaration) =>
+      (importDeclaration.value.specifiers || []).some(
+        (importDeclaration) =>
+          importDeclaration.type === "ImportSpecifier" &&
+          importDeclaration.imported.name === DOCUMENT_CLIENT
+      )
+    );
 };

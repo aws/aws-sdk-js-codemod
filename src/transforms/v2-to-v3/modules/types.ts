@@ -7,9 +7,16 @@ export interface ClientModulesOptions {
   v3ClientName: string;
   v3ClientPackageName: string;
   clientIdentifiers: ClientIdentifier[];
+  importType: ImportType;
 }
 
 export interface ImportSpecifierOptions {
   importedName: string;
   localName?: string;
+}
+
+export enum ImportType {
+  REQUIRE = "require",
+  IMPORT = "import",
+  IMPORT_EQUALS = "import-equals",
 }
