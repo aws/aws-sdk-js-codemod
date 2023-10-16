@@ -5,6 +5,7 @@ import { CLIENT_REQ_RESP_TYPES_MAP } from "../config/CLIENT_REQ_RESP_TYPES_MAP";
 import { ImportType } from "../modules";
 import { getDefaultLocalName } from "../utils";
 import { getTypeForString } from "./getTypeForString";
+import { getV3ClientTypeName } from "./getV3ClientTypeName";
 
 export interface GetV3ClientTypeOptions {
   v2ClientLocalName: string;
@@ -12,18 +13,6 @@ export interface GetV3ClientTypeOptions {
   v2ClientTypeName: string;
   importType: ImportType;
 }
-
-const getV3ClientTypeName = (
-  v3ClientTypeName: string,
-  v2ClientLocalName: string,
-  importType: ImportType
-) => {
-  const v3ClientTypeNameSections = [v3ClientTypeName];
-  if (importType === ImportType.IMPORT_EQUALS) {
-    v3ClientTypeNameSections.unshift(getDefaultLocalName(v2ClientLocalName));
-  }
-  return v3ClientTypeNameSections.join(".");
-};
 
 export const getV3ClientType = (
   j: JSCodeshift,
