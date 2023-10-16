@@ -1,9 +1,14 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { getClientNamesFromDeepImport } from "../client-names";
 import { DYNAMODB } from "../config";
+import { ImportType } from "../modules/types";
 import { getNodesWithDocClientNamedImportFromDeepPath } from "./getNodesWithDocClientNamedImportFromDeepPath";
 
-export const addNotSupportedComments = (j: JSCodeshift, source: Collection<unknown>) => {
+export const addNotSupportedComments = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
+  importType: ImportType
+) => {
   const clientNamesFromDeepImport = getClientNamesFromDeepImport(source.toSource());
 
   if (clientNamesFromDeepImport.includes(DYNAMODB)) {
@@ -14,7 +19,7 @@ export const addNotSupportedComments = (j: JSCodeshift, source: Collection<unkno
       j.commentLine(" Please convert to a default import, and re-run aws-sdk-js-codemod."),
     ];
 
-    getNodesWithDocClientNamedImportFromDeepPath(j, source).forEach((node) => {
+    getNodesWithDocClientNamedImportFromDeepPath(j, source, importType).forEach((node) => {
       const comments = node.value.comments || [];
       node.value.comments = [...comments, ...documentClientDeepNamedImportUnsupportedComments];
     });

@@ -30,8 +30,9 @@ import { isTypeScriptFile } from "./utils";
 const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
+  const importType = getImportType(j, source);
 
-  addNotSupportedComments(j, source);
+  addNotSupportedComments(j, source, importType);
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source);
@@ -63,7 +64,6 @@ const transformer = async (file: FileInfo, api: API) => {
     return source.toSource();
   }
 
-  const importType = getImportType(j, source);
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
     const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
