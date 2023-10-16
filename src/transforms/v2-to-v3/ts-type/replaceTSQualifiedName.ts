@@ -96,7 +96,10 @@ export const replaceTSQualifiedName = (
     replaceTSQualifiedName(j, source, {
       ...options,
       v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
-      v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+      v2ClientLocalName:
+        importType === ImportType.IMPORT_EQUALS
+          ? `lib_dynamodb`
+          : `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
     });
   }
 };
