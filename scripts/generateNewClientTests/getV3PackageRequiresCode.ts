@@ -29,7 +29,7 @@ export const getV3PackageRequiresCode = (
       : v2ClientName;
 
     const v3RequireKeyValuePair =
-      v3ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
+      v2ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
     content += declarationPerClient
       ? `const {\n  ${v3RequireKeyValuePair}\n} = require("${v3ClientPackageName}");\n`
       : `{\n        ${v3RequireKeyValuePair}\n      } = require("${v3ClientPackageName}"),\n      `;

@@ -4,8 +4,8 @@
 
 import { ACM } from "@aws-sdk/client-acm";
 import { AccessAnalyzer } from "@aws-sdk/client-accessanalyzer";
-import { ApplicationDiscoveryService as Discovery } from "@aws-sdk/client-application-discovery-service";
+import { ApplicationDiscoveryService } from "@aws-sdk/client-application-discovery-service";
 
 new ACM();
 new AccessAnalyzer();
-new Discovery();
+new ApplicationDiscoveryService();

@@ -24,7 +24,7 @@ export const getV3PackageImportsCode = (
       : v2ClientName;
 
     const v3ImportSpecifier =
-      v3ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName} as ${v2ClientLocalName}`;
+      v2ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName} as ${v2ClientLocalName}`;
 
     content += `import { ${v3ImportSpecifier} } from "${v3ClientPackageName}";\n`;
   }

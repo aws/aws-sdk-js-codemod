@@ -7,9 +7,9 @@ const {
   AccessAnalyzer
 } = require("@aws-sdk/client-accessanalyzer");
 const {
-  ApplicationDiscoveryService: Discovery
+  ApplicationDiscoveryService
 } = require("@aws-sdk/client-application-discovery-service");
 
 new ACM();
 new AccessAnalyzer();
-new Discovery();
+new ApplicationDiscoveryService();

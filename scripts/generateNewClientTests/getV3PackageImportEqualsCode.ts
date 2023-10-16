@@ -28,7 +28,8 @@ export const getV3PackageImportEqualsCode = (
       : v2ClientName;
 
     const v3ObjectPattern =
-      v3ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
+      v2ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
+
     content +=
       `const {\n` + `  ${v3ObjectPattern}\n` + `} = ${getDefaultLocalName(v2ClientName)};\n\n`;
   }

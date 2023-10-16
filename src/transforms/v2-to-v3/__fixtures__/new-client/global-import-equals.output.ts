@@ -17,9 +17,9 @@ const {
 import AWS_Discovery = require("@aws-sdk/client-application-discovery-service");
 
 const {
-  ApplicationDiscoveryService: Discovery
+  ApplicationDiscoveryService
 } = AWS_Discovery;
 
 new ACM();
 new AccessAnalyzer();
-new Discovery();
+new ApplicationDiscoveryService();
