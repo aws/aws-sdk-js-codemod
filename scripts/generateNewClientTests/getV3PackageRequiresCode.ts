@@ -8,7 +8,6 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 export interface V3PackageRequiresCodeOptions {
   useLocalSuffix?: boolean;
   declarationPerClient?: boolean;
-  useV3ClientName?: boolean;
 }
 
 export const getV3PackageRequiresCode = (
@@ -16,11 +15,7 @@ export const getV3PackageRequiresCode = (
   options?: V3PackageRequiresCodeOptions
 ) => {
   let content = ``;
-  const {
-    useLocalSuffix = false,
-    declarationPerClient = false,
-    useV3ClientName = false,
-  } = options || {};
+  const { useLocalSuffix = false, declarationPerClient = false } = options || {};
 
   if (!declarationPerClient) {
     content += `const `;
@@ -34,9 +29,7 @@ export const getV3PackageRequiresCode = (
       : v2ClientName;
 
     const v3RequireKeyValuePair =
-      useV3ClientName || v3ClientName === v2ClientLocalName
-        ? v3ClientName
-        : `${v3ClientName}: ${v2ClientLocalName}`;
+      v2ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
     content += declarationPerClient
       ? `const {\n  ${v3RequireKeyValuePair}\n} = require("${v3ClientPackageName}");\n`
       : `{\n        ${v3RequireKeyValuePair}\n      } = require("${v3ClientPackageName}"),\n      `;

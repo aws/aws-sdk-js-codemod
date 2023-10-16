@@ -7,9 +7,7 @@ import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode";
 export const getGlobalRequireOutput = () => {
   let content = ``;
 
-  content += getV3PackageRequiresCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST), {
-    useV3ClientName: true,
-  });
+  content += getV3PackageRequiresCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST));
   content += getV3ClientsNewExpressionCode(
     CLIENTS_TO_TEST.map((clientName) => CLIENT_NAMES_MAP[clientName])
   );

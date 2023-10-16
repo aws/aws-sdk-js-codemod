@@ -6,9 +6,7 @@ import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
 export const getGlobalImportOutput = () => {
   let content = ``;
 
-  content += getV3PackageImportsCode(getClientNamesSortedByPackageName(CLIENT_NAMES), {
-    useV3ClientName: true,
-  });
+  content += getV3PackageImportsCode(getClientNamesSortedByPackageName(CLIENT_NAMES));
   content += `\n`;
   content += getV3ClientsNewExpressionCode(
     CLIENT_NAMES.map((clientName) => CLIENT_NAMES_MAP[clientName])
