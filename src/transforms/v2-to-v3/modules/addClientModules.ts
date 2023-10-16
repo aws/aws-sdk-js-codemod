@@ -18,26 +18,25 @@ import {
 import { getV3ClientTypesCount } from "../ts-type";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
-import { hasImportEquals } from "./hasImportEquals";
-import { hasRequire } from "./hasRequire";
 
 import * as importEqualsModule from "./importEqualsModule";
 import * as importModule from "./importModule";
 import * as requireModule from "./requireModule";
-import { ClientModulesOptions } from "./types";
+import { ClientModulesOptions, ImportType } from "./types";
 
 export const addClientModules = (
   j: JSCodeshift,
   source: Collection<unknown>,
   options: ClientModulesOptions
 ): void => {
-  const { clientIdentifiers, v2ClientName, v3ClientName, v2ClientLocalName } = options;
+  const { clientIdentifiers, v2ClientName, v3ClientName, v2ClientLocalName, importType } = options;
 
-  const { addClientDefaultModule, addClientNamedModule } = hasRequire(j, source)
-    ? requireModule
-    : hasImportEquals(j, source)
-    ? importEqualsModule
-    : importModule;
+  const { addClientDefaultModule, addClientNamedModule } =
+    importType === ImportType.REQUIRE
+      ? requireModule
+      : importType === ImportType.IMPORT_EQUALS
+      ? importEqualsModule
+      : importModule;
 
   const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);

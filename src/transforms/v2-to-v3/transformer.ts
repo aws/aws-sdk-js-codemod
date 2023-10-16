@@ -20,6 +20,7 @@ import { S3 } from "./config";
 import {
   addClientModules,
   getGlobalNameFromModule,
+  getImportType,
   removeClientModule,
   removeGlobalModule,
 } from "./modules";
@@ -62,6 +63,7 @@ const transformer = async (file: FileInfo, api: API) => {
     return source.toSource();
   }
 
+  const importType = getImportType(j, source);
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
     const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
@@ -69,7 +71,7 @@ const transformer = async (file: FileInfo, api: API) => {
     const v2Options = { v2ClientName, v2ClientLocalName, v2GlobalName };
     const v3Options = { v3ClientName, v3ClientPackageName };
 
-    addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers });
+    addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
     replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, v2Options);
 
