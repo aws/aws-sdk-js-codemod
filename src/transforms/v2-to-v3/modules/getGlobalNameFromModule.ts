@@ -3,13 +3,14 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportSpecifiers } from "./getImportSpecifiers";
-import { hasRequire } from "./hasRequire";
+import { ImportType } from "./types";
 
 export const getGlobalNameFromModule = (
   j: JSCodeshift,
-  source: Collection<unknown>
+  source: Collection<unknown>,
+  importType: ImportType
 ): string | undefined => {
-  if (hasRequire(j, source)) {
+  if (importType === ImportType.REQUIRE) {
     const requireIdentifiers = source
       .find(j.VariableDeclarator, {
         id: { type: "Identifier" },
