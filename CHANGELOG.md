@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.19.0
+
+### Minor Changes
+
+- Use v3 client name when input code does not use local name ([c1c8016](https://github.com/awslabs/aws-sdk-js-codemod/commit/c1c8016))
+
 ## 0.18.3
 
 ### Patch Changes
