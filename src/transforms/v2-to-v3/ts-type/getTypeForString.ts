@@ -6,14 +6,14 @@ const arrayRegex = /^Array<(.*)>$/;
 const recordRegex = /^Record<string, (.*)>$/;
 
 export interface GetTypeForStringOptions {
-  v3ClientDefaultLocalName: string;
+  v2ClientLocalName: string;
   v3ClientTypeString: string;
 }
 
 export const getTypeForString = (
   j: JSCodeshift,
   importType: ImportType,
-  { v3ClientDefaultLocalName, v3ClientTypeString }: GetTypeForStringOptions
+  { v2ClientLocalName, v3ClientTypeString }: GetTypeForStringOptions
 ): TSType => {
   if (v3ClientTypeString === "string") {
     return j.tsStringKeyword();
@@ -35,7 +35,7 @@ export const getTypeForString = (
   if (arrayRegexMatches) {
     const type = arrayRegexMatches[1];
     const typeArgument = getTypeForString(j, importType, {
-      v3ClientDefaultLocalName,
+      v2ClientLocalName,
       v3ClientTypeString: type,
     });
     return j.tsTypeReference.from({
@@ -50,7 +50,7 @@ export const getTypeForString = (
   if (recordRegexMatches) {
     const type = recordRegexMatches[1];
     const typeArgument = getTypeForString(j, importType, {
-      v3ClientDefaultLocalName,
+      v2ClientLocalName,
       v3ClientTypeString: type,
     });
     return j.tsTypeReference.from({
@@ -62,6 +62,6 @@ export const getTypeForString = (
   }
 
   return j.tsTypeReference(
-    j.identifier(getV3ClientTypeName(v3ClientTypeString, v3ClientDefaultLocalName, importType))
+    j.identifier(getV3ClientTypeName(v3ClientTypeString, v2ClientLocalName, importType))
   );
 };
