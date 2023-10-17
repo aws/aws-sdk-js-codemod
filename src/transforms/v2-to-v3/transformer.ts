@@ -86,7 +86,7 @@ const transformer = async (file: FileInfo, api: API) => {
       replaceS3GetSignedUrlApi(j, source, { clientIdentifiers, importType });
     }
 
-    replaceWaiterApi(j, source, clientIdentifiers);
+    replaceWaiterApi(j, source, { clientIdentifiers, v2ClientName, importType });
 
     replaceClientCreation(j, source, { ...v2Options, v3ClientName, importType });
     replaceDocClientCreation(j, source, { ...v2Options, importType });
