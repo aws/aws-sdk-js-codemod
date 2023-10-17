@@ -1,56 +1,69 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getDefaultLocalName } from "../../utils";
-import { getImportEqualsDeclaration } from "../getImportEqualsDeclaration";
 import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationType";
 import { getImportEqualsLocalNameSuffix } from "../getImportEqualsLocalNameSuffix";
-import { ClientModulesOptions } from "../types";
+import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
+import { addClientDefaultModule } from "./addClientDefaultModule";
 
-/**
- * Import Equals does not support named import.
- * We just add a default import for the package.
- */
 export const addClientNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: ClientModulesOptions
+  options: ClientModulesOptions & ImportSpecifierOptions
 ) => {
+  const { importedName, localName = importedName, ...v3ClientModulesOptions } = options;
+  const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
+
   const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
   const defaultLocalName = getDefaultLocalName(localNameSuffix);
-  const existingImportEquals = source.find(
-    j.TSImportEqualsDeclaration,
-    getImportEqualsDeclarationType(v3ClientPackageName)
-  );
 
-  if (existingImportEquals.size()) {
-    if (
-      existingImportEquals
-        .nodes()
-        .some((importEqualsDeclaration) => importEqualsDeclaration.id.name === defaultLocalName)
-    ) {
-      return;
-    }
+  const existingDeclaration = source.find(j.TSImportEqualsDeclaration, {
+    type: "TSImportEqualsDeclaration",
+    id: {
+      type: "Identifier",
+      name: localName,
+    },
+    moduleReference: {
+      type: "TSQualifiedName",
+      left: {
+        type: "Identifier",
+        name: defaultLocalName,
+      },
+      right: {
+        type: "Identifier",
+        name: importedName,
+      },
+    },
+  });
+
+  if (existingDeclaration.size()) {
+    return;
   }
 
-  // Insert after global, or service import equals.
-  const v2ImportEqualsDeclaration = getImportEqualsDeclaration(j, source, {
-    v2ClientName,
-    v2ClientLocalName,
-    v2GlobalName,
-  }).at(0);
+  const defaultDeclaration = getImportEqualsDeclarationType(v3ClientPackageName);
+  if (source.find(j.TSImportEqualsDeclaration, defaultDeclaration).size() === 0) {
+    addClientDefaultModule(j, source, v3ClientModulesOptions);
+  }
 
-  const v3importEqualsDeclaration = j.tsImportEqualsDeclaration(
-    j.identifier(defaultLocalName),
-    j.tsExternalModuleReference(j.stringLiteral(v3ClientPackageName))
+  const importEqualsDeclaration = j.tsImportEqualsDeclaration(
+    j.identifier(localName),
+    j.tsQualifiedName(j.identifier(defaultLocalName), j.identifier(importedName))
   );
 
-  if (v2ImportEqualsDeclaration && v2ImportEqualsDeclaration.nodes().length > 0) {
-    v2ImportEqualsDeclaration.at(0).insertAfter(v3importEqualsDeclaration);
-  } else {
-    // Unreachable code, throw error
-    throw new Error(
-      "Base Import Equals Declaration not found to insert new Import Declaration.\n" +
-        "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod"
+  const v3ClientImportEquals = source
+    .find(j.TSImportEqualsDeclaration, defaultDeclaration)
+    .filter(
+      (importEqualsDeclaration) => importEqualsDeclaration.value.id.name === defaultLocalName
     );
+
+  if (v3ClientImportEquals.size() > 0) {
+    v3ClientImportEquals.at(0).insertAfter(importEqualsDeclaration);
+    return;
   }
+
+  // Unreachable code, throw error
+  throw new Error(
+    "The named import equals can't exist on it's own.\n" +
+      "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod"
+  );
 };
