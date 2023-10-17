@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.21.0
+
+### Minor Changes
+
+- Use named imports while transforming require/import ([536132b](https://github.com/awslabs/aws-sdk-js-codemod/commit/536132b))
+
 ## 0.20.0
 
 ### Minor Changes
