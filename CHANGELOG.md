@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 0.20.0
+
+### Minor Changes
+
+- Use only default import while transforming import equals ([73264e6](https://github.com/awslabs/aws-sdk-js-codemod/commit/73264e6))
+
+### Patch Changes
+
+- Store whether code uses require/import/importEquals in importType ([7603bda](https://github.com/awslabs/aws-sdk-js-codemod/commit/7603bda))
+
 ## 0.19.0
 
 ### Minor Changes
