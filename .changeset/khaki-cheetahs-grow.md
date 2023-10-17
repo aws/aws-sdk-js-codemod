@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": minor
 ---
 
-Use named imports in transformed code
+Use named imports while transforming require/import
