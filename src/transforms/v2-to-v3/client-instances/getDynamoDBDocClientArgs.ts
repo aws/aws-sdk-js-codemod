@@ -1,18 +1,11 @@
 import { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { ImportType } from "../modules";
 import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
-
-export interface GetDynamoDBDocClientArgsOptions {
-  v2ClientName: string;
-  v2ClientLocalName?: string;
-  importType: ImportType;
-}
 
 export const getDynamoDBDocClientArgs = (
   j: JSCodeshift,
   v2DocClientNewExpression: ASTPath<NewExpression>,
-  options: GetDynamoDBDocClientArgsOptions
+  v2ClientLocalName?: string
 ) => {
   const dynamoDBDocClientOptions = j.objectExpression([]);
 
@@ -57,7 +50,7 @@ export const getDynamoDBDocClientArgs = (
   }
 
   return [
-    getDynamoDBForDocClient(j, v2DocClientNewExpression, options),
+    getDynamoDBForDocClient(j, v2DocClientNewExpression, v2ClientLocalName),
     ...(dynamoDBDocClientOptions.properties.length > 0 ? [dynamoDBDocClientOptions] : []),
   ];
 };

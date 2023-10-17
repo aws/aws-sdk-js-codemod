@@ -1,20 +1,13 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { ImportType } from "../modules";
-import { getV3ClientTypeName } from "../ts-type";
 import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
-
-export interface ReplaceS3UploadApiOptions {
-  clientIdentifiers: ClientIdentifier[];
-  importType: ImportType;
-}
 
 // Updates `s3.upload()` API with `new Upload()` API.
 export const replaceS3UploadApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { clientIdentifiers, importType }: ReplaceS3UploadApiOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
   for (const clientId of clientIdentifiers) {
     // Replace `.promise()` call with `.done()` if present.
@@ -66,8 +59,7 @@ export const replaceS3UploadApi = (
           }
         }
 
-        const uploadApi = getV3ClientTypeName("Upload", "lib_storage", importType);
-        return j.newExpression(j.identifier(uploadApi), [j.objectExpression(properties)]);
+        return j.newExpression(j.identifier("Upload"), [j.objectExpression(properties)]);
       });
   }
 };

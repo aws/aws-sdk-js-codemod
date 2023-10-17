@@ -8,23 +8,16 @@ import {
   ObjectProperty,
 } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST, S3 } from "../config";
-import { ImportType } from "../modules";
-import { getV3ClientTypeName } from "../ts-type";
+import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getCommandName } from "./getCommandName";
-
-export interface ReplaceS3GetSignedUrlApiOptions {
-  clientIdentifiers: ClientIdentifier[];
-  importType: ImportType;
-}
 
 // Updates `s3.getSignedUrl()` API with `await getSignedUrl(s3, command)` API.
 export const replaceS3GetSignedUrlApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { clientIdentifiers, importType }: ReplaceS3GetSignedUrlApiOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
   for (const clientId of clientIdentifiers) {
     for (const getSignedUrlApiName of ["getSignedUrl", "getSignedUrlPromise"]) {
@@ -78,23 +71,17 @@ export const replaceS3GetSignedUrlApi = (
             );
           }
 
-          const commandName = getV3ClientTypeName(getCommandName(apiName), S3, importType);
           const getSignedUrlArgs: (ClientIdentifier | NewExpression | ObjectExpression)[] = [
             clientId,
-            j.newExpression(j.identifier(commandName), [params]),
+            j.newExpression(j.identifier(getCommandName(apiName)), [params]),
           ];
 
           if (options.properties.length > 0) {
             getSignedUrlArgs.push(options);
           }
 
-          const getSignedUrlIdentifier = getV3ClientTypeName(
-            "getSignedUrl",
-            "s3_request_presigner",
-            importType
-          );
           const outputCallExpression = j.callExpression.from({
-            callee: j.identifier(getSignedUrlIdentifier),
+            callee: j.identifier("getSignedUrl"),
             arguments: getSignedUrlArgs,
           });
 

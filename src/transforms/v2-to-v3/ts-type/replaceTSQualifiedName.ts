@@ -1,7 +1,6 @@
 import { ASTPath, Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
-import { ImportType } from "../modules";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 import { getV3ClientType } from "./getV3ClientType";
@@ -12,7 +11,6 @@ export interface ReplaceTSQualifiedNameOptions {
   v2ClientLocalName: string;
   v2GlobalName?: string;
   v3ClientName: string;
-  importType: ImportType;
 }
 
 const isRightSectionIdentifier = (node: TSQualifiedName) => node.right.type === "Identifier";
@@ -28,8 +26,8 @@ export const replaceTSQualifiedName = (
   source: Collection<unknown>,
   options: ReplaceTSQualifiedNameOptions
 ): void => {
-  const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName, importType } = options;
-  const clientTypeOptions = { v2ClientName, v2ClientLocalName, importType };
+  const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
+  const clientTypeOptions = { v2ClientName, v2ClientLocalName };
 
   if (v2GlobalName) {
     // Replace type reference to client created with global name.

@@ -1,6 +1,4 @@
 import { ASTPath, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
-import { DOCUMENT_CLIENT } from "../config";
-import { ImportType } from "../modules";
 import { addTsTypeQueryToRefType } from "./addTsTypeQueryToRefType";
 import { getV3ClientType } from "./getV3ClientType";
 
@@ -12,7 +10,6 @@ interface UpdateV2ClientTypeOptions {
   v2ClientName: string;
   v2ClientTypeName: string;
   v2ClientLocalName: string;
-  importType: ImportType;
 }
 
 export const updateV2ClientType = (
@@ -20,14 +17,7 @@ export const updateV2ClientType = (
   v2ClientType: ASTPath<TSQualifiedName>,
   options: UpdateV2ClientTypeOptions
 ) => {
-  const { importType } = options;
-  const v2ClientLocalName =
-    importType === ImportType.IMPORT_EQUALS &&
-    options.v2ClientLocalName.endsWith(`.${DOCUMENT_CLIENT}`)
-      ? "lib_dynamodb"
-      : options.v2ClientLocalName;
-
-  const v3ClientType = getV3ClientType(j, { ...options, v2ClientLocalName });
+  const v3ClientType = getV3ClientType(j, options);
 
   if (v2ClientType.parentPath?.value.type === "TSTypeQuery") {
     if (nativeTsRefTypes.includes(v3ClientType.type)) {
