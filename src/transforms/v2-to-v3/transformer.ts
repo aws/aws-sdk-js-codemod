@@ -72,24 +72,24 @@ const transformer = async (file: FileInfo, api: API) => {
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
-    replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName, importType });
+    replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, { ...v2Options, importType });
 
     if (v2ClientName === S3) {
       // Needs to be called before removing promise calls, as replacement has `.done()` call.
-      replaceS3UploadApi(j, source, { clientIdentifiers, importType });
+      replaceS3UploadApi(j, source, clientIdentifiers);
     }
 
     removePromiseCalls(j, source, clientIdentifiers);
 
     if (v2ClientName === S3) {
-      replaceS3GetSignedUrlApi(j, source, { clientIdentifiers, importType });
+      replaceS3GetSignedUrlApi(j, source, clientIdentifiers);
     }
 
-    replaceWaiterApi(j, source, { clientIdentifiers, v2ClientName, importType });
+    replaceWaiterApi(j, source, clientIdentifiers);
 
-    replaceClientCreation(j, source, { ...v2Options, v3ClientName, importType });
-    replaceDocClientCreation(j, source, { ...v2Options, importType });
+    replaceClientCreation(j, source, { ...v2Options, v3ClientName });
+    replaceDocClientCreation(j, source, v2Options);
   }
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, { v2GlobalName, importType });

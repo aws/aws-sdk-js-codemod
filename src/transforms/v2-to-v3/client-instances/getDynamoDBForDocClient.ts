@@ -1,19 +1,11 @@
 import { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { ImportType } from "../modules";
-import { getV3ClientTypeName } from "../ts-type";
-
-export interface GetDynamoDBForDocClientOptions {
-  v2ClientName: string;
-  v2ClientLocalName?: string;
-  importType: ImportType;
-}
 
 export const getDynamoDBForDocClient = (
   j: JSCodeshift,
   v2DocClientNewExpression: ASTPath<NewExpression>,
-  { v2ClientName, v2ClientLocalName, importType }: GetDynamoDBForDocClientOptions
+  v2ClientLocalName?: string
 ) => {
   const v2DocClientArgs = v2DocClientNewExpression.node.arguments || [];
 
@@ -67,10 +59,5 @@ export const getDynamoDBForDocClient = (
     }
   }
 
-  const typeName =
-    importType === ImportType.IMPORT_EQUALS ? DYNAMODB : v2ClientLocalName ?? DYNAMODB;
-  return j.newExpression(
-    j.identifier(getV3ClientTypeName(typeName, v2ClientName, importType)),
-    v3DocClientNewExpressionArgs
-  );
+  return j.newExpression(j.identifier(v2ClientLocalName ?? DYNAMODB), v3DocClientNewExpressionArgs);
 };

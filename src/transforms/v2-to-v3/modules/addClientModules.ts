@@ -27,7 +27,7 @@ import { ClientModulesOptions, ImportType } from "./types";
 export const addClientModules = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions
+  options: ClientModulesOptions & { importType: ImportType }
 ): void => {
   const { clientIdentifiers, v2ClientName, v3ClientName, v2ClientLocalName, importType } = options;
 

@@ -1,7 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { ImportType } from "../modules";
-import { getV3ClientTypeName } from "../ts-type";
 import { ClientIdentifier } from "../types";
 import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
@@ -10,27 +8,16 @@ import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
 import { getWaiterConfig } from "./getWaiterConfig";
 import { getWaiterConfigValue } from "./getWaiterConfigValue";
 
-export interface ReplaceWaiterApiOptions {
-  clientIdentifiers: ClientIdentifier[];
-  v2ClientName: string;
-  importType: ImportType;
-}
-
 // Updates .waitFor() API with waitUntil* API.
 export const replaceWaiterApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  { clientIdentifiers, v2ClientName, importType }: ReplaceWaiterApiOptions
+  clientIdentifiers: ClientIdentifier[]
 ): void => {
   for (const clientId of clientIdentifiers) {
     const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
     for (const waiterState of waiterStates) {
-      const v3WaiterApiName = getV3ClientTypeName(
-        getV3ClientWaiterApiName(waiterState),
-        v2ClientName,
-        importType
-      );
       source
         .find(j.CallExpression, getClientWaiterCallExpression(clientId, waiterState))
         .replaceWith((callExpression) => {
@@ -67,7 +54,7 @@ export const replaceWaiterApi = (
             })
           );
 
-          return j.callExpression(j.identifier(v3WaiterApiName), [
+          return j.callExpression(j.identifier(getV3ClientWaiterApiName(waiterState)), [
             j.objectExpression(properties),
             getArgsWithoutWaiterConfig(callExpression.node.arguments[1]),
           ]);
