@@ -3,6 +3,7 @@
 import ACM = require("aws-sdk/clients/acm");
 import AccessAnalyzer = require("aws-sdk/clients/accessanalyzer");
 import Discovery = require("aws-sdk/clients/discovery");
+
 new ACM();
 new AccessAnalyzer();
 new Discovery();
