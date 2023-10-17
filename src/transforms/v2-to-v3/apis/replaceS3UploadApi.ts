@@ -1,15 +1,34 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
+import { ImportType } from "../modules";
+import { getV3ClientTypeName } from "../ts-type";
 import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
+
+export interface ReplaceS3UploadApiOptions {
+  clientIdentifiers: ClientIdentifier[];
+  importType: ImportType;
+}
 
 // Updates `s3.upload()` API with `new Upload()` API.
 export const replaceS3UploadApi = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  clientIdentifiers: ClientIdentifier[]
+  { clientIdentifiers, importType }: ReplaceS3UploadApiOptions
 ): void => {
   for (const clientId of clientIdentifiers) {
+    // Replace `.promise()` call with `.done()` if present.
+    source
+      .find(j.MemberExpression, {
+        type: "MemberExpression",
+        object: getClientApiCallExpression(clientId, "upload"),
+        property: { type: "Identifier", name: "promise" },
+      })
+      .forEach((memberExpression) => {
+        (memberExpression.value.property as Identifier).name = "done";
+      });
+
+    // Replace `.upload()` call with `new Upload()` call.
     source
       .find(j.CallExpression, getClientApiCallExpression(clientId, "upload"))
       .replaceWith((callExpression) => {
@@ -47,21 +66,8 @@ export const replaceS3UploadApi = (
           }
         }
 
-        return j.newExpression(j.identifier("Upload"), [j.objectExpression(properties)]);
-      });
-
-    // Replace `.promise()` call with `.done()` if present.
-    source
-      .find(j.MemberExpression, {
-        type: "MemberExpression",
-        object: {
-          type: "NewExpression",
-          callee: { type: "Identifier", name: "Upload" },
-        },
-        property: { type: "Identifier", name: "promise" },
-      })
-      .forEach((memberExpression) => {
-        (memberExpression.value.property as Identifier).name = "done";
+        const uploadApi = getV3ClientTypeName("Upload", "lib_storage", importType);
+        return j.newExpression(j.identifier(uploadApi), [j.objectExpression(properties)]);
       });
   }
 };

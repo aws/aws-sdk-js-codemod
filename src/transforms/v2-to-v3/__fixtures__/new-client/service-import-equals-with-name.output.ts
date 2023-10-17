@@ -3,23 +3,9 @@
 
 
 import AWS_ACM = require("@aws-sdk/client-acm");
-
-const {
-  ACM: ACMClient
-} = AWS_ACM;
-
 import AWS_AccessAnalyzer = require("@aws-sdk/client-accessanalyzer");
-
-const {
-  AccessAnalyzer: AccessAnalyzerClient
-} = AWS_AccessAnalyzer;
-
 import AWS_Discovery = require("@aws-sdk/client-application-discovery-service");
 
-const {
-  ApplicationDiscoveryService: DiscoveryClient
-} = AWS_Discovery;
-
-new ACMClient();
-new AccessAnalyzerClient();
-new DiscoveryClient();
+new AWS_ACM.ACM();
+new AWS_AccessAnalyzer.AccessAnalyzer();
+new AWS_Discovery.ApplicationDiscoveryService();

@@ -10,6 +10,7 @@ export const getServiceImportEqualsWithNameInput = () => {
     const importName = getClientNameWithLocalSuffix(clientName);
     content += `import ${importName} = require("${getClientDeepImportPath(clientName)}");\n`;
   }
+  content += `\n`;
   content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;
