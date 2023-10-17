@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": minor
 ---
 
-Use only default import in case of import equals
+Use only default import while transforming import equals
