@@ -67,8 +67,10 @@ export const getDynamoDBForDocClient = (
     }
   }
 
+  const typeName =
+    importType === ImportType.IMPORT_EQUALS ? DYNAMODB : v2ClientLocalName ?? DYNAMODB;
   return j.newExpression(
-    j.identifier(getV3ClientTypeName(v2ClientLocalName ?? DYNAMODB, v2ClientName, importType)),
+    j.identifier(getV3ClientTypeName(typeName, v2ClientName, importType)),
     v3DocClientNewExpressionArgs
   );
 };
