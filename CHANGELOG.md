@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.21.1
+
+### Patch Changes
+
+- Remove check for require global identifier ([a01e797](https://github.com/awslabs/aws-sdk-js-codemod/commit/a01e797))
+- Add import equals declaration for named imports ([91b67f0](https://github.com/awslabs/aws-sdk-js-codemod/commit/91b67f0))
+
 ## 0.21.0
 
 ### Minor Changes
