@@ -24,8 +24,13 @@ export const replaceClientCreation = (
     importType,
   }: ReplaceClientCreationOptions
 ): void => {
-  const clientName = v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName;
-  const v3ClientConstructor = getV3ClientTypeName(clientName, v2ClientLocalName, importType);
+  const clientName =
+    importType === ImportType.IMPORT_EQUALS || v2ClientName === v2ClientLocalName
+      ? v3ClientName
+      : v2ClientLocalName;
+  const clientLocalName =
+    importType === ImportType.IMPORT_EQUALS ? v2ClientName : v2ClientLocalName;
+  const v3ClientConstructor = getV3ClientTypeName(clientName, clientLocalName, importType);
 
   if (v2GlobalName) {
     source
