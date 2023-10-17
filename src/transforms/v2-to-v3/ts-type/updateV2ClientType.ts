@@ -20,14 +20,14 @@ export const updateV2ClientType = (
   v2ClientType: ASTPath<TSQualifiedName>,
   options: UpdateV2ClientTypeOptions
 ) => {
-  const { v2ClientName, v2ClientTypeName, importType } = options;
+  const { importType } = options;
   const v2ClientLocalName =
     importType === ImportType.IMPORT_EQUALS &&
     options.v2ClientLocalName.endsWith(`.${DOCUMENT_CLIENT}`)
       ? "lib_dynamodb"
       : options.v2ClientLocalName;
 
-  const v3ClientType = getV3ClientType(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+  const v3ClientType = getV3ClientType(j, { ...options, v2ClientLocalName });
 
   if (v2ClientType.parentPath?.value.type === "TSTypeQuery") {
     if (nativeTsRefTypes.includes(v3ClientType.type)) {

@@ -1,32 +1,18 @@
-import * as AWS_DynamoDB from "@aws-sdk/client-dynamodb";
-
-const {
-  DynamoDB
-} = AWS_DynamoDB;
-
-import * as AWS_Lambda from "@aws-sdk/client-lambda";
-
-const {
-  Lambda
-} = AWS_Lambda;
-
-import * as AWS_STS from "@aws-sdk/client-sts";
-
-const {
-  STS
-} = AWS_STS;
+import { DynamoDB, ListTablesCommandInput, ListTablesCommandOutput } from "@aws-sdk/client-dynamodb";
+import { InvokeCommandInput, InvokeCommandOutput, Lambda } from "@aws-sdk/client-lambda";
+import { GetCallerIdentityCommandInput, GetCallerIdentityCommandOutput, STS } from "@aws-sdk/client-sts";
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
-const listTablesInput: AWS_DynamoDB.ListTablesCommandInput = { Limit: 10 };
-const listTablesOutput: AWS_DynamoDB.ListTablesCommandOutput = await ddbClient
+const listTablesInput: ListTablesCommandInput = { Limit: 10 };
+const listTablesOutput: ListTablesCommandOutput = await ddbClient
   .listTables(listTablesInput);
 
 const stsClient = new STS({ region: "us-west-2" });
-const getCallerIdentityInput: AWS_STS.GetCallerIdentityCommandInput = {};
-const getCallerIdentityOutput: AWS_STS.GetCallerIdentityCommandOutput = await stsClient
+const getCallerIdentityInput: GetCallerIdentityCommandInput = {};
+const getCallerIdentityOutput: GetCallerIdentityCommandOutput = await stsClient
   .getCallerIdentity(getCallerIdentityInput);
 
 const lambdaClient = new Lambda({ region: "us-west-2" });
-const invokeInput: AWS_Lambda.InvokeCommandInput = { FunctionName: "my-function" };
-const invokeOutput: AWS_Lambda.InvokeCommandOutput = await lambdaClient
+const invokeInput: InvokeCommandInput = { FunctionName: "my-function" };
+const invokeOutput: InvokeCommandOutput = await lambdaClient
   .invoke(invokeInput);

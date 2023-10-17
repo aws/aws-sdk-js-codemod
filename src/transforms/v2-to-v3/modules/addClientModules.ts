@@ -15,7 +15,7 @@ import {
   DYNAMODB_DOCUMENT_CLIENT,
   S3,
 } from "../config";
-import { getV3ClientTypesCount } from "../ts-type";
+import { getV3ClientTypes } from "../ts-type";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 
@@ -31,21 +31,24 @@ export const addClientModules = (
 ): void => {
   const { clientIdentifiers, v2ClientName, v3ClientName, v2ClientLocalName, importType } = options;
 
-  const { addClientDefaultModule, addClientNamedModule } =
+  const { addClientNamedModule } =
     importType === ImportType.REQUIRE
       ? requireModule
       : importType === ImportType.IMPORT_EQUALS
       ? importEqualsModule
       : importModule;
 
-  const v3ClientTypesCount = getV3ClientTypesCount(j, source, options);
+  const v3ClientTypes = getV3ClientTypes(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);
   const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
   const waiterStates = getClientWaiterStates(j, source, clientIdentifiers);
 
-  // Add default import for types, if needed.
-  if (v3ClientTypesCount > 0) {
-    addClientDefaultModule(j, source, options);
+  // Add named import for types, if needed.
+  for (const v3ClientType of v3ClientTypes) {
+    addClientNamedModule(j, source, {
+      ...options,
+      importedName: v3ClientType,
+    });
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
@@ -99,7 +102,7 @@ export const addClientModules = (
       }),
     };
 
-    const docClientTypesCount = getV3ClientTypesCount(j, source, docClientOptions);
+    const docClientTypes = getV3ClientTypes(j, source, docClientOptions);
     const docClientNewExpressionCount = getNewExpressionCount(j, source, docClientOptions);
 
     const docClientModuleOptions = {
@@ -108,9 +111,13 @@ export const addClientModules = (
       v3ClientPackageName: "@aws-sdk/lib-dynamodb",
     };
 
-    // Add default import for types, if needed.
-    if (docClientTypesCount > 0) {
-      addClientDefaultModule(j, source, docClientModuleOptions);
+    // Add named import for types, if needed.
+    for (const docClientType of docClientTypes) {
+      addClientNamedModule(j, source, {
+        ...options,
+        importedName: docClientType,
+        v3ClientPackageName: "@aws-sdk/lib-dynamodb",
+      });
     }
 
     if (docClientNewExpressionCount > 0) {

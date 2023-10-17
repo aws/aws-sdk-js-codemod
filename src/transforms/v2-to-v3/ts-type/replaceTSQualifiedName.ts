@@ -91,7 +91,7 @@ export const replaceTSQualifiedName = (
       )
       .replaceWith((v2ClientType) => {
         const v2ClientTypeName = v2ClientType.node.name;
-        return getV3ClientType(j, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+        return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
       });
   }
 
