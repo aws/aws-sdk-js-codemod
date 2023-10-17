@@ -77,7 +77,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
     if (v2ClientName === S3) {
       // Needs to be called before removing promise calls, as replacement has `.done()` call.
-      replaceS3UploadApi(j, source, clientIdentifiers);
+      replaceS3UploadApi(j, source, { clientIdentifiers, importType });
     }
 
     removePromiseCalls(j, source, clientIdentifiers);
