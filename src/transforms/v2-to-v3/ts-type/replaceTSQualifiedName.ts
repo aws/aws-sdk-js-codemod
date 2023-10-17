@@ -1,6 +1,7 @@
 import { ASTPath, Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { ImportType } from "../modules";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 import { getV3ClientType } from "./getV3ClientType";
@@ -11,6 +12,7 @@ export interface ReplaceTSQualifiedNameOptions {
   v2ClientLocalName: string;
   v2GlobalName?: string;
   v3ClientName: string;
+  importType: ImportType;
 }
 
 const isRightSectionIdentifier = (node: TSQualifiedName) => node.right.type === "Identifier";
@@ -26,7 +28,8 @@ export const replaceTSQualifiedName = (
   source: Collection<unknown>,
   options: ReplaceTSQualifiedNameOptions
 ): void => {
-  const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
+  const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName, importType } = options;
+  const clientTypeOptions = { v2ClientName, v2ClientLocalName, importType };
 
   if (v2GlobalName) {
     // Replace type reference to client created with global name.
@@ -46,7 +49,7 @@ export const replaceTSQualifiedName = (
       )
       .forEach((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-        updateV2ClientType(j, v2ClientType, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+        updateV2ClientType(j, v2ClientType, { ...clientTypeOptions, v2ClientTypeName });
       });
   }
 
@@ -69,7 +72,7 @@ export const replaceTSQualifiedName = (
     )
     .forEach((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-      updateV2ClientType(j, v2ClientType, { v2ClientName, v2ClientTypeName, v2ClientLocalName });
+      updateV2ClientType(j, v2ClientType, { ...clientTypeOptions, v2ClientTypeName });
     });
 
   // Replace type reference to client type with modules.
@@ -96,10 +99,7 @@ export const replaceTSQualifiedName = (
     replaceTSQualifiedName(j, source, {
       ...options,
       v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
-      v2ClientLocalName:
-        importType === ImportType.IMPORT_EQUALS
-          ? `lib_dynamodb`
-          : `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+      v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
     });
   }
 };

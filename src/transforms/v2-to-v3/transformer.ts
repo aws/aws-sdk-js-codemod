@@ -72,7 +72,7 @@ const transformer = async (file: FileInfo, api: API) => {
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
-    replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName });
+    replaceTSQualifiedName(j, source, { ...v2Options, v3ClientName, importType });
     removeClientModule(j, source, { ...v2Options, importType });
 
     if (v2ClientName === S3) {
