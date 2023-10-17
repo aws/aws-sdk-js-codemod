@@ -1,10 +1,8 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
-import { getDefaultLocalName } from "../../utils";
 import { getRequireDeclarator } from "../getRequireDeclarator";
 import { getRequireDeclarators } from "../getRequireDeclarators";
-import { getRequireDeclaratorsWithIdentifier } from "../getRequireDeclaratorsWithIdentifier";
 import { getRequireProperty } from "../getRequireProperty";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
 import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
@@ -18,7 +16,6 @@ export const addClientNamedModule = (
     options;
   const localName = options.localName ?? importedName;
 
-  const defaultLocalName = getDefaultLocalName(v2ClientLocalName);
   const clientObjectProperty = getRequireProperty(j, { importedName, localName });
   const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
 
@@ -43,21 +40,6 @@ export const addClientNamedModule = (
           })
       )
     ) {
-      return;
-    }
-
-    const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
-      identifierName: defaultLocalName,
-      sourceValue: v3ClientPackageName,
-    });
-
-    if (requireDeclaratorsWithIdentifier && requireDeclaratorsWithIdentifier.nodes().length > 0) {
-      requireDeclaratorsWithIdentifier.at(0).insertAfter(
-        j.variableDeclarator(j.objectPattern([clientObjectProperty]), {
-          type: "Identifier",
-          name: defaultLocalName,
-        })
-      );
       return;
     }
 
