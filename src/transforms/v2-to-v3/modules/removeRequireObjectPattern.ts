@@ -10,6 +10,7 @@ import {
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
+import { removeDeclaration } from "./removeDeclaration";
 
 export interface RemoveRequireObjectPropertyOptions {
   localName: string;
@@ -44,7 +45,7 @@ export const removeRequireObjectPattern = (
 
       // Remove VariableDeclaration if there are no declarations.
       if (varDeclaration.value.declarations?.length === 0) {
-        j(varDeclaration).remove();
+        removeDeclaration(j, source, varDeclaration);
       }
     }
   });

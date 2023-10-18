@@ -1,12 +1,18 @@
-import { ASTPath, Collection, ImportDeclaration, JSCodeshift } from "jscodeshift";
+import {
+  ASTPath,
+  Collection,
+  ImportDeclaration,
+  JSCodeshift,
+  VariableDeclaration,
+} from "jscodeshift";
 
 /**
- * Removes import declaration, but preserves comments if they're top level comments.
+ * Removes import/variable declaration, but preserves comments if they're top level comments.
  */
-export const removeImportDeclaration = (
+export const removeDeclaration = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  declarationPath: ASTPath<ImportDeclaration>
+  declarationPath: ASTPath<ImportDeclaration | VariableDeclaration>
 ) => {
   const firstNode = source.find(j.Program).get("body", 0).node;
   if (firstNode === declarationPath.node) {

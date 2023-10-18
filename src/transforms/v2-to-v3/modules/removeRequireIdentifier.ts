@@ -1,6 +1,7 @@
 import { Collection, Identifier, JSCodeshift, VariableDeclarator } from "jscodeshift";
 
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
+import { removeDeclaration } from "./removeDeclaration";
 
 export interface RemoveRequireIdentifierOptions {
   localName: string;
@@ -50,7 +51,7 @@ export const removeRequireIdentifier = (
 
     // Remove VariableDeclaration if there are no declarations.
     if (varDeclaration.value.declarations?.length === 0) {
-      j(varDeclaration).remove();
+      removeDeclaration(j, source, varDeclaration);
     }
   });
 };

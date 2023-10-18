@@ -1,5 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
-import { removeImportDeclaration } from "./removeImportDeclaration";
+import { removeDeclaration } from "./removeDeclaration";
 
 export interface RemoveImportDefaultOptions {
   localName: string;
@@ -27,7 +27,7 @@ export const removeImportDefault = (
 
       // Remove ImportDeclaration if there are no import specifiers.
       if (declarationPath.value.specifiers?.length === 0) {
-        removeImportDeclaration(j, source, declarationPath);
+        removeDeclaration(j, source, declarationPath);
       }
     });
 };
