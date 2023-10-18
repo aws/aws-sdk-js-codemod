@@ -6,11 +6,7 @@ import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode";
 export const getServiceRequireDeepWithNameOutput = () => {
   let content = ``;
 
-  content += getV3PackageRequiresCode(CLIENTS_TO_TEST, {
-    declarationPerClient: true,
-    useLocalSuffix: true,
-  });
-  content += `\n`;
+  content += getV3PackageRequiresCode(CLIENTS_TO_TEST, { useLocalSuffix: true });
   content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;

@@ -5,8 +5,7 @@ import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode";
 export const getServiceRequireDeepOutput = () => {
   let content = ``;
 
-  content += getV3PackageRequiresCode(CLIENTS_TO_TEST, { declarationPerClient: true });
-  content += `\n`;
+  content += getV3PackageRequiresCode(CLIENTS_TO_TEST);
   content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
   return content;
