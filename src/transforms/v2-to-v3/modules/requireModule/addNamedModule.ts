@@ -62,5 +62,5 @@ export const addNamedModule = (
   }
 
   // Insert require declarator at the top of the document.
-  source.get().node.program.body.unshift(v3RequireDeclarator);
+  source.get().node.program.body.unshift(j.variableDeclaration("const", [v3RequireDeclarator]));
 };
