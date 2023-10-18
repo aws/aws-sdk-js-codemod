@@ -18,8 +18,6 @@ const isRightSectionIdentifier = (node: TSTypeReference) =>
 const getRightIdentifierName = (node: TSTypeReference) =>
   ((node.typeName as TSQualifiedName).right as Identifier).name;
 
-const getIdentifierName = (node: TSTypeReference) => (node.typeName as Identifier).name;
-
 // Replace v2 client type reference with v3 client type reference.
 export const replaceTSTypeReference = (
   j: JSCodeshift,
@@ -85,7 +83,7 @@ export const replaceTSTypeReference = (
     source
       .find(j.TSTypeReference, { typeName: { type: "Identifier", name: clientTypeName } })
       .replaceWith((v2ClientType) => {
-        const v2ClientTypeName = getIdentifierName(v2ClientType.node);
+        const v2ClientTypeName = (v2ClientType.node.typeName as Identifier).name;
         return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
       });
   }
