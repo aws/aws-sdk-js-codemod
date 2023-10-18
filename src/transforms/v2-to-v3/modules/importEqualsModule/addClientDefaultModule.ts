@@ -1,10 +1,9 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../../utils";
 import { getImportEqualsDeclaration } from "../getImportEqualsDeclaration";
 import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationType";
-import { getImportEqualsLocalNameSuffix } from "../getImportEqualsLocalNameSuffix";
 import { ClientModulesOptions } from "../types";
+import { getImportEqualsDefaultName } from "./getImportEqualsDefaultName";
 
 export type ClientDefaultModuleOptions = Omit<ClientModulesOptions, "clientIdentifiers">;
 
@@ -13,8 +12,7 @@ export const addClientDefaultModule = (
   source: Collection<unknown>,
   { v2ClientLocalName, v2ClientName, v2GlobalName, v3ClientPackageName }: ClientDefaultModuleOptions
 ) => {
-  const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
-  const defaultLocalName = getDefaultLocalName(localNameSuffix);
+  const defaultLocalName = getImportEqualsDefaultName(v3ClientPackageName);
   const existingImportEquals = source.find(
     j.TSImportEqualsDeclaration,
     getImportEqualsDeclarationType(v3ClientPackageName)

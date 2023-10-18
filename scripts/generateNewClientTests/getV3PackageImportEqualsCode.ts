@@ -3,7 +3,6 @@ import {
   CLIENT_NAMES_MAP,
   CLIENT_PACKAGE_NAMES_MAP,
 } from "../../src/transforms/v2-to-v3/config";
-import { getDefaultLocalName } from "../../src/transforms/v2-to-v3/utils";
 import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 
 export interface V3PackageImportEqualsCodeOptions {
@@ -18,7 +17,10 @@ export const getV3PackageImportEqualsCode = (
   const { useLocalSuffix = false } = options || {};
 
   for (const v2ClientName of clientsToTest) {
-    const v3ClientDefaultLocalName = getDefaultLocalName(v2ClientName);
+    const v3ClientDefaultLocalName = [
+      "AWS",
+      ...CLIENT_PACKAGE_NAMES_MAP[v2ClientName].split("-"),
+    ].join("_");
     const v3ClientPackageName = `@aws-sdk/${CLIENT_PACKAGE_NAMES_MAP[v2ClientName]}`;
     content += `import ${v3ClientDefaultLocalName} = require("${v3ClientPackageName}");\n`;
 

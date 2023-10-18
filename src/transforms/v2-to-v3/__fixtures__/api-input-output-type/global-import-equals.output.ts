@@ -1,15 +1,15 @@
-import AWS_DynamoDB = require("@aws-sdk/client-dynamodb");
-import DynamoDB = AWS_DynamoDB.DynamoDB;
-import ListTablesCommandOutput = AWS_DynamoDB.ListTablesCommandOutput;
-import ListTablesCommandInput = AWS_DynamoDB.ListTablesCommandInput;
-import AWS_Lambda = require("@aws-sdk/client-lambda");
-import Lambda = AWS_Lambda.Lambda;
-import InvokeCommandOutput = AWS_Lambda.InvokeCommandOutput;
-import InvokeCommandInput = AWS_Lambda.InvokeCommandInput;
-import AWS_STS = require("@aws-sdk/client-sts");
-import STS = AWS_STS.STS;
-import GetCallerIdentityCommandOutput = AWS_STS.GetCallerIdentityCommandOutput;
-import GetCallerIdentityCommandInput = AWS_STS.GetCallerIdentityCommandInput;
+import AWS_client_dynamodb = require("@aws-sdk/client-dynamodb");
+import DynamoDB = AWS_client_dynamodb.DynamoDB;
+import ListTablesCommandOutput = AWS_client_dynamodb.ListTablesCommandOutput;
+import ListTablesCommandInput = AWS_client_dynamodb.ListTablesCommandInput;
+import AWS_client_lambda = require("@aws-sdk/client-lambda");
+import Lambda = AWS_client_lambda.Lambda;
+import InvokeCommandOutput = AWS_client_lambda.InvokeCommandOutput;
+import InvokeCommandInput = AWS_client_lambda.InvokeCommandInput;
+import AWS_client_sts = require("@aws-sdk/client-sts");
+import STS = AWS_client_sts.STS;
+import GetCallerIdentityCommandOutput = AWS_client_sts.GetCallerIdentityCommandOutput;
+import GetCallerIdentityCommandInput = AWS_client_sts.GetCallerIdentityCommandInput;
 
 const ddbClient = new DynamoDB({ region: "us-west-2" });
 const listTablesInput: ListTablesCommandInput = { Limit: 10 };
