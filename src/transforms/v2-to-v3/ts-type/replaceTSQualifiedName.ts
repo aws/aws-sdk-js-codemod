@@ -4,7 +4,6 @@ import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 import { getV3ClientType } from "./getV3ClientType";
-import { updateV2ClientType } from "./updateV2ClientType";
 
 export interface ReplaceTSQualifiedNameOptions {
   v2ClientName: string;
@@ -45,9 +44,9 @@ export const replaceTSQualifiedName = (
         (v2ClientType) =>
           isRightSectionIdentifier(v2ClientType.node) && !isParentTSQualifiedName(v2ClientType)
       )
-      .forEach((v2ClientType) => {
+      .replaceWith((v2ClientType) => {
         const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-        updateV2ClientType(j, v2ClientType, { ...clientTypeOptions, v2ClientTypeName });
+        return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
       });
   }
 
@@ -68,9 +67,9 @@ export const replaceTSQualifiedName = (
       (v2ClientType) =>
         isRightSectionIdentifier(v2ClientType.node) && !isParentTSQualifiedName(v2ClientType)
     )
-    .forEach((v2ClientType) => {
+    .replaceWith((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-      updateV2ClientType(j, v2ClientType, { ...clientTypeOptions, v2ClientTypeName });
+      return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
     });
 
   // Replace type reference to client type with modules.
