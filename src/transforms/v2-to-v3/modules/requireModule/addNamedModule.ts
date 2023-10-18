@@ -1,23 +1,20 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
-import { getRequireDeclarator } from "../getRequireDeclarator";
 import { getRequireDeclarators } from "../getRequireDeclarators";
 import { getRequireProperty } from "../getRequireProperty";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
-import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
+import { ModulesOptions } from "../types";
 
-export const addClientNamedModule = (
+export const addNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & ImportSpecifierOptions
+  options: ModulesOptions
 ) => {
-  const { importedName, v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientPackageName } =
-    options;
-  const localName = options.localName ?? importedName;
+  const { importedName, localName = importedName, packageName } = options;
 
   const clientObjectProperty = getRequireProperty(j, { importedName, localName });
-  const existingRequires = getRequireDeclarators(j, source, v3ClientPackageName);
+  const existingRequires = getRequireDeclarators(j, source, packageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
     const existingRequireProperties = existingRequires
@@ -51,22 +48,12 @@ export const addClientNamedModule = (
     }
   }
 
+  // Build a new require declarator.
   const v3RequireDeclarator = j.variableDeclarator(
     j.objectPattern([clientObjectProperty]),
-    j.callExpression(j.identifier("require"), [j.literal(v3ClientPackageName)])
+    j.callExpression(j.identifier("require"), [j.literal(packageName)])
   );
 
-  // prettier-ignore
-  const v2RequireDeclarator =
-    getRequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
-
-  if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
-    v2RequireDeclarator.insertAfter(j.variableDeclaration("const", [v3RequireDeclarator]));
-  } else {
-    // Unreachable code, throw error
-    throw new Error(
-      "Base Require Declarator not found to insert new Require Declarator.\n" +
-        "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod"
-    );
-  }
+  // Insert require declarator at the top of the document.
+  source.get().node.program.body.unshift(v3RequireDeclarator);
 };

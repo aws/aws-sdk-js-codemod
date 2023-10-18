@@ -1,1 +1,1 @@
-export * from "./addClientNamedModule";
+export * from "./addNamedModule";
