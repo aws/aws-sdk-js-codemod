@@ -61,7 +61,7 @@ export const addClientNamedModule = (
     getRequireDeclarator(j, source, { v2ClientName, v2ClientLocalName, v2GlobalName });
 
   if (v2RequireDeclarator && v2RequireDeclarator.nodes().length > 0) {
-    v2RequireDeclarator.insertAfter(v3RequireDeclarator);
+    v2RequireDeclarator.insertAfter(j.variableDeclaration("const", [v3RequireDeclarator]));
   } else {
     // Unreachable code, throw error
     throw new Error(
