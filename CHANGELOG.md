@@ -1,5 +1,13 @@
 # aws-sdk-js-codemod
 
+## 0.21.2
+
+### Patch Changes
+
+- Remove type annotation transformation in redundant types ([0296d75](https://github.com/awslabs/aws-sdk-js-codemod/commit/0296d75))
+- Remove type annotation for union of required types ([bf44354](https://github.com/awslabs/aws-sdk-js-codemod/commit/bf44354))
+- Remove transformation for types with type annotation ([5896f7a](https://github.com/awslabs/aws-sdk-js-codemod/commit/5896f7a))
+
 ## 0.21.1
 
 ### Patch Changes
