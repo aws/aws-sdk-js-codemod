@@ -7,7 +7,7 @@ import {
   ObjectProperty,
 } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
+import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
 import { getImportSpecifier } from "../getImportSpecifier";
 import { getImportSpecifiers } from "../getImportSpecifiers";
 import { getRequireProperty } from "../getRequireProperty";
@@ -112,6 +112,16 @@ export const addNamedModule = (
     [getImportSpecifier(j, { importedName, localName })],
     j.stringLiteral(packageName)
   );
+
+  const v2importDeclarations = source
+    .find(j.ImportDeclaration)
+    .filter((path) => path.node.source.value === PACKAGE_NAME);
+
+  if (v2importDeclarations.size()) {
+    // Insert it after the last import declaration.
+    v2importDeclarations.at(0).insertAfter(v3ImportDeclaration);
+    return;
+  }
 
   // Insert it at the top of the document.
   source.get().node.program.body.unshift(v3ImportDeclaration);

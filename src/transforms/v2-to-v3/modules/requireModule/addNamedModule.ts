@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
+import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
 import { getRequireDeclarators } from "../getRequireDeclarators";
 import { getRequireProperty } from "../getRequireProperty";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
@@ -53,6 +53,13 @@ export const addNamedModule = (
     j.objectPattern([clientObjectProperty]),
     j.callExpression(j.identifier("require"), [j.literal(packageName)])
   );
+
+  const v2RequireDeclarations = getRequireDeclarators(j, source, PACKAGE_NAME);
+  if (v2RequireDeclarations.size()) {
+    // Insert it after the first require declaration.
+    v2RequireDeclarations.at(0).insertAfter(v3RequireDeclarator);
+    return;
+  }
 
   // Insert require declarator at the top of the document.
   source.get().node.program.body.unshift(v3RequireDeclarator);
