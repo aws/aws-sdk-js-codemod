@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.21.4
+
+### Patch Changes
+
+- Remove require declarator from declaration ([6ebca1a](https://github.com/awslabs/aws-sdk-js-codemod/commit/6ebca1a))
+
 ## 0.21.3
 
 ### Patch Changes
