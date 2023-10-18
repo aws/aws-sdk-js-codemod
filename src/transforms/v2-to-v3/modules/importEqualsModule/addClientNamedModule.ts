@@ -1,10 +1,9 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getDefaultLocalName } from "../../utils";
 import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationType";
-import { getImportEqualsLocalNameSuffix } from "../getImportEqualsLocalNameSuffix";
 import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
 import { addClientDefaultModule } from "./addClientDefaultModule";
+import { getImportEqualsDefaultName } from "./getImportEqualsDefaultName";
 
 export const addClientNamedModule = (
   j: JSCodeshift,
@@ -12,10 +11,9 @@ export const addClientNamedModule = (
   options: ClientModulesOptions & ImportSpecifierOptions
 ) => {
   const { importedName, localName = importedName, ...v3ClientModulesOptions } = options;
-  const { v2ClientName, v3ClientPackageName } = v3ClientModulesOptions;
+  const { v3ClientPackageName } = v3ClientModulesOptions;
 
-  const localNameSuffix = getImportEqualsLocalNameSuffix(v2ClientName, v3ClientPackageName);
-  const defaultLocalName = getDefaultLocalName(localNameSuffix);
+  const defaultLocalName = getImportEqualsDefaultName(v3ClientPackageName);
 
   const existingDeclaration = source.find(j.TSImportEqualsDeclaration, {
     type: "TSImportEqualsDeclaration",
