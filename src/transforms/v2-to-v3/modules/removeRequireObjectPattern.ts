@@ -1,4 +1,12 @@
-import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
+import {
+  Collection,
+  Identifier,
+  JSCodeshift,
+  ObjectPattern,
+  ObjectProperty,
+  Property,
+  VariableDeclarator,
+} from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
@@ -8,7 +16,7 @@ export interface RemoveRequireObjectPropertyOptions {
   sourceValue: string;
 }
 
-export const removeRequireObjectProperty = (
+export const removeRequireObjectPattern = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireObjectPropertyOptions
@@ -19,8 +27,6 @@ export const removeRequireObjectProperty = (
   });
 
   requireDeclarators.forEach((varDeclarator) => {
-    const varDeclarationCollection = j(varDeclarator).closest(j.VariableDeclaration);
-
     // Remove ObjectProperty from Variable Declarator.
     const varDeclaratorId = varDeclarator.value.id as ObjectPattern;
     varDeclaratorId.properties = varDeclaratorId.properties.filter((property) => {
@@ -31,12 +37,14 @@ export const removeRequireObjectProperty = (
 
     // Remove VariableDeclarator if there are no properties.
     if (varDeclaratorId.properties.length === 0) {
-      j(varDeclarator).remove();
+      const varDeclaration = varDeclarator.parentPath.parentPath;
+      varDeclaration.value.declarations = varDeclaration.value.declarations.filter(
+        (declaration: VariableDeclarator | Identifier) => declaration !== varDeclarator.value
+      );
 
       // Remove VariableDeclaration if there are no declarations.
-      const varDeclaration = varDeclarationCollection.nodes()[0];
-      if (varDeclaration && varDeclaration.declarations?.length === 0) {
-        varDeclarationCollection.remove();
+      if (varDeclaration.value.declarations?.length === 0) {
+        j(varDeclaration).remove();
       }
     }
   });
