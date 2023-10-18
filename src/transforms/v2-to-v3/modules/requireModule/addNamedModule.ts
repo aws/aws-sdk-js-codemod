@@ -54,10 +54,26 @@ export const addNamedModule = (
     j.callExpression(j.identifier("require"), [j.literal(packageName)])
   );
 
-  const v2RequireDeclarations = getRequireDeclarators(j, source, PACKAGE_NAME);
-  if (v2RequireDeclarations.size()) {
-    // Insert it after the first require declaration.
-    v2RequireDeclarations.at(0).insertAfter(v3RequireDeclarator);
+  const v2RequireDeclarators = getRequireDeclarators(j, source, PACKAGE_NAME);
+  if (v2RequireDeclarators.size()) {
+    // Insert it after the first require declarator.
+    v2RequireDeclarators.at(0).insertAfter(v3RequireDeclarator);
+    return;
+  }
+
+  const v2RequirePropertyDeclarators = source.find(j.VariableDeclarator, {
+    init: {
+      type: "MemberExpression",
+      object: {
+        arguments: [{ value: PACKAGE_NAME }],
+        callee: { type: "Identifier", name: "require" },
+        type: "CallExpression",
+      },
+    },
+  });
+  if (v2RequirePropertyDeclarators.size()) {
+    // Insert it after the first require property declarator.
+    v2RequirePropertyDeclarators.at(0).insertAfter(v3RequireDeclarator);
     return;
   }
 
