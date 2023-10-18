@@ -1,4 +1,4 @@
-export const PACKAGE_NAME = "aws-sdk";
+export const PACKAGE_NAME_V2 = "aws-sdk";
 
 export const S3 = "S3";
 export const DYNAMODB = "DynamoDB";

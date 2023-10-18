@@ -7,7 +7,7 @@ import {
   Property,
 } from "jscodeshift";
 
-import { CLIENT_NAMES, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../config";
+import { CLIENT_NAMES, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME_V2 } from "../config";
 import { getRequireDeclaratorsWithProperty } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 import { getRequireIds } from "./getRequireIds";
@@ -19,7 +19,7 @@ export const getClientNamesRecordFromRequire = (
 ) => {
   const clientNamesRecord: Record<string, string> = {};
 
-  const idPropertiesFromObjectPattern = getRequireIds(j, source, PACKAGE_NAME)
+  const idPropertiesFromObjectPattern = getRequireIds(j, source, PACKAGE_NAME_V2)
     .filter((id) => id.type === "ObjectPattern")
     .map((objectPattern) => (objectPattern as ObjectPattern).properties)
     .flat();
@@ -39,7 +39,7 @@ export const getClientNamesRecordFromRequire = (
   }
 
   const declaratorsWithProperty = getRequireDeclaratorsWithProperty(j, source, {
-    sourceValue: PACKAGE_NAME,
+    sourceValue: PACKAGE_NAME_V2,
   }).nodes();
 
   for (const declaratorWithProperty of declaratorsWithProperty) {

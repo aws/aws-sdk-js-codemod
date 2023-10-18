@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
+import { PACKAGE_NAME_V2 } from "../config";
 import { getClientDeepImportPath } from "../utils";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
@@ -25,7 +25,7 @@ export const getRequireDeclarator = (
   if (v2GlobalName) {
     const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
       identifierName: v2GlobalName,
-      sourceValue: PACKAGE_NAME,
+      sourceValue: PACKAGE_NAME_V2,
     });
 
     if (requireDeclaratorsWithIdentifier.size() > 0) {
@@ -35,7 +35,7 @@ export const getRequireDeclarator = (
 
   const requireDeclaratorsWithObjectPattern = getRequireDeclaratorsWithObjectPattern(j, source, {
     identifierName: v2ClientLocalName,
-    sourceValue: PACKAGE_NAME,
+    sourceValue: PACKAGE_NAME_V2,
   });
 
   if (requireDeclaratorsWithObjectPattern.size() > 0) {
@@ -44,7 +44,7 @@ export const getRequireDeclarator = (
 
   const requireDeclaratorsWithProperty = getRequireDeclaratorsWithProperty(j, source, {
     identifierName: v2ClientName,
-    sourceValue: PACKAGE_NAME,
+    sourceValue: PACKAGE_NAME_V2,
   });
 
   if (requireDeclaratorsWithProperty.size() > 0) {

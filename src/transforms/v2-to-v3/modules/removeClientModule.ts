@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
+import { PACKAGE_NAME_V2 } from "../config";
 import { getClientTypeNames } from "../ts-type";
 import { getClientDeepImportPath } from "../utils";
 import { removeImportDefault } from "./removeImportDefault";
@@ -27,7 +27,7 @@ export const removeClientModule = (
   const deepImportPath = getClientDeepImportPath(v2ClientName);
 
   const defaultOptions = { localName: v2ClientLocalName, sourceValue: deepImportPath };
-  const namedOptions = { localName: v2ClientLocalName, sourceValue: PACKAGE_NAME };
+  const namedOptions = { localName: v2ClientLocalName, sourceValue: PACKAGE_NAME_V2 };
 
   if (importType === ImportType.REQUIRE) {
     removeRequireIdentifier(j, source, defaultOptions);

@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
+import { PACKAGE_NAME_V2 } from "../config";
 import { getClientDeepImportPath } from "../utils";
 
 export interface GetImportDeclarationOptions {
@@ -21,7 +21,7 @@ export const getImportDeclaration = (
     const sourceValue = importDeclaration.value.source.value as string;
 
     if (
-      sourceValue === PACKAGE_NAME &&
+      sourceValue === PACKAGE_NAME_V2 &&
       importDeclaration.value.specifiers?.some(
         (specifier) =>
           ["ImportNamespaceSpecifier", "ImportDefaultSpecifier"].includes(specifier.type) ||

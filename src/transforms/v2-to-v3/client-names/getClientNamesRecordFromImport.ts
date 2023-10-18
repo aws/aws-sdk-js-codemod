@@ -1,6 +1,6 @@
 import { Collection, Identifier, ImportSpecifier, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
+import { CLIENT_NAMES, PACKAGE_NAME_V2 } from "../config";
 import { getImportEqualsDeclarationType, getImportSpecifiers } from "../modules";
 import { getClientDeepImportPath } from "../utils";
 
@@ -11,7 +11,7 @@ export const getClientNamesRecordFromImport = (
 ) => {
   const clientNamesRecord: Record<string, string> = {};
 
-  const specifiersFromNamedImport = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
+  const specifiersFromNamedImport = getImportSpecifiers(j, source, PACKAGE_NAME_V2).filter(
     (specifier) => specifier?.type === "ImportSpecifier"
   ) as ImportSpecifier[];
 

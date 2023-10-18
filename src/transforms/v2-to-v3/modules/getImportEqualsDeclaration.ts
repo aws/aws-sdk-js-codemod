@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
+import { PACKAGE_NAME_V2 } from "../config";
 import { getClientDeepImportPath } from "../utils";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 
@@ -27,7 +27,7 @@ export const getImportEqualsDeclaration = (
         .moduleReference as TSExternalModuleReference;
       const expressionValue = importEqualsModuleRef.expression.value;
 
-      if (expressionValue === PACKAGE_NAME && identifierName === options.v2GlobalName) {
+      if (expressionValue === PACKAGE_NAME_V2 && identifierName === options.v2GlobalName) {
         return true;
       }
 

@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
+import { PACKAGE_NAME_V2 } from "../config";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 import { ImportType } from "./types";
@@ -17,7 +17,7 @@ export const getGlobalNameFromModule = (
         init: {
           type: "CallExpression",
           callee: { type: "Identifier", name: "require" },
-          arguments: [{ value: PACKAGE_NAME }],
+          arguments: [{ value: PACKAGE_NAME_V2 }],
         },
       })
       .nodes();
@@ -27,8 +27,9 @@ export const getGlobalNameFromModule = (
     }
   }
 
-  const importDefaultSpecifiers = getImportSpecifiers(j, source, PACKAGE_NAME).filter((specifier) =>
-    ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
+  const importDefaultSpecifiers = getImportSpecifiers(j, source, PACKAGE_NAME_V2).filter(
+    (specifier) =>
+      ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
   );
 
   if (importDefaultSpecifiers.length > 0) {
@@ -37,7 +38,7 @@ export const getGlobalNameFromModule = (
 
   const importEqualsDeclarations = source.find(
     j.TSImportEqualsDeclaration,
-    getImportEqualsDeclarationType(PACKAGE_NAME)
+    getImportEqualsDeclarationType(PACKAGE_NAME_V2)
   );
 
   if (importEqualsDeclarations.length > 0) {

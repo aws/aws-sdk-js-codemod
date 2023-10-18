@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
+import { PACKAGE_NAME_V2 } from "../config";
 import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEquals } from "./removeImportEquals";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
@@ -23,7 +23,7 @@ export const removeGlobalModule = (
 
   // Only usage is import/require.
   if (identifierUsages.size() === 1) {
-    const defaultOptions = { localName: v2GlobalName, sourceValue: PACKAGE_NAME };
+    const defaultOptions = { localName: v2GlobalName, sourceValue: PACKAGE_NAME_V2 };
     if (importType === ImportType.REQUIRE) {
       removeRequireIdentifier(j, source, defaultOptions);
     } else if (importType === ImportType.IMPORT_EQUALS) {

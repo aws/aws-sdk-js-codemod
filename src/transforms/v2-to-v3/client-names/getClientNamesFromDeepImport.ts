@@ -1,6 +1,6 @@
-import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
+import { CLIENT_NAMES, PACKAGE_NAME_V2 } from "../config";
 
-const DEEP_IMPORT_PATH_REGEXP = new RegExp(`${PACKAGE_NAME}/clients/([\\w]*)`, "g");
+const DEEP_IMPORT_PATH_REGEXP = new RegExp(`${PACKAGE_NAME_V2}/clients/([\\w]*)`, "g");
 
 export const getClientNamesFromDeepImport = (fileSource: string) => {
   const clientsFromDeepImportPath = new Set(
