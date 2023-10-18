@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.21.3
+
+### Patch Changes
+
+- Use package name as suffix in import equals default declaration ([2161b67](https://github.com/awslabs/aws-sdk-js-codemod/commit/2161b67))
+
 ## 0.21.2
 
 ### Patch Changes
