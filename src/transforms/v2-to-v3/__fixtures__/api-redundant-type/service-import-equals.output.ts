@@ -1,10 +1,10 @@
-import AWS_APIGateway = require("@aws-sdk/client-api-gateway");
-import MethodSnapshot = AWS_APIGateway.MethodSnapshot;
-import AWS_DynamoDB = require("@aws-sdk/client-dynamodb");
-import AttributeValue = AWS_DynamoDB.AttributeValue;
-import AWS_S3 = require("@aws-sdk/client-s3");
-import Bucket = AWS_S3.Bucket;
-import ChecksumAlgorithm = AWS_S3.ChecksumAlgorithm;
+import AWS_client_api_gateway = require("@aws-sdk/client-api-gateway");
+import MethodSnapshot = AWS_client_api_gateway.MethodSnapshot;
+import AWS_client_dynamodb = require("@aws-sdk/client-dynamodb");
+import AttributeValue = AWS_client_dynamodb.AttributeValue;
+import AWS_client_s3 = require("@aws-sdk/client-s3");
+import Bucket = AWS_client_s3.Bucket;
+import ChecksumAlgorithm = AWS_client_s3.ChecksumAlgorithm;
 
 // Native types
 const stringType: string = "string";

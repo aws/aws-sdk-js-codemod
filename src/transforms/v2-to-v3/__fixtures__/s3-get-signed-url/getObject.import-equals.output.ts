@@ -1,8 +1,8 @@
 import AWS_s3_request_presigner = require("@aws-sdk/s3-request-presigner");
 import getSignedUrl = AWS_s3_request_presigner.getSignedUrl;
-import AWS_S3 = require("@aws-sdk/client-s3");
-import GetObjectCommand = AWS_S3.GetObjectCommand;
-import S3 = AWS_S3.S3;
+import AWS_client_s3 = require("@aws-sdk/client-s3");
+import GetObjectCommand = AWS_client_s3.GetObjectCommand;
+import S3 = AWS_client_s3.S3;
 
 const s3 = new S3();
 
