@@ -14,6 +14,10 @@ export interface ImportSpecifierOptions {
   localName?: string;
 }
 
+export interface ModulesOptions extends ImportSpecifierOptions {
+  packageName: string;
+}
+
 export enum ImportType {
   REQUIRE = "require",
   IMPORT = "import",
