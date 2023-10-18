@@ -7,7 +7,7 @@ import { removeImportDefault } from "./removeImportDefault";
 import { removeImportEquals } from "./removeImportEquals";
 import { removeImportNamed } from "./removeImportNamed";
 import { removeRequireIdentifier } from "./removeRequireIdentifier";
-import { removeRequireObjectProperty } from "./removeRequireObjectProperty";
+import { removeRequireObjectPattern } from "./removeRequireObjectPattern";
 import { removeRequireProperty } from "./removeRequireProperty";
 import { ImportType } from "./types";
 
@@ -31,7 +31,7 @@ export const removeClientModule = (
 
   if (importType === ImportType.REQUIRE) {
     removeRequireIdentifier(j, source, defaultOptions);
-    removeRequireObjectProperty(j, source, namedOptions);
+    removeRequireObjectPattern(j, source, namedOptions);
     removeRequireProperty(j, source, { ...namedOptions, propertyName: v2ClientName });
   } else if (importType === ImportType.IMPORT_EQUALS) {
     removeImportEquals(j, source, defaultOptions);

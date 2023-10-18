@@ -16,7 +16,7 @@ export interface RemoveRequireObjectPropertyOptions {
   sourceValue: string;
 }
 
-export const removeRequireObjectProperty = (
+export const removeRequireObjectPattern = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireObjectPropertyOptions
