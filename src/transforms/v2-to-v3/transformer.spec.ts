@@ -11,10 +11,7 @@ describe("v2-to-v3", () => {
   const fixtureDir = join(__dirname, "__fixtures__");
   const fixtureSubDirs = readdirSync(fixtureDir, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name)
-    // Temporarily skip multiple-declarators use case.
-    // Resume when declarators are sorted, and added before the selected import.
-    .filter((name) => name !== "multiple-declarators");
+    .map((dirent) => dirent.name);
 
   const getTestFileMetadata = (dirPath: string) =>
     readdirSync(dirPath)
