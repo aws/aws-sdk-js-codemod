@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.22.0
+
+### Minor Changes
+
+- Add require declaration per client ([d989203](https://github.com/awslabs/aws-sdk-js-codemod/commit/d989203))
+
 ## 0.21.4
 
 ### Patch Changes
