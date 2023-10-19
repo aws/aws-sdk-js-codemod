@@ -10,9 +10,13 @@ export interface GetRequireDeclaratorOptions {
 export const getRequireDeclarator = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   options: GetRequireDeclaratorOptions
 ) => {
+  const { v2ClientName, v2GlobalName } = options;
+
+  // Support DynamoDB.DocumentClient
+  const v2ClientLocalName = options.v2ClientLocalName.split(".")[0];
+
   // Temporary fix, will be removed in https://github.com/awslabs/aws-sdk-js-codemod/pull/622
   const v2RequireCallExpressions = source.find(j.VariableDeclaration).filter(
     (variableDeclaration) =>
@@ -20,6 +24,10 @@ export const getRequireDeclarator = (
         // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
         (declaration: VariableDeclarator | Identifier) => {
           if (declaration.type === "Identifier") return true;
+
+          const id = declaration.id;
+          if (id.type !== "Identifier") return true;
+          if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(id.name)) return true;
 
           const init = declaration.init;
           if (!init) return true;
@@ -70,6 +78,7 @@ export const getRequireDeclarator = (
 
           const property = init.property;
           if (property.type !== "Identifier") return true;
+          if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.name)) return true;
 
           return false;
         }
