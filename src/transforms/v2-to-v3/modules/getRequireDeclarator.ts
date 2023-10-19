@@ -34,7 +34,8 @@ export const getRequireDeclarator = (
           if (!args) return true;
           if (args.length !== 1) return true;
           if (args[0].type !== "Literal") return true;
-          if (args[0].value !== PACKAGE_NAME) return true;
+          if (typeof args[0].value !== "string") return true;
+          if (!args[0].value.startsWith(PACKAGE_NAME)) return true;
 
           return false;
         }
