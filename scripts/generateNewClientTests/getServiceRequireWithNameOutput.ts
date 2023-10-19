@@ -5,7 +5,7 @@ import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode";
 
 export const getServiceRequireWithNameOutput = () => {
-  let content = ``;
+  let content = `\n\n`;
 
   content += getV3PackageRequiresCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST), {
     useLocalSuffix: true,

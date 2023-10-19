@@ -1,10 +1,11 @@
 const {
-        getSignedUrl
-      } = require("@aws-sdk/s3-request-presigner"),
-      {
-        GetObjectCommand,
-        S3
-      } = require("@aws-sdk/client-s3");
+  getSignedUrl
+} = require("@aws-sdk/s3-request-presigner");
+
+const {
+  GetObjectCommand,
+  S3
+} = require("@aws-sdk/client-s3");
 
 const s3 = new S3();
 

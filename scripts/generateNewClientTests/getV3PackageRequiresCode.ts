@@ -7,7 +7,6 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 
 export interface V3PackageRequiresCodeOptions {
   useLocalSuffix?: boolean;
-  declarationPerClient?: boolean;
 }
 
 export const getV3PackageRequiresCode = (
@@ -15,11 +14,7 @@ export const getV3PackageRequiresCode = (
   options?: V3PackageRequiresCodeOptions
 ) => {
   let content = ``;
-  const { useLocalSuffix = false, declarationPerClient = false } = options || {};
-
-  if (!declarationPerClient) {
-    content += `const `;
-  }
+  const { useLocalSuffix = false } = options || {};
 
   for (const v2ClientName of clientsToTest) {
     const v3ClientName = CLIENT_NAMES_MAP[v2ClientName];
@@ -30,13 +25,7 @@ export const getV3PackageRequiresCode = (
 
     const v3RequireKeyValuePair =
       v2ClientName === v2ClientLocalName ? v3ClientName : `${v3ClientName}: ${v2ClientLocalName}`;
-    content += declarationPerClient
-      ? `const {\n  ${v3RequireKeyValuePair}\n} = require("${v3ClientPackageName}");\n`
-      : `{\n        ${v3RequireKeyValuePair}\n      } = require("${v3ClientPackageName}"),\n      `;
-  }
-
-  if (!declarationPerClient) {
-    content = content.replace(/,\n {6}$/, ";\n\n");
+    content += `const {\n  ${v3RequireKeyValuePair}\n} = require("${v3ClientPackageName}");\n\n`;
   }
 
   return content;

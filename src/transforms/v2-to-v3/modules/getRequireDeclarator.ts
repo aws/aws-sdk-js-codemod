@@ -1,10 +1,5 @@
-import { Collection, JSCodeshift } from "jscodeshift";
-
+import { Collection, Identifier, JSCodeshift, VariableDeclarator } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
-import { getClientDeepImportPath } from "../utils";
-import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
-import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
-import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 
 export interface GetRequireDeclaratorOptions {
   v2ClientName: string;
@@ -22,41 +17,86 @@ export const getRequireDeclarator = (
   // Support DynamoDB.DocumentClient
   const v2ClientLocalName = options.v2ClientLocalName.split(".")[0];
 
-  if (v2GlobalName) {
-    const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
-      identifierName: v2GlobalName,
-      sourceValue: PACKAGE_NAME,
-    });
+  // Temporary fix, will be removed in https://github.com/awslabs/aws-sdk-js-codemod/pull/622
+  const v2RequireCallExpressions = source
+    .find(j.VariableDeclaration)
+    .filter((variableDeclaration) =>
+      variableDeclaration.value.declarations.some(
+        // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
+        (declaration: VariableDeclarator | Identifier) => {
+          if (declaration.type === "Identifier") return false;
 
-    if (requireDeclaratorsWithIdentifier.size() > 0) {
-      return requireDeclaratorsWithIdentifier;
-    }
+          const id = declaration.id;
+          if (id.type === "Identifier") {
+            if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(id.name)) return false;
+          }
+          if (id.type === "ObjectPattern") {
+            if (
+              !id.properties.some(
+                (property) =>
+                  property.type === "Property" &&
+                  property.key.type === "Identifier" &&
+                  [v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.key.name)
+              )
+            )
+              return false;
+          }
+
+          const init = declaration.init;
+          if (!init) return false;
+          if (init.type !== "CallExpression") return false;
+
+          const callee = init.callee;
+          if (!callee) return false;
+          if (callee.type !== "Identifier") return false;
+          if (callee.name !== "require") return false;
+
+          const args = init.arguments;
+          if (!args) return false;
+          if (args.length !== 1) return false;
+          if (args[0].type !== "Literal") return false;
+          if (typeof args[0].value !== "string") return false;
+          if (!args[0].value.startsWith(PACKAGE_NAME)) return false;
+
+          return true;
+        }
+      )
+    );
+  if (v2RequireCallExpressions.size()) {
+    return v2RequireCallExpressions;
   }
 
-  const requireDeclaratorsWithObjectPattern = getRequireDeclaratorsWithObjectPattern(j, source, {
-    identifierName: v2ClientLocalName,
-    sourceValue: PACKAGE_NAME,
-  });
+  const v2RequireProperties = source.find(j.VariableDeclaration).filter((variableDeclaration) =>
+    variableDeclaration.value.declarations.some(
+      // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
+      (declaration: VariableDeclarator | Identifier) => {
+        if (declaration.type === "Identifier") return false;
 
-  if (requireDeclaratorsWithObjectPattern.size() > 0) {
-    return requireDeclaratorsWithObjectPattern;
-  }
+        const init = declaration.init;
+        if (!init) return false;
+        if (init.type !== "MemberExpression") return false;
 
-  const requireDeclaratorsWithProperty = getRequireDeclaratorsWithProperty(j, source, {
-    identifierName: v2ClientName,
-    sourceValue: PACKAGE_NAME,
-  });
+        const object = init.object;
+        if (object.type !== "CallExpression") return false;
 
-  if (requireDeclaratorsWithProperty.size() > 0) {
-    return requireDeclaratorsWithProperty;
-  }
+        const callee = object.callee;
+        if (callee.type !== "Identifier") return false;
+        if (callee.name !== "require") return false;
 
-  const requireDeclaratorsWithIdentifier = getRequireDeclaratorsWithIdentifier(j, source, {
-    identifierName: v2ClientLocalName,
-    sourceValue: getClientDeepImportPath(v2ClientName),
-  });
+        const args = object.arguments;
+        if (args.length !== 1) return false;
+        if (args[0].type !== "Literal") return false;
+        if (args[0].value !== PACKAGE_NAME) return false;
 
-  if (requireDeclaratorsWithIdentifier.size() > 0) {
-    return requireDeclaratorsWithIdentifier;
+        const property = init.property;
+        if (property.type !== "Identifier") return false;
+        if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.name)) return false;
+
+        return true;
+      }
+    )
+  );
+  if (v2RequireProperties.size()) {
+    return v2RequireProperties;
   }
 };
