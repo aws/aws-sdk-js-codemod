@@ -26,8 +26,20 @@ export const getRequireDeclarator = (
           if (declaration.type === "Identifier") return true;
 
           const id = declaration.id;
-          if (id.type !== "Identifier") return true;
-          if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(id.name)) return true;
+          if (id.type === "Identifier") {
+            if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(id.name)) return true;
+          }
+          if (id.type === "ObjectPattern") {
+            if (
+              !id.properties.some(
+                (property) =>
+                  property.type === "Property" &&
+                  property.key.type === "Identifier" &&
+                  [v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.key.name)
+              )
+            )
+              return true;
+          }
 
           const init = declaration.init;
           if (!init) return true;
