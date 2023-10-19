@@ -49,34 +49,67 @@ export const addNamedModule = (
   }
 
   // Build a new require declarator.
-  const v3RequireDeclarator = j.variableDeclarator(
-    j.objectPattern([clientObjectProperty]),
-    j.callExpression(j.identifier("require"), [j.literal(packageName)])
+  const v3RequireDeclaration = j.variableDeclaration("const", [
+    j.variableDeclarator(
+      j.objectPattern([clientObjectProperty]),
+      j.callExpression(j.identifier("require"), [j.literal(packageName)])
+    ),
+  ]);
+
+  const v2RequireDeclarations = source.find(j.VariableDeclaration).filter((variableDeclaration) =>
+    variableDeclaration.value.declarations.some(
+      // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
+      (declaration: VariableDeclarator | Identifier) => {
+        if (declaration.type === "Identifier") return false;
+
+        const init = declaration.init;
+        if (!init) return false;
+
+        // Checks for require identifier or object pattern.
+        if (init.type === "CallExpression") {
+          const callee = init.callee;
+          if (!callee) return false;
+          if (callee.type !== "Identifier") return false;
+          if (callee.name !== "require") return false;
+
+          const args = init.arguments;
+          if (!args) return false;
+          if (args.length !== 1) return false;
+          if (args[0].type !== "Literal") return false;
+          if (typeof args[0].value !== "string") return false;
+          if (!args[0].value.startsWith(PACKAGE_NAME)) return false;
+
+          return true;
+        }
+
+        // Checks for require property.
+        if (init.type === "MemberExpression") {
+          const object = init.object;
+          if (object.type !== "CallExpression") return false;
+
+          const callee = object.callee;
+          if (callee.type !== "Identifier") return false;
+          if (callee.name !== "require") return false;
+
+          const args = object.arguments;
+          if (args.length !== 1) return false;
+          if (args[0].type !== "Literal") return false;
+          if (args[0].value !== PACKAGE_NAME) return false;
+
+          return true;
+        }
+
+        return false;
+      }
+    )
   );
 
-  const v2RequireDeclarators = getRequireDeclarators(j, source, PACKAGE_NAME);
-  if (v2RequireDeclarators.size()) {
-    // Insert it after the first require declarator.
-    v2RequireDeclarators.at(0).insertAfter(v3RequireDeclarator);
-    return;
-  }
-
-  const v2RequirePropertyDeclarators = source.find(j.VariableDeclarator, {
-    init: {
-      type: "MemberExpression",
-      object: {
-        arguments: [{ value: PACKAGE_NAME }],
-        callee: { type: "Identifier", name: "require" },
-        type: "CallExpression",
-      },
-    },
-  });
-  if (v2RequirePropertyDeclarators.size()) {
-    // Insert it after the first require property declarator.
-    v2RequirePropertyDeclarators.at(0).insertAfter(v3RequireDeclarator);
+  if (v2RequireDeclarations.size()) {
+    // Insert it after the first v2 require declaration.
+    v2RequireDeclarations.at(0).insertAfter(v3RequireDeclaration);
     return;
   }
 
   // Insert require declarator at the top of the document.
-  source.get().node.program.body.unshift(j.variableDeclaration("const", [v3RequireDeclarator]));
+  source.get().node.program.body.unshift(v3RequireDeclaration);
 };
