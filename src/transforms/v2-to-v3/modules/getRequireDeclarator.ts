@@ -18,16 +18,17 @@ export const getRequireDeclarator = (
   const v2ClientLocalName = options.v2ClientLocalName.split(".")[0];
 
   // Temporary fix, will be removed in https://github.com/awslabs/aws-sdk-js-codemod/pull/622
-  const v2RequireCallExpressions = source.find(j.VariableDeclaration).filter(
-    (variableDeclaration) =>
-      !variableDeclaration.value.declarations.some(
+  const v2RequireCallExpressions = source
+    .find(j.VariableDeclaration)
+    .filter((variableDeclaration) =>
+      variableDeclaration.value.declarations.some(
         // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
         (declaration: VariableDeclarator | Identifier) => {
-          if (declaration.type === "Identifier") return true;
+          if (declaration.type === "Identifier") return false;
 
           const id = declaration.id;
           if (id.type === "Identifier") {
-            if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(id.name)) return true;
+            if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(id.name)) return false;
           }
           if (id.type === "ObjectPattern") {
             if (
@@ -38,63 +39,62 @@ export const getRequireDeclarator = (
                   [v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.key.name)
               )
             )
-              return true;
+              return false;
           }
 
           const init = declaration.init;
-          if (!init) return true;
-          if (init.type !== "CallExpression") return true;
+          if (!init) return false;
+          if (init.type !== "CallExpression") return false;
 
           const callee = init.callee;
-          if (!callee) return true;
-          if (callee.type !== "Identifier") return true;
-          if (callee.name !== "require") return true;
+          if (!callee) return false;
+          if (callee.type !== "Identifier") return false;
+          if (callee.name !== "require") return false;
 
           const args = init.arguments;
-          if (!args) return true;
-          if (args.length !== 1) return true;
-          if (args[0].type !== "Literal") return true;
-          if (typeof args[0].value !== "string") return true;
-          if (!args[0].value.startsWith(PACKAGE_NAME)) return true;
+          if (!args) return false;
+          if (args.length !== 1) return false;
+          if (args[0].type !== "Literal") return false;
+          if (typeof args[0].value !== "string") return false;
+          if (!args[0].value.startsWith(PACKAGE_NAME)) return false;
 
-          return false;
+          return true;
         }
       )
-  );
+    );
   if (v2RequireCallExpressions.size()) {
     return v2RequireCallExpressions;
   }
 
-  const v2RequireProperties = source.find(j.VariableDeclaration).filter(
-    (variableDeclaration) =>
-      !variableDeclaration.value.declarations.some(
-        // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
-        (declaration: VariableDeclarator | Identifier) => {
-          if (declaration.type === "Identifier") return true;
+  const v2RequireProperties = source.find(j.VariableDeclaration).filter((variableDeclaration) =>
+    variableDeclaration.value.declarations.some(
+      // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
+      (declaration: VariableDeclarator | Identifier) => {
+        if (declaration.type === "Identifier") return false;
 
-          const init = declaration.init;
-          if (!init) return true;
-          if (init.type !== "MemberExpression") return true;
+        const init = declaration.init;
+        if (!init) return false;
+        if (init.type !== "MemberExpression") return false;
 
-          const object = init.object;
-          if (object.type !== "CallExpression") return true;
+        const object = init.object;
+        if (object.type !== "CallExpression") return false;
 
-          const callee = object.callee;
-          if (callee.type !== "Identifier") return true;
-          if (callee.name !== "require") return true;
+        const callee = object.callee;
+        if (callee.type !== "Identifier") return false;
+        if (callee.name !== "require") return false;
 
-          const args = object.arguments;
-          if (args.length !== 1) return true;
-          if (args[0].type !== "Literal") return true;
-          if (args[0].value !== PACKAGE_NAME) return true;
+        const args = object.arguments;
+        if (args.length !== 1) return false;
+        if (args[0].type !== "Literal") return false;
+        if (args[0].value !== PACKAGE_NAME) return false;
 
-          const property = init.property;
-          if (property.type !== "Identifier") return true;
-          if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.name)) return true;
+        const property = init.property;
+        if (property.type !== "Identifier") return false;
+        if (![v2GlobalName, v2ClientName, v2ClientLocalName].includes(property.name)) return false;
 
-          return false;
-        }
-      )
+        return true;
+      }
+    )
   );
   if (v2RequireProperties.size()) {
     return v2RequireProperties;
