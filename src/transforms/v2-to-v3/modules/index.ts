@@ -1,4 +1,5 @@
 export * from "./addClientModules";
+export * from "./addNamedModule";
 export * from "./getGlobalNameFromModule";
 export * from "./getImportEqualsDeclarationType";
 export * from "./getImportSpecifiers";
