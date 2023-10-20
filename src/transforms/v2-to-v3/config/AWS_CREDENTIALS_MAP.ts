@@ -7,4 +7,5 @@ export const AWS_CREDENTIALS_MAP: Record<string, string> = {
   ECSCredentials: "fromContainerMetadata",
   EnvironmentCredentials: "fromEnv",
   RemoteCredentials: "fromContainerMetadata",
+  SharedIniFileCredentials: "fromIni",
 };
