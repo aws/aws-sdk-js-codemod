@@ -14,6 +14,6 @@ const {
   ApplicationDiscoveryService: DiscoveryClient
 } = require("@aws-sdk/client-application-discovery-service");
 
-new ACMClient();
 new AccessAnalyzerClient();
 new DiscoveryClient();
+new ACMClient();

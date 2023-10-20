@@ -9,6 +9,6 @@ import ACMClient = AWS_client_acm.ACM;
 import AWS_client_application_discovery_service = require("@aws-sdk/client-application-discovery-service");
 import DiscoveryClient = AWS_client_application_discovery_service.ApplicationDiscoveryService;
 
-new ACMClient();
 new AccessAnalyzerClient();
 new DiscoveryClient();
+new ACMClient();
