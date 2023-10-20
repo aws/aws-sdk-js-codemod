@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.22.1
+
+### Patch Changes
+
+- Add imports after the first occurrence of aws-sdk ([2fe3834](https://github.com/awslabs/aws-sdk-js-codemod/commit/2fe3834))
+
 ## 0.22.0
 
 ### Minor Changes
