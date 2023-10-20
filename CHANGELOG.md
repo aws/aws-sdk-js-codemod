@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.23.0
+
+### Minor Changes
+
+- Basic transformation of AWS Credentials ([7abe8a2](https://github.com/awslabs/aws-sdk-js-codemod/commit/7abe8a2))
+
 ## 0.22.1
 
 ### Patch Changes
