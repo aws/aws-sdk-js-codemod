@@ -113,9 +113,10 @@ export const addNamedModule = (
     j.stringLiteral(packageName)
   );
 
-  const v2importDeclarations = source
-    .find(j.ImportDeclaration)
-    .filter((path) => path.node.source.value === PACKAGE_NAME);
+  const v2importDeclarations = source.find(j.ImportDeclaration).filter((path) => {
+    const { value } = path.node.source;
+    return typeof value === "string" && value.startsWith(PACKAGE_NAME);
+  });
 
   if (v2importDeclarations.size()) {
     // Insert it after the last import declaration.
