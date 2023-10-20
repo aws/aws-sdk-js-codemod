@@ -9,4 +9,5 @@ export const AWS_CREDENTIALS_MAP: Record<string, string> = {
   RemoteCredentials: "fromContainerMetadata",
   SharedIniFileCredentials: "fromIni",
   TokenFileWebIdentityCredentials: "fromTokenFile",
+  WebIdentityCredentials: "fromWebToken",
 };
