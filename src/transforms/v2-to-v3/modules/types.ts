@@ -7,11 +7,16 @@ export interface ClientModulesOptions {
   v3ClientName: string;
   v3ClientPackageName: string;
   clientIdentifiers: ClientIdentifier[];
+  importType: ImportType;
 }
 
 export interface ImportSpecifierOptions {
   importedName: string;
   localName?: string;
+}
+
+export interface ModulesOptions extends ImportSpecifierOptions {
+  packageName: string;
 }
 
 export enum ImportType {

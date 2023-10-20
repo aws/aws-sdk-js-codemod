@@ -1,19 +1,18 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationType";
-import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
-import { addClientDefaultModule } from "./addClientDefaultModule";
-import { getImportEqualsDefaultName } from "./getImportEqualsDefaultName";
+import { ModulesOptions } from "../types";
+import { addDefaultModule } from "./addDefaultModule";
+import { getDefaultName } from "./getDefaultName";
 
-export const addClientNamedModule = (
+export const addNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & ImportSpecifierOptions
+  options: ModulesOptions
 ) => {
-  const { importedName, localName = importedName, ...v3ClientModulesOptions } = options;
-  const { v3ClientPackageName } = v3ClientModulesOptions;
+  const { importedName, localName = importedName, packageName } = options;
 
-  const defaultLocalName = getImportEqualsDefaultName(v3ClientPackageName);
+  const defaultLocalName = getDefaultName(packageName);
 
   const existingDeclaration = source.find(j.TSImportEqualsDeclaration, {
     type: "TSImportEqualsDeclaration",
@@ -38,9 +37,9 @@ export const addClientNamedModule = (
     return;
   }
 
-  const defaultDeclaration = getImportEqualsDeclarationType(v3ClientPackageName);
+  const defaultDeclaration = getImportEqualsDeclarationType(packageName);
   if (source.find(j.TSImportEqualsDeclaration, defaultDeclaration).size() === 0) {
-    addClientDefaultModule(j, source, v3ClientModulesOptions);
+    addDefaultModule(j, source, packageName);
   }
 
   const importEqualsDeclaration = j.tsImportEqualsDeclaration(
@@ -54,6 +53,7 @@ export const addClientNamedModule = (
       (importEqualsDeclaration) => importEqualsDeclaration.value.id.name === defaultLocalName
     );
 
+  // Insert import equals after the package import equals.
   if (v3ClientImportEquals.size() > 0) {
     v3ClientImportEquals.at(0).insertAfter(importEqualsDeclaration);
     return;

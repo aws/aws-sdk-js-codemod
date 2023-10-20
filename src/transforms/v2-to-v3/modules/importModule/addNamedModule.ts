@@ -7,29 +7,27 @@ import {
   ObjectProperty,
 } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
-import { getImportDeclaration } from "../getImportDeclaration";
+import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
 import { getImportSpecifier } from "../getImportSpecifier";
 import { getImportSpecifiers } from "../getImportSpecifiers";
 import { getRequireProperty } from "../getRequireProperty";
 import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
-import { ClientModulesOptions, ImportSpecifierOptions } from "../types";
+import { ModulesOptions } from "../types";
 
-export const addClientNamedModule = (
+export const addNamedModule = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & ImportSpecifierOptions
+  options: ModulesOptions
 ) => {
-  const { importedName, v2ClientName, v2ClientLocalName, v3ClientPackageName } = options;
-  const localName = options.localName ?? importedName;
+  const { importedName, localName = importedName, packageName } = options;
 
   const importDeclarations = source.find(j.ImportDeclaration, {
-    source: { value: v3ClientPackageName },
+    source: { value: packageName },
   });
 
   if (importDeclarations.size()) {
-    const importSpecifiers = getImportSpecifiers(j, source, v3ClientPackageName);
+    const importSpecifiers = getImportSpecifiers(j, source, packageName);
 
     // Return if the import specifier already exists.
     if (
@@ -94,7 +92,7 @@ export const addClientNamedModule = (
         .find(j.ImportDeclaration, {
           type: "ImportDeclaration",
           specifiers: [importNamespaceSpecifiers[0]],
-          source: { value: v3ClientPackageName },
+          source: { value: packageName },
         })
         .insertAfter(varDeclaration);
       return;
@@ -109,24 +107,23 @@ export const addClientNamedModule = (
     }
   }
 
-  // Insert after global import, or service import.
-  const v2ImportDeclaration = getImportDeclaration(j, source, {
-    v2ClientName,
-    v2ClientLocalName,
-  });
-
+  // Build a new import declaration.
   const v3ImportDeclaration = j.importDeclaration(
     [getImportSpecifier(j, { importedName, localName })],
-    j.stringLiteral(v3ClientPackageName)
+    j.stringLiteral(packageName)
   );
 
-  if (v2ImportDeclaration && v2ImportDeclaration.nodes().length > 0) {
-    v2ImportDeclaration.at(0).insertAfter(v3ImportDeclaration);
-  } else {
-    // Unreachable code, throw error
-    throw new Error(
-      "Base Import Declaration not found to insert new Import Declaration.\n" +
-        "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod"
-    );
+  const v2importDeclarations = source.find(j.ImportDeclaration).filter((path) => {
+    const { value } = path.node.source;
+    return typeof value === "string" && value.startsWith(PACKAGE_NAME);
+  });
+
+  if (v2importDeclarations.size()) {
+    // Insert it after the last import declaration.
+    v2importDeclarations.at(0).insertAfter(v3ImportDeclaration);
+    return;
   }
+
+  // Insert it at the top of the document.
+  source.get().node.program.body.unshift(v3ImportDeclaration);
 };

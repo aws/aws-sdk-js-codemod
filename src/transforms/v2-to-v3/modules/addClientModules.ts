@@ -27,11 +27,18 @@ import { ClientModulesOptions, ImportType } from "./types";
 export const addClientModules = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  options: ClientModulesOptions & { importType: ImportType }
+  options: ClientModulesOptions
 ): void => {
-  const { clientIdentifiers, v2ClientName, v3ClientName, v2ClientLocalName, importType } = options;
+  const {
+    clientIdentifiers,
+    v2ClientName,
+    v3ClientName,
+    v3ClientPackageName,
+    v2ClientLocalName,
+    importType,
+  } = options;
 
-  const { addClientNamedModule } =
+  const { addNamedModule } =
     importType === ImportType.REQUIRE
       ? requireModule
       : importType === ImportType.IMPORT_EQUALS
@@ -45,47 +52,45 @@ export const addClientModules = (
 
   // Add named import for types, if needed.
   for (const v3ClientType of v3ClientTypes) {
-    addClientNamedModule(j, source, {
-      ...options,
+    addNamedModule(j, source, {
       importedName: v3ClientType,
+      packageName: v3ClientPackageName,
     });
   }
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
-    addClientNamedModule(j, source, {
-      ...options,
+    addNamedModule(j, source, {
       importedName: v3ClientName,
       localName: v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName,
+      packageName: v3ClientPackageName,
     });
   }
 
   for (const waiterState of waiterStates) {
     const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
-    addClientNamedModule(j, source, {
-      ...options,
+    addNamedModule(j, source, {
       importedName: v3WaiterApiName,
+      packageName: v3ClientPackageName,
     });
   }
 
   if (v2ClientName === S3) {
     if (isS3UploadApiUsed(j, source, clientIdentifiers)) {
-      addClientNamedModule(j, source, {
-        ...options,
+      addNamedModule(j, source, {
         importedName: "Upload",
-        v3ClientPackageName: "@aws-sdk/lib-storage",
+        packageName: "@aws-sdk/lib-storage",
       });
     }
 
     if (isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
-      addClientNamedModule(j, source, {
-        ...options,
+      addNamedModule(j, source, {
         importedName: "getSignedUrl",
-        v3ClientPackageName: "@aws-sdk/s3-request-presigner",
+        packageName: "@aws-sdk/s3-request-presigner",
       });
       for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
-        addClientNamedModule(j, source, {
-          ...options,
+        addNamedModule(j, source, {
           importedName: getCommandName(apiName),
+          packageName: v3ClientPackageName,
         });
       }
     }
@@ -105,25 +110,18 @@ export const addClientModules = (
     const docClientTypes = getV3ClientTypes(j, source, docClientOptions);
     const docClientNewExpressionCount = getNewExpressionCount(j, source, docClientOptions);
 
-    const docClientModuleOptions = {
-      ...options,
-      v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
-      v3ClientPackageName: "@aws-sdk/lib-dynamodb",
-    };
-
     // Add named import for types, if needed.
     for (const docClientType of docClientTypes) {
-      addClientNamedModule(j, source, {
-        ...options,
+      addNamedModule(j, source, {
         importedName: docClientType,
-        v3ClientPackageName: "@aws-sdk/lib-dynamodb",
+        packageName: "@aws-sdk/lib-dynamodb",
       });
     }
 
     if (docClientNewExpressionCount > 0) {
-      addClientNamedModule(j, source, {
-        ...docClientModuleOptions,
+      addNamedModule(j, source, {
         importedName: DYNAMODB_DOCUMENT,
+        packageName: "@aws-sdk/lib-dynamodb",
       });
     }
   }
