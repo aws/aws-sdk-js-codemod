@@ -29,7 +29,21 @@ export const replaceAwsCredentials = (
         packageName: "@aws-sdk/credential-providers",
       });
       credsNewExpressions.replaceWith(({ node }) =>
-        j.callExpression(j.identifier(v3ProviderName), node.arguments)
+        j.callExpression.from({
+          callee: j.identifier(v3ProviderName),
+          comments: [
+            j.commentLine(
+              " JS SDK v3 switched to credential providers to functions instead of objects."
+            ),
+            j.commentLine(
+              " This is the closest approximation from codemod of what your application needs."
+            ),
+            j.commentLine(
+              " Reference: https://www.npmjs.com/package/@aws-sdk/credential-providers"
+            ),
+          ],
+          arguments: node.arguments,
+        })
       );
     }
   }

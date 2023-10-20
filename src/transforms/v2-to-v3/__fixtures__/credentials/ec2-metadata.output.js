@@ -1,3 +1,6 @@
 import { fromInstanceMetadata } from "@aws-sdk/credential-providers";
 
-const credentials = fromInstanceMetadata();
+// JS SDK v3 switched to credential providers to functions instead of objects.
+// This is the closest approximation from codemod of what your application needs.
+// Reference: https://www.npmjs.com/package/@aws-sdk/credential-providers
+fromInstanceMetadata();

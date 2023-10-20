@@ -1,3 +1,3 @@
 import AWS from "aws-sdk";
 
-const credentials = new AWS.EC2MetadataCredentials();
+new AWS.EC2MetadataCredentials();
