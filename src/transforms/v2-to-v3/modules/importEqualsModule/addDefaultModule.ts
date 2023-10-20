@@ -31,10 +31,16 @@ export const addDefaultModule = (
     j.tsExternalModuleReference(j.stringLiteral(packageName))
   );
 
-  const v2ImportEquals = source.find(
-    j.TSImportEqualsDeclaration,
-    getImportEqualsDeclarationType(PACKAGE_NAME)
-  );
+  const v2ImportEquals = source
+    .find(j.TSImportEqualsDeclaration, getImportEqualsDeclarationType())
+    .filter((importEqualsDeclaration) => {
+      const { moduleReference } = importEqualsDeclaration.value;
+      if (moduleReference.type !== "TSExternalModuleReference") return false;
+      const { expression } = moduleReference;
+      if (expression.type !== "StringLiteral") return false;
+      const { value } = expression;
+      return value.startsWith(PACKAGE_NAME);
+    });
 
   if (v2ImportEquals.size()) {
     // Insert it after the first import equals declaration.
