@@ -16,13 +16,11 @@ import {
   S3,
 } from "../config";
 import { getV3ClientTypes } from "../ts-type";
+import { addNamedModule } from "./addNamedModule";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 
-import * as importEqualsModule from "./importEqualsModule";
-import * as importModule from "./importModule";
-import * as requireModule from "./requireModule";
-import { ClientModulesOptions, ImportType } from "./types";
+import { ClientModulesOptions } from "./types";
 
 export const addClientModules = (
   j: JSCodeshift,
@@ -38,13 +36,6 @@ export const addClientModules = (
     importType,
   } = options;
 
-  const { addNamedModule } =
-    importType === ImportType.REQUIRE
-      ? requireModule
-      : importType === ImportType.IMPORT_EQUALS
-      ? importEqualsModule
-      : importModule;
-
   const v3ClientTypes = getV3ClientTypes(j, source, options);
   const newExpressionCount = getNewExpressionCount(j, source, options);
   const clientTSTypeRefCount = getClientTSTypeRefCount(j, source, options);
@@ -53,6 +44,7 @@ export const addClientModules = (
   // Add named import for types, if needed.
   for (const v3ClientType of v3ClientTypes) {
     addNamedModule(j, source, {
+      importType,
       importedName: v3ClientType,
       packageName: v3ClientPackageName,
     });
@@ -60,6 +52,7 @@ export const addClientModules = (
 
   if (newExpressionCount > 0 || clientTSTypeRefCount > 0) {
     addNamedModule(j, source, {
+      importType,
       importedName: v3ClientName,
       localName: v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName,
       packageName: v3ClientPackageName,
@@ -69,6 +62,7 @@ export const addClientModules = (
   for (const waiterState of waiterStates) {
     const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
     addNamedModule(j, source, {
+      importType,
       importedName: v3WaiterApiName,
       packageName: v3ClientPackageName,
     });
@@ -77,6 +71,7 @@ export const addClientModules = (
   if (v2ClientName === S3) {
     if (isS3UploadApiUsed(j, source, clientIdentifiers)) {
       addNamedModule(j, source, {
+        importType,
         importedName: "Upload",
         packageName: "@aws-sdk/lib-storage",
       });
@@ -84,11 +79,13 @@ export const addClientModules = (
 
     if (isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
       addNamedModule(j, source, {
+        importType,
         importedName: "getSignedUrl",
         packageName: "@aws-sdk/s3-request-presigner",
       });
       for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
         addNamedModule(j, source, {
+          importType,
           importedName: getCommandName(apiName),
           packageName: v3ClientPackageName,
         });
@@ -113,6 +110,7 @@ export const addClientModules = (
     // Add named import for types, if needed.
     for (const docClientType of docClientTypes) {
       addNamedModule(j, source, {
+        importType,
         importedName: docClientType,
         packageName: "@aws-sdk/lib-dynamodb",
       });
@@ -120,6 +118,7 @@ export const addClientModules = (
 
     if (docClientNewExpressionCount > 0) {
       addNamedModule(j, source, {
+        importType,
         importedName: DYNAMODB_DOCUMENT,
         packageName: "@aws-sdk/lib-dynamodb",
       });
