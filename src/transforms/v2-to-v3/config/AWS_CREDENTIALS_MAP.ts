@@ -3,6 +3,7 @@
  */
 export const AWS_CREDENTIALS_MAP: Record<string, string> = {
   ChainableTemporaryCredentials: "fromTemporaryCredentials",
+  CognitoIdentityCredentials: "fromCognitoIdentity",
   EC2MetadataCredentials: "fromInstanceMetadata",
   ECSCredentials: "fromContainerMetadata",
   EnvironmentCredentials: "fromEnv",
