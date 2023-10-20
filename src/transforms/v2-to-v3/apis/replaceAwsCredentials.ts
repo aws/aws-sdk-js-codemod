@@ -1,11 +1,17 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { AWS_CREDENTIALS_MAP } from "../config";
+import { ImportType } from "../modules";
 import { getAwsCredentialsNewExpressions } from "./getAwsCredentialsNewExpressions";
+
+export interface ReplaceAwsCredentialsOptions {
+  v2GlobalName?: string;
+  importType: ImportType;
+}
 
 export const replaceAwsCredentials = (
   j: JSCodeshift,
   source: Collection<unknown>,
-  v2GlobalName?: string
+  { v2GlobalName }: ReplaceAwsCredentialsOptions
 ) => {
   if (!v2GlobalName) return;
 
@@ -17,8 +23,8 @@ export const replaceAwsCredentials = (
     const credsNewExpressionCount = credsNewExpressions.size();
 
     if (credsNewExpressionCount > 0) {
-      // addClientNamedModule(j, source, {
-      //   ...options,
+      // ToDo: Call importType agnostic addNamedModule
+      // addNamedModule(j, source, {
       //   importedName: v3ProviderName,
       //   v3ClientPackageName: "@aws-sdk/credential-provider",
       // });

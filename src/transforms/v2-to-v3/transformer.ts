@@ -92,7 +92,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
     replaceDocClientCreation(j, source, v2Options);
   }
-  replaceAwsCredentials(j, source, v2GlobalName);
+  replaceAwsCredentials(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, { v2GlobalName, importType });
 
