@@ -3,12 +3,12 @@
 
 
 const {
-  ACM
-} = require("@aws-sdk/client-acm");
-
-const {
   AccessAnalyzer
 } = require("@aws-sdk/client-accessanalyzer");
+
+const {
+  ACM
+} = require("@aws-sdk/client-acm");
 
 const {
   ApplicationDiscoveryService
