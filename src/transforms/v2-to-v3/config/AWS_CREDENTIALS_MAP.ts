@@ -3,4 +3,5 @@
  */
 export const AWS_CREDENTIALS_MAP: Record<string, string> = {
   EnvironmentCredentials: "fromEnv",
+  ChainableTemporaryCredentials: "fromTemporaryCredentials",
 };
