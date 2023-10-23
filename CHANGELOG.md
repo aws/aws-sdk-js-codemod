@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.23.1
+
+### Patch Changes
+
+- Add transformation for AWS.ProcessCredentials ([34405ed](https://github.com/awslabs/aws-sdk-js-codemod/commit/34405ed))
+- Add transformation for AWS.SsoCredentials ([cc5f412](https://github.com/awslabs/aws-sdk-js-codemod/commit/cc5f412))
+
 ## 0.23.0
 
 ### Minor Changes
