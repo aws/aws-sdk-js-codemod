@@ -7,6 +7,7 @@ export const AWS_CREDENTIALS_MAP: Record<string, string> = {
   EC2MetadataCredentials: "fromInstanceMetadata",
   ECSCredentials: "fromContainerMetadata",
   EnvironmentCredentials: "fromEnv",
+  ProcessCredentials: "fromProcess",
   RemoteCredentials: "fromContainerMetadata",
   SharedIniFileCredentials: "fromIni",
   SsoCredentials: "fromSSO",
