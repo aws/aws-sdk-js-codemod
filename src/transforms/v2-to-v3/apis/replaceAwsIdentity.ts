@@ -1,7 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { AWS_CREDENTIALS_MAP } from "../config";
 import { ImportType, addNamedModule } from "../modules";
-import { getAwsCredentialsNewExpressions } from "./getAwsCredentialsNewExpressions";
 
 export interface ReplaceAwsCredentialsOptions {
   v2GlobalName?: string;
@@ -15,14 +14,21 @@ export const replaceAwsIdentity = (
 ) => {
   if (!v2GlobalName) return;
 
+  // ToDo: Add support for AWS.Token in future.
   for (const [v2CredentialsName, v3ProviderName] of Object.entries(AWS_CREDENTIALS_MAP)) {
-    const credsNewExpressions = getAwsCredentialsNewExpressions(j, source, {
-      v2GlobalName,
-      className: v2CredentialsName,
+    const credsNewExpressions = source.find(j.NewExpression, {
+      type: "NewExpression",
+      callee: {
+        type: "MemberExpression",
+        object: {
+          type: "Identifier",
+          name: v2GlobalName,
+        },
+        property: { name: v2CredentialsName },
+      },
     });
-    const credsNewExpressionCount = credsNewExpressions.size();
 
-    if (credsNewExpressionCount > 0) {
+    if (credsNewExpressions.size() > 0) {
       addNamedModule(j, source, {
         importType,
         importedName: v3ProviderName,
