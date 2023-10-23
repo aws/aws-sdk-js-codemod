@@ -8,7 +8,7 @@ export interface ReplaceAwsCredentialsOptions {
   importType: ImportType;
 }
 
-export const replaceAwsCredentials = (
+export const replaceAwsIdentity = (
   j: JSCodeshift,
   source: Collection<unknown>,
   { v2GlobalName, importType }: ReplaceAwsCredentialsOptions

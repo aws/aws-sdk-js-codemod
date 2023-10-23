@@ -8,7 +8,7 @@ import {
   replaceS3UploadApi,
   replaceS3GetSignedUrlApi,
   getClientIdentifiersRecord,
-  replaceAwsCredentials,
+  replaceAwsIdentity,
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
@@ -92,7 +92,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
     replaceDocClientCreation(j, source, v2Options);
   }
-  replaceAwsCredentials(j, source, { v2GlobalName, importType });
+  replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, { v2GlobalName, importType });
 
