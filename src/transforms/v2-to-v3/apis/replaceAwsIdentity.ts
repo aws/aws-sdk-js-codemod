@@ -7,6 +7,8 @@ export interface ReplaceAwsCredentialsOptions {
   importType: ImportType;
 }
 
+const PROVIDER_SWITCH_COMMENT = ` JS SDK v3 switched to credential providers to functions instead of objects.`;
+
 const getNewExpression = (identifier: string, className: string) =>
   ({
     type: "NewExpression",
@@ -27,6 +29,32 @@ export const replaceAwsIdentity = (
 ) => {
   if (!v2GlobalName) return;
 
+  // ToDo: Add support for AWS.TokenProviderChain in future.
+  const chainNewExpressions = source.find(
+    j.NewExpression,
+    getNewExpression(v2GlobalName, "CredentialProviderChain")
+  );
+  if (chainNewExpressions.size() > 0) {
+    const localName = "providerChain";
+    addNamedModule(j, source, {
+      importType,
+      localName,
+      importedName: "chain",
+      packageName: "@smithy/property-provider",
+    });
+    chainNewExpressions.replaceWith(({ node }) =>
+      j.callExpression.from({
+        callee: j.identifier(localName),
+        comments: [
+          j.commentLine(PROVIDER_SWITCH_COMMENT),
+          j.commentLine(" The CredentialProviderChain is now a chain of providers."),
+          j.commentLine(" Reference: https://www.npmjs.com/package/@aws-sdk/credential-providers"),
+        ],
+        arguments: node.arguments,
+      })
+    );
+  }
+
   // ToDo: Add support for AWS.Token in future.
   for (const [v2CredentialsName, v3ProviderName] of Object.entries(AWS_CREDENTIALS_MAP)) {
     const credsNewExpressions = source.find(
@@ -44,9 +72,7 @@ export const replaceAwsIdentity = (
         j.callExpression.from({
           callee: j.identifier(v3ProviderName),
           comments: [
-            j.commentLine(
-              " JS SDK v3 switched to credential providers to functions instead of objects."
-            ),
+            j.commentLine(PROVIDER_SWITCH_COMMENT),
             j.commentLine(
               " This is the closest approximation from codemod of what your application needs."
             ),
