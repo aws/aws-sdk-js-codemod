@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift, NewExpression } from "jscodeshift";
 import { AWS_CREDENTIALS_MAP } from "../config";
 import { ImportType, addNamedModule } from "../modules";
 
@@ -6,6 +6,19 @@ export interface ReplaceAwsCredentialsOptions {
   v2GlobalName?: string;
   importType: ImportType;
 }
+
+const getNewExpression = (identifier: string, className: string) =>
+  ({
+    type: "NewExpression",
+    callee: {
+      type: "MemberExpression",
+      object: {
+        type: "Identifier",
+        name: identifier,
+      },
+      property: { name: className },
+    },
+  }) as NewExpression;
 
 export const replaceAwsIdentity = (
   j: JSCodeshift,
@@ -16,17 +29,10 @@ export const replaceAwsIdentity = (
 
   // ToDo: Add support for AWS.Token in future.
   for (const [v2CredentialsName, v3ProviderName] of Object.entries(AWS_CREDENTIALS_MAP)) {
-    const credsNewExpressions = source.find(j.NewExpression, {
-      type: "NewExpression",
-      callee: {
-        type: "MemberExpression",
-        object: {
-          type: "Identifier",
-          name: v2GlobalName,
-        },
-        property: { name: v2CredentialsName },
-      },
-    });
+    const credsNewExpressions = source.find(
+      j.NewExpression,
+      getNewExpression(v2GlobalName, v2CredentialsName)
+    );
 
     if (credsNewExpressions.size() > 0) {
       addNamedModule(j, source, {
