@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.23.2
+
+### Patch Changes
+
+- Add transformation for AWS.CredentialProviderChain ([08464c6](https://github.com/awslabs/aws-sdk-js-codemod/commit/08464c6))
+
 ## 0.23.1
 
 ### Patch Changes
