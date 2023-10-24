@@ -1,5 +1,5 @@
 import { Collection, JSCodeshift, NewExpression } from "jscodeshift";
-import { AWS_CREDENTIALS_MAP } from "../config";
+import { AWS_CREDENTIALS_MAP, AWS_TOKEN_MAP } from "../config";
 import { ImportType, addNamedModule } from "../modules";
 
 export interface ReplaceAwsCredentialsOptions {
@@ -27,65 +27,65 @@ export const replaceAwsIdentity = (
 ) => {
   if (!v2GlobalName) return;
 
-  const identity = "Credential";
-  const identityMap = AWS_CREDENTIALS_MAP;
+  for (const [identity, identityMap] of Object.entries({
+    Credential: AWS_CREDENTIALS_MAP,
+    Token: AWS_TOKEN_MAP,
+  })) {
+    const identitySwitchComment = ` JS SDK v3 switched ${identity.toLowerCase()} providers from classes to functions.`;
+    const identityPackageName = `@aws-sdk/${identity.toLowerCase()}-providers`;
 
-  const identitySwitchComment = ` JS SDK v3 switched ${identity.toLowerCase()} providers from classes to functions.`;
-  const identityPackageName = `@aws-sdk/${identity.toLowerCase()}-providers`;
-
-  // ToDo: Add support for AWS.TokenProviderChain in future.
-  const identityProviderChain = `${identity}ProviderChain`;
-  const chainNewExpressions = source.find(
-    j.NewExpression,
-    getNewExpression(v2GlobalName, identityProviderChain)
-  );
-  if (chainNewExpressions.size() > 0) {
-    const localName = "providerChain";
-    addNamedModule(j, source, {
-      importType,
-      localName,
-      importedName: "chain",
-      packageName: "@smithy/property-provider",
-    });
-    chainNewExpressions.replaceWith(({ node }) =>
-      j.callExpression.from({
-        callee: j.identifier(localName),
-        comments: [
-          j.commentLine(identitySwitchComment),
-          j.commentLine(` The ${identityProviderChain} is now a chain of providers.`),
-          j.commentLine(` Reference: https://www.npmjs.com/package/${identityPackageName}`),
-        ],
-        arguments: node.arguments,
-      })
-    );
-  }
-
-  // ToDo: Add support for AWS.Token in future.
-  for (const [v2IdentityName, v3ProviderName] of Object.entries(identityMap)) {
-    const credsNewExpressions = source.find(
+    const identityProviderChain = `${identity}ProviderChain`;
+    const chainNewExpressions = source.find(
       j.NewExpression,
-      getNewExpression(v2GlobalName, v2IdentityName)
+      getNewExpression(v2GlobalName, identityProviderChain)
     );
-
-    if (credsNewExpressions.size() > 0) {
+    if (chainNewExpressions.size() > 0) {
+      const localName = "providerChain";
       addNamedModule(j, source, {
         importType,
-        importedName: v3ProviderName,
-        packageName: identityPackageName,
+        localName,
+        importedName: "chain",
+        packageName: "@smithy/property-provider",
       });
-      credsNewExpressions.replaceWith(({ node }) =>
+      chainNewExpressions.replaceWith(({ node }) =>
         j.callExpression.from({
-          callee: j.identifier(v3ProviderName),
+          callee: j.identifier(localName),
           comments: [
             j.commentLine(identitySwitchComment),
-            j.commentLine(
-              " This is the closest approximation from codemod of what your application needs."
-            ),
+            j.commentLine(` The ${identityProviderChain} is now a chain of providers.`),
             j.commentLine(` Reference: https://www.npmjs.com/package/${identityPackageName}`),
           ],
           arguments: node.arguments,
         })
       );
+    }
+
+    for (const [v2IdentityName, v3ProviderName] of Object.entries(identityMap)) {
+      const credsNewExpressions = source.find(
+        j.NewExpression,
+        getNewExpression(v2GlobalName, v2IdentityName)
+      );
+
+      if (credsNewExpressions.size() > 0) {
+        addNamedModule(j, source, {
+          importType,
+          importedName: v3ProviderName,
+          packageName: identityPackageName,
+        });
+        credsNewExpressions.replaceWith(({ node }) =>
+          j.callExpression.from({
+            callee: j.identifier(v3ProviderName),
+            comments: [
+              j.commentLine(identitySwitchComment),
+              j.commentLine(
+                " This is the closest approximation from codemod of what your application needs."
+              ),
+              j.commentLine(` Reference: https://www.npmjs.com/package/${identityPackageName}`),
+            ],
+            arguments: node.arguments,
+          })
+        );
+      }
     }
   }
 };
