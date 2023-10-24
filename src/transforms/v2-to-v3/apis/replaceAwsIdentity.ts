@@ -7,7 +7,7 @@ export interface ReplaceAwsCredentialsOptions {
   importType: ImportType;
 }
 
-const PROVIDER_SWITCH_COMMENT = ` JS SDK v3 switched to credential providers to functions instead of objects.`;
+const PROVIDER_SWITCH_COMMENT = ` JS SDK v3 switched credential providers from classes to functions.`;
 
 const getNewExpression = (identifier: string, className: string) =>
   ({
