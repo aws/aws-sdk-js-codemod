@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.24.0
+
+### Minor Changes
+
+- Add transformation for TokenProviders and TokenProviderChain ([4a0d7b4](https://github.com/awslabs/aws-sdk-js-codemod/commit/4a0d7b4))
+
 ## 0.23.2
 
 ### Patch Changes
