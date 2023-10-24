@@ -16,9 +16,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
       - name: corepack
         run: corepack enable
+        # Yarn dependencies cannot be cached until yarn is installed
+        # Workaround: https://github.com/actions/setup-node/issues/531
+      - name: cache
+        uses: actions/setup-node@v3
+        with:
+          cache: yarn
       - name: install
         run: yarn
       - name: lint
