@@ -22,6 +22,7 @@ export const getObjectWithUpdatedAwsConfigKeys = (
 
     if (!awsConfigKeyStatus) {
       // ToDo: Add unsupported comment in this case.
+      return property;
     }
 
     if (awsConfigKeyStatus.newKeyName) {
