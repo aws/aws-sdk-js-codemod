@@ -19,6 +19,7 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage: "The clock skew correction is applied by default.",
   },
   credentials: {},
+  endpointCacheSize: {},
   systemClockOffset: {},
   region: {},
 };
