@@ -25,6 +25,10 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage: "The hostname prefix is automatically inserted when necessary.",
   },
   logger: {},
+  maxRedirects: {
+    deprecationMessage:
+      "SDK does not follow redirects to avoid unintentional cross-region requests.",
+  },
   systemClockOffset: {},
   region: {},
 };
