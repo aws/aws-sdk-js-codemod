@@ -1,3 +1,4 @@
+export * from "./AWS_CONFIG_KEY_MAP";
 export * from "./AWS_CREDENTIALS_MAP";
 export * from "./AWS_TOKEN_MAP";
 export * from "./CLIENT_NAMES";
