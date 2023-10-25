@@ -44,5 +44,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   s3BucketEndpoint: {
     newKeyName: "bucketEndpoint",
   },
+  s3ForcePathStyle: {
+    newKeyName: "forcePathStyle",
+  },
   region: {},
 };
