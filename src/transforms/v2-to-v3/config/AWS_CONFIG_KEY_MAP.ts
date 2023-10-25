@@ -54,5 +54,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     description: `S3 client will always use regional endpoint if region is set to "us-east-1".`,
     deprecationMessage: `Set region to "aws-global" to send requests to S3 global endpoint.`,
   },
+  signatureCache: {
+    deprecationMessage: "SDK always caches the hashed signing keys.",
+  },
   region: {},
 };
