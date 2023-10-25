@@ -20,6 +20,7 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   },
   credentials: {},
   endpointCacheSize: {},
+  endpointDiscoveryEnabled: {},
   systemClockOffset: {},
   region: {},
 };
