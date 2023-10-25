@@ -63,5 +63,9 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   sslEnabled: {
     newKeyName: "tls",
   },
+  stsRegionalEndpoints: {
+    description: `STS client will always use regional endpoints if set to a specific region.`,
+    deprecationMessage: `Set region to "aws-global" to send requests to STS global endpoint.`,
+  },
   region: {},
 };
