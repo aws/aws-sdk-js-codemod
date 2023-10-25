@@ -11,7 +11,11 @@ import {
   replaceAwsIdentity,
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
-import { replaceClientCreation, replaceDocClientCreation } from "./client-instances";
+import {
+  replaceAwsConfig,
+  replaceClientCreation,
+  replaceDocClientCreation,
+} from "./client-instances";
 import {
   getClientMetadataRecord,
   getClientNamesFromGlobal,
@@ -92,6 +96,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
     replaceDocClientCreation(j, source, v2Options);
   }
+  replaceAwsConfig(j, source, v2GlobalName);
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, { v2GlobalName, importType });

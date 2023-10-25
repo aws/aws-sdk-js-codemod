@@ -1,8 +1,8 @@
-import { ASTPath, ObjectExpression, ObjectProperty, Property } from "jscodeshift";
+import { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 import { AWS_CONFIG_KEY_MAP, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-export const replaceAwsConfigKeys = (objectExpression: ASTPath<ObjectExpression>) => {
-  objectExpression.node.properties.forEach((property) => {
+export const replaceAwsConfigKeys = (objectExpression: ObjectExpression) => {
+  objectExpression.properties.forEach((property) => {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
       return;
     }
