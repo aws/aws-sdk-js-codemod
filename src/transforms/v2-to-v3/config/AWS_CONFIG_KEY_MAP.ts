@@ -47,5 +47,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   s3ForcePathStyle: {
     newKeyName: "forcePathStyle",
   },
+  s3UseArnRegion: {
+    newKeyName: "useArnRegion",
+  },
   region: {},
 };
