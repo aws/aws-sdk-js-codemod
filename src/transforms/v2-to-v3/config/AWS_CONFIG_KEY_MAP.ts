@@ -15,5 +15,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage:
       "Not type-safe. It doesn't convert time stamp or base64 binaries from the JSON response.",
   },
+  correctClockSkew: {
+    deprecationMessage: "The clock skew correction is applied by default.",
+  },
   region: {},
 };
