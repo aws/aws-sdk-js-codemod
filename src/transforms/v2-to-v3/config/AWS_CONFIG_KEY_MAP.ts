@@ -29,6 +29,10 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage:
       "SDK does not follow redirects to avoid unintentional cross-region requests.",
   },
+  maxRetries: {
+    newKeyName: "maxAttempts",
+    description: "The value of maxAttempts needs to be maxRetries + 1.",
+  },
   systemClockOffset: {},
   region: {},
 };
