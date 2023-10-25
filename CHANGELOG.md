@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.25.0
+
+### Minor Changes
+
+- Basic transformation for AWS.Config constructor ([734411c](https://github.com/awslabs/aws-sdk-js-codemod/commit/734411c))
+
 ## 0.24.0
 
 ### Minor Changes
