@@ -21,6 +21,9 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   credentials: {},
   endpointCacheSize: {},
   endpointDiscoveryEnabled: {},
+  hostPrefixEnabled: {
+    deprecationMessage: "The hostname prefix is automatically inserted when necessary.",
+  },
   systemClockOffset: {},
   region: {},
 };
