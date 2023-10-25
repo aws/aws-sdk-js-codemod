@@ -33,6 +33,9 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     newKeyName: "maxAttempts",
     description: "The value of maxAttempts needs to be maxRetries + 1.",
   },
+  paramValidation: {
+    deprecationMessage: "The SDK no longer validates input parameters.",
+  },
   systemClockOffset: {},
   region: {},
 };
