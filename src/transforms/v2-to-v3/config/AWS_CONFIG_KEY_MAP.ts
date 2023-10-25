@@ -11,5 +11,9 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   computeChecksums: {
     deprecationMessage: "Applicable commands of S3 will automatically compute the MD5 checksums.",
   },
+  convertResponseTypes: {
+    deprecationMessage:
+      "Not type-safe. It doesn't convert time stamp or base64 binaries from the JSON response.",
+  },
   region: {},
 };
