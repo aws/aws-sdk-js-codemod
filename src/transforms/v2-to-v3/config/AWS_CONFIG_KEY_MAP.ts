@@ -50,5 +50,9 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   s3UseArnRegion: {
     newKeyName: "useArnRegion",
   },
+  s3UsEast1RegionalEndpoint: {
+    description: `S3 client will always use regional endpoint if region is set to "us-east-1".`,
+    deprecationMessage: `Set region to "aws-global" to send requests to S3 global endpoint.`,
+  },
   region: {},
 };
