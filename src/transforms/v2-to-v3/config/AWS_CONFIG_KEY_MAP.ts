@@ -36,6 +36,7 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   paramValidation: {
     deprecationMessage: "The SDK no longer validates input parameters.",
   },
+  region: {},
   retryDelayOptions: {
     description: "Reference: https://www.npmjs.com/package/@smithy/util-retry",
     deprecationMessage: "The SDK supports more flexible retry strategies in retryStrategy option.",
@@ -67,5 +68,5 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     description: `STS client will always use regional endpoints if set to a specific region.`,
     deprecationMessage: `Set region to "aws-global" to send requests to STS global endpoint.`,
   },
-  region: {},
+  useAccelerateEndpoint: {},
 };
