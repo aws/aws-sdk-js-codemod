@@ -57,5 +57,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   signatureCache: {
     deprecationMessage: "SDK always caches the hashed signing keys.",
   },
+  signatureVersion: {
+    deprecationMessage: "SDK v3 only supports signature v4.",
+  },
   region: {},
 };
