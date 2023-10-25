@@ -1,3 +1,3 @@
 const config = {
-  useAccelerateEndpoint: "us-east-1"
+  useAccelerateEndpoint: true
 };

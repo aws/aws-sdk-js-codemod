@@ -69,4 +69,5 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage: `Set region to "aws-global" to send requests to STS global endpoint.`,
   },
   useAccelerateEndpoint: {},
+  useDualstackEndpoint: {},
 };
