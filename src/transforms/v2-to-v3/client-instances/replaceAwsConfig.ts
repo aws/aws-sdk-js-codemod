@@ -1,5 +1,5 @@
 import { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
-import { replaceAwsConfigKeys } from "./replaceAwsConfigKeys";
+import { getObjectWithUpdatedAwsConfigKeys } from "./getObjectWithUpdatedAwsConfigKeys";
 
 export const replaceAwsConfig = (
   j: JSCodeshift,
@@ -25,8 +25,7 @@ export const replaceAwsConfig = (
     .filter(
       ({ node }) => node.arguments.length === 1 && node.arguments[0].type === "ObjectExpression"
     )
-    .replaceWith(({ node }) => {
-      replaceAwsConfigKeys(node.arguments[0] as ObjectExpression);
-      return node.arguments[0];
-    });
+    .replaceWith(({ node }) =>
+      getObjectWithUpdatedAwsConfigKeys(j, node.arguments[0] as ObjectExpression)
+    );
 };
