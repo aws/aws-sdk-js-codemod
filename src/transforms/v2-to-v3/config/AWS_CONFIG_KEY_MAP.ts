@@ -60,5 +60,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   signatureVersion: {
     deprecationMessage: "SDK v3 only supports signature v4.",
   },
+  sslEnabled: {
+    newKeyName: "tls",
+  },
   region: {},
 };
