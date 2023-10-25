@@ -1,0 +1,3 @@
+const config = {
+  endpointDiscoveryEnabled: true
+};
