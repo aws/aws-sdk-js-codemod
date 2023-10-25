@@ -1,8 +1,14 @@
 import { JSCodeshift, ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 import { AWS_CONFIG_KEY_MAP, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-const getUnsuppportedCommentLine = (keyName: string) =>
+const getUnsuppportedComment = (keyName: string) =>
   ` The key ${keyName} is no longer supported in v3, and can be removed.`;
+
+const getCodemodUnsuppportedComments = (keyName: string) => [
+  ` The transformation for ${keyName} is not implemented.`,
+  ` Refer to UPGRADING.md on aws-sdk-js-v3 for changes needed.`,
+  ` Create/Upvote feature request on aws-sdk-js-codemod for config key ${keyName}.`,
+];
 
 export const getObjectWithUpdatedAwsConfigKeys = (
   j: JSCodeshift,
@@ -21,7 +27,10 @@ export const getObjectWithUpdatedAwsConfigKeys = (
     const awsConfigKeyStatus = AWS_CONFIG_KEY_MAP[propertyKey.name];
 
     if (!awsConfigKeyStatus) {
-      // ToDo: Add unsupported comment in this case.
+      property.comments = property.comments || [];
+      for (const commentLine of getCodemodUnsuppportedComments(propertyKey.name)) {
+        property.comments.push(j.commentLine(commentLine));
+      }
       return property;
     }
 
@@ -30,15 +39,15 @@ export const getObjectWithUpdatedAwsConfigKeys = (
     }
 
     if (awsConfigKeyStatus.description) {
+      property.comments = property.comments || [];
       for (const commentLine in awsConfigKeyStatus.description.split("\n")) {
-        property.comments = property.comments || [];
         property.comments.push(j.commentLine(commentLine));
       }
     }
 
     if (awsConfigKeyStatus.deprecationMessage) {
       property.comments = property.comments || [];
-      property.comments.push(j.commentLine(getUnsuppportedCommentLine(propertyKey.name)));
+      property.comments.push(j.commentLine(getUnsuppportedComment(propertyKey.name)));
       property.comments.push(
         j.commentLine(` @deprecated ${awsConfigKeyStatus.deprecationMessage}`)
       );
