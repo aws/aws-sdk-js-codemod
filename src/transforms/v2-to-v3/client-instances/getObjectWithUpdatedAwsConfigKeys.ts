@@ -2,7 +2,7 @@ import { JSCodeshift, ObjectExpression, ObjectProperty, Property } from "jscodes
 import { AWS_CONFIG_KEY_MAP, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
 const getRenameComment = (keyName: string, newKeyName: string) =>
-  ` The key ${keyName} was renamed to ${newKeyName}.`;
+  ` The key ${keyName} is renamed to ${newKeyName}.`;
 
 const getUnsuppportedComment = (keyName: string) =>
   ` The key ${keyName} is no longer supported in v3, and can be removed.`;

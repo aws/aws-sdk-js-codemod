@@ -41,5 +41,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage: "The SDK supports more flexible retry strategies in retryStrategy option.",
   },
   systemClockOffset: {},
+  s3BucketEndpoint: {
+    newKeyName: "bucketEndpoint",
+  },
   region: {},
 };
