@@ -36,6 +36,10 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   paramValidation: {
     deprecationMessage: "The SDK no longer validates input parameters.",
   },
+  retryDelayOptions: {
+    description: "Reference: https://www.npmjs.com/package/@smithy/util-retry",
+    deprecationMessage: "The SDK supports more flexible retry strategies in retryStrategy option.",
+  },
   systemClockOffset: {},
   region: {},
 };
