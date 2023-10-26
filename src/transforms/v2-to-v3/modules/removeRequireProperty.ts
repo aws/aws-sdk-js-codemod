@@ -1,5 +1,6 @@
-import { Collection, Identifier, JSCodeshift, VariableDeclarator } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, Literal, VariableDeclarator } from "jscodeshift";
 
+import { STRING_LITERAL_TYPE_LIST } from "../config";
 import { getRequireDeclaratorsWithProperty } from "./getRequireDeclaratorsWithProperty";
 import { removeDeclaration } from "./removeDeclaration";
 
@@ -45,8 +46,8 @@ export const removeRequireProperty = (
 
         const args = object.arguments;
         if (args.length !== 1) return true;
-        if (args[0].type !== "Literal") return true;
-        if (args[0].value !== sourceValue) return true;
+        if (!STRING_LITERAL_TYPE_LIST.includes(args[0].type)) return true;
+        if ((args[0] as Literal).value !== sourceValue) return true;
 
         const property = init.property;
         if (property.type !== "Identifier") return true;
