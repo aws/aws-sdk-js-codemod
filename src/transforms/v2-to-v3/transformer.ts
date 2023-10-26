@@ -99,7 +99,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsConfig(j, source, v2GlobalName);
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
-  removeGlobalModule(j, source, { v2GlobalName, importType });
+  removeGlobalModule(j, source, v2GlobalName);
 
   return source.toSource();
 };
