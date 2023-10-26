@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.25.2
+
+### Patch Changes
+
+- Check for StringLiteral type to handle requires in TypeScript code ([c72eac2](https://github.com/awslabs/aws-sdk-js-codemod/commit/c72eac2))
+
 ## 0.25.1
 
 ### Patch Changes
