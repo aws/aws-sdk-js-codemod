@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
+import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../../config";
 import { getRequireDeclarators } from "../getRequireDeclarators";
 import { getRequireProperty } from "../getRequireProperty";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
@@ -75,7 +75,7 @@ export const addNamedModule = (
           const args = init.arguments;
           if (!args) return false;
           if (args.length !== 1) return false;
-          if (args[0].type !== "Literal") return false;
+          if (!STRING_LITERAL_TYPE_LIST.includes(args[0].type)) return true;
           if (typeof args[0].value !== "string") return false;
           if (!args[0].value.startsWith(PACKAGE_NAME)) return false;
 
@@ -93,7 +93,7 @@ export const addNamedModule = (
 
           const args = object.arguments;
           if (args.length !== 1) return false;
-          if (args[0].type !== "Literal") return false;
+          if (!STRING_LITERAL_TYPE_LIST.includes(args[0].type)) return true;
           if (args[0].value !== PACKAGE_NAME) return false;
 
           return true;
