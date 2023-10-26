@@ -12,3 +12,4 @@ export const FUNCTION_TYPE_LIST = [
   "FunctionExpression",
   "ArrowFunctionExpression",
 ];
+export const STRING_LITERAL_TYPE_LIST = ["Literal", "StringLiteral"];
