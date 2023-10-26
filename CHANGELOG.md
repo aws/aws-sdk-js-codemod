@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.25.1
+
+### Patch Changes
+
+- Transform config inside client initialization ([8d1d3bb](https://github.com/awslabs/aws-sdk-js-codemod/commit/8d1d3bb))
+
 ## 0.25.0
 
 ### Minor Changes
