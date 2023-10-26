@@ -11,17 +11,17 @@ import STS = AWS_client_sts.STS;
 import GetCallerIdentityCommandOutput = AWS_client_sts.GetCallerIdentityCommandOutput;
 import GetCallerIdentityCommandInput = AWS_client_sts.GetCallerIdentityCommandInput;
 
-const ddbClient = new DynamoDB({ region: "us-west-2" });
+const ddbClient = new DynamoDB();
 const listTablesInput: ListTablesCommandInput = { Limit: 10 };
 const listTablesOutput: ListTablesCommandOutput = await ddbClient
   .listTables(listTablesInput);
 
-const stsClient = new STS({ region: "us-west-2" });
+const stsClient = new STS();
 const getCallerIdentityInput: GetCallerIdentityCommandInput = {};
 const getCallerIdentityOutput: GetCallerIdentityCommandOutput = await stsClient
   .getCallerIdentity(getCallerIdentityInput);
 
-const lambdaClient = new Lambda({ region: "us-west-2" });
+const lambdaClient = new Lambda();
 const invokeInput: InvokeCommandInput = { FunctionName: "my-function" };
 const invokeOutput: InvokeCommandOutput = await lambdaClient
   .invoke(invokeInput);
