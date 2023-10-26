@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { getClientNewExpression } from "../utils";
+import { getNewClientExpression } from "./getNewClientExpression";
 
 export interface ReplaceClientCreationOptions {
   v2ClientName: string;
@@ -16,17 +17,17 @@ export const replaceClientCreation = (
 ): void => {
   const clientName = v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName;
 
+  source
+    .find(j.NewExpression, getClientNewExpression({ v2ClientName, v2ClientLocalName }))
+    .replaceWith((v2ClientNewExpression) =>
+      getNewClientExpression(j, clientName, v2ClientNewExpression)
+    );
+
   if (v2GlobalName) {
     source
       .find(j.NewExpression, getClientNewExpression({ v2GlobalName, v2ClientName }))
       .replaceWith((v2ClientNewExpression) =>
-        j.newExpression(j.identifier(clientName), v2ClientNewExpression.node.arguments)
+        getNewClientExpression(j, clientName, v2ClientNewExpression)
       );
   }
-
-  source
-    .find(j.NewExpression, getClientNewExpression({ v2ClientName, v2ClientLocalName }))
-    .replaceWith((v2ClientNewExpression) =>
-      j.newExpression(j.identifier(clientName), v2ClientNewExpression.node.arguments)
-    );
 };

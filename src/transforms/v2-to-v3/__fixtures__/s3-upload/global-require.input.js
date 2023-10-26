@@ -1,6 +1,6 @@
 const AWS = require("aws-sdk");
 
-const client = new AWS.S3({ region: "REGION" });
+const client = new AWS.S3();
 await client.upload({
   Body: "BODY",
   Bucket: "Bucket",

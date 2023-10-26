@@ -3,7 +3,7 @@ import waitUntilBucketExists = AWS_client_s3.waitUntilBucketExists;
 import S3 = AWS_client_s3.S3;
 
 const Bucket = "BUCKET_NAME";
-const client = new S3({ region: "REGION" });
+const client = new S3();
 
 await client.createBucket({ Bucket });
 

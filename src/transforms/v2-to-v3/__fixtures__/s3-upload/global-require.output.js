@@ -6,7 +6,7 @@ const {
   S3
 } = require("@aws-sdk/client-s3");
 
-const client = new S3({ region: "REGION" });
+const client = new S3();
 await new Upload({
   client,
 

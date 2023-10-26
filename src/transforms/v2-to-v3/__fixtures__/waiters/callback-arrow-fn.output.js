@@ -1,7 +1,7 @@
 import AWS from "aws-sdk";
 
 const Bucket = "BUCKET_NAME";
-const client = new AWS.S3({ region: "REGION" });
+const client = new AWS.S3();
 
 // Waiters with callbacks are not supported in AWS SDK for JavaScript (v3).
 // Please convert to `await client.waitFor(state, params).promise()`, and re-run aws-sdk-js-codemod.

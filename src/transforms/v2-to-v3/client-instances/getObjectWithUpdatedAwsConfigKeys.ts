@@ -16,52 +16,51 @@ const getCodemodUnsuppportedComments = (keyName: string) => [
 export const getObjectWithUpdatedAwsConfigKeys = (
   j: JSCodeshift,
   objectExpression: ObjectExpression
-) => {
-  objectExpression.properties = objectExpression.properties.map((property) => {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
-      return property;
-    }
-
-    const propertyKey = (property as Property | ObjectProperty).key;
-    if (propertyKey.type !== "Identifier") {
-      return property;
-    }
-
-    const awsConfigKeyStatus = AWS_CONFIG_KEY_MAP[propertyKey.name];
-
-    if (!awsConfigKeyStatus) {
-      property.comments = property.comments || [];
-      for (const commentLine of getCodemodUnsuppportedComments(propertyKey.name)) {
-        property.comments.push(j.commentLine(commentLine));
+) =>
+  j.objectExpression(
+    objectExpression.properties.map((property) => {
+      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+        return property;
       }
-      return property;
-    }
 
-    if (awsConfigKeyStatus.newKeyName) {
-      property.comments = property.comments || [];
-      property.comments.push(
-        j.commentLine(getRenameComment(propertyKey.name, awsConfigKeyStatus.newKeyName))
-      );
-      propertyKey.name = awsConfigKeyStatus.newKeyName;
-    }
-
-    if (awsConfigKeyStatus.description) {
-      property.comments = property.comments || [];
-      for (const commentLine of awsConfigKeyStatus.description.split("\n")) {
-        property.comments.push(j.commentLine(` ${commentLine}`));
+      const propertyKey = (property as Property | ObjectProperty).key;
+      if (propertyKey.type !== "Identifier") {
+        return property;
       }
-    }
 
-    if (awsConfigKeyStatus.deprecationMessage) {
-      property.comments = property.comments || [];
-      property.comments.push(j.commentLine(getUnsuppportedComment(propertyKey.name)));
-      property.comments.push(
-        j.commentLine(` @deprecated ${awsConfigKeyStatus.deprecationMessage}`)
-      );
-    }
+      const awsConfigKeyStatus = AWS_CONFIG_KEY_MAP[propertyKey.name];
 
-    return property;
-  });
+      if (!awsConfigKeyStatus) {
+        property.comments = property.comments || [];
+        for (const commentLine of getCodemodUnsuppportedComments(propertyKey.name)) {
+          property.comments.push(j.commentLine(commentLine));
+        }
+        return property;
+      }
 
-  return objectExpression;
-};
+      if (awsConfigKeyStatus.newKeyName) {
+        property.comments = property.comments || [];
+        property.comments.push(
+          j.commentLine(getRenameComment(propertyKey.name, awsConfigKeyStatus.newKeyName))
+        );
+        propertyKey.name = awsConfigKeyStatus.newKeyName;
+      }
+
+      if (awsConfigKeyStatus.description) {
+        property.comments = property.comments || [];
+        for (const commentLine of awsConfigKeyStatus.description.split("\n")) {
+          property.comments.push(j.commentLine(` ${commentLine}`));
+        }
+      }
+
+      if (awsConfigKeyStatus.deprecationMessage) {
+        property.comments = property.comments || [];
+        property.comments.push(j.commentLine(getUnsuppportedComment(propertyKey.name)));
+        property.comments.push(
+          j.commentLine(` @deprecated ${awsConfigKeyStatus.deprecationMessage}`)
+        );
+      }
+
+      return property;
+    })
+  );
