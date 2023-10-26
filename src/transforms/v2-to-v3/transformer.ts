@@ -39,7 +39,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
   addNotSupportedComments(j, source, importType);
 
-  const v2GlobalName = getGlobalNameFromModule(j, source, importType);
+  const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
@@ -99,7 +99,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsConfig(j, source, v2GlobalName);
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
-  removeGlobalModule(j, source, { v2GlobalName, importType });
+  removeGlobalModule(j, source, v2GlobalName);
 
   return source.toSource();
 };
