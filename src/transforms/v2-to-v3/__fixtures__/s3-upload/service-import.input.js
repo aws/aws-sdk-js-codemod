@@ -1,6 +1,6 @@
 import { S3 } from "aws-sdk";
 
-const client = new S3({ region: "REGION" });
+const client = new S3();
 await client.upload({
   Body: "BODY",
   Bucket: "Bucket",

@@ -3,7 +3,7 @@ import Upload = AWS_lib_storage.Upload;
 import AWS_client_s3 = require("@aws-sdk/client-s3");
 import S3 = AWS_client_s3.S3;
 
-const client = new S3({ region: "REGION" });
+const client = new S3();
 await new Upload({
   client,
 
