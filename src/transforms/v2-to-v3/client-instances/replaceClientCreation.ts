@@ -17,6 +17,12 @@ export const replaceClientCreation = (
 ): void => {
   const clientName = v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName;
 
+  source
+    .find(j.NewExpression, getClientNewExpression({ v2ClientName, v2ClientLocalName }))
+    .replaceWith((v2ClientNewExpression) =>
+      getNewClientExpression(j, clientName, v2ClientNewExpression)
+    );
+
   if (v2GlobalName) {
     source
       .find(j.NewExpression, getClientNewExpression({ v2GlobalName, v2ClientName }))
@@ -24,10 +30,4 @@ export const replaceClientCreation = (
         getNewClientExpression(j, clientName, v2ClientNewExpression)
       );
   }
-
-  source
-    .find(j.NewExpression, getClientNewExpression({ v2ClientName, v2ClientLocalName }))
-    .replaceWith((v2ClientNewExpression) =>
-      getNewClientExpression(j, clientName, v2ClientNewExpression)
-    );
 };
