@@ -1,4 +1,5 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift, Literal } from "jscodeshift";
+import { PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../config";
 
 export const hasRequire = (j: JSCodeshift, source: Collection<unknown>) =>
   source
@@ -7,11 +8,11 @@ export const hasRequire = (j: JSCodeshift, source: Collection<unknown>) =>
     })
     .filter((callExpression) => {
       const { arguments: args } = callExpression.value;
-      return (
-        args.length > 0 &&
-        (args[0].type === "Literal" || args[0].type === "StringLiteral") &&
-        typeof args[0].value === "string" &&
-        args[0].value.startsWith("aws-sdk")
-      );
+
+      if (args.length === 0) return false;
+      if (!STRING_LITERAL_TYPE_LIST.includes(args[0].type)) return false;
+
+      const value = (args[0] as Literal).value;
+      return typeof value === "string" && value.startsWith(PACKAGE_NAME);
     })
     .size() > 0;
