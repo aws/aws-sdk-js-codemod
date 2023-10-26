@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.25.3
+
+### Patch Changes
+
+- Prefer import over require when both are present ([f2185da](https://github.com/awslabs/aws-sdk-js-codemod/commit/f2185da))
+
 ## 0.25.2
 
 ### Patch Changes
