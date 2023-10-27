@@ -46,6 +46,7 @@ export const getClientNewExpression = ({
       return {
         type: "NewExpression",
         callee: {
+          type: "MemberExpression",
           object: { type: "Identifier", name: v2GlobalName },
           property: { type: "Identifier", name: clientName },
         },
@@ -55,6 +56,7 @@ export const getClientNewExpression = ({
     return {
       type: "NewExpression",
       callee: {
+        type: "MemberExpression",
         object: { type: "Identifier", name: v2GlobalName },
         property: { type: "Identifier" },
       },
@@ -68,6 +70,7 @@ export const getClientNewExpression = ({
     return {
       type: "NewExpression",
       callee: {
+        type: "MemberExpression",
         object: { type: "Identifier", name: clientName },
         property: { type: "Identifier", name: subClientName },
       },

@@ -2,6 +2,7 @@ import { Collection, Identifier, JSCodeshift, NewExpression } from "jscodeshift"
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientNewExpression } from "../utils";
+import { getNewExpressionVariants } from "./getNewExpressionVariants";
 
 export interface GetClientIdNamesFromNewExprOptions {
   v2ClientName: string;
@@ -14,26 +15,34 @@ const getNamesFromVariableDeclarator = (
   source: Collection<unknown>,
   newExpression: NewExpression
 ) =>
-  source
-    .find(j.VariableDeclarator, {
-      id: { type: "Identifier" },
-      init: newExpression,
-    })
-    .nodes()
-    .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
+  getNewExpressionVariants(newExpression)
+    .map((newExpressionVariant) =>
+      source
+        .find(j.VariableDeclarator, {
+          id: { type: "Identifier" },
+          init: newExpressionVariant,
+        })
+        .nodes()
+        .map((variableDeclarator) => (variableDeclarator.id as Identifier).name)
+    )
+    .flat();
 
 const getNamesFromAssignmentPattern = (
   j: JSCodeshift,
   source: Collection<unknown>,
   newExpression: NewExpression
 ) =>
-  source
-    .find(j.AssignmentPattern, {
-      left: { type: "Identifier" },
-      right: newExpression,
-    })
-    .nodes()
-    .map((assignmentPattern) => (assignmentPattern.left as Identifier).name);
+  getNewExpressionVariants(newExpression)
+    .map((newExpressionVariant) =>
+      source
+        .find(j.AssignmentPattern, {
+          left: { type: "Identifier" },
+          right: newExpressionVariant,
+        })
+        .nodes()
+        .map((assignmentPattern) => (assignmentPattern.left as Identifier).name)
+    )
+    .flat();
 
 export const getClientIdNamesFromNewExpr = (
   j: JSCodeshift,

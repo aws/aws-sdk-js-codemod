@@ -1,4 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
+import { getNewExpressionVariants } from "../apis";
 import { getClientNewExpression } from "../utils";
 import { getNewClientExpression } from "./getNewClientExpression";
 
@@ -17,17 +18,25 @@ export const replaceClientCreation = (
 ): void => {
   const clientName = v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName;
 
-  source
-    .find(j.NewExpression, getClientNewExpression({ v2ClientName, v2ClientLocalName }))
-    .replaceWith((v2ClientNewExpression) =>
-      getNewClientExpression(j, clientName, v2ClientNewExpression)
-    );
+  getNewExpressionVariants(getClientNewExpression({ v2ClientName, v2ClientLocalName })).forEach(
+    (newExpressionVariant) => {
+      source
+        .find(j.NewExpression, newExpressionVariant)
+        .replaceWith((v2ClientNewExpression) =>
+          getNewClientExpression(j, clientName, v2ClientNewExpression)
+        );
+    }
+  );
 
   if (v2GlobalName) {
-    source
-      .find(j.NewExpression, getClientNewExpression({ v2GlobalName, v2ClientName }))
-      .replaceWith((v2ClientNewExpression) =>
-        getNewClientExpression(j, clientName, v2ClientNewExpression)
-      );
+    getNewExpressionVariants(getClientNewExpression({ v2GlobalName, v2ClientName })).forEach(
+      (newExpressionVariant) => {
+        source
+          .find(j.NewExpression, newExpressionVariant)
+          .replaceWith((v2ClientNewExpression) =>
+            getNewClientExpression(j, clientName, v2ClientNewExpression)
+          );
+      }
+    );
   }
 };
