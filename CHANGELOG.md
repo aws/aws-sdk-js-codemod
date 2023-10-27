@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.25.5
+
+### Patch Changes
+
+- Transform types imported without clients ([b017b59](https://github.com/awslabs/aws-sdk-js-codemod/commit/b017b59))
+
 ## 0.25.4
 
 ### Patch Changes
