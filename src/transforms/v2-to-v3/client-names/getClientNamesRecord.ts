@@ -11,7 +11,19 @@ export const getClientNamesRecord = (
   importType: ImportType
 ) => {
   const clientNamesFromDeepImport = getClientNamesFromDeepImport(source.toSource());
-  return importType === ImportType.REQUIRE
-    ? getClientNamesRecordFromRequire(j, source, clientNamesFromDeepImport)
-    : getClientNamesRecordFromImport(j, source, clientNamesFromDeepImport);
+
+  const clientNamesRecord =
+    importType === ImportType.REQUIRE
+      ? getClientNamesRecordFromRequire(j, source, clientNamesFromDeepImport)
+      : getClientNamesRecordFromImport(j, source, clientNamesFromDeepImport);
+
+  // Populate client names for type transformations
+  // Ref: https://github.com/awslabs/aws-sdk-js-codemod/issues/663
+  for (const clientName of clientNamesFromDeepImport) {
+    if (!(clientName in clientNamesRecord)) {
+      clientNamesRecord[clientName] = clientName;
+    }
+  }
+
+  return clientNamesRecord;
 };
