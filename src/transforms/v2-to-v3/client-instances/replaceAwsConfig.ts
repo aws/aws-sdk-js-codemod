@@ -12,14 +12,8 @@ export const replaceAwsConfig = (
     .find(j.NewExpression, {
       callee: {
         type: "MemberExpression",
-        object: {
-          type: "Identifier",
-          name: v2GlobalName,
-        },
-        property: {
-          type: "Identifier",
-          name: "Config",
-        },
+        object: { type: "Identifier", name: v2GlobalName },
+        property: { type: "Identifier", name: "Config" },
       },
     })
     .filter(
