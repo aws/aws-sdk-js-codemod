@@ -16,9 +16,12 @@ const getCodemodUnsuppportedComments = (keyName: string) => [
 export const getObjectWithUpdatedAwsConfigKeys = (
   j: JSCodeshift,
   objectExpression: ObjectExpression
-) =>
-  j.objectExpression(
-    objectExpression.properties.map((property) => {
+) => {
+  const securityCredentialKeys = ["accessKeyId", "secretAccessKey", "sessionToken"];
+  const credentials = j.objectExpression([]);
+
+  const updatedProperties = objectExpression.properties
+    .map((property) => {
       if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
         return property;
       }
@@ -26,6 +29,11 @@ export const getObjectWithUpdatedAwsConfigKeys = (
       const propertyKey = (property as Property | ObjectProperty).key;
       if (propertyKey.type !== "Identifier") {
         return property;
+      }
+
+      if (securityCredentialKeys.includes(propertyKey.name)) {
+        credentials.properties.push(property);
+        return undefined;
       }
 
       const awsConfigKeyStatus = AWS_CONFIG_KEY_MAP[propertyKey.name];
@@ -63,4 +71,13 @@ export const getObjectWithUpdatedAwsConfigKeys = (
 
       return property;
     })
-  );
+    .filter((property) => property !== undefined);
+
+  if (credentials.properties.length > 0) {
+    updatedProperties.unshift(j.objectProperty(j.identifier("credentials"), credentials));
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore is Argument is not assignable to parameter
+  return j.objectExpression(updatedProperties);
+};
