@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.25.4
+
+### Patch Changes
+
+- Transform config credential keys ([1a09462](https://github.com/awslabs/aws-sdk-js-codemod/commit/1a09462))
+
 ## 0.25.3
 
 ### Patch Changes
