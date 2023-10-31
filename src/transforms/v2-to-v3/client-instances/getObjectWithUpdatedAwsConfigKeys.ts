@@ -1,4 +1,4 @@
-import { JSCodeshift, ObjectExpression, ObjectProperty, Property } from "jscodeshift";
+import { Identifier, JSCodeshift, ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 import { AWS_CONFIG_KEY_MAP, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
 const getRenameComment = (keyName: string, newKeyName: string) =>
@@ -15,12 +15,46 @@ const getCodemodUnsuppportedComments = (keyName: string) => [
 
 export const getObjectWithUpdatedAwsConfigKeys = (
   j: JSCodeshift,
-  objectExpression: ObjectExpression
+  objectExpression: ObjectExpression,
+  awsGlobalConfig: ObjectExpression
 ) => {
   const securityCredentialKeys = ["accessKeyId", "secretAccessKey", "sessionToken"];
   const credentials = j.objectExpression([]);
 
-  const updatedProperties = objectExpression.properties
+  const propertiesToUpdate = objectExpression.properties;
+
+  // Add properties from awsGlobalConfig
+  for (const property of awsGlobalConfig.properties) {
+    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+      propertiesToUpdate.push(property);
+      continue;
+    }
+
+    const propertyKey = (property as Property | ObjectProperty).key;
+    if (propertyKey.type !== "Identifier") {
+      propertiesToUpdate.push(property);
+      continue;
+    }
+
+    const propertyKeyName = (propertyKey as Identifier).name;
+    if (
+      !propertiesToUpdate
+        .filter((propertyToUpdate) => OBJECT_PROPERTY_TYPE_LIST.includes(propertyToUpdate.type))
+        .filter(
+          (propertyToUpdate) =>
+            (propertyToUpdate as Property | ObjectProperty).key.type === "Identifier"
+        )
+        .some(
+          (propertyToUpdate) =>
+            ((propertyToUpdate as Property | ObjectProperty).key as Identifier).name ===
+            propertyKeyName
+        )
+    ) {
+      propertiesToUpdate.push(property);
+    }
+  }
+
+  const updatedProperties = propertiesToUpdate
     .map((property) => {
       if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
         return property;
