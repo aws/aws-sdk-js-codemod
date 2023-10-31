@@ -22,6 +22,7 @@ export const getObjectWithUpdatedAwsConfigKeys = (
   const credentials = j.objectExpression([]);
 
   const propertiesToUpdate = objectExpression.properties;
+
   // Add properties from awsGlobalConfig
   for (const property of awsGlobalConfig.properties) {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
@@ -39,7 +40,7 @@ export const getObjectWithUpdatedAwsConfigKeys = (
         .filter((propertyToUpdate) => OBJECT_PROPERTY_TYPE_LIST.includes(propertyToUpdate.type))
         .filter(
           (propertyToUpdate) =>
-            (propertyToUpdate as Property | ObjectProperty).key.type !== "Identifier"
+            (propertyToUpdate as Property | ObjectProperty).key.type === "Identifier"
         )
         .some(
           (propertyToUpdate) =>
