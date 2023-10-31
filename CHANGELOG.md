@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.26.1
+
+### Patch Changes
+
+- Transform explicitly set keys in AWS.config ([43b2991](https://github.com/awslabs/aws-sdk-js-codemod/commit/43b2991))
+
 ## 0.26.0
 
 ### Minor Changes
