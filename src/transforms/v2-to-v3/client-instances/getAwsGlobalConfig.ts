@@ -30,6 +30,16 @@ export const getAwsGlobalConfig = (
       objectExpressionProperties.forEach((property) => {
         objectExpression.properties.push(property);
       });
+
+      const comments = node.comments || [];
+      comments.push(
+        j.commentLine(" JS SDK v3 does not support global configuration."),
+        j.commentLine(" Codemod has attempted to pass values to each service client in this file."),
+        j.commentLine(
+          " You may need to update clients outside of this file, if they use global config."
+        )
+      );
+      node.comments = comments;
     });
 
   return objectExpression;

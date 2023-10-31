@@ -42,7 +42,6 @@ const transformer = async (file: FileInfo, api: API) => {
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
-  const awsGlobalConfig = getAwsGlobalConfig(j, source, v2GlobalName);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
@@ -71,6 +70,7 @@ const transformer = async (file: FileInfo, api: API) => {
     return source.toSource();
   }
 
+  const awsGlobalConfig = getAwsGlobalConfig(j, source, v2GlobalName);
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
     const { v2ClientLocalName, v3ClientName, v3ClientPackageName } = v3ClientMetadata;
