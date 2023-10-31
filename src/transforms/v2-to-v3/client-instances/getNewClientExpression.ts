@@ -15,7 +15,7 @@ export const getNewClientExpression = (
 
   const v2ClientArguments = v2ClientNewExpression.node.arguments;
 
-  if (v2ClientArguments.length === 0) {
+  if (v2ClientArguments.length === 0 && awsGlobalConfig.properties.length > 0) {
     newClientArguments.push(
       getObjectWithUpdatedAwsConfigKeys(j, j.objectExpression([]), awsGlobalConfig)
     );
