@@ -1,4 +1,10 @@
-import { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
+import { Collection, JSCodeshift, MemberExpression, ObjectExpression } from "jscodeshift";
+
+const getUnsupportedComments = (): string[] => [
+  " JS SDK v3 does not support global configuration.",
+  " Codemod has attempted to pass values to each service client in this file.",
+  " You may need to update clients outside of this file, if they use global config.",
+];
 
 export const getAwsGlobalConfig = (
   j: JSCodeshift,
@@ -9,6 +15,7 @@ export const getAwsGlobalConfig = (
 
   if (!v2GlobalName) return objectExpression;
 
+  // Get config from AWS.config.update({ ... })
   source
     .find(j.CallExpression, {
       callee: {
@@ -32,13 +39,34 @@ export const getAwsGlobalConfig = (
       });
 
       const comments = node.comments || [];
-      comments.push(
-        j.commentLine(" JS SDK v3 does not support global configuration."),
-        j.commentLine(" Codemod has attempted to pass values to each service client in this file."),
-        j.commentLine(
-          " You may need to update clients outside of this file, if they use global config."
-        )
+      for (const comment of getUnsupportedComments()) {
+        comments.push(j.commentLine(comment));
+      }
+      node.comments = comments;
+    });
+
+  // Get config from AWS.config.key = value
+  source
+    .find(j.AssignmentExpression, {
+      left: {
+        type: "MemberExpression",
+        object: {
+          type: "MemberExpression",
+          object: { type: "Identifier", name: v2GlobalName },
+          property: { type: "Identifier", name: "config" },
+        },
+        property: { type: "Identifier" },
+      },
+    })
+    .forEach(({ node }) => {
+      objectExpression.properties.push(
+        j.objectProperty((node.left as MemberExpression).property, node.right)
       );
+
+      const comments = node.comments || [];
+      for (const comment of getUnsupportedComments()) {
+        comments.push(j.commentLine(comment));
+      }
       node.comments = comments;
     });
 
