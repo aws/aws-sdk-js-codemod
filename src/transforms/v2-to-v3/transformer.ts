@@ -12,6 +12,7 @@ import {
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import {
+  getAwsGlobalConfig,
   replaceAwsConfig,
   replaceClientCreation,
   replaceDocClientCreation,
@@ -41,6 +42,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
+  const awsGlobalConfig = getAwsGlobalConfig(j, source, v2GlobalName);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
     return source.toSource();
@@ -96,7 +98,7 @@ const transformer = async (file: FileInfo, api: API) => {
     replaceClientCreation(j, source, { ...v2Options, v3ClientName });
     replaceDocClientCreation(j, source, v2Options);
   }
-  replaceAwsConfig(j, source, v2GlobalName);
+  replaceAwsConfig(j, source, { v2GlobalName, awsGlobalConfig });
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
