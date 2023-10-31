@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.26.0
+
+### Minor Changes
+
+- Pass values from global config in service config ([3df47f9](https://github.com/awslabs/aws-sdk-js-codemod/commit/3df47f9))
+
 ## 0.25.5
 
 ### Patch Changes
