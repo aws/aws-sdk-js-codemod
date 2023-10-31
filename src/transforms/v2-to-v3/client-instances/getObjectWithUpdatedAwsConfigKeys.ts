@@ -27,11 +27,13 @@ export const getObjectWithUpdatedAwsConfigKeys = (
   for (const property of awsGlobalConfig.properties) {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
       propertiesToUpdate.push(property);
+      continue;
     }
 
     const propertyKey = (property as Property | ObjectProperty).key;
     if (propertyKey.type !== "Identifier") {
       propertiesToUpdate.push(property);
+      continue;
     }
 
     const propertyKeyName = (propertyKey as Identifier).name;
