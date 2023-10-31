@@ -1,14 +1,17 @@
-import { describe, expect, it } from "vitest";
+import { strictEqual } from "node:assert";
+import { describe, it } from "node:test";
 
 import { isTypeScriptFile } from "./isTypeScriptFile";
 
 describe(isTypeScriptFile.name, () => {
-  it.each([
+  for (const [output, input] of [
     [true, "foo.ts"],
     [true, "foo.tsx"],
     [false, "foo.js"],
     [false, "foo.jsx"],
-  ])("should return %b for %s", (output, input) => {
-    expect(isTypeScriptFile(input)).toBe(output);
-  });
+  ] as [boolean, string][]) {
+    it(`should return ${output} for ${input}`, () => {
+      strictEqual(isTypeScriptFile(input), output);
+    });
+  }
 });
