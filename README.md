@@ -33,25 +33,15 @@ To use aws-sdk-js-codemod, please install [Node.js][install-nodejs].
 ```console
 $ cat example.ts
 import AWS from "aws-sdk";
-
-const region = "us-west-2";
-const client = new AWS.DynamoDB({ region });
-client.listTables({}, (err, data) => {
-  if (err) console.log(err, err.stack);
-  else console.log(data);
-});
+const client = new AWS.DynamoDB();
+const response = await client.listTables({}).promise();
 
 $ npx aws-sdk-js-codemod@latest -t v2-to-v3 example.ts
 
 $ cat example.ts
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
-
-const region = "us-west-2";
-const client = new DynamoDB({ region });
-client.listTables({}, (err, data) => {
-  if (err) console.log(err, err.stack);
-  else console.log(data);
-});
+const client = new DynamoDB();
+const response = await client.listTables({});
 
 ```
 
