@@ -61,6 +61,11 @@ try {
 
 const { transform } = options;
 if (transforms.map(({ name }) => name).includes(transform)) {
+  // ToDo: Move this warning only after files are transformed.
+  console.warn(
+    `\nPlease review the code change thoroughly for required\nfunctionality before deploying it to production.\n\n` +
+      `If the transformation is not complete or is incorrect,\nplease report the issue on GitHub.\n`
+  );
   options.transform = getUpdatedTransformFile(transform);
 }
 
