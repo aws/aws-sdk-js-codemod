@@ -13,6 +13,9 @@ You can provide names of the custom transforms instead of a local path or url:
      v2-to-v3  Converts AWS SDK for JavaScript APIs in a Javascript/TypeScript
                codebase from version 2 (v2) to version 3 (v3).
 
+Please review the code change thoroughly for required functionality before deploying it to production.
+If the transformation is not complete or is incorrect, please report the issue on GitHub.
+
 ## Prerequisites
 
 To use aws-sdk-js-codemod, please install [Node.js][install-nodejs].
