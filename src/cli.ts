@@ -72,7 +72,10 @@ try {
 
 const { transform } = options;
 if (transforms.map(({ name }) => name).includes(transform)) {
-  console.warn(disclaimerLines.map((line) => `\n${line}`).join(""));
+  const supressDisclaimer = process.env.AWS_SDK_JS_CODEMOD_SUPRESS_WARNING;
+  if (!supressDisclaimer || !supressDisclaimer === "1") {
+    console.warn(disclaimerLines.map((line) => `\n${line}`).join(""));
+  }
   options.transform = getUpdatedTransformFile(transform);
 }
 
