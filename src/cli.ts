@@ -40,6 +40,17 @@ if (args[2] === "--help" || args[2] === "-h") {
   process.stdout.write(getHelpParagraph(transforms));
 }
 
+const disclaimerLines = [
+  `╔════════════════════════════════════════════════════════╗`,
+  `║ Please review the code change thoroughly for required  ║`,
+  `║ functionality before deploying it to production.       ║`,
+  `║                                                        ║`,
+  `║ If the transformation is not complete or is incorrect, ║`,
+  `║ please report the issue on GitHub.                     ║`,
+  `╚════════════════════════════════════════════════════════╝`,
+  ``,
+];
+
 const parser = getJsCodeshiftParser();
 
 let options, positionalArguments;
@@ -61,16 +72,7 @@ try {
 
 const { transform } = options;
 if (transforms.map(({ name }) => name).includes(transform)) {
-  // ToDo: Move this warning only after files are transformed.
-  console.warn(
-    `\n╔════════════════════════════════════════════════════════╗` +
-      `\n║ Please review the code change thoroughly for required  ║` +
-      `\n║ functionality before deploying it to production.       ║` +
-      `\n║                                                        ║` +
-      `\n║ If the transformation is not complete or is incorrect, ║` +
-      `\n║ please report the issue on GitHub.                     ║` +
-      `\n╚════════════════════════════════════════════════════════╝\n`
-  );
+  console.warn(disclaimerLines.map((line) => `\n${line}`).join(""));
   options.transform = getUpdatedTransformFile(transform);
 }
 
