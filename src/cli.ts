@@ -40,6 +40,17 @@ if (args[2] === "--help" || args[2] === "-h") {
   process.stdout.write(getHelpParagraph(transforms));
 }
 
+const disclaimerLines = [
+  `╔════════════════════════════════════════════════════════╗`,
+  `║ Please review the code change thoroughly for required  ║`,
+  `║ functionality before deploying it to production.       ║`,
+  `║                                                        ║`,
+  `║ If the transformation is not complete or is incorrect, ║`,
+  `║ please report the issue on GitHub.                     ║`,
+  `╚════════════════════════════════════════════════════════╝`,
+  ``,
+];
+
 const parser = getJsCodeshiftParser();
 
 let options, positionalArguments;
@@ -61,6 +72,10 @@ try {
 
 const { transform } = options;
 if (transforms.map(({ name }) => name).includes(transform)) {
+  const supressDisclaimer = process.env.AWS_SDK_JS_CODEMOD_SUPRESS_WARNING;
+  if (!supressDisclaimer || !supressDisclaimer === "1") {
+    console.warn(disclaimerLines.map((line) => `\n${line}`).join(""));
+  }
   options.transform = getUpdatedTransformFile(transform);
 }
 
