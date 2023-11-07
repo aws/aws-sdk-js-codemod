@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.26.2
+
+### Patch Changes
+
+- Add a simpler concise example in README ([68341cc](https://github.com/awslabs/aws-sdk-js-codemod/commit/68341cc))
+- Add disclaimer in README and process warning ([e0176fb](https://github.com/awslabs/aws-sdk-js-codemod/commit/e0176fb))
+
 ## 0.26.1
 
 ### Patch Changes
