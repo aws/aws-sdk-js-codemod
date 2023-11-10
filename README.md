@@ -45,8 +45,9 @@ $ cat example.ts
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 const client = new DynamoDB();
 const response = await client.listTables({});
-
 ```
+
+For a summary of supported transformations, check [TRANSFORMATIONS.md](TRANSFORMATIONS.md).
 
 ## License
 
