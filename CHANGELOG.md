@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 0.26.3
+
+### Patch Changes
+
+- Mark Config apiVersion as deprecated ([fb18aa6](https://github.com/awslabs/aws-sdk-js-codemod/commit/fb18aa6))
+- Insert credentials at the first occurrence of a security credential key ([4440265](https://github.com/awslabs/aws-sdk-js-codemod/commit/4440265))
+
 ## 0.26.2
 
 ### Patch Changes
