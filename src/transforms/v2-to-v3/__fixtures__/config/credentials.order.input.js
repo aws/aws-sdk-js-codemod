@@ -20,3 +20,17 @@ const credsInBetween = new AWS.Config({
   secretAccessKey: "SECRET",
   region: "us-east-1",
 });
+
+const credsDispersedBefore = new AWS.Config({
+  accessKeyId: "KEY",
+  logger: console,
+  secretAccessKey: "SECRET",
+  region: "us-east-1"
+});
+
+const credsDispersedAfter = new AWS.Config({
+  logger: console,
+  accessKeyId: "KEY",
+  region: "us-east-1",
+  secretAccessKey: "SECRET",
+});

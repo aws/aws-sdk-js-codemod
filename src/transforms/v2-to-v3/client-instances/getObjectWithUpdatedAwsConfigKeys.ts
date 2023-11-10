@@ -69,7 +69,7 @@ export const getObjectWithUpdatedAwsConfigKeys = (
         credentials.properties.push(property);
 
         // Push credentials key only once.
-        if (credentials.properties.length > 1) {
+        if (credentials.properties.length === 1) {
           return j.objectProperty(j.identifier("credentials"), credentials);
         }
 
