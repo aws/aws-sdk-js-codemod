@@ -67,6 +67,12 @@ export const getObjectWithUpdatedAwsConfigKeys = (
 
       if (securityCredentialKeys.includes(propertyKey.name)) {
         credentials.properties.push(property);
+
+        // Push credentials key only once.
+        if (credentials.properties.length === 1) {
+          return j.objectProperty(j.identifier("credentials"), credentials);
+        }
+
         return undefined;
       }
 
@@ -106,10 +112,6 @@ export const getObjectWithUpdatedAwsConfigKeys = (
       return property;
     })
     .filter((property) => property !== undefined);
-
-  if (credentials.properties.length > 0) {
-    updatedProperties.unshift(j.objectProperty(j.identifier("credentials"), credentials));
-  }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore is Argument is not assignable to parameter
