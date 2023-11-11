@@ -112,7 +112,14 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
 
-  return source.toSource({ quote, useTabs });
+  const sourceString = source.toSource({ quote, useTabs });
+
+  if (useTabs) {
+    // Refs: https://github.com/benjamn/recast/issues/315
+    return sourceString.replace(/ {4,}/g, "\t");
+  }
+
+  return sourceString;
 };
 
 export default transformer;
