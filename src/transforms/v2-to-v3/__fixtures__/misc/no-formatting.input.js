@@ -1,0 +1,1 @@
+const env = {...process.env, ...this.config.env || {}}
