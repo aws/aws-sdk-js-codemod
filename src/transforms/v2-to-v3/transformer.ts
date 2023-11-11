@@ -44,7 +44,7 @@ const transformer = async (file: FileInfo, api: API) => {
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
 
   if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
-    return source.toSource();
+    return file.source;
   }
 
   if (v2GlobalName) {
