@@ -19,11 +19,12 @@ export const getMostUsedStringLiteralQuote = (
 
     // Check if the literal value is a string and contains single quotes
     if (typeof value === "string") {
-      // @ts-expects-error Property 'raw' does not exist on type 'Literal'.
-      const rawValue = path.node.raw as string;
-      if (rawValue.includes("'")) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore Property 'raw' does not exist on type 'Literal'.
+      const rawValue = path.node.raw || "";
+      if (rawValue.startsWith("'")) {
         quoteCount[StringLiteralQuoteType.SINGLE]++;
-      } else if (rawValue.includes('"')) {
+      } else if (rawValue.startsWith('"')) {
         quoteCount[StringLiteralQuoteType.DOUBLE]++;
       }
     }
