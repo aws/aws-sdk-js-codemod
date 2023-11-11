@@ -31,7 +31,12 @@ import {
   removeGlobalModule,
 } from "./modules";
 import { replaceTSTypeReference } from "./ts-type";
-import { getMostUsedStringLiteralQuote, isTypeScriptFile } from "./utils";
+import {
+  IndentationType,
+  getMostUsedIndentationType,
+  getMostUsedStringLiteralQuote,
+  isTypeScriptFile,
+} from "./utils";
 
 const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
@@ -72,6 +77,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
   // Compute recast options before doing transformations
   const quote = getMostUsedStringLiteralQuote(j, source);
+  const useTabs = getMostUsedIndentationType(file.source) === IndentationType.TAB;
 
   const awsGlobalConfig = getAwsGlobalConfig(j, source, v2GlobalName);
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
@@ -106,7 +112,14 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
 
-  return source.toSource({ quote });
+  const sourceString = source.toSource({ quote, useTabs });
+
+  if (useTabs) {
+    // Refs: https://github.com/benjamn/recast/issues/315
+    return sourceString.replace(/ {4,}/g, "\t");
+  }
+
+  return sourceString;
 };
 
 export default transformer;
