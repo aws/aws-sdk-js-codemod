@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": minor
 ---
 
-Follow formatting changes of input code
+Follow formatting conventions of input code
