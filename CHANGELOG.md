@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.26.4
+
+### Patch Changes
+
+- Only format while which include AWS SDK for JavaScript ([fb13fcc](https://github.com/awslabs/aws-sdk-js-codemod/commit/fb13fcc))
+
 ## 0.26.3
 
 ### Patch Changes
