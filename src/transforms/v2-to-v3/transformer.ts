@@ -31,7 +31,7 @@ import {
   removeGlobalModule,
 } from "./modules";
 import { replaceTSTypeReference } from "./ts-type";
-import { isTypeScriptFile } from "./utils";
+import { getMostUsedStringLiteralQuote, isTypeScriptFile } from "./utils";
 
 const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
@@ -70,6 +70,9 @@ const transformer = async (file: FileInfo, api: API) => {
     return source.toSource();
   }
 
+  // Compute recast options before doing transformations
+  const quote = getMostUsedStringLiteralQuote(j, source);
+
   const awsGlobalConfig = getAwsGlobalConfig(j, source, v2GlobalName);
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
     const clientIdentifiers = clientIdentifiersRecord[v2ClientName];
@@ -103,7 +106,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
 
-  return source.toSource();
+  return source.toSource({ quote });
 };
 
 export default transformer;
