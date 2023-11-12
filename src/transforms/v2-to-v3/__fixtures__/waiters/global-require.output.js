@@ -1,7 +1,4 @@
-const {
-  S3,
-  waitUntilBucketExists
-} = require("@aws-sdk/client-s3");
+const { S3, waitUntilBucketExists } = require("@aws-sdk/client-s3");
 
 const Bucket = "BUCKET_NAME";
 const client = new S3();
