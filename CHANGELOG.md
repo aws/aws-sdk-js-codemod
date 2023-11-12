@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.27.4
+
+### Patch Changes
+
+- Check for raw string in extra.raw when searching for quotes ([8b861cf](https://github.com/awslabs/aws-sdk-js-codemod/commit/8b861cf))
+
 ## 0.27.3
 
 ### Patch Changes
