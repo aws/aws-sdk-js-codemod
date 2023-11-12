@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.27.3
+
+### Patch Changes
+
+- Remove trailing comma from ObjectProperty require ([304ae20](https://github.com/awslabs/aws-sdk-js-codemod/commit/304ae20))
+
 ## 0.27.2
 
 ### Patch Changes
