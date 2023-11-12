@@ -7,7 +7,11 @@ export const getFormattedSourceString = (source: string) =>
     .replace(
       /\{\n {2}([\w,\n ]+)\n\} = require\((['"])@aws-sdk/g,
       (_, identifiers, quote) =>
-        `{ ${identifiers.split(",\n  ").join(", ")} } = require(${quote}@aws-sdk`
+        `{ ${identifiers
+          .split(",")
+          .map((str: string) => str.trimLeft())
+          .filter((str: string) => str !== "")
+          .join(", ")} } = require(${quote}@aws-sdk`
     )
     // Remove extra newlines between require declarations.
     .replace(
