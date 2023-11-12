@@ -36,6 +36,7 @@ import {
   getMostUsedIndentationType,
   getMostUsedStringLiteralQuote,
   getValueIndentedWithTabs,
+  isTrailingCommaUsed,
   isTypeScriptFile,
 } from "./utils";
 
@@ -79,6 +80,7 @@ const transformer = async (file: FileInfo, api: API) => {
   // Compute recast options before doing transformations
   const quote = getMostUsedStringLiteralQuote(j, source);
   const useTabs = getMostUsedIndentationType(file.source) === IndentationType.TAB;
+  const trailingComma = isTrailingCommaUsed(j, source);
 
   const awsGlobalConfig = getAwsGlobalConfig(j, source, v2GlobalName);
   for (const [v2ClientName, v3ClientMetadata] of Object.entries(clientMetadataRecord)) {
@@ -113,7 +115,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
 
-  const sourceString = source.toSource({ quote, useTabs });
+  const sourceString = source.toSource({ quote, useTabs, trailingComma });
 
   if (useTabs) {
     // Refs: https://github.com/benjamn/recast/issues/315
