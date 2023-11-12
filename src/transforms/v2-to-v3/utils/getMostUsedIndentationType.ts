@@ -4,9 +4,8 @@ export enum IndentationType {
 }
 
 export const getMostUsedIndentationType = (source: string) => {
-  const tabCount = (source.match(/\t/g) || []).length;
-  const spaceCount = (source.match(/ {2}/g) || []).length;
-  console.log({ tabCount, spaceCount });
+  const tabCount = (source.match(/\n\t/g) || []).length;
+  const spaceCount = (source.match(/\n {2}/g) || []).length;
 
   if (tabCount > spaceCount) {
     return IndentationType.TAB;
