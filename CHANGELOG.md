@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.27.1
+
+### Patch Changes
+
+- Use formatting convention of trailing comma from input code ([b4b12b3](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b12b3))
+
 ## 0.27.0
 
 ### Minor Changes
