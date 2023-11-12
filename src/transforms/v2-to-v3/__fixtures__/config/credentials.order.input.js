@@ -11,14 +11,14 @@ const credsBefore = new AWS.Config({
   accessKeyId: "KEY",
   secretAccessKey: "SECRET",
   logger: console,
-  region: "us-east-1",
+  region: "us-east-1"
 });
 
 const credsInBetween = new AWS.Config({
   logger: console,
   accessKeyId: "KEY",
   secretAccessKey: "SECRET",
-  region: "us-east-1",
+  region: "us-east-1"
 });
 
 const credsDispersedBefore = new AWS.Config({
@@ -32,5 +32,5 @@ const credsDispersedAfter = new AWS.Config({
   logger: console,
   accessKeyId: "KEY",
   region: "us-east-1",
-  secretAccessKey: "SECRET",
+  secretAccessKey: "SECRET"
 });
