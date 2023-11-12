@@ -5,6 +5,7 @@ export const getFormattedSourceString = (source: string) =>
   source
     // Remove newlines from ObjectPattern requires.
     .replace(
-      /\{\n {2}([\w]*)\n\} = require\((['"])@aws-sdk/g,
-      (_, identifier, quote) => `{ ${identifier} } = require(${quote}@aws-sdk`
+      /\{\n {2}([\w,\n ]+)\n\} = require\((['"])@aws-sdk/g,
+      (_, identifiers, quote) =>
+        `{ ${identifiers.split(",\n  ").join(", ")} } = require(${quote}@aws-sdk`
     );
