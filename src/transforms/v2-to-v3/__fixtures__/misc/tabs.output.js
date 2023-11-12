@@ -8,4 +8,5 @@ const client = new DynamoDB({
 	}
 });
 
+// Spaces inside string should not be replaced.
 const stringWithFourSpaces = "    ";
