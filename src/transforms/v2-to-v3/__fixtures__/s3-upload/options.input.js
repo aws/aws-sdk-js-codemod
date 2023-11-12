@@ -7,13 +7,13 @@ await client
       Body: "BODY",
       Bucket: "Bucket",
       ContentType: "ContentType",
-      Key: "Key",
+      Key: "Key"
     },
     {
       partSize: 1024 * 1024 * 5,
       queueSize: 1,
       leavePartsOnError: true,
-      tags: [],
+      tags: []
     }
   )
   .promise();
