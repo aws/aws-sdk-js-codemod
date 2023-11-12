@@ -33,6 +33,7 @@ import {
 import { replaceTSTypeReference } from "./ts-type";
 import {
   IndentationType,
+  getFormattedSourceString,
   getMostUsedIndentationType,
   getMostUsedStringLiteralQuote,
   getValueIndentedWithTabs,
@@ -115,7 +116,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   removeGlobalModule(j, source, v2GlobalName);
 
-  const sourceString = source.toSource({ quote, useTabs, trailingComma });
+  const sourceString = getFormattedSourceString(source.toSource({ quote, useTabs, trailingComma }));
 
   if (useTabs) {
     // Refs: https://github.com/benjamn/recast/issues/315
