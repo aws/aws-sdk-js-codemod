@@ -3,9 +3,14 @@
  */
 export const getFormattedSourceString = (source: string) =>
   source
-    // Remove newlines from ObjectPattern requires.
+    // Remove newlines from ObjectPattern require declarations.
     .replace(
       /\{\n {2}([\w,\n ]+)\n\} = require\((['"])@aws-sdk/g,
       (_, identifiers, quote) =>
         `{ ${identifiers.split(",\n  ").join(", ")} } = require(${quote}@aws-sdk`
+    )
+    // Remove extra newlines between require declarations.
+    .replace(
+      /@aws-sdk\/([\w-]+)(['"])\);\n\nconst \{/g,
+      (_, packageName, quote) => `@aws-sdk/${packageName}${quote});\nconst {`
     );

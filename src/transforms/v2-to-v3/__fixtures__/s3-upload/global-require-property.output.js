@@ -1,5 +1,4 @@
 const { Upload } = require("@aws-sdk/lib-storage");
-
 const { S3 } = require("@aws-sdk/client-s3");
 
 const client = new S3();
