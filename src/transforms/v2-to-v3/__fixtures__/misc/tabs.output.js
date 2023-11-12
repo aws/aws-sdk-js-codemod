@@ -7,3 +7,6 @@ const client = new DynamoDB({
 		secretAccessKey: "SECRET"
 	}
 });
+
+// Spaces inside string should not be replaced.
+const stringWithFourSpaces = "    ";

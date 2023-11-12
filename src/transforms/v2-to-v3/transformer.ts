@@ -35,6 +35,7 @@ import {
   IndentationType,
   getMostUsedIndentationType,
   getMostUsedStringLiteralQuote,
+  getValueIndentedWithTabs,
   isTypeScriptFile,
 } from "./utils";
 
@@ -116,7 +117,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
   if (useTabs) {
     // Refs: https://github.com/benjamn/recast/issues/315
-    return sourceString.replace(/ {4,}/g, "\t");
+    return getValueIndentedWithTabs(sourceString);
   }
 
   return sourceString;

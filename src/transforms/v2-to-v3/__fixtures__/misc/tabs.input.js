@@ -5,3 +5,6 @@ const client = new AWS.DynamoDB({
 	accessKeyId: "KEY",
 	secretAccessKey: "SECRET"
 });
+
+// Spaces inside string should not be replaced.
+const stringWithFourSpaces = "    ";
