@@ -1,6 +1,4 @@
-const {
-  getSignedUrl
-} = require("@aws-sdk/s3-request-presigner");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 const {
   GetObjectCommand,
