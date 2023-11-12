@@ -1,5 +1,13 @@
 # aws-sdk-js-codemod
 
+## 0.27.2
+
+### Patch Changes
+
+- Remove newlines from ObjectPattern requires ([c18f8be](https://github.com/awslabs/aws-sdk-js-codemod/commit/c18f8be))
+- Remove newlines from ObjectPattern requires with multiple keys ([56a5979](https://github.com/awslabs/aws-sdk-js-codemod/commit/56a5979))
+- Remove extra newlines between v3 require declarations ([255467b](https://github.com/awslabs/aws-sdk-js-codemod/commit/255467b))
+
 ## 0.27.1
 
 ### Patch Changes
