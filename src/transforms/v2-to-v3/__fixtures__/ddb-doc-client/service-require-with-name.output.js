@@ -1,5 +1,4 @@
 const { DynamoDBDocument } = require("@aws-sdk/lib-dynamodb");
-
 const {
   DynamoDB: DynamoDBClient
 } = require("@aws-sdk/client-dynamodb");
