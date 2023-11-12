@@ -1,5 +1,4 @@
 const { ApplicationDiscoveryService } = require("@aws-sdk/client-application-discovery-service");
-
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 
 const ddbClient = new DynamoDB(),
