@@ -6,13 +6,13 @@ const uploadParams = {
   Body: "BODY",
   Bucket: "Bucket",
   ContentType: "ContentType",
-  Key: "Key",
+  Key: "Key"
 };
 const uploadOptions = {
   partSize: 1024 * 1024 * 5,
   queueSize: 1,
   leavePartsOnError: true,
-  tags: [],
+  tags: []
 };
 
 await client.upload(uploadParams, uploadOptions).promise();

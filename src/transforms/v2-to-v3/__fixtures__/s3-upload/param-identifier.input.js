@@ -5,7 +5,7 @@ const uploadParams = {
   Body: "BODY",
   Bucket: "Bucket",
   ContentType: "ContentType",
-  Key: "Key",
+  Key: "Key"
 };
 
 await client.upload(uploadParams).promise();

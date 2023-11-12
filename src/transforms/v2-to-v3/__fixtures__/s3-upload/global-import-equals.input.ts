@@ -5,5 +5,5 @@ await client.upload({
   Body: "BODY",
   Bucket: "Bucket",
   ContentType: "ContentType",
-  Key: "Key",
+  Key: "Key"
 }).promise();

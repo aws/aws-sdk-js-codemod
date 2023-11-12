@@ -9,7 +9,7 @@ await new Upload({
     Body: "BODY",
     Bucket: "Bucket",
     ContentType: "ContentType",
-    Key: "Key",
+    Key: "Key"
   },
 
   partSize: 1024 * 1024 * 5,

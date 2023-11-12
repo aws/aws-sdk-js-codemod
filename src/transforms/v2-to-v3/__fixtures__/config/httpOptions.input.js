@@ -2,6 +2,6 @@ import AWS from "aws-sdk";
 
 const config = new AWS.Config({
   httpOptions: {
-    connectTimeout: 1000,
+    connectTimeout: 1000
   }
 });
