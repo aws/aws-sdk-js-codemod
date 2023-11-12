@@ -1,11 +1,21 @@
+import { EOL } from "os";
+
 export enum IndentationType {
   TAB = "tab",
   SPACE = "space",
 }
 
 export const getMostUsedIndentationType = (source: string) => {
-  const tabCount = (source.match(/\n\t/g) || []).length;
-  const spaceCount = (source.match(/\n {2}/g) || []).length;
+  let tabCount = 0;
+  let spaceCount = 0;
+
+  for (const line of source.split(EOL)) {
+    if (line.startsWith(" ")) {
+      spaceCount++;
+    } else if (line.startsWith("\t")) {
+      tabCount++;
+    }
+  }
 
   if (tabCount > spaceCount) {
     return IndentationType.TAB;
