@@ -1,5 +1,16 @@
 # aws-sdk-js-codemod
 
+## 0.27.0
+
+### Minor Changes
+
+- Follow formatting conventions of input code ([c2ee5d1](https://github.com/awslabs/aws-sdk-js-codemod/commit/c2ee5d1))
+
+### Patch Changes
+
+- Use quotation style from the input code ([06a1242](https://github.com/awslabs/aws-sdk-js-codemod/commit/06a1242))
+- Use formatting conventions of tabs or spaces from input code ([0d9e469](https://github.com/awslabs/aws-sdk-js-codemod/commit/0d9e469))
+
 ## 0.26.4
 
 ### Patch Changes
