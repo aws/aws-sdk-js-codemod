@@ -21,7 +21,7 @@ export const getMostUsedStringLiteralQuote = (
     if (typeof value === "string") {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore Property 'raw' does not exist on type 'Literal'.
-      const rawValue = path.node.raw || "";
+      const rawValue = path.node.raw || path.node.extra?.raw || "";
       if (rawValue.startsWith("'")) {
         quoteCount[StringLiteralQuoteType.SINGLE]++;
       } else if (rawValue.startsWith('"')) {
