@@ -7,3 +7,5 @@ const client = new DynamoDB({
 		secretAccessKey: "SECRET"
 	}
 });
+
+const stringWithFourSpaces = "    ";
