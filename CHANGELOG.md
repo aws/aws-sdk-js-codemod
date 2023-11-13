@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.28.0
+
+### Minor Changes
+
+- Transform types imported from redundant Types ([aa735f7](https://github.com/awslabs/aws-sdk-js-codemod/commit/aa735f7))
+
 ## 0.27.4
 
 ### Patch Changes
