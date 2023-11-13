@@ -24,7 +24,9 @@ export const getV3ClientTypes = (
   const clientTypeNames = getClientTypeNames(j, source, options);
 
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
-  const v3ClientUnavailableTypes = Object.keys(clientTypesMap);
+  const v3ClientUnavailableTypes = Object.keys(clientTypesMap).filter(
+    (item) => item !== "ClientConfiguration"
+  );
   const clientReqRespTypesMap = CLIENT_REQ_RESP_TYPES_MAP[v2ClientName];
 
   return clientTypeNames
@@ -36,6 +38,10 @@ export const getV3ClientTypes = (
       return typesFromString.some((type) => !nativeTypes.includes(type));
     })
     .map((clientTypeName) => {
+      if (clientTypeName === "ClientConfiguration") {
+        return clientTypesMap[clientTypeName];
+      }
+
       if (Object.keys(clientReqRespTypesMap).includes(clientTypeName)) {
         return clientReqRespTypesMap[clientTypeName];
       }
