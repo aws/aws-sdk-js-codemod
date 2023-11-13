@@ -1921,7 +1921,7 @@ __metadata:
     "@types/node": "npm:^14.18.33"
     "@typescript-eslint/eslint-plugin": "npm:^6.5.0"
     "@typescript-eslint/parser": "npm:^6.5.0"
-    aws-sdk: "npm:2.1457.0"
+    aws-sdk: "npm:2.1495.0"
     eslint: "npm:^8.48.0"
     eslint-plugin-import: "npm:^2.28.1"
     jscodeshift: "npm:0.15.0"
@@ -1936,9 +1936,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aws-sdk@npm:2.1457.0":
-  version: 2.1457.0
-  resolution: "aws-sdk@npm:2.1457.0"
+"aws-sdk@npm:2.1495.0":
+  version: 2.1495.0
+  resolution: "aws-sdk@npm:2.1495.0"
   dependencies:
     buffer: "npm:4.9.2"
     events: "npm:1.1.1"
@@ -1950,7 +1950,7 @@ __metadata:
     util: "npm:^0.12.4"
     uuid: "npm:8.0.0"
     xml2js: "npm:0.5.0"
-  checksum: 308aa2b82007f958ece9110f2706b8ce2f8c0531fc27298e01b7dadc04f5e497c9db2325e4d59a26a419a3acb69debe6e2b7f468ac5872e4fdb9e2393a4c2db2
+  checksum: 3b3e6559b46cb1fb9db550197f777d722f598b2854a54d89ca88773a2c696d723965079a27c027e208d4e3c12fdc4347098d6328961b6e85d3aa042d313cd082
   languageName: node
   linkType: hard
 
