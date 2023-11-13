@@ -11,8 +11,14 @@ export const removeTypesFromTSQualifiedName = (
 
   source
     .find(j.TSQualifiedName, {
-      // ToDo: Check for left being a TSQualifiedName
       left: { type: "Identifier", name: clientName },
+      right: { type: "Identifier", name: "Types" },
+    })
+    .replaceWith((nodePath) => nodePath.node.left);
+
+  source
+    .find(j.TSQualifiedName, {
+      left: { type: "TSQualifiedName", right: { type: "Identifier", name: clientName } },
       right: { type: "Identifier", name: "Types" },
     })
     .replaceWith((nodePath) => nodePath.node.left);
