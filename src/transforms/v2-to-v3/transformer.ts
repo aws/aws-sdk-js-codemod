@@ -30,7 +30,7 @@ import {
   removeClientModule,
   removeGlobalModule,
 } from "./modules";
-import { removeTypesFromTSTypeReference, replaceTSTypeReference } from "./ts-type";
+import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
   IndentationType,
   getFormattedSourceString,
@@ -92,7 +92,7 @@ const transformer = async (file: FileInfo, api: API) => {
     const v3Options = { v3ClientName, v3ClientPackageName };
 
     // Remove redundant `Types` from Client Types.
-    removeTypesFromTSTypeReference(j, source, v2ClientName);
+    removeTypesFromTSQualifiedName(j, source, v2ClientName);
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
     removeClientModule(j, source, { ...v2Options, importType });

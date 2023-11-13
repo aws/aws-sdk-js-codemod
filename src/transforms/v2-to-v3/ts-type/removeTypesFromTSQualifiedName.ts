@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-export const removeTypesFromTSTypeReference = (
+export const removeTypesFromTSQualifiedName = (
   j: JSCodeshift,
   source: Collection<unknown>,
   v2ClientName: string
