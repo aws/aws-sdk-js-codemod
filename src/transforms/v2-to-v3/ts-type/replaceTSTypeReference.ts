@@ -4,7 +4,6 @@ import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 import { getV3ClientType } from "./getV3ClientType";
-import { removeTypesFromTSTypeReference } from "./removeTypesFromTSTypeReference";
 
 export interface ReplaceTSTypeReferenceOptions {
   v2ClientName: string;
@@ -27,9 +26,6 @@ export const replaceTSTypeReference = (
 ): void => {
   const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
   const clientTypeOptions = { v2ClientName, v2ClientLocalName };
-
-  // Remove redundant `Types` from Client Types.
-  removeTypesFromTSTypeReference(j, source, v2ClientName);
 
   if (v2GlobalName) {
     // Replace type reference to client created with global name.
