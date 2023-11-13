@@ -74,7 +74,6 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ForecastService: "client-forecast",
   FraudDetector: "client-frauddetector",
   GameLift: "client-gamelift",
-  GameSparks: "client-gamesparks",
   GreengrassV2: "client-greengrassv2",
   GroundStation: "client-groundstation",
   GuardDuty: "client-guardduty",

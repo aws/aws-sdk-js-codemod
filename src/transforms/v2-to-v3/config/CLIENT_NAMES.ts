@@ -138,7 +138,6 @@ export const CLIENT_NAMES = [
   "ForecastService",
   "FraudDetector",
   "GameLift",
-  "GameSparks",
   "Glacier",
   "GlobalAccelerator",
   "Glue",
