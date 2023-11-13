@@ -1,5 +1,6 @@
 import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } from "jscodeshift";
 
+import { CLIENT_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
 import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
 import { getTypesSource } from "./getTypesSource";
 
@@ -119,6 +120,7 @@ export const getClientTypesMap = async (clientName: string): Promise<Record<stri
   });
 
   const updatedClientTypesMap = getClientTypesMapWithKeysRemovedFromValues(clientTypesMap);
+  clientTypesMap["ClientConfiguration"] = `${CLIENT_NAMES_MAP[clientName]}ClientConfig`;
 
   return Object.entries(updatedClientTypesMap)
     .sort(([key1], [key2]) => key1.localeCompare(key2))
