@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 0.28.1
+
+### Patch Changes
+
+- Replace ClientConfiguration with <ClientName>ClientConfig ([6e4caa0](https://github.com/awslabs/aws-sdk-js-codemod/commit/6e4caa0))
+
 ## 0.28.0
 
 ### Minor Changes
