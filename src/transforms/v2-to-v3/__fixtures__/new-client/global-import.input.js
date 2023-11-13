@@ -140,7 +140,6 @@ new AWS.ForecastQueryService();
 new AWS.ForecastService();
 new AWS.FraudDetector();
 new AWS.GameLift();
-new AWS.GameSparks();
 new AWS.Glacier();
 new AWS.GlobalAccelerator();
 new AWS.Glue();
