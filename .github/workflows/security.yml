@@ -1,0 +1,17 @@
+name: security scan
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+    if: (github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: semgrep ci
