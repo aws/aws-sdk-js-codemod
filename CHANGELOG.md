@@ -4,35 +4,35 @@
 
 ### Major Changes
 
-- Transform S3 getSignedUrl APIs from v2 to v3 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Remove redundant JS SDK v2 TypeScript types ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform JS SDK v2 credential providers and chains to v3 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Remove `.promise()` from JS SDK API calls ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform JS SDK v2 token providers and chains to v3 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform DynamoDB DocumentClient from v2 to v3 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform S3 multi-part upload APIs from v2 to v3 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform JS SDK v2 TypeScript types to v3 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform waiter `waitFor` calls with `waitUntil*` functions ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform JS SDK client creations in v2 to v3: ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-  - When client name is same
-  - When client name is different
-  - When client is imported with a local name
-- Transform simple JS SDK config from v2 to v3 which is deprecated, not supported, replaced or renamed ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-- Transform JS SDK APIs to v3 from static imports of aws-sdk v2 ([b4b7e069ab2f8d5816a9555866900773c43712b7](https://github.com/awslabs/aws-sdk-js-codemod/commit/b4b7e069ab2f8d5816a9555866900773c43712b7))
-  - Default Import
-  - Namespace Import
-  - Variable Require
-  - Import Equals
-  - Named Import
-  - Named Import with a local name
-  - ObjectPattern Require
-  - ObjectPattern Require with a local name
-  - Variable Require Property
-  - Variable Require Property with a local name
-  - Default Import with deep path
-  - Namespace Import with deep path
-  - Variable Require with deep path
-  - Import Equals with deep path
+- Transform JS SDK APIs to v3 from static imports of aws-sdk v2
+    - Default Import
+    - Namespace Import
+    - Variable Require
+    - Import Equals
+    - Named Import
+    - Named Import with a local name
+    - ObjectPattern Require
+    - ObjectPattern Require with a local name
+    - Variable Require Property
+    - Variable Require Property with a local name
+    - Default Import with deep path
+    - Namespace Import with deep path
+    - Variable Require with deep path
+    - Import Equals with deep path
+- Transform JS SDK client creations in v2 to v3
+    - When client name is same
+    - When client name is different
+    - When client is imported with a local name
+- Transform simple JS SDK config from v2 to v3 which is deprecated, not supported, replaced or renamed
+- Remove `.promise()` from JS SDK API calls
+- Transform JS SDK v2 TypeScript types to v3
+- Remove redundant JS SDK v2 TypeScript types
+- Transform waiter `waitFor` calls with `waitUntil*` functions
+- Transform JS SDK v2 credential providers and chains to v3
+- Transform JS SDK v2 token providers and chains to v3
+- Transform DynamoDB DocumentClient from v2 to v3
+- Transform S3 getSignedUrl APIs from v2 to v3
+- Transform S3 multi-part upload APIs from v2 to v3
 
 ## 0.28.2
 
