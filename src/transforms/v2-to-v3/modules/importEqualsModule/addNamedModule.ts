@@ -62,6 +62,6 @@ export const addNamedModule = (
   // Unreachable code, throw error
   throw new Error(
     "The named import equals can't exist on it's own.\n" +
-      "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod"
+      "Please report your use case on https://github.com/aws/aws-sdk-js-codemod"
   );
 };
