@@ -1,4 +1,4 @@
-const REPO = "awslabs/aws-sdk-js-codemod";
+const REPO = "aws/aws-sdk-js-codemod";
 
 const getGithubCommitWithLink = (commit) =>
   `[${commit}](https://github.com/${REPO}/commit/${commit})`;

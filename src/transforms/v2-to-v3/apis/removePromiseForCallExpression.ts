@@ -19,7 +19,7 @@ export const removePromiseForCallExpression = (
       emitWarning(
         `Removal of .promise() not implemented for parentPath: ${callExpression.parentPath.value.type}\n` +
           `Code processed: ${j(callExpression.parentPath).toSource()}\n\n` +
-          "Please report your use case on https://github.com/awslabs/aws-sdk-js-codemod\n"
+          "Please report your use case on https://github.com/aws/aws-sdk-js-codemod\n"
       );
       const comments = callExpression.parentPath.node.comments || [];
       comments.push(

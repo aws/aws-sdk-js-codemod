@@ -18,7 +18,7 @@ export const getClientNamesRecord = (
       : getClientNamesRecordFromImport(j, source, clientNamesFromDeepImport);
 
   // Populate client names for type transformations
-  // Ref: https://github.com/awslabs/aws-sdk-js-codemod/issues/663
+  // Ref: https://github.com/aws/aws-sdk-js-codemod/issues/663
   for (const clientName of clientNamesFromDeepImport) {
     if (!(clientName in clientNamesRecord)) {
       clientNamesRecord[clientName] = clientName;
