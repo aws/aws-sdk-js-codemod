@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint 'src/**/*.ts'",
     "release": "yarn build && changeset publish",
     "test": "vitest"
   },
