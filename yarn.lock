@@ -1902,7 +1902,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
     "@typescript-eslint/parser": "npm:^6.12.0"
     aws-sdk: "npm:2.1495.0"
-    eslint: "npm:^8.54.0"
+    eslint: "npm:^8.56.0"
     eslint-plugin-import: "npm:^2.29.0"
     jscodeshift: "npm:0.15.0"
     lint-staged: "npm:^13.0.3"
@@ -2885,7 +2885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.54.0":
+"eslint@npm:^8.56.0":
   version: 8.56.0
   resolution: "eslint@npm:8.56.0"
   dependencies:
