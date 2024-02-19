@@ -1367,10 +1367,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node14@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@tsconfig/node14@npm:1.0.3"
-  checksum: 10c0/67c1316d065fdaa32525bc9449ff82c197c4c19092b9663b23213c8cbbf8d88b6ed6a17898e0cbc2711950fbfaf40388938c1c748a2ee89f7234fc9e7fe2bf44
+"@tsconfig/node14@npm:^14.1.0":
+  version: 14.1.0
+  resolution: "@tsconfig/node14@npm:14.1.0"
+  checksum: 10c0/22cc69e7fc74b1c9f281e2e4eb35c000a87d5846722067a76b2c3fa94446f30b6bfdb256bd09861bba5ebfb682e60781053a4dc9a42af74a7842b4318472d664
   languageName: node
   linkType: hard
 
@@ -1896,7 +1896,7 @@ __metadata:
   resolution: "aws-sdk-js-codemod@workspace:."
   dependencies:
     "@changesets/cli": "npm:^2.27.1"
-    "@tsconfig/node14": "npm:^1.0.3"
+    "@tsconfig/node14": "npm:^14.1.0"
     "@types/jscodeshift": "npm:^0.11.5"
     "@types/node": "npm:^14.18.33"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.1"
