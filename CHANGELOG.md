@@ -1,28 +1,34 @@
 # aws-sdk-js-codemod
 
+## 1.0.1
+
+### Patch Changes
+
+- Bump jscodeshift to v0.15.1 ([c04ed748e9702077e2dcd5f39c26b9708d2d78ae](https://github.com/aws/aws-sdk-js-codemod/commit/c04ed748e9702077e2dcd5f39c26b9708d2d78ae))
+
 ## 1.0.0
 
 ### Major Changes
 
 - Transform JS SDK APIs to v3 from static imports of aws-sdk v2
-    - Default Import
-    - Namespace Import
-    - Variable Require
-    - Import Equals
-    - Named Import
-    - Named Import with a local name
-    - ObjectPattern Require
-    - ObjectPattern Require with a local name
-    - Variable Require Property
-    - Variable Require Property with a local name
-    - Default Import with deep path
-    - Namespace Import with deep path
-    - Variable Require with deep path
-    - Import Equals with deep path
+  - Default Import
+  - Namespace Import
+  - Variable Require
+  - Import Equals
+  - Named Import
+  - Named Import with a local name
+  - ObjectPattern Require
+  - ObjectPattern Require with a local name
+  - Variable Require Property
+  - Variable Require Property with a local name
+  - Default Import with deep path
+  - Namespace Import with deep path
+  - Variable Require with deep path
+  - Import Equals with deep path
 - Transform JS SDK client creations in v2 to v3
-    - When client name is same
-    - When client name is different
-    - When client is imported with a local name
+  - When client name is same
+  - When client name is different
+  - When client is imported with a local name
 - Transform simple JS SDK config from v2 to v3 which is deprecated, not supported, replaced or renamed
 - Remove `.promise()` from JS SDK API calls
 - Transform JS SDK v2 TypeScript types to v3
