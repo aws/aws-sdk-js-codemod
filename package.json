@@ -39,12 +39,12 @@
     "test": "vitest"
   },
   "dependencies": {
-    "jscodeshift": "0.15.0"
+    "jscodeshift": "0.15.1"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@tsconfig/node14": "^14.1.0",
-    "@types/jscodeshift": "^0.11.5",
+    "@types/jscodeshift": "^0.11.11",
     "@types/node": "^14.18.33",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
