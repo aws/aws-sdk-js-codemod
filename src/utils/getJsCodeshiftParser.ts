@@ -6,6 +6,7 @@
 
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
+import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -76,7 +77,14 @@ export const getJsCodeshiftParser = () =>
     },
     extensions: {
       display_index: 3,
-      default: "js",
+      // Explicitly add all extensions as default to avoid bug in jscodeshift.
+      // Refs: https://github.com/facebook/jscodeshift/issues/582
+      // Source code: https://github.com/facebook/jscodeshift/blob/51da1a5c4ba3707adb84416663634d4fc3141cbb/src/Worker.js#L80
+      default: [
+        ...DEFAULT_EXTENSIONS.map((ext) => (ext.startsWith(".") ? ext.substring(1) : ext)),
+        "ts",
+        "tsx",
+      ].join(","),
       help: "transform files with these file extensions (comma separated list)",
       metavar: "EXT",
     },
