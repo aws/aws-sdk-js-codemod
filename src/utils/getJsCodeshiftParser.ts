@@ -76,7 +76,8 @@ export const getJsCodeshiftParser = () =>
     },
     extensions: {
       display_index: 3,
-      default: "js",
+      // Refs: https://github.com/facebook/jscodeshift/issues/582
+      // default: "js",
       help: "transform files with these file extensions (comma separated list)",
       metavar: "EXT",
     },
