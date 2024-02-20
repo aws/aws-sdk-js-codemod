@@ -84,7 +84,9 @@ export const getJsCodeshiftParser = () =>
         ...DEFAULT_EXTENSIONS.map((ext) => (ext.startsWith(".") ? ext.substring(1) : ext)),
         "ts",
         "tsx",
-      ].join(","),
+      ]
+        .sort()
+        .join(","),
       help: "transform files with these file extensions (comma separated list)",
       metavar: "EXT",
     },
