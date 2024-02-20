@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.0.2
+
+### Patch Changes
+
+- Explicitly pass all extensions by default when calling jscodeshift ([9b6cca76e876d7e6e4aa76c5c65d2e80a0b0199e](https://github.com/aws/aws-sdk-js-codemod/commit/9b6cca76e876d7e6e4aa76c5c65d2e80a0b0199e))
+
 ## 1.0.1
 
 ### Patch Changes
