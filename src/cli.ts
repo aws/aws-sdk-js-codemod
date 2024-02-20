@@ -45,7 +45,9 @@ if (args[2] === "--help" || args[2] === "-h") {
 if (!args.some((arg) => arg.startsWith("--extensions"))) {
   // Explicitly add all extensions as default to avoid bug in jscodeshift.
   // Refs: https://github.com/facebook/jscodeshift/blob/51da1a5c4ba3707adb84416663634d4fc3141cbb/src/Worker.js#L80
-  const babelExtensions = DEFAULT_EXTENSIONS.map((ext) => ext.substring(1));
+  const babelExtensions = DEFAULT_EXTENSIONS.map((ext) =>
+    ext.startsWith(".") ? ext.substring(1) : ext
+  );
   args.push(`--extensions=${[...babelExtensions, "ts", "tsx"].join(",")}`);
 }
 
