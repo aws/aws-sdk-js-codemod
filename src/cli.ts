@@ -24,7 +24,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import path from "path";
-import { DEFAULT_EXTENSIONS } from "@babel/core";
 import Runner from "jscodeshift/dist/Runner";
 
 import {
@@ -39,16 +38,6 @@ const transforms = getTransforms();
 
 if (args[2] === "--help" || args[2] === "-h") {
   process.stdout.write(getHelpParagraph(transforms));
-}
-
-// Refs: https://github.com/facebook/jscodeshift/issues/582
-if (!args.some((arg) => arg.startsWith("--extensions"))) {
-  // Explicitly add all extensions as default to avoid bug in jscodeshift.
-  // Refs: https://github.com/facebook/jscodeshift/blob/51da1a5c4ba3707adb84416663634d4fc3141cbb/src/Worker.js#L80
-  const babelExtensions = DEFAULT_EXTENSIONS.map((ext) =>
-    ext.startsWith(".") ? ext.substring(1) : ext
-  );
-  args.push(`--extensions=${[...babelExtensions, "ts", "tsx"].join(",")}`);
 }
 
 const disclaimerLines = [
