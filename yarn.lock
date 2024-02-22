@@ -1974,7 +1974,7 @@ __metadata:
     aws-sdk: "npm:2.1563.0"
     eslint: "npm:^8.56.0"
     eslint-plugin-import: "npm:^2.29.0"
-    jscodeshift: "npm:0.15.1"
+    jscodeshift: "npm:0.15.2"
     lint-staged: "npm:^13.0.3"
     prettier: "npm:3.0.3"
     simple-git-hooks: "npm:^2.8.1"
@@ -4133,9 +4133,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jscodeshift@npm:0.15.1":
-  version: 0.15.1
-  resolution: "jscodeshift@npm:0.15.1"
+"jscodeshift@npm:0.15.2":
+  version: 0.15.2
+  resolution: "jscodeshift@npm:0.15.2"
   dependencies:
     "@babel/core": "npm:^7.23.0"
     "@babel/parser": "npm:^7.23.0"
@@ -4164,7 +4164,7 @@ __metadata:
       optional: true
   bin:
     jscodeshift: bin/jscodeshift.js
-  checksum: 10c0/334de6ffa776a68b3f59f2f18a285ea977f3339d85e3517f3854761e65769ffa7e453c35cde320fc969106d573df39bd3fb08b23db54ae17c1b1516e5bf05742
+  checksum: 10c0/79afb059b9ca92712af02bdc8d6ff144de7aaf5e2cdcc6f6534e7a86a7347b0a278d9f4884f2c78dac424162a353aafff183a60e868f71132be2c5b5304aeeb8
   languageName: node
   linkType: hard
 
