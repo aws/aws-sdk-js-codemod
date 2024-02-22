@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 1.0.3
+
+### Patch Changes
+
+- Enable all supported extensions by default in config ([c8343a780126c5ebc22854f1694ef4890a925ee8](https://github.com/aws/aws-sdk-js-codemod/commit/c8343a780126c5ebc22854f1694ef4890a925ee8))
+- Transform clients published between 2023-11-14 and 2024-02-21 ([110295c603b7a2dc555a8fa53cf0ff94f55fe974](https://github.com/aws/aws-sdk-js-codemod/commit/110295c603b7a2dc555a8fa53cf0ff94f55fe974))
+
 ## 1.0.2
 
 ### Patch Changes
