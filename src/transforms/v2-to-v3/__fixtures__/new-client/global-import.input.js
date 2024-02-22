@@ -222,7 +222,6 @@ new AWS.MQ();
 new AWS.MTurk();
 new AWS.MWAA();
 new AWS.MachineLearning();
-new AWS.Macie();
 new AWS.Macie2();
 new AWS.ManagedBlockchain();
 new AWS.ManagedBlockchainQuery();
