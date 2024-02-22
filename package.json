@@ -48,7 +48,7 @@
     "@types/node": "^14.18.33",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
-    "aws-sdk": "2.1495.0",
+    "aws-sdk": "2.1563.0",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.0",
     "lint-staged": "^13.0.3",
