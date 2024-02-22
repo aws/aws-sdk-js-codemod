@@ -1971,7 +1971,7 @@ __metadata:
     "@types/node": "npm:^14.18.33"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.1"
     "@typescript-eslint/parser": "npm:^7.0.1"
-    aws-sdk: "npm:2.1495.0"
+    aws-sdk: "npm:2.1563.0"
     eslint: "npm:^8.56.0"
     eslint-plugin-import: "npm:^2.29.0"
     jscodeshift: "npm:0.15.1"
@@ -1986,9 +1986,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aws-sdk@npm:2.1495.0":
-  version: 2.1495.0
-  resolution: "aws-sdk@npm:2.1495.0"
+"aws-sdk@npm:2.1563.0":
+  version: 2.1563.0
+  resolution: "aws-sdk@npm:2.1563.0"
   dependencies:
     buffer: "npm:4.9.2"
     events: "npm:1.1.1"
@@ -1999,8 +1999,8 @@ __metadata:
     url: "npm:0.10.3"
     util: "npm:^0.12.4"
     uuid: "npm:8.0.0"
-    xml2js: "npm:0.5.0"
-  checksum: 10c0/3b3e6559b46cb1fb9db550197f777d722f598b2854a54d89ca88773a2c696d723965079a27c027e208d4e3c12fdc4347098d6328961b6e85d3aa042d313cd082
+    xml2js: "npm:0.6.2"
+  checksum: 10c0/5d6fafc3d03d0fe0defb9b2df63a9f3122478219c11b07a86451b9c4440086d4bbb423cc77303f4885df0c0bb9be530adecbe913e714662e411205f2d4ad6952
   languageName: node
   linkType: hard
 
@@ -6716,13 +6716,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xml2js@npm:0.5.0":
-  version: 0.5.0
-  resolution: "xml2js@npm:0.5.0"
+"xml2js@npm:0.6.2":
+  version: 0.6.2
+  resolution: "xml2js@npm:0.6.2"
   dependencies:
     sax: "npm:>=0.6.0"
     xmlbuilder: "npm:~11.0.0"
-  checksum: 10c0/c9cd07cd19c5e41c740913bbbf16999a37a204488e11f86eddc2999707d43967197e257014d7ed72c8fc4348c192fa47eb352d1d9d05637cefd0d2e24e9aa4c8
+  checksum: 10c0/e98a84e9c172c556ee2c5afa0fc7161b46919e8b53ab20de140eedea19903ed82f7cd5b1576fb345c84f0a18da1982ddf65908129b58fc3d7cbc658ae232108f
   languageName: node
   linkType: hard
 

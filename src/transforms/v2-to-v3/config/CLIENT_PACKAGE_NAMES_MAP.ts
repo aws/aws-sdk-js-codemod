@@ -8,19 +8,25 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
       [name]: `client-${name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()}`
         .replace("-chime-sdk", "-chime-sdk-")
         .replace("client-amplify-", "client-amplify")
+        .replace("client-bcmdata-exports", "client-bcm-data-exports")
+        .replace("client-clean-rooms-ml", "client-cleanroomsml")
         .replace("client-cloud-", "client-cloud")
         .replace("client-code-", "client-code")
         .replace("client-connect-", "client-connect")
         .replace("client-data-", "client-data")
+        .replace("client-free-tier", "client-freetier")
         .replace("client-io-t", "client-iot-")
         .replace("client-iot-fleet-", "client-iotfleet")
         .replace("client-lookout-", "client-lookout")
         .replace("client-media-", "client-media")
         .replace("client-migration-hub-", "client-migrationhub")
+        .replace("client-network-monitor", "client-networkmonitor")
         .replace("client-pinpoint-sms", "client-pinpoint-sms-")
         .replace("client-route53", "client-route53-")
         .replace("client-sage-maker", "client-sagemaker")
         .replace("client-security-", "client-security")
+        .replace("client-supply-chain", "client-supplychain")
+        .replace("client-trusted-advisor", "client-trustedadvisor")
         .replace("client-work-", "client-work"),
     }),
     {}
