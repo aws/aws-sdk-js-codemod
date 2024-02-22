@@ -220,7 +220,6 @@ export const CLIENT_NAMES = [
   "MTurk",
   "MWAA",
   "MachineLearning",
-  "Macie",
   "Macie2",
   "ManagedBlockchain",
   "ManagedBlockchainQuery",
