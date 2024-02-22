@@ -27,6 +27,11 @@ const requirePackage = (name: string) => {
   return {};
 };
 
+const defaultExtensions = DEFAULT_EXTENSIONS.concat(["ts", "tsx"])
+  .map((ext) => (ext.startsWith(".") ? ext.substring(1) : ext))
+  .sort()
+  .join(",");
+
 /* eslint-disable @typescript-eslint/naming-convention */
 export const getJsCodeshiftParser = () =>
   argsParser.options({
@@ -77,16 +82,7 @@ export const getJsCodeshiftParser = () =>
     },
     extensions: {
       display_index: 3,
-      // Explicitly add all extensions as default to avoid bug in jscodeshift.
-      // Refs: https://github.com/facebook/jscodeshift/issues/582
-      // Source code: https://github.com/facebook/jscodeshift/blob/51da1a5c4ba3707adb84416663634d4fc3141cbb/src/Worker.js#L80
-      default: [
-        ...DEFAULT_EXTENSIONS.map((ext) => (ext.startsWith(".") ? ext.substring(1) : ext)),
-        "ts",
-        "tsx",
-      ]
-        .sort()
-        .join(","),
+      default: defaultExtensions,
       help: "transform files with these file extensions (comma separated list)",
       metavar: "EXT",
     },
