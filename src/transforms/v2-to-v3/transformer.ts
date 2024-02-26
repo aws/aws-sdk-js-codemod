@@ -47,6 +47,7 @@ const transformer = async (file: FileInfo, api: API) => {
   const importType = getImportType(j, source);
 
   if (importType === null) {
+    // Skip transformation, since no import/require statements found for "aws-sdk" package.
     return file.source;
   }
 
