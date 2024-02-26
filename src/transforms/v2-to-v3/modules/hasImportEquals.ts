@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 
 export const hasImportEquals = (j: JSCodeshift, source: Collection<unknown>) =>
@@ -12,7 +13,7 @@ export const hasImportEquals = (j: JSCodeshift, source: Collection<unknown>) =>
       return (
         expression.type === "StringLiteral" &&
         typeof expression.value === "string" &&
-        expression.value.startsWith("aws-sdk")
+        expression.value.startsWith(PACKAGE_NAME)
       );
     })
     .size() > 0;

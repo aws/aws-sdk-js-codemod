@@ -46,14 +46,15 @@ const transformer = async (file: FileInfo, api: API) => {
   const source = j(file.source);
   const importType = getImportType(j, source);
 
+  if (importType === null) {
+    // Skip transformation, since no import/require statements found for "aws-sdk" package.
+    return file.source;
+  }
+
   addNotSupportedComments(j, source, importType);
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
-
-  if (!v2GlobalName && Object.keys(v2ClientNamesRecord).length === 0) {
-    return file.source;
-  }
 
   if (v2GlobalName) {
     for (const v2ClientNameFromGlobal of getClientNamesFromGlobal(j, source, v2GlobalName)) {
