@@ -17,7 +17,7 @@ export interface ImportSpecifierPattern {
 
 export type ImportSpecifierDefault = string;
 
-export type ImportSpecifier = ImportSpecifierPattern | ImportSpecifierDefault;
+export type ImportSpecifierType = ImportSpecifierPattern | ImportSpecifierDefault;
 
 export interface ModulesOptions extends ImportSpecifierPattern {
   packageName: string;
