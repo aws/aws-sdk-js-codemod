@@ -15,6 +15,10 @@ export interface ImportSpecifierPattern {
   localName?: string;
 }
 
+export type ImportSpecifierDefault = string;
+
+export type ImportSpecifier = ImportSpecifierPattern | ImportSpecifierDefault;
+
 export interface ModulesOptions extends ImportSpecifierPattern {
   packageName: string;
 }
