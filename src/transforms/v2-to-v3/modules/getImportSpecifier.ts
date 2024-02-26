@@ -1,10 +1,10 @@
 import { JSCodeshift } from "jscodeshift";
 
-import { ImportSpecifierOptions } from "./types";
+import { ImportSpecifierPattern } from "./types";
 
 export const getImportSpecifier = (
   j: JSCodeshift,
-  { importedName, localName }: ImportSpecifierOptions
+  { importedName, localName }: ImportSpecifierPattern
 ) =>
   localName
     ? j.importSpecifier(j.identifier(importedName), j.identifier(localName))

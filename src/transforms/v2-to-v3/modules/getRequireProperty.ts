@@ -1,10 +1,10 @@
 import { JSCodeshift } from "jscodeshift";
 
-import { ImportSpecifierOptions } from "./types";
+import { ImportSpecifierPattern } from "./types";
 
 export const getRequireProperty = (
   j: JSCodeshift,
-  { importedName, localName }: ImportSpecifierOptions
+  { importedName, localName }: ImportSpecifierPattern
 ) =>
   j.objectProperty.from({
     key: j.identifier(importedName),
