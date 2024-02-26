@@ -1,16 +1,13 @@
-import {
-  Collection,
-  Identifier,
-  JSCodeshift,
-  ObjectPattern,
-  ObjectProperty,
-  Property,
-} from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES, OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../config";
-import { getRequireDeclaratorsWithProperty } from "../modules";
+import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
+import {
+  ImportSpecifierDefault,
+  ImportSpecifierPattern,
+  getRequireDeclaratorsWithProperty,
+} from "../modules";
+import { getImportSpecifiers } from "../modules/requireModule";
 import { getClientDeepImportPath } from "../utils";
-import { getRequireIds } from "./getRequireIds";
 
 export const getClientNamesRecordFromRequire = (
   j: JSCodeshift,
@@ -19,22 +16,13 @@ export const getClientNamesRecordFromRequire = (
 ) => {
   const clientNamesRecord: Record<string, string> = {};
 
-  const idPropertiesFromObjectPattern = getRequireIds(j, source, PACKAGE_NAME)
-    .filter((id) => id.type === "ObjectPattern")
-    .map((objectPattern) => (objectPattern as ObjectPattern).properties)
-    .flat();
+  const idPropertiesFromObjectPattern = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
+    (importSpecifier) => typeof importSpecifier === "object"
+  ) as ImportSpecifierPattern[];
 
-  for (const idProperty of idPropertiesFromObjectPattern) {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(idProperty.type)) {
-      continue;
-    }
-    const key = (idProperty as Property | ObjectProperty).key;
-    const value = (idProperty as Property | ObjectProperty).value;
-    if (key.type !== "Identifier" || value.type !== "Identifier") {
-      continue;
-    }
-    if (CLIENT_NAMES.includes(key.name)) {
-      clientNamesRecord[key.name] = value.name;
+  for (const { importedName, localName } of idPropertiesFromObjectPattern) {
+    if (CLIENT_NAMES.includes(importedName)) {
+      clientNamesRecord[importedName] = localName || importedName;
     }
   }
 
@@ -59,11 +47,11 @@ export const getClientNamesRecordFromRequire = (
 
   for (const clientName of clientNamesFromDeepImport) {
     const deepImportPath = getClientDeepImportPath(clientName);
-    const idsFromDefaultImport = getRequireIds(j, source, deepImportPath).filter(
-      (id) => id.type === "Identifier"
-    );
+    const idsFromDefaultImport = getImportSpecifiers(j, source, deepImportPath).filter(
+      (importSpecifier) => typeof importSpecifier === "string"
+    ) as ImportSpecifierDefault[];
     if (idsFromDefaultImport.length) {
-      clientNamesRecord[clientName] = (idsFromDefaultImport[0] as Identifier).name;
+      clientNamesRecord[clientName] = idsFromDefaultImport[0];
     }
   }
 
