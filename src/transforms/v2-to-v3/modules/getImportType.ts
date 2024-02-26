@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { hasImport } from "./hasImport";
 import { hasImportEquals } from "./hasImportEquals";
+import { hasRequire } from "./hasRequire";
 import { ImportType } from "./types";
 
 export const getImportType = (j: JSCodeshift, source: Collection<unknown>) =>
@@ -8,4 +9,6 @@ export const getImportType = (j: JSCodeshift, source: Collection<unknown>) =>
     ? ImportType.IMPORT
     : hasImportEquals(j, source)
     ? ImportType.IMPORT_EQUALS
-    : ImportType.REQUIRE;
+    : hasRequire(j, source)
+    ? ImportType.REQUIRE
+    : null;
