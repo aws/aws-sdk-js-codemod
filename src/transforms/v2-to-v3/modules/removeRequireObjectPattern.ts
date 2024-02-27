@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { addTopLevelComments } from "./addTopLevelComments";
-import { getRequireDeclaratorsWithObjectPattern } from "./getRequireDeclaratorsWithObjectPattern";
+import { getRequireObjectPatternProperty } from "./getRequireObjectPatternProperty";
 
 export interface RemoveRequireObjectPropertyOptions {
   localName: string;
@@ -13,12 +13,12 @@ export const removeRequireObjectPattern = (
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveRequireObjectPropertyOptions
 ) => {
-  const requireDeclarators = getRequireDeclaratorsWithObjectPattern(j, source, {
+  const requireObjectPatternProperty = getRequireObjectPatternProperty(j, source, {
     identifierName: localName,
     sourceValue,
   });
 
   const comments = source.find(j.Program).get("body", 0).node.comments;
-  requireDeclarators.remove();
+  requireObjectPatternProperty.remove();
   addTopLevelComments(j, source, comments);
 };
