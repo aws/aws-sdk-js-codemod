@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 1.0.5
+
+### Patch Changes
+
+- Use closest API to find package import variable declaration ([3b3401a5adf3f861ba05bb5204257d23ef7a7eb4](https://github.com/aws/aws-sdk-js-codemod/commit/3b3401a5adf3f861ba05bb5204257d23ef7a7eb4))
+- Skip transformation if "aws-sdk" import is not present ([858acade9ac8c9ff77f77939b772a9c0cb65e289](https://github.com/aws/aws-sdk-js-codemod/commit/858acade9ac8c9ff77f77939b772a9c0cb65e289))
+
 ## 1.0.4
 
 ### Patch Changes
