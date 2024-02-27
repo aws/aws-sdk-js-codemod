@@ -1,4 +1,12 @@
-import { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
+import {
+  Collection,
+  JSCodeshift,
+  Literal,
+  ObjectPattern,
+  ObjectProperty,
+  Property,
+  StringLiteral,
+} from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../../config";
 import { getRequireDeclarators } from "../getRequireDeclarators";
@@ -56,57 +64,22 @@ export const addNamedModule = (
     ),
   ]);
 
-  const v2RequireDeclarations = source.find(j.VariableDeclaration).filter((variableDeclaration) =>
-    variableDeclaration.value.declarations.some(
-      // @ts-expect-error Type 'JSXIdentifier' is not assignable to type 'Identifier'.
-      (declaration: VariableDeclarator | Identifier) => {
-        if (declaration.type === "Identifier") return false;
-
-        const init = declaration.init;
-        if (!init) return false;
-
-        // Checks for require identifier or object pattern.
-        if (init.type === "CallExpression") {
-          const callee = init.callee;
-          if (!callee) return false;
-          if (callee.type !== "Identifier") return false;
-          if (callee.name !== "require") return false;
-
-          const args = init.arguments;
-          if (!args) return false;
-          if (args.length !== 1) return false;
-          if (!STRING_LITERAL_TYPE_LIST.includes(args[0].type)) return true;
-          if (typeof args[0].value !== "string") return false;
-          if (!args[0].value.startsWith(PACKAGE_NAME)) return false;
-
-          return true;
-        }
-
-        // Checks for require property.
-        if (init.type === "MemberExpression") {
-          const object = init.object;
-          if (object.type !== "CallExpression") return false;
-
-          const callee = object.callee;
-          if (callee.type !== "Identifier") return false;
-          if (callee.name !== "require") return false;
-
-          const args = object.arguments;
-          if (args.length !== 1) return false;
-          if (!STRING_LITERAL_TYPE_LIST.includes(args[0].type)) return true;
-          if (args[0].value !== PACKAGE_NAME) return false;
-
-          return true;
-        }
-
+  const v2RequireCallExpressions = source
+    .find(j.CallExpression, {
+      callee: { type: "Identifier", name: "require" },
+    })
+    .filter((callExpression) => {
+      const arg = callExpression.value.arguments[0];
+      if (!STRING_LITERAL_TYPE_LIST.includes(arg.type)) {
         return false;
       }
-    )
-  );
+      const argValue = (arg as Literal | StringLiteral).value;
+      return typeof argValue === "string" && argValue.startsWith(PACKAGE_NAME);
+    });
 
-  if (v2RequireDeclarations.size()) {
+  if (v2RequireCallExpressions.size()) {
     // Insert it after the first v2 require declaration.
-    v2RequireDeclarations.at(0).insertAfter(v3RequireDeclaration);
+    v2RequireCallExpressions.at(0).closest(j.VariableDeclaration).insertAfter(v3RequireDeclaration);
     return;
   }
 
