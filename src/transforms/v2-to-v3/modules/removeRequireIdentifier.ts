@@ -1,6 +1,6 @@
-import { isDeepStrictEqual } from "util";
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { addTopLevelComments } from "./addTopLevelComments";
 import { getRequireDeclaratorsWithIdentifier } from "./getRequireDeclaratorsWithIdentifier";
 
 export interface RemoveRequireIdentifierOptions {
@@ -18,13 +18,7 @@ export const removeRequireIdentifier = (
     sourceValue,
   });
 
-  const commentsBeforeRemoval = source.find(j.Program).get("body", 0).node.comments;
+  const comments = source.find(j.Program).get("body", 0).node.comments;
   requireDeclarators.remove();
-  if (commentsBeforeRemoval?.length) {
-    const firstNode = source.find(j.Program).get("body", 0);
-    const commentsAfterRemoval = firstNode.node.comments;
-    if (!isDeepStrictEqual(commentsBeforeRemoval, commentsAfterRemoval)) {
-      firstNode.insertBefore(j.emptyStatement.from({ comments: commentsBeforeRemoval }));
-    }
-  }
+  addTopLevelComments(j, source, comments);
 };
