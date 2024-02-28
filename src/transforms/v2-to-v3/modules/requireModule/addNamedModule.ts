@@ -9,9 +9,9 @@ import {
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../../config";
-import { getRequireDeclarators } from "../getRequireDeclarators";
 import { getRequireProperty } from "../getRequireProperty";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
+import { getRequireDeclarators } from "../requireModule";
 import { ModulesOptions } from "../types";
 
 export const addNamedModule = (
