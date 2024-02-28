@@ -1,13 +1,7 @@
-import {
-  CallExpression,
-  Collection,
-  JSCodeshift,
-  Literal,
-  ObjectProperty,
-  Property,
-} from "jscodeshift";
-import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
+import { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
+import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
 import { ImportSpecifierType } from "../types";
+import { getRequireDeclarators } from "./getRequireDeclarators";
 
 export const getImportSpecifiers = (
   j: JSCodeshift,
@@ -16,38 +10,7 @@ export const getImportSpecifiers = (
 ): ImportSpecifierType[] => {
   const importSpecifiers = new Set<ImportSpecifierType>();
 
-  const varDeclarators = source
-    .find(j.VariableDeclarator, {
-      init: {
-        type: "CallExpression",
-        callee: { type: "Identifier", name: "require" },
-      },
-    })
-    .nodes()
-    .filter((varDeclarator) => {
-      const declaratorInit = varDeclarator.init;
-      if (!declaratorInit || declaratorInit.type !== "CallExpression") {
-        return false;
-      }
-
-      const callExpression = declaratorInit as CallExpression;
-      if (callExpression.arguments.length !== 1) {
-        return false;
-      }
-
-      const { value: sourceValue } = callExpression.arguments[0] as Literal;
-      if (typeof sourceValue !== "string") {
-        return false;
-      }
-
-      if (path) {
-        return sourceValue === path;
-      } else {
-        return sourceValue.startsWith(PACKAGE_NAME);
-      }
-    });
-
-  for (const varDeclarator of varDeclarators) {
+  for (const varDeclarator of getRequireDeclarators(j, source, path).nodes()) {
     const declaratorId = varDeclarator.id;
 
     if (declaratorId.type === "Identifier") {
