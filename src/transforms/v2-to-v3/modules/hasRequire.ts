@@ -1,13 +1,5 @@
-import { Collection, JSCodeshift, Literal } from "jscodeshift";
-import { PACKAGE_NAME } from "../config";
+import { Collection, JSCodeshift } from "jscodeshift";
+import { getRequireDeclarators } from "./requireModule";
 
 export const hasRequire = (j: JSCodeshift, source: Collection<unknown>) =>
-  source
-    .find(j.CallExpression, {
-      callee: { type: "Identifier", name: "require" },
-    })
-    .filter((callExpression) => {
-      const { value: sourceValue } = callExpression.value.arguments[0] as Literal;
-      return typeof sourceValue === "string" && sourceValue.startsWith(PACKAGE_NAME);
-    })
-    .size() > 0;
+  getRequireDeclarators(j, source).size() > 0;
