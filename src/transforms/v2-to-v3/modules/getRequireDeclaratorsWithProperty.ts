@@ -1,4 +1,5 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { getRequireDeclarators } from "./requireModule";
 
 export interface GetRequireDeclaratorsWithPropertyOptions {
   localName?: string;
@@ -11,15 +12,19 @@ export const getRequireDeclaratorsWithProperty = (
   source: Collection<unknown>,
   { localName, identifierName, sourceValue }: GetRequireDeclaratorsWithPropertyOptions
 ) =>
-  source.find(j.VariableDeclarator, {
-    id: { type: "Identifier", ...(localName && { name: localName }) },
-    init: {
-      type: "MemberExpression",
-      object: {
-        type: "CallExpression",
-        callee: { type: "Identifier", name: "require" },
-        arguments: [{ value: sourceValue }],
-      },
-      property: { type: "Identifier", ...(identifierName && { name: identifierName }) },
-    },
+  getRequireDeclarators(j, source, sourceValue).filter((varDeclarator) => {
+    const declaratorId = varDeclarator.value.id;
+    const declaratorInit = varDeclarator.value.init;
+
+    if (declaratorId.type === "Identifier") {
+      const declaratorIdName = declaratorId.name;
+      if (declaratorInit!.type === "MemberExpression") {
+        const importedName = (declaratorInit.property as Identifier).name;
+        if (localName === declaratorIdName && identifierName === importedName) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   });
