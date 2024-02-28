@@ -9,6 +9,8 @@ export interface RemoveRequireIdentifierOptions {
   sourceValue: string;
 }
 
+// ToDo: Write generic utility to remove unused modules
+// Similar to https://github.com/aws/aws-sdk-js-codemod/pull/781
 export const removeRequireIdentifier = (
   j: JSCodeshift,
   source: Collection<unknown>,
