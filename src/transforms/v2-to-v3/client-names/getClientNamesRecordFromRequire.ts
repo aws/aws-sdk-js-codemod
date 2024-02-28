@@ -1,11 +1,7 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import {
-  ImportSpecifierDefault,
-  ImportSpecifierPattern,
-  getRequireDeclaratorsWithProperty,
-} from "../modules";
+import { ImportSpecifierDefault, ImportSpecifierPattern } from "../modules";
 import { getImportSpecifiers } from "../modules/requireModule";
 import { getClientDeepImportPath } from "../utils";
 
@@ -23,25 +19,6 @@ export const getClientNamesRecordFromRequire = (
   for (const { importedName, localName } of idPropertiesFromObjectPattern) {
     if (CLIENT_NAMES.includes(importedName)) {
       clientNamesRecord[importedName] = localName || importedName;
-    }
-  }
-
-  const declaratorsWithProperty = getRequireDeclaratorsWithProperty(j, source, {
-    sourceValue: PACKAGE_NAME,
-  }).nodes();
-
-  for (const declaratorWithProperty of declaratorsWithProperty) {
-    const { id, init } = declaratorWithProperty;
-    if (
-      id.type === "Identifier" &&
-      init != undefined &&
-      init.type === "MemberExpression" &&
-      init.property.type === "Identifier"
-    ) {
-      const clientName = (init.property as Identifier).name;
-      if (CLIENT_NAMES.includes(clientName)) {
-        clientNamesRecord[clientName] = (id as Identifier).name;
-      }
     }
   }
 
