@@ -8,7 +8,6 @@ import {
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
-import { getImportSpecifier } from "../getImportSpecifier";
 import { getImportSpecifiers } from "../getImportSpecifiers";
 import { getRequireProperty } from "../getRequireProperty";
 import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
@@ -101,7 +100,9 @@ export const addNamedModule = (
     // Add named import to the first import declaration.
     const firstImportDeclSpecifiers = importDeclarations.nodes()[0].specifiers;
     if (firstImportDeclSpecifiers) {
-      firstImportDeclSpecifiers.push(getImportSpecifier(j, { importedName, localName }));
+      firstImportDeclSpecifiers.push(
+        j.importSpecifier(j.identifier(importedName), j.identifier(localName))
+      );
       firstImportDeclSpecifiers.sort(importSpecifierCompareFn);
       return;
     }
@@ -109,7 +110,7 @@ export const addNamedModule = (
 
   // Build a new import declaration.
   const v3ImportDeclaration = j.importDeclaration(
-    [getImportSpecifier(j, { importedName, localName })],
+    [j.importSpecifier(j.identifier(importedName), j.identifier(localName))],
     j.stringLiteral(packageName)
   );
 

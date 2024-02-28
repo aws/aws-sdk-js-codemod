@@ -1,6 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
-
-import { getRequireDeclarators } from "./getRequireDeclarators";
+import { getRequireDeclarators } from "./requireModule";
 
 export interface GetRequireDeclaratorsWithIdentifier {
   identifierName: string;
