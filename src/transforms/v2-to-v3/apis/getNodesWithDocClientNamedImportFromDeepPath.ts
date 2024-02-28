@@ -7,6 +7,7 @@ import {
 } from "jscodeshift";
 import { DOCUMENT_CLIENT, DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { ImportType } from "../modules";
+import { getRequireDeclarators } from "../modules/requireModule";
 import { getClientDeepImportPath } from "../utils";
 
 export const getNodesWithDocClientNamedImportFromDeepPath = (
@@ -17,14 +18,7 @@ export const getNodesWithDocClientNamedImportFromDeepPath = (
   const deepImportPath = getClientDeepImportPath(DYNAMODB);
 
   if (importType === ImportType.REQUIRE) {
-    return source
-      .find(j.VariableDeclarator, {
-        init: {
-          type: "CallExpression",
-          callee: { type: "Identifier", name: "require" },
-          arguments: [{ value: deepImportPath }],
-        },
-      })
+    return getRequireDeclarators(j, source, deepImportPath)
       .filter(
         (variableDeclarator) =>
           variableDeclarator.value.id.type === "ObjectPattern" &&
