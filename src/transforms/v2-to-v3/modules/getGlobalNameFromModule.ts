@@ -3,20 +3,14 @@ import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportSpecifiers } from "./getImportSpecifiers";
+import { getRequireDeclarators } from "./requireModule";
 
 export const getGlobalNameFromModule = (
   j: JSCodeshift,
   source: Collection<unknown>
 ): string | undefined => {
-  const requireIdentifiers = source
-    .find(j.VariableDeclarator, {
-      id: { type: "Identifier" },
-      init: {
-        type: "CallExpression",
-        callee: { type: "Identifier", name: "require" },
-        arguments: [{ value: PACKAGE_NAME }],
-      },
-    })
+  const requireIdentifiers = getRequireDeclarators(j, source, PACKAGE_NAME)
+    .filter((declarator) => declarator.value.id.type === "Identifier")
     .nodes();
 
   if (requireIdentifiers.length > 0) {
