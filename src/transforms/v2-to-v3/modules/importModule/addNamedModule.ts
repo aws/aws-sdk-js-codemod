@@ -1,9 +1,9 @@
-import { Collection, ImportSpecifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../../config";
-import { getImportSpecifiers } from "../getImportSpecifiers";
+import { getImportSpecifiers } from "../importModule";
 import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
-import { ModulesOptions } from "../types";
+import { ImportSpecifierPattern, ModulesOptions } from "../types";
 
 export const addNamedModule = (
   j: JSCodeshift,
@@ -19,15 +19,15 @@ export const addNamedModule = (
   if (importDeclarations.size()) {
     const importSpecifiers = getImportSpecifiers(j, source, packageName);
 
+    const importSpecifierPatterns = importSpecifiers.filter(
+      (importSpecifier) => typeof importSpecifier === "object"
+    ) as ImportSpecifierPattern[];
+
     // Return if the import specifier already exists.
     if (
-      importSpecifiers
-        .filter((importSpecifier) => importSpecifier?.type === "ImportSpecifier")
-        .find(
-          (specifier) =>
-            (specifier as ImportSpecifier)?.imported?.name === importedName &&
-            specifier?.local?.name === localName
-        )
+      importSpecifierPatterns.find(
+        (specifier) => specifier.importedName === importedName && specifier.localName === localName
+      )
     ) {
       return;
     }
