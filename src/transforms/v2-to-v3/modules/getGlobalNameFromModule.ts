@@ -4,7 +4,6 @@ import { PACKAGE_NAME } from "../config";
 import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
 import { getImportSpecifiers } from "./importModule";
 import { getRequireDeclarators } from "./requireModule";
-import { ImportSpecifierDefault } from ".";
 
 export const getGlobalNameFromModule = (
   j: JSCodeshift,
@@ -19,11 +18,11 @@ export const getGlobalNameFromModule = (
   }
 
   const importDefaultSpecifiers = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
-    (importSpecifier) => typeof importSpecifier === "string"
-  ) as ImportSpecifierDefault[];
+    (importSpecifier) => !importSpecifier.importedName
+  );
 
   if (importDefaultSpecifiers.length > 0) {
-    return importDefaultSpecifiers[0];
+    return importDefaultSpecifiers[0].localName;
   }
 
   const importEqualsDeclarations = source.find(

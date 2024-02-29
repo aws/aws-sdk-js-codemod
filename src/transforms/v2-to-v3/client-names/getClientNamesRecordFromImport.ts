@@ -1,11 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import {
-  ImportSpecifierDefault,
-  ImportSpecifierPattern,
-  getImportEqualsDeclarationType,
-} from "../modules";
+import { getImportEqualsDeclarationType } from "../modules";
 import { getImportSpecifiers } from "../modules/importModule";
 import { getClientDeepImportPath } from "../utils";
 
@@ -17,8 +13,8 @@ export const getClientNamesRecordFromImport = (
   const clientNamesRecord: Record<string, string> = {};
 
   const specifiersFromNamedImport = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
-    (importSpecifier) => typeof importSpecifier === "object"
-  ) as ImportSpecifierPattern[];
+    (importSpecifier) => importSpecifier.importedName
+  );
 
   for (const { importedName, localName } of specifiersFromNamedImport) {
     const clientName = importedName ?? localName;
@@ -31,10 +27,10 @@ export const getClientNamesRecordFromImport = (
     const deepImportPath = getClientDeepImportPath(clientName);
 
     const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
-      (importSpecifier) => typeof importSpecifier === "string"
-    ) as ImportSpecifierDefault[];
+      (importSpecifier) => !importSpecifier.importedName
+    );
     if (specifiersFromDeepImport.length > 0) {
-      clientNamesRecord[clientName] = specifiersFromDeepImport[0];
+      clientNamesRecord[clientName] = specifiersFromDeepImport[0].localName;
     }
 
     const identifiersFromImportEquals = source.find(
