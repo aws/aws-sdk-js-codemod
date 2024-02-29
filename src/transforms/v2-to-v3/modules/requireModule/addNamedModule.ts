@@ -9,7 +9,6 @@ import {
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../../config";
-import { getRequireProperty } from "../getRequireProperty";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
 import { getRequireDeclarators } from "../requireModule";
 import { ModulesOptions } from "../types";
@@ -21,7 +20,11 @@ export const addNamedModule = (
 ) => {
   const { importedName, localName = importedName, packageName } = options;
 
-  const clientObjectProperty = getRequireProperty(j, { importedName, localName });
+  const clientObjectProperty = j.objectProperty.from({
+    key: j.identifier(importedName),
+    value: j.identifier(localName ?? importedName),
+    shorthand: true,
+  });
   const existingRequires = getRequireDeclarators(j, source, packageName);
 
   if (existingRequires && existingRequires.nodes().length > 0) {
