@@ -3,7 +3,7 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../../config";
 import { getImportSpecifiers } from "../importModule";
 import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
-import { ImportSpecifierPattern, ModulesOptions } from "../types";
+import { ModulesOptions } from "../types";
 
 export const addNamedModule = (
   j: JSCodeshift,
@@ -12,28 +12,27 @@ export const addNamedModule = (
 ) => {
   const { importedName, localName = importedName, packageName } = options;
 
-  const importDeclarations = source.find(j.ImportDeclaration, {
-    source: { value: packageName },
-  });
+  const importSpecifiers = getImportSpecifiers(j, source, packageName);
 
-  if (importDeclarations.size()) {
-    const importSpecifiers = getImportSpecifiers(j, source, packageName);
-
-    const importSpecifierPatterns = importSpecifiers.filter(
-      (importSpecifier) => typeof importSpecifier === "object"
-    ) as ImportSpecifierPattern[];
-
+  if (importSpecifiers.length > 0) {
     // Return if the import specifier already exists.
     if (
-      importSpecifierPatterns.find(
-        (specifier) => specifier.importedName === importedName && specifier.localName === localName
+      importSpecifiers.find(
+        (specifier) =>
+          typeof specifier === "object" &&
+          specifier.importedName === importedName &&
+          specifier.localName === localName
       )
     ) {
       return;
     }
 
     // Add named import to the first import declaration.
-    const firstImportDeclSpecifiers = importDeclarations.nodes()[0].specifiers;
+    const firstImportDeclSpecifiers = source
+      .find(j.ImportDeclaration, {
+        source: { value: packageName },
+      })
+      .nodes()[0].specifiers;
     if (firstImportDeclSpecifiers) {
       firstImportDeclSpecifiers.push(
         j.importSpecifier(j.identifier(importedName), j.identifier(localName))
