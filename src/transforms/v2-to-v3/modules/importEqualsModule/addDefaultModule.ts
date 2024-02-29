@@ -32,7 +32,7 @@ export const addDefaultModule = (
   );
 
   const v2ImportEquals = source
-    .find(j.TSImportEqualsDeclaration, getImportEqualsDeclarationType())
+    .find(j.TSImportEqualsDeclaration)
     .filter((importEqualsDeclaration) => {
       const { moduleReference } = importEqualsDeclaration.value;
       if (moduleReference.type !== "TSExternalModuleReference") return false;
