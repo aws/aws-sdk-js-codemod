@@ -1,9 +1,9 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationType";
 import { ModulesOptions } from "../types";
 import { addDefaultModule } from "./addDefaultModule";
 import { getDefaultName } from "./getDefaultName";
+import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
 import { getImportSpecifiers } from "./getImportSpecifiers";
 
 export const addNamedModule = (
@@ -38,7 +38,6 @@ export const addNamedModule = (
     return;
   }
 
-  const defaultDeclaration = getImportEqualsDeclarationType(packageName);
   if (getImportSpecifiers(j, source, packageName).length === 0) {
     addDefaultModule(j, source, packageName);
   }
@@ -48,11 +47,9 @@ export const addNamedModule = (
     j.tsQualifiedName(j.identifier(defaultLocalName), j.identifier(importedName))
   );
 
-  const v3ClientImportEquals = source
-    .find(j.TSImportEqualsDeclaration, defaultDeclaration)
-    .filter(
-      (importEqualsDeclaration) => importEqualsDeclaration.value.id.name === defaultLocalName
-    );
+  const v3ClientImportEquals = getImportEqualsDeclarations(j, source, packageName).filter(
+    (importEqualsDeclaration) => importEqualsDeclaration.value.id.name === defaultLocalName
+  );
 
   // Insert import equals after the package import equals.
   if (v3ClientImportEquals.size() > 0) {
