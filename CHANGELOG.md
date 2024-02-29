@@ -1,5 +1,19 @@
 # aws-sdk-js-codemod
 
+## 1.1.0
+
+### Minor Changes
+
+- Simplify getClientNamedRecord using import specifiers utilities ([59a8b7a88c291f3a03bb149892c51b369570d2f6](https://github.com/aws/aws-sdk-js-codemod/commit/59a8b7a88c291f3a03bb149892c51b369570d2f6))
+
+### Patch Changes
+
+- Add utility requireModule getImportSpecifiers ([bee398b0a3f818a1691b3151350b95e73922f21a](https://github.com/aws/aws-sdk-js-codemod/commit/bee398b0a3f818a1691b3151350b95e73922f21a))
+- Add utility importEqualsModule getImportSpecifiers ([05b471413454b61529b4dd4e6b2db15557585785](https://github.com/aws/aws-sdk-js-codemod/commit/05b471413454b61529b4dd4e6b2db15557585785))
+- Clean up adding import as object pattern ([10ba4654d5996a29c26bd15511fd62ca3d505af2](https://github.com/aws/aws-sdk-js-codemod/commit/10ba4654d5996a29c26bd15511fd62ca3d505af2))
+- Make importedName optional in ImportSpecifierType ([9f8d6dc6a95cd1072068a89961864658ff4d7e98](https://github.com/aws/aws-sdk-js-codemod/commit/9f8d6dc6a95cd1072068a89961864658ff4d7e98))
+- Add utility importModule getImportSpecifiers ([d8249e8a4fd7bf09aab0ddc1c3382ad6865da3a2](https://github.com/aws/aws-sdk-js-codemod/commit/d8249e8a4fd7bf09aab0ddc1c3382ad6865da3a2))
+
 ## 1.0.5
 
 ### Patch Changes
