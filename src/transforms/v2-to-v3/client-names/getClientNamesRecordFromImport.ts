@@ -21,8 +21,8 @@ export const getClientNamesRecordFromImport = (
   ) as ImportSpecifierPattern[];
 
   for (const { importedName, localName } of specifiersFromNamedImport) {
-    if (CLIENT_NAMES.includes(importedName)) {
-      clientNamesRecord[importedName] = localName ?? importedName;
+    if (CLIENT_NAMES.includes(localName)) {
+      clientNamesRecord[localName] = importedName ?? localName;
     }
   }
 

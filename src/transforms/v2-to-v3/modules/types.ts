@@ -11,8 +11,8 @@ export interface ClientModulesOptions {
 }
 
 export interface ImportSpecifierPattern {
-  importedName: string;
-  localName?: string;
+  importedName?: string;
+  localName: string;
 }
 
 export type ImportSpecifierDefault = string;

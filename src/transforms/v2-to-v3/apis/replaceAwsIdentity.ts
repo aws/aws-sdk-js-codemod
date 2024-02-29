@@ -69,7 +69,7 @@ export const replaceAwsIdentity = (
       if (credsNewExpressions.size() > 0) {
         addNamedModule(j, source, {
           importType,
-          importedName: v3ProviderName,
+          localName: v3ProviderName,
           packageName: identityPackageName,
         });
         credsNewExpressions.replaceWith(({ node }) =>

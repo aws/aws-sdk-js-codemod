@@ -18,11 +18,11 @@ export const addNamedModule = (
   source: Collection<unknown>,
   options: ModulesOptions
 ) => {
-  const { importedName, localName = importedName, packageName } = options;
+  const { localName, importedName = localName, packageName } = options;
 
   const clientObjectProperty = j.objectProperty.from({
     key: j.identifier(importedName),
-    value: j.identifier(localName ?? importedName),
+    value: j.identifier(localName),
     shorthand: true,
   });
   const existingRequires = getRequireDeclarators(j, source, packageName);

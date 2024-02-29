@@ -10,7 +10,7 @@ export const addNamedModule = (
   source: Collection<unknown>,
   options: ModulesOptions
 ) => {
-  const { importedName, localName = importedName, packageName } = options;
+  const { localName, importedName = localName, packageName } = options;
 
   const defaultLocalName = getDefaultName(packageName);
 

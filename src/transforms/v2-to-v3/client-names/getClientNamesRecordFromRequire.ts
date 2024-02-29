@@ -17,8 +17,8 @@ export const getClientNamesRecordFromRequire = (
   ) as ImportSpecifierPattern[];
 
   for (const { importedName, localName } of idPropertiesFromObjectPattern) {
-    if (CLIENT_NAMES.includes(importedName)) {
-      clientNamesRecord[importedName] = localName || importedName;
+    if (CLIENT_NAMES.includes(localName)) {
+      clientNamesRecord[localName] = importedName ?? localName;
     }
   }
 
