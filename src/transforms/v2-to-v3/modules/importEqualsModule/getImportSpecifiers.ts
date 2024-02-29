@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift, StringLiteral, TSExternalModuleReference } from "jscodeshift";
-import { PACKAGE_NAME } from "../../config";
+import { Collection, JSCodeshift } from "jscodeshift";
 import { ImportSpecifierType } from "../types";
+import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
 
 export const getImportSpecifiers = (
   j: JSCodeshift,
@@ -9,26 +9,9 @@ export const getImportSpecifiers = (
 ): ImportSpecifierType[] => {
   const importSpecifiers = new Set<ImportSpecifierType>();
 
-  source
-    .find(j.TSImportEqualsDeclaration, {
-      type: "TSImportEqualsDeclaration",
-      moduleReference: {
-        type: "TSExternalModuleReference",
-        expression: { type: "StringLiteral" },
-      },
-    })
-    .filter((importEqualsDeclaration) => {
-      const moduleReference = importEqualsDeclaration.value
-        .moduleReference as TSExternalModuleReference;
-      const expressionValue = (moduleReference.expression as StringLiteral).value;
-      if (path) {
-        return expressionValue === path;
-      }
-      return expressionValue.startsWith(PACKAGE_NAME);
-    })
-    .forEach((importEqualsDeclaration) => {
-      importSpecifiers.add({ localName: importEqualsDeclaration.value.id.name });
-    });
+  getImportEqualsDeclarations(j, source, path).forEach((importEqualsDeclaration) => {
+    importSpecifiers.add({ localName: importEqualsDeclaration.value.id.name });
+  });
 
   return Array.from(importSpecifiers);
 };
