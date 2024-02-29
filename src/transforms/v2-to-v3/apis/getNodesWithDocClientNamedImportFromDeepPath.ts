@@ -7,6 +7,7 @@ import {
 } from "jscodeshift";
 import { DOCUMENT_CLIENT, DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { ImportType } from "../modules";
+import { getImportDeclarations } from "../modules/importModule";
 import { getRequireDeclarators } from "../modules/requireModule";
 import { getClientDeepImportPath } from "../utils";
 
@@ -35,16 +36,11 @@ export const getNodesWithDocClientNamedImportFromDeepPath = (
       ) as Collection<VariableDeclaration>;
   }
 
-  return source
-    .find(j.ImportDeclaration, {
-      type: "ImportDeclaration",
-      source: { value: deepImportPath },
-    })
-    .filter((importDeclaration) =>
-      (importDeclaration.value.specifiers || []).some(
-        (importDeclaration) =>
-          importDeclaration.type === "ImportSpecifier" &&
-          importDeclaration.imported.name === DOCUMENT_CLIENT
-      )
-    );
+  return getImportDeclarations(j, source, deepImportPath).filter((importDeclaration) =>
+    (importDeclaration.value.specifiers || []).some(
+      (importSpecifier) =>
+        importSpecifier.type === "ImportSpecifier" &&
+        importSpecifier.imported.name === DOCUMENT_CLIENT
+    )
+  );
 };
