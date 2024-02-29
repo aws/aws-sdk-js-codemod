@@ -1,10 +1,10 @@
 import { Collection, Identifier, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
 import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
-import { ImportSpecifierPattern, ImportSpecifierType } from "../types";
+import { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 
 const getImportSpecifiersFromObjectPattern = (properties: (Property | ObjectProperty)[]) => {
-  const importSpecifiers = new Set<ImportSpecifierPattern>();
+  const importSpecifiers = new Set<ImportSpecifierType>();
 
   for (const property of properties) {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
@@ -43,7 +43,7 @@ export const getImportSpecifiers = (
           localName: declaratorIdName,
         });
       } else {
-        importSpecifiers.add(declaratorIdName);
+        importSpecifiers.add({ localName: declaratorIdName });
       }
     }
 

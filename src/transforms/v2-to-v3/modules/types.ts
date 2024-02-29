@@ -10,16 +10,12 @@ export interface ClientModulesOptions {
   importType: ImportType;
 }
 
-export interface ImportSpecifierPattern {
-  importedName: string;
-  localName?: string;
+export interface ImportSpecifierType {
+  importedName?: string;
+  localName: string;
 }
 
-export type ImportSpecifierDefault = string;
-
-export type ImportSpecifierType = ImportSpecifierPattern | ImportSpecifierDefault;
-
-export interface ModulesOptions extends ImportSpecifierPattern {
+export interface ModulesOptions extends ImportSpecifierType {
   packageName: string;
 }
 

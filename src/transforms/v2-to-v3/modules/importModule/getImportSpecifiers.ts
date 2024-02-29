@@ -24,7 +24,7 @@ export const getImportSpecifiers = (
         case "ImportNamespaceSpecifier":
         case "ImportDefaultSpecifier": {
           if (specifier.local) {
-            importSpecifiers.add(specifier.local.name);
+            importSpecifiers.add({ localName: specifier.local.name });
           }
           break;
         }

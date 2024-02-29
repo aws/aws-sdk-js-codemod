@@ -45,7 +45,7 @@ export const addClientModules = (
   for (const v3ClientType of v3ClientTypes) {
     addNamedModule(j, source, {
       importType,
-      importedName: v3ClientType,
+      localName: v3ClientType,
       packageName: v3ClientPackageName,
     });
   }
@@ -63,7 +63,7 @@ export const addClientModules = (
     const v3WaiterApiName = getV3ClientWaiterApiName(waiterState);
     addNamedModule(j, source, {
       importType,
-      importedName: v3WaiterApiName,
+      localName: v3WaiterApiName,
       packageName: v3ClientPackageName,
     });
   }
@@ -72,7 +72,7 @@ export const addClientModules = (
     if (isS3UploadApiUsed(j, source, clientIdentifiers)) {
       addNamedModule(j, source, {
         importType,
-        importedName: "Upload",
+        localName: "Upload",
         packageName: "@aws-sdk/lib-storage",
       });
     }
@@ -80,13 +80,13 @@ export const addClientModules = (
     if (isS3GetSignedUrlApiUsed(j, source, clientIdentifiers)) {
       addNamedModule(j, source, {
         importType,
-        importedName: "getSignedUrl",
+        localName: "getSignedUrl",
         packageName: "@aws-sdk/s3-request-presigner",
       });
       for (const apiName of getS3SignedUrlApiNames(j, source, clientIdentifiers)) {
         addNamedModule(j, source, {
           importType,
-          importedName: getCommandName(apiName),
+          localName: getCommandName(apiName),
           packageName: v3ClientPackageName,
         });
       }
@@ -111,7 +111,7 @@ export const addClientModules = (
     for (const docClientType of docClientTypes) {
       addNamedModule(j, source, {
         importType,
-        importedName: docClientType,
+        localName: docClientType,
         packageName: "@aws-sdk/lib-dynamodb",
       });
     }
@@ -119,7 +119,7 @@ export const addClientModules = (
     if (docClientNewExpressionCount > 0) {
       addNamedModule(j, source, {
         importType,
-        importedName: DYNAMODB_DOCUMENT,
+        localName: DYNAMODB_DOCUMENT,
         packageName: "@aws-sdk/lib-dynamodb",
       });
     }

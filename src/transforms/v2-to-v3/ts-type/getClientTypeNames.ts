@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { ImportSpecifierPattern } from "../modules";
+import { ImportSpecifierType } from "../modules";
 import { getImportSpecifiers } from "../modules/importModule";
 import { getClientDeepImportPath } from "../utils";
 
@@ -77,8 +77,8 @@ export const getClientTypeNames = (
 
   clientTypeNames.push(
     ...getImportSpecifiers(j, source, getClientDeepImportPath(v2ClientName))
-      .filter((importSpecifier) => typeof importSpecifier === "object")
-      .map((importSpecifier) => (importSpecifier as ImportSpecifierPattern).localName!)
+      .filter((importSpecifier) => importSpecifier.importedName)
+      .map((importSpecifier) => (importSpecifier as ImportSpecifierType).localName!)
   );
 
   return [...new Set(clientTypeNames)];
