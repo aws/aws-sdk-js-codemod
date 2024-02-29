@@ -1,5 +1,11 @@
 import { Collection, JSCodeshift } from "jscodeshift";
-import { getImportDeclarations } from "./importModule";
+import { PACKAGE_NAME } from "../config";
 
 export const hasImport = (j: JSCodeshift, source: Collection<unknown>) =>
-  getImportDeclarations(j, source).size() > 0;
+  source
+    .find(j.ImportDeclaration)
+    .filter((importDeclaration) => {
+      const { value: sourceValue } = importDeclaration.value.source;
+      return typeof sourceValue === "string" && sourceValue.startsWith(PACKAGE_NAME);
+    })
+    .size() > 0;
