@@ -17,20 +17,11 @@ export const addNamedModule = (
 
   const existingDeclaration = source.find(j.TSImportEqualsDeclaration, {
     type: "TSImportEqualsDeclaration",
-    id: {
-      type: "Identifier",
-      name: localName,
-    },
+    id: { type: "Identifier", name: localName },
     moduleReference: {
       type: "TSQualifiedName",
-      left: {
-        type: "Identifier",
-        name: defaultLocalName,
-      },
-      right: {
-        type: "Identifier",
-        name: importedName,
-      },
+      left: { type: "Identifier", name: defaultLocalName },
+      right: { type: "Identifier", name: importedName },
     },
   });
 

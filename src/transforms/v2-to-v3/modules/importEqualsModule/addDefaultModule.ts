@@ -1,7 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../../config";
-import { getImportSpecifiers } from "../importEqualsModule";
+import { getImportEqualsDeclarations, getImportSpecifiers } from "../importEqualsModule";
 import { getDefaultName } from "./getDefaultName";
 
 export const addDefaultModule = (
@@ -26,16 +25,7 @@ export const addDefaultModule = (
     j.tsExternalModuleReference(j.stringLiteral(packageName))
   );
 
-  const v2ImportEquals = source
-    .find(j.TSImportEqualsDeclaration)
-    .filter((importEqualsDeclaration) => {
-      const { moduleReference } = importEqualsDeclaration.value;
-      if (moduleReference.type !== "TSExternalModuleReference") return false;
-      const { expression } = moduleReference;
-      if (expression.type !== "StringLiteral") return false;
-      const { value } = expression;
-      return value.startsWith(PACKAGE_NAME);
-    });
+  const v2ImportEquals = getImportEqualsDeclarations(j, source);
 
   if (v2ImportEquals.size()) {
     // Insert it after the first import equals declaration.
