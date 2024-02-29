@@ -17,10 +17,7 @@ export const addNamedModule = (
     // Return if the import specifier already exists.
     if (
       importSpecifiers.find(
-        (specifier) =>
-          typeof specifier === "object" &&
-          specifier.importedName === importedName &&
-          specifier.localName === localName
+        (specifier) => specifier.importedName === importedName && specifier.localName === localName
       )
     ) {
       return;
