@@ -1,7 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../../config";
-import { getImportSpecifiers } from "../importModule";
+import { getImportDeclarations, getImportSpecifiers } from "../importModule";
 import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
 import { ModulesOptions } from "../types";
 
@@ -28,11 +27,8 @@ export const addNamedModule = (
     }
 
     // Add named import to the first import declaration.
-    const firstImportDeclSpecifiers = source
-      .find(j.ImportDeclaration, {
-        source: { value: packageName },
-      })
-      .nodes()[0].specifiers;
+    const firstImportDeclSpecifiers = getImportDeclarations(j, source, packageName).nodes()[0]
+      .specifiers;
     if (firstImportDeclSpecifiers) {
       firstImportDeclSpecifiers.push(
         j.importSpecifier(j.identifier(importedName), j.identifier(localName))
@@ -48,10 +44,7 @@ export const addNamedModule = (
     j.stringLiteral(packageName)
   );
 
-  const v2importDeclarations = source.find(j.ImportDeclaration).filter((path) => {
-    const { value } = path.node.source;
-    return typeof value === "string" && value.startsWith(PACKAGE_NAME);
-  });
+  const v2importDeclarations = getImportDeclarations(j, source);
 
   if (v2importDeclarations.size()) {
     // Insert it after the last import declaration.
