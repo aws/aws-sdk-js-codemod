@@ -1,7 +1,6 @@
 export * from "./addClientModules";
 export * from "./addNamedModule";
 export * from "./getGlobalNameFromModule";
-export * from "./getImportEqualsDeclarationType";
 export * from "./getImportType";
 export * from "./getRequireDeclaratorsWithProperty";
 export * from "./removeClientModule";
