@@ -1,7 +1,12 @@
-import { Collection, Identifier, ImportSpecifier, JSCodeshift } from "jscodeshift";
+import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import { getImportEqualsDeclarationType, getImportSpecifiers } from "../modules";
+import {
+  ImportSpecifierDefault,
+  ImportSpecifierPattern,
+  getImportEqualsDeclarationType,
+} from "../modules";
+import { getImportSpecifiers } from "../modules/importModule";
 import { getClientDeepImportPath } from "../utils";
 
 export const getClientNamesRecordFromImport = (
@@ -12,12 +17,10 @@ export const getClientNamesRecordFromImport = (
   const clientNamesRecord: Record<string, string> = {};
 
   const specifiersFromNamedImport = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
-    (specifier) => specifier?.type === "ImportSpecifier"
-  ) as ImportSpecifier[];
+    (importSpecifier) => typeof importSpecifier === "object"
+  ) as ImportSpecifierPattern[];
 
-  for (const specifier of specifiersFromNamedImport) {
-    const importedName = specifier.imported.name;
-    const localName = (specifier.local as Identifier).name;
+  for (const { importedName, localName } of specifiersFromNamedImport) {
     if (CLIENT_NAMES.includes(importedName)) {
       clientNamesRecord[importedName] = localName ?? importedName;
     }
@@ -27,11 +30,10 @@ export const getClientNamesRecordFromImport = (
     const deepImportPath = getClientDeepImportPath(clientName);
 
     const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
-      (specifier) =>
-        ["ImportDefaultSpecifier", "ImportNamespaceSpecifier"].includes(specifier?.type as string)
-    );
+      (importSpecifier) => typeof importSpecifier === "string"
+    ) as ImportSpecifierDefault[];
     if (specifiersFromDeepImport.length > 0) {
-      clientNamesRecord[clientName] = (specifiersFromDeepImport[0]?.local as Identifier).name;
+      clientNamesRecord[clientName] = specifiersFromDeepImport[0];
     }
 
     const identifiersFromImportEquals = source.find(
