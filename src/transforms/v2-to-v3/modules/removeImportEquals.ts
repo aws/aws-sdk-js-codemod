@@ -1,4 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
+import { getImportEqualsDeclarations } from "./importEqualsModule";
 import { removeDeclaration } from "./removeDeclaration";
 
 export interface RemoveImportEqualsOptions {
@@ -11,14 +12,9 @@ export const removeImportEquals = (
   source: Collection<unknown>,
   { localName, sourceValue }: RemoveImportEqualsOptions
 ) => {
-  const importEqualsDeclaration = source.find(j.TSImportEqualsDeclaration, {
-    type: "TSImportEqualsDeclaration",
-    id: { name: localName },
-    moduleReference: {
-      type: "TSExternalModuleReference",
-      expression: { type: "StringLiteral", value: sourceValue },
-    },
-  });
+  const importEqualsDeclaration = getImportEqualsDeclarations(j, source, sourceValue).filter(
+    (importEqualsDeclaration) => importEqualsDeclaration.value.id.name === localName
+  );
   if (importEqualsDeclaration.length) {
     removeDeclaration(j, source, importEqualsDeclaration.get());
   }
