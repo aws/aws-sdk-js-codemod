@@ -4,6 +4,7 @@ import { getImportEqualsDeclarationType } from "../getImportEqualsDeclarationTyp
 import { ModulesOptions } from "../types";
 import { addDefaultModule } from "./addDefaultModule";
 import { getDefaultName } from "./getDefaultName";
+import { getImportSpecifiers } from "./getImportSpecifiers";
 
 export const addNamedModule = (
   j: JSCodeshift,
@@ -38,7 +39,7 @@ export const addNamedModule = (
   }
 
   const defaultDeclaration = getImportEqualsDeclarationType(packageName);
-  if (source.find(j.TSImportEqualsDeclaration, defaultDeclaration).size() === 0) {
+  if (getImportSpecifiers(j, source, packageName).length === 0) {
     addDefaultModule(j, source, packageName);
   }
 

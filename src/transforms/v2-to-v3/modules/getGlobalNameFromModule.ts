@@ -1,7 +1,7 @@
 import { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
-import { getImportEqualsDeclarationType } from "./getImportEqualsDeclarationType";
+import { getImportSpecifiers as getImportEqualsSpecifiers } from "../modules/importEqualsModule";
 import { getImportSpecifiers } from "./importModule";
 import { getRequireDeclarators } from "./requireModule";
 
@@ -25,13 +25,10 @@ export const getGlobalNameFromModule = (
     return importDefaultSpecifiers[0].localName;
   }
 
-  const importEqualsDeclarations = source.find(
-    j.TSImportEqualsDeclaration,
-    getImportEqualsDeclarationType(PACKAGE_NAME)
-  );
+  const importEqualsDeclarations = getImportEqualsSpecifiers(j, source, PACKAGE_NAME);
 
   if (importEqualsDeclarations.length > 0) {
-    return importEqualsDeclarations.nodes()[0]?.id?.name;
+    return importEqualsDeclarations[0].localName;
   }
 
   return undefined;

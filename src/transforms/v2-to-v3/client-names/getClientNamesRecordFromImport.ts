@@ -1,7 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import { getImportEqualsDeclarationType } from "../modules";
+import { getImportSpecifiers as getImportEqualsSpecifiers } from "../modules/importEqualsModule";
 import { getImportSpecifiers } from "../modules/importModule";
 import { getClientDeepImportPath } from "../utils";
 
@@ -33,12 +33,9 @@ export const getClientNamesRecordFromImport = (
       clientNamesRecord[clientName] = specifiersFromDeepImport[0].localName;
     }
 
-    const identifiersFromImportEquals = source.find(
-      j.TSImportEqualsDeclaration,
-      getImportEqualsDeclarationType(deepImportPath)
-    );
+    const identifiersFromImportEquals = getImportEqualsSpecifiers(j, source, deepImportPath);
     if (identifiersFromImportEquals.length > 0) {
-      clientNamesRecord[clientName] = identifiersFromImportEquals.nodes()[0]?.id.name;
+      clientNamesRecord[clientName] = identifiersFromImportEquals[0].localName;
     }
   }
 
