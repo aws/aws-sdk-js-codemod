@@ -15,10 +15,18 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
 
         if (importedName && importedName === localName) {
           // Two occurrences: one imported identifier and one local identifier.
-          return identifiers.size() !== 2;
+          if (identifiers.size() === 2) {
+            return false;
+          }
+          // ToDo: check if similar specifier exists from @aws-sdk import declaration
+          return true;
         }
         // One occurrence: local identifier.
-        return identifiers.size() !== 1;
+        if (identifiers.size() === 1) {
+          return false;
+        }
+        // ToDo: check if similar specifier exists from @aws-sdk import declaration
+        return true;
       }
     );
 
