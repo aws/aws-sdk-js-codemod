@@ -3,7 +3,5 @@ export * from "./addNamedModule";
 export * from "./getGlobalNameFromModule";
 export * from "./getImportType";
 export * from "./getRequireDeclaratorsWithProperty";
-export * from "./removeClientModule";
-export * from "./removeGlobalModule";
 export * from "./removeUnusedModules";
 export * from "./types";
