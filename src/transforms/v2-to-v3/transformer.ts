@@ -27,7 +27,6 @@ import {
   addClientModules,
   getGlobalNameFromModule,
   getImportType,
-  removeClientModule,
   removeUnusedModules,
 } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
@@ -96,7 +95,6 @@ const transformer = async (file: FileInfo, api: API) => {
     removeTypesFromTSQualifiedName(j, source, v2ClientName);
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
-    removeClientModule(j, source, { ...v2Options, importType });
 
     if (v2ClientName === S3) {
       // Needs to be called before removing promise calls, as replacement has `.done()` call.
