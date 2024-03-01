@@ -25,18 +25,13 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
         const identifiers = source.find(j.Identifier, { name: localName });
         const importedName = specifier.type === "ImportSpecifier" && specifier.imported?.name;
 
-        if (importedName && importedName === localName) {
-          // Two occurrences: one imported identifier and one local identifier.
-          if (identifiers.size() === 2) {
-            return false;
-          }
-          return !isAnotherSpecifier(j, source, localName);
-        }
-        // One occurrence: local identifier.
-        if (identifiers.size() === 1) {
-          return false;
-        }
-        return !isAnotherSpecifier(j, source, localName);
+        // For default or namespace import, there's only one occurrence of local identifier.
+        // For named import, there are two occurrences: one imported identifier and one local identifier.
+        const identifierNum = importedName && importedName === localName ? 2 : 1;
+
+        // Either the identifiers are the only occurences on the page.
+        // Or there's another specifier with the same local identifier from JS SDK v3.
+        return !(identifiers.size() === identifierNum || !isAnotherSpecifier(j, source, localName));
       }
     );
 
