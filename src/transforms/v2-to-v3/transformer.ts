@@ -23,13 +23,7 @@ import {
   getClientNamesRecord,
 } from "./client-names";
 import { S3 } from "./config";
-import {
-  addClientModules,
-  getGlobalNameFromModule,
-  getImportType,
-  removeClientModule,
-  removeGlobalModule,
-} from "./modules";
+import { addClientModules, getGlobalNameFromModule, getImportType, removeModules } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
   IndentationType,
@@ -96,7 +90,6 @@ const transformer = async (file: FileInfo, api: API) => {
     removeTypesFromTSQualifiedName(j, source, v2ClientName);
     addClientModules(j, source, { ...v2Options, ...v3Options, clientIdentifiers, importType });
     replaceTSTypeReference(j, source, { ...v2Options, v3ClientName });
-    removeClientModule(j, source, { ...v2Options, importType });
 
     if (v2ClientName === S3) {
       // Needs to be called before removing promise calls, as replacement has `.done()` call.
@@ -117,7 +110,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsConfig(j, source, { v2GlobalName, awsGlobalConfig });
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
-  removeGlobalModule(j, source, v2GlobalName);
+  removeModules(j, source, importType);
 
   const sourceString = getFormattedSourceString(source.toSource({ quote, useTabs, trailingComma }));
 
