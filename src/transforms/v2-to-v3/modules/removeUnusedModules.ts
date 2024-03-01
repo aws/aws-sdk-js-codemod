@@ -1,4 +1,5 @@
 import { Collection, JSCodeshift } from "jscodeshift";
+import { removeImport } from "./importModule";
 import { ImportType } from "./types";
 
 export const removeUnusedModules = (
@@ -16,7 +17,7 @@ export const removeUnusedModules = (
       break;
     }
     case ImportType.IMPORT: {
-      // ToDo
+      removeImport(j, source);
       break;
     }
   }

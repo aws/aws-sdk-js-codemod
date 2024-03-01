@@ -5,4 +5,5 @@ export * from "./getImportType";
 export * from "./getRequireDeclaratorsWithProperty";
 export * from "./removeClientModule";
 export * from "./removeGlobalModule";
+export * from "./removeUnusedModules";
 export * from "./types";

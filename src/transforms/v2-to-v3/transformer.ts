@@ -28,6 +28,7 @@ import {
   getGlobalNameFromModule,
   getImportType,
   removeClientModule,
+  removeUnusedModules,
 } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
@@ -116,6 +117,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsConfig(j, source, { v2GlobalName, awsGlobalConfig });
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
+  removeUnusedModules(j, source, importType);
 
   const sourceString = getFormattedSourceString(source.toSource({ quote, useTabs, trailingComma }));
 
