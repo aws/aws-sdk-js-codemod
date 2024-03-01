@@ -10,9 +10,15 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
         if (!localName) {
           return true;
         }
-        const identifierUsages = source.find(j.Identifier, { name: localName });
-        // Only usage is import.
-        return identifierUsages.length !== 1;
+        const identifiers = source.find(j.Identifier, { name: localName });
+        const importedName = specifier.type === "ImportSpecifier" && specifier.imported?.name;
+
+        if (importedName && importedName === localName) {
+          // Two occurrences: one imported identifier and one local identifier.
+          return identifiers.size() !== 2;
+        }
+        // One occurrence: local identifier.
+        return identifiers.size() !== 1;
       }
     );
 
