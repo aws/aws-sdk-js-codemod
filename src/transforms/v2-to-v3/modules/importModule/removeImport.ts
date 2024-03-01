@@ -2,6 +2,18 @@ import { Collection, JSCodeshift } from "jscodeshift";
 import { removeDeclaration } from "../removeDeclaration";
 import { getImportDeclarations } from "./getImportDeclarations";
 
+const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localName: string) =>
+  source
+    .find(j.ImportDeclaration, { specifiers: [{ local: { name: localName } }] })
+    .filter((importDeclaration) => {
+      const sourceValue = importDeclaration.value.source.value;
+      if (typeof sourceValue !== "string") {
+        return false;
+      }
+      return sourceValue.startsWith("@aws-sdk/");
+    })
+    .size() > 0;
+
 export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
   getImportDeclarations(j, source).forEach((importDeclaration) => {
     importDeclaration.value.specifiers = (importDeclaration.value.specifiers || []).filter(
@@ -18,15 +30,13 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
           if (identifiers.size() === 2) {
             return false;
           }
-          // ToDo: check if similar specifier exists from @aws-sdk import declaration
-          return true;
+          return !isAnotherSpecifier(j, source, localName);
         }
         // One occurrence: local identifier.
         if (identifiers.size() === 1) {
           return false;
         }
-        // ToDo: check if similar specifier exists from @aws-sdk import declaration
-        return true;
+        return !isAnotherSpecifier(j, source, localName);
       }
     );
 
