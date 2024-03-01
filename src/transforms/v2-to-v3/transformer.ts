@@ -23,12 +23,7 @@ import {
   getClientNamesRecord,
 } from "./client-names";
 import { S3 } from "./config";
-import {
-  addClientModules,
-  getGlobalNameFromModule,
-  getImportType,
-  removeUnusedModules,
-} from "./modules";
+import { addClientModules, getGlobalNameFromModule, getImportType, removeModules } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
   IndentationType,
@@ -115,7 +110,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsConfig(j, source, { v2GlobalName, awsGlobalConfig });
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
-  removeUnusedModules(j, source, importType);
+  removeModules(j, source, importType);
 
   const sourceString = getFormattedSourceString(source.toSource({ quote, useTabs, trailingComma }));
 

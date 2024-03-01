@@ -3,7 +3,7 @@ import { removeImportEquals } from "./importEqualsModule";
 import { removeImport } from "./importModule";
 import { ImportType } from "./types";
 
-export const removeUnusedModules = (
+export const removeModules = (
   j: JSCodeshift,
   source: Collection<unknown>,
   importType: ImportType
