@@ -65,6 +65,11 @@ export const removeRequire = (j: JSCodeshift, source: Collection<unknown>) =>
     // Explore using .closest() here.
     const varDeclaration = varDeclarator.parentPath.parentPath;
 
+    // The declaration might have been removed in earlier iterations.
+    if (!varDeclaration.value) {
+      return;
+    }
+
     // Removes variable declarator from the declarations.
     varDeclaration.value.declarations = varDeclaration.value.declarations.filter(
       (declaration: VariableDeclarator | Identifier) => {
