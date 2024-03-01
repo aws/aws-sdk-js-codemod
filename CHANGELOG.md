@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.1.1
+
+### Patch Changes
+
+- Add utility to remove unused modules ([c1669bea4877fcf1a4e4e335be8300ba71861f2a](https://github.com/aws/aws-sdk-js-codemod/commit/c1669bea4877fcf1a4e4e335be8300ba71861f2a))
+
 ## 1.1.0
 
 ### Minor Changes
