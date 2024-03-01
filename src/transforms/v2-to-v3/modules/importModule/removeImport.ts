@@ -26,7 +26,7 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
         const importedName = specifier.type === "ImportSpecifier" && specifier.imported?.name;
 
         // For default or namespace import, there's only one occurrence of local identifier.
-        // For named import, there are two occurrences: one imported identifier and one local identifier.
+        // For named import, there can be two occurrences: one imported identifier and one local identifier.
         const identifierNum = importedName && importedName === localName ? 2 : 1;
 
         // Either the identifiers are the only occurences on the page.

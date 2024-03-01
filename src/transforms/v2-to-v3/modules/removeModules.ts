@@ -1,6 +1,7 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 import { removeImportEquals } from "./importEqualsModule";
 import { removeImport } from "./importModule";
+import { removeRequire } from "./requireModule";
 import { ImportType } from "./types";
 
 export const removeModules = (
@@ -10,7 +11,7 @@ export const removeModules = (
 ) => {
   switch (importType) {
     case ImportType.REQUIRE: {
-      // ToDo
+      removeRequire(j, source);
       break;
     }
     case ImportType.IMPORT_EQUALS: {
