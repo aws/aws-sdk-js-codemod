@@ -31,7 +31,7 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
 
         // Either the identifiers are the only occurences on the page.
         // Or there's another specifier with the same name imported from JS SDK v3.
-        return !(identifiers.size() === identifierNum || !isAnotherSpecifier(j, source, localName));
+        return !(identifiers.size() === identifierNum || isAnotherSpecifier(j, source, localName));
       }
     );
 
