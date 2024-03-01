@@ -9,7 +9,9 @@ export const removeImportEquals = (j: JSCodeshift, source: Collection<unknown>) 
   getImportEqualsDeclarations(j, source).forEach((importEqualsDeclaration) => {
     const localName = importEqualsDeclaration.value.id.name;
     const identifiers = source.find(j.Identifier, { name: localName });
-    // One occurrence: local identifier.
+
+    // Either the identifier is the only occurence on the page.
+    // Or there is another specifier with the same name imported from JS SDK v3.
     if (identifiers.size() === 1 || isAnotherSpecifier(j, source, localName)) {
       removeDeclaration(j, source, importEqualsDeclaration.get());
     }
