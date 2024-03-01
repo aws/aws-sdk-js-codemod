@@ -7,6 +7,7 @@ export const removeImportEquals = (j: JSCodeshift, source: Collection<unknown>) 
     const localName = importEqualsDeclaration.value.id.name;
     const identifiers = source.find(j.Identifier, { name: localName });
     // One occurrence: local identifier.
+    // ToDo: Check if there're another import equals from `@aws-sdk/`.
     if (identifiers.size() === 1) {
       removeDeclaration(j, source, importEqualsDeclaration.get());
     }
