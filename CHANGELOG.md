@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.1.2
+
+### Patch Changes
+
+- Transform named import of Credentials ([bfa8e16a5650aabfc2acde7246aa48b722438700](https://github.com/aws/aws-sdk-js-codemod/commit/bfa8e16a5650aabfc2acde7246aa48b722438700))
+
 ## 1.1.1
 
 ### Patch Changes
