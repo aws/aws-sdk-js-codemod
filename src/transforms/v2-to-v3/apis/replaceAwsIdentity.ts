@@ -7,16 +7,23 @@ export interface ReplaceAwsCredentialsOptions {
   importType: ImportType;
 }
 
-const getNewExpression = (identifier: string, className: string) =>
+const getNewExpression = (className: string, identifier?: string) =>
   ({
     type: "NewExpression",
     callee: {
-      type: "MemberExpression",
-      object: {
-        type: "Identifier",
-        name: identifier,
-      },
-      property: { name: className },
+      ...(identifier
+        ? {
+            type: "MemberExpression",
+            object: {
+              type: "Identifier",
+              name: identifier,
+            },
+            property: { name: className },
+          }
+        : {
+            type: "Identifier",
+            name: className,
+          }),
     },
   }) as NewExpression;
 
@@ -25,8 +32,6 @@ export const replaceAwsIdentity = (
   source: Collection<unknown>,
   { v2GlobalName, importType }: ReplaceAwsCredentialsOptions
 ) => {
-  if (!v2GlobalName) return;
-
   for (const [identity, identityMap] of Object.entries({
     Credential: AWS_CREDENTIALS_MAP,
     Token: AWS_TOKEN_MAP,
@@ -37,8 +42,9 @@ export const replaceAwsIdentity = (
     const identityProviderChain = `${identity}ProviderChain`;
     const chainNewExpressions = source.find(
       j.NewExpression,
-      getNewExpression(v2GlobalName, identityProviderChain)
+      getNewExpression(identityProviderChain, v2GlobalName)
     );
+
     if (chainNewExpressions.size() > 0) {
       const localName = "providerChain";
       addNamedModule(j, source, {
@@ -63,7 +69,7 @@ export const replaceAwsIdentity = (
     for (const [v2IdentityName, v3ProviderName] of Object.entries(identityMap)) {
       const credsNewExpressions = source.find(
         j.NewExpression,
-        getNewExpression(v2GlobalName, v2IdentityName)
+        getNewExpression(v2IdentityName, v2GlobalName)
       );
 
       if (credsNewExpressions.size() > 0) {
