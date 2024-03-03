@@ -1,3 +1,3 @@
-import AWS from "aws-sdk";
+import { CredentialProviderChain } from "aws-sdk";
 
-new AWS.CredentialProviderChain(providers);
+new CredentialProviderChain(providers);
