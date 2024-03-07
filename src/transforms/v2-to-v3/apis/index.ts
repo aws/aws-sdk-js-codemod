@@ -7,6 +7,7 @@ export * from "./isS3GetSignedUrlApiUsed";
 export * from "./isS3UploadApiUsed";
 export * from "./removePromiseCalls";
 export * from "./replaceAwsIdentity";
+export * from "./replaceAwsError";
 export * from "./replaceS3GetSignedUrlApi";
 export * from "./replaceS3UploadApi";
 export * from "./replaceWaiterApi";
