@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.0
+
+### Minor Changes
+
+- Transform AWSError to ServiceException ([b8ae45da4debd0b3db57cc2da5c09f5bdd03e9dd](https://github.com/aws/aws-sdk-js-codemod/commit/b8ae45da4debd0b3db57cc2da5c09f5bdd03e9dd))
+
 ## 1.1.2
 
 ### Patch Changes
