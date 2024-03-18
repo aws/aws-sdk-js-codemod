@@ -51,9 +51,9 @@
     "aws-sdk": "2.1563.0",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "^15.2.2",
     "prettier": "3.0.3",
-    "simple-git-hooks": "^2.8.1",
+    "simple-git-hooks": "^2.11.0",
     "tsx": "^3.12.1",
     "typescript": "~5.4.2",
     "vitest": "~1.4.0"
