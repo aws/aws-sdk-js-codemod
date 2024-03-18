@@ -8,7 +8,7 @@ export const getImportType = (j: JSCodeshift, source: Collection<unknown>) =>
   hasImport(j, source)
     ? ImportType.IMPORT
     : hasImportEquals(j, source)
-    ? ImportType.IMPORT_EQUALS
-    : hasRequire(j, source)
-    ? ImportType.REQUIRE
-    : null;
+      ? ImportType.IMPORT_EQUALS
+      : hasRequire(j, source)
+        ? ImportType.REQUIRE
+        : null;
