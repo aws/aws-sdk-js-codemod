@@ -19,8 +19,8 @@ export const getClientNamesRecord = (
     importType === ImportType.REQUIRE
       ? requireModule
       : importType === ImportType.IMPORT_EQUALS
-      ? importEqualsModule
-      : importModule;
+        ? importEqualsModule
+        : importModule;
 
   const specifiersFromNamedImport = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
     (importSpecifier) => importSpecifier.importedName

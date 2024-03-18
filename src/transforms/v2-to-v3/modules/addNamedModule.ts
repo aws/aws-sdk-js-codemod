@@ -16,8 +16,8 @@ export const addNamedModule = (
     importType === ImportType.REQUIRE
       ? requireModule
       : importType === ImportType.IMPORT_EQUALS
-      ? importEqualsModule
-      : importModule;
+        ? importEqualsModule
+        : importModule;
 
   addNamedModule(j, source, addNamedModuleOptions);
 };
