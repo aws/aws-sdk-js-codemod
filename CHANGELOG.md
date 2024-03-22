@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.1
+
+### Patch Changes
+
+- Add an empty param if value is not passed for optional params in callback ([03c00b6375c5977d83e3e30c662ef2d93ac6f18a](https://github.com/aws/aws-sdk-js-codemod/commit/03c00b6375c5977d83e3e30c662ef2d93ac6f18a))
+
 ## 1.2.0
 
 ### Minor Changes
