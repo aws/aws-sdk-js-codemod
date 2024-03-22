@@ -10,6 +10,7 @@ import {
   getClientIdentifiersRecord,
   replaceAwsIdentity,
   replaceAwsError,
+  addEmptyObjectForUndefined,
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import {
@@ -98,6 +99,7 @@ const transformer = async (file: FileInfo, api: API) => {
     }
 
     removePromiseCalls(j, source, clientIdentifiers);
+    addEmptyObjectForUndefined(j, source, clientIdentifiers);
 
     if (v2ClientName === S3) {
       replaceS3GetSignedUrlApi(j, source, clientIdentifiers);
