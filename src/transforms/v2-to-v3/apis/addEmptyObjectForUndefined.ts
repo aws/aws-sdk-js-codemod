@@ -9,7 +9,6 @@ export const addEmptyObjectForUndefined = (
   clientIdentifiers: ClientIdentifier[]
 ): void => {
   for (const clientId of clientIdentifiers) {
-    // Remove .promise() from client API calls.
     source
       .find(j.CallExpression, {
         callee: {
