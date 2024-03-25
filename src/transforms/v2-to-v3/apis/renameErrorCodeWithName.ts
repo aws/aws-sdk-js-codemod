@@ -2,6 +2,19 @@ import { Collection, JSCodeshift, TryStatement } from "jscodeshift";
 
 import { ClientIdentifier } from "../types";
 
+const renameCodeWithName = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
+  errorName: string
+): void => {
+  source
+    .find(j.MemberExpression, {
+      object: { type: "Identifier", name: errorName },
+      property: { type: "Identifier", name: "code" },
+    })
+    .replaceWith(() => j.memberExpression(j.identifier(errorName), j.identifier("name")));
+};
+
 // Renames error.code with error.name.
 export const renameErrorCodeWithName = (
   j: JSCodeshift,
@@ -31,18 +44,7 @@ export const renameErrorCodeWithName = (
           return;
         }
 
-        j(catchClause.body)
-          .find(j.MemberExpression, {
-            object: {
-              type: "Identifier",
-              name: errorParam.name,
-            },
-            property: {
-              type: "Identifier",
-              name: "code",
-            },
-          })
-          .replaceWith(() => j.memberExpression(errorParam, j.identifier("name")));
+        renameCodeWithName(j, j(catchClause.body), errorParam.name);
       });
   }
 };
