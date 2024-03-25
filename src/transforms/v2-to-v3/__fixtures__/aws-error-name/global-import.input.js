@@ -1,11 +1,10 @@
 import AWS from "aws-sdk";
 
 const client = new AWS.S3();
+const Bucket = "bucket-name";
 
 try {
-  await client.createBucket({
-    Bucket: "bucket"
-  }).promise();
+  await client.createBucket({ Bucket }).promise();
 } catch (error) {
   if (error.code === "BucketAlreadyExists") {
     // Handle BucketAlreadyExists error
@@ -13,3 +12,17 @@ try {
     throw error;
   }
 }
+
+client
+  .createBucket({ Bucket })
+  .promise()
+  .then((response) => {
+    // Consume the response
+  })
+  .catch((error) => {
+    if (error.code === "BucketAlreadyExists") {
+      // Handle BucketAlreadyExists error
+    } else {
+      // Handle other error.
+    }
+  });
