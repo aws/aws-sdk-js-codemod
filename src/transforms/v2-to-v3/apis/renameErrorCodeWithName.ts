@@ -1,4 +1,12 @@
-import { Collection, JSCodeshift, TryStatement } from "jscodeshift";
+import {
+  ASTPath,
+  ArrowFunctionExpression,
+  CallExpression,
+  Collection,
+  FunctionExpression,
+  JSCodeshift,
+  TryStatement,
+} from "jscodeshift";
 
 import { ClientIdentifier } from "../types";
 
@@ -15,6 +23,26 @@ const renameCodeWithName = (
     .replaceWith(() => j.memberExpression(j.identifier(errorName), j.identifier("name")));
 };
 
+const getCatchExpression = (
+  j: JSCodeshift,
+  callExpression: ASTPath<CallExpression>
+): ASTPath<CallExpression> | null => {
+  const parentPath = callExpression.parentPath.value;
+  if (parentPath?.type !== "MemberExpression") {
+    return null;
+  }
+
+  const grandParentPath = callExpression.parentPath.parentPath.value;
+  if (grandParentPath?.type !== "CallExpression") {
+    return null;
+  }
+
+  if (parentPath.property.type === "Identifier" && parentPath.property.name === "catch") {
+    return callExpression.parentPath.parentPath;
+  }
+  return getCatchExpression(j, callExpression.parentPath.parentPath);
+};
+
 // Renames error.code with error.name.
 export const renameErrorCodeWithName = (
   j: JSCodeshift,
@@ -22,29 +50,54 @@ export const renameErrorCodeWithName = (
   clientIdentifiers: ClientIdentifier[]
 ): void => {
   for (const clientId of clientIdentifiers) {
-    // Replace error.code with error.name in catch clauses.
-    source
-      .find(j.CallExpression, {
-        callee: {
-          type: "MemberExpression",
-          object: clientId,
-        },
-      })
-      .forEach((callExpression) => {
-        const tryStatement = j(callExpression).closest(j.TryStatement).nodes()[0] as TryStatement;
+    const callExpressions = source.find(j.CallExpression, {
+      callee: { type: "MemberExpression", object: clientId },
+    });
 
-        if (!tryStatement || !tryStatement.handler) {
+    // Replace error.code with error.name in try-catch clauses.
+    callExpressions.forEach((callExpression) => {
+      const tryStatement = j(callExpression).closest(j.TryStatement).nodes()[0] as TryStatement;
+
+      if (!tryStatement || !tryStatement.handler) {
+        return;
+      }
+
+      const catchClause = tryStatement.handler;
+      const errorParam = catchClause.param;
+
+      if (errorParam?.type !== "Identifier") {
+        return;
+      }
+
+      renameCodeWithName(j, j(catchClause.body), errorParam.name);
+    });
+
+    // Replace error.code with error.name in promise catch.
+    callExpressions
+      .map((callExpression) => getCatchExpression(j, callExpression))
+      .forEach((catchExpression) => {
+        if (!catchExpression) {
           return;
         }
 
-        const catchClause = tryStatement.handler;
-        const errorParam = catchClause.param;
+        if (
+          !["ArrowFunctionExpression", "FunctionExpression"].includes(
+            catchExpression.value.arguments[0].type
+          )
+        ) {
+          return;
+        }
+
+        const catchFunction = catchExpression.value.arguments[0] as
+          | FunctionExpression
+          | ArrowFunctionExpression;
+        const errorParam = catchFunction.params[0];
 
         if (errorParam?.type !== "Identifier") {
           return;
         }
 
-        renameCodeWithName(j, j(catchClause.body), errorParam.name);
+        renameCodeWithName(j, j(catchFunction.body), errorParam.name);
       });
   }
 };
