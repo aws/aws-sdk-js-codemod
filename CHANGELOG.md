@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.3
+
+### Patch Changes
+
+- Transform checks for error.code to error.name in promise catch ([5fb11bb463a45fc1cbab6b532cfdf21c6182563e](https://github.com/aws/aws-sdk-js-codemod/commit/5fb11bb463a45fc1cbab6b532cfdf21c6182563e))
+
 ## 1.2.2
 
 ### Patch Changes
