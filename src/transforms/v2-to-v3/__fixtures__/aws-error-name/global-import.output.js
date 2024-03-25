@@ -25,3 +25,16 @@ client
       // Handle other error.
     }
   });
+
+client
+  .createBucket({ Bucket })
+  .then((response) => {
+    // Consume the response
+  })
+  .catch(function (error) {
+    if (error.name === "BucketAlreadyExists") {
+      // Handle BucketAlreadyExists error
+    } else {
+      // Handle other error.
+    }
+  });
