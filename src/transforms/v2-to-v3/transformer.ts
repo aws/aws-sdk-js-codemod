@@ -100,8 +100,8 @@ const transformer = async (file: FileInfo, api: API) => {
     }
 
     removePromiseCalls(j, source, clientIdentifiers);
-    renameErrorCodeWithName(j, source, clientIdentifiers);
     addEmptyObjectForUndefined(j, source, clientIdentifiers);
+    renameErrorCodeWithName(j, source, clientIdentifiers);
 
     if (v2ClientName === S3) {
       replaceS3GetSignedUrlApi(j, source, clientIdentifiers);

@@ -129,5 +129,27 @@ export const renameErrorCodeWithName = (
 
         renameCodeWithName(j, j(failureCallbackFunction.body), errorParam.name);
       });
+
+    // Replace error.code with error.name in callbacks.
+    callExpressions.forEach((callExpression) => {
+      if (callExpression.value.arguments.length !== 2) {
+        return;
+      }
+
+      if (!FUNCTION_EXPRESSION_TYPES.includes(callExpression.value.arguments[1].type)) {
+        return;
+      }
+
+      const callbackFunction = callExpression.value.arguments[1] as
+        | FunctionExpression
+        | ArrowFunctionExpression;
+      const errorParam = callbackFunction.params[0];
+
+      if (errorParam?.type !== "Identifier") {
+        return;
+      }
+
+      renameCodeWithName(j, j(callbackFunction.body), errorParam.name);
+    });
   }
 };
