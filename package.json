@@ -27,9 +27,7 @@
   ],
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
-  "bin": {
-    "aws-sdk-js-codemod": "bin/aws-sdk-js-codemod"
-  },
+  "bin": "bin/aws-sdk-js-codemod",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aws/aws-sdk-js-codemod.git"
