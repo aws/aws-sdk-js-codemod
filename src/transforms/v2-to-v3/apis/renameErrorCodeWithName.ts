@@ -10,6 +10,8 @@ import {
 
 import { ClientIdentifier } from "../types";
 
+const FUNCTION_EXPRESSION_TYPES = ["ArrowFunctionExpression", "FunctionExpression"];
+
 const renameCodeWithName = (
   j: JSCodeshift,
   source: Collection<unknown>,
@@ -23,9 +25,10 @@ const renameCodeWithName = (
     .replaceWith(() => j.memberExpression(j.identifier(errorName), j.identifier("name")));
 };
 
-const getCatchExpression = (
+const getFirstExpression = (
   j: JSCodeshift,
-  callExpression: ASTPath<CallExpression>
+  callExpression: ASTPath<CallExpression>,
+  expressionName: string
 ): ASTPath<CallExpression> | null => {
   const parentPath = callExpression.parentPath.value;
   if (parentPath?.type !== "MemberExpression") {
@@ -37,10 +40,10 @@ const getCatchExpression = (
     return null;
   }
 
-  if (parentPath.property.type === "Identifier" && parentPath.property.name === "catch") {
+  if (parentPath.property.type === "Identifier" && parentPath.property.name === expressionName) {
     return callExpression.parentPath.parentPath;
   }
-  return getCatchExpression(j, callExpression.parentPath.parentPath);
+  return getFirstExpression(j, callExpression.parentPath.parentPath, expressionName);
 };
 
 // Renames error.code with error.name.
@@ -74,17 +77,13 @@ export const renameErrorCodeWithName = (
 
     // Replace error.code with error.name in promise catch.
     callExpressions
-      .map((callExpression) => getCatchExpression(j, callExpression))
+      .map((callExpression) => getFirstExpression(j, callExpression, "catch"))
       .forEach((catchExpression) => {
         if (!catchExpression) {
           return;
         }
 
-        if (
-          !["ArrowFunctionExpression", "FunctionExpression"].includes(
-            catchExpression.value.arguments[0].type
-          )
-        ) {
+        if (!FUNCTION_EXPRESSION_TYPES.includes(catchExpression.value.arguments[0].type)) {
           return;
         }
 
@@ -98,6 +97,37 @@ export const renameErrorCodeWithName = (
         }
 
         renameCodeWithName(j, j(catchFunction.body), errorParam.name);
+      });
+
+    // Replace error.code with error.name in promise failure callback.
+    callExpressions
+      .map((callExpression) => getFirstExpression(j, callExpression, "then"))
+      .forEach((thenExpression) => {
+        if (!thenExpression) {
+          return;
+        }
+
+        if (thenExpression.value.arguments.length !== 2) {
+          return;
+        }
+
+        if (
+          !FUNCTION_EXPRESSION_TYPES.includes(thenExpression.value.arguments[0].type) ||
+          !FUNCTION_EXPRESSION_TYPES.includes(thenExpression.value.arguments[1].type)
+        ) {
+          return;
+        }
+
+        const failureCallbackFunction = thenExpression.value.arguments[1] as
+          | FunctionExpression
+          | ArrowFunctionExpression;
+        const errorParam = failureCallbackFunction.params[0];
+
+        if (errorParam?.type !== "Identifier") {
+          return;
+        }
+
+        renameCodeWithName(j, j(failureCallbackFunction.body), errorParam.name);
       });
   }
 };
