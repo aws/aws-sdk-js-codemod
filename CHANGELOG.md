@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.4
+
+### Patch Changes
+
+- Transform checks for error.code to error.name in promise failure callbacks ([563b51e1afeeb158de762f9f9bd402993983f69f](https://github.com/aws/aws-sdk-js-codemod/commit/563b51e1afeeb158de762f9f9bd402993983f69f))
+
 ## 1.2.3
 
 ### Patch Changes
