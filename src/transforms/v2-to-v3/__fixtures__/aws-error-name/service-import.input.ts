@@ -45,3 +45,21 @@ export const funcPromiseCatchFn = async (client: S3) => {
       }
     });
 }
+
+export const funcPromiseCatchCallback = async (client: S3) => {
+  client
+    .createBucket({ Bucket })
+    .promise()
+    .then(
+      (response) => {
+        // Consume the response
+      },
+      (error) => {
+        if (error.code === "BucketAlreadyExists") {
+          // Handle BucketAlreadyExists error
+        } else {
+          // Handle other error.
+        }
+      }
+    );
+}
