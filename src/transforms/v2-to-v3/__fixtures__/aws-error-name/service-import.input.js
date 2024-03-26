@@ -40,3 +40,19 @@ client
       // Handle other error.
     }
   });
+
+client
+  .createBucket({ Bucket })
+  .promise()
+  .then(
+    (response) => {
+      // Consume the response
+    },
+    (error) => {
+      if (error.code === "BucketAlreadyExists") {
+        // Handle BucketAlreadyExists error
+      } else {
+        // Handle other error.
+      }
+    }
+  );
