@@ -1936,6 +1936,7 @@ __metadata:
     aws-sdk: "npm:2.1563.0"
     eslint: "npm:^8.57.0"
     eslint-plugin-import: "npm:^2.29.1"
+    eslint-plugin-sort-export-all: "npm:^1.4.1"
     jscodeshift: "npm:0.15.2"
     lint-staged: "npm:^15.2.2"
     prettier: "npm:3.2.5"
@@ -2974,6 +2975,17 @@ __metadata:
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
   checksum: 10c0/5f35dfbf4e8e67f741f396987de9504ad125c49f4144508a93282b4ea0127e052bde65ab6def1f31b6ace6d5d430be698333f75bdd7dca3bc14226c92a083196
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-sort-export-all@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "eslint-plugin-sort-export-all@npm:1.4.1"
+  dependencies:
+    natural-compare: "npm:^1.4.0"
+  peerDependencies:
+    eslint: ^4 || ^5 || ^6 || ^7 || ^8
+  checksum: 10c0/da105c7625fffd08a36bd5d7e4c79ee69d0011232125b55aec2d48396e82ef8cc906bb4582b9b07159877f185ce6452470df12e44cb450977219ff8fd3008feb
   languageName: node
   linkType: hard
 
