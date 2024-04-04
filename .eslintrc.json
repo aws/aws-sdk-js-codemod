@@ -5,6 +5,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:import/recommended",
+    "plugin:sort-export-all/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
