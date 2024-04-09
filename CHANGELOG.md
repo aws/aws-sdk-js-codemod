@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.6
+
+### Patch Changes
+
+- Replace client type reference if client names are different in v2 and v3 ([14eb23a1b6ebb57db9c6d3e8780737e978da33c7](https://github.com/aws/aws-sdk-js-codemod/commit/14eb23a1b6ebb57db9c6d3e8780737e978da33c7))
+
 ## 1.2.5
 
 ### Patch Changes
