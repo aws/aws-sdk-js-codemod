@@ -27,40 +27,21 @@ export const replaceTSTypeReference = (
   const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
   const clientTypeOptions = { v2ClientName, v2ClientLocalName };
 
-  if (v2GlobalName) {
-    // Replace type reference to client created with global name.
-    source
-      .find(j.TSTypeReference, {
-        typeName: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
-      })
-      .replaceWith((v2ClientType) =>
-        j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
-      );
-
-    // Replace reference to client types created with global name.
-    source
-      .find(j.TSTypeReference, {
-        typeName: {
-          left: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
-        },
-      })
-      .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
-      .replaceWith((v2ClientType) => {
-        const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
-        return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
-      });
-  }
-
-  // Replace client type reference if client names are different in v2 and v3.
-  if (v2ClientName !== v3ClientName) {
-    source
-      .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientName } })
-      .replaceWith(() => j.tsTypeReference(j.identifier(v3ClientName)));
-  }
-
+  // Replace type reference to clients
   source
     .find(j.TSTypeReference, {
-      typeName: { left: getTSQualifiedNameFromClientName(v2ClientLocalName) },
+      typeName: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
+    })
+    .replaceWith((v2ClientType) =>
+      j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
+    );
+
+  // Replace reference to client types.
+  source
+    .find(j.TSTypeReference, {
+      typeName: {
+        left: getTSQualifiedNameFromClientName(v2ClientLocalName, v2GlobalName),
+      },
     })
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
     .replaceWith((v2ClientType) => {
