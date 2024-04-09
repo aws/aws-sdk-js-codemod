@@ -30,19 +30,9 @@ export const getClientTypeNames = (
 ): string[] => {
   const clientTypeNames = [];
 
-  if (v2GlobalName) {
-    clientTypeNames.push(
-      ...getRightIdentifierName(j, source, {
-        typeName: {
-          left: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
-        },
-      })
-    );
-  }
-
   clientTypeNames.push(
     ...getRightIdentifierName(j, source, {
-      typeName: { left: getTSQualifiedNameFromClientName(v2ClientLocalName) },
+      typeName: { left: getTSQualifiedNameFromClientName(v2ClientLocalName, v2GlobalName) },
     })
   );
 

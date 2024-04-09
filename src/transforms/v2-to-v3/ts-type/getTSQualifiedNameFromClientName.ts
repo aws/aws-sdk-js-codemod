@@ -3,11 +3,11 @@ import { Identifier, TSQualifiedName } from "jscodeshift";
 export type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 
 export const getTSQualifiedNameFromClientName = (
-  v2ClientName: string,
+  clientName: string,
   v2GlobalName?: string
 ): DeepPartial<TSQualifiedName | Identifier> => {
   // Support for DynamoDB.DocumentClient
-  const [clientNamePrefix, clientNameSuffix] = v2ClientName.split(".");
+  const [clientNamePrefix, clientNameSuffix] = clientName.split(".");
 
   if (v2GlobalName) {
     if (clientNameSuffix) {
