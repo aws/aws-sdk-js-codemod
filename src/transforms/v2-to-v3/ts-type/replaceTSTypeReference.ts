@@ -51,6 +51,13 @@ export const replaceTSTypeReference = (
       });
   }
 
+  // Replace client type reference if client names are different in v2 and v3.
+  if (v2ClientName !== v3ClientName) {
+    source
+      .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientName } })
+      .replaceWith(() => j.tsTypeReference(j.identifier(v3ClientName)));
+  }
+
   const [clientNamePrefix, clientNameSuffix] = v2ClientLocalName.split(".");
   // Replace reference to client types created with client module.
   source
