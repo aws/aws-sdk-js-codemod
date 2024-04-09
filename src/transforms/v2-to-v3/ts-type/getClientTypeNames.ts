@@ -42,7 +42,7 @@ export const getClientTypeNames = (
 
   clientTypeNames.push(
     ...getRightIdentifierName(j, source, {
-      typeName: getTSQualifiedNameFromClientName(v2ClientLocalName),
+      typeName: { left: getTSQualifiedNameFromClientName(v2ClientLocalName) },
     })
   );
 
