@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.7
+
+### Patch Changes
+
+- Simplify Typescript Type replacements ([577ad2fb53675f63977d6d13586a5ddcbf7c2293](https://github.com/aws/aws-sdk-js-codemod/commit/577ad2fb53675f63977d6d13586a5ddcbf7c2293))
+
 ## 1.2.6
 
 ### Patch Changes
