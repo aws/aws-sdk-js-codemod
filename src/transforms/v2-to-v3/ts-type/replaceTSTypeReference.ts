@@ -31,7 +31,7 @@ export const replaceTSTypeReference = (
     // Replace type reference to client created with global name.
     source
       .find(j.TSTypeReference, {
-        typeName: getTSQualifiedNameFromClientName(v2GlobalName, v2ClientName),
+        typeName: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
       })
       .replaceWith((v2ClientType) =>
         j.tsTypeReference(j.identifier(v3ClientName), v2ClientType.node.typeParameters)
@@ -41,7 +41,7 @@ export const replaceTSTypeReference = (
     source
       .find(j.TSTypeReference, {
         typeName: {
-          left: getTSQualifiedNameFromClientName(v2GlobalName, v2ClientName),
+          left: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
         },
       })
       .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))

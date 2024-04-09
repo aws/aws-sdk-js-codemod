@@ -3,7 +3,7 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference }
 import { ImportSpecifierType } from "../modules";
 import { getImportSpecifiers } from "../modules/importModule";
 import { getClientDeepImportPath } from "../utils";
-import { DeepPartial, getClientTypeNameObject } from "./getClientTypeNameObject";
+import { DeepPartial, getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 
 export interface GetClientTypeNamesOptions {
   v2ClientName: string;
@@ -34,7 +34,7 @@ export const getClientTypeNames = (
     clientTypeNames.push(
       ...getRightIdentifierName(j, source, {
         typeName: {
-          left: getClientTypeNameObject(v2ClientName, v2GlobalName),
+          left: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
         },
       })
     );
@@ -42,7 +42,7 @@ export const getClientTypeNames = (
 
   clientTypeNames.push(
     ...getRightIdentifierName(j, source, {
-      typeName: getClientTypeNameObject(v2ClientLocalName),
+      typeName: getTSQualifiedNameFromClientName(v2ClientLocalName),
     })
   );
 

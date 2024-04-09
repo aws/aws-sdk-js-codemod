@@ -1,24 +1,39 @@
 import { TSQualifiedName } from "jscodeshift";
 
-export const getTSQualifiedNameFromClientName = (
-  v2GlobalName: string,
-  clientName: string
-): TSQualifiedName => {
-  // Support for DynamoDB.DocumentClient
-  const [clientNamePrefix, clientNameSuffix] = clientName.split(".");
+export type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 
-  if (clientNameSuffix) {
+export const getTSQualifiedNameFromClientName = (
+  v2ClientName: string,
+  v2GlobalName?: string
+): DeepPartial<TSQualifiedName> => {
+  // Support for DynamoDB.DocumentClient
+  const [clientName, subClientName] = v2ClientName.split(".");
+
+  if (v2GlobalName) {
+    if (subClientName) {
+      return {
+        left: {
+          left: { type: "Identifier", name: v2GlobalName },
+          right: { type: "Identifier", name: clientName },
+        },
+        right: { type: "Identifier", name: subClientName },
+      };
+    }
+
     return {
-      left: {
-        left: { type: "Identifier", name: v2GlobalName },
-        right: { type: "Identifier", name: clientNamePrefix },
-      },
-      right: { type: "Identifier", name: clientNameSuffix },
-    } as TSQualifiedName;
+      left: { type: "Identifier", name: v2GlobalName },
+      right: { type: "Identifier", name: clientName },
+    };
   }
 
-  return {
-    left: { type: "Identifier", name: v2GlobalName },
-    right: { type: "Identifier", name: clientNamePrefix },
-  } as TSQualifiedName;
+  if (subClientName) {
+    return {
+      left: {
+        left: { type: "Identifier", name: clientName },
+        right: { type: "Identifier", name: subClientName },
+      },
+    };
+  }
+
+  return { left: { type: "Identifier", name: clientName } };
 };
