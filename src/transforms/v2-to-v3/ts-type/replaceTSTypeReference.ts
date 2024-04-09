@@ -59,7 +59,9 @@ export const replaceTSTypeReference = (
   }
 
   source
-    .find(j.TSTypeReference, { typeName: getTSQualifiedNameFromClientName(v2ClientLocalName) })
+    .find(j.TSTypeReference, {
+      typeName: { left: getTSQualifiedNameFromClientName(v2ClientLocalName) },
+    })
     .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
     .replaceWith((v2ClientType) => {
       const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
