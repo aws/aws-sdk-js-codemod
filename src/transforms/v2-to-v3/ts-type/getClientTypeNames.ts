@@ -3,14 +3,13 @@ import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference }
 import { ImportSpecifierType } from "../modules";
 import { getImportSpecifiers } from "../modules/importModule";
 import { getClientDeepImportPath } from "../utils";
+import { DeepPartial, getClientTypeNameObject } from "./getClientTypeNameObject";
 
 export interface GetClientTypeNamesOptions {
   v2ClientName: string;
   v2GlobalName?: string;
   v2ClientLocalName: string;
 }
-
-type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
 
 const getRightIdentifierName = (
   j: JSCodeshift,
@@ -32,26 +31,10 @@ export const getClientTypeNames = (
   const clientTypeNames = [];
 
   if (v2GlobalName) {
-    // Support for DynamoDB.DocumentClient
-    const [clientName, subClientName] = v2ClientName.split(".");
-
     clientTypeNames.push(
       ...getRightIdentifierName(j, source, {
         typeName: {
-          left: {
-            ...(subClientName
-              ? {
-                  left: {
-                    left: { type: "Identifier", name: v2GlobalName },
-                    right: { type: "Identifier", name: clientName },
-                  },
-                  right: { type: "Identifier", name: subClientName },
-                }
-              : {
-                  left: { type: "Identifier", name: v2GlobalName },
-                  right: { type: "Identifier", name: clientName },
-                }),
-          },
+          left: getClientTypeNameObject(v2ClientName, v2GlobalName),
         },
       })
     );

@@ -1,4 +1,11 @@
-export const getClientTypeNameObject = (v2ClientName: string, v2GlobalName?: string) => {
+import { TSQualifiedName } from "jscodeshift";
+
+export type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
+
+export const getClientTypeNameObject = (
+  v2ClientName: string,
+  v2GlobalName?: string
+): DeepPartial<TSQualifiedName> => {
   // Support for DynamoDB.DocumentClient
   const [clientName, subClientName] = v2ClientName.split(".");
 
