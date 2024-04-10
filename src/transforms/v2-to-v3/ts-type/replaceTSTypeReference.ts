@@ -29,12 +29,18 @@ export const replaceTSTypeReference = (
 
   // DynamoDb DocumentClient types need to be updated first.
   if (v2ClientName === DYNAMODB) {
+    const ddbClientLocalName = `${v2ClientLocalName}.${DOCUMENT_CLIENT}`;
+
     replaceTSTypeReference(j, source, {
       ...options,
       v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
-      v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
+      v2ClientLocalName: ddbClientLocalName,
       v3ClientName: DYNAMODB_DOCUMENT,
     });
+
+    source
+      .find(j.TSTypeReference, { typeName: getTSQualifiedNameFromClientName(ddbClientLocalName) })
+      .replaceWith(() => j.tsTypeReference(j.identifier(DYNAMODB_DOCUMENT)));
   }
 
   if (v2GlobalName) {
