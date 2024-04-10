@@ -43,6 +43,11 @@ export const addClientModules = (
 
   // Add named import for types, if needed.
   for (const v3ClientType of v3ClientTypes) {
+    if (v2ClientName === DYNAMODB && v3ClientType === DOCUMENT_CLIENT) {
+      // Not a type, but a class. Skip adding import for DocumentClient.
+      continue;
+    }
+
     addNamedModule(j, source, {
       importType,
       localName: v3ClientType,
@@ -106,6 +111,7 @@ export const addClientModules = (
 
     const docClientTypes = getV3ClientTypes(j, source, docClientOptions);
     const docClientNewExpressionCount = getNewExpressionCount(j, source, docClientOptions);
+    const docClientTSTypeRefCount = getClientTSTypeRefCount(j, source, docClientOptions);
 
     // Add named import for types, if needed.
     for (const docClientType of docClientTypes) {
@@ -116,7 +122,7 @@ export const addClientModules = (
       });
     }
 
-    if (docClientNewExpressionCount > 0) {
+    if (docClientNewExpressionCount > 0 || docClientTSTypeRefCount > 0) {
       addNamedModule(j, source, {
         importType,
         localName: DYNAMODB_DOCUMENT,

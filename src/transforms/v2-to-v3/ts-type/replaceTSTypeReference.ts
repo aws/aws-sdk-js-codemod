@@ -1,6 +1,6 @@
 import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
 import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
 import { getV3ClientType } from "./getV3ClientType";
@@ -27,6 +27,22 @@ export const replaceTSTypeReference = (
   const { v2ClientName, v2ClientLocalName, v2GlobalName, v3ClientName } = options;
   const clientTypeOptions = { v2ClientName, v2ClientLocalName };
 
+  // DynamoDb DocumentClient types need to be updated first.
+  if (v2ClientName === DYNAMODB) {
+    const ddbClientLocalName = `${v2ClientLocalName}.${DOCUMENT_CLIENT}`;
+
+    replaceTSTypeReference(j, source, {
+      ...options,
+      v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
+      v2ClientLocalName: ddbClientLocalName,
+      v3ClientName: DYNAMODB_DOCUMENT,
+    });
+
+    source
+      .find(j.TSTypeReference, { typeName: getTSQualifiedNameFromClientName(ddbClientLocalName) })
+      .replaceWith(() => j.tsTypeReference(j.identifier(DYNAMODB_DOCUMENT)));
+  }
+
   if (v2GlobalName) {
     // Replace type reference to client created with global name.
     source
@@ -51,12 +67,9 @@ export const replaceTSTypeReference = (
       });
   }
 
-  // Replace client type reference if client names are different in v2 and v3.
-  if (v2ClientName !== v3ClientName) {
-    source
-      .find(j.TSTypeReference, { typeName: { type: "Identifier", name: v2ClientName } })
-      .replaceWith(() => j.tsTypeReference(j.identifier(v3ClientName)));
-  }
+  source
+    .find(j.TSTypeReference, { typeName: getTSQualifiedNameFromClientName(v2ClientName) })
+    .replaceWith(() => j.tsTypeReference(j.identifier(v3ClientName)));
 
   source
     .find(j.TSTypeReference, {
@@ -82,13 +95,5 @@ export const replaceTSTypeReference = (
         const v2ClientTypeName = (v2ClientType.node.typeName as Identifier).name;
         return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
       });
-  }
-
-  if (v2ClientName === DYNAMODB) {
-    replaceTSTypeReference(j, source, {
-      ...options,
-      v2ClientName: DYNAMODB_DOCUMENT_CLIENT,
-      v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}`,
-    });
   }
 };

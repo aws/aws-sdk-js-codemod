@@ -1,5 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
+import { getTSQualifiedNameFromClientName } from "../ts-type";
 import { ClientModulesOptions } from "./types";
 
 export const getClientTSTypeRefCount = (
@@ -11,16 +12,13 @@ export const getClientTSTypeRefCount = (
 
   if (v2GlobalName) {
     const clienTSTypeRefFromGlobalName = source.find(j.TSTypeReference, {
-      typeName: {
-        left: { type: "Identifier", name: v2GlobalName },
-        right: { type: "Identifier", name: v2ClientName },
-      },
+      typeName: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
     });
     clientTSTypeRefCount += clienTSTypeRefFromGlobalName.length;
   }
 
   const clienTSTypeRefFromClientLocalName = source.find(j.TSTypeReference, {
-    typeName: { type: "Identifier", name: v2ClientLocalName },
+    typeName: getTSQualifiedNameFromClientName(v2ClientLocalName),
   });
   clientTSTypeRefCount += clienTSTypeRefFromClientLocalName.length;
 
