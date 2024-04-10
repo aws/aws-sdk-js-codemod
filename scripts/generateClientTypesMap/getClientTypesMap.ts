@@ -1,6 +1,6 @@
 import jscodeshift, { Identifier, TSArrayType, TSTypeLiteral, TSTypeReference } from "jscodeshift";
 
-import { CLIENT_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
+import { CLIENT_NAMES_MAP, DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config";
 import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
 import { getTypesSource } from "./getTypesSource";
 
@@ -25,7 +25,12 @@ export const getClientTypesMap = async (clientName: string): Promise<Record<stri
       tsTypes
         .filter((tsType) => tsType.typeAnnotation.type === type)
         .forEach((tsType) => {
-          clientTypesMap[tsType.id.name] = value;
+          const { name } = tsType.id;
+          if (clientName === DOCUMENT_CLIENT && name === "AttributeValue" && value === "any") {
+            clientTypesMap[name] = "NativeAttributeValue";
+          } else {
+            clientTypesMap[name] = value;
+          }
         });
     }
 
