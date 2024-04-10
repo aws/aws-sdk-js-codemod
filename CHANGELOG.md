@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.8
+
+### Patch Changes
+
+- Transform DocumentClient AttributeValue to lib-dynamodb NativeAttributeValue ([fbba1e97937f8883a7ab5f68b0ac6a14b18c9bc9](https://github.com/aws/aws-sdk-js-codemod/commit/fbba1e97937f8883a7ab5f68b0ac6a14b18c9bc9))
+
 ## 1.2.7
 
 ### Patch Changes
