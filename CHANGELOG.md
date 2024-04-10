@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.2.7
+
+### Patch Changes
+
+- Transform DynamoDB.DocumentClient type ([a1c0cd5ffaff0b28244361d83a290e9021de2be2](https://github.com/aws/aws-sdk-js-codemod/commit/a1c0cd5ffaff0b28244361d83a290e9021de2be2))
+
 ## 1.2.6
 
 ### Patch Changes
