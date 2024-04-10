@@ -1,7 +1,3 @@
-import { AccessAnalyzer as AccessAnalyzerClient } from "@aws-sdk/client-accessanalyzer";
-import { ACM as ACMClient } from "@aws-sdk/client-acm";
-import { ApplicationDiscoveryService as DiscoveryClient } from "@aws-sdk/client-application-discovery-service";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
 
-let accessAnalyzerClient: AccessAnalyzerClient;
-let discoveryClient: DiscoveryClient;
-let acmClient: ACMClient;
+let client: DynamoDBDocument;

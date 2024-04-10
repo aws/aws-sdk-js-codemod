@@ -1,7 +1,3 @@
-import AccessAnalyzer from "aws-sdk/clients/accessanalyzer";
-import Discovery from "aws-sdk/clients/discovery";
-import ACM from "aws-sdk/clients/acm";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 
-let accessAnalyzerClient: AccessAnalyzer;
-let discoveryClient: Discovery;
-let acmClient: ACM;
+let client: DynamoDB.DocumentClient;
