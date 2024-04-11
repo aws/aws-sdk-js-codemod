@@ -1,5 +1,13 @@
 # aws-sdk-js-codemod
 
+## 1.3.2
+
+### Patch Changes
+
+- Disable DocumentClient deep import unsupported comments ([2615e0154dba42216e12af914903db7c3bb0c0fc](https://github.com/aws/aws-sdk-js-codemod/commit/2615e0154dba42216e12af914903db7c3bb0c0fc))
+- Use 'not supported' constant for early return ([64f1f38ead68f3585d4a9b0aa5f40718f9b70ec0](https://github.com/aws/aws-sdk-js-codemod/commit/64f1f38ead68f3585d4a9b0aa5f40718f9b70ec0))
+- Transform clients imported from aws-sdk/clients/all ([81d863f969ce7761866fe277cf2e605ea91113cd](https://github.com/aws/aws-sdk-js-codemod/commit/81d863f969ce7761866fe277cf2e605ea91113cd))
+
 ## 1.3.1
 
 ### Patch Changes
