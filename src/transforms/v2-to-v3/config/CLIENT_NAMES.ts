@@ -179,7 +179,6 @@ export const CLIENT_NAMES = [
   "IoTFleetHub",
   "IoTFleetWise",
   "IoTJobsDataPlane",
-  "IoTRoboRunner",
   "IoTSecureTunneling",
   "IoTSiteWise",
   "IoTThingsGraph",

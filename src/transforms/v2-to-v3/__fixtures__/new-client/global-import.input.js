@@ -181,7 +181,6 @@ new AWS.IoTEventsData();
 new AWS.IoTFleetHub();
 new AWS.IoTFleetWise();
 new AWS.IoTJobsDataPlane();
-new AWS.IoTRoboRunner();
 new AWS.IoTSecureTunneling();
 new AWS.IoTSiteWise();
 new AWS.IoTThingsGraph();
