@@ -16,3 +16,20 @@ class ClientClassMember {
     return this.clientInClass.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
   }
 }
+
+// Client as class member with creation inside constructor
+class ClientClassMemberConstructor {
+  private clientInClassCtr: AWS.DynamoDB;
+  
+  constructor() {
+    this.clientInClassCtr = new AWS.DynamoDB();
+  }
+
+  async listTables() {
+    return this.clientInClassCtr.listTables().promise();
+  }
+
+  async listTagsOfResource() {
+    return this.clientInClassCtr.listTagsOfResource({ ResourceArn: "STRING_VALUE" }).promise();
+  }
+}

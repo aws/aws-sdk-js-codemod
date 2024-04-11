@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift, NewExpression } from "jscodeshift";
+import { Collection, Identifier, JSCodeshift, MemberExpression, NewExpression } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientNewExpression } from "../utils";
@@ -15,10 +15,7 @@ const getNamesFromVariableDeclarator = (
   newExpression: NewExpression
 ) =>
   source
-    .find(j.VariableDeclarator, {
-      id: { type: "Identifier" },
-      init: newExpression,
-    })
+    .find(j.VariableDeclarator, { id: { type: "Identifier" }, init: newExpression })
     .nodes()
     .map((variableDeclarator) => (variableDeclarator.id as Identifier).name);
 
@@ -28,12 +25,29 @@ const getNamesFromAssignmentPattern = (
   newExpression: NewExpression
 ) =>
   source
-    .find(j.AssignmentPattern, {
-      left: { type: "Identifier" },
+    .find(j.AssignmentPattern, { left: { type: "Identifier" }, right: newExpression })
+    .nodes()
+    .map((assignmentPattern) => (assignmentPattern.left as Identifier).name);
+
+const getNamesFromThisMemberExpression = (
+  j: JSCodeshift,
+  source: Collection<unknown>,
+  newExpression: NewExpression
+) =>
+  source
+    .find(j.AssignmentExpression, {
+      left: {
+        type: "MemberExpression",
+        object: { type: "ThisExpression" },
+        property: { type: "Identifier" },
+      },
       right: newExpression,
     })
     .nodes()
-    .map((assignmentPattern) => (assignmentPattern.left as Identifier).name);
+    .map(
+      (assignmentExpression) =>
+        ((assignmentExpression.left as MemberExpression).property as Identifier).name
+    );
 
 export const getClientIdNamesFromNewExpr = (
   j: JSCodeshift,
@@ -43,7 +57,11 @@ export const getClientIdNamesFromNewExpr = (
   const namesFromGlobalModule = [];
   const namesFromServiceModule = [];
 
-  for (const getNames of [getNamesFromVariableDeclarator, getNamesFromAssignmentPattern]) {
+  for (const getNames of [
+    getNamesFromVariableDeclarator,
+    getNamesFromAssignmentPattern,
+    getNamesFromThisMemberExpression,
+  ]) {
     if (v2GlobalName) {
       namesFromGlobalModule.push(
         ...getNames(j, source, getClientNewExpression({ v2GlobalName, v2ClientName }))

@@ -8,8 +8,8 @@ export const getClientIdThisExpressions = (
   source: Collection<unknown>,
   clientIdentifiers: Identifier[]
 ): ThisMemberExpression[] =>
-  clientIdentifiers.flatMap((clientIdentifier) =>
-    source
+  clientIdentifiers.flatMap((clientIdentifier) => {
+    const clientIdsFromThisExpressionAssignment = source
       .find(j.AssignmentExpression, {
         left: thisMemberExpression as MemberExpression,
         right: clientIdentifier,
@@ -24,5 +24,25 @@ export const getClientIdThisExpressions = (
               name: ((assignmentExpression.left as MemberExpression).property as Identifier).name,
             },
           }) as ThisMemberExpression
-      )
-  );
+      );
+
+    const clientIdsFromThisExpression = source
+      .find(j.MemberExpression, {
+        type: "MemberExpression",
+        object: { type: "ThisExpression" },
+        property: clientIdentifier,
+      })
+      .nodes()
+      .map(
+        (memberExpression) =>
+          ({
+            ...thisMemberExpression,
+            property: {
+              type: "Identifier",
+              name: (memberExpression.property as Identifier).name,
+            },
+          }) as ThisMemberExpression
+      )[0];
+
+    return [...clientIdsFromThisExpressionAssignment, clientIdsFromThisExpression];
+  });
