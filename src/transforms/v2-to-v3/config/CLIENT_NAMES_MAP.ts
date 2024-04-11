@@ -1,4 +1,5 @@
 import { CLIENT_NAMES } from "./CLIENT_NAMES";
+import { DOCUMENT_CLIENT, DYNAMODB_DOCUMENT_CLIENT } from "./constants";
 
 // The key is the client name in v2, and value is the client name in v3.
 export const CLIENT_NAMES_MAP: Record<string, string> = {
@@ -30,4 +31,5 @@ export const CLIENT_NAMES_MAP: Record<string, string> = {
   SavingsPlans: "Savingsplans",
   StepFunctions: "SFN",
   TranscribeService: "Transcribe",
+  [DYNAMODB_DOCUMENT_CLIENT]: DOCUMENT_CLIENT,
 };
