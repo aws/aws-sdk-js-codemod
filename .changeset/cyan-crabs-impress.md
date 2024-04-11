@@ -2,4 +2,4 @@
 "aws-sdk-js-codemod": patch
 ---
 
-Transform global client imported from 'aws-sdk/global'
+Transform global imported from 'aws-sdk/global'
