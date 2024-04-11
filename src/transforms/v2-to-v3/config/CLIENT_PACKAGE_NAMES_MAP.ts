@@ -9,6 +9,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("-chime-sdk", "-chime-sdk-")
         .replace("client-amplify-", "client-amplify")
         .replace("client-bcmdata-exports", "client-bcm-data-exports")
+        .replace("client-control-catalog", "client-controlcatalog")
         .replace("client-clean-rooms-ml", "client-cleanroomsml")
         .replace("client-cloud-", "client-cloud")
         .replace("client-code-", "client-code")
@@ -26,6 +27,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
         .replace("client-sage-maker", "client-sagemaker")
         .replace("client-security-", "client-security")
         .replace("client-supply-chain", "client-supplychain")
+        .replace("client-timestream-influx-db", "client-timestream-influxdb")
         .replace("client-trusted-advisor", "client-trustedadvisor")
         .replace("client-work-", "client-work"),
     }),
