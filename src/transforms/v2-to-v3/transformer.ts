@@ -1,7 +1,6 @@
 import { API, FileInfo } from "jscodeshift";
 
 import {
-  addNotSupportedComments,
   addNotSupportedClientComments,
   removePromiseCalls,
   replaceWaiterApi,
@@ -48,8 +47,6 @@ const transformer = async (file: FileInfo, api: API) => {
     // Skip transformation, since no import/require statements found for "aws-sdk" package.
     return file.source;
   }
-
-  addNotSupportedComments(j, source, importType);
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
