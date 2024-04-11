@@ -55,7 +55,6 @@ const transformer = async (file: FileInfo, api: API) => {
   }
 
   replaceDeepImport(j, source, { fromPath: "aws-sdk/global", toPath: PACKAGE_NAME });
-  replaceDeepImport(j, source, { fromPath: "aws-sdk/lib/core", toPath: PACKAGE_NAME });
   replaceDeepImport(j, source, { fromPath: "aws-sdk/clients/all", toPath: PACKAGE_NAME });
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
