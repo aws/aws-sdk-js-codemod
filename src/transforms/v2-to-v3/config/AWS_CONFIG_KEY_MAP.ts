@@ -26,6 +26,7 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     newKeyName: "credentials",
     description: "The credentials in JS SDK v3 accepts providers.",
   },
+  customUserAgent: {},
   endpoint: {},
   endpointCacheSize: {},
   endpointDiscoveryEnabled: {},
