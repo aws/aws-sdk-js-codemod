@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.3.1
+
+### Patch Changes
+
+- Transform promise() on APIs called on client created inside constructor ([d440d3ded38c5348867dcb8b9968b491bed1fd61](https://github.com/aws/aws-sdk-js-codemod/commit/d440d3ded38c5348867dcb8b9968b491bed1fd61))
+
 ## 1.3.0
 
 ### Minor Changes
