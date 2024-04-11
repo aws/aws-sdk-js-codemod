@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
+import { CLIENT_NAMES, DOCUMENT_CLIENT, DYNAMODB_DOCUMENT_CLIENT, PACKAGE_NAME } from "../config";
 import { ImportType } from "../modules";
 import * as importEqualsModule from "../modules/importEqualsModule";
 import * as importModule from "../modules/importModule";
@@ -37,11 +37,23 @@ export const getClientNamesRecord = (
   for (const clientName of clientNamesFromDeepImport) {
     const deepImportPath = getClientDeepImportPath(clientName);
 
-    const specifiersFromDeepImport = getImportSpecifiers(j, source, deepImportPath).filter(
+    const specifiersFromNamedImport = getImportSpecifiers(j, source, deepImportPath);
+
+    const defaultSpecifiersFromDeepImport = specifiersFromNamedImport.filter(
       (importSpecifier) => !importSpecifier.importedName
     );
-    if (specifiersFromDeepImport.length > 0) {
-      clientNamesRecord[clientName] = specifiersFromDeepImport[0].localName;
+    if (defaultSpecifiersFromDeepImport.length > 0) {
+      clientNamesRecord[clientName] = defaultSpecifiersFromDeepImport[0].localName;
+    }
+
+    const namedSpecifiersFromDeepImport = specifiersFromNamedImport.filter(
+      (importSpecifier) => importSpecifier.importedName
+    );
+    if (
+      namedSpecifiersFromDeepImport.length > 0 &&
+      namedSpecifiersFromDeepImport[0].importedName === DOCUMENT_CLIENT
+    ) {
+      clientNamesRecord[DYNAMODB_DOCUMENT_CLIENT] = namedSpecifiersFromDeepImport[0].localName;
     }
   }
 
