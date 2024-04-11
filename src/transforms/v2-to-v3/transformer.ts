@@ -107,7 +107,7 @@ const transformer = async (file: FileInfo, api: API) => {
       replaceS3UploadApi(j, source, clientIdentifiers);
     }
 
-    removePromiseCalls(j, source, clientIdentifiers);
+    removePromiseCalls(j, source, { ...v2Options, clientIdentifiers });
     addEmptyObjectForUndefined(j, source, clientIdentifiers);
     renameErrorCodeWithName(j, source, clientIdentifiers);
 
