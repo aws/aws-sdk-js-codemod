@@ -13,3 +13,5 @@ export const FUNCTION_TYPE_LIST = [
   "ArrowFunctionExpression",
 ];
 export const STRING_LITERAL_TYPE_LIST = ["Literal", "StringLiteral"];
+
+export const NOT_SUPPORTED_COMMENT = "not supported in AWS SDK for JavaScript (v3)";

@@ -25,7 +25,7 @@ import {
   getClientNamesFromGlobal,
   getClientNamesRecord,
 } from "./client-names";
-import { S3 } from "./config";
+import { NOT_SUPPORTED_COMMENT, S3 } from "./config";
 import { addClientModules, getGlobalNameFromModule, getImportType, removeModules } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
@@ -70,7 +70,7 @@ const transformer = async (file: FileInfo, api: API) => {
     addNotSupportedClientComments(j, source, { v2ClientName, clientIdentifiers });
   }
 
-  if (source.toSource() !== file.source) {
+  if (source.toSource().includes(NOT_SUPPORTED_COMMENT)) {
     return source.toSource();
   }
 

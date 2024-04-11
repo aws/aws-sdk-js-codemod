@@ -1,6 +1,6 @@
 import { Collection, JSCodeshift } from "jscodeshift";
 
-import { FUNCTION_TYPE_LIST, S3 } from "../config";
+import { FUNCTION_TYPE_LIST, NOT_SUPPORTED_COMMENT, S3 } from "../config";
 import { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
@@ -29,11 +29,7 @@ export const addNotSupportedClientComments = (
 
           if (FUNCTION_TYPE_LIST.includes(args[args.length - 1].type)) {
             const comments = callExpression.node.comments || [];
-            comments.push(
-              j.commentLine(
-                " Waiters with callbacks are not supported in AWS SDK for JavaScript (v3)."
-              )
-            );
+            comments.push(j.commentLine(` Waiters with callbacks are ${NOT_SUPPORTED_COMMENT}.`));
             comments.push(
               j.commentLine(
                 " Please convert to `await client.waitFor(state, params).promise()`, and re-run aws-sdk-js-codemod."
@@ -68,9 +64,7 @@ export const addNotSupportedClientComments = (
             if (FUNCTION_TYPE_LIST.includes(args[args.length - 1].type)) {
               const comments = callExpression.node.comments || [];
               comments.push(
-                j.commentLine(
-                  ` ${apiDescription} with callbacks are not supported in AWS SDK for JavaScript (v3).`
-                )
+                j.commentLine(` ${apiDescription} with callbacks are ${NOT_SUPPORTED_COMMENT}.`)
               );
               comments.push(
                 j.commentLine(
