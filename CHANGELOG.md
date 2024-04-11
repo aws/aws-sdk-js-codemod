@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 1.3.3
+
+### Patch Changes
+
+- Transform global imported from 'aws-sdk/global' ([98790a3b8ea1173eb67dfc23d641236667f93b9f](https://github.com/aws/aws-sdk-js-codemod/commit/98790a3b8ea1173eb67dfc23d641236667f93b9f))
+- Transform global imports from 'aws-sdk/lib/core' ([f28eaa89e83d11b77f850ecaa14471ca84eb06c4](https://github.com/aws/aws-sdk-js-codemod/commit/f28eaa89e83d11b77f850ecaa14471ca84eb06c4))
+
 ## 1.3.2
 
 ### Patch Changes
