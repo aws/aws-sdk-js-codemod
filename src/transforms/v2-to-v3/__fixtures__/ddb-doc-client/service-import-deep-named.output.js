@@ -1,6 +1,5 @@
-// Transformation of DocumentClient named import from deep path is unsupported in aws-sdk-js-codemod.
-// Please convert to a default import, and re-run aws-sdk-js-codemod.
-import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDB } from "@aws-sdk/client-dynamodb";
 
-const documentClient = new DocumentClient({ region: "us-west-2" });
-const response = await documentClient.scan({ TableName: "TABLE_NAME" }).promise();
+const documentClient = DynamoDBDocument.from(new DynamoDB());
+const response = await documentClient.scan({ TableName: "TABLE_NAME" });
