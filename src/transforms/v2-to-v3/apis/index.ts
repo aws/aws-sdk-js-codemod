@@ -10,6 +10,7 @@ export * from "./isS3GetSignedUrlApiUsed";
 export * from "./isS3UploadApiUsed";
 export * from "./removePromiseCalls";
 export * from "./renameErrorCodeWithName";
+export * from "./replaceAwsEndpoint";
 export * from "./replaceAwsError";
 export * from "./replaceAwsIdentity";
 export * from "./replaceS3GetSignedUrlApi";
