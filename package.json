@@ -1,6 +1,6 @@
 {
   "name": "aws-sdk-js-codemod",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Collection of codemod scripts that help update AWS SDK for JavaScript APIs",
   "keywords": [
     "jscodeshift",
