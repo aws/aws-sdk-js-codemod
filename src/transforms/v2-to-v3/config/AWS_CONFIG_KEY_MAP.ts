@@ -22,7 +22,7 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     deprecationMessage: "The clock skew correction is applied by default.",
   },
   credentials: {},
-  credentialsProvider: {
+  credentialProvider: {
     newKeyName: "credentials",
     description: "The credentials in JS SDK v3 accepts providers.",
   },
