@@ -25,8 +25,14 @@ import {
   getClientNamesFromGlobal,
   getClientNamesRecord,
 } from "./client-names";
-import { NOT_SUPPORTED_COMMENT, S3 } from "./config";
-import { addClientModules, getGlobalNameFromModule, getImportType, removeModules } from "./modules";
+import { NOT_SUPPORTED_COMMENT, PACKAGE_NAME, S3 } from "./config";
+import {
+  addClientModules,
+  getGlobalNameFromModule,
+  getImportType,
+  removeModules,
+  replaceDeepImport,
+} from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
   IndentationType,
@@ -47,6 +53,8 @@ const transformer = async (file: FileInfo, api: API) => {
     // Skip transformation, since no import/require statements found for "aws-sdk" package.
     return file.source;
   }
+
+  replaceDeepImport(j, source, { fromPath: "aws-sdk/clients/all", toPath: PACKAGE_NAME });
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
   const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
