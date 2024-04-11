@@ -9,6 +9,7 @@ import {
   replaceS3GetSignedUrlApi,
   getClientIdentifiersRecord,
   replaceAwsIdentity,
+  replaceAwsEndpoint,
   replaceAwsError,
   addEmptyObjectForUndefined,
   renameErrorCodeWithName,
@@ -116,6 +117,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsIdentity(j, source, { v2GlobalName, importType });
   replaceAwsUtilFunctions(j, source, v2GlobalName);
   replaceAwsError(j, source, { v2GlobalName, importType });
+  replaceAwsEndpoint(j, source, v2GlobalName);
   removeModules(j, source, importType);
 
   const sourceString = getFormattedSourceString(source.toSource({ quote, useTabs, trailingComma }));
