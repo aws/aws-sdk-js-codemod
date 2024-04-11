@@ -1,6 +1,5 @@
 export * from "./addEmptyObjectForUndefined";
 export * from "./addNotSupportedClientComments";
-export * from "./addNotSupportedComments";
 export * from "./getClientIdentifiersRecord";
 export * from "./getClientWaiterStates";
 export * from "./getCommandName";
