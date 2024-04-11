@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 1.3.0
+
+### Minor Changes
+
+- Transform AWS.Endpoint to URL ([cbf9c2176c1fac25cce1bb1cc8cdabb43f0a9425](https://github.com/aws/aws-sdk-js-codemod/commit/cbf9c2176c1fac25cce1bb1cc8cdabb43f0a9425))
+
+### Patch Changes
+
+- Transform clients published between 2024-02-22 and 2024-04-10 ([419796f0f7054d69d0f2fd63eb564692b5557e71](https://github.com/aws/aws-sdk-js-codemod/commit/419796f0f7054d69d0f2fd63eb564692b5557e71))
+
 ## 1.2.8
 
 ### Patch Changes
