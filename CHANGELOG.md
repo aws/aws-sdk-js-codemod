@@ -1,5 +1,13 @@
 # aws-sdk-js-codemod
 
+## 1.3.4
+
+### Patch Changes
+
+- Skip adding unsupported comment for config customUserAgent ([fa5324448dc49d9a3db16f98c2171864224d5c10](https://github.com/aws/aws-sdk-js-codemod/commit/fa5324448dc49d9a3db16f98c2171864224d5c10))
+- Replace config credentialsProvider with credentials ([f2100df1fa03c6e7cbb3dec3bd522ff758fbad54](https://github.com/aws/aws-sdk-js-codemod/commit/f2100df1fa03c6e7cbb3dec3bd522ff758fbad54))
+- Add comment about unsupported config.params ([59d2e57dc082da71df93cc5bfc5d2488491208a4](https://github.com/aws/aws-sdk-js-codemod/commit/59d2e57dc082da71df93cc5bfc5d2488491208a4))
+
 ## 1.3.3
 
 ### Patch Changes
