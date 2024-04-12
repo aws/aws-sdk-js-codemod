@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 1.3.5
+
+### Patch Changes
+
+- Add comment to investigate removal of .promise() ([06a91b73acfceda1691217919aa885f137b50577](https://github.com/aws/aws-sdk-js-codemod/commit/06a91b73acfceda1691217919aa885f137b50577))
+- Remove .promise() calls from APIs called from new client ([13dc42ab98a6970ede0b7a4900cdd4aad53482f0](https://github.com/aws/aws-sdk-js-codemod/commit/13dc42ab98a6970ede0b7a4900cdd4aad53482f0))
+
 ## 1.3.4
 
 ### Patch Changes
