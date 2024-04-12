@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.3.6
+
+### Patch Changes
+
+- Conditionally add comments for unchanged .promise() APIs ([b5f1b2efc1fe0d3e765dd16e5a83b08438a4d6e4](https://github.com/aws/aws-sdk-js-codemod/commit/b5f1b2efc1fe0d3e765dd16e5a83b08438a4d6e4))
+
 ## 1.3.5
 
 ### Patch Changes
