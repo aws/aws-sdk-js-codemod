@@ -53,7 +53,7 @@ const transformer = async (file: FileInfo, api: API) => {
   if (importType === null) {
     addPromiseRemovalComments(j, source);
     // Skip transformation, since no import/require statements found for "aws-sdk" package.
-    return file.source;
+    return source.toSource();
   }
 
   replaceDeepImport(j, source, { fromPath: "aws-sdk/global", toPath: PACKAGE_NAME });

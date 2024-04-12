@@ -9,10 +9,12 @@ export const addPromiseRemovalComments = (j: JSCodeshift, source: Collection<unk
         property: { type: "Identifier", name: "promise" },
       },
     })
-    .forEach((callExpression) => {
-      callExpression.value.comments = [
-        ...(callExpression.value.comments || []),
-        j.commentLine(" This is a comment before the CallExpression"),
-      ];
+    .forEach(({ node }) => {
+      const comments = node.comments || [];
+      comments.push(j.commentLine(" The `.promise()` call might be on an JS SDK v2 client API."));
+      comments.push(
+        j.commentLine(" If yes, please remove .promise(). If not, remove this comment.")
+      );
+      node.comments = comments;
     });
 };
