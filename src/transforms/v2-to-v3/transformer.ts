@@ -12,6 +12,7 @@ import {
   replaceAwsError,
   addEmptyObjectForUndefined,
   renameErrorCodeWithName,
+  addPromiseRemovalComments,
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import {
@@ -50,8 +51,9 @@ const transformer = async (file: FileInfo, api: API) => {
   const importType = getImportType(j, source);
 
   if (importType === null) {
+    addPromiseRemovalComments(j, source);
     // Skip transformation, since no import/require statements found for "aws-sdk" package.
-    return file.source;
+    return source.toSource();
   }
 
   replaceDeepImport(j, source, { fromPath: "aws-sdk/global", toPath: PACKAGE_NAME });
@@ -126,6 +128,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceAwsError(j, source, { v2GlobalName, importType });
   replaceAwsEndpoint(j, source, v2GlobalName);
   removeModules(j, source, importType);
+  addPromiseRemovalComments(j, source);
 
   const sourceString = getFormattedSourceString(source.toSource({ quote, useTabs, trailingComma }));
 
