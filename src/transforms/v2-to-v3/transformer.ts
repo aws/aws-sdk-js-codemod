@@ -13,6 +13,7 @@ import {
   addEmptyObjectForUndefined,
   renameErrorCodeWithName,
   addPromiseRemovalComments,
+  replaceS3CreatePresignedPostApi,
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import {
@@ -118,6 +119,7 @@ const transformer = async (file: FileInfo, api: API) => {
 
     if (v2ClientName === S3) {
       replaceS3GetSignedUrlApi(j, source, clientIdentifiers);
+      replaceS3CreatePresignedPostApi(j, source, clientIdentifiers);
     }
 
     replaceWaiterApi(j, source, clientIdentifiers);

@@ -13,6 +13,7 @@ export * from "./renameErrorCodeWithName";
 export * from "./replaceAwsEndpoint";
 export * from "./replaceAwsError";
 export * from "./replaceAwsIdentity";
+export * from "./replaceS3CreatePresignedPostApi";
 export * from "./replaceS3GetSignedUrlApi";
 export * from "./replaceS3UploadApi";
 export * from "./replaceWaiterApi";
