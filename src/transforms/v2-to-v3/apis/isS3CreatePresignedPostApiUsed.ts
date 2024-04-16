@@ -8,14 +8,16 @@ export const isS3CreatePresignedPostApiUsed = (
   clientIdentifiers: ClientIdentifier[]
 ) => {
   for (const clientId of clientIdentifiers) {
-    const s3GetSignedUrlCallExpressions = source.find(j.CallExpression, {
-      callee: {
-        type: "MemberExpression",
-        object: clientId,
-        property: { type: "Identifier", name: "createPresignedPost" },
-      },
-    });
-    if (s3GetSignedUrlCallExpressions.length) return true;
+    if (
+      source.find(j.CallExpression, {
+        callee: {
+          type: "MemberExpression",
+          object: clientId,
+          property: { type: "Identifier", name: "createPresignedPost" },
+        },
+      }).length
+    )
+      return true;
   }
 
   return false;
