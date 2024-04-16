@@ -64,7 +64,7 @@ export const addNotSupportedClientComments = (
             if (FUNCTION_TYPE_LIST.includes(args[args.length - 1].type)) {
               const comments = callExpression.node.comments || [];
               comments.push(
-                j.commentLine(` ${apiDescription} with callbacks are ${NOT_SUPPORTED_COMMENT}.`)
+                j.commentLine(` ${apiDescription} with callbacks is ${NOT_SUPPORTED_COMMENT}.`)
               );
               comments.push(
                 j.commentLine(
