@@ -5,6 +5,7 @@ import {
   getCommandName,
   getS3SignedUrlApiNames,
   getV3ClientWaiterApiName,
+  isS3CreatePresignedPostApiUsed,
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
 } from "../apis";
@@ -95,6 +96,14 @@ export const addClientModules = (
           packageName: v3ClientPackageName,
         });
       }
+    }
+
+    if (isS3CreatePresignedPostApiUsed(j, source, clientIdentifiers)) {
+      addNamedModule(j, source, {
+        importType,
+        localName: "createPresignedPost",
+        packageName: "@aws-sdk/s3-presigned-post",
+      });
     }
   }
 

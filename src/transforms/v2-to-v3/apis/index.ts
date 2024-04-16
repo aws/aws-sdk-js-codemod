@@ -6,6 +6,7 @@ export * from "./getClientWaiterStates";
 export * from "./getCommandName";
 export * from "./getS3SignedUrlApiNames";
 export * from "./getV3ClientWaiterApiName";
+export * from "./isS3CreatePresignedPostApiUsed";
 export * from "./isS3GetSignedUrlApiUsed";
 export * from "./isS3UploadApiUsed";
 export * from "./removePromiseCalls";
