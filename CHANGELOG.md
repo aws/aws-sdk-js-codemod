@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 1.4.0
+
+### Minor Changes
+
+- Add transformation for s3 createPresignedPost ([63d870bb261afe0c967b31681cc7c6538b7543a2](https://github.com/aws/aws-sdk-js-codemod/commit/63d870bb261afe0c967b31681cc7c6538b7543a2))
+
+### Patch Changes
+
+- State api name "is" not supported in comments ([2db36c95e43408c08767f08853e9eeded771d15b](https://github.com/aws/aws-sdk-js-codemod/commit/2db36c95e43408c08767f08853e9eeded771d15b))
+
 ## 1.3.6
 
 ### Patch Changes
