@@ -54,6 +54,11 @@ export const addNotSupportedClientComments = (
           apiDescription: "S3 getSignedUrl",
           apiSuggestion: "client.getSignedUrl(apiName, options)",
         },
+        {
+          apiName: "createPresignedPost",
+          apiDescription: "S3 createPresignedPost",
+          apiSuggestion: "client.createPresignedPost(params)",
+        },
       ];
       for (const { apiName, apiDescription, apiSuggestion } of apiMetadata) {
         source
