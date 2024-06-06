@@ -48,6 +48,7 @@ export const removePromiseForCallExpression = (
         )
       );
       callExpression.parentPath.node.comments = comments;
+      break;
     }
   }
 };
