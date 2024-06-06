@@ -2,29 +2,15 @@
   "name": "aws-sdk-js-codemod",
   "version": "2.0.0",
   "description": "Collection of codemod scripts that help update AWS SDK for JavaScript APIs",
-  "keywords": [
-    "jscodeshift",
-    "transform",
-    "aws",
-    "sdk",
-    "javascript",
-    "v2",
-    "v3",
-    "migration"
-  ],
+  "keywords": ["jscodeshift", "transform", "aws", "sdk", "javascript", "v2", "v3", "migration"],
   "homepage": "https://github.com/aws/aws-sdk-js-codemod",
   "license": "MIT-0",
   "author": {
     "name": "Amazon Web Services",
     "url": "http://aws.amazon.com"
   },
-  "contributors": [
-    "Kamat, Trivikram <trivikr.dev@gmail.com>"
-  ],
-  "files": [
-    "bin",
-    "dist"
-  ],
+  "contributors": ["Kamat, Trivikram <trivikr.dev@gmail.com>"],
+  "files": ["bin", "dist"],
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
   "bin": "bin/aws-sdk-js-codemod",
@@ -65,9 +51,7 @@
   },
   "packageManager": "yarn@4.3.1",
   "lint-staged": {
-    "*.ts": [
-      "eslint --fix"
-    ]
+    "*.ts": ["eslint --fix"]
   },
   "publishConfig": {
     "provenance": true
