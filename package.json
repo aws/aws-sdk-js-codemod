@@ -2,15 +2,29 @@
   "name": "aws-sdk-js-codemod",
   "version": "2.0.0",
   "description": "Collection of codemod scripts that help update AWS SDK for JavaScript APIs",
-  "keywords": ["jscodeshift", "transform", "aws", "sdk", "javascript", "v2", "v3", "migration"],
+  "keywords": [
+    "jscodeshift",
+    "transform",
+    "aws",
+    "sdk",
+    "javascript",
+    "v2",
+    "v3",
+    "migration"
+  ],
   "homepage": "https://github.com/aws/aws-sdk-js-codemod",
   "license": "MIT-0",
   "author": {
     "name": "Amazon Web Services",
     "url": "http://aws.amazon.com"
   },
-  "contributors": ["Kamat, Trivikram <trivikr.dev@gmail.com>"],
-  "files": ["bin", "dist"],
+  "contributors": [
+    "Kamat, Trivikram <trivikr.dev@gmail.com>"
+  ],
+  "files": [
+    "bin",
+    "dist"
+  ],
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
   "bin": "bin/aws-sdk-js-codemod",
@@ -21,7 +35,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint 'src/**/*.ts'",
-    "prepare": "simple-git-hooks",
+    "prepare": "lefthook install",
     "release": "yarn build && changeset publish",
     "test": "vitest"
   },
@@ -34,14 +48,8 @@
     "@tsconfig/node16": "^16.1.3",
     "@types/jscodeshift": "^0.11.11",
     "@types/node": "^16.18.101",
-    "@typescript-eslint/eslint-plugin": "^7.14.1",
-    "@typescript-eslint/parser": "^7.14.1",
     "aws-sdk": "2.1641.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-sort-export-all": "^1.4.1",
-    "lint-staged": "^15.2.2",
-    "simple-git-hooks": "^2.11.0",
+    "lefthook": "^1.6.15",
     "tsx": "^4.7.1",
     "typescript": "~5.5.2",
     "vitest": "~2.0.1"
@@ -50,9 +58,6 @@
     "node": ">=16.0.0"
   },
   "packageManager": "yarn@4.3.1",
-  "lint-staged": {
-    "*.ts": ["eslint --fix"]
-  },
   "publishConfig": {
     "provenance": true
   }
