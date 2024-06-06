@@ -15,9 +15,12 @@ const requirePackage = (name: string) => {
   const entry = require.resolve(name);
   let dir = dirname(entry);
   while (dir !== "/") {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const pkg = require(join(dir, "package.json"));
-    return pkg.name === name ? pkg : {};
+    try {
+      const pkg = require(join(dir, "package.json"));
+      return pkg.name === name ? pkg : {};
+      // biome-ignore lint/suspicious/noEmptyBlockStatements: ignore
+      // biome-ignore lint/correctness/noUnusedVariables: ignore
+    } catch (error) {}
     dir = dirname(dir);
   }
   return {};
