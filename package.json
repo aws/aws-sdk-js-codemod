@@ -55,7 +55,6 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-sort-export-all": "^1.4.1",
     "lint-staged": "^15.2.2",
-    "prettier": "3.2.5",
     "simple-git-hooks": "^2.11.0",
     "tsx": "^4.7.1",
     "typescript": "~5.4.2",
@@ -67,10 +66,8 @@
   "packageManager": "yarn@4.2.1",
   "lint-staged": {
     "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": "prettier --write"
+      "eslint --fix"
+    ]
   },
   "publishConfig": {
     "provenance": true
