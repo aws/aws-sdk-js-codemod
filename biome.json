@@ -19,7 +19,8 @@
         "noMultipleSpacesInRegularExpressionLiterals": "error",
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
-        "noWith": "error"
+        "noWith": "error",
+        "useFlatMap": "off"
       },
       "correctness": {
         "noConstAssign": "error",
