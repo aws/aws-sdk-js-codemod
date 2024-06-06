@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
+  "files": {
+    "maxSize": 5242880
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
