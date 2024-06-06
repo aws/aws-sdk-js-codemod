@@ -1,11 +1,13 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.0/schema.json",
-  "files": { "maxSize": 5242880 },
+  "files": {
+    "maxSize": 5242880,
+    "ignore": ["**/__fixtures__/**"]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "lineWidth": 100,
-    "ignore": ["**/__fixtures__/**"]
+    "lineWidth": 100
   },
   "linter": {
     "rules": {
