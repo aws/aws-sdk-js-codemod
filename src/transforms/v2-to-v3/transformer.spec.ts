@@ -44,9 +44,9 @@ describe("v2-to-v3", () => {
         const output = await transform(input, {
           j: jscodeshift,
           jscodeshift,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
           stats: () => {},
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
           report: () => {},
         });
 

@@ -1,7 +1,6 @@
 // Most of the code from here is from bin/jscodeshift.js
 // It's kept that way so that users can reuse jscodeshift options.
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { readFileSync } from "fs";
@@ -9,7 +8,6 @@ import { dirname, join } from "path";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../../package.json";
 
@@ -18,10 +16,11 @@ const requirePackage = (name: string) => {
   let dir = dirname(entry);
   while (dir !== "/") {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const pkg = require(join(dir, "package.json"));
       return pkg.name === name ? pkg : {};
-    } catch (error) {} // eslint-disable-line no-empty
+      // biome-ignore lint/suspicious/noEmptyBlockStatements: ignore
+      // biome-ignore lint/correctness/noUnusedVariables: ignore
+    } catch (error) {}
     dir = dirname(dir);
   }
   return {};
@@ -143,13 +142,12 @@ export const getJsCodeshiftParser = () =>
     version: {
       display_index: 17,
       help: "print version and exit",
-      callback: function () {
-        return [
+      callback: () =>
+        [
           `aws-sdk-js-codemod: ${version}`,
           `- jscodeshift: ${requirePackage("jscodeshift").version}`,
           `- recast: ${requirePackage("recast").version}\n`,
-        ].join("\n");
-      },
+        ].join("\n"),
     },
     stdin: {
       display_index: 14,
