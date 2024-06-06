@@ -15,7 +15,6 @@ export const removePromiseForCallExpression = (
       ).object;
       break;
     }
-    // eslint-disable-next-line no-fallthrough
     case "ArrowFunctionExpression":
     case "AwaitExpression":
     case "CallExpression":
