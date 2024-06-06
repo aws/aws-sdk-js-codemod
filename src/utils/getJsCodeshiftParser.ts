@@ -139,13 +139,12 @@ export const getJsCodeshiftParser = () =>
     version: {
       display_index: 17,
       help: "print version and exit",
-      callback: function () {
-        return [
+      callback: () =>
+        [
           `aws-sdk-js-codemod: ${version}`,
           `- jscodeshift: ${requirePackage("jscodeshift").version}`,
           `- recast: ${requirePackage("recast").version}\n`,
-        ].join("\n");
-      },
+        ].join("\n"),
     },
     stdin: {
       display_index: 14,
