@@ -15,6 +15,7 @@
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
+        "noForEach": "off",
         "noMultipleSpacesInRegularExpressionLiterals": "error",
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
