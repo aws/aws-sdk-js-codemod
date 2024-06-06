@@ -50,6 +50,7 @@
       },
       "style": {
         "noNamespace": "error",
+        "noNonNullAssertion": "off",
         "noUnusedTemplateLiteral": "off",
         "useAsConstAssertion": "error",
         "useConsistentArrayType": {
@@ -57,7 +58,8 @@
           "options": { "syntax": "shorthand" }
         },
         "useImportType": "off",
-        "useNodejsImportProtocol": "off"
+        "useNodejsImportProtocol": "off",
+        "useTemplate": "off"
       },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
