@@ -11,7 +11,7 @@
   },
   "linter": {
     "rules": {
-      "recommended": false,
+      "recommended": true,
       "complexity": {
         "noBannedTypes": "error",
         "noExtraBooleanCast": "error",
@@ -52,7 +52,8 @@
         "useConsistentArrayType": {
           "level": "error",
           "options": { "syntax": "shorthand" }
-        }
+        },
+        "useImportType": "off"
       },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
