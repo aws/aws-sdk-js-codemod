@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "biome lint",
     "prepare": "lefthook install",
     "release": "yarn build && changeset publish",
     "test": "vitest"
