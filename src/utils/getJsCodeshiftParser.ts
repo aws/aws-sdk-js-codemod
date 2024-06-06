@@ -17,11 +17,9 @@ const requirePackage = (name: string) => {
   const entry = require.resolve(name);
   let dir = dirname(entry);
   while (dir !== "/") {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const pkg = require(join(dir, "package.json"));
-      return pkg.name === name ? pkg : {};
-    } catch (error) {} // eslint-disable-line no-empty
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const pkg = require(join(dir, "package.json"));
+    return pkg.name === name ? pkg : {};
     dir = dirname(dir);
   }
   return {};
