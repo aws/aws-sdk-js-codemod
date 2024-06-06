@@ -20,7 +20,8 @@
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
         "noWith": "error",
-        "useFlatMap": "off"
+        "useFlatMap": "off",
+        "useOptionalChain": "off"
       },
       "correctness": {
         "noConstAssign": "error",
