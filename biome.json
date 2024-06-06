@@ -50,6 +50,7 @@
       },
       "style": {
         "noNamespace": "error",
+        "noUnusedTemplateLiteral": "off",
         "useAsConstAssertion": "error",
         "useConsistentArrayType": {
           "level": "error",
