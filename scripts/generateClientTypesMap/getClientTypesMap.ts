@@ -125,6 +125,7 @@ export const getClientTypesMap = async (clientName: string): Promise<Record<stri
   });
 
   const updatedClientTypesMap = getClientTypesMapWithKeysRemovedFromValues(clientTypesMap);
+  // biome-ignore lint/complexity/useLiteralKeys: script
   clientTypesMap["ClientConfiguration"] = `${CLIENT_NAMES_MAP[clientName]}ClientConfig`;
 
   return Object.entries(updatedClientTypesMap)
