@@ -1773,7 +1773,7 @@ __metadata:
     "@types/node": "npm:^14.18.33"
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
-    aws-sdk: "npm:2.1597.0"
+    aws-sdk: "npm:2.1641.0"
     eslint: "npm:^8.57.0"
     eslint-plugin-import: "npm:^2.29.1"
     eslint-plugin-sort-export-all: "npm:^1.4.1"
@@ -1789,9 +1789,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"aws-sdk@npm:2.1597.0":
-  version: 2.1597.0
-  resolution: "aws-sdk@npm:2.1597.0"
+"aws-sdk@npm:2.1641.0":
+  version: 2.1641.0
+  resolution: "aws-sdk@npm:2.1641.0"
   dependencies:
     buffer: "npm:4.9.2"
     events: "npm:1.1.1"
@@ -1803,7 +1803,7 @@ __metadata:
     util: "npm:^0.12.4"
     uuid: "npm:8.0.0"
     xml2js: "npm:0.6.2"
-  checksum: 10c0/f5bc91a652b17fda70c38425577dd749039859718fa9285009a418d15ec331f6457118af5444fa5ecafe94aacda1320ec14b70bb9df7c84eb8e84eef305bb561
+  checksum: 10c0/9a2465894dfbc5ba19680381f72a0a436cd312950e4037a20bda4357143d1cafb276829eb01baafec92e63cf18bd9fb06b056d4ccd85c43c5d26002d0531384e
   languageName: node
   linkType: hard
 
