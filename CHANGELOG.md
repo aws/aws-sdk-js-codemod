@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 1.4.1
+
+### Patch Changes
+
+- Transform clients published between 2024-04-11 and 2024-06-13 ([03c8f7254b6b62d8a6a602735a51b1d6b37577c6](https://github.com/aws/aws-sdk-js-codemod/commit/03c8f7254b6b62d8a6a602735a51b1d6b37577c6))
+
 ## 1.4.0
 
 ### Minor Changes
