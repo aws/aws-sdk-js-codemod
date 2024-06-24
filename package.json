@@ -63,7 +63,7 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@4.3.0",
+  "packageManager": "yarn@4.3.1",
   "lint-staged": {
     "*.ts": [
       "eslint --fix",
