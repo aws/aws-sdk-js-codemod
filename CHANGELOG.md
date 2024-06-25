@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 2.0.0
+
+### Major Changes
+
+- Drop support for Node.js 14.x ([05c30df01cc161e743a9d26a372983faf5dd7ab7](https://github.com/aws/aws-sdk-js-codemod/commit/05c30df01cc161e743a9d26a372983faf5dd7ab7))
+
+### Minor Changes
+
+- Bump jscodeshift to 0.16.0 ([8735528c01127c51788cb15d2f841c3f10a672bc](https://github.com/aws/aws-sdk-js-codemod/commit/8735528c01127c51788cb15d2f841c3f10a672bc))
+
 ## 1.4.1
 
 ### Patch Changes
