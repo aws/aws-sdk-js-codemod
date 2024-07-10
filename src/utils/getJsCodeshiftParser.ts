@@ -1,7 +1,6 @@
 // Most of the code from here is from bin/jscodeshift.js
 // It's kept that way so that users can reuse jscodeshift options.
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
 import { readFileSync } from "fs";
@@ -9,7 +8,6 @@ import { dirname, join } from "path";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: package.json will be imported from dist folders
 import { version } from "../../package.json";
 

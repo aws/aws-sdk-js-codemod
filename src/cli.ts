@@ -21,7 +21,6 @@
 // Most of the code from here is from bin/jscodeshift.js
 // It's kept that way so that users can reuse jscodeshift options.
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import path from "path";
 import Runner from "jscodeshift/dist/Runner";

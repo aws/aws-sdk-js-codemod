@@ -19,7 +19,6 @@ export const getMostUsedStringLiteralQuote = (
 
     // Check if the literal value is a string and contains single quotes
     if (typeof value === "string") {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore Property 'raw' does not exist on type 'Literal'.
       const rawValue = path.node.raw || path.node.extra?.raw || "";
       if (rawValue.startsWith("'")) {

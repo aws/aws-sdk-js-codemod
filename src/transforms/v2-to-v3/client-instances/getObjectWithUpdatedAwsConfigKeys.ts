@@ -113,7 +113,6 @@ export const getObjectWithUpdatedAwsConfigKeys = (
     })
     .filter((property) => property !== undefined);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore is Argument is not assignable to parameter
   return j.objectExpression(updatedProperties);
 };

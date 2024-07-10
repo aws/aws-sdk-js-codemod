@@ -21,7 +21,8 @@
         "format": ["camelCase", "UPPER_CASE", "PascalCase"],
         "leadingUnderscore": "allow"
       }
-    ]
+    ],
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "ignorePatterns": ["__fixtures__"]
 }
