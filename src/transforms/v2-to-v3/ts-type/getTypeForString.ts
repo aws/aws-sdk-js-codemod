@@ -30,7 +30,7 @@ export const getTypeForString = (
     const typeArgument = getTypeForString(j, v2ClientLocalName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Array"),
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
       // @ts-ignore
       typeParameters: j.tsTypeParameterInstantiation([typeArgument]),
     });
@@ -42,7 +42,7 @@ export const getTypeForString = (
     const typeArgument = getTypeForString(j, v2ClientLocalName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Record"),
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
       // @ts-ignore
       typeParameters: j.tsTypeParameterInstantiation([j.tsStringKeyword(), typeArgument]),
     });
