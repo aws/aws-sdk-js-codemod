@@ -3,7 +3,7 @@
 
 // @ts-nocheck
 
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import { dirname, join } from "path";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
@@ -15,11 +15,11 @@ const requirePackage = (name: string) => {
   const entry = require.resolve(name);
   let dir = dirname(entry);
   while (dir !== "/") {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const pkg = require(join(dir, "package.json"));
-      return pkg.name === name ? pkg : {};
-    } catch (error) {} // eslint-disable-line no-empty
+    const packageJsonPath = join(dir, "package.json");
+    if (existsSync(packageJsonPath)) {
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8"));
+      return packageJson.name === name ? packageJson : {};
+    }
     dir = dirname(dir);
   }
   return {};
