@@ -15,6 +15,21 @@ export const removePromiseForCallExpression = (
       ).object;
       break;
     }
+    case "ArrowFunctionExpression":
+    case "AwaitExpression":
+    case "CallExpression":
+    case "ExpressionStatement":
+    case "ObjectProperty":
+    case "ReturnStatement":
+    case "VariableDeclarator": {
+      const currentCalleeObject = (callExpression.value.callee as MemberExpression)
+        .object as CallExpression;
+      if (currentCalleeObject.arguments.length > 0) {
+        callExpression.value.arguments = currentCalleeObject.arguments;
+      }
+      callExpression.value.callee = currentCalleeObject.callee;
+      break;
+    }
     default: {
       emitWarning(
         `Removal of .promise() not implemented for parentPath: ${callExpression.parentPath.value.type}\n` +
@@ -33,22 +48,6 @@ export const removePromiseForCallExpression = (
         )
       );
       callExpression.parentPath.node.comments = comments;
-    }
-    // eslint-disable-next-line no-fallthrough
-    case "ArrowFunctionExpression":
-    case "AwaitExpression":
-    case "CallExpression":
-    case "ExpressionStatement":
-    case "ObjectProperty":
-    case "ReturnStatement":
-    case "VariableDeclarator": {
-      const currentCalleeObject = (callExpression.value.callee as MemberExpression)
-        .object as CallExpression;
-      if (currentCalleeObject.arguments.length > 0) {
-        callExpression.value.arguments = currentCalleeObject.arguments;
-      }
-      callExpression.value.callee = currentCalleeObject.callee;
-      break;
     }
   }
 };
