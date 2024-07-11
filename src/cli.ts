@@ -52,9 +52,8 @@ const disclaimerLines = [
 
 const parser = getJsCodeshiftParser();
 
-// biome-ignore lint/style/useSingleVarDeclarator: ignore
-// biome-ignore lint/suspicious/noImplicitAnyLet: ignore
-let options, positionalArguments;
+let options: Record;
+let positionalArguments: Array;
 try {
   ({ options, positionalArguments } = parser.parse());
   if (positionalArguments.length === 0 && !options.stdin) {
@@ -90,8 +89,9 @@ function run(paths, options) {
 
 if (options.stdin) {
   let buffer = "";
-  // biome-ignore lint/suspicious/noAssignInExpressions: ignore
-  process.stdin.on("data", (data) => (buffer += data));
+  process.stdin.on("data", (data) => {
+    buffer += data;
+  });
   process.stdin.on("end", () => run(buffer.split("\n"), options));
 } else {
   run(positionalArguments, options);
