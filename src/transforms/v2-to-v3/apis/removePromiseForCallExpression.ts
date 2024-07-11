@@ -1,5 +1,5 @@
-import { emitWarning } from "process";
 import { ASTPath, CallExpression, JSCodeshift, MemberExpression } from "jscodeshift";
+import { emitWarning } from "process";
 
 export const removePromiseForCallExpression = (
   j: JSCodeshift,
@@ -48,7 +48,6 @@ export const removePromiseForCallExpression = (
         )
       );
       callExpression.parentPath.node.comments = comments;
-      break;
     }
   }
 };
