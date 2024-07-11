@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "biome lint",
+    "lint": "biome lint --write src",
     "prepare": "lefthook install",
     "release": "yarn build && changeset publish",
     "test": "vitest"
