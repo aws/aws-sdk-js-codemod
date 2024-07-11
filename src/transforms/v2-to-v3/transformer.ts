@@ -1,19 +1,19 @@
 import { API, FileInfo } from "jscodeshift";
 
 import {
+  addEmptyObjectForUndefined,
   addNotSupportedClientComments,
-  removePromiseCalls,
-  replaceWaiterApi,
-  replaceS3UploadApi,
-  replaceS3GetSignedUrlApi,
+  addPromiseRemovalComments,
   getClientIdentifiersRecord,
-  replaceAwsIdentity,
+  removePromiseCalls,
+  renameErrorCodeWithName,
   replaceAwsEndpoint,
   replaceAwsError,
-  addEmptyObjectForUndefined,
-  renameErrorCodeWithName,
-  addPromiseRemovalComments,
+  replaceAwsIdentity,
   replaceS3CreatePresignedPostApi,
+  replaceS3GetSignedUrlApi,
+  replaceS3UploadApi,
+  replaceWaiterApi,
 } from "./apis";
 import { replaceAwsUtilFunctions } from "./aws-util";
 import {

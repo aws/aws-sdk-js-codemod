@@ -4,8 +4,8 @@ import {
   Literal,
   NewExpression,
   ObjectExpression,
-  Property,
   ObjectProperty,
+  Property,
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
