@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 2.0.1
+
+### Patch Changes
+
+- Check for package.json exists before reading ([df5b3abdff60863487cc53cb97dc3dbde5644478](https://github.com/aws/aws-sdk-js-codemod/commit/df5b3abdff60863487cc53cb97dc3dbde5644478))
+- Convert version callback to arrow function ([163414a215edd37a6df4ca53491b84a74a0d0763](https://github.com/aws/aws-sdk-js-codemod/commit/163414a215edd37a6df4ca53491b84a74a0d0763))
+
 ## 2.0.0
 
 ### Major Changes
