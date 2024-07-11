@@ -1,6 +1,6 @@
 import { readdirSync } from "fs";
-import { readFile } from "fs/promises";
 import { join } from "path";
+import { readFile } from "fs/promises";
 import jscodeshift from "jscodeshift";
 import { describe, expect, it } from "vitest";
 
