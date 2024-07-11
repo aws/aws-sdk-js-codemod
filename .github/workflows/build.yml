@@ -22,10 +22,8 @@ jobs:
           cache: "yarn"
       - name: install
         run: yarn
-      - name: lint
-        run: biome lint
-      - name: format
-        run: biome format
+      - name: lint+format
+        run: biome ci src
       - name: build
         run: yarn build
       - name: test
