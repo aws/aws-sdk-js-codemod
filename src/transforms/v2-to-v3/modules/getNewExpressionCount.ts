@@ -1,7 +1,10 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
-import { getClientNewExpression } from "../utils";
+import {
+  getClientNewExpressionFromGlobalName,
+  getClientNewExpressionFromLocalName,
+} from "../utils";
 import type { ClientModulesOptions } from "./types";
 
 export const getNewExpressionCount = (
@@ -15,14 +18,14 @@ export const getNewExpressionCount = (
   if (v2GlobalName) {
     const newExpressionsFromGlobalName = source.find(
       j.NewExpression,
-      getClientNewExpression({ v2ClientName, v2GlobalName })
+      getClientNewExpressionFromGlobalName(v2GlobalName, v2ClientName)
     );
     newExpressionCount += newExpressionsFromGlobalName.length;
   }
 
   const newExpressionsFromClientLocalName = source.find(
     j.NewExpression,
-    getClientNewExpression({ v2ClientLocalName })
+    getClientNewExpressionFromLocalName(v2ClientLocalName)
   );
   newExpressionCount += newExpressionsFromClientLocalName.length;
 

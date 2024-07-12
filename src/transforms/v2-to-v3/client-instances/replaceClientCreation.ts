@@ -1,5 +1,8 @@
 import type { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
-import { getClientNewExpression } from "../utils";
+import {
+  getClientNewExpressionFromGlobalName,
+  getClientNewExpressionFromLocalName,
+} from "../utils";
 import { getNewClientExpression } from "./getNewClientExpression";
 
 export interface ReplaceClientCreationOptions {
@@ -25,14 +28,14 @@ export const replaceClientCreation = (
   const clientName = v2ClientName === v2ClientLocalName ? v3ClientName : v2ClientLocalName;
 
   source
-    .find(j.NewExpression, getClientNewExpression({ v2ClientName, v2ClientLocalName }))
+    .find(j.NewExpression, getClientNewExpressionFromLocalName(v2ClientLocalName))
     .replaceWith((v2ClientNewExpression) =>
       getNewClientExpression(j, clientName, { v2ClientNewExpression, awsGlobalConfig })
     );
 
   if (v2GlobalName) {
     source
-      .find(j.NewExpression, getClientNewExpression({ v2GlobalName, v2ClientName }))
+      .find(j.NewExpression, getClientNewExpressionFromGlobalName(v2GlobalName, v2ClientName))
       .replaceWith((v2ClientNewExpression) =>
         getNewClientExpression(j, clientName, { v2ClientNewExpression, awsGlobalConfig })
       );
