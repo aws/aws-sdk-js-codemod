@@ -2,7 +2,7 @@ import type { NewExpression } from "jscodeshift";
 
 export const getClientNewExpressionFromLocalName = (v2ClientLocalName: string): NewExpression => {
   // Support for DynamoDB.DocumentClient
-  const [clientName, subClientName] = v2ClientLocalName!.split(".");
+  const [clientName, subClientName] = v2ClientLocalName.split(".");
 
   if (subClientName) {
     return {
