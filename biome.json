@@ -20,9 +20,6 @@
         "noUndeclaredVariables": "error",
         "noUnusedVariables": "error"
       },
-      "performance": {
-        "noAccumulatingSpread": "off"
-      },
       "style": {
         "noNamespace": "error",
         "noNonNullAssertion": "off",

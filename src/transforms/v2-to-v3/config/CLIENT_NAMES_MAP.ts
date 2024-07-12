@@ -2,7 +2,10 @@ import { CLIENT_NAMES } from "./CLIENT_NAMES";
 
 // The key is the client name in v2, and value is the client name in v3.
 export const CLIENT_NAMES_MAP: Record<string, string> = {
-  ...CLIENT_NAMES.reduce((acc, name) => ({ ...acc, [name]: name }), {}),
+  ...CLIENT_NAMES.reduce((acc: Record<string, string>, name) => {
+    acc[name] = name;
+    return acc;
+  }, {}),
   AugmentedAIRuntime: "SageMakerA2IRuntime",
   CUR: "CostAndUsageReportService",
   CodeArtifact: "Codeartifact",
