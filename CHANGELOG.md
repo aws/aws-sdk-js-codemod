@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 2.1.2
+
+### Patch Changes
+
+- Split getClientNewExpression into global/local name ([a301bf9de699466bc382c2466f464210707a239b](https://github.com/aws/aws-sdk-js-codemod/commit/a301bf9de699466bc382c2466f464210707a239b))
+- Remove non-null assertions using the `!` postfix operator ([bf76ad1fa68e171ed30d3aa23c93d2128838dcb2](https://github.com/aws/aws-sdk-js-codemod/commit/bf76ad1fa68e171ed30d3aa23c93d2128838dcb2))
+
 ## 2.1.1
 
 ### Patch Changes
