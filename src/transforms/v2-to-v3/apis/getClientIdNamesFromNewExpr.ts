@@ -93,7 +93,7 @@ export const getClientIdNamesFromNewExpr = (
         ...getNames(
           j,
           source,
-          getClientNewExpressionFromGlobalName(`${v2ClientLocalName}.${DOCUMENT_CLIENT}`)
+          getClientNewExpressionFromLocalName(`${v2ClientLocalName}.${DOCUMENT_CLIENT}`)
         )
       );
     }
