@@ -7,7 +7,10 @@ import type {
 } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
-import { getClientNewExpression } from "../utils";
+import {
+  getClientNewExpressionFromGlobalName,
+  getClientNewExpressionFromLocalName,
+} from "../utils";
 
 export interface GetClientIdNamesFromNewExprOptions {
   v2ClientName: string;
@@ -70,27 +73,27 @@ export const getClientIdNamesFromNewExpr = (
   ]) {
     if (v2GlobalName) {
       namesFromGlobalModule.push(
-        ...getNames(j, source, getClientNewExpression({ v2GlobalName, v2ClientName }))
+        ...getNames(j, source, getClientNewExpressionFromGlobalName(v2GlobalName, v2ClientName))
       );
       if (v2ClientName === DYNAMODB) {
         namesFromGlobalModule.push(
           ...getNames(
             j,
             source,
-            getClientNewExpression({ v2GlobalName, v2ClientName: DYNAMODB_DOCUMENT_CLIENT })
+            getClientNewExpressionFromGlobalName(v2GlobalName, DYNAMODB_DOCUMENT_CLIENT)
           )
         );
       }
     }
     namesFromServiceModule.push(
-      ...getNames(j, source, getClientNewExpression({ v2ClientLocalName }))
+      ...getNames(j, source, getClientNewExpressionFromLocalName(v2ClientLocalName))
     );
     if (v2ClientName === DYNAMODB) {
       namesFromServiceModule.push(
         ...getNames(
           j,
           source,
-          getClientNewExpression({ v2ClientLocalName: `${v2ClientLocalName}.${DOCUMENT_CLIENT}` })
+          getClientNewExpressionFromGlobalName(`${v2ClientLocalName}.${DOCUMENT_CLIENT}`)
         )
       );
     }

@@ -1,7 +1,7 @@
 import type { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
 
 import { DYNAMODB_DOCUMENT_CLIENT } from "../config";
-import { getClientNewExpression } from "../utils";
+import { getClientNewExpressionFromGlobalName } from "../utils";
 
 export const getNamesFromNewExpr = (
   j: JSCodeshift,
@@ -9,7 +9,7 @@ export const getNamesFromNewExpr = (
   v2GlobalName: string
 ): string[] => [
   ...source
-    .find(j.NewExpression, getClientNewExpression({ v2GlobalName }))
+    .find(j.NewExpression, getClientNewExpressionFromGlobalName(v2GlobalName))
     .nodes()
     .map(
       (newExpression) => ((newExpression.callee as MemberExpression).property as Identifier).name
@@ -17,7 +17,7 @@ export const getNamesFromNewExpr = (
   ...source
     .find(
       j.NewExpression,
-      getClientNewExpression({ v2GlobalName, v2ClientName: DYNAMODB_DOCUMENT_CLIENT })
+      getClientNewExpressionFromGlobalName(v2GlobalName, DYNAMODB_DOCUMENT_CLIENT)
     )
     .nodes()
     .map(

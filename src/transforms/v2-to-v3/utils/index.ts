@@ -1,5 +1,6 @@
 export * from "./getClientDeepImportPath";
-export * from "./getClientNewExpression";
+export * from "./getClientNewExpressionFromGlobalName";
+export * from "./getClientNewExpressionFromLocalName";
 export * from "./getFormattedSourceString";
 export * from "./getMostUsedIndentationType";
 export * from "./getMostUsedStringLiteralQuote";
