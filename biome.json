@@ -34,7 +34,6 @@
           "options": { "syntax": "shorthand" }
         },
         "useImportType": "off",
-        "useNodejsImportProtocol": "off",
         "useTemplate": "off"
       },
       "suspicious": {

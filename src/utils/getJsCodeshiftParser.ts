@@ -3,8 +3,8 @@
 
 // @ts-nocheck
 
-import { existsSync, readFileSync } from "fs";
-import { dirname, join } from "path";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
 

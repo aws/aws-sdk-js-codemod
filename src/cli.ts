@@ -22,7 +22,7 @@
 // It's kept that way so that users can reuse jscodeshift options.
 
 // @ts-nocheck
-import path from "path";
+import path from "node:path";
 import Runner from "jscodeshift/dist/Runner";
 
 import {
