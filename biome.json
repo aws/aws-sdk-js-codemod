@@ -13,8 +13,7 @@
     "rules": {
       "recommended": true,
       "complexity": {
-        "noForEach": "off",
-        "useOptionalChain": "off"
+        "noForEach": "off"
       },
       "correctness": {
         "noNewSymbol": "error",
