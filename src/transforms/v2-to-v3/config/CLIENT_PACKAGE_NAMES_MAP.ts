@@ -2,37 +2,34 @@ import { CLIENT_NAMES } from "./CLIENT_NAMES";
 
 // The key is the client name in v2, and value is the client package name in v3.
 export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
-  ...CLIENT_NAMES.reduce(
-    (acc, name) => ({
-      ...acc,
-      [name]: `client-${name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()}`
-        .replace("-chime-sdk", "-chime-sdk-")
-        .replace("client-amplify-", "client-amplify")
-        .replace("client-bcmdata-exports", "client-bcm-data-exports")
-        .replace("client-control-catalog", "client-controlcatalog")
-        .replace("client-clean-rooms-ml", "client-cleanroomsml")
-        .replace("client-cloud-", "client-cloud")
-        .replace("client-code-", "client-code")
-        .replace("client-connect-", "client-connect")
-        .replace("client-data-", "client-data")
-        .replace("client-free-tier", "client-freetier")
-        .replace("client-io-t", "client-iot-")
-        .replace("client-iot-fleet-", "client-iotfleet")
-        .replace("client-lookout-", "client-lookout")
-        .replace("client-media-", "client-media")
-        .replace("client-migration-hub-", "client-migrationhub")
-        .replace("client-network-monitor", "client-networkmonitor")
-        .replace("client-pinpoint-sms", "client-pinpoint-sms-")
-        .replace("client-route53", "client-route53-")
-        .replace("client-sage-maker", "client-sagemaker")
-        .replace("client-security-", "client-security")
-        .replace("client-supply-chain", "client-supplychain")
-        .replace("client-timestream-influx-db", "client-timestream-influxdb")
-        .replace("client-trusted-advisor", "client-trustedadvisor")
-        .replace("client-work-", "client-work"),
-    }),
-    {}
-  ),
+  ...CLIENT_NAMES.reduce((acc: Record<string, string>, name) => {
+    acc[name] = `client-${name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()}`
+      .replace("-chime-sdk", "-chime-sdk-")
+      .replace("client-amplify-", "client-amplify")
+      .replace("client-bcmdata-exports", "client-bcm-data-exports")
+      .replace("client-control-catalog", "client-controlcatalog")
+      .replace("client-clean-rooms-ml", "client-cleanroomsml")
+      .replace("client-cloud-", "client-cloud")
+      .replace("client-code-", "client-code")
+      .replace("client-connect-", "client-connect")
+      .replace("client-data-", "client-data")
+      .replace("client-free-tier", "client-freetier")
+      .replace("client-io-t", "client-iot-")
+      .replace("client-iot-fleet-", "client-iotfleet")
+      .replace("client-lookout-", "client-lookout")
+      .replace("client-media-", "client-media")
+      .replace("client-migration-hub-", "client-migrationhub")
+      .replace("client-network-monitor", "client-networkmonitor")
+      .replace("client-pinpoint-sms", "client-pinpoint-sms-")
+      .replace("client-route53", "client-route53-")
+      .replace("client-sage-maker", "client-sagemaker")
+      .replace("client-security-", "client-security")
+      .replace("client-supply-chain", "client-supplychain")
+      .replace("client-timestream-influx-db", "client-timestream-influxdb")
+      .replace("client-trusted-advisor", "client-trustedadvisor")
+      .replace("client-work-", "client-work");
+    return acc;
+  }, {}),
   AccessAnalyzer: "client-accessanalyzer",
   ACMPCA: "client-acm-pca",
   APIGateway: "client-api-gateway",

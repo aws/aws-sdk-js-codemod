@@ -7,16 +7,19 @@ export const getClientMetadataRecord = (
 ): ClientMetadataRecord =>
   Object.entries(
     Object.entries(v2ClientNamesRecord).reduce(
-      (acc, [v2ClientName, v2ClientLocalName]) => ({
-        ...acc,
-        [v2ClientName]: {
+      (acc: ClientMetadataRecord, [v2ClientName, v2ClientLocalName]) => {
+        acc[v2ClientName] = {
           v2ClientLocalName,
           v3ClientName: getV3ClientName(v2ClientName),
           v3ClientPackageName: getV3ClientPackageName(v2ClientName),
-        },
-      }),
+        };
+        return acc;
+      },
       {}
-    ) as ClientMetadataRecord
+    )
   )
     .sort(([, { v3ClientPackageName: a }], [, { v3ClientPackageName: b }]) => b.localeCompare(a))
-    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+    .reduce((acc: ClientMetadataRecord, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    }, {});
