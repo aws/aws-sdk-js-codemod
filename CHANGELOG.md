@@ -1,5 +1,15 @@
 # aws-sdk-js-codemod
 
+## 2.1.1
+
+### Patch Changes
+
+- Use TypeScript type import for types ([0093a9639e1e34f915eb0765d72c9d55784cf322](https://github.com/aws/aws-sdk-js-codemod/commit/0093a9639e1e34f915eb0765d72c9d55784cf322))
+- Do not use spread syntax on accumulators ([8a1fdff40ebab4bc56f2c383af408a5e4bb9d8d4](https://github.com/aws/aws-sdk-js-codemod/commit/8a1fdff40ebab4bc56f2c383af408a5e4bb9d8d4))
+- Use optional chain instead of chained logical expressions ([e66c64b17130872531cb58817036001ee72cf305](https://github.com/aws/aws-sdk-js-codemod/commit/e66c64b17130872531cb58817036001ee72cf305))
+- Use node: import for Node.js built-in modules ([37c061f259ed5c9e053564e4def29debc205bd5b](https://github.com/aws/aws-sdk-js-codemod/commit/37c061f259ed5c9e053564e4def29debc205bd5b))
+- Use `.flatMap()` instead of `.map().flat()` ([4f28fbb817cc0a1696fb3569ce40a3d89e4725da](https://github.com/aws/aws-sdk-js-codemod/commit/4f28fbb817cc0a1696fb3569ce40a3d89e4725da))
+
 ## 2.1.0
 
 ### Minor Changes
