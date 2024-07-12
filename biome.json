@@ -22,7 +22,6 @@
       },
       "style": {
         "noNamespace": "error",
-        "noNonNullAssertion": "off",
         "noUnusedTemplateLiteral": "off",
         "useConsistentArrayType": {
           "level": "error",

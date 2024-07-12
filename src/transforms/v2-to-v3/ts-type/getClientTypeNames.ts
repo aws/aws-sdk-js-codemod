@@ -58,7 +58,7 @@ export const getClientTypeNames = (
   clientTypeNames.push(
     ...getImportSpecifiers(j, source, getClientDeepImportPath(v2ClientName))
       .filter((importSpecifier) => importSpecifier.importedName)
-      .map((importSpecifier) => (importSpecifier as ImportSpecifierType).localName!)
+      .map((importSpecifier) => (importSpecifier as ImportSpecifierType).localName)
   );
 
   return [...new Set(clientTypeNames)];

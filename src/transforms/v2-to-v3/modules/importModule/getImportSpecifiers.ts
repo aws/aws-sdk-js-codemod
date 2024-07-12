@@ -17,7 +17,7 @@ export const getImportSpecifiers = (
           const importedName = specifier.imported.name;
           importSpecifiers.add({
             importedName,
-            localName: specifier.local!.name || importedName,
+            localName: specifier.local?.name || importedName,
           });
           break;
         }

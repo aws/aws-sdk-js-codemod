@@ -37,7 +37,7 @@ export const getImportSpecifiers = (
 
     if (declaratorId.type === "Identifier") {
       const declaratorIdName = declaratorId.name;
-      if (declaratorInit!.type === "MemberExpression") {
+      if (declaratorInit?.type === "MemberExpression") {
         importSpecifiers.add({
           importedName: (declaratorInit.property as Identifier).name,
           localName: declaratorIdName,
@@ -48,7 +48,7 @@ export const getImportSpecifiers = (
     }
 
     if (declaratorId.type === "ObjectPattern") {
-      if (declaratorInit!.type !== "CallExpression") {
+      if (declaratorInit?.type !== "CallExpression") {
         continue;
       }
       const properties = declaratorId.properties as (Property | ObjectProperty)[];
