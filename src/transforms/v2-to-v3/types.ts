@@ -1,4 +1,4 @@
-import { Identifier, ThisExpression } from "jscodeshift";
+import type { Identifier, ThisExpression } from "jscodeshift";
 
 export type ClientMetadataRecord = Record<string, ClientMetadata>;
 

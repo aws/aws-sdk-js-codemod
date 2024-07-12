@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
+import type { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getRequireDeclarators } from "./requireModule";

@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 
 // Updates `s3.createPresignedPost(params)` API with `await createPresignedPost(s3, params)` API.

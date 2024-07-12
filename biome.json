@@ -33,7 +33,6 @@
           "level": "error",
           "options": { "syntax": "shorthand" }
         },
-        "useImportType": "off",
         "useTemplate": "off"
       },
       "suspicious": {

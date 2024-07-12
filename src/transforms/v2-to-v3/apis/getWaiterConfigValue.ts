@@ -1,4 +1,4 @@
-import { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
+import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 

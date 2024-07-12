@@ -1,4 +1,4 @@
-import {
+import type {
   ASTPath,
   ArrowFunctionExpression,
   CallExpression,
@@ -8,7 +8,7 @@ import {
   TryStatement,
 } from "jscodeshift";
 
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 
 const FUNCTION_EXPRESSION_TYPES = ["ArrowFunctionExpression", "FunctionExpression"];
 

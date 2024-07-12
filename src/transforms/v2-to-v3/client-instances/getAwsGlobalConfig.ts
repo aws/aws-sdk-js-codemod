@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift, MemberExpression, ObjectExpression } from "jscodeshift";
+import type { Collection, JSCodeshift, MemberExpression, ObjectExpression } from "jscodeshift";
 
 const getUnsupportedComments = (): string[] => [
   " JS SDK v3 does not support global configuration.",

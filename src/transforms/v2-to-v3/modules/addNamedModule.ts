@@ -1,9 +1,9 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import * as importEqualsModule from "./importEqualsModule";
 import * as importModule from "./importModule";
 import * as requireModule from "./requireModule";
-import { ImportType, ModulesOptions } from "./types";
+import { ImportType, type ModulesOptions } from "./types";
 
 export const addNamedModule = (
   j: JSCodeshift,

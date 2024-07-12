@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 import { getRequireDeclarators } from "./requireModule";
 
 export interface GetRequireDeclaratorsWithPropertyOptions {

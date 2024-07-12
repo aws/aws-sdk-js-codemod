@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { ModulesOptions } from "../types";
+import type { ModulesOptions } from "../types";
 import { addDefaultModule } from "./addDefaultModule";
 import { getDefaultName } from "./getDefaultName";
 import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";

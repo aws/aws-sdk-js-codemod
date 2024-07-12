@@ -1,7 +1,7 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { FUNCTION_TYPE_LIST, NOT_SUPPORTED_COMMENT, S3 } from "../config";
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
 import { getClientWaiterStates } from "./getClientWaiterStates";

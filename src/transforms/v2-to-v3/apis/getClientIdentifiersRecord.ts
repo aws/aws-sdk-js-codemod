@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { ClientIdentifiersRecord } from "../types";
+import type { ClientIdentifiersRecord } from "../types";
 import { getClientIdentifiers } from "./getClientIdentifiers";
 
 export interface GetClientIdentifiersRecordOptions {

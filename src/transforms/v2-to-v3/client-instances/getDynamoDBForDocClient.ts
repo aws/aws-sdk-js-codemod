@@ -1,4 +1,4 @@
-import { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
+import type { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 

@@ -1,4 +1,4 @@
-import { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
+import type { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
 

@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 export const getNamesFromTSQualifiedName = (
   j: JSCodeshift,

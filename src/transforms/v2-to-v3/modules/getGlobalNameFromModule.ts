@@ -1,4 +1,4 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getImportSpecifiers as getImportEqualsSpecifiers } from "../modules/importEqualsModule";

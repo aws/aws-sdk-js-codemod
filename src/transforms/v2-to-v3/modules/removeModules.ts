@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 import { removeImportEquals } from "./importEqualsModule";
 import { removeImport } from "./importModule";
 import { removeRequire } from "./requireModule";

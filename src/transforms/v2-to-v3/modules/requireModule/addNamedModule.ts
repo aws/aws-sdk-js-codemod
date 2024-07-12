@@ -1,4 +1,4 @@
-import {
+import type {
   Collection,
   JSCodeshift,
   Literal,
@@ -11,7 +11,7 @@ import {
 import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../../config";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
 import { getRequireDeclarators } from "../requireModule";
-import { ModulesOptions } from "../types";
+import type { ModulesOptions } from "../types";
 
 export const addNamedModule = (
   j: JSCodeshift,

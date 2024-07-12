@@ -1,4 +1,4 @@
-import { JSCodeshift, TSType } from "jscodeshift";
+import type { JSCodeshift, TSType } from "jscodeshift";
 
 const arrayRegex = /^Array<(.*)>$/;
 const recordRegex = /^Record<string, (.*)>$/;

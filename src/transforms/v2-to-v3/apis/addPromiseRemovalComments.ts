@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 export const addPromiseRemovalComments = (j: JSCodeshift, source: Collection<unknown>): void => {
   // Add comment for .promise() calls which weren't removed.

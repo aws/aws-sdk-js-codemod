@@ -1,4 +1,9 @@
-import { Collection, JSCodeshift, StringLiteral, TSExternalModuleReference } from "jscodeshift";
+import type {
+  Collection,
+  JSCodeshift,
+  StringLiteral,
+  TSExternalModuleReference,
+} from "jscodeshift";
 import { PACKAGE_NAME } from "../../config";
 
 export const getImportEqualsDeclarations = (

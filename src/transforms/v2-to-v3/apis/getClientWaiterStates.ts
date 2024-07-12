@@ -1,5 +1,5 @@
-import { Collection, JSCodeshift } from "jscodeshift";
-import { ClientIdentifier } from "../types";
+import type { Collection, JSCodeshift } from "jscodeshift";
+import type { ClientIdentifier } from "../types";
 
 export const getClientWaiterStates = (
   j: JSCodeshift,

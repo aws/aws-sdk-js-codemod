@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 export const isTrailingCommaUsed = (j: JSCodeshift, source: Collection<unknown>) => {
   for (const node of source.find(j.ObjectExpression).nodes()) {

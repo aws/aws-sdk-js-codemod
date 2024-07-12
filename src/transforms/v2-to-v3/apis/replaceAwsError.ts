@@ -1,5 +1,5 @@
-import { Collection, JSCodeshift } from "jscodeshift";
-import { ImportType, addNamedModule } from "../modules";
+import type { Collection, JSCodeshift } from "jscodeshift";
+import { type ImportType, addNamedModule } from "../modules";
 
 export interface ReplaceAwsErrorOptions {
   v2GlobalName?: string;

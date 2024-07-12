@@ -1,4 +1,4 @@
-import { NewExpression } from "jscodeshift";
+import type { NewExpression } from "jscodeshift";
 
 export interface ClientNewExpressionOptions {
   v2ClientLocalName?: string;

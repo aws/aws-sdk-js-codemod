@@ -1,4 +1,8 @@
-import { ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier } from "jscodeshift";
+import type {
+  ImportDefaultSpecifier,
+  ImportNamespaceSpecifier,
+  ImportSpecifier,
+} from "jscodeshift";
 
 export const importSpecifierCompareFn = (
   specifier1: ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier,
