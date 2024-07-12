@@ -4,7 +4,7 @@ const DEEP_IMPORT_PATH_REGEXP = new RegExp(`${PACKAGE_NAME}/clients/([\\w]*)`, "
 
 export const getClientNamesFromDeepImport = (fileSource: string) => {
   const clientsFromDeepImportPath = new Set(
-    [...fileSource.matchAll(DEEP_IMPORT_PATH_REGEXP)].map((regExpMatch) => regExpMatch[1]).flat()
+    [...fileSource.matchAll(DEEP_IMPORT_PATH_REGEXP)].flatMap((regExpMatch) => regExpMatch[1])
   );
 
   return CLIENT_NAMES.filter((clientName) =>

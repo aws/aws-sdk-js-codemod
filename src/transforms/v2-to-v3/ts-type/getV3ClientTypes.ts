@@ -37,7 +37,7 @@ export const getV3ClientTypes = (
       const typesFromString = getTypesFromString(clientTypesMap[clientTypeName]);
       return typesFromString.some((type) => !nativeTypes.includes(type));
     })
-    .map((clientTypeName) => {
+    .flatMap((clientTypeName) => {
       if (clientTypeName === "ClientConfiguration") {
         return clientTypesMap[clientTypeName];
       }
@@ -51,6 +51,5 @@ export const getV3ClientTypes = (
       }
 
       return clientTypeName;
-    })
-    .flat();
+    });
 };
