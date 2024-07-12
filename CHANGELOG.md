@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.1.0
+
+### Minor Changes
+
+- Migrate from prettier+eslint to biome ([517fb7f933b3c6d3d46cc399bb4cd7b3aff0bd30](https://github.com/aws/aws-sdk-js-codemod/commit/517fb7f933b3c6d3d46cc399bb4cd7b3aff0bd30))
+
 ## 2.0.1
 
 ### Patch Changes
