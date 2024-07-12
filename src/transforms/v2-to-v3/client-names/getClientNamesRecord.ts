@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
 import { ImportType } from "../modules";

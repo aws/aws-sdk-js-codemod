@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientNewExpression } from "../utils";

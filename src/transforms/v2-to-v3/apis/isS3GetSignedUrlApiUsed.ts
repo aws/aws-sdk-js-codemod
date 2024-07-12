@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 
 export const isS3GetSignedUrlApiUsed = (
   j: JSCodeshift,

@@ -1,6 +1,6 @@
-import { Collection, JSCodeshift, NewExpression } from "jscodeshift";
+import type { Collection, JSCodeshift, NewExpression } from "jscodeshift";
 import { AWS_CREDENTIALS_MAP, AWS_TOKEN_MAP } from "../config";
-import { ImportType, addNamedModule } from "../modules";
+import { type ImportType, addNamedModule } from "../modules";
 
 export interface ReplaceAwsCredentialsOptions {
   v2GlobalName?: string;

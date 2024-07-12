@@ -1,4 +1,4 @@
-import {
+import type {
   Collection,
   JSCodeshift,
   Literal,
@@ -9,7 +9,7 @@ import {
 } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getCommandName } from "./getCommandName";
 

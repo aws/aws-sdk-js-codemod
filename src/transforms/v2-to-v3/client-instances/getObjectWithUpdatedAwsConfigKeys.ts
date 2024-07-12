@@ -1,4 +1,10 @@
-import { Identifier, JSCodeshift, ObjectExpression, ObjectProperty, Property } from "jscodeshift";
+import type {
+  Identifier,
+  JSCodeshift,
+  ObjectExpression,
+  ObjectProperty,
+  Property,
+} from "jscodeshift";
 import { AWS_CONFIG_KEY_MAP, OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
 const getRenameComment = (keyName: string, newKeyName: string) =>

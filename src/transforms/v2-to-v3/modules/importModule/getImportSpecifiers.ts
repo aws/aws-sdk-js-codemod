@@ -1,5 +1,5 @@
-import { Collection, JSCodeshift } from "jscodeshift";
-import { ImportSpecifierType } from "../types";
+import type { Collection, JSCodeshift } from "jscodeshift";
+import type { ImportSpecifierType } from "../types";
 import { getImportDeclarations } from "./getImportDeclarations";
 
 export const getImportSpecifiers = (

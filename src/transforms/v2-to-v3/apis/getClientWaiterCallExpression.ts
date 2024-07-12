@@ -1,6 +1,6 @@
-import { CallExpression } from "jscodeshift";
+import type { CallExpression } from "jscodeshift";
 
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 
 export const getClientWaiterCallExpression = (
   clientId: ClientIdentifier,

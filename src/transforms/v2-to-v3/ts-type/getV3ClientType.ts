@@ -1,4 +1,4 @@
-import { JSCodeshift, TSType } from "jscodeshift";
+import type { JSCodeshift, TSType } from "jscodeshift";
 
 import { CLIENT_TYPES_MAP } from "../config";
 import { CLIENT_REQ_RESP_TYPES_MAP } from "../config/CLIENT_REQ_RESP_TYPES_MAP";

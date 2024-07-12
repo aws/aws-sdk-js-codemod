@@ -1,8 +1,8 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientNewExpression } from "../utils";
-import { ClientModulesOptions } from "./types";
+import type { ClientModulesOptions } from "./types";
 
 export const getNewExpressionCount = (
   j: JSCodeshift,

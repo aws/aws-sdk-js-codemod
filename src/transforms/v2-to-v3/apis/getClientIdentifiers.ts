@@ -1,6 +1,6 @@
-import { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types";
 import { getClientIdNamesFromNewExpr } from "./getClientIdNamesFromNewExpr";
 import { getClientIdNamesFromTSTypeRef } from "./getClientIdNamesFromTSTypeRef";
 import { getClientIdThisExpressions } from "./getClientIdThisExpressions";

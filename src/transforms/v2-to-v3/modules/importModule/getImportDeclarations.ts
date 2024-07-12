@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 import { PACKAGE_NAME } from "../../config";
 
 export const getImportDeclarations = (j: JSCodeshift, source: Collection<unknown>, path?: string) =>

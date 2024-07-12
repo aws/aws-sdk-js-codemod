@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import {
   getClientWaiterStates,
@@ -21,7 +21,7 @@ import { addNamedModule } from "./addNamedModule";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
 
-import { ClientModulesOptions } from "./types";
+import type { ClientModulesOptions } from "./types";
 
 export const addClientModules = (
   j: JSCodeshift,

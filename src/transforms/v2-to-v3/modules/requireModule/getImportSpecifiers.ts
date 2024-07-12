@@ -1,6 +1,6 @@
-import { Collection, Identifier, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
+import type { Collection, Identifier, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
 import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
-import { ImportSpecifierType } from "../types";
+import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 
 const getImportSpecifiersFromObjectPattern = (properties: (Property | ObjectProperty)[]) => {

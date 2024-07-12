@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 import { hasImport } from "./hasImport";
 import { hasImportEquals } from "./hasImportEquals";
 import { hasRequire } from "./hasRequire";

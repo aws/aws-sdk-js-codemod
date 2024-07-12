@@ -1,4 +1,10 @@
-import { Collection, Identifier, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
+import type {
+  Collection,
+  Identifier,
+  JSCodeshift,
+  TSQualifiedName,
+  TSTypeReference,
+} from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";

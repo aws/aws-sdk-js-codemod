@@ -1,4 +1,4 @@
-import { ClientMetadataRecord } from "../types";
+import type { ClientMetadataRecord } from "../types";
 import { getV3ClientName } from "./getV3ClientName";
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
 

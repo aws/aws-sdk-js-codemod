@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { CLIENT_NAMES } from "../config";
 import { getNamesFromNewExpr } from "./getNamesFromNewExpr";

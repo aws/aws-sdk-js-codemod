@@ -1,4 +1,10 @@
-import { Collection, Identifier, JSCodeshift, MemberExpression, NewExpression } from "jscodeshift";
+import type {
+  Collection,
+  Identifier,
+  JSCodeshift,
+  MemberExpression,
+  NewExpression,
+} from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientNewExpression } from "../utils";

@@ -1,4 +1,4 @@
-import {
+import type {
   CallExpression,
   Collection,
   Identifier,
@@ -12,7 +12,7 @@ import {
 } from "jscodeshift";
 import { OBJECT_PROPERTY_TYPE_LIST, STRING_LITERAL_TYPE_LIST } from "../../config";
 import { removeDeclaration } from "../removeDeclaration";
-import { ImportSpecifierType } from "../types";
+import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
 
 // ToDo: create utility to share with requireModule/addNamedModule

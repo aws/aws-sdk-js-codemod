@@ -1,4 +1,4 @@
-import { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
+import type { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
 import { getClientNewExpression } from "../utils";
 import { getNewClientExpression } from "./getNewClientExpression";
 

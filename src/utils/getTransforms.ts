@@ -1,7 +1,7 @@
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
 
-import { AwsSdkJsCodemodTransform } from "../transforms";
+import type { AwsSdkJsCodemodTransform } from "../transforms";
 
 export const getTransforms = () =>
   readdirSync(join(__dirname, "..", "transforms"), { withFileTypes: true })
