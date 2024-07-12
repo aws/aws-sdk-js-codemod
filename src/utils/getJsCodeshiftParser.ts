@@ -30,7 +30,6 @@ const defaultExtensions = DEFAULT_EXTENSIONS.concat(["ts", "tsx"])
   .sort()
   .join(",");
 
-/* eslint-disable @typescript-eslint/naming-convention */
 export const getJsCodeshiftParser = () =>
   argsParser.options({
     transform: {

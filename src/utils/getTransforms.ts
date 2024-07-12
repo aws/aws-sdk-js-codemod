@@ -8,6 +8,6 @@ export const getTransforms = () =>
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
     .map((dirName) => {
-      const { name, description, options } = require(`../transforms/${dirName}/transform`); // eslint-disable-line
+      const { name, description, options } = require(`../transforms/${dirName}/transform`);
       return { name, description, options } as AwsSdkJsCodemodTransform;
     });

@@ -52,7 +52,8 @@ const disclaimerLines = [
 
 const parser = getJsCodeshiftParser();
 
-let options, positionalArguments;
+let options: Record;
+let positionalArguments: Array;
 try {
   ({ options, positionalArguments } = parser.parse());
   if (positionalArguments.length === 0 && !options.stdin) {
@@ -88,7 +89,9 @@ function run(paths, options) {
 
 if (options.stdin) {
   let buffer = "";
-  process.stdin.on("data", (data) => (buffer += data));
+  process.stdin.on("data", (data) => {
+    buffer += data;
+  });
   process.stdin.on("end", () => run(buffer.split("\n"), options));
 } else {
   run(positionalArguments, options);
