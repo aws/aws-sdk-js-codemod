@@ -18,7 +18,7 @@ export const getRequireDeclaratorsWithProperty = (
 
     if (declaratorId.type === "Identifier") {
       const declaratorIdName = declaratorId.name;
-      if (declaratorInit!.type === "MemberExpression") {
+      if (declaratorInit?.type === "MemberExpression") {
         const importedName = (declaratorInit.property as Identifier).name;
         if (localName === declaratorIdName && identifierName === importedName) {
           return true;
