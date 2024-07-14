@@ -22,7 +22,6 @@
       },
       "style": {
         "noNamespace": "error",
-        "noUnusedTemplateLiteral": "off",
         "useConsistentArrayType": {
           "level": "error",
           "options": { "syntax": "shorthand" }

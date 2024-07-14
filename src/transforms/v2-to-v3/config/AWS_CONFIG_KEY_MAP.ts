@@ -65,8 +65,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     newKeyName: "useArnRegion",
   },
   s3UsEast1RegionalEndpoint: {
-    description: `S3 client will always use regional endpoint if region is set to "us-east-1".`,
-    deprecationMessage: `Set region to "aws-global" to send requests to S3 global endpoint.`,
+    description: "S3 client will always use regional endpoint if region is set to 'us-east-1'.",
+    deprecationMessage: "Set region to 'aws-global' to send requests to S3 global endpoint.",
   },
   signatureCache: {
     deprecationMessage: "SDK always caches the hashed signing keys.",
@@ -78,8 +78,8 @@ export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
     newKeyName: "tls",
   },
   stsRegionalEndpoints: {
-    description: `STS client will always use regional endpoints if set to a specific region.`,
-    deprecationMessage: `Set region to "aws-global" to send requests to STS global endpoint.`,
+    description: "STS client will always use regional endpoints if set to a specific region.",
+    deprecationMessage: "Set region to 'aws-global' to send requests to STS global endpoint.",
   },
   useAccelerateEndpoint: {},
   useDualstackEndpoint: {},

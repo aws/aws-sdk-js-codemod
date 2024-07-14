@@ -40,14 +40,14 @@ if (args[2] === "--help" || args[2] === "-h") {
 }
 
 const disclaimerLines = [
-  `╔════════════════════════════════════════════════════════╗`,
-  `║ Please review the code change thoroughly for required  ║`,
-  `║ functionality before deploying it to production.       ║`,
-  `║                                                        ║`,
-  `║ If the transformation is not complete or is incorrect, ║`,
-  `║ please report the issue on GitHub.                     ║`,
-  `╚════════════════════════════════════════════════════════╝`,
-  ``,
+  "╔════════════════════════════════════════════════════════╗",
+  "║ Please review the code change thoroughly for required  ║",
+  "║ functionality before deploying it to production.       ║",
+  "║                                                        ║",
+  "║ If the transformation is not complete or is incorrect, ║",
+  "║ please report the issue on GitHub.                     ║",
+  "╚════════════════════════════════════════════════════════╝",
+  "",
 ];
 
 const parser = getJsCodeshiftParser();
