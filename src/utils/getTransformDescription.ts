@@ -15,7 +15,7 @@ const getWrappedBlocks = (sentence: string, blockLength: number): string[] => {
     }
 
     // add the word to the current block
-    currentBlock += word + " ";
+    currentBlock += `${word} `;
   }
 
   // add the final block to the list of blocks

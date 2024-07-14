@@ -26,8 +26,7 @@
         "useConsistentArrayType": {
           "level": "error",
           "options": { "syntax": "shorthand" }
-        },
-        "useTemplate": "off"
+        }
       },
       "suspicious": {
         "noEmptyBlockStatements": "error"
