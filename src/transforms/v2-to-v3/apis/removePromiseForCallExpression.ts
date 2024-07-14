@@ -32,6 +32,7 @@ export const removePromiseForCallExpression = (
     }
     default: {
       emitWarning(
+        // biome-ignore lint/style/useTemplate: This is a multiline string
         `Removal of .promise() not implemented for parentPath: ${callExpression.parentPath.value.type}\n` +
           `Code processed: ${j(callExpression.parentPath).toSource()}\n\n` +
           "Please report your use case on https://github.com/aws/aws-sdk-js-codemod\n"
