@@ -9,7 +9,7 @@ export interface AwsConfigKeyStatus {
  */
 export const AWS_CONFIG_KEY_MAP: Record<string, AwsConfigKeyStatus> = {
   apiVersion: {
-    deprecationMessage: `The client uses the "latest" apiVersion.`,
+    deprecationMessage: 'The client uses the "latest" apiVersion.',
   },
   computeChecksums: {
     deprecationMessage: "Applicable commands of S3 will automatically compute the MD5 checksums.",
