@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 2.1.3
+
+### Patch Changes
+
+- Disallow template literals if interpolation and special-character handling are not needed ([b00c993900b3b20cfc47c8d07e29f9a223e3b069](https://github.com/aws/aws-sdk-js-codemod/commit/b00c993900b3b20cfc47c8d07e29f9a223e3b069))
+- Prefer template literals over string concatenation ([33b8745a554a2e24f354bce9d5b46e5d67f28543](https://github.com/aws/aws-sdk-js-codemod/commit/33b8745a554a2e24f354bce9d5b46e5d67f28543))
+
 ## 2.1.2
 
 ### Patch Changes
