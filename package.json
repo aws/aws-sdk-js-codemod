@@ -41,7 +41,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "jscodeshift": "0.16.0"
+    "jscodeshift": "0.16.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.0",
