@@ -36,7 +36,6 @@
     "build": "tsc",
     "format": "biome format --write .",
     "lint": "biome lint --write src",
-    "prepare": "lefthook install",
     "release": "yarn build && changeset publish",
     "test": "vitest"
   },
@@ -50,7 +49,6 @@
     "@types/jscodeshift": "^0.11.11",
     "@types/node": "^16.18.101",
     "aws-sdk": "2.1641.0",
-    "lefthook": "^1.6.15",
     "tsx": "^4.7.1",
     "typescript": "~5.5.2",
     "vitest": "~2.0.1"
