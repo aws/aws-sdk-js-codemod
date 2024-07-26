@@ -119,6 +119,5 @@ export const getObjectWithUpdatedAwsConfigKeys = (
     })
     .filter((property) => property !== undefined);
 
-  // @ts-ignore is Argument is not assignable to parameter
   return j.objectExpression(updatedProperties);
 };
