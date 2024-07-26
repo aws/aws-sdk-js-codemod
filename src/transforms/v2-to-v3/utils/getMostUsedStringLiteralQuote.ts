@@ -19,7 +19,7 @@ export const getMostUsedStringLiteralQuote = (
 
     // Check if the literal value is a string and contains single quotes
     if (typeof value === "string") {
-      // @ts-ignore Property 'raw' does not exist on type 'Literal'.
+      // @ts-expect-error Property 'raw' does not exist on type 'Literal'.
       const rawValue = path.node.raw || path.node.extra?.raw || "";
       if (rawValue.startsWith("'")) {
         quoteCount[StringLiteralQuoteType.SINGLE]++;
