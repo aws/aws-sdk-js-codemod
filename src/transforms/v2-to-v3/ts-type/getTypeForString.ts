@@ -31,7 +31,7 @@ export const getTypeForString = (
     return j.tsTypeReference.from({
       typeName: j.identifier("Array"),
 
-      // @ts-ignore
+      // @ts-expect-error Type 'TSType' is not assignable to type 'TSTypeKind'.
       typeParameters: j.tsTypeParameterInstantiation([typeArgument]),
     });
   }
@@ -43,7 +43,7 @@ export const getTypeForString = (
     return j.tsTypeReference.from({
       typeName: j.identifier("Record"),
 
-      // @ts-ignore
+      // @ts-expect-error Type 'TSType' is not assignable to type 'TSTypeKind'.
       typeParameters: j.tsTypeParameterInstantiation([j.tsStringKeyword(), typeArgument]),
     });
   }
