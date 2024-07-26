@@ -8,7 +8,6 @@ import { dirname, join } from "node:path";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
 
-// @ts-ignore: package.json will be imported from dist folders
 import { version } from "../../package.json";
 
 const requirePackage = (name: string) => {
