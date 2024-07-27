@@ -1,8 +1,8 @@
 import jscodeshift, {
-  Identifier,
-  TSFunctionType,
-  TSQualifiedName,
-  TSTypeReference,
+  type Identifier,
+  type TSFunctionType,
+  type TSQualifiedName,
+  type TSTypeReference,
 } from "jscodeshift";
 
 import { getTypesSource } from "./getTypesSource";
