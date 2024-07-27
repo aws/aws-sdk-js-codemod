@@ -5,7 +5,7 @@ export const getGlobalImportEqualsInput = () => {
   let content = "";
 
   content += `import AWS = require("aws-sdk");\n\n`;
-  content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST, `AWS.`);
+  content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST, "AWS.");
 
   return content;
 };

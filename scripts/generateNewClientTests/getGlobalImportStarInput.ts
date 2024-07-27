@@ -5,7 +5,7 @@ export const getGlobalImportStarInput = () => {
   let content = "";
 
   content += `import * as AWS from "aws-sdk";\n\n`;
-  content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST, `AWS.`);
+  content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST, "AWS.");
 
   return content;
 };
