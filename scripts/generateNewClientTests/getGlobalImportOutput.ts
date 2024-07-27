@@ -4,10 +4,10 @@ import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
 
 export const getGlobalImportOutput = () => {
-  let content = ``;
+  let content = "";
 
   content += getV3PackageImportsCode(getClientNamesSortedByPackageName(CLIENT_NAMES));
-  content += `\n`;
+  content += "\n";
   content += getV3ClientsNewExpressionCode(CLIENT_NAMES);
 
   return content;

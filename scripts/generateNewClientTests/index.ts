@@ -1,7 +1,7 @@
 // This script generates tests in src/transforms/v2-to-v3/__fixtures__/new-client
 // Run them using: yarn tsx scripts/generateNewClientTests/index.ts
-import { writeFile } from "fs/promises";
-import { join } from "path";
+import { writeFile } from "node:fs/promises";
+import { join } from "node:path";
 
 import { getGlobalImportEqualsInput } from "./getGlobalImportEqualsInput";
 import { getGlobalImportEqualsOutput } from "./getGlobalImportEqualsOutput";

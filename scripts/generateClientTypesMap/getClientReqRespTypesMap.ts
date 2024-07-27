@@ -1,8 +1,8 @@
 import jscodeshift, {
-  Identifier,
-  TSFunctionType,
-  TSQualifiedName,
-  TSTypeReference,
+  type Identifier,
+  type TSFunctionType,
+  type TSQualifiedName,
+  type TSTypeReference,
 } from "jscodeshift";
 
 import { getTypesSource } from "./getTypesSource";
@@ -35,7 +35,7 @@ export const getClientReqRespTypesMap = async (
       if (!params.typeAnnotation) return;
       if (!params.typeAnnotation.typeAnnotation) return;
       if (params.typeAnnotation.typeAnnotation.type !== "TSTypeReference") return;
-      const paramsTypeRef = params.typeAnnotation!.typeAnnotation! as TSTypeReference;
+      const paramsTypeRef = params.typeAnnotation.typeAnnotation as TSTypeReference;
 
       if (!paramsTypeRef.typeName) return;
       if (paramsTypeRef.typeName.type !== "TSQualifiedName") return;
@@ -55,7 +55,7 @@ export const getClientReqRespTypesMap = async (
       if (!callback.typeAnnotation) return;
       if (!callback.typeAnnotation.typeAnnotation) return;
       if (callback.typeAnnotation.typeAnnotation.type !== "TSFunctionType") return;
-      const callbackTypeRef = callback.typeAnnotation!.typeAnnotation! as TSFunctionType;
+      const callbackTypeRef = callback.typeAnnotation.typeAnnotation as TSFunctionType;
 
       if (!callbackTypeRef.parameters) return;
       if (callbackTypeRef.parameters.length !== 2) return;
@@ -66,7 +66,7 @@ export const getClientReqRespTypesMap = async (
       if (responseType.typeAnnotation.type !== "TSTypeAnnotation") return;
       if (!responseType.typeAnnotation.typeAnnotation) return;
       if (responseType.typeAnnotation.typeAnnotation.type !== "TSTypeReference") return;
-      const responseTypeRef = responseType.typeAnnotation!.typeAnnotation! as TSTypeReference;
+      const responseTypeRef = responseType.typeAnnotation.typeAnnotation as TSTypeReference;
 
       if (!responseTypeRef.typeName) return;
       if (responseTypeRef.typeName.type !== "TSQualifiedName") return;

@@ -1,5 +1,5 @@
 import {
-  CLIENT_NAMES,
+  type CLIENT_NAMES,
   CLIENT_NAMES_MAP,
   CLIENT_PACKAGE_NAMES_MAP,
 } from "../../src/transforms/v2-to-v3/config";
@@ -13,7 +13,7 @@ export const getV3PackageImportEqualsCode = (
   clientsToTest: typeof CLIENT_NAMES,
   options?: V3PackageImportEqualsCodeOptions
 ) => {
-  let content = ``;
+  let content = "";
   const { useLocalSuffix = false } = options || {};
 
   for (const v2ClientName of clientsToTest) {
