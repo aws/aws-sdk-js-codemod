@@ -35,7 +35,7 @@
   "scripts": {
     "build": "tsc",
     "format": "biome format --write .",
-    "lint": "biome lint --write src",
+    "lint": "biome lint --write .",
     "release": "yarn build && changeset publish",
     "test": "vitest"
   },
