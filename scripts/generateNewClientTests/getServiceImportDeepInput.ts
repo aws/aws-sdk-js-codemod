@@ -8,7 +8,7 @@ export const getServiceImportDeepInput = () => {
   for (const clientName of CLIENTS_TO_TEST) {
     content += `import ${clientName} from "${getClientDeepImportPath(clientName)}";\n`;
   }
-  content += `\n`;
+  content += "\n";
   content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
   return content;

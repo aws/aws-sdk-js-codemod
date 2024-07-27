@@ -9,7 +9,7 @@ export const getGlobalRequirePropertyWithNameInput = () => {
     const importName = getClientNameWithLocalSuffix(clientName);
     content += `const ${importName} = require("aws-sdk").${clientName};\n`;
   }
-  content += `\n`;
+  content += "\n";
   content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;

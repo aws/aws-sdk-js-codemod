@@ -10,7 +10,7 @@ export const getServiceImportDeepStarWithNameInput = () => {
     const importName = getClientNameWithLocalSuffix(clientName);
     content += `import * as ${importName} from "${getClientDeepImportPath(clientName)}";\n`;
   }
-  content += `\n`;
+  content += "\n";
   content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;

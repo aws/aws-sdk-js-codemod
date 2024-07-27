@@ -8,7 +8,7 @@ export const getServiceRequireWithNameInput = () => {
   content += `const { \n${CLIENTS_TO_TEST.map(
     (clientName) => `  ${clientName}: ${getClientNameWithLocalSuffix(clientName)}`
   ).join(`,\n`)}\n} = require("aws-sdk");\n`;
-  content += `\n`;
+  content += "\n";
   content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;

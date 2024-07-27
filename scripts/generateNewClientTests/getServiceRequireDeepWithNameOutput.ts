@@ -10,7 +10,7 @@ export const getServiceRequireDeepWithNameOutput = () => {
   content += getV3PackageRequiresCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST), {
     useLocalSuffix: true,
   });
-  content += `\n`;
+  content += "\n";
   content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;

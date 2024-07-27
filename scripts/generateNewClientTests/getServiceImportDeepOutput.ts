@@ -7,7 +7,7 @@ export const getServiceImportDeepOutput = () => {
   let content = "";
 
   content += getV3PackageImportsCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST));
-  content += `\n`;
+  content += "\n";
   content += getV3ClientsNewExpressionCode(CLIENTS_TO_TEST);
 
   return content;

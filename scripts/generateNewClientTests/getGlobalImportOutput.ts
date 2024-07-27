@@ -7,7 +7,7 @@ export const getGlobalImportOutput = () => {
   let content = "";
 
   content += getV3PackageImportsCode(getClientNamesSortedByPackageName(CLIENT_NAMES));
-  content += `\n`;
+  content += "\n";
   content += getV3ClientsNewExpressionCode(CLIENT_NAMES);
 
   return content;

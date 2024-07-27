@@ -8,7 +8,7 @@ export const getServiceImportWithNameInput = () => {
   content += `import { \n${CLIENTS_TO_TEST.map(
     (clientName) => `  ${clientName} as ${getClientNameWithLocalSuffix(clientName)}`
   ).join(`,\n`)}\n} from "aws-sdk";\n`;
-  content += `\n`;
+  content += "\n";
   content += getV2ClientsNewExpressionCode(CLIENTS_TO_TEST.map(getClientNameWithLocalSuffix));
 
   return content;
