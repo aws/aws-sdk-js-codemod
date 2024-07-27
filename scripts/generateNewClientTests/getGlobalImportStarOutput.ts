@@ -4,7 +4,7 @@ import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
 
 export const getGlobalImportStarOutput = () => {
-  let content = ``;
+  let content = "";
 
   content += getV3PackageImportsCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST));
   content += `\n`;

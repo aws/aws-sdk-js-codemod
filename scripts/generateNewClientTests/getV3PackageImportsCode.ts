@@ -13,7 +13,7 @@ export const getV3PackageImportsCode = (
   v2ClientNames: typeof CLIENT_NAMES,
   options?: V3PackageImportsCodeOptions
 ) => {
-  let content = ``;
+  let content = "";
   const { useLocalSuffix = false } = options || {};
 
   for (const v2ClientName of v2ClientNames) {

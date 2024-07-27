@@ -13,7 +13,7 @@ export const getV3PackageRequiresCode = (
   clientsToTest: typeof CLIENT_NAMES,
   options?: V3PackageRequiresCodeOptions
 ) => {
-  let content = ``;
+  let content = "";
   const { useLocalSuffix = false } = options || {};
 
   for (const v2ClientName of clientsToTest) {

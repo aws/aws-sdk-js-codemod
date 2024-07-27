@@ -13,7 +13,7 @@ export const getV3PackageImportEqualsCode = (
   clientsToTest: typeof CLIENT_NAMES,
   options?: V3PackageImportEqualsCodeOptions
 ) => {
-  let content = ``;
+  let content = "";
   const { useLocalSuffix = false } = options || {};
 
   for (const v2ClientName of clientsToTest) {

@@ -4,7 +4,7 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getServiceRequireDeepWithNameInput = () => {
-  let content = ``;
+  let content = "";
 
   for (const clientName of CLIENTS_TO_TEST) {
     const importedName = getClientNameWithLocalSuffix(clientName);

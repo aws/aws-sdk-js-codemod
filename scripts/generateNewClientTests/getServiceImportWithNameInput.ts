@@ -3,7 +3,7 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getServiceImportWithNameInput = () => {
-  let content = ``;
+  let content = "";
 
   content += `import { \n${CLIENTS_TO_TEST.map(
     (clientName) => `  ${clientName} as ${getClientNameWithLocalSuffix(clientName)}`

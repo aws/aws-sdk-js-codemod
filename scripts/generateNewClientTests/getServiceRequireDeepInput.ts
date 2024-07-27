@@ -3,7 +3,7 @@ import { getClientDeepImportPath } from "./getClientDeepImportPath";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getServiceRequireDeepInput = () => {
-  let content = ``;
+  let content = "";
 
   for (const clientName of CLIENTS_TO_TEST) {
     content += `const ${clientName} = require("${getClientDeepImportPath(clientName)}");\n`;

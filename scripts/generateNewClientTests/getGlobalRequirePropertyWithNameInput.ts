@@ -3,7 +3,7 @@ import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
 
 export const getGlobalRequirePropertyWithNameInput = () => {
-  let content = ``;
+  let content = "";
 
   for (const clientName of CLIENTS_TO_TEST) {
     const importName = getClientNameWithLocalSuffix(clientName);

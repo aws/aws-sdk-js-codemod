@@ -4,7 +4,7 @@ import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageImportEqualsCode } from "./getV3PackageImportEqualsCode";
 
 export const getServiceImportEqualsOutput = () => {
-  let content = ``;
+  let content = "";
 
   content += getV3PackageImportEqualsCode(getClientNamesSortedByPackageName(CLIENTS_TO_TEST));
   content += "\n";
