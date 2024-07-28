@@ -30,8 +30,12 @@
       "suspicious": {
         "noEmptyBlockStatements": "error"
       }
-    },
-    "ignore": ["**/__fixtures__"]
+    }
   },
-  "javascript": { "formatter": { "trailingCommas": "es5" } }
+  "javascript": { "formatter": { "trailingCommas": "es5" } },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  }
 }
