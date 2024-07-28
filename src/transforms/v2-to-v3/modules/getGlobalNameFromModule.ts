@@ -1,4 +1,4 @@
-import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import { PACKAGE_NAME } from "../config";
 import { getImportSpecifiers as getImportEqualsSpecifiers } from "../modules/importEqualsModule";
@@ -13,8 +13,8 @@ export const getGlobalNameFromModule = (
     .filter((declarator) => declarator.value.id.type === "Identifier")
     .nodes();
 
-  if (requireIdentifiers.length > 0) {
-    return (requireIdentifiers[0]?.id as Identifier).name;
+  if (requireIdentifiers.length > 0 && requireIdentifiers[0].id.type === "Identifier") {
+    return requireIdentifiers[0].id.name;
   }
 
   const importDefaultSpecifiers = getImportSpecifiers(j, source, PACKAGE_NAME).filter(
