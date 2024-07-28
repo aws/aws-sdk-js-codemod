@@ -1,13 +1,11 @@
-import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
-
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import type { ObjectExpression } from "jscodeshift";
 
 export const getArgsWithoutWaiterConfig = (options: ObjectExpression): ObjectExpression => {
   options.properties = options.properties.filter((property) => {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+    if (property.type !== "Property" && property.type !== "ObjectProperty") {
       return true;
     }
-    const propertyKey = (property as Property | ObjectProperty).key;
+    const propertyKey = property.key;
     if (propertyKey.type !== "Identifier") {
       return true;
     }
