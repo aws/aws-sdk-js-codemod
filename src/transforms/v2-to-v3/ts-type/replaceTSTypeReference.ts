@@ -1,10 +1,4 @@
-import type {
-  Collection,
-  Identifier,
-  JSCodeshift,
-  TSQualifiedName,
-  TSTypeReference,
-} from "jscodeshift";
+import type { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
 import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { getClientTypeNames } from "./getClientTypeNames";
@@ -17,12 +11,6 @@ export interface ReplaceTSTypeReferenceOptions {
   v2GlobalName?: string;
   v3ClientName: string;
 }
-
-const isRightSectionIdentifier = (node: TSTypeReference) =>
-  (node.typeName as TSQualifiedName).right.type === "Identifier";
-
-const getRightIdentifierName = (node: TSTypeReference) =>
-  ((node.typeName as TSQualifiedName).right as Identifier).name;
 
 // Replace v2 client type reference with v3 client type reference.
 export const replaceTSTypeReference = (
@@ -66,9 +54,12 @@ export const replaceTSTypeReference = (
           left: getTSQualifiedNameFromClientName(v2ClientName, v2GlobalName),
         },
       })
-      .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
       .replaceWith((v2ClientType) => {
-        const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
+        const tSQualifiedName = v2ClientType.node.typeName as TSQualifiedName;
+        if (tSQualifiedName.right.type !== "Identifier") {
+          return v2ClientType;
+        }
+        const v2ClientTypeName = tSQualifiedName.right.name;
         return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
       });
   }
@@ -81,9 +72,12 @@ export const replaceTSTypeReference = (
     .find(j.TSTypeReference, {
       typeName: { left: getTSQualifiedNameFromClientName(v2ClientLocalName) },
     })
-    .filter((v2ClientType) => isRightSectionIdentifier(v2ClientType.node))
     .replaceWith((v2ClientType) => {
-      const v2ClientTypeName = getRightIdentifierName(v2ClientType.node);
+      const tSQualifiedName = v2ClientType.node.typeName as TSQualifiedName;
+      if (tSQualifiedName.right.type !== "Identifier") {
+        return v2ClientType;
+      }
+      const v2ClientTypeName = tSQualifiedName.right.name;
       return getV3ClientType(j, { ...clientTypeOptions, v2ClientTypeName });
     });
 
