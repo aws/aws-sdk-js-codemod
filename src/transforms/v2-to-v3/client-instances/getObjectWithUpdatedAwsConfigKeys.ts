@@ -42,7 +42,7 @@ export const getObjectWithUpdatedAwsConfigKeys = (
       continue;
     }
 
-    const propertyKeyName = (propertyKey as Identifier).name;
+    const propertyKeyName = propertyKey.name;
     if (
       !propertiesToUpdate
         .filter((propertyToUpdate) => OBJECT_PROPERTY_TYPE_LIST.includes(propertyToUpdate.type))

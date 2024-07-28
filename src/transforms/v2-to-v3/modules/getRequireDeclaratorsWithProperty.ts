@@ -1,4 +1,4 @@
-import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 import { getRequireDeclarators } from "./requireModule";
 
 export interface GetRequireDeclaratorsWithPropertyOptions {
@@ -18,8 +18,11 @@ export const getRequireDeclaratorsWithProperty = (
 
     if (declaratorId.type === "Identifier") {
       const declaratorIdName = declaratorId.name;
-      if (declaratorInit?.type === "MemberExpression") {
-        const importedName = (declaratorInit.property as Identifier).name;
+      if (
+        declaratorInit?.type === "MemberExpression" &&
+        declaratorInit.property.type === "Identifier"
+      ) {
+        const importedName = declaratorInit.property.name;
         if (localName === declaratorIdName && identifierName === importedName) {
           return true;
         }

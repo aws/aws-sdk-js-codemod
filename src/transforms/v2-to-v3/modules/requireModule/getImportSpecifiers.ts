@@ -1,4 +1,4 @@
-import type { Collection, Identifier, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
+import type { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
 import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
 import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
@@ -37,9 +37,12 @@ export const getImportSpecifiers = (
 
     if (declaratorId.type === "Identifier") {
       const declaratorIdName = declaratorId.name;
-      if (declaratorInit?.type === "MemberExpression") {
+      if (
+        declaratorInit?.type === "MemberExpression" &&
+        declaratorInit.property.type === "Identifier"
+      ) {
         importSpecifiers.add({
-          importedName: (declaratorInit.property as Identifier).name,
+          importedName: declaratorInit.property.name,
           localName: declaratorIdName,
         });
       } else {

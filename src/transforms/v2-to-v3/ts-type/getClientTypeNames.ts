@@ -1,10 +1,4 @@
-import type {
-  Collection,
-  Identifier,
-  JSCodeshift,
-  TSQualifiedName,
-  TSTypeReference,
-} from "jscodeshift";
+import type { Collection, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
 import type { ImportSpecifierType } from "../modules";
 import { getImportSpecifiers } from "../modules/importModule";
@@ -30,7 +24,7 @@ const getRightIdentifierName = (
     .nodes()
     .map((node) => (node.typeName as TSQualifiedName).right)
     .filter((node) => node.type === "Identifier")
-    .map((node) => (node as Identifier).name);
+    .map((node) => node.name);
 
 export const getClientTypeNames = (
   j: JSCodeshift,

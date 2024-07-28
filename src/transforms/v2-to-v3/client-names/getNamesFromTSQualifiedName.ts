@@ -8,6 +8,7 @@ export const getNamesFromTSQualifiedName = (
   source
     .find(j.TSQualifiedName, {
       left: { name: v2GlobalName },
+      right: { type: "Identifier" },
     })
     .nodes()
     .map((tsTypeReference) => (tsTypeReference.right as Identifier).name);
