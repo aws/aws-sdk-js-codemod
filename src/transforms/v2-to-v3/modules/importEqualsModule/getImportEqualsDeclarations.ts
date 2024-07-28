@@ -1,9 +1,4 @@
-import type {
-  Collection,
-  JSCodeshift,
-  StringLiteral,
-  TSExternalModuleReference,
-} from "jscodeshift";
+import type { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift";
 import { PACKAGE_NAME } from "../../config";
 
 export const getImportEqualsDeclarations = (
@@ -22,7 +17,7 @@ export const getImportEqualsDeclarations = (
     .filter((importEqualsDeclaration) => {
       const moduleReference = importEqualsDeclaration.value
         .moduleReference as TSExternalModuleReference;
-      const expressionValue = (moduleReference.expression as StringLiteral).value;
+      const expressionValue = moduleReference.expression.value;
       if (path) {
         return expressionValue === path;
       }

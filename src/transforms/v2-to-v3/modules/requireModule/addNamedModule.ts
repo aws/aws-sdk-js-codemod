@@ -1,14 +1,6 @@
-import type {
-  Collection,
-  JSCodeshift,
-  Literal,
-  ObjectPattern,
-  ObjectProperty,
-  Property,
-  StringLiteral,
-} from "jscodeshift";
+import type { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME, STRING_LITERAL_TYPE_LIST } from "../../config";
+import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
 import { getRequireDeclarators } from "../requireModule";
 import type { ModulesOptions } from "../types";
@@ -73,11 +65,10 @@ export const addNamedModule = (
     })
     .filter((callExpression) => {
       const arg = callExpression.value.arguments[0];
-      if (!STRING_LITERAL_TYPE_LIST.includes(arg.type)) {
+      if (arg.type !== "Literal" && arg.type !== "StringLiteral") {
         return false;
       }
-      const argValue = (arg as Literal | StringLiteral).value;
-      return typeof argValue === "string" && argValue.startsWith(PACKAGE_NAME);
+      return typeof arg.value === "string" && arg.value.startsWith(PACKAGE_NAME);
     });
 
   if (v2RequireCallExpressions.size()) {

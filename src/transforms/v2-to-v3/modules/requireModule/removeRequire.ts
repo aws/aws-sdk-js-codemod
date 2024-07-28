@@ -3,14 +3,12 @@ import type {
   Collection,
   Identifier,
   JSCodeshift,
-  Literal,
   ObjectPattern,
   ObjectProperty,
   Property,
-  StringLiteral,
   VariableDeclarator,
 } from "jscodeshift";
-import { OBJECT_PROPERTY_TYPE_LIST, STRING_LITERAL_TYPE_LIST } from "../../config";
+import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
 import { removeDeclaration } from "../removeDeclaration";
 import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
@@ -37,9 +35,9 @@ const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localNa
       const initArgs = init.arguments;
       if (!initArgs || initArgs.length !== 0) return false;
 
-      if (STRING_LITERAL_TYPE_LIST.includes(initArgs[0].type)) return false;
+      if (initArgs[0].type !== "Literal" && initArgs[0].type !== "StringLiteral") return false;
 
-      const sourceValue = (initArgs[0] as Literal | StringLiteral).value;
+      const sourceValue = initArgs[0].value;
       if (typeof sourceValue !== "string") return false;
       return sourceValue.startsWith("@aws-sdk/");
     })
