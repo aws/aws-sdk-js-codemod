@@ -2,13 +2,8 @@ import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-export const getArgsWithoutWaiterConfig = <T>(callArgument: T): T => {
-  if ((callArgument as ObjectExpression).type !== "ObjectExpression") {
-    return callArgument;
-  }
-
-  const objectExpression = callArgument as ObjectExpression;
-  objectExpression.properties = objectExpression.properties.filter((property) => {
+export const getArgsWithoutWaiterConfig = (options: ObjectExpression): ObjectExpression => {
+  options.properties = options.properties.filter((property) => {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
       return true;
     }
@@ -22,6 +17,5 @@ export const getArgsWithoutWaiterConfig = <T>(callArgument: T): T => {
     return true;
   });
 
-  // @ts-expect-error Type 'ObjectExpression' is not assignable to type 'T'.
-  return objectExpression;
+  return options;
 };

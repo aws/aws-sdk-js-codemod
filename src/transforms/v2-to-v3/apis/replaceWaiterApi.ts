@@ -54,9 +54,12 @@ export const replaceWaiterApi = (
             })
           );
 
+          const options = callExpression.node.arguments[1];
+          const updatedOptions =
+            options.type === "ObjectExpression" ? getArgsWithoutWaiterConfig(options) : options;
           return j.callExpression(j.identifier(getV3ClientWaiterApiName(waiterState)), [
             j.objectExpression(properties),
-            getArgsWithoutWaiterConfig(callExpression.node.arguments[1]),
+            updatedOptions,
           ]);
         });
     }
