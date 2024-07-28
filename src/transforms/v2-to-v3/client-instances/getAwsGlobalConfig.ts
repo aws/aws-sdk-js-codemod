@@ -28,12 +28,13 @@ export const getAwsGlobalConfig = (
         property: { type: "Identifier", name: "update" },
       },
     })
-    .filter(
-      ({ node }) => node.arguments.length === 1 && node.arguments[0].type === "ObjectExpression"
-    )
-    .forEach(({ node }) => {
-      const objectExpressionProperties = (node.arguments[0] as ObjectExpression).properties;
+    .forEach((callExpression) => {
+      const node = callExpression.node;
+      if (node.arguments.length !== 1 || node.arguments[0].type !== "ObjectExpression") {
+        return;
+      }
 
+      const objectExpressionProperties = node.arguments[0].properties;
       objectExpressionProperties.forEach((property) => {
         objectExpression.properties.push(property);
       });

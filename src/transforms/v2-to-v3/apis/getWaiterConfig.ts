@@ -2,11 +2,8 @@ import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-export const getWaiterConfig = (callArgument: unknown): ObjectExpression | undefined => {
-  if ((callArgument as ObjectExpression).type !== "ObjectExpression") {
-    return;
-  }
-  for (const property of (callArgument as ObjectExpression).properties) {
+export const getWaiterConfig = (originalConfig: ObjectExpression): ObjectExpression | undefined => {
+  for (const property of originalConfig.properties) {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
       continue;
     }

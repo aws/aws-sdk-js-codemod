@@ -21,9 +21,17 @@ export const replaceWaiterApi = (
       source
         .find(j.CallExpression, getClientWaiterCallExpression(clientId, waiterState))
         .replaceWith((callExpression) => {
-          const waiterConfig = getWaiterConfig(callExpression.node.arguments[1]);
-          const delay = getWaiterConfigValue(waiterConfig, "delay");
-          const maxAttempts = getWaiterConfigValue(waiterConfig, "maxAttempts");
+          let delay: string | undefined;
+          let maxAttempts: string | undefined;
+
+          const callArguments = callExpression.node.arguments;
+          if (callArguments.length > 1 && callArguments[1].type === "ObjectExpression") {
+            const waiterConfig = getWaiterConfig(callArguments[1]);
+            if (waiterConfig) {
+              delay = getWaiterConfigValue(waiterConfig, "delay");
+              maxAttempts = getWaiterConfigValue(waiterConfig, "maxAttempts");
+            }
+          }
 
           const properties = [];
           properties.push(
@@ -54,9 +62,12 @@ export const replaceWaiterApi = (
             })
           );
 
+          const options = callExpression.node.arguments[1];
+          const updatedOptions =
+            options.type === "ObjectExpression" ? getArgsWithoutWaiterConfig(options) : options;
           return j.callExpression(j.identifier(getV3ClientWaiterApiName(waiterState)), [
             j.objectExpression(properties),
-            getArgsWithoutWaiterConfig(callExpression.node.arguments[1]),
+            updatedOptions,
           ]);
         });
     }

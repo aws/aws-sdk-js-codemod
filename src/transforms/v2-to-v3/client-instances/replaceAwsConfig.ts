@@ -21,16 +21,16 @@ export const replaceAwsConfig = (
         property: { type: "Identifier", name: "Config" },
       },
     })
-    .filter(
-      ({ node }) =>
-        node.arguments.length === 0 ||
-        (node.arguments.length === 1 && node.arguments[0].type === "ObjectExpression")
-    )
-    .replaceWith(({ node }) => {
-      const objectExpression =
-        node.arguments.length === 0
-          ? j.objectExpression([])
-          : (node.arguments[0] as ObjectExpression);
-      return getObjectWithUpdatedAwsConfigKeys(j, objectExpression, awsGlobalConfig);
+    .replaceWith((newExpression) => {
+      const nodeArguments = newExpression.node.arguments;
+
+      if (nodeArguments.length === 0) {
+        return getObjectWithUpdatedAwsConfigKeys(j, j.objectExpression([]), awsGlobalConfig);
+      }
+      if (nodeArguments.length === 1 && nodeArguments[0].type === "ObjectExpression") {
+        return getObjectWithUpdatedAwsConfigKeys(j, nodeArguments[0], awsGlobalConfig);
+      }
+
+      return newExpression;
     });
 };
