@@ -25,8 +25,8 @@ export const replaceWaiterApi = (
           let maxAttempts: string | undefined;
 
           const callArguments = callExpression.node.arguments;
-          if (callArguments.length > 1 && callArguments[0].type === "ObjectExpression") {
-            const waiterConfig = getWaiterConfig(callArguments[0]);
+          if (callArguments.length > 1 && callArguments[1].type === "ObjectExpression") {
+            const waiterConfig = getWaiterConfig(callArguments[1]);
             if (waiterConfig) {
               delay = getWaiterConfigValue(waiterConfig, "delay");
               maxAttempts = getWaiterConfigValue(waiterConfig, "maxAttempts");
