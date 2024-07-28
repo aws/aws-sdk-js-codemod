@@ -1,9 +1,4 @@
-import jscodeshift, {
-  type Identifier,
-  type TSArrayType,
-  type TSTypeLiteral,
-  type TSTypeReference,
-} from "jscodeshift";
+import jscodeshift from "jscodeshift";
 
 import { CLIENT_NAMES_MAP, DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config";
 import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
@@ -39,20 +34,21 @@ export const getClientTypesMap = async (clientName: string): Promise<Record<stri
         });
     }
 
-    tsTypes
-      .filter((tsType) => tsType.typeAnnotation.type === "TSTypeReference")
-      .forEach((tsType) => {
-        const name = tsType.id.name;
-        const typeName = ((tsType.typeAnnotation as TSTypeReference).typeName as Identifier).name;
-        if (typeName === "Date") {
-          clientTypesMap[name] = typeName;
-        } else if (typeName === "EventStream") {
-          // Exception for SelectObjectContentEventStream
-          clientTypesMap[name] = "AsyncIterable<KEY>";
-        } else {
-          console.log("TSTypeReference with unsupported type:", name, typeName);
-        }
-      });
+    tsTypes.forEach((tsType) => {
+      if (tsType.typeAnnotation.type !== "TSTypeReference") return;
+      const typeAnnotationName = tsType.typeAnnotation.typeName;
+      if (typeAnnotationName.type !== "Identifier") return;
+      const name = tsType.id.name;
+      const typeName = typeAnnotationName.name;
+      if (typeName === "Date") {
+        clientTypesMap[name] = typeName;
+      } else if (typeName === "EventStream") {
+        // Exception for SelectObjectContentEventStream
+        clientTypesMap[name] = "AsyncIterable<KEY>";
+      } else {
+        console.log("TSTypeReference with unsupported type:", name, typeName);
+      }
+    });
 
     tsTypes
       .filter((tsType) => tsType.typeAnnotation.type === "TSUnionType")
@@ -63,62 +59,60 @@ export const getClientTypesMap = async (clientName: string): Promise<Record<stri
         }
       });
 
-    tsTypes
-      .filter((tsType) => tsType.typeAnnotation.type === "TSArrayType")
-      .forEach((tsType) => {
-        const name = tsType.id.name;
-        const elementType = (tsType.typeAnnotation as TSArrayType).elementType;
-        if (elementType.type === "TSTypeReference") {
-          const typeName = elementType.typeName;
-          if (typeName.type === "Identifier") {
-            if (clientTypesMap[typeName.name]) {
-              clientTypesMap[name] = `Array<${clientTypesMap[typeName.name]}>`;
-            } else {
-              // Assume it's an interface which would be available in v3.
-              clientTypesMap[name] = `Array<${typeName.name}>`;
-            }
+    tsTypes.forEach((tsType) => {
+      if (tsType.typeAnnotation.type !== "TSArrayType") return;
+      const name = tsType.id.name;
+      const elementType = tsType.typeAnnotation.elementType;
+      if (elementType.type === "TSTypeReference") {
+        const typeName = elementType.typeName;
+        if (typeName.type === "Identifier") {
+          if (clientTypesMap[typeName.name]) {
+            clientTypesMap[name] = `Array<${clientTypesMap[typeName.name]}>`;
           } else {
-            console.log("TSArrayType TSTypeReference without Identifier type:", name);
+            // Assume it's an interface which would be available in v3.
+            clientTypesMap[name] = `Array<${typeName.name}>`;
           }
-        } else if (Object.keys(ElementTypeToNativeTypeMap).includes(elementType.type)) {
-          clientTypesMap[name] = `Array<${ElementTypeToNativeTypeMap[elementType.type]}>`;
         } else {
-          console.log("TSArrayType with unsupported elemental type:", name);
+          console.log("TSArrayType TSTypeReference without Identifier type:", name);
         }
-      });
+      } else if (Object.keys(ElementTypeToNativeTypeMap).includes(elementType.type)) {
+        clientTypesMap[name] = `Array<${ElementTypeToNativeTypeMap[elementType.type]}>`;
+      } else {
+        console.log("TSArrayType with unsupported elemental type:", name);
+      }
+    });
 
-    tsTypes
-      .filter((tsType) => tsType.typeAnnotation.type === "TSTypeLiteral")
-      .forEach((tsType) => {
-        const name = tsType.id.name;
-        const member = (tsType.typeAnnotation as TSTypeLiteral).members[0];
-        if (member.type === "TSIndexSignature") {
-          if (member.typeAnnotation) {
-            if (member.typeAnnotation.typeAnnotation) {
-              const typeAnnotation = member.typeAnnotation.typeAnnotation;
-              if (typeAnnotation.type === "TSTypeReference") {
-                const typeName = typeAnnotation.typeName;
-                if (typeName.type === "Identifier") {
-                  if (clientTypesMap[typeName.name]) {
-                    clientTypesMap[name] = `Record<string, ${clientTypesMap[typeName.name]}>`;
-                  } else {
-                    // Assume it's an interface which would be available in v3.
-                    clientTypesMap[name] = `Record<string, ${typeName.name}>`;
-                  }
+    tsTypes.forEach((tsType) => {
+      if (tsType.typeAnnotation.type !== "TSTypeLiteral") return;
+      const name = tsType.id.name;
+      const member = tsType.typeAnnotation.members[0];
+      if (member.type === "TSIndexSignature") {
+        if (member.typeAnnotation) {
+          if (member.typeAnnotation.typeAnnotation) {
+            const typeAnnotation = member.typeAnnotation.typeAnnotation;
+            if (typeAnnotation.type === "TSTypeReference") {
+              const typeName = typeAnnotation.typeName;
+              if (typeName.type === "Identifier") {
+                if (clientTypesMap[typeName.name]) {
+                  clientTypesMap[name] = `Record<string, ${clientTypesMap[typeName.name]}>`;
                 } else {
-                  console.log("TSTypeLiteral TSTypeReference without Identifier type:", name);
+                  // Assume it's an interface which would be available in v3.
+                  clientTypesMap[name] = `Record<string, ${typeName.name}>`;
                 }
-              } else if (Object.keys(ElementTypeToNativeTypeMap).includes(typeAnnotation.type)) {
-                clientTypesMap[name] = `Record<string, ${
-                  ElementTypeToNativeTypeMap[typeAnnotation.type]
-                }>`;
               } else {
-                console.log("TSTypeLiteral with unsupported typeAnnotation type:", name);
+                console.log("TSTypeLiteral TSTypeReference without Identifier type:", name);
               }
+            } else if (Object.keys(ElementTypeToNativeTypeMap).includes(typeAnnotation.type)) {
+              clientTypesMap[name] = `Record<string, ${
+                ElementTypeToNativeTypeMap[typeAnnotation.type]
+              }>`;
+            } else {
+              console.log("TSTypeLiteral with unsupported typeAnnotation type:", name);
             }
           }
         }
-      });
+      }
+    });
 
     tsTypes.forEach((tsType) => {
       const name = tsType.id.name;
