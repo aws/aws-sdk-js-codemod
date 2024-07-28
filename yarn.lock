@@ -607,6 +607,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@biomejs/js-api@npm:0.6.2":
+  version: 0.6.2
+  resolution: "@biomejs/js-api@npm:0.6.2"
+  peerDependencies:
+    "@biomejs/wasm-bundler": ^1.8.2
+    "@biomejs/wasm-nodejs": ^1.8.2
+    "@biomejs/wasm-web": ^1.8.2
+  peerDependenciesMeta:
+    "@biomejs/wasm-bundler":
+      optional: true
+    "@biomejs/wasm-nodejs":
+      optional: true
+    "@biomejs/wasm-web":
+      optional: true
+  checksum: 10c0/7dca6b8611ab5f0506f35dfe028aaf600584e68a4a048a4a46c66b32737db8b4c5ce770ca2cb72f3b83337c8fc3f6acc0c817d3fdf3c75e837a0538e01ca40ca
+  languageName: node
+  linkType: hard
+
+"@biomejs/wasm-nodejs@npm:1.8.0":
+  version: 1.8.0
+  resolution: "@biomejs/wasm-nodejs@npm:1.8.0"
+  checksum: 10c0/99bf443031b8514fa180e333c0f421495ea29f6bf5e6a2826f52c9fc9096cf8a0d121c013c186450ee39ed258a8d02ea65e449f08a27b7304d8af19e9576820c
+  languageName: node
+  linkType: hard
+
 "@changesets/apply-release-plan@npm:^7.0.3":
   version: 7.0.3
   resolution: "@changesets/apply-release-plan@npm:7.0.3"
@@ -1514,6 +1539,8 @@ __metadata:
   resolution: "aws-sdk-js-codemod@workspace:."
   dependencies:
     "@biomejs/biome": "npm:1.8.0"
+    "@biomejs/js-api": "npm:0.6.2"
+    "@biomejs/wasm-nodejs": "npm:1.8.0"
     "@changesets/cli": "npm:^2.27.1"
     "@tsconfig/node16": "npm:^16.1.3"
     "@types/jscodeshift": "npm:^0.11.11"
