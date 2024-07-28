@@ -1,5 +1,17 @@
 # aws-sdk-js-codemod
 
+## 2.2.0
+
+### Minor Changes
+
+- Remove type assertions while generating client types map ([341108394fb8f1a9442a2d842b3f18b1a15fba6b](https://github.com/aws/aws-sdk-js-codemod/commit/341108394fb8f1a9442a2d842b3f18b1a15fba6b))
+
+### Patch Changes
+
+- Remove type assertions for Identifier ([3cbcf569f4a1b4d13ba3ade8a599fa371bd75cb2](https://github.com/aws/aws-sdk-js-codemod/commit/3cbcf569f4a1b4d13ba3ade8a599fa371bd75cb2))
+- Remove type assertions for ObjectExpression ([de55f71fd36d92b56bd2ef20b133d9d4fc2037bd](https://github.com/aws/aws-sdk-js-codemod/commit/de55f71fd36d92b56bd2ef20b133d9d4fc2037bd))
+- Remove type assertions for Literal and StringLiteral ([538670bd4386565953121c675c837222b04bfc4f](https://github.com/aws/aws-sdk-js-codemod/commit/538670bd4386565953121c675c837222b04bfc4f))
+
 ## 2.1.4
 
 ### Patch Changes
