@@ -1,5 +1,4 @@
-import type { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import type { ASTPath, JSCodeshift, NewExpression } from "jscodeshift";
 import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
 
 export const getDynamoDBDocClientArgs = (
@@ -16,11 +15,11 @@ export const getDynamoDBDocClientArgs = (
     const params = v2DocClientArgs[0];
     if (params.type === "ObjectExpression") {
       for (const property of params.properties) {
-        if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+        if (property.type !== "Property" && property.type !== "ObjectProperty") {
           continue;
         }
 
-        const propertyKey = (property as Property | ObjectProperty).key;
+        const propertyKey = property.key;
         if (propertyKey.type !== "Identifier") {
           continue;
         }
@@ -36,11 +35,7 @@ export const getDynamoDBDocClientArgs = (
               "init",
               j.identifier(docClientOptionsHash[propertyKey.name]),
               j.objectExpression([
-                j.property(
-                  "init",
-                  j.identifier(propertyKey.name),
-                  (property as Property | ObjectProperty).value
-                ),
+                j.property("init", j.identifier(propertyKey.name), property.value),
               ])
             )
           );
