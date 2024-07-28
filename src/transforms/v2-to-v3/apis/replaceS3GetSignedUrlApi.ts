@@ -1,7 +1,6 @@
 import type {
   Collection,
   JSCodeshift,
-  Literal,
   NewExpression,
   ObjectExpression,
   ObjectProperty,
@@ -26,7 +25,15 @@ export const replaceS3GetSignedUrlApi = (
         .replaceWith((callExpression) => {
           const args = callExpression.node.arguments;
 
-          const apiName = (args[0] as Literal).value as string;
+          if (args[0].type !== "Literal" && args[0].type !== "StringLiteral") {
+            return callExpression;
+          }
+
+          if (typeof args[0].value !== "string") {
+            return callExpression;
+          }
+
+          const apiName = args[0].value;
           const params = args[1];
 
           const options = j.objectExpression([]);
