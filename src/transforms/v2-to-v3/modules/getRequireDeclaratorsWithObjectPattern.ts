@@ -1,6 +1,5 @@
-import type { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import { getRequireDeclarators } from "./requireModule";
 
 export interface GetRequireDeclaratorsWithObjectPattern {
@@ -19,8 +18,9 @@ export const getRequireDeclaratorsWithObjectPattern = (
     }
     const { properties } = declarator.value.id;
     return properties.some((property) => {
-      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return false;
-      const propertyValue = (property as Property | ObjectProperty).value;
-      return propertyValue.type === "Identifier" && propertyValue.name === identifierName;
+      if (property.type !== "Property" && property.type !== "ObjectProperty") {
+        return false;
+      }
+      return property.value.type === "Identifier" && property.value.name === identifierName;
     });
   });
