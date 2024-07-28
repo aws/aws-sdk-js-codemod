@@ -1,10 +1,4 @@
-import type {
-  CallExpression,
-  Collection,
-  JSCodeshift,
-  Literal,
-  VariableDeclarator,
-} from "jscodeshift";
+import type { CallExpression, Collection, JSCodeshift, VariableDeclarator } from "jscodeshift";
 import { PACKAGE_NAME } from "../../config";
 
 const isValidRequireCallExpression = (callExpression: CallExpression, path?: string) => {
@@ -12,7 +6,12 @@ const isValidRequireCallExpression = (callExpression: CallExpression, path?: str
     return false;
   }
 
-  const { value: sourceValue } = callExpression.arguments[0] as Literal;
+  const callExpressionArg = callExpression.arguments[0];
+  if (callExpressionArg.type !== "Literal" && callExpressionArg.type !== "StringLiteral") {
+    return false;
+  }
+
+  const sourceValue = callExpressionArg.value;
   if (typeof sourceValue !== "string") {
     return false;
   }
