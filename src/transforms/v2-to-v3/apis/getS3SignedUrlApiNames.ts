@@ -1,4 +1,4 @@
-import type { Collection, JSCodeshift, Literal } from "jscodeshift";
+import type { Collection, JSCodeshift } from "jscodeshift";
 
 import type { ClientIdentifier } from "../types";
 
@@ -20,7 +20,14 @@ export const getS3SignedUrlApiNames = (
           },
         })
         .forEach((callExpression) => {
-          apiNames.add((callExpression.value.arguments[0] as Literal).value as string);
+          const callExpressionArg = callExpression.value.arguments[0];
+          if (callExpressionArg.type !== "Literal" && callExpressionArg.type !== "StringLiteral") {
+            return;
+          }
+          if (typeof callExpressionArg.value !== "string") {
+            return;
+          }
+          apiNames.add(callExpressionArg.value);
         });
     }
   }
