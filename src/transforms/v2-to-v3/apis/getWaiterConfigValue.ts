@@ -2,13 +2,7 @@ import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
 
 import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 
-export const getWaiterConfigValue = (
-  waiterConfiguration: ObjectExpression | undefined,
-  key: string
-): string | undefined => {
-  if (!waiterConfiguration) {
-    return;
-  }
+export const getWaiterConfigValue = (waiterConfiguration: ObjectExpression, key: string) => {
   for (const property of waiterConfiguration.properties) {
     if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
       continue;
@@ -19,8 +13,15 @@ export const getWaiterConfigValue = (
       continue;
     }
     if (propertyKey.name === key) {
-      // @ts-expect-error value is Literal/StringLiteral
-      return propertyValue.value;
+      if (propertyValue.type === "Literal" || propertyValue.type === "StringLiteral") {
+        if (typeof propertyValue.value === "number") {
+          return propertyValue.value.toString();
+        }
+        if (typeof propertyValue.value === "string") {
+          return propertyValue.value;
+        }
+      }
+      return;
     }
   }
 };
