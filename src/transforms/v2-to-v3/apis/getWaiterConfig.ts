@@ -1,19 +1,15 @@
-import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
-
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import type { ObjectExpression } from "jscodeshift";
 
 export const getWaiterConfig = (originalConfig: ObjectExpression): ObjectExpression | undefined => {
   for (const property of originalConfig.properties) {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+    if (property.type !== "Property" && property.type !== "ObjectProperty") {
       continue;
     }
-    const propertyKey = (property as Property | ObjectProperty).key;
-    const propertyValue = (property as Property | ObjectProperty).value;
-    if (propertyKey.type !== "Identifier" || propertyValue.type !== "ObjectExpression") {
+    if (property.key.type !== "Identifier" || property.value.type !== "ObjectExpression") {
       continue;
     }
-    if (propertyKey.name === "$waiter") {
-      return propertyValue;
+    if (property.key.name === "$waiter") {
+      return property.value;
     }
   }
 };
