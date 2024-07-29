@@ -1,13 +1,5 @@
-import type {
-  Collection,
-  JSCodeshift,
-  NewExpression,
-  ObjectExpression,
-  ObjectProperty,
-  Property,
-} from "jscodeshift";
+import type { Collection, JSCodeshift, NewExpression, ObjectExpression } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
 import type { ClientIdentifier } from "../types";
 import { getClientApiCallExpression } from "./getClientApiCallExpression";
 import { getCommandName } from "./getCommandName";
@@ -41,26 +33,26 @@ export const replaceS3GetSignedUrlApi = (
           if (params.type === "ObjectExpression") {
             // Check if params has property 'Expires' and add it to options.
             for (const property of params.properties) {
-              if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) continue;
-              const propertyKey = (property as Property | ObjectProperty).key;
-              const propertyValue = (property as Property | ObjectProperty).value;
-              if (propertyKey.type === "Identifier") {
-                const propertyKeyName = propertyKey.name;
-                if (propertyKeyName === "Expires") {
+              if (property.type !== "Property" && property.type !== "ObjectProperty") {
+                continue;
+              }
+              if (property.key.type === "Identifier") {
+                if (property.key.name === "Expires") {
                   // Add 'expiresIn' property to options.
                   options.properties.push(
                     j.objectProperty.from({
                       key: j.identifier("expiresIn"),
-                      value: propertyValue,
+                      value: property.value,
                       shorthand: true,
                     })
                   );
                   // Remove 'Expires' property from params.
                   params.properties = params.properties.filter((property) => {
-                    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return true;
-                    const propertyKey = (property as Property | ObjectProperty).key;
-                    if (propertyKey.type !== "Identifier") return true;
-                    return propertyKey.name !== "Expires";
+                    if (property.type !== "Property" && property.type !== "ObjectProperty") {
+                      return true;
+                    }
+                    if (property.key.type !== "Identifier") return true;
+                    return property.key.name !== "Expires";
                   });
                 }
               }
