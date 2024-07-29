@@ -1,18 +1,15 @@
-import type { ObjectExpression, ObjectProperty, Property } from "jscodeshift";
-
-import { OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import type { ObjectExpression } from "jscodeshift";
 
 export const getWaiterConfigValue = (waiterConfiguration: ObjectExpression, key: string) => {
   for (const property of waiterConfiguration.properties) {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+    if (property.type !== "Property" && property.type !== "ObjectProperty") {
       continue;
     }
-    const propertyKey = (property as Property | ObjectProperty).key;
-    const propertyValue = (property as Property | ObjectProperty).value;
-    if (propertyKey.type !== "Identifier") {
+    if (property.key.type !== "Identifier") {
       continue;
     }
-    if (propertyKey.name === key) {
+    if (property.key.name === key) {
+      const propertyValue = property.value;
       if (propertyValue.type === "Literal" || propertyValue.type === "StringLiteral") {
         if (typeof propertyValue.value === "number") {
           return propertyValue.value.toString();

@@ -1,6 +1,6 @@
-import type { Collection, JSCodeshift, ObjectPattern, ObjectProperty, Property } from "jscodeshift";
+import type { Collection, JSCodeshift, ObjectPattern } from "jscodeshift";
 
-import { OBJECT_PROPERTY_TYPE_LIST, PACKAGE_NAME } from "../../config";
+import { PACKAGE_NAME } from "../../config";
 import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
 import { getRequireDeclarators } from "../requireModule";
 import type { ModulesOptions } from "../types";
@@ -30,13 +30,13 @@ export const addNamedModule = (
         (variableDeclarator) =>
           variableDeclarator.id.type === "ObjectPattern" &&
           variableDeclarator.id.properties.find((property) => {
-            if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return false;
-            const key = (property as Property | ObjectProperty).key;
-            const value = (property as Property | ObjectProperty).value;
-            if (key.type !== "Identifier" || value.type !== "Identifier") {
+            if (property.type !== "Property" && property.type !== "ObjectProperty") {
               return false;
             }
-            return key.name === importedName && value.name === localName;
+            if (property.key.type !== "Identifier" || property.value.type !== "Identifier") {
+              return false;
+            }
+            return property.key.name === importedName && property.value.name === localName;
           })
       )
     ) {

@@ -1,28 +1,6 @@
-import type { Collection, JSCodeshift, ObjectProperty, Property } from "jscodeshift";
-import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
+import type { Collection, JSCodeshift } from "jscodeshift";
 import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
-
-const getImportSpecifiersFromObjectPattern = (properties: (Property | ObjectProperty)[]) => {
-  const importSpecifiers = new Set<ImportSpecifierType>();
-
-  for (const property of properties) {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
-      continue;
-    }
-    const objectProperty = property as Property | ObjectProperty;
-    const key = objectProperty.key;
-    const value = objectProperty.value;
-    if (key.type === "Identifier" && value.type === "Identifier") {
-      importSpecifiers.add({
-        importedName: key.name,
-        localName: value.name,
-      });
-    }
-  }
-
-  return Array.from(importSpecifiers);
-};
 
 export const getImportSpecifiers = (
   j: JSCodeshift,
@@ -54,9 +32,16 @@ export const getImportSpecifiers = (
       if (declaratorInit?.type !== "CallExpression") {
         continue;
       }
-      const properties = declaratorId.properties as (Property | ObjectProperty)[];
-      for (const importSpecifier of getImportSpecifiersFromObjectPattern(properties)) {
-        importSpecifiers.add(importSpecifier);
+      for (const property of declaratorId.properties) {
+        if (property.type !== "Property" && property.type !== "ObjectProperty") {
+          continue;
+        }
+        if (property.key.type === "Identifier" && property.value.type === "Identifier") {
+          importSpecifiers.add({
+            importedName: property.key.name,
+            localName: property.value.name,
+          });
+        }
       }
     }
   }

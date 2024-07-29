@@ -4,11 +4,8 @@ import type {
   Identifier,
   JSCodeshift,
   ObjectPattern,
-  ObjectProperty,
-  Property,
   VariableDeclarator,
 } from "jscodeshift";
-import { OBJECT_PROPERTY_TYPE_LIST } from "../../config";
 import { removeDeclaration } from "../removeDeclaration";
 import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";
@@ -24,9 +21,10 @@ const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localNa
       const id = varDeclarator.value.id as ObjectPattern;
       if (
         id.properties.some((property) => {
-          if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return false;
-          const value = (property as Property | ObjectProperty).value;
-          return value.type === "Identifier" && value.name === localName;
+          if (property.type !== "Property" && property.type !== "ObjectProperty") {
+            return false;
+          }
+          return property.value.type === "Identifier" && property.value.name === localName;
         })
       )
         return true;
@@ -90,15 +88,16 @@ export const removeRequire = (j: JSCodeshift, source: Collection<unknown>) =>
           }
           case "ObjectPattern": {
             id.properties = id.properties.filter((property) => {
-              if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) return true;
-
-              const propertyKey = (property as Property | ObjectProperty).key;
-              const propertyValue = (property as Property | ObjectProperty).value;
-              if (propertyKey.type !== "Identifier" || propertyValue.type !== "Identifier")
+              if (property.type !== "Property" && property.type !== "ObjectProperty") {
                 return true;
+              }
 
-              const importedName = propertyKey.name;
-              const localName = propertyValue.name;
+              if (property.key.type !== "Identifier" || property.value.type !== "Identifier") {
+                return true;
+              }
+
+              const importedName = property.key.name;
+              const localName = property.value.name;
               return !isIdentifierRemovable(j, source, { importedName, localName });
             });
             if (id.properties.length === 0) {

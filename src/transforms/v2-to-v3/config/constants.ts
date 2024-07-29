@@ -6,7 +6,6 @@ export const DOCUMENT_CLIENT = "DocumentClient";
 export const DYNAMODB_DOCUMENT = "DynamoDBDocument";
 export const DYNAMODB_DOCUMENT_CLIENT = [DYNAMODB, DOCUMENT_CLIENT].join(".");
 
-export const OBJECT_PROPERTY_TYPE_LIST = ["Property", "ObjectProperty"];
 export const FUNCTION_TYPE_LIST = [
   "FunctionDeclaration",
   "FunctionExpression",

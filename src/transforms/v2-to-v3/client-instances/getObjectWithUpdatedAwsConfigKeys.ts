@@ -1,11 +1,5 @@
-import type {
-  Identifier,
-  JSCodeshift,
-  ObjectExpression,
-  ObjectProperty,
-  Property,
-} from "jscodeshift";
-import { AWS_CONFIG_KEY_MAP, OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import type { JSCodeshift, ObjectExpression } from "jscodeshift";
+import { AWS_CONFIG_KEY_MAP } from "../config";
 
 const getRenameComment = (keyName: string, newKeyName: string) =>
   ` The key ${keyName} is renamed to ${newKeyName}.`;
@@ -31,30 +25,25 @@ export const getObjectWithUpdatedAwsConfigKeys = (
 
   // Add properties from awsGlobalConfig
   for (const property of awsGlobalConfig.properties) {
-    if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+    if (property.type !== "Property" && property.type !== "ObjectProperty") {
       propertiesToUpdate.push(property);
       continue;
     }
 
-    const propertyKey = (property as Property | ObjectProperty).key;
-    if (propertyKey.type !== "Identifier") {
+    if (property.key.type !== "Identifier") {
       propertiesToUpdate.push(property);
       continue;
     }
 
-    const propertyKeyName = propertyKey.name;
+    const propertyKeyName = property.key.name;
     if (
-      !propertiesToUpdate
-        .filter((propertyToUpdate) => OBJECT_PROPERTY_TYPE_LIST.includes(propertyToUpdate.type))
-        .filter(
-          (propertyToUpdate) =>
-            (propertyToUpdate as Property | ObjectProperty).key.type === "Identifier"
-        )
-        .some(
-          (propertyToUpdate) =>
-            ((propertyToUpdate as Property | ObjectProperty).key as Identifier).name ===
-            propertyKeyName
-        )
+      !propertiesToUpdate.some((propertyToUpdate) => {
+        if (propertyToUpdate.type === "Property" || propertyToUpdate.type === "ObjectProperty") {
+          if (propertyToUpdate.key.type === "Identifier") {
+            return propertyToUpdate.key.name === propertyKeyName;
+          }
+        }
+      })
     ) {
       propertiesToUpdate.push(property);
     }
@@ -62,11 +51,11 @@ export const getObjectWithUpdatedAwsConfigKeys = (
 
   const updatedProperties = propertiesToUpdate
     .map((property) => {
-      if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+      if (property.type !== "Property" && property.type !== "ObjectProperty") {
         return property;
       }
 
-      const propertyKey = (property as Property | ObjectProperty).key;
+      const propertyKey = property.key;
       if (propertyKey.type !== "Identifier") {
         return property;
       }
