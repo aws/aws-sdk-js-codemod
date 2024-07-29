@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.2.1
+
+### Patch Changes
+
+- Remove type assertions for Property and ObjectProperty ([dbc0faec73d3e48ce210a223eac08e6abd8de65a](https://github.com/aws/aws-sdk-js-codemod/commit/dbc0faec73d3e48ce210a223eac08e6abd8de65a))
+
 ## 2.2.0
 
 ### Minor Changes
