@@ -1,6 +1,6 @@
-import type { ASTPath, JSCodeshift, NewExpression, ObjectProperty, Property } from "jscodeshift";
+import type { ASTPath, JSCodeshift, NewExpression } from "jscodeshift";
 
-import { DYNAMODB, OBJECT_PROPERTY_TYPE_LIST } from "../config";
+import { DYNAMODB } from "../config";
 
 export const getDynamoDBForDocClient = (
   j: JSCodeshift,
@@ -13,23 +13,21 @@ export const getDynamoDBForDocClient = (
   if (v2DocClientArgs.length > 0) {
     const params = v2DocClientArgs[0];
     if (params.type === "ObjectExpression") {
-      const serviceProperty = params.properties.find((property) => {
-        if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
-          return false;
+      for (const property of params.properties) {
+        if (property.type !== "Property" && property.type !== "ObjectProperty") {
+          continue;
         }
-        const propertyKey = (property as Property | ObjectProperty).key;
-        if (propertyKey.type !== "Identifier") {
-          return false;
-        }
-        if (propertyKey.name === "service") {
-          return true;
-        }
-      }) as Property | ObjectProperty | undefined;
 
-      if (serviceProperty) {
-        // The value here will work in most Document Client creations.
-        // Adding typecast to skip TypeScript errors.
-        return serviceProperty.value as NewExpression;
+        const propertyKey = property.key;
+        if (propertyKey.type !== "Identifier") {
+          continue;
+        }
+
+        if (propertyKey.name === "service") {
+          // The value here will work in most Document Client creations.
+          // Adding typecast to skip TypeScript errors.
+          return property.value as NewExpression;
+        }
       }
     }
   }
@@ -41,14 +39,13 @@ export const getDynamoDBForDocClient = (
   if (v3DocClientArgs) {
     if (v3DocClientArgs.type === "ObjectExpression") {
       v3DocClientArgs.properties = v3DocClientArgs.properties.filter((property) => {
-        if (!OBJECT_PROPERTY_TYPE_LIST.includes(property.type)) {
+        if (property.type !== "Property" && property.type !== "ObjectProperty") {
           return true;
         }
-        const propertyKey = (property as Property | ObjectProperty).key;
-        if (propertyKey.type !== "Identifier") {
+        if (property.key.type !== "Identifier") {
           return true;
         }
-        return !["convertEmptyValues", "wrapNumbers"].includes(propertyKey.name);
+        return !["convertEmptyValues", "wrapNumbers"].includes(property.key.name);
       });
 
       if (v3DocClientArgs.properties.length > 0) {
