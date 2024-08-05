@@ -6,8 +6,5 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "biomejs.biome",
   "editor.rulers": [80, 120],
-  "editor.tabSize": 2,
-  "search.exclude": {
-    "**/.yarn": true
-  }
+  "editor.tabSize": 2
 }
