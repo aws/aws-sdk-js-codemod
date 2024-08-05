@@ -4,6 +4,10 @@
     "source.organizeImports.biome": true
   },
   "language_servers": ["biome"],
-  "wrap_guides": [80, 120],
-  "tab_size": 2
+  "tab_size": 2,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "wrap_guides": [80, 120]
 }
