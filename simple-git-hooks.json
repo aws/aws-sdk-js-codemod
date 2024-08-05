@@ -1,3 +1,0 @@
-{
-  "pre-commit": "yarn lint-staged"
-}
