@@ -1,0 +1,9 @@
+{
+  "code_actions_on_format": {
+    "source.fixAll.biome": true,
+    "source.organizeImports.biome": true
+  },
+  "language_servers": ["biome"],
+  "wrap_guides": [80, 120],
+  "tab_size": 2
+}
