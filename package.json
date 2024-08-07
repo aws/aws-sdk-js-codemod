@@ -51,7 +51,6 @@
     "@types/jscodeshift": "^0.11.11",
     "@types/node": "^16.18.101",
     "aws-sdk": "2.1641.0",
-    "tsx": "^4.7.1",
     "typescript": "~5.5.2",
     "vitest": "~2.0.1"
   },
