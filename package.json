@@ -35,6 +35,8 @@
   "scripts": {
     "build": "tsc",
     "format": "biome format --write",
+    "generate:map": "tsx scripts/generateClientTypesMap",
+    "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
     "release": "yarn build && changeset publish",
     "test": "vitest"
