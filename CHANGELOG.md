@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 2.2.2
+
+### Patch Changes
+
+- Remove type assertion for ImportSpecifierType ([e9efdd5cbfcc7795dd8bd9d66872672dee709934](https://github.com/aws/aws-sdk-js-codemod/commit/e9efdd5cbfcc7795dd8bd9d66872672dee709934))
+- Remove type assertion for TryStatement ([49ff72125a14a92ed024a9f6ff4c4303599ba5e7](https://github.com/aws/aws-sdk-js-codemod/commit/49ff72125a14a92ed024a9f6ff4c4303599ba5e7))
+
 ## 2.2.1
 
 ### Patch Changes
