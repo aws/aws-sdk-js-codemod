@@ -5,7 +5,6 @@ import type {
   Collection,
   FunctionExpression,
   JSCodeshift,
-  TryStatement,
 } from "jscodeshift";
 
 import type { ClientIdentifier } from "../types";
@@ -59,7 +58,7 @@ export const renameErrorCodeWithName = (
 
     // Replace error.code with error.name in try-catch clauses.
     callExpressions.forEach((callExpression) => {
-      const tryStatement = j(callExpression).closest(j.TryStatement).nodes()[0] as TryStatement;
+      const tryStatement = j(callExpression).closest(j.TryStatement).nodes()[0];
 
       if (!tryStatement || !tryStatement.handler) {
         return;
