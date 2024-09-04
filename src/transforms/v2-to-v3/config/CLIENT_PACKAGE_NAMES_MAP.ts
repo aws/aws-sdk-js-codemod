@@ -132,6 +132,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   SimSpaceWeaver: "client-simspaceweaver",
   SSMContacts: "client-ssm-contacts",
   SSMIncidents: "client-ssm-incidents",
+  SSMQuickSetup: "client-ssm-quicksetup",
   SSOAdmin: "client-sso-admin",
   SSOOIDC: "client-sso-oidc",
   StepFunctions: "client-sfn",
