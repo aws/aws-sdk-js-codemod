@@ -23118,6 +23118,7 @@ export const CLIENT_REQ_RESP_TYPES_MAP: Record<string, Record<string, string>> =
     UntagResourceRequest: "UntagResourceCommandInput",
     UntagResourceResponse: "UntagResourceCommandOutput",
     UpdateLibraryItemInput: "UpdateLibraryItemCommandInput",
+    UpdateLibraryItemMetadataInput: "UpdateLibraryItemMetadataCommandInput",
     UpdateLibraryItemOutput: "UpdateLibraryItemCommandOutput",
     UpdateQAppInput: "UpdateQAppCommandInput",
     UpdateQAppOutput: "UpdateQAppCommandOutput",
