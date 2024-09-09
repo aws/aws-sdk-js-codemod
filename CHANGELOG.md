@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.3.2
+
+### Patch Changes
+
+- Transform API updates published till JS SDK v2 maintenance mode ([76ae733aec0c021b9653a78a25149f3f607fc480](https://github.com/aws/aws-sdk-js-codemod/commit/76ae733aec0c021b9653a78a25149f3f607fc480))
+
 ## 2.3.1
 
 ### Patch Changes
