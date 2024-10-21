@@ -20,15 +20,15 @@ jobs:
         run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          cache: "yarn"
+          cache: "npm"
 
-      - run: yarn
+      - run: npm install
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: yarn release
+          publish: node --run release
           title: Publish <version>
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

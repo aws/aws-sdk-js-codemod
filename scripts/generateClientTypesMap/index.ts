@@ -41,6 +41,6 @@ const execAsync = promisify(exec);
     fileContent += JSON.stringify(clientTypesMap);
 
     await writeFile(relativeFilePath, fileContent);
-    await execAsync(`yarn biome format --write ${relativeFilePath}`);
+    await execAsync(`npx biome format --write ${relativeFilePath}`);
   }
 })();

@@ -19,12 +19,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "npm"
       - name: install
-        run: yarn
+        run: npm install
       - name: lint+format
         run: biome ci
       - name: build
-        run: yarn build
+        run: node --run build
       - name: test
-        run: yarn test
+        run: node --run test
