@@ -38,7 +38,7 @@
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
-    "release": "node --run build && changeset publish",
+    "release": "npm run build && changeset publish",
     "test": "vitest"
   },
   "dependencies": {

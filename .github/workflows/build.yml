@@ -25,6 +25,6 @@ jobs:
       - name: lint+format
         run: biome ci
       - name: build
-        run: node --run build
+        run: npm run build
       - name: test
-        run: node --run test
+        run: npm run test
