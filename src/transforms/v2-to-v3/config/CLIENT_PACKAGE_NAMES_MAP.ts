@@ -104,6 +104,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   ManagedBlockchain: "client-managedblockchain",
   ManagedBlockchainQuery: "client-managedblockchain-query",
   MediaPackageV2: "client-mediapackagev2",
+  MemoryDB: "client-memorydb",
   MigrationHubConfig: "client-migrationhub-config",
   MigrationHubRefactorSpaces: "client-migration-hub-refactor-spaces",
   NetworkManager: "client-networkmanager",

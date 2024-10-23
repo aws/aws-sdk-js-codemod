@@ -238,7 +238,7 @@ import { MediaStore } from "@aws-sdk/client-mediastore";
 import { MediaStoreData } from "@aws-sdk/client-mediastore-data";
 import { MediaTailor } from "@aws-sdk/client-mediatailor";
 import { MedicalImaging } from "@aws-sdk/client-medical-imaging";
-import { MemoryDB } from "@aws-sdk/client-memory-db";
+import { MemoryDB } from "@aws-sdk/client-memorydb";
 import { Mgn } from "@aws-sdk/client-mgn";
 import { MigrationHub } from "@aws-sdk/client-migration-hub";
 import { MigrationHubRefactorSpaces } from "@aws-sdk/client-migration-hub-refactor-spaces";
