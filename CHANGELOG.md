@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.3.3
+
+### Patch Changes
+
+- Fix package name of MemoryDB client ([7764430726b749e95f753d2c8f089621fdc51122](https://github.com/aws/aws-sdk-js-codemod/commit/7764430726b749e95f753d2c8f089621fdc51122))
+
 ## 2.3.2
 
 ### Patch Changes
