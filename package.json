@@ -38,7 +38,7 @@
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
-    "release": "yarn build && changeset publish",
+    "release": "npm run build && changeset publish",
     "test": "vitest"
   },
   "dependencies": {
@@ -58,7 +58,13 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "packageManager": "yarn@4.5.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "10.9.0",
+      "onFail": "error"
+    }
+  },
   "publishConfig": {
     "provenance": true
   }
