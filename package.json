@@ -42,7 +42,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "jscodeshift": "17.0.0"
+    "jscodeshift": "17.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.0",
