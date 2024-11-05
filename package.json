@@ -38,6 +38,7 @@
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
+    "prepublishOnly": "tsx scripts/testChangedPackageNames",
     "release": "npm run build && changeset publish",
     "test": "vitest"
   },
