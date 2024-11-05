@@ -39,7 +39,8 @@
     "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
     "prepublishOnly": "tsx scripts/testChangedPackageNames",
-    "release": "npm run build && changeset publish",
+    "prerelease": "npm run build && changeset version && npm i --lockfile-only",
+    "release": "changeset publish",
     "test": "vitest"
   },
   "dependencies": {
