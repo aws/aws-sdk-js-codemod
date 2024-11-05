@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.4.3
+
+### Patch Changes
+
+- Fix package name of AugmentedAIRuntime and EKSAuth clients ([3cafbf5b7a2c2e155be5dd1fd0faf15f2b601fde](https://github.com/aws/aws-sdk-js-codemod/commit/3cafbf5b7a2c2e155be5dd1fd0faf15f2b601fde))
+
 ## 2.4.2
 
 ### Patch Changes
