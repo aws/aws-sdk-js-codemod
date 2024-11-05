@@ -45,7 +45,7 @@ export const CLIENT_PACKAGE_NAMES_MAP: Record<string, string> = {
   AppTest: "client-apptest",
   ApplicationCostProfiler: "client-applicationcostprofiler",
   ARCZonalShift: "client-arc-zonal-shift",
-  AugmentedAIRuntime: "client-sage-maker-a2i-runtime",
+  AugmentedAIRuntime: "client-sagemaker-a2i-runtime",
   AuditManager: "client-auditmanager",
   BackupStorage: "client-backupstorage",
   CUR: "client-cost-and-usage-report-service",
