@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.4.5
+
+### Patch Changes
+
+- Bump aws-sdk to v2.1692.0 ([93983d06edbbd10ee10a1b82ca0b0d5bb7e68dea](https://github.com/aws/aws-sdk-js-codemod/commit/93983d06edbbd10ee10a1b82ca0b0d5bb7e68dea))
+
 ## 2.4.4
 
 ### Patch Changes
