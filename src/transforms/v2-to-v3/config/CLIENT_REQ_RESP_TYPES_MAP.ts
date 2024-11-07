@@ -25760,6 +25760,7 @@ export const CLIENT_REQ_RESP_TYPES_MAP: Record<string, Record<string, string>> =
     PutBucketIntelligentTieringConfigurationRequest:
       "PutBucketIntelligentTieringConfigurationCommandInput",
     PutBucketInventoryConfigurationRequest: "PutBucketInventoryConfigurationCommandInput",
+    PutBucketLifecycleConfigurationOutput: "PutBucketLifecycleConfigurationCommandOutput",
     PutBucketLifecycleConfigurationRequest: "PutBucketLifecycleConfigurationCommandInput",
     PutBucketLifecycleRequest: "PutBucketLifecycleCommandInput",
     PutBucketLoggingRequest: "PutBucketLoggingCommandInput",
