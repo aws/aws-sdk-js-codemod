@@ -25026,6 +25026,7 @@ export const CLIENT_TYPES_MAP: Record<string, Record<string, string>> = {
     BucketKeyEnabled: "boolean",
     BucketLocationName: "string",
     BucketName: "string",
+    BucketRegion: "string",
     Buckets: "Array<Bucket>",
     BypassGovernanceRetention: "boolean",
     BytesProcessed: "number",
