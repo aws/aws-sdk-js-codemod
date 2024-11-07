@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 2.4.4
+
+### Patch Changes
+
+- Remove package names for BackupStorage and IoTRoboRunner ([510d9691a2ced883106e3dc5c9a495561f6b66f5](https://github.com/aws/aws-sdk-js-codemod/commit/510d9691a2ced883106e3dc5c9a495561f6b66f5))
+
 ## 2.4.3
 
 ### Patch Changes
