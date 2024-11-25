@@ -3,6 +3,9 @@ import { join } from "node:path";
 import type { JSCodeshift } from "jscodeshift";
 import { DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config/index.ts";
 
+// @ts-expect-error import.meta.dirname is defined in Node.js 22.x used for development.
+const __dirname = import.meta.dirname;
+
 export const getTypesSource = (j: JSCodeshift, clientName: string) => {
   const typesPath =
     clientName === DOCUMENT_CLIENT

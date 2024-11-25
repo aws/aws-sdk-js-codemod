@@ -12,6 +12,8 @@ import {
 import { getClientReqRespTypesMap } from "./getClientReqRespTypesMap.ts";
 import { getClientTypesMap } from "./getClientTypesMap.ts";
 
+// @ts-expect-error import.meta.dirname is defined in Node.js 22.x used for development.
+const __dirname = import.meta.dirname;
 const execAsync = promisify(exec);
 
 (async () => {
