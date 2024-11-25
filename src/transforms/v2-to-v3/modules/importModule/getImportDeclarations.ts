@@ -1,5 +1,5 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import { PACKAGE_NAME } from "../../config";
+import { PACKAGE_NAME } from "../../config/index.ts";
 
 export const getImportDeclarations = (j: JSCodeshift, source: Collection<unknown>, path?: string) =>
   source.find(j.ImportDeclaration).filter((importDeclaration) => {

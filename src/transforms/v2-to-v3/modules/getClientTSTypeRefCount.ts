@@ -1,7 +1,7 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { getTSQualifiedNameFromClientName } from "../ts-type";
-import type { ClientModulesOptions } from "./types";
+import { getTSQualifiedNameFromClientName } from "../ts-type/index.ts";
+import type { ClientModulesOptions } from "./types.ts";
 
 export const getClientTSTypeRefCount = (
   j: JSCodeshift,

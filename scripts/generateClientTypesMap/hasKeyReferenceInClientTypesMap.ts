@@ -1,4 +1,4 @@
-import { hasKeyReferenceInValue } from "./hasKeyReferenceinValue";
+import { hasKeyReferenceInValue } from "./hasKeyReferenceinValue/index.ts";
 
 /**
  * Checks if any of the values in the clientTypesMap has a reference to any of the keys.

@@ -1,8 +1,8 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES } from "../config";
-import { getNamesFromNewExpr } from "./getNamesFromNewExpr";
-import { getNamesFromTSQualifiedName } from "./getNamesFromTSQualifiedName";
+import { CLIENT_NAMES } from "../config/index.ts";
+import { getNamesFromNewExpr } from "./getNamesFromNewExpr.ts";
+import { getNamesFromTSQualifiedName } from "./getNamesFromTSQualifiedName.ts";
 
 export const getClientNamesFromGlobal = (
   j: JSCodeshift,

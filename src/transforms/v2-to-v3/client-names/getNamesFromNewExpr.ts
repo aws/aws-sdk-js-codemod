@@ -1,7 +1,7 @@
 import type { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
 
-import { DYNAMODB_DOCUMENT_CLIENT } from "../config";
-import { getClientNewExpressionFromGlobalName } from "../utils";
+import { DYNAMODB_DOCUMENT_CLIENT } from "../config/index.ts";
+import { getClientNewExpressionFromGlobalName } from "../utils/index.ts";
 
 export const getNamesFromNewExpr = (
   j: JSCodeshift,

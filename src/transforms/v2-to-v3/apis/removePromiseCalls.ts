@@ -1,7 +1,7 @@
 import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
-import { removePromiseForCallExpression } from "./removePromiseForCallExpression";
+import type { ClientIdentifier } from "../types.ts";
+import { removePromiseForCallExpression } from "./removePromiseForCallExpression.ts";
 
 export interface RemovePromiseCallsOptions {
   v2GlobalName?: string;

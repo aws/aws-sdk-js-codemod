@@ -7,7 +7,7 @@ import type {
   JSCodeshift,
 } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types.ts";
 
 const FUNCTION_EXPRESSION_TYPES = ["ArrowFunctionExpression", "FunctionExpression"];
 

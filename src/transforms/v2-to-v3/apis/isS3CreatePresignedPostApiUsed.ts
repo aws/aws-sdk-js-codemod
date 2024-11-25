@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types.ts";
 
 export const isS3CreatePresignedPostApiUsed = (
   j: JSCodeshift,

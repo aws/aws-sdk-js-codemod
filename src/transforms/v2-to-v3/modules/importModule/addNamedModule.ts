@@ -1,8 +1,8 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { getImportDeclarations, getImportSpecifiers } from "../importModule";
-import { importSpecifierCompareFn } from "../importSpecifierCompareFn";
-import type { ModulesOptions } from "../types";
+import { getImportDeclarations, getImportSpecifiers } from "../importModule/index.ts";
+import { importSpecifierCompareFn } from "../importSpecifierCompareFn.ts";
+import type { ModulesOptions } from "../types.ts";
 
 export const addNamedModule = (
   j: JSCodeshift,

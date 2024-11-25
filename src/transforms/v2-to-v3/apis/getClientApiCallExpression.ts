@@ -1,6 +1,6 @@
 import type { CallExpression } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types.ts";
 
 export const getClientApiCallExpression = (
   clientId: ClientIdentifier,

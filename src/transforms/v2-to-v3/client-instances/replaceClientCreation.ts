@@ -2,8 +2,8 @@ import type { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
 import {
   getClientNewExpressionFromGlobalName,
   getClientNewExpressionFromLocalName,
-} from "../utils";
-import { getNewClientExpression } from "./getNewClientExpression";
+} from "../utils/index.ts";
+import { getNewClientExpression } from "./getNewClientExpression.ts";
 
 export interface ReplaceClientCreationOptions {
   v2ClientName: string;

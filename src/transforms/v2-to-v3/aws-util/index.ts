@@ -1,1 +1,1 @@
-export * from "./replaceAwsUtilFunctions";
+export * from "./replaceAwsUtilFunctions.ts";

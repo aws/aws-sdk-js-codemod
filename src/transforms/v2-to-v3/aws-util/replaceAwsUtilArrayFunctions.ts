@@ -1,5 +1,5 @@
 import type { Collection, FunctionExpression, Identifier, JSCodeshift } from "jscodeshift";
-import { getAwsUtilCallExpression } from "./getAwsUtilCallExpression";
+import { getAwsUtilCallExpression } from "./getAwsUtilCallExpression.ts";
 
 export const replaceAwsUtilArrayFunctions = (
   j: JSCodeshift,

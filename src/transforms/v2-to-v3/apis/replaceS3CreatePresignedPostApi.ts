@@ -1,7 +1,7 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
-import { getClientApiCallExpression } from "./getClientApiCallExpression";
+import type { ClientIdentifier } from "../types.ts";
+import { getClientApiCallExpression } from "./getClientApiCallExpression.ts";
 
 // Updates `s3.createPresignedPost(params)` API with `await createPresignedPost(s3, params)` API.
 export const replaceS3CreatePresignedPostApi = (

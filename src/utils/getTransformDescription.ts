@@ -1,4 +1,4 @@
-import type { AwsSdkJsCodemodTransform } from "../transforms";
+import type { AwsSdkJsCodemodTransform } from "../transforms/index.ts";
 
 const getWrappedBlocks = (sentence: string, blockLength: number): string[] => {
   const words = sentence.split(" ");

@@ -1,9 +1,9 @@
 import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
-import { getClientIdNamesFromNewExpr } from "./getClientIdNamesFromNewExpr";
-import { getClientIdNamesFromTSTypeRef } from "./getClientIdNamesFromTSTypeRef";
-import { getClientIdThisExpressions } from "./getClientIdThisExpressions";
+import type { ClientIdentifier } from "../types.ts";
+import { getClientIdNamesFromNewExpr } from "./getClientIdNamesFromNewExpr.ts";
+import { getClientIdNamesFromTSTypeRef } from "./getClientIdNamesFromTSTypeRef.ts";
+import { getClientIdThisExpressions } from "./getClientIdThisExpressions.ts";
 
 export interface GetClientIdentifiersOptions {
   v2ClientName: string;

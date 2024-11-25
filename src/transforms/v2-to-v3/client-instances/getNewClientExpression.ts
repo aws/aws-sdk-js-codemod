@@ -1,5 +1,5 @@
 import type { ASTPath, JSCodeshift, NewExpression, ObjectExpression } from "jscodeshift";
-import { getObjectWithUpdatedAwsConfigKeys } from "./getObjectWithUpdatedAwsConfigKeys";
+import { getObjectWithUpdatedAwsConfigKeys } from "./getObjectWithUpdatedAwsConfigKeys.ts";
 
 export interface GetNewClientExpressionOptions {
   v2ClientNewExpression: ASTPath<NewExpression>;

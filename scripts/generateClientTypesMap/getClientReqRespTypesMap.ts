@@ -1,6 +1,6 @@
 import jscodeshift from "jscodeshift";
 
-import { getTypesSource } from "./getTypesSource";
+import { getTypesSource } from "./getTypesSource.ts";
 
 export const getClientReqRespTypesMap = async (
   clientName: string

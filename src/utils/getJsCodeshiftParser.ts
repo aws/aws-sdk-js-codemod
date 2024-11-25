@@ -8,7 +8,7 @@ import { dirname, join } from "node:path";
 import { DEFAULT_EXTENSIONS } from "@babel/core";
 import argsParser from "jscodeshift/dist/argsParser";
 
-import { version } from "../../package.json";
+import { version } from "../../package.json/index.ts";
 
 const requirePackage = (name: string) => {
   const entry = require.resolve(name);

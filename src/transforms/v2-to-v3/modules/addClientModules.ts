@@ -8,20 +8,20 @@ import {
   isS3CreatePresignedPostApiUsed,
   isS3GetSignedUrlApiUsed,
   isS3UploadApiUsed,
-} from "../apis";
+} from "../apis/index.ts";
 import {
   DOCUMENT_CLIENT,
   DYNAMODB,
   DYNAMODB_DOCUMENT,
   DYNAMODB_DOCUMENT_CLIENT,
   S3,
-} from "../config";
-import { getV3ClientTypes } from "../ts-type";
-import { addNamedModule } from "./addNamedModule";
-import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
-import { getNewExpressionCount } from "./getNewExpressionCount";
+} from "../config/index.ts";
+import { getV3ClientTypes } from "../ts-type/index.ts";
+import { addNamedModule } from "./addNamedModule.ts";
+import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount.ts";
+import { getNewExpressionCount } from "./getNewExpressionCount.ts";
 
-import type { ClientModulesOptions } from "./types";
+import type { ClientModulesOptions } from "./types.ts";
 
 export const addClientModules = (
   j: JSCodeshift,

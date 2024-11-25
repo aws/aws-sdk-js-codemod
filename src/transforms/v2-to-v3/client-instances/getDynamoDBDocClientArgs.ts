@@ -1,5 +1,5 @@
 import type { ASTPath, JSCodeshift, NewExpression } from "jscodeshift";
-import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient";
+import { getDynamoDBForDocClient } from "./getDynamoDBForDocClient.ts";
 
 export const getDynamoDBDocClientArgs = (
   j: JSCodeshift,

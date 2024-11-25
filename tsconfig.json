@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "resolveJsonModule": true,
+    "rewriteRelativeImportExtensions": true,
     "rootDir": "src"
   },
   "exclude": ["dist", "**/__fixtures__/**", "**/*.spec.ts", "scripts"]

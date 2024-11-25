@@ -1,6 +1,6 @@
 import type { ASTPath, JSCodeshift, NewExpression } from "jscodeshift";
 
-import { DYNAMODB } from "../config";
+import { DYNAMODB } from "../config/index.ts";
 
 export const getDynamoDBForDocClient = (
   j: JSCodeshift,

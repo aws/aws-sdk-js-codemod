@@ -1,6 +1,6 @@
-import type { ClientMetadataRecord } from "../types";
-import { getV3ClientName } from "./getV3ClientName";
-import { getV3ClientPackageName } from "./getV3ClientPackageName";
+import type { ClientMetadataRecord } from "../types.ts";
+import { getV3ClientName } from "./getV3ClientName.ts";
+import { getV3ClientPackageName } from "./getV3ClientPackageName.ts";
 
 export const getClientMetadataRecord = (
   v2ClientNamesRecord: Record<string, string>

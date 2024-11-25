@@ -1,9 +1,9 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../config";
-import { getImportSpecifiers as getImportEqualsSpecifiers } from "../modules/importEqualsModule";
-import { getImportSpecifiers } from "./importModule";
-import { getRequireDeclarators } from "./requireModule";
+import { PACKAGE_NAME } from "../config/index.ts";
+import { getImportSpecifiers as getImportEqualsSpecifiers } from "../modules/importEqualsModule/index.ts";
+import { getImportSpecifiers } from "./importModule/index.ts";
+import { getRequireDeclarators } from "./requireModule/index.ts";
 
 export const getGlobalNameFromModule = (
   j: JSCodeshift,

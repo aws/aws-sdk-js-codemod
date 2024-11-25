@@ -1,8 +1,8 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import { removeImportEquals } from "./importEqualsModule";
-import { removeImport } from "./importModule";
-import { removeRequire } from "./requireModule";
-import { ImportType } from "./types";
+import { removeImportEquals } from "./importEqualsModule/index.ts";
+import { removeImport } from "./importModule/index.ts";
+import { removeRequire } from "./requireModule/index.ts";
+import { ImportType } from "./types.ts";
 
 export const removeModules = (
   j: JSCodeshift,

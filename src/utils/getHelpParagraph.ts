@@ -1,5 +1,5 @@
-import type { AwsSdkJsCodemodTransform } from "../transforms";
-import { getTransformDescription } from "./getTransformDescription";
+import type { AwsSdkJsCodemodTransform } from "../transforms/index.ts";
+import { getTransformDescription } from "./getTransformDescription.ts";
 
 const separator = "-".repeat(95);
 

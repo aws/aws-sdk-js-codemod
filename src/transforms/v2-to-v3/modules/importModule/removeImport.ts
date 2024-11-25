@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import { removeDeclaration } from "../removeDeclaration";
-import { getImportDeclarations } from "./getImportDeclarations";
+import { removeDeclaration } from "../removeDeclaration.ts";
+import { getImportDeclarations } from "./getImportDeclarations.ts";
 
 const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localName: string) =>
   source

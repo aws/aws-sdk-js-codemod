@@ -1,10 +1,10 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { FUNCTION_TYPE_LIST, NOT_SUPPORTED_COMMENT, S3 } from "../config";
-import type { ClientIdentifier } from "../types";
-import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
-import { getClientWaiterStates } from "./getClientWaiterStates";
+import { FUNCTION_TYPE_LIST, NOT_SUPPORTED_COMMENT, S3 } from "../config/index.ts";
+import type { ClientIdentifier } from "../types.ts";
+import { getClientApiCallExpression } from "./getClientApiCallExpression.ts";
+import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression.ts";
+import { getClientWaiterStates } from "./getClientWaiterStates.ts";
 
 export interface CommentsForUnsupportedAPIsOptions {
   v2ClientName: string;

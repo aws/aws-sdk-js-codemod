@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import type { ImportSpecifierType } from "../types";
-import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
+import type { ImportSpecifierType } from "../types.ts";
+import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations.ts";
 
 export const getImportSpecifiers = (
   j: JSCodeshift,

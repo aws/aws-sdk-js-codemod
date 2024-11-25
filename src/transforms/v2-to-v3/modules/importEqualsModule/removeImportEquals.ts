@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import { removeDeclaration } from "../removeDeclaration";
-import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
+import { removeDeclaration } from "../removeDeclaration.ts";
+import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations.ts";
 
 const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localName: string) =>
   source.find(j.TSImportEqualsDeclaration, { id: { name: localName } }).size() > 1;

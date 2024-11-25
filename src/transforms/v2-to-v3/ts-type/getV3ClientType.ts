@@ -1,8 +1,8 @@
 import type { JSCodeshift, TSType } from "jscodeshift";
 
-import { CLIENT_TYPES_MAP } from "../config";
-import { CLIENT_REQ_RESP_TYPES_MAP } from "../config/CLIENT_REQ_RESP_TYPES_MAP";
-import { getTypeForString } from "./getTypeForString";
+import { CLIENT_REQ_RESP_TYPES_MAP } from "../config/CLIENT_REQ_RESP_TYPES_MAP.ts";
+import { CLIENT_TYPES_MAP } from "../config/index.ts";
+import { getTypeForString } from "./getTypeForString.ts";
 
 export interface GetV3ClientTypeOptions {
   v2ClientLocalName: string;

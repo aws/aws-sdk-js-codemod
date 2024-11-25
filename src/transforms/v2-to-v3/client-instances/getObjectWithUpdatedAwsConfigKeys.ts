@@ -1,5 +1,5 @@
 import type { JSCodeshift, ObjectExpression } from "jscodeshift";
-import { AWS_CONFIG_KEY_MAP } from "../config";
+import { AWS_CONFIG_KEY_MAP } from "../config/index.ts";
 
 const getRenameComment = (keyName: string, newKeyName: string) =>
   ` The key ${keyName} is renamed to ${newKeyName}.`;

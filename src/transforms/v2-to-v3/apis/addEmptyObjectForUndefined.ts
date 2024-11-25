@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types.ts";
 
 // Adds an empty object, if undefined is passed for optional parameters.
 export const addEmptyObjectForUndefined = (

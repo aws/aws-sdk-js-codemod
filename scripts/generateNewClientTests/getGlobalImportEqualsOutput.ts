@@ -1,7 +1,7 @@
-import { CLIENTS_TO_TEST } from "./config";
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
-import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
-import { getV3PackageImportEqualsCode } from "./getV3PackageImportEqualsCode";
+import { CLIENTS_TO_TEST } from "./config/index.ts";
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName/index.ts";
+import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode/index.ts";
+import { getV3PackageImportEqualsCode } from "./getV3PackageImportEqualsCode/index.ts";
 
 export const getGlobalImportEqualsOutput = () => {
   let content = "";

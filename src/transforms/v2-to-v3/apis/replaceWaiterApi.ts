@@ -1,12 +1,12 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
-import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig";
-import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression";
-import { getClientWaiterStates } from "./getClientWaiterStates";
-import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName";
-import { getWaiterConfig } from "./getWaiterConfig";
-import { getWaiterConfigValue } from "./getWaiterConfigValue";
+import type { ClientIdentifier } from "../types.ts";
+import { getArgsWithoutWaiterConfig } from "./getArgsWithoutWaiterConfig.ts";
+import { getClientWaiterCallExpression } from "./getClientWaiterCallExpression.ts";
+import { getClientWaiterStates } from "./getClientWaiterStates.ts";
+import { getV3ClientWaiterApiName } from "./getV3ClientWaiterApiName.ts";
+import { getWaiterConfig } from "./getWaiterConfig.ts";
+import { getWaiterConfigValue } from "./getWaiterConfigValue.ts";
 
 // Updates .waitFor() API with waitUntil* API.
 export const replaceWaiterApi = (

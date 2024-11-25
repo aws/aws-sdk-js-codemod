@@ -1,4 +1,4 @@
-import type { ClientIdentifier } from "../types";
+import type { ClientIdentifier } from "../types.ts";
 
 export interface ClientModulesOptions {
   v2ClientName: string;

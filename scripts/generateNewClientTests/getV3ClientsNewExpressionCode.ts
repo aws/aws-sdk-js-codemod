@@ -1,4 +1,4 @@
-import { CLIENT_NAMES_MAP } from "../../src/transforms/v2-to-v3/config";
+import { CLIENT_NAMES_MAP } from "../../src/transforms/v2-to-v3/config/index.ts";
 
 export const getV3ClientsNewExpressionCode = (clientsToTest: string[]) => {
   let content = "";

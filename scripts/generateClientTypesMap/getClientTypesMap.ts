@@ -1,8 +1,8 @@
 import jscodeshift from "jscodeshift";
 
-import { CLIENT_NAMES_MAP, DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config";
-import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues";
-import { getTypesSource } from "./getTypesSource";
+import { CLIENT_NAMES_MAP, DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config/index.ts";
+import { getClientTypesMapWithKeysRemovedFromValues } from "./getClientTypesMapWithKeysRemovedFromValues/index.ts";
+import { getTypesSource } from "./getTypesSource/index.ts";
 
 const TYPES_TO_SKIP = ["apiVersion", "ClientConfiguration"];
 const ElementTypeToNativeTypeMap = {

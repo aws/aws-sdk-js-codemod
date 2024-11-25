@@ -1,7 +1,7 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifiersRecord } from "../types";
-import { getClientIdentifiers } from "./getClientIdentifiers";
+import type { ClientIdentifiersRecord } from "../types.ts";
+import { getClientIdentifiers } from "./getClientIdentifiers.ts";
 
 export interface GetClientIdentifiersRecordOptions {
   v2GlobalName?: string;

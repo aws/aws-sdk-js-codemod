@@ -1,7 +1,7 @@
 import type { Collection, Identifier, JSCodeshift } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
-import { getClientApiCallExpression } from "./getClientApiCallExpression";
+import type { ClientIdentifier } from "../types.ts";
+import { getClientApiCallExpression } from "./getClientApiCallExpression.ts";
 
 // Updates `s3.upload()` API with `new Upload()` API.
 export const replaceS3UploadApi = (

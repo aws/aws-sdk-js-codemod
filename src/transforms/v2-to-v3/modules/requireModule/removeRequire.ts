@@ -6,9 +6,9 @@ import type {
   ObjectPattern,
   VariableDeclarator,
 } from "jscodeshift";
-import { removeDeclaration } from "../removeDeclaration";
-import type { ImportSpecifierType } from "../types";
-import { getRequireDeclarators } from "./getRequireDeclarators";
+import { removeDeclaration } from "../removeDeclaration.ts";
+import type { ImportSpecifierType } from "../types.ts";
+import { getRequireDeclarators } from "./getRequireDeclarators.ts";
 
 // ToDo: create utility to share with requireModule/addNamedModule
 const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localName: string) =>

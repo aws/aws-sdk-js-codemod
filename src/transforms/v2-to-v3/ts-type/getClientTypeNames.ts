@@ -1,11 +1,11 @@
 import type { Collection, JSCodeshift, TSQualifiedName, TSTypeReference } from "jscodeshift";
 
-import { getImportSpecifiers } from "../modules/importModule";
-import { getClientDeepImportPath } from "../utils";
+import { getImportSpecifiers } from "../modules/importModule/index.ts";
+import { getClientDeepImportPath } from "../utils/index.ts";
 import {
   type DeepPartial,
   getTSQualifiedNameFromClientName,
-} from "./getTSQualifiedNameFromClientName";
+} from "./getTSQualifiedNameFromClientName.ts";
 
 export interface GetClientTypeNamesOptions {
   v2ClientName: string;

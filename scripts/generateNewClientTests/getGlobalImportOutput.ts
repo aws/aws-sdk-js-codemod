@@ -1,7 +1,7 @@
-import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config";
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
-import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
-import { getV3PackageImportsCode } from "./getV3PackageImportsCode";
+import { CLIENT_NAMES } from "../../src/transforms/v2-to-v3/config/index.ts";
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName/index.ts";
+import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode/index.ts";
+import { getV3PackageImportsCode } from "./getV3PackageImportsCode/index.ts";
 
 export const getGlobalImportOutput = () => {
   let content = "";

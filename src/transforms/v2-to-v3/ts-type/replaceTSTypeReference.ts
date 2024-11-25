@@ -1,9 +1,14 @@
 import type { Collection, Identifier, JSCodeshift, TSQualifiedName } from "jscodeshift";
 
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
-import { getClientTypeNames } from "./getClientTypeNames";
-import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName";
-import { getV3ClientType } from "./getV3ClientType";
+import {
+  DOCUMENT_CLIENT,
+  DYNAMODB,
+  DYNAMODB_DOCUMENT,
+  DYNAMODB_DOCUMENT_CLIENT,
+} from "../config/index.ts";
+import { getClientTypeNames } from "./getClientTypeNames.ts";
+import { getTSQualifiedNameFromClientName } from "./getTSQualifiedNameFromClientName.ts";
+import { getV3ClientType } from "./getV3ClientType.ts";
 
 export interface ReplaceTSTypeReferenceOptions {
   v2ClientName: string;

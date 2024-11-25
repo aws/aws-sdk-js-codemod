@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import { replaceAwsUtilArrayFunctions } from "./replaceAwsUtilArrayFunctions";
-import { replaceAwsUtilCopy } from "./replaceAwsUtilCopy";
+import { replaceAwsUtilArrayFunctions } from "./replaceAwsUtilArrayFunctions.ts";
+import { replaceAwsUtilCopy } from "./replaceAwsUtilCopy.ts";
 
 export const replaceAwsUtilFunctions = (
   j: JSCodeshift,

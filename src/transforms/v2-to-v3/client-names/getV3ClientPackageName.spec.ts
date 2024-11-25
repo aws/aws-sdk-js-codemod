@@ -1,8 +1,8 @@
 import { strictEqual, throws } from "node:assert";
 import { describe, it } from "node:test";
 
-import { CLIENT_PACKAGE_NAMES_MAP } from "../config";
-import { getV3ClientPackageName } from "./getV3ClientPackageName";
+import { CLIENT_PACKAGE_NAMES_MAP } from "../config/index.ts";
+import { getV3ClientPackageName } from "./getV3ClientPackageName.ts";
 
 describe(getV3ClientPackageName.name, () => {
   for (const [input, output] of Object.entries(CLIENT_PACKAGE_NAMES_MAP)) {

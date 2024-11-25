@@ -1,9 +1,9 @@
 import type { Collection, JSCodeshift, ObjectPattern } from "jscodeshift";
 
-import { PACKAGE_NAME } from "../../config";
-import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn";
-import { getRequireDeclarators } from "../requireModule";
-import type { ModulesOptions } from "../types";
+import { PACKAGE_NAME } from "../../config/index.ts";
+import { objectPatternPropertyCompareFn } from "../objectPatternPropertyCompareFn.ts";
+import { getRequireDeclarators } from "../requireModule/index.ts";
+import type { ModulesOptions } from "../types.ts";
 
 export const addNamedModule = (
   j: JSCodeshift,

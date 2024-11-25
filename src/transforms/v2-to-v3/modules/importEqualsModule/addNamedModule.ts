@@ -1,10 +1,10 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import type { ModulesOptions } from "../types";
-import { addDefaultModule } from "./addDefaultModule";
-import { getDefaultName } from "./getDefaultName";
-import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
-import { getImportSpecifiers } from "./getImportSpecifiers";
+import type { ModulesOptions } from "../types.ts";
+import { addDefaultModule } from "./addDefaultModule.ts";
+import { getDefaultName } from "./getDefaultName.ts";
+import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations.ts";
+import { getImportSpecifiers } from "./getImportSpecifiers.ts";
 
 export const addNamedModule = (
   j: JSCodeshift,

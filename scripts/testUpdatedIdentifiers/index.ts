@@ -6,7 +6,7 @@ import { promisify } from "node:util";
 import {
   CLIENT_NAMES_MAP as CLIENT_NAMES_MAP_TO_PUBLISH,
   CLIENT_PACKAGE_NAMES_MAP as PACKAGE_NAMES_MAP_TO_PUBLISH,
-} from "../../src/transforms/v2-to-v3/config";
+} from "../../src/transforms/v2-to-v3/config/index.ts";
 
 const execAsync = promisify(exec);
 

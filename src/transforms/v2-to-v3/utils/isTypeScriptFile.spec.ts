@@ -1,7 +1,7 @@
 import { strictEqual } from "node:assert";
 import { describe, it } from "node:test";
 
-import { isTypeScriptFile } from "./isTypeScriptFile";
+import { isTypeScriptFile } from "./isTypeScriptFile/index.ts";
 
 describe(isTypeScriptFile.name, () => {
   for (const [output, input] of [

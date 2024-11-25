@@ -6,11 +6,11 @@ import type {
   NewExpression,
 } from "jscodeshift";
 
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config/index.ts";
 import {
   getClientNewExpressionFromGlobalName,
   getClientNewExpressionFromLocalName,
-} from "../utils";
+} from "../utils/index.ts";
 
 export interface GetClientIdNamesFromNewExprOptions {
   v2ClientName: string;

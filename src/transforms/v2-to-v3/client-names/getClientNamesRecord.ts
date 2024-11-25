@@ -1,12 +1,12 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
-import { ImportType } from "../modules";
-import * as importEqualsModule from "../modules/importEqualsModule";
-import * as importModule from "../modules/importModule";
-import * as requireModule from "../modules/requireModule";
-import { getClientDeepImportPath } from "../utils";
-import { getClientNamesFromDeepImport } from "./getClientNamesFromDeepImport";
+import { CLIENT_NAMES, PACKAGE_NAME } from "../config/index.ts";
+import * as importEqualsModule from "../modules/importEqualsModule/index.ts";
+import * as importModule from "../modules/importModule/index.ts";
+import { ImportType } from "../modules/index.ts";
+import * as requireModule from "../modules/requireModule/index.ts";
+import { getClientDeepImportPath } from "../utils/index.ts";
+import { getClientNamesFromDeepImport } from "./getClientNamesFromDeepImport.ts";
 
 export const getClientNamesRecord = (
   j: JSCodeshift,

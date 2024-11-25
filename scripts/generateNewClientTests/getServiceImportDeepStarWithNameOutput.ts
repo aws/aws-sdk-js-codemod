@@ -1,3 +1,3 @@
-import { getServiceImportDeepWithNameOutput } from "./getServiceImportDeepWithNameOutput";
+import { getServiceImportDeepWithNameOutput } from "./getServiceImportDeepWithNameOutput/index.ts";
 
 export const getServiceImportDeepStarWithNameOutput = getServiceImportDeepWithNameOutput;

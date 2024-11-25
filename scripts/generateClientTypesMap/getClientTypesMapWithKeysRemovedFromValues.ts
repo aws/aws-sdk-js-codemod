@@ -1,5 +1,5 @@
-import { hasKeyReferenceInClientTypesMap } from "./hasKeyReferenceInClientTypesMap";
-import { hasKeyReferenceInValue } from "./hasKeyReferenceinValue";
+import { hasKeyReferenceInClientTypesMap } from "./hasKeyReferenceInClientTypesMap/index.ts";
+import { hasKeyReferenceInValue } from "./hasKeyReferenceinValue/index.ts";
 
 /**
  * Checks if any of the values have reference to key, and replaces them recursively.

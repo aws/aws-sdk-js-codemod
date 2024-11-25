@@ -1,4 +1,4 @@
-import { CLIENT_NAMES, PACKAGE_NAME } from "../config";
+import { CLIENT_NAMES, PACKAGE_NAME } from "../config/index.ts";
 
 const DEEP_IMPORT_PATH_REGEXP = new RegExp(`${PACKAGE_NAME}/clients/([\\w]*)`, "g");
 

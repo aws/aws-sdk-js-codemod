@@ -30,7 +30,7 @@ import {
   getJsCodeshiftParser,
   getTransforms,
   getUpdatedTransformFile,
-} from "./utils";
+} from "./utils/index.ts";
 
 const args = process.argv;
 const transforms = getTransforms();

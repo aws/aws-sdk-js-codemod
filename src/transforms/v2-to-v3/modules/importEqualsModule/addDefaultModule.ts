@@ -1,7 +1,7 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { getImportEqualsDeclarations, getImportSpecifiers } from "../importEqualsModule";
-import { getDefaultName } from "./getDefaultName";
+import { getImportEqualsDeclarations, getImportSpecifiers } from "../importEqualsModule/index.ts";
+import { getDefaultName } from "./getDefaultName.ts";
 
 export const addDefaultModule = (
   j: JSCodeshift,

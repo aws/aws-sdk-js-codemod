@@ -1,5 +1,5 @@
 import type { Collection, JSCodeshift, ObjectExpression } from "jscodeshift";
-import { getObjectWithUpdatedAwsConfigKeys } from "./getObjectWithUpdatedAwsConfigKeys";
+import { getObjectWithUpdatedAwsConfigKeys } from "./getObjectWithUpdatedAwsConfigKeys.ts";
 
 export interface ReplaceAwsConfigOptions {
   v2GlobalName?: string;

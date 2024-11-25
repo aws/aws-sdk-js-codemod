@@ -1,8 +1,8 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
-import { hasImport } from "./hasImport";
-import { hasImportEquals } from "./hasImportEquals";
-import { hasRequire } from "./hasRequire";
-import { ImportType } from "./types";
+import { hasImport } from "./hasImport.ts";
+import { hasImportEquals } from "./hasImportEquals.ts";
+import { hasRequire } from "./hasRequire.ts";
+import { ImportType } from "./types.ts";
 
 export const getImportType = (j: JSCodeshift, source: Collection<unknown>) =>
   hasImport(j, source)

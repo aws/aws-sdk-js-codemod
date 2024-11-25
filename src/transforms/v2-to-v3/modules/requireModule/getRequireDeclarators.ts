@@ -1,5 +1,5 @@
 import type { CallExpression, Collection, JSCodeshift, VariableDeclarator } from "jscodeshift";
-import { PACKAGE_NAME } from "../../config";
+import { PACKAGE_NAME } from "../../config/index.ts";
 
 const isValidRequireCallExpression = (callExpression: CallExpression, path?: string) => {
   if (callExpression.arguments.length !== 1) {

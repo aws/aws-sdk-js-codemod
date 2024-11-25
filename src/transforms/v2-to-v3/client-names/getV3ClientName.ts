@@ -1,4 +1,4 @@
-import { CLIENT_NAMES_MAP } from "../config";
+import { CLIENT_NAMES_MAP } from "../config/index.ts";
 
 // Returns v3 client name for the provided v2 client name.
 export const getV3ClientName = (clientName: string) => {

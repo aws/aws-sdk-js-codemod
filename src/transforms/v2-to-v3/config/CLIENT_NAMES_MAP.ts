@@ -1,4 +1,4 @@
-import { CLIENT_NAMES } from "./CLIENT_NAMES";
+import { CLIENT_NAMES } from "./CLIENT_NAMES.ts";
 
 // The key is the client name in v2, and value is the client name in v3.
 export const CLIENT_NAMES_MAP: Record<string, string> = {

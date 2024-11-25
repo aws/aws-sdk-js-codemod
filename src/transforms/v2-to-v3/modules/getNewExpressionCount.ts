@@ -1,11 +1,11 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT_CLIENT } from "../config/index.ts";
 import {
   getClientNewExpressionFromGlobalName,
   getClientNewExpressionFromLocalName,
-} from "../utils";
-import type { ClientModulesOptions } from "./types";
+} from "../utils/index.ts";
+import type { ClientModulesOptions } from "./types.ts";
 
 export const getNewExpressionCount = (
   j: JSCodeshift,

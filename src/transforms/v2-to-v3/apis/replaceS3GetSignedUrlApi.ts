@@ -1,8 +1,8 @@
 import type { Collection, JSCodeshift, NewExpression, ObjectExpression } from "jscodeshift";
 
-import type { ClientIdentifier } from "../types";
-import { getClientApiCallExpression } from "./getClientApiCallExpression";
-import { getCommandName } from "./getCommandName";
+import type { ClientIdentifier } from "../types.ts";
+import { getClientApiCallExpression } from "./getClientApiCallExpression.ts";
+import { getCommandName } from "./getCommandName.ts";
 
 // Updates `s3.getSignedUrl()` API with `await getSignedUrl(s3, command)` API.
 export const replaceS3GetSignedUrlApi = (

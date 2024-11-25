@@ -1,7 +1,7 @@
-import { CLIENTS_TO_TEST } from "./config";
-import { getClientDeepImportPath } from "./getClientDeepImportPath";
-import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
-import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode";
+import { CLIENTS_TO_TEST } from "./config/index.ts";
+import { getClientDeepImportPath } from "./getClientDeepImportPath/index.ts";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix/index.ts";
+import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode/index.ts";
 
 export const getServiceImportDeepWithNameInput = () => {
   let content = "";

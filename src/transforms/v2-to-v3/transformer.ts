@@ -14,28 +14,28 @@ import {
   replaceS3GetSignedUrlApi,
   replaceS3UploadApi,
   replaceWaiterApi,
-} from "./apis";
-import { replaceAwsUtilFunctions } from "./aws-util";
+} from "./apis/index.ts";
+import { replaceAwsUtilFunctions } from "./aws-util/index.ts";
 import {
   getAwsGlobalConfig,
   replaceAwsConfig,
   replaceClientCreation,
   replaceDocClientCreation,
-} from "./client-instances";
+} from "./client-instances/index.ts";
 import {
   getClientMetadataRecord,
   getClientNamesFromGlobal,
   getClientNamesRecord,
-} from "./client-names";
-import { NOT_SUPPORTED_COMMENT, PACKAGE_NAME, S3 } from "./config";
+} from "./client-names/index.ts";
+import { NOT_SUPPORTED_COMMENT, PACKAGE_NAME, S3 } from "./config/index.ts";
 import {
   addClientModules,
   getGlobalNameFromModule,
   getImportType,
   removeModules,
   replaceDeepImport,
-} from "./modules";
-import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
+} from "./modules/index.ts";
+import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type/index.ts";
 import {
   getFormattedSourceString,
   getMostUsedIndentationType,
@@ -44,7 +44,7 @@ import {
   IndentationType,
   isTrailingCommaUsed,
   isTypeScriptFile,
-} from "./utils";
+} from "./utils/index.ts";
 
 const transformer = async (file: FileInfo, api: API) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;

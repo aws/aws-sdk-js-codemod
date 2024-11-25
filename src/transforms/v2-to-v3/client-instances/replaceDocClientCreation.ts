@@ -1,11 +1,16 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { DOCUMENT_CLIENT, DYNAMODB, DYNAMODB_DOCUMENT, DYNAMODB_DOCUMENT_CLIENT } from "../config";
+import {
+  DOCUMENT_CLIENT,
+  DYNAMODB,
+  DYNAMODB_DOCUMENT,
+  DYNAMODB_DOCUMENT_CLIENT,
+} from "../config/index.ts";
 import {
   getClientNewExpressionFromGlobalName,
   getClientNewExpressionFromLocalName,
-} from "../utils";
-import { getDynamoDBDocClientArgs } from "./getDynamoDBDocClientArgs";
+} from "../utils/index.ts";
+import { getDynamoDBDocClientArgs } from "./getDynamoDBDocClientArgs.ts";
 
 export interface ReplaceDocClientCreationOptions {
   v2ClientName: string;
