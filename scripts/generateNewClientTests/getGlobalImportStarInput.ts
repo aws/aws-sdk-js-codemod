@@ -1,5 +1,5 @@
-import { CLIENTS_TO_TEST } from "./config/index.ts";
-import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode/index.ts";
+import { CLIENTS_TO_TEST } from "./config.ts";
+import { getV2ClientsNewExpressionCode } from "./getV2ClientsNewExpressionCode.ts";
 
 export const getGlobalImportStarInput = () => {
   let content = "";

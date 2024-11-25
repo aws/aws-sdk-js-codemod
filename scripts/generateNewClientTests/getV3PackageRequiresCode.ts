@@ -3,7 +3,7 @@ import {
   CLIENT_NAMES_MAP,
   CLIENT_PACKAGE_NAMES_MAP,
 } from "../../src/transforms/v2-to-v3/config/index.ts";
-import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix/index.ts";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix.ts";
 
 export interface V3PackageRequiresCodeOptions {
   useLocalSuffix?: boolean;

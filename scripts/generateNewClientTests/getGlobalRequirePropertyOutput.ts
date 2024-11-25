@@ -1,3 +1,3 @@
-import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput/index.ts";
+import { getServiceRequireDeepOutput } from "./getServiceRequireDeepOutput.ts";
 
 export const getGlobalRequirePropertyOutput = getServiceRequireDeepOutput;

@@ -1,8 +1,8 @@
-import { CLIENTS_TO_TEST } from "./config/index.ts";
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName/index.ts";
-import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix/index.ts";
-import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode/index.ts";
-import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode/index.ts";
+import { CLIENTS_TO_TEST } from "./config.ts";
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName.ts";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix.ts";
+import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode.ts";
+import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode.ts";
 
 export const getServiceRequireDeepWithNameOutput = () => {
   let content = "\n\n";

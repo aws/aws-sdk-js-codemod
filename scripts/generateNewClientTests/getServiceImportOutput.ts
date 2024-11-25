@@ -1,7 +1,7 @@
-import { CLIENTS_TO_TEST } from "./config/index.ts";
-import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName/index.ts";
-import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode/index.ts";
-import { getV3PackageImportsCode } from "./getV3PackageImportsCode/index.ts";
+import { CLIENTS_TO_TEST } from "./config.ts";
+import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName.ts";
+import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode.ts";
+import { getV3PackageImportsCode } from "./getV3PackageImportsCode.ts";
 
 export const getServiceImportOutput = () => {
   let content = "";

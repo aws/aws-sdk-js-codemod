@@ -1,3 +1,3 @@
-import { getGlobalRequireOutput } from "./getGlobalRequireOutput/index.ts";
+import { getGlobalRequireOutput } from "./getGlobalRequireOutput.ts";
 
 export const getServiceRequireOutput = getGlobalRequireOutput;
