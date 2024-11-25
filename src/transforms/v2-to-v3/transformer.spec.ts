@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import jscodeshift from "jscodeshift";
 
-import transform from "./transformer/index.ts";
+import transform from "./transformer.ts";
 
 describe("v2-to-v3", () => {
   const inputFileRegex = /(.*).input.[jt]sx?$/;
