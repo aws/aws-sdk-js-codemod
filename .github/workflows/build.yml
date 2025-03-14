@@ -13,16 +13,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: corepack
+        run: npm install -g corepack && corepack enable
       - uses: biomejs/setup-biome@v2
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "yarn"
       - name: install
-        run: npm install
+        run: yarn
       - name: lint+format
         run: biome ci
       - name: build
-        run: npm run build
+        run: yarn build
       - name: test
-        run: npm run test
+        run: yarn test
