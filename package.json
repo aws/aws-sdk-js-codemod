@@ -61,9 +61,9 @@
   },
   "devEngines": {
     "packageManager": {
-      "name": "npm",
-      "version": "10.9.0",
-      "onFail": "error"
+      "name": "yarn",
+      "version": "4.7.0",
+      "onFail": "download"
     }
   },
   "publishConfig": {
