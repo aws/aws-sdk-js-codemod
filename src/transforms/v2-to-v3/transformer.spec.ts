@@ -1,9 +1,9 @@
+import { strictEqual } from "node:assert";
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import jscodeshift from "jscodeshift";
-import { strictEqual } from "node:assert";
 import { describe, it } from "node:test";
+import jscodeshift from "jscodeshift";
 
 import transform from "./transformer";
 
@@ -22,22 +22,12 @@ describe("v2-to-v3", () => {
           [
             (fileName.match(inputFileRegex) as RegExpMatchArray)[1],
             fileName.split(".").pop() as string,
-          ] as const,
+          ] as const
       );
 
-  const getTestMetadata = async (
-    dirPath: string,
-    filePrefix: string,
-    fileExtension: string,
-  ) => {
-    const inputPath = join(
-      dirPath,
-      [filePrefix, "input", fileExtension].join("."),
-    );
-    const outputPath = join(
-      dirPath,
-      [filePrefix, "output", fileExtension].join("."),
-    );
+  const getTestMetadata = async (dirPath: string, filePrefix: string, fileExtension: string) => {
+    const inputPath = join(dirPath, [filePrefix, "input", fileExtension].join("."));
+    const outputPath = join(dirPath, [filePrefix, "output", fileExtension].join("."));
     const inputCode = await readFile(inputPath, "utf8");
     const outputCode = await readFile(outputPath, "utf8");
 
@@ -48,31 +38,25 @@ describe("v2-to-v3", () => {
   for (const subDir of fixtureSubDirs) {
     describe(subDir, () => {
       const subDirPath = join(fixtureDir, subDir);
-      for (const [filePrefix, fileExtension] of getTestFileMetadata(
-        subDirPath,
-      )) {
-        it(
-          `transforms: ${filePrefix}.${fileExtension}`,
-          { concurrency: true },
-          async () => {
-            const { input, outputCode } = await getTestMetadata(
-              subDirPath,
-              filePrefix,
-              fileExtension,
-            );
+      for (const [filePrefix, fileExtension] of getTestFileMetadata(subDirPath)) {
+        it(`transforms: ${filePrefix}.${fileExtension}`, { concurrency: true }, async () => {
+          const { input, outputCode } = await getTestMetadata(
+            subDirPath,
+            filePrefix,
+            fileExtension
+          );
 
-            const output = await transform(input, {
-              j: jscodeshift,
-              jscodeshift,
-              // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
-              stats: () => {},
-              // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
-              report: () => {},
-            });
+          const output = await transform(input, {
+            j: jscodeshift,
+            jscodeshift,
+            // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
+            stats: () => {},
+            // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
+            report: () => {},
+          });
 
-            strictEqual(output.trim(), outputCode.trim());
-          },
-        );
+          strictEqual(output.trim(), outputCode.trim());
+        });
       }
     });
   }
