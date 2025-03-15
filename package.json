@@ -38,9 +38,8 @@
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
-    "release": "tsx scripts/testUpdatedIdentifiers && npm run build && changeset publish",
-    "test": "vitest",
-    "version": "changeset version && npm i --package-lock-only"
+    "release": "tsx scripts/testUpdatedIdentifiers && yarn build && changeset publish",
+    "test": "vitest"
   },
   "dependencies": {
     "jscodeshift": "17.1.1"
@@ -61,9 +60,9 @@
   },
   "devEngines": {
     "packageManager": {
-      "name": "npm",
-      "version": "10.9.0",
-      "onFail": "error"
+      "name": "yarn",
+      "version": "4.7.0",
+      "onFail": "download"
     }
   },
   "publishConfig": {
