@@ -52,8 +52,7 @@
     "@types/node": "^16.18.101",
     "aws-sdk": "2.1692.0",
     "tsx": "^4.7.1",
-    "typescript": "~5.7.2",
-    "vitest": "^3.0.3"
+    "typescript": "~5.7.2"
   },
   "engines": {
     "node": ">=16.0.0"
