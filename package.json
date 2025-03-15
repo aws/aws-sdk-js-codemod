@@ -39,7 +39,7 @@
     "generate:tests": "tsx scripts/generateNewClientTests",
     "lint": "biome lint --write",
     "release": "tsx scripts/testUpdatedIdentifiers && yarn build && changeset publish",
-    "test": "vitest"
+    "test": "node --import tsx --test src/**/*.spec.ts"
   },
   "dependencies": {
     "jscodeshift": "17.1.1"
