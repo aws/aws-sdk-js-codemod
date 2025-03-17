@@ -1,25 +1,35 @@
-import { describe, expect, it } from "vitest";
+import { strictEqual, throws } from "node:assert";
+import { describe, it } from "node:test";
 
 import { CLIENT_NAMES_MAP } from "../config";
 import { getV3ClientName } from "./getV3ClientName";
 
 describe(getV3ClientName.name, () => {
-  it.each(Object.entries(CLIENT_NAMES_MAP))("getV3ClientName('%s') === '%s'", (input, output) => {
-    expect(getV3ClientName(input)).toBe(output);
-  });
+  for (const [input, output] of Object.entries(CLIENT_NAMES_MAP)) {
+    it(`getV3ClientName('${input}') === '${output}'`, () => {
+      strictEqual(getV3ClientName(input), output);
+    });
+  }
 
-  it.each(["ImportExport", "MobileAnalytics", "SimpleDB"])(
-    "throws for deprecated client '%s'",
-    (deprecatedClient) => {
-      expect(() => {
-        getV3ClientName(deprecatedClient);
-      }).toThrow(new Error(`Client '${deprecatedClient}' is either deprecated or newly added.`));
-    }
-  );
+  for (const deprecatedClient of ["ImportExport", "MobileAnalytics", "SimpleDB"]) {
+    it(`throws for deprecated client '${deprecatedClient}'`, () => {
+      throws(
+        () => {
+          getV3ClientName(deprecatedClient);
+        },
+        new Error(`Client '${deprecatedClient}' is either deprecated or newly added.`)
+      );
+    });
+  }
 
-  it.each(["UNDEFINED", "NULL", "UNKNOWN"])("throws for unknown client '%s'", (unknownClient) => {
-    expect(() => {
-      getV3ClientName(unknownClient);
-    }).toThrow(new Error(`Client '${unknownClient}' is either deprecated or newly added.`));
-  });
+  for (const unknownClient of ["UNDEFINED", "NULL", "UNKNOWN"]) {
+    it(`throws for unknown client '${unknownClient}'`, () => {
+      throws(
+        () => {
+          getV3ClientName(unknownClient);
+        },
+        new Error(`Client '${unknownClient}' is either deprecated or newly added.`)
+      );
+    });
+  }
 });

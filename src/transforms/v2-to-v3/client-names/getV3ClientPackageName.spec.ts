@@ -1,28 +1,35 @@
-import { describe, expect, it } from "vitest";
+import { strictEqual, throws } from "node:assert";
+import { describe, it } from "node:test";
 
 import { CLIENT_PACKAGE_NAMES_MAP } from "../config";
 import { getV3ClientPackageName } from "./getV3ClientPackageName";
 
 describe(getV3ClientPackageName.name, () => {
-  it.each(Object.entries(CLIENT_PACKAGE_NAMES_MAP))(
-    "getClientName('%s') === '%s'",
-    (input, output) => {
-      expect(getV3ClientPackageName(input)).toBe(`@aws-sdk/${output}`);
-    }
-  );
+  for (const [input, output] of Object.entries(CLIENT_PACKAGE_NAMES_MAP)) {
+    it("getClientName('%s') === '%s'", () => {
+      strictEqual(getV3ClientPackageName(input), `@aws-sdk/${output}`);
+    });
+  }
 
-  it.each(["ImportExport", "MobileAnalytics", "SimpleDB"])(
-    "throws for deprecated client '%s'",
-    (deprecatedClient) => {
-      expect(() => {
-        getV3ClientPackageName(deprecatedClient);
-      }).toThrow(new Error(`Client '${deprecatedClient}' is either deprecated or newly added.`));
-    }
-  );
+  for (const deprecatedClient of ["ImportExport", "MobileAnalytics", "SimpleDB"]) {
+    it("throws for deprecated client '%s'", () => {
+      throws(
+        () => {
+          getV3ClientPackageName(deprecatedClient);
+        },
+        new Error(`Client '${deprecatedClient}' is either deprecated or newly added.`)
+      );
+    });
+  }
 
-  it.each(["UNDEFINED", "NULL", "UNKNOWN"])("throws for unknown client '%s'", (unknownClient) => {
-    expect(() => {
-      getV3ClientPackageName(unknownClient);
-    }).toThrow(new Error(`Client '${unknownClient}' is either deprecated or newly added.`));
-  });
+  for (const unknownClient of ["UNDEFINED", "NULL", "UNKNOWN"]) {
+    it("throws for unknown client '%s'", () => {
+      throws(
+        () => {
+          getV3ClientPackageName(unknownClient);
+        },
+        new Error(`Client '${unknownClient}' is either deprecated or newly added.`)
+      );
+    });
+  }
 });

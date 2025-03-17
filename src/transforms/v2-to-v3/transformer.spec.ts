@@ -1,8 +1,9 @@
+import { strictEqual } from "node:assert";
 import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { describe, it } from "node:test";
 import jscodeshift from "jscodeshift";
-import { describe, expect, it } from "vitest";
 
 import transform from "./transformer";
 
@@ -34,25 +35,29 @@ describe("v2-to-v3", () => {
     return { input, outputCode };
   };
 
-  describe.each(fixtureSubDirs)("%s", (subDir) => {
-    const subDirPath = join(fixtureDir, subDir);
-    it.concurrent.each(getTestFileMetadata(subDirPath))(
-      "transforms: %s.%s",
-      async (filePrefix, fileExtension) => {
-        const { input, outputCode } = await getTestMetadata(subDirPath, filePrefix, fileExtension);
+  for (const subDir of fixtureSubDirs) {
+    describe(subDir, () => {
+      const subDirPath = join(fixtureDir, subDir);
+      for (const [filePrefix, fileExtension] of getTestFileMetadata(subDirPath)) {
+        it(`transforms: ${filePrefix}.${fileExtension}`, { concurrency: true }, async () => {
+          const { input, outputCode } = await getTestMetadata(
+            subDirPath,
+            filePrefix,
+            fileExtension
+          );
 
-        const output = await transform(input, {
-          j: jscodeshift,
-          jscodeshift,
-          // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
-          stats: () => {},
-          // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
-          report: () => {},
+          const output = await transform(input, {
+            j: jscodeshift,
+            jscodeshift,
+            // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
+            stats: () => {},
+            // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
+            report: () => {},
+          });
+
+          strictEqual(output.trim(), outputCode.trim());
         });
-
-        expect(output.trim()).toEqual(outputCode.trim());
-      },
-      100000
-    );
-  });
+      }
+    });
+  }
 });
