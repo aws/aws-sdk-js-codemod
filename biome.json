@@ -11,6 +11,16 @@
   },
   "linter": {
     "rules": {
+      "complexity": {
+        "noForEach": "off"
+      },
+      "correctness": {
+        "noInvalidBuiltinInstantiation": {
+          "level": "error"
+        },
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error"
+      },
       "style": {
         "noNamespace": "error",
         "useConsistentArrayType": {
@@ -39,16 +49,6 @@
         "useExportType": "error",
         "noUselessElse": "error",
         "useShorthandFunctionType": "error"
-      },
-      "correctness": {
-        "noInvalidBuiltinInstantiation": {
-          "level": "error"
-        },
-        "noUndeclaredVariables": "error",
-        "noUnusedVariables": "error"
-      },
-      "complexity": {
-        "noForEach": "off"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error"
