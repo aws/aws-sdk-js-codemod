@@ -13,13 +13,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: corepack
+        run: npm i -g corepack
       - uses: biomejs/setup-biome@v2
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-      - name: corepack
-        run: npm i -g corepack
       - name: install
         run: yarn
       - name: lint+format
