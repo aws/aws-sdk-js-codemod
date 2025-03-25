@@ -11,6 +11,7 @@
   },
   "linter": {
     "rules": {
+      "recommended": true,
       "complexity": {
         "noForEach": "off"
       },
