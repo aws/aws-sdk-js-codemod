@@ -1,6 +1,6 @@
 import type {
-  ASTPath,
   ArrowFunctionExpression,
+  ASTPath,
   CallExpression,
   Collection,
   FunctionExpression,
