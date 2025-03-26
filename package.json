@@ -35,6 +35,7 @@
   "scripts": {
     "build": "tsc",
     "check": "biome check --write",
+    "ci": "biome ci",
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
     "release": "tsx scripts/testUpdatedIdentifiers && yarn build && changeset publish",
