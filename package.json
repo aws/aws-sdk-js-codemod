@@ -66,5 +66,6 @@
   },
   "publishConfig": {
     "provenance": true
-  }
+  },
+  "packageManager": "yarn@4.8.0"
 }
