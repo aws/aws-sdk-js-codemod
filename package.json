@@ -60,12 +60,11 @@
   "devEngines": {
     "packageManager": {
       "name": "yarn",
-      "version": "4.7.0",
+      "version": "4.8.0",
       "onFail": "download"
     }
   },
   "publishConfig": {
     "provenance": true
-  },
-  "packageManager": "yarn@4.8.0"
+  }
 }
