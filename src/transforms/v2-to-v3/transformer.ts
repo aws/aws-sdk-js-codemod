@@ -37,11 +37,11 @@ import {
 } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
-  IndentationType,
   getFormattedSourceString,
   getMostUsedIndentationType,
   getMostUsedStringLiteralQuote,
   getValueIndentedWithTabs,
+  IndentationType,
   isTrailingCommaUsed,
   isTypeScriptFile,
 } from "./utils";

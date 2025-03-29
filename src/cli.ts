@@ -58,7 +58,6 @@ try {
   ({ options, positionalArguments } = parser.parse());
   if (positionalArguments.length === 0 && !options.stdin) {
     process.stderr.write(
-      // biome-ignore lint/style/useTemplate: This is a multiline string
       "Error: You have to provide at least one file/directory to transform." +
         "\n\n---\n\n" +
         parser.getHelpText()

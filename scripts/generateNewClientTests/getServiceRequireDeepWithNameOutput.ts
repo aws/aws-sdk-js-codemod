@@ -1,6 +1,6 @@
 import { CLIENTS_TO_TEST } from "./config";
-import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getClientNamesSortedByPackageName } from "./getClientNamesSortedByPackageName";
+import { getClientNameWithLocalSuffix } from "./getClientNameWithLocalSuffix";
 import { getV3ClientsNewExpressionCode } from "./getV3ClientsNewExpressionCode";
 import { getV3PackageRequiresCode } from "./getV3PackageRequiresCode";
 
