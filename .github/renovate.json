@@ -1,15 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":dependencyDashboard"
-  ],
+  "extends": ["config:recommended", ":dependencyDashboard"],
   "packageRules": [
     {
       "enabled": false,
-      "matchPackageNames": [
-        "*"
-      ]
+      "matchPackageNames": ["*"]
     }
   ],
   "vulnerabilityAlerts": {
@@ -18,8 +13,6 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
-    "schedule": [
-      "before 3am on the first day of the month"
-    ]
+    "schedule": ["before 3am on the first day of the month"]
   }
 }
