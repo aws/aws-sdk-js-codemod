@@ -22,6 +22,11 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
         if (!localName) {
           return true;
         }
+        if (typeof localName !== "string") {
+          throw new Error(
+            "Please report your use case on https://github.com/aws/aws-sdk-js-codemod"
+          );
+        }
         const identifiers = source.find(j.Identifier, { name: localName });
         const importedName = specifier.type === "ImportSpecifier" && specifier.imported?.name;
 
