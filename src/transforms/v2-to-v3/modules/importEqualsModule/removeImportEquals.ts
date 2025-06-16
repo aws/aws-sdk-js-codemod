@@ -8,6 +8,9 @@ const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localNa
 export const removeImportEquals = (j: JSCodeshift, source: Collection<unknown>) =>
   getImportEqualsDeclarations(j, source).forEach((importEqualsDeclaration) => {
     const localName = importEqualsDeclaration.value.id.name;
+    if (typeof localName !== "string") {
+      throw new Error("Please report your use case on https://github.com/aws/aws-sdk-js-codemod");
+    }
     const identifiers = source.find(j.Identifier, { name: localName });
 
     // Either the identifier is the only occurence on the page.

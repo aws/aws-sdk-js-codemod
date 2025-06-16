@@ -15,16 +15,28 @@ export const getImportSpecifiers = (
       switch (specifier.type) {
         case "ImportSpecifier": {
           const importedName = specifier.imported.name;
+          const localName = specifier.local?.name;
+          if (typeof importedName !== "string" || (localName && typeof localName !== "string")) {
+            throw new Error(
+              "Please report your use case on https://github.com/aws/aws-sdk-js-codemod"
+            );
+          }
           importSpecifiers.add({
             importedName,
-            localName: specifier.local?.name || importedName,
+            localName: localName || importedName,
           });
           break;
         }
         case "ImportNamespaceSpecifier":
         case "ImportDefaultSpecifier": {
           if (specifier.local) {
-            importSpecifiers.add({ localName: specifier.local.name });
+            const localName = specifier.local.name;
+            if (typeof localName !== "string") {
+              throw new Error(
+                "Please report your use case on https://github.com/aws/aws-sdk-js-codemod"
+              );
+            }
+            importSpecifiers.add({ localName });
           }
           break;
         }

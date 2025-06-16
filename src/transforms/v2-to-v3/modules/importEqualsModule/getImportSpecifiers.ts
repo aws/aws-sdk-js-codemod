@@ -10,7 +10,11 @@ export const getImportSpecifiers = (
   const importSpecifiers = new Set<ImportSpecifierType>();
 
   getImportEqualsDeclarations(j, source, path).forEach((importEqualsDeclaration) => {
-    importSpecifiers.add({ localName: importEqualsDeclaration.value.id.name });
+    const localName = importEqualsDeclaration.value.id.name;
+    if (typeof localName !== "string") {
+      throw new Error("Please report your use case on https://github.com/aws/aws-sdk-js-codemod");
+    }
+    importSpecifiers.add({ localName });
   });
 
   return Array.from(importSpecifiers);
