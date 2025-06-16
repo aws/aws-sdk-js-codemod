@@ -49,7 +49,7 @@
     "@changesets/cli": "^2.27.1",
     "@tsconfig/node18": "^18.2.4",
     "@types/jscodeshift": "^0.12.0",
-    "@types/node": "^16.18.101",
+    "@types/node": "^18.19.112",
     "aws-sdk": "2.1692.0",
     "tsx": "^4.7.1",
     "typescript": "~5.8.3"
