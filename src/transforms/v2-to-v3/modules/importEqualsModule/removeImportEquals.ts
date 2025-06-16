@@ -7,7 +7,7 @@ const isAnotherSpecifier = (j: JSCodeshift, source: Collection<unknown>, localNa
 
 export const removeImportEquals = (j: JSCodeshift, source: Collection<unknown>) =>
   getImportEqualsDeclarations(j, source).forEach((importEqualsDeclaration) => {
-    const localName = importEqualsDeclaration.value.id.name;
+    const localName = importEqualsDeclaration.value.id.name as string;
     const identifiers = source.find(j.Identifier, { name: localName });
 
     // Either the identifier is the only occurence on the page.

@@ -18,7 +18,7 @@ export const removeImport = (j: JSCodeshift, source: Collection<unknown>) =>
   getImportDeclarations(j, source).forEach((importDeclaration) => {
     importDeclaration.value.specifiers = (importDeclaration.value.specifiers || []).filter(
       (specifier) => {
-        const localName = specifier.local?.name;
+        const localName = specifier.local?.name as string;
         if (!localName) {
           return true;
         }

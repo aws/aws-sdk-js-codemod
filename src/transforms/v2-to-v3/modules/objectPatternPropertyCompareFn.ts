@@ -2,6 +2,7 @@ import type {
   ObjectProperty,
   Property,
   PropertyPattern,
+  RestElement,
   RestProperty,
   SpreadProperty,
   SpreadPropertyPattern,
@@ -13,6 +14,7 @@ export type ObjectPatternProperty =
   | SpreadPropertyPattern
   | SpreadProperty
   | ObjectProperty
+  | RestElement
   | RestProperty;
 
 export const objectPatternPropertyCompareFn = (
@@ -26,7 +28,9 @@ export const objectPatternPropertyCompareFn = (
     return 0;
   }
   if (property1.key.type === "Identifier" && property2.key.type === "Identifier") {
-    return property1.key.name.localeCompare(property2.key.name);
+    const property1KeyName = property1.key.name as string;
+    const property2KeyName = property2.key.name as string;
+    return property1KeyName.localeCompare(property2KeyName);
   }
   return 0;
 };

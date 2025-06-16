@@ -14,17 +14,17 @@ export const getImportSpecifiers = (
     for (const specifier of specifiers) {
       switch (specifier.type) {
         case "ImportSpecifier": {
-          const importedName = specifier.imported.name;
+          const importedName = specifier.imported.name as string;
           importSpecifiers.add({
             importedName,
-            localName: specifier.local?.name || importedName,
+            localName: (specifier.local?.name as string) || importedName,
           });
           break;
         }
         case "ImportNamespaceSpecifier":
         case "ImportDefaultSpecifier": {
           if (specifier.local) {
-            importSpecifiers.add({ localName: specifier.local.name });
+            importSpecifiers.add({ localName: specifier.local.name as string });
           }
           break;
         }

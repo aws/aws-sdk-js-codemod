@@ -10,7 +10,7 @@ export const getImportSpecifiers = (
   const importSpecifiers = new Set<ImportSpecifierType>();
 
   getImportEqualsDeclarations(j, source, path).forEach((importEqualsDeclaration) => {
-    importSpecifiers.add({ localName: importEqualsDeclaration.value.id.name });
+    importSpecifiers.add({ localName: importEqualsDeclaration.value.id.name as string });
   });
 
   return Array.from(importSpecifiers);
