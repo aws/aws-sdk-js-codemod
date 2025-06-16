@@ -2,6 +2,7 @@ import type {
   ObjectProperty,
   Property,
   PropertyPattern,
+  RestElement,
   RestProperty,
   SpreadProperty,
   SpreadPropertyPattern,
@@ -13,6 +14,7 @@ export type ObjectPatternProperty =
   | SpreadPropertyPattern
   | SpreadProperty
   | ObjectProperty
+  | RestElement
   | RestProperty;
 
 export const objectPatternPropertyCompareFn = (
