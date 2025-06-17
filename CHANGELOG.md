@@ -1,5 +1,11 @@
 # aws-sdk-js-codemod
 
+## 3.0.1
+
+### Patch Changes
+
+- Bump biome to v2 ([283c67224c958c86fe7a9fcb1b3b818e1276ac8f](https://github.com/aws/aws-sdk-js-codemod/commit/283c67224c958c86fe7a9fcb1b3b818e1276ac8f))
+
 ## 3.0.0
 
 ### Major Changes
