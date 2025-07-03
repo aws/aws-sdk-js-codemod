@@ -39,6 +39,11 @@ export const getJsCodeshiftParser = () =>
       metavar: "FILE",
       required: true,
     },
+    clients: {
+      display_index: 18,
+      help: "comma-separated list of AWS SDK client names to transform (e.g., 's3,dynamodb'). If not specified, all clients will be transformed.",
+      metavar: "CLIENTS",
+    },
     cpus: {
       display_index: 1,
       abbr: "c",

@@ -1,3 +1,4 @@
+export * from "./filterClientsByOption";
 export * from "./getClientDeepImportPath";
 export * from "./getClientNewExpressionFromGlobalName";
 export * from "./getClientNewExpressionFromLocalName";

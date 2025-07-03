@@ -1,4 +1,4 @@
-import type { API, FileInfo } from "jscodeshift";
+import type { API, FileInfo, Options } from "jscodeshift";
 
 import {
   addEmptyObjectForUndefined,
@@ -37,6 +37,7 @@ import {
 } from "./modules";
 import { removeTypesFromTSQualifiedName, replaceTSTypeReference } from "./ts-type";
 import {
+  filterClientsByOption,
   getFormattedSourceString,
   getMostUsedIndentationType,
   getMostUsedStringLiteralQuote,
@@ -46,7 +47,7 @@ import {
   isTypeScriptFile,
 } from "./utils";
 
-const transformer = async (file: FileInfo, api: API) => {
+const transformer = async (file: FileInfo, api: API, options: Options) => {
   const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
   const source = j(file.source);
   const importType = getImportType(j, source);
@@ -65,7 +66,7 @@ const transformer = async (file: FileInfo, api: API) => {
   replaceDeepImport(j, source, { fromPath: "aws-sdk/clients/all", toPath: PACKAGE_NAME });
 
   const v2GlobalName = getGlobalNameFromModule(j, source);
-  const v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
+  let v2ClientNamesRecord = getClientNamesRecord(j, source, importType);
 
   if (v2GlobalName) {
     for (const v2ClientNameFromGlobal of getClientNamesFromGlobal(j, source, v2GlobalName)) {
@@ -74,6 +75,9 @@ const transformer = async (file: FileInfo, api: API) => {
       }
     }
   }
+
+  // Filter clients based on the --clients option
+  v2ClientNamesRecord = filterClientsByOption(v2ClientNamesRecord, options.clients);
 
   const clientMetadataRecord = getClientMetadataRecord(v2ClientNamesRecord);
   const clientIdentifiersRecord = getClientIdentifiersRecord(j, source, {
