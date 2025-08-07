@@ -57,11 +57,5 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "devEngines": {
-    "packageManager": {
-      "name": "yarn",
-      "version": "4.9.2",
-      "onFail": "download"
-    }
-  }
+  "packageManager": "yarn@4.9.2"
 }
