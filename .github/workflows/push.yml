@@ -20,9 +20,9 @@ jobs:
         run: npm i -g corepack
       - uses: actions/setup-node@v4
         with:
+          node-version: "24.x" # Trusted publishing requires npm >=v11.5.1
           cache: "yarn"
 
-      - run: npm install -g npm # Trusted publishing requires npm >=v11.5.1
       - run: yarn
 
       - name: Create Release Pull Request or Publish to npm
