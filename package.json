@@ -63,8 +63,5 @@
       "version": "4.9.2",
       "onFail": "download"
     }
-  },
-  "publishConfig": {
-    "provenance": true
   }
 }

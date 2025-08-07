@@ -22,6 +22,7 @@ jobs:
         with:
           cache: "yarn"
 
+      - run: npm install -g npm # Trusted publishing requires npm >=v11.5.1
       - run: yarn
 
       - name: Create Release Pull Request or Publish to npm
@@ -32,4 +33,3 @@ jobs:
           title: Publish <version>
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
