@@ -1,5 +1,12 @@
 # aws-sdk-js-codemod
 
+## 3.0.2
+
+### Patch Changes
+
+- Enable npm trusted publishing ([c61addfea5884dcea091ea664e9485e6b8739b59](https://github.com/aws/aws-sdk-js-codemod/commit/c61addfea5884dcea091ea664e9485e6b8739b59))
+- Bump TypeScript to 5.9 ([3ebe2bc5154ee68a7e183e5390dbe7f1a8c02103](https://github.com/aws/aws-sdk-js-codemod/commit/3ebe2bc5154ee68a7e183e5390dbe7f1a8c02103))
+
 ## 3.0.1
 
 ### Patch Changes
