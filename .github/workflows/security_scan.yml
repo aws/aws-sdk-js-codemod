@@ -8,7 +8,7 @@ jobs:
   semgrep:
     runs-on: ubuntu-latest
     container:
-      image: returntocorp/semgrep
+      image: semgrep/semgrep
     if: (github.actor != 'dependabot[bot]' && github.actor != 'renovate[bot]')
     steps:
       - uses: actions/checkout@v4
