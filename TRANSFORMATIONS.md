@@ -35,7 +35,7 @@ const AWS = require("aws-sdk");
     <td>Import Equals</td>
     <td>
 <pre lang="javascript">
-import AWS = require(“aws-sdk");
+import AWS = require("aws-sdk");
 </pre>
     </td>
   </tr>
@@ -115,7 +115,7 @@ const DynamoDB = require("aws-sdk/clients/dynamodb");
     <td>Import Equals with deep path</td>
     <td>
 <pre lang="javascript">
-import DynamoDB = require(“aws-sdk/clients/dynamodb”);
+import DynamoDB = require("aws-sdk/clients/dynamodb");
 </pre>
     </td>
   </tr>
@@ -168,7 +168,7 @@ const client = new AWS.IotData();
     </td>
     <td>
 <pre lang="javascript">
-import { IoTDataPlane } from “@aws-sdk/client-iot-data-plane";
+import { IoTDataPlane } from "@aws-sdk/client-iot-data-plane";
 const client = new IoTDataPlane();
 </pre>
     </td>
