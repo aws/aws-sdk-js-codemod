@@ -1,0 +1,4 @@
+{
+  "plugins": ["import", "jsdoc", "promise", "vitest"],
+  "ignorePatterns": ["**/__fixtures__/**"]
+}

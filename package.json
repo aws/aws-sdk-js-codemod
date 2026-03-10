@@ -37,7 +37,7 @@
     "format": "oxfmt",
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
-    "lint": "biome lint",
+    "lint": "oxlint src/**/*.ts",
     "release": "tsx scripts/testUpdatedIdentifiers && yarn build && changeset publish",
     "test": "node --import tsx --test src/**/*.spec.ts"
   },
@@ -52,6 +52,7 @@
     "@types/node": "^18.19.112",
     "aws-sdk": "2.1692.0",
     "oxfmt": "^0.36.0",
+    "oxlint": "^1.52.0",
     "tsx": "^4.20.3",
     "typescript": "~5.9.2"
   },
