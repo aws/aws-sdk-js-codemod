@@ -34,10 +34,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "check": "biome check --write",
-    "ci": "biome ci",
+    "format": "oxfmt",
     "generate:map": "tsx scripts/generateClientTypesMap",
     "generate:tests": "tsx scripts/generateNewClientTests",
+    "lint": "oxlint src/**/*.ts",
     "release": "tsx scripts/testUpdatedIdentifiers && yarn build && changeset publish",
     "test": "node --import tsx --test src/**/*.spec.ts"
   },
@@ -45,12 +45,13 @@
     "jscodeshift": "17.3.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.6",
     "@changesets/cli": "^2.29.4",
     "@tsconfig/node18": "^18.2.4",
     "@types/jscodeshift": "^17.3.0",
     "@types/node": "^18.19.112",
     "aws-sdk": "2.1692.0",
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.52.0",
     "tsx": "^4.20.3",
     "typescript": "~5.9.2"
   },

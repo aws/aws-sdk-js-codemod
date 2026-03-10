@@ -49,9 +49,7 @@ describe("v2-to-v3", () => {
           const output = await transform(input, {
             j: jscodeshift,
             jscodeshift,
-            // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
             stats: () => {},
-            // biome-ignore lint/suspicious/noEmptyBlockStatements: test helper
             report: () => {},
           });
 
