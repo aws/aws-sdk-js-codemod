@@ -1,4 +1,5 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
+
 import { removeDeclaration } from "../removeDeclaration";
 import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
 

@@ -20,7 +20,6 @@ import { getV3ClientTypes } from "../ts-type";
 import { addNamedModule } from "./addNamedModule";
 import { getClientTSTypeRefCount } from "./getClientTSTypeRefCount";
 import { getNewExpressionCount } from "./getNewExpressionCount";
-
 import type { ClientModulesOptions } from "./types";
 
 export const addClientModules = (

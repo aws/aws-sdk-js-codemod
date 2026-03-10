@@ -1,4 +1,5 @@
 import type { Collection, Identifier, JSCodeshift, MemberExpression } from "jscodeshift";
+
 import type { ThisMemberExpression } from "../types";
 
 const thisMemberExpression = { type: "MemberExpression", object: { type: "ThisExpression" } };
