@@ -6,6 +6,7 @@ import type {
   ObjectPattern,
   VariableDeclarator,
 } from "jscodeshift";
+
 import { removeDeclaration } from "../removeDeclaration";
 import type { ImportSpecifierType } from "../types";
 import { getRequireDeclarators } from "./getRequireDeclarators";

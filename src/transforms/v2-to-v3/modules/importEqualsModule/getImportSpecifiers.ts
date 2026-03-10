@@ -1,4 +1,5 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
+
 import type { ImportSpecifierType } from "../types";
 import { getImportEqualsDeclarations } from "./getImportEqualsDeclarations";
 

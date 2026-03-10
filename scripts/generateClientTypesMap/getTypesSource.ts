@@ -1,6 +1,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+
 import type { JSCodeshift } from "jscodeshift";
+
 import { DOCUMENT_CLIENT } from "../../src/transforms/v2-to-v3/config";
 
 export const getTypesSource = (j: JSCodeshift, clientName: string) => {

@@ -1,4 +1,5 @@
 import type { CallExpression, Collection, JSCodeshift, VariableDeclarator } from "jscodeshift";
+
 import { PACKAGE_NAME } from "../../config";
 
 const isValidRequireCallExpression = (callExpression: CallExpression, path?: string) => {

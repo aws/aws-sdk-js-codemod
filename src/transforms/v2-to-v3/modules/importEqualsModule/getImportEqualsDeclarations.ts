@@ -1,4 +1,5 @@
 import type { Collection, JSCodeshift, TSExternalModuleReference } from "jscodeshift";
+
 import { PACKAGE_NAME } from "../../config";
 
 export const getImportEqualsDeclarations = (
