@@ -23,8 +23,13 @@ export const removePromiseForCallExpression = (
     case "ObjectProperty":
     case "ReturnStatement":
     case "VariableDeclarator": {
-      const currentCalleeObject = (callExpression.value.callee as MemberExpression)
-        .object as CallExpression;
+      const calleeObject = (callExpression.value.callee as MemberExpression).object;
+      // The request is stored in a variable, so there is no inner call to unwrap.
+      if (calleeObject.type === "Identifier") {
+        callExpression.replace(calleeObject);
+        break;
+      }
+      const currentCalleeObject = calleeObject as CallExpression;
       if (currentCalleeObject.arguments.length > 0) {
         callExpression.value.arguments = currentCalleeObject.arguments;
       }
