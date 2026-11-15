@@ -1,6 +1,6 @@
 import type { Collection, JSCodeshift } from "jscodeshift";
 
-import { CLIENT_REQ_RESP_TYPES_MAP, CLIENT_TYPES_MAP } from "../config";
+import { CLIENT_REQ_RESP_TYPES_MAP, CLIENT_TYPES_MAP, DYNAMODB_DOCUMENT_CLIENT } from "../config";
 import { type GetClientTypeNamesOptions, getClientTypeNames } from "./getClientTypeNames";
 
 const arrayBracketRegex = /<([\w]+)>/g;
@@ -51,5 +51,10 @@ export const getV3ClientTypes = (
       }
 
       return clientTypeName;
-    });
+    })
+    .map((typeName) =>
+      v2ClientName === DYNAMODB_DOCUMENT_CLIENT && typeName === "WriteRequest"
+        ? "BatchWriteCommandInput"
+        : typeName
+    );
 };
