@@ -1,13 +1,32 @@
 import type { JSCodeshift, TSType } from "jscodeshift";
 
+import { DYNAMODB_DOCUMENT_CLIENT } from "../config";
+
 const arrayRegex = /^Array<(.*)>$/;
 const recordRegex = /^Record<string, (.*)>$/;
 
 export const getTypeForString = (
   j: JSCodeshift,
-  v2ClientLocalName: string,
+  v2ClientName: string,
   v3ClientTypeString: string
 ): TSType => {
+  if (v2ClientName === DYNAMODB_DOCUMENT_CLIENT && v3ClientTypeString === "WriteRequest") {
+    // lib-dynamodb does not export WriteRequest. Derive its native-value shape
+    // from the public batch-write input instead of importing the low-level type.
+    const requestItems = j.tsIndexedAccessType(
+      j.tsTypeReference(j.identifier("BatchWriteCommandInput")),
+      j.tsLiteralType(j.stringLiteral("RequestItems"))
+    );
+    const nonNullableRequestItems = j.tsTypeReference.from({
+      typeName: j.identifier("NonNullable"),
+      typeParameters: j.tsTypeParameterInstantiation([requestItems]),
+    });
+    return j.tsIndexedAccessType(
+      j.tsIndexedAccessType(nonNullableRequestItems, j.tsStringKeyword()),
+      j.tsNumberKeyword()
+    );
+  }
+
   if (v3ClientTypeString === "string") {
     return j.tsStringKeyword();
   }
@@ -27,7 +46,7 @@ export const getTypeForString = (
   const arrayRegexMatches = arrayRegex.exec(v3ClientTypeString);
   if (arrayRegexMatches) {
     const type = arrayRegexMatches[1];
-    const typeArgument = getTypeForString(j, v2ClientLocalName, type);
+    const typeArgument = getTypeForString(j, v2ClientName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Array"),
 
@@ -39,7 +58,7 @@ export const getTypeForString = (
   const recordRegexMatches = recordRegex.exec(v3ClientTypeString);
   if (recordRegexMatches) {
     const type = recordRegexMatches[1];
-    const typeArgument = getTypeForString(j, v2ClientLocalName, type);
+    const typeArgument = getTypeForString(j, v2ClientName, type);
     return j.tsTypeReference.from({
       typeName: j.identifier("Record"),
 
