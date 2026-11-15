@@ -11,7 +11,7 @@ export interface GetV3ClientTypeOptions {
 }
 
 export const getV3ClientType = (j: JSCodeshift, options: GetV3ClientTypeOptions): TSType => {
-  const { v2ClientName, v2ClientLocalName, v2ClientTypeName } = options;
+  const { v2ClientName, v2ClientTypeName } = options;
   const clientReqRespTypesMap = CLIENT_REQ_RESP_TYPES_MAP[v2ClientName];
 
   if (Object.keys(clientReqRespTypesMap).includes(v2ClientTypeName)) {
@@ -22,8 +22,8 @@ export const getV3ClientType = (j: JSCodeshift, options: GetV3ClientTypeOptions)
   const clientTypesMap = CLIENT_TYPES_MAP[v2ClientName];
 
   if (Object.keys(clientTypesMap).includes(v2ClientTypeName)) {
-    return getTypeForString(j, v2ClientLocalName, clientTypesMap[v2ClientTypeName]);
+    return getTypeForString(j, v2ClientName, clientTypesMap[v2ClientTypeName]);
   }
 
-  return j.tsTypeReference(j.identifier(v2ClientTypeName));
+  return getTypeForString(j, v2ClientName, v2ClientTypeName);
 };
