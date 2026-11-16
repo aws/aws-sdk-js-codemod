@@ -47,7 +47,8 @@ import {
 } from "./utils";
 
 const transformer = async (file: FileInfo, api: API) => {
-  const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser("ts") : api.jscodeshift;
+  const parser = file.path.endsWith(".tsx") ? "tsx" : "ts";
+  const j = isTypeScriptFile(file.path) ? api.jscodeshift.withParser(parser) : api.jscodeshift;
   const source = j(file.source);
   const importType = getImportType(j, source);
 
